@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <poolConfig>
-   <enable default="xxt">xxt,hnxxt</enable>
+   <enable default="xxt">xxt,hnxxt,hdadmin</enable>
    <pools>
        <xxt driver="oracle.jdbc.driver.OracleDriver" connectionPoolSize="10" minConnectionPoolSize="2" >
            <url>jdbc:oracle:thin:@61.142.114.252:1521:orcl</url>
@@ -12,6 +12,11 @@
            <user>hnxxt</user>
            <pwd>hnxxt2010$%^</pwd>
        </hnxxt>
+       <hdadmin driver="oracle.jdbc.driver.OracleDriver" connectionPoolSize="10" minConnectionPoolSize="2" >
+           <url>jdbc:oracle:thin:@58.20.49.116:1521:bsims</url>
+           <user>sjsy</user>
+           <pwd>sjsy</pwd>
+       </hdadmin>
    </pools>
 </poolConfig>
 
