@@ -1,0 +1,18 @@
+
+教师账号 cspangyi9     abc123abca
+学生 cspangyi6     56468863
+家长  13549824485   53584222
+
+
+
+select * from v_user  系统用户
+
+
+
+查询 .DO 的业务
+
+
+      SELECT *
+        FROM config_cache a LEFT JOIN area b ON a.area_id = b.ID
+             LEFT JOIN qx_function c ON a.function_id = c.ID
+       WHERE a.function_id > -1 AND UPPER (url) LIKE UPPER ('%stuqry.do%')
