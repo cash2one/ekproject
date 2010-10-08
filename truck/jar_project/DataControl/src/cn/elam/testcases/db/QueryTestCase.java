@@ -1,4 +1,4 @@
-package cn.elam.util.db.sample;
+package cn.elam.testcases.db;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -16,7 +16,7 @@ public class QueryTestCase {
 		try {
 //			query();
 //			queryByPage();
-			showTable("hnxxt","select table_name from user_tables where table_name like '%CHILD%' ");
+			showTable("hdadmin","select table_name from user_tables where table_name like '%CH%' ");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
