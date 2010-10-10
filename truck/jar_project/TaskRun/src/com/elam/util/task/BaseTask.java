@@ -2,15 +2,22 @@ package com.elam.util.task;
 
 /**
  * 
- * @author ethanlam
- * 任务
+ * @author ethanlam 任务
  * 
  */
-public class BaseTask {
+public abstract class BaseTask {
+	
+	boolean locked = false;
+	TaskItem task = null;
 
-	long sleepTime ;
-	
-	
-	
+	public BaseTask(TaskItem task) {
+
+	}
+
+	/**
+	 * 任务内容
+	 */
+	protected abstract void task();
+
 	
 }
