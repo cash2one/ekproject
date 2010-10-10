@@ -3,14 +3,8 @@ package com.elam.util.task;
 /**
  * 
  * @author ethanlam
- * хннЯ
- * 
+ *  
  */
-public class BaseTask {
+public class TaskItem {
 
-	long sleepTime ;
-	
-	
-	
-	
 }
