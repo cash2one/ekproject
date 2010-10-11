@@ -14,7 +14,7 @@ import java.util.concurrent.ScheduledFuture;
 public abstract class BaseTask implements Task {
 
 	Object locker = new Object();
-	boolean worked = false;
+	boolean worked = true;
 	int runTimes = 0;
 	int errorTimes = 0;
 	long firstRunTime = 0; // 计算距离第一次被执行的时间差，倒计时
@@ -75,6 +75,7 @@ public abstract class BaseTask implements Task {
 	 * 中断任务
 	 */
     public void interrupt(){
+    	 this.worked = false;
     	 scheduler.schedule(new Runnable() {
     	      public void run() {
     	    	  taskHandle.cancel(true);
@@ -90,6 +91,7 @@ public abstract class BaseTask implements Task {
      */
     public void reStart(){
     	TaskLog.info(taskItem.getName(), "任务重新加载中......");
+    	this.worked = true;
     	loadAndRun();
     }
   

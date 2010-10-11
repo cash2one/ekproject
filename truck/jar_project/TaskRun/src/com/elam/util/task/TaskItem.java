@@ -10,7 +10,16 @@ public class TaskItem {
 	String name = "";
 	int runType = 0; // 任务类型 0：定时任务；1：周期任务
 	long seconds;
-	long startTime; // 任务第一次生效时间
+	String startTime; // 任务第一次生效时间
+    String timeType ="sec";
+	
+	public String getTimeType() {
+		return timeType;
+	}
+
+	public void setTimeType(String timeType) {
+		this.timeType = timeType;
+	}
 
 	public String getName() {
 		return name;
@@ -36,11 +45,11 @@ public class TaskItem {
 		this.seconds = seconds;
 	}
 
-	public long getStartTime() {
+	public String getStartTime() {
 		return startTime;
 	}
 
-	public void setStartTime(long startTime) {
+	public void setStartTime(String startTime) {
 		this.startTime = startTime;
 	}
 
