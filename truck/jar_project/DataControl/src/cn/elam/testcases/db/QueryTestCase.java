@@ -16,7 +16,7 @@ public class QueryTestCase {
 		try {
 //			query();
 //			queryByPage();
-			showTable("hdadmin","select table_name from user_tables where table_name like '%CH%' ");
+			showTable("xxt","select table_name from user_tables where table_name like '%CH%' ");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -50,6 +50,8 @@ public class QueryTestCase {
 		BaseDao dao = new BaseDao(conn);
 //		String sql = " select * from user_tables where table_name like '%CHILD%' ";
 		ResultSet rs = dao.queryByPage(sql, 1, 40);
+		if(rs==null)
+			return;
 		ResultSetMetaData md = rs.getMetaData();
 		int columns = md.getColumnCount();
 		for(int index =1;index<=columns;index++){
