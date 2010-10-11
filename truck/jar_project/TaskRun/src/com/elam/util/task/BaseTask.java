@@ -92,7 +92,11 @@ public abstract class BaseTask implements Task {
     	TaskLog.info(taskItem.getName(), "任务重新加载中......");
     	loadAndRun();
     }
-    
+  
+    public TaskItem getTaskItem() {
+		return taskItem;
+	}
+
     /**
      * 任务初始化
      */
