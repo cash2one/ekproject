@@ -21,7 +21,6 @@ public class TasksContainer {
     	Document doc = XmlHandler.loadXML("TaskConfig.xml");
     	if(doc==null)
     		return;
-    	
     	tasks = new ArrayList<BaseTask>();
 		Element element = XmlHandler.getElement(doc, "global");
 		List<Element> taskItems = XmlHandler.getElements(doc, "tasks/task");
