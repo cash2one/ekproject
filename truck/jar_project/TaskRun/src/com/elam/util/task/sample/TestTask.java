@@ -24,7 +24,7 @@ public class TestTask extends BaseTask{
 	@Override
 	protected void task() {
 		// TODO Auto-generated method stub
-		TaskLog.info(getTaskItem().getName(), "execute task....");
+		TaskLog.info(getTaskItem().getName(), " execute TestTask....");
 	}
 
 }
