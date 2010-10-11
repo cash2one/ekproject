@@ -21,12 +21,15 @@ public abstract class BaseTask {
 	ScheduledExecutorService service = null;
 	TaskItem taskItem = null;
 
+	
 	public BaseTask(TaskItem taskItem) {
 		this.taskItem = taskItem;
 		service = Executors.newScheduledThreadPool(1);
+		TaskLog.info(taskItem.getName(), "任务加载中......");
 		initialize();
 		firstRunDelayTime();
 		startTask();
+		TaskLog.info(taskItem.getName(), "已完成任务加载并进入任务管理器中。");
 	}
 
 	void firstRunDelayTime() {
@@ -40,12 +43,16 @@ public abstract class BaseTask {
 					synchronized (locker) {
 						try {
 							runTimes++;
+							TaskLog.info(taskItem.getName(), "开始执行任务。");
 							task();
+							TaskLog.info(taskItem.getName(), "退出任务。");
 						} catch (Exception e) {
 							errorTimes++;
+							TaskLog.error(taskItem.getName(), e.getMessage(), e
+									.getMessage());
 							e.printStackTrace();
 						} finally {
-							release();
+
 						}
 					}
 				;
