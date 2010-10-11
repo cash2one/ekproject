@@ -5,9 +5,6 @@
 		<task id="" name="TestTask1" startTimeAt="10:10" period="10" periodType="sec">
 			com.elam.util.task.sample.TestTask
        </task>
-       <task id="" name="TestTask2" startTimeAt="10:10" period="5" periodType="sec">
-			com.elam.util.task.sample.TestTask
-       </task>
 	</tasks>
 </TasksConfig>
 
