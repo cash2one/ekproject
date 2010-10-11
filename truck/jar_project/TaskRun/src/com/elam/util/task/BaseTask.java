@@ -18,24 +18,31 @@ public abstract class BaseTask {
 	int runTimes = 0;
 	int errorTimes = 0;
 	long firstRunTime = 0; // 计算距离第一次被执行的时间差，倒计时
-	ScheduledExecutorService service = null;
+	ScheduledExecutorService scheduler = null;
 	TaskItem taskItem = null;
-
+	ScheduledFuture taskHandle = null;
 	
 	public BaseTask(TaskItem taskItem) {
 		this.taskItem = taskItem;
-		service = Executors.newScheduledThreadPool(1);
-		TaskLog.info(taskItem.getName(), "任务加载中......");
+		TaskLog.info(taskItem.getName(), "任务初始化加载。");
+		loadAndRun();
+	}
+
+	void loadAndRun(){
+		scheduler = Executors.newScheduledThreadPool(1);
 		initialize();
 		firstRunDelayTime();
 		startTask();
 		TaskLog.info(taskItem.getName(), "已完成任务加载并进入任务管理器中。");
 	}
-
+	
 	void firstRunDelayTime() {
 		this.firstRunTime = 10;
 	}
 
+	/**
+	 * 加载任务
+	 */
 	void startTask() {
 		Runnable task = new Runnable() {
 			public void run() {
@@ -58,16 +65,47 @@ public abstract class BaseTask {
 				;
 			}
 		};
-		ScheduledFuture taskHandle = service.scheduleAtFixedRate(task,
+	  taskHandle = scheduler.scheduleAtFixedRate(task,
 				(firstRunTime >= 0 ? firstRunTime : 60), taskItem.getSeconds(),
 				SECONDS);
 
 	}
 
+	/**
+	 * 中断任务
+	 */
+    public void interrupt(){
+    	 scheduler.schedule(new Runnable() {
+    	      public void run() {
+    	    	  taskHandle.cancel(true);
+    	    	  release();
+    	      }
+    	    }, 30, SECONDS);
+    	 scheduler.shutdown();
+    	 scheduler = null;
+    }
+    
+    /**
+     * 重启任务
+     */
+    public void reStart(){
+    	TaskLog.info(taskItem.getName(), "任务重新加载中......");
+    	loadAndRun();
+    }
+    
+    /**
+     * 任务初始化
+     */
 	protected abstract void initialize();
 
+	/**
+	 * 实际任务业务逻辑
+	 */
 	protected abstract void task();
 
+	/**
+	 * 任务退出时资源释放
+	 */
 	protected abstract void release();
 
 }
