@@ -11,7 +11,7 @@ import java.util.concurrent.ScheduledFuture;
  * @author ethanlam хннЯ
  * 
  */
-public abstract class BaseTask {
+public abstract class BaseTask implements Task {
 
 	Object locker = new Object();
 	boolean worked = false;
