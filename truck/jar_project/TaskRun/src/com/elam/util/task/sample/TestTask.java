@@ -12,13 +12,13 @@ public class TestTask extends BaseTask{
 
 	@Override
 	protected void initialize() {
-	  TaskLog.info(getTaskItem().getName(), "initialize....");
+	  TaskLog.info(getTaskItem().getName(), " initialize....");
 	}
 
 	@Override
 	protected void release() {
 		// TODO Auto-generated method stub
-		TaskLog.info(getTaskItem().getName(), "release....");
+		TaskLog.info(getTaskItem().getName(), " release....");
 	}
 
 	@Override

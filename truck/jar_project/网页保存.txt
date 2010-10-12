@@ -8,3 +8,10 @@ OSGI:  http://developer.51cto.com/art/200909/154863.htm
 lucene:
    利用lucene给网站、系统增加搜索功能
    http://www.blogjava.net/pengo/archive/2010/10/07/333903.html
+
+
+一键GHOST 2010.10.10 优盘版　
+http://www.onlinedown.net/soft/48620.htm
+
+OSGi and Embedded Jetty
+http://java.dzone.com/articles/osgi-and-embedded-jetty
