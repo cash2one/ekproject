@@ -4,10 +4,10 @@ PL/SQL Developer Test script 3.0
 declare 
   -- Local variables here
   i integer;
-  cursor c_area is select abb from area;
+
 begin
   -- Test statements here
-   
+  pro_stat_dx_log_everyday_test();   
 end;
 0
 0
