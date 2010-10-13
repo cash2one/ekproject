@@ -67,8 +67,8 @@ select *  from area
 
 
 /* 短信*/
-select * from dx_groupsend  where object_mobile like '15917292802'  order by create_time desc
-
+select * from dx_groupsend  where object_mobile like '13826098916'  order by create_time desc
+select * from zs_transaction_log order by open_date desc
 delete from dx_groupsend  where object_mobile = '15917292802'
 
 /* 查询开通业务*/
@@ -83,4 +83,8 @@ select * from mz_package_confirmstatus_new pcn where pcn.family_id  =(select  fa
 /* 删除业务*/
 delete from   zs_package_customer where del=0 and family_id=(select  fa.id  from zs_xj_family fa where fa.name like 'Felam3')
 
-select *  from mz_xj_family fa where fa.name like 'Felam3'
+select fa.is_dxx,fa.is_kaoqin,fa.is_liuyanban,fa.is_qin_qing_tel  from zs_xj_family fa where fa.name like 'nef'
+
+select * from zs_xj_student  stu where stu.name = 'nelam'
+
+select * from dx_groupsend  where object_mobile like '13826098916'  order by create_time desc
