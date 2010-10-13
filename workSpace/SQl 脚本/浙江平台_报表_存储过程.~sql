@@ -4,6 +4,7 @@ p_month number;
 p_day number;    
 p_area varchar2(10);
 sqlStr varchar2(400);
+tempSqlStr varchar2(300);
 t_time varchar(20);
 cursor c_area is select abb from area;
 type cur_type is ref cursor;  
@@ -18,10 +19,9 @@ BEGIN
 
     for v_abb in c_area loop
         p_area:=v_abb.abb;
-     
-     -- dbms_output.put_line(p_area); 
     
-      --统计当月的登录（教师）情况、短信流量     
+    
+      --统计当月的登录（教师）情况 
           sqlStr:='select count(*) logon_teas,a.school_id from xj_teacher a, xj_school b' 
               ||'  where a.school_id=b.id and exists (select 1 from '||p_area||'_logs c  where a.id=c.user_id and a.school_id=c.school_id and '
               ||' to_char(DT,''yyyy-mm'')='''||t_time||'''  and type=9) ' 
@@ -32,7 +32,21 @@ BEGIN
              loop
                 fetch cur_row into countNum,school_id;
                 exit when cur_row%notfound;--推出条件
-                dbms_output.put_line('教师登录情况:'||p_area||'学校ID:'||school_id||',登录数:'||countNum);
+     --           dbms_output.put_line('教师登录情况:'||p_area||'学校ID:'||school_id||',登录数:'||countNum);
+                
+              -- "1_log" number(11),"1_log_teacher" number(11),"1_dx_flow" number(11),
+                sqlStr:=' update  '||p_area||'_school_use_state  set  "'||p_month||'_log_teacher"='||countNum||'   where year='||p_year||'  and school_id='||school_id;
+    --            dbms_output.put_line(sqlStr); 
+                              
+                execute  immediate  sqlStr;               
+                if sql%rowcount <= 0 or sql%rowcount is null then
+          --              dbms_output.put_line('unSuc'); 
+                        tempSqlStr:=' insert into  '||p_area||'_school_use_state (id,school_id,year) values('||p_area||'_school_use_seq_id.nextval,'||school_id||','||p_year||' )';
+        --                dbms_output.put_line(tempSqlStr); 
+                        execute  immediate  tempSqlStr;    
+                        execute  immediate  sqlStr;         
+                end if;
+                
              end loop;--结束循环
          close cur_row;--关闭游标
           
@@ -47,8 +61,21 @@ BEGIN
              loop
                 fetch cur_row into countNum,school_id;
                 exit when cur_row%notfound;--推出条件
-                dbms_output.put_line('登录情况:'||p_area||'学校ID:'||school_id||',登录数:'||countNum);
-             end loop;--结束循环
+       --         dbms_output.put_line('登录情况:'||p_area||'学校ID:'||school_id||',登录数:'||countNum);
+                   
+                  sqlStr:=' update  '||p_area||'_school_use_state  set  "'||p_month||'_log"='||countNum||'   where year='||p_year||'  and school_id='||school_id;
+    --              dbms_output.put_line(sqlStr); 
+                                
+                  execute  immediate  sqlStr;               
+                  if sql%rowcount <= 0 or sql%rowcount is null then
+        --                  dbms_output.put_line('unSuc'); 
+                          tempSqlStr:=' insert into  '||p_area||'_school_use_state (id,school_id,year) values('||p_area||'_school_use_seq_id.nextval,'||school_id||','||p_year||' )';
+        --                  dbms_output.put_line(tempSqlStr); 
+                          execute  immediate  tempSqlStr;    
+                          execute  immediate  sqlStr;         
+                  end if;
+          
+           end loop;--结束循环
           close cur_row;--关闭游标
        
        
@@ -62,11 +89,24 @@ BEGIN
              loop
                 fetch cur_row into countNum,school_id;
                 exit when cur_row%notfound;--推出条件
-                dbms_output.put_line('短信情况:'||p_area||'学校ID:'||school_id||',数量:'||countNum);
-             end loop;--结束循环
+             ---  dbms_output.put_line('短信情况:'||p_area||'学校ID:'||school_id||',数量:'||countNum);
+                  
+                 sqlStr:=' update  '||p_area||'_school_use_state  set  "'||p_month||'_dx_flow"='||countNum||'   where year='||p_year||'  and school_id='||school_id;
+            ---     dbms_output.put_line(sqlStr); 
+                                
+                  execute  immediate  sqlStr;               
+                  if sql%rowcount <= 0 or sql%rowcount is null then
+              ---        dbms_output.put_line('unSuc'); 
+                          tempSqlStr:=' insert into  '||p_area||'_school_use_state (id,school_id,year) values('||p_area||'_school_use_seq_id.nextval,'||school_id||','||p_year||' )';
+              --          dbms_output.put_line(tempSqlStr); 
+                          execute  immediate  tempSqlStr;    
+                          execute  immediate  sqlStr;         
+                  end if;
+                     
+            end loop;--结束循环
           close cur_row;--关闭游标
       
-     
+ 
     end loop;
     
 END PRO_STAT_DX_LOG_EVERYDAY_TEST; 
