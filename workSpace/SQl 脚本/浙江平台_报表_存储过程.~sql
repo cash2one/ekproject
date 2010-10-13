@@ -14,8 +14,8 @@ countNum number(11);
 BEGIN
     p_year:=to_number(to_char(sysdate,'yyyy') );
     p_month:=to_number(to_char(sysdate,'mm'));
-  --t_time:=to_char(sysdate,'yyyy-mm');
-    t_time:='2010-05';
+    t_time:=to_char(sysdate,'yyyy-mm');
+   --t_time:='2010-05';
 
     for v_abb in c_area loop
         p_area:=v_abb.abb;

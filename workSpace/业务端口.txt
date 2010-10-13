@@ -1,0 +1,20 @@
+
+
+
+http://localhost:8080/jzdx/revert.do?source=15917292802&dest=1065827091001052578&time=2010/9/21 8:51:17&data=Y
+http://localhost:8080/jzdx/revert.do?source=15917292802&dest=1065827091001052548&time=2010/9/21 9:51:17&data=·ñ
+http://localhost:8080/jzdx/revert.do?source=15917292802&dest=106570614209&time=2010/9/21 9:51:17&data=0000
+
+
+
+
+              1065827
+mz  Ö÷Òª¶Ë¿Ú  10657061
+                                                             
+http://localhost:8080/jzdx/revert.do?source=15917292802&dest=10657061151000485128&time=2010/9/21 9:51:17&data=1111
+
+http://61.142.114.252:3083/jzdx/revert.do?source=15917292802&dest=10657061151000485058&time=2010/9/21 19:51:17&data=1111
+
+
+
+http://61.142.114.252:3083/jzdx/revert.do?source=15917292802&dest=10657061151000485138&time=2010/9/21 19:51:17&data=1111
