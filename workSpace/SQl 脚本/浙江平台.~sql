@@ -5,41 +5,46 @@ SELECT * FROM QX_ADMIN_USER
 select * from user_tables
 where table_name like '%USER%'
 
-select * from cs_xj_family
+select * from qx_user_school
+
+select * from qx_admin_si
+
+select * from qx_account_school  d where d.school_id = 1
 
 
- SELECT * FROM config_cache a LEFT JOIN area b ON a.area_id = b.ID
-    LEFT JOIN qx_function c ON a.function_id = c.ID
-       WHERE a.function_id > -1 AND UPPER (url) LIKE UPPER ('%stuqry.do%')
-       
-alter table cs_xj_family add ic_no varchar2(20);
-
-alter table cs_xj_family add (ic_no varchar2(20));
-
-
-
+--统计各学校的使用情况
+ select school_id,town_id,c.id si,"10_log","10_log_teacher","10_dx_flow" from cs_school_use_state rpt left join xj_school on xj_school.id = rpt.school_id  left join qx_user_school b on b.school_id = rpt.school_id  left join qx_admin_si c on c.id = b.user_id  left join qx_account_school d on d.school_id = rpt.school_id  where year=2010 and town_id=3863 and d.user_id=1 and school_id=1 and c.id=1674
+---
 
 
 
+select * from qx_account_school
+select * from qx_admin_user 
+
+---
+select town_name 县区,school_name 学校名称,
+  b.teacher_nums 教师数,
+  c.student_nums 学生数,d.jf_nums 计费数
+  from xj_school a 
+  left  join  (select count(*) teacher_nums,a.school_id  
+      from xj_teacher a,xj_school b 
+      where a.school_id=b.id group by a.school_id) b on a.id=b.school_id
 
 
+  left join (select count(*) student_nums,a.school_id  from wz_xj_stu_class a,xj_school b 
+  where a.school_id=b.id group by a.school_id) c  on a.id=c.school_id
 
-select* from temp_insert_importstu
-select * from temp_importstu
-select * from t_importstu
-
-insert into temp_insert_importstu 
-
-
-select * from (select stu_sequence,stuname,stu_no,ic_no,ic_no_2,class_id,phone,phonetype,famname,
-file_time,rank() over(partition by ti.stuname,ti.class_id order by stu_sequence) rn,
-sex,bind_phone,fps_phone1,fps_phone2,fps_phone3,relationship,icard_no 
-from temp_importstu ti 
-where not exists(select 1 from cs_xj_student a,cs_xj_stu_class b, cs_xj_family c
- where a.stu_sequence=b.stu_sequence and c.stu_sequence=b.stu_sequence and ti.class_id=b.class_id 
- and ti.stuname=a.name  and b.school_id=1) and not exists (select 1 from blacklist bl
- where bl.phone=ti.phone) and ti.school_id=1 and ti.file_time='1284623747232' and ti.dealflag=0) where rn=1
+  left join (select count(*) jf_nums,a.school_id from wz_xj_stu_class a,xj_school b 
+     where a.id=b.id and exists(select 1 from wz_xj_family c,wz_tranpackage_customer d
+     where a.stu_sequence=c.stu_sequence and c.id=d.family_id and d.charge=1 and d.del=0 and d.boss_salemodalid is not null) 
+    group by a.school_id) d on d.school_id=a.id 
 
 
+ 
+    select  school_id ,count(userid)  from xj_teacher group by school_id 
+    
+    select   school_id ,count(*)  from cs_xj_stu_class  group by school_id 
+  
+    select  
 
 

@@ -52,3 +52,5 @@ select * from cs_school_use_state
  update  cs_school_use_state  set  "10_log_teacher"=1   where year=2010  and school_id=1
 
  create  sequence cs_school_use_seq_id   increment   by   1   start   with   1  maxvalue   999999999;
+
+select *  from xj_school sc  order by town_id  
