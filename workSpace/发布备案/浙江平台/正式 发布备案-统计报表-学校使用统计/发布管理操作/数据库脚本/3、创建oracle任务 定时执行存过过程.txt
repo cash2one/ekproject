@@ -1,5 +1,3 @@
-PL/SQL Developer Test script 3.0
-10
 declare v_job number:=1;
 
 begin
@@ -10,5 +8,3 @@ commit;
 
 end;
 
-0
-0

@@ -1,0 +1,5 @@
+HTML_URL：      admin/htm/report/usereport/list.htm
+BUSINESS_URL：  cn.qtone.xxt.admin.report.usereport.business.UseReportBusiness
+VIEW_URL：      cn.qtone.xxt.admin.report.usereport.view.UseReportView
+所属地区：      全部
+所属功能：      学校使用统计表

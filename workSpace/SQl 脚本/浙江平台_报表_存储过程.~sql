@@ -1,4 +1,4 @@
-CREATE OR REPLACE PROCEDURE PRO_STAT_DX_LOG_EVERYDAY_TEST IS
+CREATE OR REPLACE PROCEDURE PRO_STAT_SCHOOL_USE_EVERYDAY IS
 p_year number;  
 p_month number;  
 p_day number;    
@@ -16,6 +16,10 @@ BEGIN
     p_month:=to_number(to_char(sysdate,'mm'));
     t_time:=to_char(sysdate,'yyyy-mm');
    --t_time:='2010-05';
+   --p_year:=2010;
+   --p_month:=5;
+   --t_time:='2010-05';
+
 
     for v_abb in c_area loop
         p_area:=v_abb.abb;
@@ -109,7 +113,7 @@ BEGIN
  
     end loop;
     
-END PRO_STAT_DX_LOG_EVERYDAY_TEST; 
+END PRO_STAT_SCHOOL_USE_EVERYDAY; 
 
 
 

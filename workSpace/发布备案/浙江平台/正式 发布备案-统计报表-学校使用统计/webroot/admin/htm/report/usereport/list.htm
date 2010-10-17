@@ -1,0 +1,297 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>校讯通家校互动平台</title>
+<style type="text/css">
+<!--
+body,td,th {
+	font-size: 12px;
+	color: #000000;
+}
+body {
+	background-color: #ffffff;
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+}
+a:link {
+	color: #000000;
+	text-decoration: none;
+}
+a:visited {
+	text-decoration: none;
+	color: #000000;
+}
+a:hover {
+	text-decoration: none;
+	color: #003399;
+}
+a:active {
+	text-decoration: none;
+	color: #000000;
+}
+-->
+        </style>
+<link href="/admin/css/css.css" rel="stylesheet" type="text/css">
+
+<!--	<script language="javascript" src="/admin/js/ajax.js"></script>	<script language="javascript" src="/js/selection.js"></script>-->
+<script language="javascript" src="/js/zsedu.js"></script>
+<script language="javascript" src="/js/dropdownlist.js"></script>
+<script language="javascript" src="/js/downstatus.js"></script>
+
+<style type="text/css">
+<!--
+.STYLE1 {color: #FF0000}
+-->
+        </style>
+</head>
+<script language="javascript">
+
+
+</script>
+<body onLoad="load1();getTownListDefault(null);getSiListDefault(null);">
+<form name="form1" action="" method="post">
+<table width="100%" height="100%" border="0" cellpadding="0"
+	cellspacing="0" align="center">
+	<tr>
+		<td height="39" background="/admin/images/images_30.gif">
+		<table width="100%" height="100%" border="0" cellpadding="0"
+			cellspacing="0">
+			<tr>
+				<td height="39" background="/admin/images/images_30.gif">
+				<table width="100%" height="39" border="0" cellpadding="4"
+					cellspacing="0">
+					<tr>
+						<td width="1%" align="right" valign="bottom">&nbsp;</td>
+						<td width="33%" align="right" valign="bottom" class="title_edu">
+						<table width="100%" border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<td width="30" align="left" class="title01">&nbsp;</td>
+								<td align="left" valign="bottom" class="title01">统计报表</td>
+							</tr>
+						</table>
+						</td>
+						<td width="66%" align="right"><span class="fontred"><img
+							src="/admin/images/index_dot.gif" width="16" height="17"
+							align="absmiddle"> 您的位置：</span>统计报表 -&gt;学校使用统计表</td>
+					</tr>
+				</table>
+				</td>
+				<td width="11" align="right"
+					background="/admin/images/images_30.gif"><img
+					src="/admin/images/images_35.gif" width="11" height="39" alt=""></td>
+			</tr>
+		</table>
+		</td>
+	</tr>
+	<tr>
+		<td valign="top">
+		<table width="98%" height="98%" border="0" cellpadding="0"
+			cellspacing="0" align="center">
+			<tr>
+				<td width="100%" height="100%">
+				<div class="tScroll01">
+				<table width="100%" height="100%" border="0" cellpadding="0"
+					cellspacing="0">
+					<tr>
+						<td align="center" valign="top">
+						<table width="100%" height="100%" border="0" cellpadding="0"
+							cellspacing="0">
+							<tr>
+								<td height="100%" align="center" valign="middle">
+								<table width="100%" height="100%" border="0" cellpadding="0"
+									cellspacing="0" align="center">
+									<tr>
+										<td height="16"></td>
+									</tr>
+									<tr>
+										<td align="center">
+										<table width="98%" height="100%" border="0" cellpadding="3"
+											cellspacing="1" bgcolor="#2467C2">
+											<tr class="font5">
+												<td colspan="8" align="left" bgcolor="#E5F2FF" class="font5"><span
+													class="STYLE1">温馨提示:</span> <span
+													class="STYLE1">1、查询、导出时，请耐心等待查询结果，勿连续点击按钮！</span>
+													<br>
+													<span
+													class="STYLE1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> <span
+													class="STYLE1">2、为了能尽快查询到结果，请尽量选择详细的查询条件！</span>
+													</td>
+											</tr>
+											<tr>
+												<td width="10%" align="right" bgcolor="#E5F2FF"
+													class="font5">统计类型：</td>
+												<td colspan="7" align="left" bgcolor="#E5F2FF" class="font5"><input
+													type="radio" name="stat_type" value="0" />按地区统计&nbsp;&nbsp;<input
+													type="radio" name="stat_type" value="1" />按镇区统计&nbsp;&nbsp;<input
+													type="radio" name="stat_type" value="2" checked="checked" />按学校统计&nbsp;&nbsp;<input
+													type="radio" name="stat_type" value="3" />按si统计</td>
+											</tr>
+											<tr class="font5">
+												<td width="10%" align="right" bgcolor="#E5F2FF"
+													class="font5">地区：</td>
+												<td width="13%" align="left" class="font5" bgcolor="#FFFFFF"><select
+													id="area_id" name="area_id" class="inbox03"
+													onChange="getTownListDefault(null);getSiListDefault(null);">
+													{areaop}
+												</select></td>
+												<td width="10%" align="right" bgcolor="#E5F2FF">SI公司：</td>
+												<td width="20%" align="left" bgcolor="#FFFFFF"><select
+													name="si_id" id="si_id">
+													{siop}
+												</select></td>
+												<td width="10%" align="right" bgcolor="#E5F2FF"
+													class="font5">县区：</td>
+												<td width="13%" align="left" class="font5" bgcolor="#FFFFFF"><select
+													id="town_id" name="town_id" class="inbox03"
+													onChange="getSchoolListDefault(null);">
+													<option value="0" selected>请选择</option>
+												</select></td>
+												<td width="8%" align="right" bgcolor="#E5F2FF" class="font5">学校：</td>
+												<td width="18%" align="left" bgcolor="#FFFFFF"><select
+													name="school_id" class="inbox03">
+													<option value="0" selected>请选择</option>
+												</select></td>
+											</tr>
+											<tr>
+												<td height="30" align="right" bgcolor="#E5F2FF"
+													class="font5">年份月份：</td>
+												<td align="left" bgcolor="#FFFFFF" class="font5"><select
+													name="year">
+												</select>年 <select name="month">
+													<option value="01">01</option>
+													<option value="02">02</option>
+													<option value="03">03</option>
+													<option value="04">04</option>
+													<option value="05">05</option>
+													<option value="06">06</option>
+													<option value="07">07</option>
+													<option value="08">08</option>
+													<option value="09">09</option>
+													<option value="10">10</option>
+													<option value="11">11</option>
+													<option value="12">12</option>
+												</select>月</td>
+												<td height="30" align="right" bgcolor="#E5F2FF"
+													class="font5">学校开通时间：</td>
+												<td align="left" colspan="3" bgcolor="#FFFFFF" class="font5"><input
+													id="fromdate" name="fromdate" type="text" class="inbox03"
+													size="15" value=""
+													onClick="return selectDate2('fromdate','form1')"
+													readonly="true" style="cursor: hand"> &nbsp;
+												至&nbsp; <input id="todate" name="todate" type="text"
+													class="inbox03" size="15" value=""
+													onClick="return selectDate2('todate','form1')"
+													readonly="true" style="cursor: hand"> <input
+													name="deldate" type="button" class="btn01" value="清 空"
+													onMouseOver="this.className='btn02'"
+													onMouseOut="this.className='btn01'" onFocus="this.blur()"
+													onClick="cleardate();"></td>
+												<td colspan="3" align="center" bgcolor="#FFFFFF"
+													class="font5"><input name="Submit522" type="button"
+													class="btn01" value="搜 索" onFocus="this.blur()"
+													onClick="query()"> &nbsp;&nbsp;&nbsp; <input
+													name="Submit523" type="button" class="btn01" value="导 出"
+													onFocus="this.blur()" onClick="excel()"></td>
+											</tr>
+										</table>
+										</td>
+									</tr>
+								</table>
+								</td>
+							</tr>
+						</table>
+						</td>
+					</tr>
+					<tr height="100%">
+						<td align="center" bgcolor="#FFFFFF" width="100%">
+						<div><iframe name="iframe_stateport"
+							src="/report/usereport.do?action=frameinit" width="100%"
+							frameborder="0" marginwidth="0" height="100%" scrolling="auto"
+							align="right"></iframe></div>
+						</td>
+					</tr>
+				</table>
+				</div>
+				</td>
+				<td width="10" background="/admin/images/images_48.gif"></td>
+			</tr>
+
+		</table>
+		</td>
+		<td width="4" background="/admin/images/images_48.gif"></td>
+	</tr>
+</table>
+</form>
+</body>
+</html>
+<script language="javascript">
+function load1()
+{
+ a=new Date();
+ y=a.getFullYear();
+ y1=a.getFullYear()-1;
+ y2=a.getFullYear()-2;
+
+  
+  var option1=document.createElement("OPTION")
+  option1.text=y;
+  option1.value=y;
+  form1.year.add(option1);
+  var option3=document.createElement("OPTION")
+  option3.text=y1;
+  option3.value=y1;
+  form1.year.add(option3);
+ 
+  k=a.getMonth();
+  form1.month.selectedIndex=k;
+}  
+
+function cleardate(){
+	form1.fromdate.value="";
+	form1.todate.value="";
+	return;
+}
+
+function query()
+{
+ var stat_type="";
+ var objs = document.getElementsByName("stat_type"); 
+ for(var i=0;i<objs.length;i++){
+     if(objs[i].checked){
+        stat_type=objs[i].value;
+     }
+ }
+ 
+if(form1.fromdate.value>form1.todate.value&&form1.fromdate.value!=""&&form1.todate.value!=""){
+   	alert("查询的开始时间段必须在结束时间段以前!");
+	return;
+} 
+document.frames["iframe_stateport"].location.href="/report/usereport.do?action=query&school_id="+form1.school_id.value+"&area_id="+form1.area_id.value+"&town_id="+form1.town_id.value+"&si_id="+form1.si_id.value+"&year="+form1.year.value+"&month="+form1.month.value+"&fromdate="+form1.fromdate.value+"&todate="+form1.todate.value+"&stat_type="+stat_type;
+form1.Submit522.value="正在查询...";
+form1.Submit523.value="正在查询...";
+form1.Submit522.disabled=true;
+form1.Submit523.disabled=true;
+}
+
+//导出
+function excel()
+{
+ var stat_type="";
+ var objs = document.getElementsByName("stat_type"); 
+ for(var i=0;i<objs.length;i++){
+     if(objs[i].checked){
+        stat_type=objs[i].value;
+     }
+ }
+ 
+if(form1.fromdate.value>form1.todate.value&&form1.fromdate.value!=""&&form1.todate.value!=""){
+   	alert("查询的开始时间段必须在结束时间段以前!");
+	return;
+} 
+goo(new Array(form1.Submit523,form1.Submit522));
+document.frames["iframe_stateport"].location.href="/report/usereport.do?action=excel&school_id="+form1.school_id.value+"&area_id="+form1.area_id.value+"&town_id="+form1.town_id.value+"&si_id="+form1.si_id.value+"&year="+form1.year.value+"&month="+form1.month.value+"&fromdate="+form1.fromdate.value+"&todate="+form1.todate.value+"&stat_type="+stat_type;
+}
+
+</script>
