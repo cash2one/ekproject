@@ -20,6 +20,7 @@ public class Activator implements BundleActivator {
 		public void start(BundleContext bc) throws Exception {
 
 			m_httpServiceRef = bc.getServiceReference( WebContainer.class.getName() );
+			System.out.println(m_httpServiceRef);
 	        if( m_httpServiceRef != null ) {
 				final WebContainer webContainer = (WebContainer) bc.getService( m_httpServiceRef );
 	            if( webContainer != null ) {

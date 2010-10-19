@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: LDAPValidatorBundle
+Bundle-SymbolicName: LDAPValidatorBundle
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: cn.elam.osgi.demo.uservaliadtor.ldapvalidatorbundle.Activator
+Bundle-Vendor: elam
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Import-Package: cn.elam.osgi.demo.service.user,
+ org.osgi.framework;version="1.3.0"
