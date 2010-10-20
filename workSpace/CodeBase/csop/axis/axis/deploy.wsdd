@@ -1,0 +1,8 @@
+<deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+  <service name="ADCInter" provider="java:RPC">  
+     <parameter name="className" value="com.siinterface.adc.AdcBusiReceiver2"/>  
+     <parameter name="allowedMethods" value="*"/>
+     <beanMapping languageSpecificType="java:com.siinterface.adc.AdcSiRequest" qname="ns7:AdcSiRequest" xmlns:ns7="http://adc.siinterface.com"/>
+     <beanMapping languageSpecificType="java:com.siinterface.adc.AdcSiResponse" qname="ns7:AdcSiResponse" xmlns:ns7="http://adc.siinterface.com"/>
+  </service>  
+</deployment>
