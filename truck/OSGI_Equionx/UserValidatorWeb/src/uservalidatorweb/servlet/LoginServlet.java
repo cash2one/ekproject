@@ -31,8 +31,7 @@ public class LoginServlet extends HttpServlet{
 		response.setContentType("text/html");
 		ServletOutputStream out = response.getOutputStream();
 		Validator service = null;
-		ServiceReference serviceRef = context
-				.getServiceReference(Validator.class.getName());
+		ServiceReference serviceRef = context.getServiceReference(Validator.class.getName());
 		if (null != serviceRef) {
 			service = (Validator) context.getService(serviceRef);
 		}

@@ -1,88 +1,85 @@
 package uservalidatorweb;
 
-import org.eclipse.equinox.http.servlet.HttpServiceServlet;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceEvent;
 import org.osgi.framework.ServiceListener;
 import org.osgi.framework.ServiceReference;
+import org.osgi.service.http.HttpService;
 import org.osgi.util.tracker.ServiceTracker;
 import org.osgi.util.tracker.ServiceTrackerCustomizer;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 import uservalidatorweb.servlet.LoginServlet;
 
-public class Activator implements BundleActivator,ServiceListener,ServiceTrackerCustomizer  {
+public class Activator implements BundleActivator, ServiceTrackerCustomizer {
 
-	
 	public static BundleContext context = null;
-	private  HttpServiceServlet   httpService;
-	private  LoginServlet  servlet;
-	
+	private HttpService httpService;
+	private LoginServlet servlet;
+
 	/*
 	 * (non-Javadoc)
-	 * @see org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext)
+	 * 
+	 * @see
+	 * org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext
+	 * )
 	 */
 	public void start(BundleContext context) throws Exception {
-		ServiceTracker tracker = new ServiceTracker (context, LoginServlet.class.getName (), this);
-		tracker.open ();
+		this.context = context;
+		servlet = new LoginServlet (context);
+		ServiceTracker tracker = new ServiceTracker(context, HttpService.class
+				.getName(), this);
+		tracker.open();
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
+	 * 
+	 * @see
+	 * org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
 	 */
 	public void stop(BundleContext context) throws Exception {
-	
-	
+		unregisterServlet(httpService);
+		servlet = null;
+		context = null;
 	}
 
-	private void registerServlet (HttpServlet aHttpService) {
+	private void registerServlet(HttpService aHttpService) {
 		try {
-		if (aHttpService != null)
-		aHttpService.registerServlet ("/hello", servlet, null, null);
-		System.out.println ("Registered /hello servlet");
+			if (aHttpService != null)
+				aHttpService.registerServlet("/login", servlet, null, null);
+			System.out.println("Registered /login servlet");
 		} catch (Exception e) {
-		System.out.println ("Unable to register servlet");
+			System.out.println("Unable to register servlet");
 		} // try
-		}
-	
-	private void unregisterServlet (HttpService aHttpService) {
-		try {
-		if (aHttpService != null)
-		aHttpService.unregister ("/hello");
-		System.out.println ("Unregistered /hello servlet");
-		} catch (Exception e) {
-		System.out.println ("Unable to unregister servlet");
-		} // try
-		}
-	
-	@Override
-	public void serviceChanged(ServiceEvent arg0) {
-	   
-	
-	}
+	} // registerServlet
 
-	@Override
-	public Object addingService(ServiceReference arg0) {
-		httpService = (HttpService) context.getService (aRef);
-		registerServlet (httpService);
+	private void unregisterServlet(HttpService aHttpService) {
+		try {
+			if (aHttpService != null)
+				aHttpService.unregister("/login");
+			System.out.println("Unregistered /login servlet");
+		} catch (Exception e) {
+			System.out.println("Unable to unregister servlet");
+		} // try
+	} // unregisterServlet
+
+	/* ----- implementation of ServiceTrackerCustomizer ----- */
+
+	public Object addingService(ServiceReference aRef) {
+		httpService = (HttpService) context.getService(aRef);
+		registerServlet(httpService);
 		return httpService;
-	}
+	} // addingService
 
-	@Override
-	public void modifiedService(ServiceReference arg0, Object arg1) {
-		httpService = (HttpService) context.getService (aRef);
-		registerServlet (httpService);
-	}
+	public void modifiedService(ServiceReference aRef, Object aObj) {
+		httpService = (HttpService) context.getService(aRef);
+		registerServlet(httpService);
+	} // modifiedService
 
-	@Override
-	public void removedService(ServiceReference arg0, Object arg1) {
-		// TODO Auto-generated method stub
-		
-	}
-
+	public void removedService(ServiceReference aRef, Object aObj) {
+	} // removedService
 }
