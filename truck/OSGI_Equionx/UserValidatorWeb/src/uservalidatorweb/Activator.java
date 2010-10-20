@@ -29,7 +29,7 @@ public class Activator implements BundleActivator, ServiceTrackerCustomizer {
 	 */
 	public void start(BundleContext context) throws Exception {
 		this.context = context;
-		servlet = new LoginServlet (context);
+		servlet = new LoginServlet(context);
 		ServiceTracker tracker = new ServiceTracker(context, HttpService.class
 				.getName(), this);
 		tracker.open();
@@ -47,20 +47,23 @@ public class Activator implements BundleActivator, ServiceTrackerCustomizer {
 		context = null;
 	}
 
-	private void registerServlet(HttpService aHttpService) {
+	private void registerServlet(HttpService httpService) {
 		try {
-			if (aHttpService != null)
-				aHttpService.registerServlet("/login", servlet, null, null);
+			if (httpService != null){
+				httpService.registerServlet("/login", servlet, null, null);
+			    httpService.registerResources("/page/htm", "html", null);
+			    httpService.registerResources("/page/jsp", "jsp", null);
+			}	
 			System.out.println("Registered /login servlet");
 		} catch (Exception e) {
 			System.out.println("Unable to register servlet");
 		} // try
 	} // registerServlet
 
-	private void unregisterServlet(HttpService aHttpService) {
+	private void unregisterServlet(HttpService httpService) {
 		try {
-			if (aHttpService != null)
-				aHttpService.unregister("/login");
+			if (httpService != null)
+				httpService.unregister("/login");
 			System.out.println("Unregistered /login servlet");
 		} catch (Exception e) {
 			System.out.println("Unable to unregister servlet");
@@ -69,14 +72,14 @@ public class Activator implements BundleActivator, ServiceTrackerCustomizer {
 
 	/* ----- implementation of ServiceTrackerCustomizer ----- */
 
-	public Object addingService(ServiceReference aRef) {
-		httpService = (HttpService) context.getService(aRef);
+	public Object addingService(ServiceReference serviceReference) {
+		httpService = (HttpService) context.getService(serviceReference);
 		registerServlet(httpService);
 		return httpService;
 	} // addingService
 
-	public void modifiedService(ServiceReference aRef, Object aObj) {
-		httpService = (HttpService) context.getService(aRef);
+	public void modifiedService(ServiceReference serviceReference, Object aObj) {
+		httpService = (HttpService) context.getService(serviceReference);
 		registerServlet(httpService);
 	} // modifiedService
 
