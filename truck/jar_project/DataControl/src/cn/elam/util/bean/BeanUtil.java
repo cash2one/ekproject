@@ -1,6 +1,8 @@
 package cn.elam.util.bean;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.util.Vector;
 
 /**
  * 
@@ -67,6 +69,30 @@ public class BeanUtil {
 			return null;
 		}
 	}
+	
+	 /**
+	  * 返回一个类中所有的属性信息，包括父类的属性
+	  * @param clazz
+	  * @return
+	  */
+	 public static Vector<Field> getAllDeclaredFields(Class clazz) {
+		Vector<Field> fileds = new Vector<Field>(5);
+		Vector<Field> temps = null;
+		if (clazz.getSuperclass() != null) {
+			temps = getAllDeclaredFields(clazz.getSuperclass());
+		}
+		if (temps != null)
+			for (Field field : temps)
+				fileds.add(field);
+		temps = null;
+		Field[] fs = clazz.getDeclaredFields();
+		if (fs != null)
+			for (Field field : fs)
+				fileds.add(field);
+		fs = null;
+		return fileds;
+	}
+	
 
 	public static void main(String... srt) {
 		Class[] types = getClassType("123", 1);
