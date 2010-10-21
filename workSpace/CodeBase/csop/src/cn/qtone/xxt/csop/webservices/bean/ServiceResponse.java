@@ -7,12 +7,13 @@ package cn.qtone.xxt.csop.webservices.bean;
  * @author linhansheng
  * 
  */
-public class ServiceReponse {
+public class ServiceResponse {
 
-	
-	
+	static String XML_HEADER ="<?xml version=1.0 encoding=UTF-8?>";
 	
 	public String toXML() {
-		return "<xml></xml>";
+		return XML_HEADER+"<content>请求服务成功服务!</content>";
 	}
+	
+	
 }

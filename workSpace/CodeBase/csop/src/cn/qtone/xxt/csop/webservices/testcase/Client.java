@@ -1,8 +1,9 @@
-package cn.qtone.xxt.csop.client;
+package cn.qtone.xxt.csop.webservices.testcase;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
@@ -21,37 +22,59 @@ import org.apache.commons.httpclient.methods.StringRequestEntity;
 public class Client{
 
 	static int PORT = 8080;
-	static String SERVEICE_NAME ="Test";
+	
+    static String fileName ="configs/Qtc_soap.xml";
+	static String SERVEICE_NAME ="QTranCustomer";
+	static String METHOD_NAME ="query";
+	
+	
+//	static String fileName ="configs/test_soap.xml";
+//	static String SERVEICE_NAME ="Test";
+//	static String METHOD_NAME ="test";
+//	
 	
 	public static void main(String...srt){
-		
 		try {
-//			test_2();
-			File file = new File(Client.class.getResource("test.xml").getPath());
-			test_1(file);
+//			System.out.println(requestXMLTrans("configs/request.xml"));
+			File file = new File(fileName);
+			test_httpPost(file);
+//			test_CallService(file);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+
 	
-	
-   public static void test_2() throws Exception{
+   public static void test_CallService(File fileParams) throws Exception{
 	  
 	   String reqUrl = "http://localhost:"+PORT+"/axis/services/"+SERVEICE_NAME;
 	   Service service = new Service();
 	   Call call =  (Call)service.createCall();
 	   call.setTargetEndpointAddress(new URL(reqUrl));
 	   
-	   call.setOperationName(new QName(reqUrl,"test"));
-	   String result  =(String)call.invoke(new Object[]{" Robert "});
+	   call.setOperationName(new QName(reqUrl,METHOD_NAME));
+	   Object[] obj;
+	    if(fileParams!=null){
+			BufferedReader in = null;
+			PrintWriter pw = null;
+			StringBuilder msg = new StringBuilder();
+			
+		    in = new BufferedReader(new InputStreamReader(new FileInputStream(fileParams)));
+			String line = null;
+			while ((line = in.readLine()) != null){
+					msg.append(line);
+			}
+		    in.close();
+		    obj = new Object[]{msg.toString()};
+	   }else
+		   	obj = new Object[]{"<?xml version=1.0 encoding=utf-8?><test></test>"};
+       	   
+	   String result  =(String)call.invoke(obj);
 	   System.out.println(result);
-	   
-	   
-	   
    }	
 	
 	
-	public static void test_1(File file){
+	public static void test_httpPost(File file){
 		HttpClient httpClient = new HttpClient();
 		BufferedReader in = null;
 		PrintWriter pw = null;
@@ -93,5 +116,23 @@ public class Client{
 		
 	}
 	
+	
+   public static String requestXMLTrans(String file) throws Exception{
+		String content ="";
+		if(file!=null){
+			BufferedReader in = null;
+			PrintWriter pw = null;
+			StringBuilder msg = new StringBuilder();
+		    in = new BufferedReader(new InputStreamReader(new FileInputStream(new File(file))));
+			String line = null;
+			while ((line = in.readLine()) != null){
+					msg.append(line);
+			}
+		    in.close();
+		    content = msg.toString().replace("<", "&lt;").replace(">","&gt;");
+		    return content;
+	   }
+		 return "null";
+	}
 	
 }
