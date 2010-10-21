@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+	<soap:Body>
+		<test xmlns="http://samples.com/">
+		   <test> 
+           &lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;Request&gt;	&lt;Platform&gt;uniteview&lt;/Platform&gt;	&lt;Flag&gt;0&lt;/Flag&gt;	&lt;Version&gt;2.0&lt;/Version&gt;	&lt;OperId&gt;JA&lt;/OperId&gt;	&lt;Password&gt;1234&lt;/Password&gt;	&lt;SysCode&gt;10086&lt;/SysCode&gt;	&lt;ServNumber&gt;13422500460&lt;/ServNumber&gt;	&lt;BusiCode&gt;13422500460&lt;/BusiCode&gt;	&lt;Params&gt;		&lt;TelNo&gt;13800138001&lt;/TelNo&gt;		&lt;BeginDate&gt;2010-7-1&lt;/BeginDate&gt;		&lt;EndDate&gt;2010-7-31&lt;/EndDate&gt;	&lt;/Params&gt;&lt;/Request&gt;
+           </test>
+		</test>
+	</soap:Body>
+</soap:Envelope>

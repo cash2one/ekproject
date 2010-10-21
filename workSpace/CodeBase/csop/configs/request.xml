@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Request>
+	<Platform>uniteview</Platform>
+	<Flag>0</Flag>
+	<Version>2.0</Version>
+	<OperId>JA</OperId>
+	<Password>1234</Password>
+	<SysCode>10086</SysCode>
+	<ServNumber>13422500460</ServNumber>
+	<BusiCode>13422500460</BusiCode>
+	<Params>
+		<TelNo>13800138001</TelNo>
+		<BeginDate>2010-7-1</BeginDate>
+		<EndDate>2010-7-31</EndDate>
+	</Params>
+</Request>
