@@ -1,4 +1,4 @@
-package cn.qtone.xxt.csop.dao.impl;
+package cn.qtone.xxt.csop.dao.comom;
 
 import java.sql.Clob;
 import java.sql.Connection;
@@ -10,9 +10,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
-import cn.qtone.xxt.csop.dao.comom.DBType;
-import cn.qtone.xxt.csop.dao.comom.DaoException;
-import cn.qtone.xxt.csop.dao.comom.PageModel;
 import cn.qtone.xxt.csop.dao.inter.DataControl;
 
 public class BaseDao implements DataControl {
@@ -40,6 +37,7 @@ public class BaseDao implements DataControl {
 
 	public boolean executeBatch(List<String> sqls) throws DaoException {
 		try {
+			checkSatePrepareExcute();
 			stmt = conn.createStatement();
 			for (String sql : sqls) {
 				stmt.addBatch(sql);
@@ -56,6 +54,7 @@ public class BaseDao implements DataControl {
 
 	public ResultSet query(String sql) throws DaoException {
 		try {
+			checkSatePrepareExcute();
 			stmt = conn.createStatement();
 			return stmt.executeQuery(sql);
 		} catch (SQLException e) {
@@ -68,6 +67,7 @@ public class BaseDao implements DataControl {
 
 	public boolean update(String sql) throws DaoException {
 		try {
+			checkSatePrepareExcute();
 			stmt = conn.createStatement();
 			return stmt.execute(sql);
 		} catch (SQLException e) {
@@ -80,6 +80,7 @@ public class BaseDao implements DataControl {
 
 	public void preparedExeDB(String sql) throws DaoException {
 		try {
+			checkSatePrepareExcute();
 			pstmt = conn.prepareStatement(sql);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -87,7 +88,7 @@ public class BaseDao implements DataControl {
 	}
 
 	public boolean excPreparedDB() throws DaoException {
-		try {
+		try {			
 			return pstmt.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -186,8 +187,28 @@ public class BaseDao implements DataControl {
 	}
 
 	void clear() {
-		stmt = null;
-		pstmt = null;
+		try {
+			// if(stmt!=null)
+			// stmt.close();
+			// stmt = null;
+			// if(pstmt!=null)
+			// pstmt = null;
+		} catch (Exception e) {
+		}
+	}
+
+	/**
+	 * 
+	 */
+	void checkSatePrepareExcute() {
+		try {
+			if (stmt != null)
+				stmt.close();
+			stmt = null;
+			if (pstmt != null)
+				pstmt = null;
+		} catch (Exception e) {
+		}
 	}
 
 	public void close() {
@@ -215,6 +236,7 @@ public class BaseDao implements DataControl {
 		ResultSet rs = null;
 		try {
 			int allRecords = 0;
+			checkSatePrepareExcute();
 			stmt = conn.createStatement();
 
 			rs = stmt.executeQuery(" select count(*) from (" + sql + ") ");
