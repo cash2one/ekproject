@@ -1,5 +1,6 @@
 package cn.qtone.xxt.csop.dao.impl;
 
+import java.awt.geom.Area;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -9,6 +10,7 @@ import cn.qtone.xxt.csop.business.TransactionType;
 import cn.qtone.xxt.csop.dao.comom.BaseDao;
 import cn.qtone.xxt.csop.dao.comom.DBConnector;
 import cn.qtone.xxt.csop.dao.inter.ResultRow;
+import cn.qtone.xxt.csop.util.Checker;
 import cn.qtone.xxt.csop.util.CsopLog;
 import cn.qtone.xxt.csop.webservices.bean.RequestParams;
 
@@ -31,13 +33,23 @@ public class TransCustomerQueryDao extends AbstractTransDao {
 	public List<ResultRow> query(RequestParams reqParams) {
 		StringBuffer querySql = new StringBuffer();
 		String phone = reqParams.getTelNo();
-		String beginTime = reqParams.getBeginDate();
-		String endTime = reqParams.getEndDate();
-
+		String beginDate = reqParams.getBeginDate();
+		String endDate = reqParams.getEndDate();
+        //一个号码可能在多个地区中订购服务
 		List<String> serviceAreas = phoneServiceInAreas(phone);
 		if (serviceAreas == null) {
 			CsopLog.info("不存在该用户【" + phone + "】的业务定制信息!");
 			return null;
+		}
+		
+		for(String areaAbb:serviceAreas){
+             //判断该地区是否属于套餐地区 
+			 if(area.isPackageArea(areaAbb)){
+				CsopLog.debug("查询用户["+phone+"] 在 "+area+" 地区定制的套餐业务情况。");
+             }else{
+                CsopLog.debug("查询用户["+phone+"] 在 "+area+" 地区定制的基本业务情况。");
+            	return this.baseTransaction(areaAbb, phone, beginDate, endDate); 
+             } 
 		}
 		return null;
 	}
@@ -62,14 +74,23 @@ public class TransCustomerQueryDao extends AbstractTransDao {
              while(rs!=null&&rs.next()){
 		          nRow = new TransCustomerRow();		 
 				  nRow.setName(rs.getString("transaction"));
-				  nRow.setDesc(rs.getString("业务描述未知"));
-				  nRow.setPort(rs.getString("业务代码未知"));
+				  nRow.setDesc("业务描述未知");
+				  nRow.setPort(rs.getString("tran_code"));
 				  nRow.setServiceState(rs.getInt("is_open")==0?"未开通":"开通");
 				  if(rs.getInt("is_open")!=0){
 				    nRow.setOpenType(rs.getInt("book_type")==0?"网页定制":"手机上行定制");
 				    nRow.setOrderTime(rs.getString("open_date"));
-				    nRow.setPayTime(rs.getString("扣费时间未知"));
-				    nRow.setChargeType(rs.getInt("is_charge")==0?"免费":"收费");
+				    nRow.setPayTime(rs.getString("kf_date"));
+				    if(rs.getInt("is_charge")!=0){
+				        if(rs.getInt("ywt_charge_type")==0)
+				    	  nRow.setChargeType("免费");  //计费类型	包月、点播
+				        else if(rs.getInt("ywt_charge_type")==1){
+					    	    nRow.setChargeType("包月");
+					    	    nRow.setCharge(rs.getInt("fee")+"元/月");
+				               }
+				        else if(rs.getInt("ywt_charge_type")==2)
+					    	  nRow.setChargeType("点播");
+				    }
 				  }  
 				  nRow.setSaleRelationShip(rs.getString("transaction"));
 				  rows.add(nRow);
@@ -90,10 +111,12 @@ public class TransCustomerQueryDao extends AbstractTransDao {
 	
 
 	// 套餐查询 定制情况
-	void packageTransaction(String areaAbb, String phone, String beginDate,
+	List<ResultRow> packageTransaction(String areaAbb, String phone, String beginDate,
 			String endDate) {
-
+          
+       		
 		
+        return null;		
 	}
 
 	// 基本业务 定制情况 Sql 语句
@@ -101,25 +124,43 @@ public class TransCustomerQueryDao extends AbstractTransDao {
 			String endDate) {
 		StringBuffer mainSql = new StringBuffer(" select base.id family,base.phone,base.stu_sequence,base.transaction,");
 		mainSql.append("base.transaction_id,base.is_open,tlog.operator,tlog.reason,");
-		mainSql.append("tlog.package_id,book_type,open_date,is_charge from ( ");
+		mainSql.append("tlog.package_id,book_type,base.open_date,is_charge,");
+		mainSql.append("nvl(ywt.fee,0)fee,ywt.type ywt_charge_type,kf.tran_code,kf.UPDATE_DATE kf_date from ( ");
 		
 		StringBuffer baseView = new StringBuffer();
 		for (TransactionType type : TransactionType.values()) {
 			baseView.append("select fv.id,fv.phone,fv.stu_sequence,'"
 					+ type.cname() + "' transaction ,'" + type.code()
-					+ "' transaction_id," + type.familyField() + " is_open,xj_school."+type.schoolField()+" is_charge ");
-			baseView.append(" from "+areaAbb+"_xj_family_view fv ");
-			baseView.append(" left join zs_xj_stu_class on zs_xj_stu_class.stu_sequence = fv.stu_sequence  ");
-			baseView.append(" left join xj_school on zs_xj_stu_class.school_id = xj_school.id ");
+					+ "' transaction_id," + type.familyField() + " is_open,xj_school."+type.schoolField()+" is_charge,"+type.openDate()+" open_date ");
+			baseView.append(" from "+areaAbb+"_xj_family fv ");
+			baseView.append(" left join "+areaAbb+"_xj_stu_class on "+areaAbb+"_xj_stu_class.stu_sequence = fv.stu_sequence  ");
+			baseView.append(" left join xj_school on "+areaAbb+"_xj_stu_class.school_id = xj_school.id ");
 			baseView.append(" where fv.phone ='"+ phone +"' ");
 			baseView.append(" union ");
 		}
 		baseView.delete(baseView.length()-" union ".length(), baseView.length());
-		
 		mainSql.append(baseView);
+	    //业务日志
 		mainSql.append(" )base left join ( ").append(lastTransactionLog(areaAbb,phone,beginDate,endDate)).append(" ) tlog ");
 		mainSql.append(" on tlog.family_id = base.id and tlog.stu_sequence = base.stu_sequence ");
 		mainSql.append(" and  tlog.open = base.is_open and tlog.transaction = base.transaction_id ");
+		//扣费记录
+		mainSql.append(" left join ").append(areaAbb).append("_yw_kf_chargerecord kf ");
+		mainSql.append(" on kf.family_id=base.id and kf.phone=base.phone and base.transaction_id=kf.transaction ");
+		//查询对应的资费
+		mainSql.append(" left join ").append(" yw_Transaction ywt");
+		mainSql.append(" on ywt.TRANSACTION=base.transaction_id and ywt.AREA_ID=").append(area.getAreaIdByAbb(areaAbb));
+	
+		//查询条件 时间
+		
+		mainSql.append(" where 1=1 ");
+		if(!Checker.isNull(beginDate))
+			mainSql.append(" and to_char(base.open_date,'YY-MM-DD')>='").append(beginDate).append("'");
+		if(!Checker.isNull(endDate))
+			mainSql.append(" and to_char(base.open_date,'YY-MM-DD')<='").append(endDate).append("'");
+		
+		baseView = null;
+		System.out.println(mainSql.toString());
 		return mainSql.toString();	
 	}
 	
@@ -137,6 +178,7 @@ public class TransCustomerQueryDao extends AbstractTransDao {
 	} 
 	
 	
+	
 	/**
 	 * 
 	 * @return
@@ -146,20 +188,10 @@ public class TransCustomerQueryDao extends AbstractTransDao {
     	return null;
     }
 	
-    
-    /**
-     * 业务费用信息
-     * @return
-     */
-    String ywTransactionInfos(){
-       //yw_Transaction
-    	return "";
-    }
-    
-	
+   
 	public static void main(String...srt){
 		TransCustomerQueryDao test = new TransCustomerQueryDao();
-	    System.out.println(test.baseTransaction("zs","13800138000", null, null));	
+	     test.baseTransaction("zs","13770536428", null, null);	
 	}
 	
 }
