@@ -74,22 +74,24 @@ public class RequestParamsWrapper<T extends RequestParams> {
 		xml.replace("&lt;","<").replace("&gt;",">");
 		Document _doc = XmlHandler.createDocument(xml);
 		if (_doc == null) {
-			System.out.println("读取请求参数文件有误! "+xml);
+			System.out.println("读取请求参数文件有误。 ");
 			return null;
 		}
 		return formParams(_doc, clazz);
 	}
 
+	
 	public static void main(String... s) throws Exception {
-		Document xml = XmlHandler.loadXML("configs/request.xml");
 		RequestParamsWrapper test = new RequestParamsWrapper<TransCustomerQueryParams>();
-		TransCustomerQueryParams params = (TransCustomerQueryParams) test
-				.formParams(xml, TransCustomerQueryParams.class);
-		System.out.println(params.getEndDate());
+//		Document xml = XmlHandler.loadXML("configs/request.xml");
+//		TransCustomerQueryParams params = (TransCustomerQueryParams) test
+//				.formParams(xml, TransCustomerQueryParams.class);
+//		System.out.println(params.getEndDate());
 		
 		String content = Client.requestXMLTrans("configs/request.xml");
+		System.out.println(content);
 		content = content.replace("&lt;","<").replace("&gt;",">");
-	    params = (TransCustomerQueryParams) test
+		TransCustomerQueryParams params = (TransCustomerQueryParams) test
 				.formParams(content, TransCustomerQueryParams.class);
 		System.out.println(params.getEndDate());
 	}

@@ -28,7 +28,7 @@ public class TransCustomerQueryService {
 			}
 			requestParams = wrapper.formParams(xml,TransCustomerQueryParams.class);
 			if(requestParams==null){
-				return  "服务异常，解释请求报文失败，对象为空！"; 
+				return  "服务异常，解释请求报文失败，    对象为空！"; 
 			}
 			
 			reponse = query(requestParams.getTelNo(),requestParams.getBeginDate(),requestParams.getEndDate());
