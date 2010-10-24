@@ -1,7 +1,10 @@
 package cn.qtone.xxt.csop.util.file.xml;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
 
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
@@ -16,7 +19,17 @@ public class XmlHandler {
 		try {
 			return loader.read(filePath);
 		} catch (DocumentException e) {
-			e.printStackTrace();
+	    		
+			String currentJarPath = XmlHandler.class.getProtectionDomain().getCodeSource().getLocation().getFile();
+			JarFile currentJar;
+			try {
+				currentJar = new JarFile(currentJarPath);
+				JarEntry dbEntry = currentJar.getJarEntry(filePath); 
+				InputStream in = currentJar.getInputStream(dbEntry);	
+				return loader.read(in);
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			} 
 			return null;
 		}
 	}

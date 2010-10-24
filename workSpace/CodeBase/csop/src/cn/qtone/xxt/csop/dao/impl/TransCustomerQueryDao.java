@@ -40,18 +40,27 @@ public class TransCustomerQueryDao extends AbstractTransDao {
 			CsopLog.info("不存在该用户【" + phone + "】的业务定制信息!");
 			return null;
 		}
-		
+		List<TransCustomerRow> allResults = new ArrayList<TransCustomerRow>();
+		List<TransCustomerRow> subResults=null;
 		for(String areaAbb:serviceAreas){
              //判断该地区是否属于套餐地区 
 			 if(area.isPackageArea(areaAbb)){
-				CsopLog.debug("查询用户["+phone+"] 在 "+area+" 地区定制的套餐业务情况。");
-				return this.packageTransaction(areaAbb, phone, beginDate, endDate);
+				CsopLog.debug("查询用户["+phone+"] 在 "+areaAbb+" 地区定制的套餐业务情况。");
+				subResults=this.packageTransaction(areaAbb, phone, beginDate, endDate);
              }else{
-                CsopLog.debug("查询用户["+phone+"] 在 "+area+" 地区定制的基本业务情况。");
-            	return this.baseTransaction(areaAbb, phone, beginDate, endDate); 
-             } 
+                CsopLog.debug("查询用户["+phone+"] 在 "+areaAbb+" 地区定制的基本业务情况。");
+                subResults=this.baseTransaction(areaAbb, phone, beginDate, endDate); 
+             }
+			 if(subResults!=null){
+                 for(TransCustomerRow row : subResults){ 			   
+                	 allResults.add(row);
+                     row = null;
+                 } 
+				 subResults.clear();
+			 }   
+			 subResults=null;
 		}
-		return null;
+		return allResults;
 	}
 	
 	/**
@@ -119,13 +128,13 @@ public class TransCustomerQueryDao extends AbstractTransDao {
 		
 		StringBuffer baseView = new StringBuffer();
 		for (TransactionType type : TransactionType.values()) {
-			baseView.append("select fv.id,fv.kf_phone phone,fv.stu_sequence,'"
+			baseView.append("select fv.id,fv.phone phone,fv.stu_sequence,'"
 					+ type.cname() + "' transaction ,'" + type.code()
 					+ "' transaction_id," + type.familyField() + " is_open,xj_school."+type.schoolField()+" is_charge,"+type.openDate()+" open_date ");
 			baseView.append(" from "+areaAbb+"_xj_family fv ");
 			baseView.append(" left join "+areaAbb+"_xj_stu_class on "+areaAbb+"_xj_stu_class.stu_sequence = fv.stu_sequence  ");
 			baseView.append(" left join xj_school on "+areaAbb+"_xj_stu_class.school_id = xj_school.id ");
-			baseView.append(" where fv.kf_phone ='"+ phone +"' ");
+			baseView.append(" where fv.phone ='"+ phone +"' ");
 			baseView.append(" union ");
 		}
 		baseView.delete(baseView.length()-" union ".length(), baseView.length());
@@ -224,12 +233,14 @@ public class TransCustomerQueryDao extends AbstractTransDao {
 		 mainSql.append(" left join ").append(areaAbb).append("_preferential_packager fp ");
 		 mainSql.append(" on fa.id = fp.f_id and fp.phone = fa.kf_phone ");
 		 mainSql.append(" left join preferential_package pp ").append(" on fp.pp_id=pp.id");
-		 mainSql.append(" left join ").append(this.lastPackageTransactionLog(areaAbb)).append(" tlog ");
+		 mainSql.append(" left join ( ").append(this.lastPackageTransactionLog(areaAbb)).append(" )tlog ");
 		 mainSql.append(" on tlog.family_id=fa.id and tlog.phone=fa.kf_phone and tlog.open=1 ");
 		 mainSql.append(" where fa.kf_phone='").append(phone).append("'");	
 		 mainSql.append(" and fp.del = 1 ");//开通的套餐
-		 mainSql.append(" and to_char(fp.START_DATE,'YY-MM-DD')>='").append(beginDate).append("'");
-		 mainSql.append(" and to_char(fp.END_DATE,'YY-MM-DD')<='").append(endDate).append("'");
+		 if(!Checker.isNull(beginDate))
+			 mainSql.append(" and to_char(fp.START_DATE,'YY-MM-DD')>='").append(beginDate).append("'");
+		 if(!Checker.isNull(endDate))
+			 mainSql.append(" and to_char(fp.END_DATE,'YY-MM-DD')<='").append(endDate).append("'");
 	     return mainSql.toString();
 	} 
 
@@ -241,7 +252,7 @@ public class TransCustomerQueryDao extends AbstractTransDao {
 		sql.append(" select a.* from "+areaAbb+"_transaction_log a, ( ");
 		sql.append(" select  b.family_id,b.stu_sequence,b.package_id,b.phone,b.open,max(b.open_date) open_date  from  "+areaAbb+"_transaction_log b");
 		sql.append(" group by b.family_id,b.stu_sequence,b.package_id,b.open,b.phone  having b.open = 1 or b.open = 2 ) n ");
-		sql.append(" where n.family_id=a.family_id and a.stu_sequence=n.stu_sequence and a.b.package_id = n.b.package_id and a.open = n.open and a.open_date= n.open_date ");
+		sql.append(" where n.family_id=a.family_id and a.stu_sequence=n.stu_sequence and a.package_id = n.package_id and a.open = n.open and a.open_date= n.open_date ");
 		return sql.toString();
 	} 
 	

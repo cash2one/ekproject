@@ -13,8 +13,8 @@ public class ServiceResponse {
 	static String ROOT_ELEMENT = "Response";
 
 	String retcode; // 000 成功
-	String retmsg; // 返回信息
-	String result; // 应答数据
+	String retmsg=""; // 返回信息
+	String result=""; // 应答数据
 
 	public String getRetcode() {
 		return retcode;

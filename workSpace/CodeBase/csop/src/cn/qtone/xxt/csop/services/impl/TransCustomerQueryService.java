@@ -23,7 +23,7 @@ public class TransCustomerQueryService {
 		try {
 			List<TransCustomerRow> results = dao.query(reqParams);
 			if(results!=null){
-			   resp.setRetmsg("查询成功，返回业务查询数据！");
+			   resp.setRetmsg("query suc "+results.size()+" records ");
 			   resp.setResult(this.formateResutlData(results));
 			}
 			resp.setRetcode("000");

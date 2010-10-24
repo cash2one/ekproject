@@ -51,7 +51,7 @@ public class TransCustomerQueryInter {
    
     
 	//测试接口
-	private String queryTest(String phone, String beginDate, String endDate) {
+	public String queryTest(String phone, String beginDate, String endDate) {
 		CsopLog.debug("接收到 [业务定制情况查询] 服务请求......");
 		TransCustomerQueryService service = new TransCustomerQueryService();
 		TransCustomerQueryParams requestParams = new TransCustomerQueryParams();
@@ -61,4 +61,9 @@ public class TransCustomerQueryInter {
 		return service.query(requestParams).toString();
 	}
 
+	
+	public static void main(String...srt){
+		System.out.println("test");
+	}
+	
 }
