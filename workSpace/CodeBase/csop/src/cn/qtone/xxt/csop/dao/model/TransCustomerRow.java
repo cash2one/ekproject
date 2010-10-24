@@ -1,4 +1,4 @@
-package cn.qtone.xxt.csop.dao.impl;
+package cn.qtone.xxt.csop.dao.model;
 
 import cn.qtone.xxt.csop.dao.inter.ResultRow;
 

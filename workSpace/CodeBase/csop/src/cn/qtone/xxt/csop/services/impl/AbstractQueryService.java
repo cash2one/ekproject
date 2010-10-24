@@ -2,8 +2,8 @@ package cn.qtone.xxt.csop.services.impl;
 
 import java.util.List;
 
-import cn.qtone.xxt.csop.dao.impl.TransCustomerRow;
 import cn.qtone.xxt.csop.dao.inter.ResultRow;
+import cn.qtone.xxt.csop.dao.model.TransCustomerRow;
 import cn.qtone.xxt.csop.webservices.bean.RequestParams;
 import cn.qtone.xxt.csop.webservices.bean.ServiceResponse;
 
