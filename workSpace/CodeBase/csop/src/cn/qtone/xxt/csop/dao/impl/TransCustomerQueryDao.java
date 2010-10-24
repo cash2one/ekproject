@@ -10,47 +10,46 @@ import cn.qtone.xxt.csop.dao.comom.BaseDao;
 import cn.qtone.xxt.csop.dao.comom.DBConnector;
 import cn.qtone.xxt.csop.dao.model.TransCustomerRow;
 import cn.qtone.xxt.csop.inter.AbstractTransDao;
-import cn.qtone.xxt.csop.inter.ResultRow;
 import cn.qtone.xxt.csop.util.Checker;
 import cn.qtone.xxt.csop.util.CsopLog;
-import cn.qtone.xxt.csop.webservices.bean.RequestParams;
+import cn.qtone.xxt.csop.webservices.bean.TransCustomerQueryParams;
 
 /**
- *6.4.1.1 ÒµÎñ¶¨ÖÆÇé¿ö²éÑ¯½Ó¿Ú£¨B005_01£©
+ *6.4.1.1 ä¸šåŠ¡å®šåˆ¶æƒ…å†µæŸ¥è¯¢æ¥å£ï¼ˆB005_01ï¼‰
  * 
- * »ù±¾ÒµÎñµØÇø(ËÄÏî»ù±¾ÒµÎñ·Ö¿ª¶¨ÖÆ)¡¢ 
- * Ì×²ÍµØÇø(°Ñ»ù±¾ÒµÎñ·â×°ÎªÌ×²Í£¬
- * ÒÔ¶¨ÖÆÌ×²ÍµÄĞÎÊ½¶¨ÖÆ·şÎñ)¡¢
- * ADCÊÔµãµØÇø(ÒÔÓªÏú·½°¸µÄ·½Ê½¶¨ÖÆ·şÎñ)
+ * åŸºæœ¬ä¸šåŠ¡åœ°åŒº(å››é¡¹åŸºæœ¬ä¸šåŠ¡åˆ†å¼€å®šåˆ¶)ã€ 
+ * å¥—é¤åœ°åŒº(æŠŠåŸºæœ¬ä¸šåŠ¡å°è£…ä¸ºå¥—é¤ï¼Œ
+ * ä»¥å®šåˆ¶å¥—é¤çš„å½¢å¼å®šåˆ¶æœåŠ¡)ã€
+ * ADCè¯•ç‚¹åœ°åŒº(ä»¥è¥é”€æ–¹æ¡ˆçš„æ–¹å¼å®šåˆ¶æœåŠ¡)
  * 
  * @author linhansheng
  */
-public class TransCustomerQueryDao extends AbstractTransDao {
+public class TransCustomerQueryDao extends AbstractTransDao<TransCustomerQueryParams,TransCustomerRow> {
 
 	/**
-	 * ½Ó¿Ú¶¨ÒåµÄ·µ»ØÊı¾İ¸ñÊ½£¨×Ö¶Î£© ÒµÎñÃû³Æ ÒµÎñ¶Ë¿Ú ÒµÎñÄÚÈİ¼ò½é ×Ê·Ñ£¨Ôª£© ¼Æ·ÑÀàĞÍ  
-	 * ¿ªÍ¨·½Ê½   ¶©¹ºÊ±¼ä    ÒµÎñÊ¹ÓÃ×´Ì¬  ¿Û·ÑÊ±¼ä   ÓªÏú¹ØÁªĞÅÏ¢
+	 * æ¥å£å®šä¹‰çš„è¿”å›æ•°æ®æ ¼å¼ï¼ˆå­—æ®µï¼‰ ä¸šåŠ¡åç§° ä¸šåŠ¡ç«¯å£ ä¸šåŠ¡å†…å®¹ç®€ä»‹ èµ„è´¹ï¼ˆå…ƒï¼‰ è®¡è´¹ç±»å‹  
+	 * å¼€é€šæ–¹å¼   è®¢è´­æ—¶é—´    ä¸šåŠ¡ä½¿ç”¨çŠ¶æ€  æ‰£è´¹æ—¶é—´   è¥é”€å…³è”ä¿¡æ¯
 	 */
-	public List<TransCustomerRow> query(RequestParams reqParams) {
+	public List<TransCustomerRow> query(TransCustomerQueryParams reqParams) {
 		StringBuffer querySql = new StringBuffer();
 		String phone = reqParams.getTelNo();
 		String beginDate = reqParams.getBeginDate();
 		String endDate = reqParams.getEndDate();
-        //Ò»¸öºÅÂë¿ÉÄÜÔÚ¶à¸öµØÇøÖĞ¶©¹º·şÎñ
+        //ä¸€ä¸ªå·ç å¯èƒ½åœ¨å¤šä¸ªåœ°åŒºä¸­è®¢è´­æœåŠ¡
 		List<String> serviceAreas = phoneServiceInAreas(phone);
 		if (serviceAreas == null) {
-			CsopLog.info("²»´æÔÚ¸ÃÓÃ»§¡¾" + phone + "¡¿µÄÒµÎñ¶¨ÖÆĞÅÏ¢!");
+			CsopLog.info("ä¸å­˜åœ¨è¯¥ç”¨æˆ·ã€" + phone + "ã€‘çš„ä¸šåŠ¡å®šåˆ¶ä¿¡æ¯!");
 			return null;
 		}
 		List<TransCustomerRow> allResults = new ArrayList<TransCustomerRow>();
 		List<TransCustomerRow> subResults=null;
 		for(String areaAbb:serviceAreas){
-             //ÅĞ¶Ï¸ÃµØÇøÊÇ·ñÊôÓÚÌ×²ÍµØÇø 
+             //åˆ¤æ–­è¯¥åœ°åŒºæ˜¯å¦å±äºå¥—é¤åœ°åŒº 
 			 if(area.isPackageArea(areaAbb)){
-				CsopLog.debug("²éÑ¯ÓÃ»§["+phone+"] ÔÚ "+areaAbb+" µØÇø¶¨ÖÆµÄÌ×²ÍÒµÎñÇé¿ö¡£");
+				CsopLog.debug("æŸ¥è¯¢ç”¨æˆ·["+phone+"] åœ¨ "+areaAbb+" åœ°åŒºå®šåˆ¶çš„å¥—é¤ä¸šåŠ¡æƒ…å†µã€‚");
 				subResults=this.packageTransaction(areaAbb, phone, beginDate, endDate);
              }else{
-                CsopLog.debug("²éÑ¯ÓÃ»§["+phone+"] ÔÚ "+areaAbb+" µØÇø¶¨ÖÆµÄ»ù±¾ÒµÎñÇé¿ö¡£");
+                CsopLog.debug("æŸ¥è¯¢ç”¨æˆ·["+phone+"] åœ¨ "+areaAbb+" åœ°åŒºå®šåˆ¶çš„åŸºæœ¬ä¸šåŠ¡æƒ…å†µã€‚");
                 subResults=this.baseTransaction(areaAbb, phone, beginDate, endDate); 
              }
 			 if(subResults!=null){
@@ -66,7 +65,7 @@ public class TransCustomerQueryDao extends AbstractTransDao {
 	}
 	
 	/**
-	 * ÊôÓÚ»ù±¾ÒµÎñµÄ²éÑ¯
+	 * å±äºåŸºæœ¬ä¸šåŠ¡çš„æŸ¥è¯¢
 	 * @param areaAbb
 	 * @param phone
 	 * @param beginDate
@@ -85,22 +84,22 @@ public class TransCustomerQueryDao extends AbstractTransDao {
              while(rs!=null&&rs.next()){
 		          nRow = new TransCustomerRow();		 
 				  nRow.setName(rs.getString("transaction"));
-				  nRow.setDesc("ÒµÎñÃèÊöÎ´Öª");
+				  nRow.setDesc("ä¸šåŠ¡æè¿°æœªçŸ¥");
 				  nRow.setPort(rs.getString("tran_code"));
-				  nRow.setServiceState(rs.getInt("is_open")==0?"Î´¿ªÍ¨":"¿ªÍ¨");
+				  nRow.setServiceState(rs.getInt("is_open")==0?"æœªå¼€é€š":"å¼€é€š");
 				  if(rs.getInt("is_open")!=0){
-				    nRow.setOpenType(rs.getInt("book_type")==0?"ÍøÒ³¶¨ÖÆ":"ÊÖ»úÉÏĞĞ¶¨ÖÆ");
+				    nRow.setOpenType(rs.getInt("book_type")==0?"ç½‘é¡µå®šåˆ¶":"æ‰‹æœºä¸Šè¡Œå®šåˆ¶");
 				    nRow.setOrderTime(rs.getString("open_date"));
 				    nRow.setPayTime(rs.getString("kf_date"));
 				    if(rs.getInt("is_charge")!=0){
 				        if(rs.getInt("ywt_charge_type")==0)
-				    	  nRow.setChargeType("Ãâ·Ñ");  //¼Æ·ÑÀàĞÍ	°üÔÂ¡¢µã²¥
+				    	  nRow.setChargeType("å…è´¹");  //è®¡è´¹ç±»å‹	åŒ…æœˆã€ç‚¹æ’­
 				        else if(rs.getInt("ywt_charge_type")==1){
-					    	    nRow.setChargeType("°üÔÂ");
-					    	    nRow.setCharge(rs.getInt("fee")+"Ôª/ÔÂ");
+					    	    nRow.setChargeType("åŒ…æœˆ");
+					    	    nRow.setCharge(rs.getInt("fee")+"å…ƒ/æœˆ");
 				               }
 				        else if(rs.getInt("ywt_charge_type")==2)
-					    	  nRow.setChargeType("µã²¥");
+					    	  nRow.setChargeType("ç‚¹æ’­");
 				    }
 				  }  
 				  nRow.setSaleRelationShip(rs.getString("transaction"));
@@ -120,7 +119,7 @@ public class TransCustomerQueryDao extends AbstractTransDao {
 		return rows;
 	}
 	
-	// »ù±¾ÒµÎñ ¶¨ÖÆÇé¿ö Sql Óï¾ä
+	// åŸºæœ¬ä¸šåŠ¡ å®šåˆ¶æƒ…å†µ Sql è¯­å¥
 	String baseTransactionSql(String areaAbb, String phone, String beginDate,
 			String endDate) {
 		StringBuffer mainSql = new StringBuffer(" select base.id family,base.phone,base.stu_sequence,base.transaction,");
@@ -141,18 +140,18 @@ public class TransCustomerQueryDao extends AbstractTransDao {
 		}
 		baseView.delete(baseView.length()-" union ".length(), baseView.length());
 		mainSql.append(baseView);
-	    //ÒµÎñÈÕÖ¾
+	    //ä¸šåŠ¡æ—¥å¿—
 		mainSql.append(" )base left join ( ").append(this.lastBaseTransactionLog(areaAbb,phone,beginDate,endDate)).append(" ) tlog ");
 		mainSql.append(" on tlog.family_id = base.id and tlog.stu_sequence = base.stu_sequence ");
 		mainSql.append(" and  tlog.open = base.is_open and tlog.transaction = base.transaction_id ");
-		//¿Û·Ñ¼ÇÂ¼
+		//æ‰£è´¹è®°å½•
 		mainSql.append(" left join ").append(areaAbb).append("_yw_kf_chargerecord kf ");
 		mainSql.append(" on kf.family_id=base.id and kf.phone=base.phone and base.transaction_id=kf.transaction ");
-		//²éÑ¯¶ÔÓ¦µÄ×Ê·Ñ
+		//æŸ¥è¯¢å¯¹åº”çš„èµ„è´¹
 		mainSql.append(" left join ").append(" yw_Transaction ywt");
 		mainSql.append(" on ywt.TRANSACTION=base.transaction_id and ywt.AREA_ID=").append(area.getAreaIdByAbb(areaAbb));
 	
-		//²éÑ¯Ìõ¼ş Ê±¼ä
+		//æŸ¥è¯¢æ¡ä»¶ æ—¶é—´
 		
 		mainSql.append(" where 1=1 ");
 		if(!Checker.isNull(beginDate))
@@ -167,7 +166,7 @@ public class TransCustomerQueryDao extends AbstractTransDao {
 	
 	
 	/*
-	 * ×îĞÂµÄ»ù±¾ÒµÎñ±ä¸üÈÕÖ¾
+	 * æœ€æ–°çš„åŸºæœ¬ä¸šåŠ¡å˜æ›´æ—¥å¿—
 	 */
 	String lastBaseTransactionLog(String areaAbb,String phone,String beginDate,String endDate){
 		StringBuffer sql = new StringBuffer();
@@ -179,7 +178,7 @@ public class TransCustomerQueryDao extends AbstractTransDao {
 	} 
 	
 	
-	// Ì×²Í²éÑ¯ ¶¨ÖÆÇé¿ö
+	// å¥—é¤æŸ¥è¯¢ å®šåˆ¶æƒ…å†µ
 	List<TransCustomerRow> packageTransaction(String areaAbb, String phone, String beginDate,
 			String endDate) {
 		BaseDao db = null;
@@ -195,9 +194,9 @@ public class TransCustomerQueryDao extends AbstractTransDao {
 				  nRow.setName(rs.getString("transaction"));
 				  nRow.setDesc(rs.getString("remark"));
 				  nRow.setPort(rs.getString("tran_code"));
-				  nRow.setServiceState(rs.getInt("is_open")==0?"Î´¿ªÍ¨":"¿ªÍ¨");
+				  nRow.setServiceState(rs.getInt("is_open")==0?"æœªå¼€é€š":"å¼€é€š");
 				  if(rs.getInt("is_open")!=0){
-				    nRow.setOpenType(rs.getInt("book_type")==0?"ÍøÒ³¶¨ÖÆ":"ÊÖ»úÉÏĞĞ¶¨ÖÆ");
+				    nRow.setOpenType(rs.getInt("book_type")==0?"ç½‘é¡µå®šåˆ¶":"æ‰‹æœºä¸Šè¡Œå®šåˆ¶");
 				    nRow.setOrderTime(rs.getString("open_date"));
 				    nRow.setPayTime(rs.getString("kf_date"));
 				    if(rs.getInt("is_charge")!=0){
@@ -221,11 +220,11 @@ public class TransCustomerQueryDao extends AbstractTransDao {
 		return rows;
 	}
 	
-	// Ì×²Í²éÑ¯ ¶¨ÖÆÇé¿ö Sql
+	// å¥—é¤æŸ¥è¯¢ å®šåˆ¶æƒ…å†µ Sql
 	
 	/**
-	 * ÒµÎñÃû³Æ ÒµÎñ¶Ë¿Ú ÒµÎñÄÚÈİ¼ò½é ×Ê·Ñ£¨Ôª£© ¼Æ·ÑÀàĞÍ  
-	 * ¿ªÍ¨·½Ê½   ¶©¹ºÊ±¼ä    ÒµÎñÊ¹ÓÃ×´Ì¬  ¿Û·ÑÊ±¼ä   ÓªÏú¹ØÁªĞÅÏ¢
+	 * ä¸šåŠ¡åç§° ä¸šåŠ¡ç«¯å£ ä¸šåŠ¡å†…å®¹ç®€ä»‹ èµ„è´¹ï¼ˆå…ƒï¼‰ è®¡è´¹ç±»å‹  
+	 * å¼€é€šæ–¹å¼   è®¢è´­æ—¶é—´    ä¸šåŠ¡ä½¿ç”¨çŠ¶æ€  æ‰£è´¹æ—¶é—´   è¥é”€å…³è”ä¿¡æ¯
 	 */
 	String packageTransactionSql(String areaAbb, String phone, String beginDate,
 			String endDate){
@@ -238,7 +237,7 @@ public class TransCustomerQueryDao extends AbstractTransDao {
 		 mainSql.append(" left join ( ").append(this.lastPackageTransactionLog(areaAbb)).append(" )tlog ");
 		 mainSql.append(" on tlog.family_id=fa.id and tlog.phone=fa.kf_phone and tlog.open=1 ");
 		 mainSql.append(" where fa.kf_phone='").append(phone).append("'");	
-		 mainSql.append(" and fp.del = 1 ");//¿ªÍ¨µÄÌ×²Í
+		 mainSql.append(" and fp.del = 1 ");//å¼€é€šçš„å¥—é¤
 		 if(!Checker.isNull(beginDate))
 			 mainSql.append(" and to_char(fp.START_DATE,'YY-MM-DD')>='").append(beginDate).append("'");
 		 if(!Checker.isNull(endDate))
@@ -247,7 +246,7 @@ public class TransCustomerQueryDao extends AbstractTransDao {
 	} 
 
 	/*
-	 * ×îĞÂµÄÌ×²ÍÒµÎñµÄ±ä¸üÈÕÖ¾
+	 * æœ€æ–°çš„å¥—é¤ä¸šåŠ¡çš„å˜æ›´æ—¥å¿—
 	 */
 	String lastPackageTransactionLog(String areaAbb){
 		StringBuffer sql = new StringBuffer();
@@ -259,7 +258,7 @@ public class TransCustomerQueryDao extends AbstractTransDao {
 	} 
 	
 	/**
-	 * ÆäËûÒµÎñ
+	 * å…¶ä»–ä¸šåŠ¡
 	 * @return
 	 */
     String otherTransaction(){

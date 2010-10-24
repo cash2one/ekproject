@@ -109,7 +109,7 @@ public class BaseDao implements DataControl {
 	}
 
 	/**
-	 * ÉèÖÃ²ÎÊı
+	 * è®¾ç½®å‚æ•°
 	 * 
 	 * @param parameterIndex
 	 * @param x
@@ -120,7 +120,7 @@ public class BaseDao implements DataControl {
 	}
 
 	/**
-	 * ÉèÖÃObjectÀàĞÍµÄ²ÎÊı
+	 * è®¾ç½®Objectç±»å‹çš„å‚æ•°
 	 * 
 	 * @param parameterIndex
 	 * @param paramValue
@@ -134,7 +134,7 @@ public class BaseDao implements DataControl {
 	}
 
 	/**
-	 * ÉèÖÃbyteÀàĞÍµÄ²ÎÊı
+	 * è®¾ç½®byteç±»å‹çš„å‚æ•°
 	 * 
 	 * @param parameterIndex
 	 * @param paramValue
@@ -148,7 +148,7 @@ public class BaseDao implements DataControl {
 	}
 
 	/**
-	 * ÉèÖÃshortÀàĞÍµÄ²ÎÊı
+	 * è®¾ç½®shortç±»å‹çš„å‚æ•°
 	 * 
 	 * @param parameterIndex
 	 * @param paramValue

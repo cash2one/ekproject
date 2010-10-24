@@ -2,7 +2,7 @@ package cn.qtone.xxt.csop.webservices.bean;
 
 /**
  * 
- * ·şÎñÓ¦´ğ ·â×°Àà ¸ºÔğ·â×°¶ÔÓ¦¸ñÊ½µÄXML
+ * æœåŠ¡åº”ç­” å°è£…ç±» è´Ÿè´£å°è£…å¯¹åº”æ ¼å¼çš„XML
  * 
  * @author linhansheng
  * 
@@ -12,9 +12,9 @@ public class ServiceResponse {
 	static String XML_HEADER = "<?xml version=1.0 encoding=UTF-8?>";
 	static String ROOT_ELEMENT = "Response";
 
-	String retcode; // 000 ³É¹¦
-	String retmsg=""; // ·µ»ØĞÅÏ¢
-	String result=""; // Ó¦´ğÊı¾İ
+	String retcode; // 000 æˆåŠŸ
+	String retmsg=""; // è¿”å›ä¿¡æ¯
+	String result=""; // åº”ç­”æ•°æ®
 
 	public String getRetcode() {
 		return retcode;
@@ -41,7 +41,7 @@ public class ServiceResponse {
 	}
 
 	/**
-	 * xml ·â×°
+	 * xml å°è£…
 	 */
 	public String toString() {
 		StringBuffer xml = new StringBuffer(XML_HEADER);

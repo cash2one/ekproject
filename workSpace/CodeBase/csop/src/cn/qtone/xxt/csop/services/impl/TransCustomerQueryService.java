@@ -10,7 +10,7 @@ import cn.qtone.xxt.csop.webservices.bean.ServiceResponse;
 import cn.qtone.xxt.csop.webservices.bean.TransCustomerQueryParams;
 
 /**
- * 6.4.1.1 ÒµÎñ¶¨ÖÆÇé¿ö²éÑ¯½Ó¿Ú£¨B005_01£©
+ * 6.4.1.1 ä¸šåŠ¡å®šåˆ¶æƒ…å†µæŸ¥è¯¢ï¼ˆB005_01ï¼‰
  * 
  * @author linhansheng
  * 
@@ -34,7 +34,7 @@ public class TransCustomerQueryService extends AbstractQueryService<TransCustome
 			resp.setRetcode("000");
 		} catch (Exception e) {
 			resp.setRetcode("");
-			resp.setRetmsg("²éÑ¯Ê§°Ü");
+			resp.setRetmsg("æŸ¥è¯¢å¤±è´¥");
 			CsopLog.error(e.getMessage());
 		}finally{
 			 dao=null;

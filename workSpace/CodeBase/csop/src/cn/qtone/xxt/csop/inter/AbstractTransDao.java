@@ -20,9 +20,9 @@ public abstract class AbstractTransDao<Params extends RequestParams,Row extends 
 	}
 
 	/**
-	 * ¸ù¾ÝºÅÂë¶¨Î»¸ÃÊÖ»ú´¦ÓÚÄÇÐ©µØÇø
-	 * ¿¼ÂÇÒ»¸öºÅÂë´æÔÚ¶à¸öµØÇøµÄÇé¿ö
-	 * @param phone  Ä¿±êÊÖ»úÓÃ»§ ºÅÂë 
+	 * æ ¹æ®å·ç å®šä½è¯¥æ‰‹æœºå¤„äºŽé‚£äº›åœ°åŒº
+	 * è€ƒè™‘ä¸€ä¸ªå·ç å­˜åœ¨å¤šä¸ªåœ°åŒºçš„æƒ…å†µ
+	 * @param phone  ç›®æ ‡æ‰‹æœºç”¨æˆ· å·ç  
 	 * @return
 	 */
 	protected List<String> phoneServiceInAreas(String phone){
@@ -60,7 +60,7 @@ public abstract class AbstractTransDao<Params extends RequestParams,Row extends 
 	
 	/**
 	 * 
-	 * ÊÇ·ñÌ×²ÍµØÇø
+	 * æ˜¯å¦å¥—é¤åœ°åŒº
 	 * @param areaAbb
 	 * @return
 	 */

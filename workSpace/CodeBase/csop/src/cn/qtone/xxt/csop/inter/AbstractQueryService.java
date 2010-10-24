@@ -9,7 +9,7 @@ import cn.qtone.xxt.csop.webservices.bean.ServiceResponse;
 public abstract class AbstractQueryService<Params extends RequestParams, Row extends ResultRow> {
 
 	/**
-	 * 查询接口
+	 * 鏌ヨ鎺ュ彛
 	 * 
 	 * @param reqParams
 	 * @return
@@ -17,8 +17,7 @@ public abstract class AbstractQueryService<Params extends RequestParams, Row ext
 	public abstract ServiceResponse query(Params reqParams);
 
 	/**
-	 * 应答数据格式，主要针对多行数据的返回
-	 * 
+	 * 搴旂瓟鏁版嵁鏍煎紡锛屼富瑕侀拡瀵瑰琛屾暟鎹殑杩斿洖
 	 * @param rows
 	 * @return
 	 */

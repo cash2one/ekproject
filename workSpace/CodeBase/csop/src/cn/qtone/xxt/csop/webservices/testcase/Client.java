@@ -96,10 +96,10 @@ public class Client{
 				System.out.println(postMethod.getResponseBodyAsString());
 			}  catch (HttpException e) {
 				e.printStackTrace();
-				throw new RuntimeException("发送HTTP请求异常");
+				throw new RuntimeException("鍙戦�丠TTP璇锋眰寮傚父");
 			} catch (IOException e) {
 				e.printStackTrace();
-				throw new RuntimeException("发送HTTP请求异常");
+				throw new RuntimeException("鍙戦�丠TTP璇锋眰寮傚父");
 			}
 		}catch (Exception e) {
 			e.printStackTrace();

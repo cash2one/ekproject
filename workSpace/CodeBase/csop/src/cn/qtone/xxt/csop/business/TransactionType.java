@@ -2,21 +2,21 @@ package cn.qtone.xxt.csop.business;
 
 /**
  * 
- * »ù±¾ÒµÎñÀàĞÍ,ĞÅÏ¢
+ * åŸºæœ¬ä¸šåŠ¡ç±»å‹,ä¿¡æ¯
  * @author linhansheng 
  */
 public enum TransactionType {
 	
-	DXX(1,"¼Ò³¤¶ÌĞÅÏä","is_dxx","is_dxx_charge","OPEN_DXX_DATE"),
-	KAOQIN(2,"¿¼ÇÚ","is_kaoqin","is_kq_charge","OPEN_KAOQIN_DATE"),
-	QINQING(3,"Ç×Çéµç»°","is_qin_qing_tel","is_qq_charge","OPEN_QINQING_TEL"),
-	LIUYANBAN(4,"µç×ÓÁôÑÔ°å","is_liuyanban","is_lyb_charge","OPEN_LIUYANBAN");
+	DXX(1,"å®¶é•¿çŸ­ä¿¡ç®±","is_dxx","is_dxx_charge","OPEN_DXX_DATE"),
+	KAOQIN(2,"è€ƒå‹¤","is_kaoqin","is_kq_charge","OPEN_KAOQIN_DATE"),
+	QINQING(3,"äº²æƒ…ç”µè¯","is_qin_qing_tel","is_qq_charge","OPEN_QINQING_TEL"),
+	LIUYANBAN(4,"ç”µå­ç•™è¨€æ¿","is_liuyanban","is_lyb_charge","OPEN_LIUYANBAN");
 	
 	int code;
 	String cname;
-	String familyField;  //¼ÒÍ¥±íÖĞµÄ±êÖ¾Î»  ÒµÎñ¿ªÍ¨×´Ì¬
-	String schoolField;  //Ñ§Ğ£±íÖĞµÄ±êÖ¾Î»  ÒµÎñÊÇ·ñÊÕ·Ñ
-	String openDate;  //¼ÒÍ¥±íÖĞ¶ÔÓ¦µÄÒµÎñ¿ªÍ¨Ê±¼ä
+	String familyField;  //å®¶åº­è¡¨ä¸­çš„æ ‡å¿—ä½  ä¸šåŠ¡å¼€é€šçŠ¶æ€
+	String schoolField;  //å­¦æ ¡è¡¨ä¸­çš„æ ‡å¿—ä½  ä¸šåŠ¡æ˜¯å¦æ”¶è´¹
+	String openDate;  //å®¶åº­è¡¨ä¸­å¯¹åº”çš„ä¸šåŠ¡å¼€é€šæ—¶é—´
 	
 	TransactionType(int code,String cname,String familyField,String schoolField,String openDate){
 	   this.code = code;
@@ -35,7 +35,7 @@ public enum TransactionType {
     }
 
     /**
-     * ·µ»Ø¶ÔÓ¦ family ±íÖĞµÄ ´ú±í¸ÃÒµÎñµÄ ×´Ì¬   ×Ö¶ÎÃû
+     * è¿”å›å¯¹åº” family è¡¨ä¸­çš„ ä»£è¡¨è¯¥ä¸šåŠ¡çš„ çŠ¶æ€   å­—æ®µå
      * @return
      */
     public String familyField(){

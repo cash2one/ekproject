@@ -16,7 +16,7 @@ import cn.qtone.xxt.csop.webservices.testcase.Client;
 
 /***
  * 
- * @author ¸ù¾İÌá¹©µÄ xml Éú³É¶ÔÓ¦µÄ ÇëÇó²ÎÊıÄ£ĞÍ
+ * @author æ ¹æ®æä¾›çš„ xml ç”Ÿæˆå¯¹åº”çš„ è¯·æ±‚å‚æ•°æ¨¡å‹
  *
  * @param <T> extends RequestParams
  */
@@ -30,7 +30,7 @@ public class RequestParamsWrapper<T extends RequestParams> {
 
 		Vector<Field> fields = BeanUtil.getAllDeclaredFields(clazz);
 		if (fields == null || fields.size() == 0)
-			throw new Exception("·şÎñÇëÇóÊ§°Ü£¡³ö´íµÄÔ­ÒòÊÇ£¬·şÎñÆ÷¶Ë½âÊÍÇëÇó±¨ÎÄÊ§°Ü£¡");
+			throw new Exception("æœåŠ¡è¯·æ±‚å¤±è´¥ï¼å‡ºé”™çš„åŸå› æ˜¯ï¼ŒæœåŠ¡å™¨ç«¯è§£é‡Šè¯·æ±‚æŠ¥æ–‡å¤±è´¥ï¼");
 		
 		ReqParam paramAnotation = null;
 		String nodePath = "";
@@ -56,7 +56,7 @@ public class RequestParamsWrapper<T extends RequestParams> {
 							paramAnotation.attribute()).getText());
 				}
 			}catch(Exception e){
-				throw new Exception("ÇëÇó±¨ÎÄĞ­ÒéÖĞËù¶¨ÒåµÄ²ÎÊı×Ö¶Î²»Ò»ÖÂ£¬Çë¼ì²é×Ö¶Î¸ñÊ½£¡³ö´íµÄÔ­ÒòÊÇ£¬ÕÒ²»µ½½Úµã["+nodePath+"]");
+				throw new Exception("è¯·æ±‚æŠ¥æ–‡åè®®ä¸­æ‰€å®šä¹‰çš„å‚æ•°å­—æ®µä¸ä¸€è‡´ï¼Œè¯·æ£€æŸ¥å­—æ®µæ ¼å¼ï¼å‡ºé”™çš„åŸå› æ˜¯ï¼Œæ‰¾ä¸åˆ°èŠ‚ç‚¹["+nodePath+"]");
 			}
 			field = null;
 			paramAnotation = null;
@@ -69,12 +69,12 @@ public class RequestParamsWrapper<T extends RequestParams> {
 
 	public T formParams(String xml, Class<T> clazz) throws Exception {
 		if(Checker.isNull(xml)){
-			System.out.println("ÇëÇó±¨ÎÄÎª¿Õ! ");			
+			System.out.println("è¯·æ±‚æŠ¥æ–‡ä¸ºç©º! ");			
 		}
 		xml.replace("&lt;","<").replace("&gt;",">");
 		Document _doc = XmlHandler.createDocument(xml);
 		if (_doc == null) {
-			System.out.println("¶ÁÈ¡ÇëÇó²ÎÊıÎÄ¼şÓĞÎó¡£ ");
+			System.out.println("è¯»å–è¯·æ±‚å‚æ•°æ–‡ä»¶æœ‰è¯¯ã€‚ ");
 			return null;
 		}
 		return formParams(_doc, clazz);

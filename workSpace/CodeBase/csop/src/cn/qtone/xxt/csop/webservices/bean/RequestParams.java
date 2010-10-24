@@ -4,62 +4,62 @@ import cn.qtone.xxt.csop.webservices.bean.anotation.ReqParam;
 import cn.qtone.xxt.csop.webservices.bean.enums.ValueType;
 
 /**
- * ·şÎñÇëÇó²ÎÊıÁĞ±í  ·â×°Àà
+ * æœåŠ¡è¯·æ±‚å‚æ•°åˆ—è¡¨  å°è£…ç±»
  * 
  * @author LinHanSheng
  * 
  */
 public abstract class RequestParams {
 
-	// Æ½Ì¨ platform=uniteview,Ä¿Ç°Í³Ò»Ê¹ÓÃuniteviewÆ½Ì¨
+	// å¹³å° platform=uniteview,ç›®å‰ç»Ÿä¸€ä½¿ç”¨uniteviewå¹³å°
 	
 	@ReqParam(nodeName = "Platform", fetch =ValueType.TEXT_VALUE)
 	String platform;
 	
-	// ±êÖ¾Î»£º0 ÕıÊ½ 1 ²âÊÔ
+	// æ ‡å¿—ä½ï¼š0 æ­£å¼ 1 æµ‹è¯•
 	@ReqParam(nodeName = "Flag", fetch =ValueType.TEXT_VALUE)
 	String flag;
 
-	// °æ±¾
+	// ç‰ˆæœ¬
 	@ReqParam(nodeName = "Version", fetch =ValueType.TEXT_VALUE)
 	String version;
 
-	// ÒµÎñÆ½Ì¨ÓĞĞ§²Ù×÷Ô±ID
+	// ä¸šåŠ¡å¹³å°æœ‰æ•ˆæ“ä½œå‘˜ID
 	@ReqParam(nodeName = "OperId", fetch =ValueType.TEXT_VALUE)
 	String operId;
 
-	// ÒµÎñÆ½Ì¨ÃÜÂë£¬ÓÃMD5¼ÓÃÜ
+	// ä¸šåŠ¡å¹³å°å¯†ç ï¼Œç”¨MD5åŠ å¯†
 	@ReqParam(nodeName = "Password", fetch =ValueType.TEXT_VALUE)
 	String password;
 
-	// ÒµÎñÆ½Ì¨´úÂë
+	// ä¸šåŠ¡å¹³å°ä»£ç 
 	@ReqParam(nodeName = "SysCode", fetch =ValueType.TEXT_VALUE)
 	String sysCode;
 
-	// ·şÎñºÅÂë ÊÖ»úºÅÂë
+	// æœåŠ¡å·ç  æ‰‹æœºå·ç 
 	@ReqParam(nodeName = "ServNumber", fetch =ValueType.TEXT_VALUE)
 	String servNumber;
 
 	/* 
-	 *                           ÒµÎñ´úÂë
-	 * ÒµÎñ¶¨ÖÆÇé¿ö²éÑ¯½Ó¿Ú                    B005_01
-	 * ÒµÎñÊÜÀí½Ó¿Ú                                        B005_02
-	 * ÒµÎñÀúÊ·¶©¹º¼ÇÂ¼²éÑ¯½Ó¿Ú          B005_03
-	 * ÒµÎñÊ¹ÓÃ¼ÇÂ¼²éÑ¯½Ó¿Ú                    B005_04
+	 *                           ä¸šåŠ¡ä»£ç 
+	 * ä¸šåŠ¡å®šåˆ¶æƒ…å†µæŸ¥è¯¢æ¥å£                    B005_01
+	 * ä¸šåŠ¡å—ç†æ¥å£                                        B005_02
+	 * ä¸šåŠ¡å†å²è®¢è´­è®°å½•æŸ¥è¯¢æ¥å£          B005_03
+	 * ä¸šåŠ¡ä½¿ç”¨è®°å½•æŸ¥è¯¢æ¥å£                    B005_04
 	 */
 	@ReqParam(nodeName = "BusiCode", fetch =ValueType.TEXT_VALUE)
 	String busiCode;
 
 	
-	// ²éÑ¯ÊÖ»úºÅÂë
+	// æŸ¥è¯¢æ‰‹æœºå·ç 
 	@ReqParam(parent="Params",nodeName = "TelNo", fetch =ValueType.TEXT_VALUE)
 	String telNo;
 
-	// ¿ªÊ¼Ê±¼ä
+	// å¼€å§‹æ—¶é—´
 	@ReqParam(parent="Params",nodeName = "BeginDate", fetch =ValueType.TEXT_VALUE)
 	String beginDate;
 
-	// ½áÊøÊ±¼ä
+	// ç»“æŸæ—¶é—´
 	@ReqParam(parent="Params",nodeName = "EndDate", fetch =ValueType.TEXT_VALUE)
 	String endDate;
 

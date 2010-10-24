@@ -12,7 +12,7 @@ import cn.qtone.xxt.csop.dao.comom.DBConnector;
 import cn.qtone.xxt.csop.util.Checker;
 
 /**
- * µØÇøĞÅÏ¢
+ * åœ°åŒºä¿¡æ¯
  * 
  * @author linhansheng
  * 
@@ -21,13 +21,13 @@ public class AreaUtil {
 
 	private static AreaUtil util = new AreaUtil();
 
-	// ´æ·ÅÒ»¸öµØÇøµÄ ÒµÎñÀàĞÍ,
+	// å­˜æ”¾ä¸€ä¸ªåœ°åŒºçš„ ä¸šåŠ¡ç±»å‹,
 	private static Map<String, String> areasMap;
 
-	// //ÊôÓÚ»ù±¾ÒµÎñµÄµØÇø
+	// //å±äºåŸºæœ¬ä¸šåŠ¡çš„åœ°åŒº
 	// private static Map<String,Boolean> baseTransMap;
 
-	// ÊôÓÚÌ×²ÍµÄµØÇø
+	// å±äºå¥—é¤çš„åœ°åŒº
 	private static Map<String, Boolean> isPackageTransMap;
 
 	private AreaUtil() {
@@ -43,7 +43,7 @@ public class AreaUtil {
 	}
 
 	/**
-	 * ³õÊ¼»¯¸÷¸öµØÇøĞÅÏ¢
+	 * åˆå§‹åŒ–å„ä¸ªåœ°åŒºä¿¡æ¯
 	 * 
 	 * @throws Exception
 	 */
@@ -104,10 +104,10 @@ public class AreaUtil {
 	}
 
 	/**
-	 * ÅĞ¶Ï¸ÃµØÇøÊÇ·ñÊÇÌ×²ÍµØÇø
+	 * åˆ¤æ–­è¯¥åœ°åŒºæ˜¯å¦æ˜¯å¥—é¤åœ°åŒº
 	 * 
 	 * @param abb
-	 *            ÇøÓò¼òĞ´
+	 *            åŒºåŸŸç®€å†™
 	 * @return
 	 */
 	public boolean isPackageArea(String abb) {
@@ -124,10 +124,10 @@ public class AreaUtil {
 	}
 
 	/**
-	 * ÅĞ¶Ï¸ÃµØÇøÊÇ·ñÊÇÌ×²ÍµØÇø
+	 * åˆ¤æ–­è¯¥åœ°åŒºæ˜¯å¦æ˜¯å¥—é¤åœ°åŒº
 	 * 
 	 * @param areaId
-	 *            ÇøÓòID
+	 *            åŒºåŸŸID
 	 * @return
 	 */
 	public boolean isPackageArea(int areaId) {
@@ -135,7 +135,7 @@ public class AreaUtil {
 	}
 
 	/**
-	 * ·µ»ØËùÓĞµØÇøµÄ¼ò³Æ
+	 * è¿”å›æ‰€æœ‰åœ°åŒºçš„ç®€ç§°
 	 * @return
 	 */
 	public List<String> listAreaAbbs() {
@@ -149,7 +149,7 @@ public class AreaUtil {
 
 	public static void main(String... s) {
 		for (String area : AreaUtil.getService().listAreaAbbs()) {
-			System.out.println(area + "ÊÇ·ñÊÇÌ×²ÍµØÇø£º"+ AreaUtil.getService().isPackageArea(area));
+			System.out.println(area + "æ˜¯å¦æ˜¯å¥—é¤åœ°åŒºï¼š"+ AreaUtil.getService().isPackageArea(area));
 		}
 	}
 

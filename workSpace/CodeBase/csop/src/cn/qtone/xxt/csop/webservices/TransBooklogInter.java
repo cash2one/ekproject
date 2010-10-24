@@ -11,7 +11,7 @@ import cn.qtone.xxt.csop.webservices.util.RequestParamsWrapper;
  * @author linhansheng
  * 
  */
-public class TransCustomerQueryInter {
+public class TransBooklogInter {
 
 	/**
 	 * 服务接口 请求参数需要解释 对应的 xml文件。

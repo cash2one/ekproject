@@ -11,12 +11,12 @@ import cn.qtone.xxt.csop.webservices.bean.enums.ValueType;
 @Target(ElementType.FIELD)
 public @interface ReqParam {
 
-	String parent() default ""; // ¸ù½Úµã µ½ ½ÚµãµÄÂ·¾¶
+	String parent() default ""; // æ ¹èŠ‚ç‚¹ åˆ° èŠ‚ç‚¹çš„è·¯å¾„
 
-	String nodeName(); // ½ÚµãÃû³Æ
+	String nodeName(); // èŠ‚ç‚¹åç§°
 
-	ValueType fetch(); // È¡Öµ
+	ValueType fetch(); // å–å€¼
 
-	String attribute() default ""; // ÊôĞÔÖ¸Ãû³Æ
+	String attribute() default ""; // å±æ€§æŒ‡åç§°
 
 }

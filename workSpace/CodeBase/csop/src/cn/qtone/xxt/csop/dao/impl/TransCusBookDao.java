@@ -7,7 +7,7 @@ import cn.qtone.xxt.csop.dao.comom.DBConnector;
 import cn.qtone.xxt.csop.dao.comom.DaoException;
 
 /**
- *6.4.1.2 ÒµÎñÊÜÀí½Ó¿Ú£¨B005_02£©
+ *6.4.1.2 ä¸šåŠ¡å—ç†æ¥å£ï¼ˆB005_02ï¼‰
  * 
  * @author Solosus
  * 

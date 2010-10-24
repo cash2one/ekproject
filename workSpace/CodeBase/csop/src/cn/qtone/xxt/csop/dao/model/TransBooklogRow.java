@@ -7,7 +7,7 @@ import cn.qtone.xxt.csop.inter.ResultRow;
  * @author linhansheng
  *
  */
-public class TransCustomerRow implements ResultRow {
+public class TransBooklogRow implements ResultRow {
 
 	/**
 	 * 业务名称 业务端口 业务内容简介 资费（元） 计费类型 开通方式 
