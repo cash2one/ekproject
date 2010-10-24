@@ -160,7 +160,7 @@ public class TransCustomerQueryDao extends AbstractTransDao<TransCustomerQueryPa
 			mainSql.append(" and to_char(base.open_date,'YY-MM-DD')<='").append(endDate).append("'");
 		
 		baseView = null;
-		CsopLog.debug(mainSql.toString());
+		CsopLog.debug("基本业务:"+mainSql.toString());
 		return mainSql.toString();	
 	}
 	
@@ -242,7 +242,9 @@ public class TransCustomerQueryDao extends AbstractTransDao<TransCustomerQueryPa
 			 mainSql.append(" and to_char(fp.START_DATE,'YY-MM-DD')>='").append(beginDate).append("'");
 		 if(!Checker.isNull(endDate))
 			 mainSql.append(" and to_char(fp.END_DATE,'YY-MM-DD')<='").append(endDate).append("'");
-	     return mainSql.toString();
+	     
+		 CsopLog.debug("套餐业务:"+mainSql.toString());
+		 return mainSql.toString();
 	} 
 
 	/*
