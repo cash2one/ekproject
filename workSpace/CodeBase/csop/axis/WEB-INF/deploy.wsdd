@@ -1,11 +1,7 @@
 <deployment xmlns="http://xml.apache.org/axis/wsdd/"
 	xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
-	<service name="Test" provider="java:RPC">
-		<parameter name="className" value="cn.qtone.xxt.csop.services.impl.TestService" />
-		<parameter name="allowedMethods" value="*" />
-	</service>
 	<service name="QTranCustomer" provider="java:RPC">
-		<parameter name="className" value="cn.qtone.xxt.csop.webservices.TransCustomerQueryService" />
+		<parameter name="className" value="cn.qtone.xxt.csop.webservices.TransCustomerQueryInter" />
 		<parameter name="allowedMethods" value="*" />
 	</service>
 </deployment>
