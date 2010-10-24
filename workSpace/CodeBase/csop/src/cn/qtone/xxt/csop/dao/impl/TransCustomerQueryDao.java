@@ -8,6 +8,7 @@ import java.util.List;
 import cn.qtone.xxt.csop.business.TransactionType;
 import cn.qtone.xxt.csop.dao.comom.BaseDao;
 import cn.qtone.xxt.csop.dao.comom.DBConnector;
+import cn.qtone.xxt.csop.dao.inter.AbstractTransDao;
 import cn.qtone.xxt.csop.dao.inter.ResultRow;
 import cn.qtone.xxt.csop.dao.model.TransCustomerRow;
 import cn.qtone.xxt.csop.util.Checker;

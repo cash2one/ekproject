@@ -1,4 +1,4 @@
-package cn.qtone.xxt.csop.dao.impl;
+package cn.qtone.xxt.csop.dao.inter;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -7,7 +7,7 @@ import java.util.List;
 
 import cn.qtone.xxt.csop.dao.comom.BaseDao;
 import cn.qtone.xxt.csop.dao.comom.DBConnector;
-import cn.qtone.xxt.csop.dao.inter.ResultRow;
+import cn.qtone.xxt.csop.dao.impl.AreaUtil;
 import cn.qtone.xxt.csop.webservices.bean.RequestParams;
 
 public abstract class AbstractTransDao<Params extends RequestParams,Row extends ResultRow> {

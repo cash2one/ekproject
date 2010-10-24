@@ -10,7 +10,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
-import cn.qtone.xxt.csop.dao.inter.DataControl;
 
 public class BaseDao implements DataControl {
 

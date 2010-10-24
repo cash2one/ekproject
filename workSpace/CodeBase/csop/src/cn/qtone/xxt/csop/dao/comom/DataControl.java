@@ -1,10 +1,8 @@
-package cn.qtone.xxt.csop.dao.inter;
+package cn.qtone.xxt.csop.dao.comom;
 
 import java.sql.ResultSet;
 import java.util.List;
 
-import cn.qtone.xxt.csop.dao.comom.DaoException;
-import cn.qtone.xxt.csop.dao.comom.PageModel;
 
 
 public interface DataControl {
