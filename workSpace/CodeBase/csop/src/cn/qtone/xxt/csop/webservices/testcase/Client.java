@@ -25,7 +25,7 @@ public class Client{
 	
     static String fileName ="configs/Qtc_soap.xml";
 	static String SERVEICE_NAME ="QTranCustomer";
-	static String METHOD_NAME ="query";
+	static String METHOD_NAME ="queryTest";
 	
 	
 //	static String fileName ="configs/test_soap.xml";
@@ -35,10 +35,10 @@ public class Client{
 	
 	public static void main(String...srt){
 		try {
-//			System.out.println(requestXMLTrans("configs/request.xml"));
+			System.out.println(requestXMLTrans("configs/request.xml"));
 			File file = new File(fileName);
-			test_httpPost(file);
-//			test_CallService(file);
+//			test_httpPost(file);
+			test_CallService(null);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -67,7 +67,7 @@ public class Client{
 		    in.close();
 		    obj = new Object[]{msg.toString()};
 	   }else
-		   	obj = new Object[]{"<?xml version=1.0 encoding=utf-8?><test></test>"};
+		   	obj = new Object[]{"13826098916"};
        	   
 	   String result  =(String)call.invoke(obj);
 	   System.out.println(result);
