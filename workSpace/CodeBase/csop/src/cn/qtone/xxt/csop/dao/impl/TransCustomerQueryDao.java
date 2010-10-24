@@ -159,7 +159,7 @@ public class TransCustomerQueryDao extends AbstractTransDao {
 			mainSql.append(" and to_char(base.open_date,'YY-MM-DD')<='").append(endDate).append("'");
 		
 		baseView = null;
-		System.out.println(mainSql.toString());
+		CsopLog.debug(mainSql.toString());
 		return mainSql.toString();	
 	}
 	

@@ -3,6 +3,7 @@ package cn.qtone.xxt.csop.services.impl;
 import java.util.List;
 
 import cn.qtone.xxt.csop.dao.impl.TransCustomerRow;
+import cn.qtone.xxt.csop.dao.inter.ResultRow;
 import cn.qtone.xxt.csop.webservices.bean.RequestParams;
 import cn.qtone.xxt.csop.webservices.bean.ServiceResponse;
 
@@ -22,7 +23,7 @@ public abstract class AbstractQueryService {
 	 * @param rows
 	 * @return
 	 */
-	protected abstract String formateResutlData(List<TransCustomerRow> rows);
+	protected abstract String formateResutlData(List<? extends ResultRow> rows);
 
 	
 }

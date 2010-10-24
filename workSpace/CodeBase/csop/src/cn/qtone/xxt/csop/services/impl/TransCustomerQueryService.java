@@ -15,7 +15,7 @@ import cn.qtone.xxt.csop.webservices.bean.ServiceResponse;
  * @author linhansheng
  * 
  */
-public class TransCustomerQueryService {
+public class TransCustomerQueryService extends AbstractQueryService{
 
 	/**
 	 * 
@@ -42,16 +42,13 @@ public class TransCustomerQueryService {
 		return resp;
 	}
 
-	/**
-	 * 
-	 * @param rows
-	 * @return
-	 */
-	String formateResutlData(List<TransCustomerRow> rows){
+
+	@Override
+	protected String formateResutlData(List<? extends ResultRow> rows) {
 		StringBuffer resultXml = new StringBuffer();
 		String parent_start ="<column>";
 		String parent_end="</column>";
-		for(TransCustomerRow row : rows){
+		for(TransCustomerRow row :(List<TransCustomerRow>)rows){
 			resultXml.append(parent_start);
 			resultXml.append("<column1>").append(row.getName()).append("</column1>");
 			resultXml.append("<column2>").append(row.getPort()).append("</column2>");
