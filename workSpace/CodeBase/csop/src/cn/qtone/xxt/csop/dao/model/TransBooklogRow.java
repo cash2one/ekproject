@@ -4,65 +4,76 @@ import cn.qtone.xxt.csop.inter.ResultRow;
 
 /**
  * 业务定制情况查询结果
+ * 
  * @author linhansheng
- *
+ * 
  */
 public class TransBooklogRow implements ResultRow {
 
 	/**
-	 * 业务名称 业务端口 业务内容简介 资费（元） 计费类型 开通方式 
-	 * 订购时间    业务使用状态    扣费时间     营销关联信息
+	 * 学校 班级 学生姓名 家长姓名 服务名称 操作方式 标准资费（元） 操作类型 操作日期 操作原因 操作人 营销关联信息 备注
 	 */
 
-	// 业务名称
-	String name;
-	// 业务端口
-	String port;
-	// 业务内容简介
-	String desc;
-	// 资费（元） 
+	String school;
+	String className;
+	String studentName;
+	String parentName;
+	String transaction;
+	String operationType;
 	String charge;
-	// 计费类型
-	String chargeType;
-
-	// 开通方式
-	String openType;
-
-	// 订购时间
-	String orderTime;
-
-	// 业务使用状态
-	String serviceState;
-
-	// 扣费时间
-	String payTime;
-
-	// 营销关联信息
+	String bookType;
+	String operateDate;
+	String reason;
+	String operator;
 	String saleRelationShip;
+	String remark;
 
-	
-	public String getName() {
-		return name;
+	public String getSchool() {
+		return school;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setSchool(String school) {
+		this.school = school;
 	}
 
-	public String getPort() {
-		return port;
+	public String getClassName() {
+		return className;
 	}
 
-	public void setPort(String port) {
-		this.port = port;
+	public void setClassName(String className) {
+		this.className = className;
 	}
 
-	public String getDesc() {
-		return desc;
+	public String getStudentName() {
+		return studentName;
 	}
 
-	public void setDesc(String desc) {
-		this.desc = desc;
+	public void setStudentName(String studentName) {
+		this.studentName = studentName;
+	}
+
+	public String getParentName() {
+		return parentName;
+	}
+
+	public void setParentName(String parentName) {
+		this.parentName = parentName;
+	}
+
+	public String getTransaction() {
+		return transaction;
+	}
+
+	public void setTransaction(String transaction) {
+		this.transaction = transaction;
+	}
+
+	public String getOperationType() {
+		return operationType;
+	}
+
+	public void setOperationType(String operationType) {
+		this.operationType = operationType;
 	}
 
 	public String getCharge() {
@@ -73,44 +84,36 @@ public class TransBooklogRow implements ResultRow {
 		this.charge = charge;
 	}
 
-	public String getChargeType() {
-		return chargeType;
+	public String getBookType() {
+		return bookType;
 	}
 
-	public void setChargeType(String chargeType) {
-		this.chargeType = chargeType;
+	public void setBookType(String bookType) {
+		this.bookType = bookType;
 	}
 
-	public String getOpenType() {
-		return openType;
+	public String getOperateDate() {
+		return operateDate;
 	}
 
-	public void setOpenType(String openType) {
-		this.openType = openType;
+	public void setOperateDate(String operateDate) {
+		this.operateDate = operateDate;
 	}
 
-	public String getOrderTime() {
-		return orderTime;
+	public String getReason() {
+		return reason;
 	}
 
-	public void setOrderTime(String orderTime) {
-		this.orderTime = orderTime;
+	public void setReason(String reason) {
+		this.reason = reason;
 	}
 
-	public String getServiceState() {
-		return serviceState;
+	public String getOperator() {
+		return operator;
 	}
 
-	public void setServiceState(String serviceState) {
-		this.serviceState = serviceState;
-	}
-
-	public String getPayTime() {
-		return payTime;
-	}
-
-	public void setPayTime(String payTime) {
-		this.payTime = payTime;
+	public void setOperator(String operator) {
+		this.operator = operator;
 	}
 
 	public String getSaleRelationShip() {
@@ -120,10 +123,12 @@ public class TransBooklogRow implements ResultRow {
 	public void setSaleRelationShip(String saleRelationShip) {
 		this.saleRelationShip = saleRelationShip;
 	}
-	
-	public String rowToXml() {
 
-		return null;
+	public String getRemark() {
+		return remark;
 	}
 
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
 }

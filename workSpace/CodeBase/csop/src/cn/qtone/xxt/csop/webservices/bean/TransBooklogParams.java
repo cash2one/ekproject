@@ -15,5 +15,13 @@ public class TransBooklogParams extends RequestParams  {
 	// 查询对象      小孩1、小孩2…全部
 	@ReqParam(parent="Params",nodeName = "ChildObject", fetch =ValueType.TEXT_VALUE)
 	String childObject;
+
+	public String getChildObject() {
+		return childObject;
+	}
+
+	public void setChildObject(String childObject) {
+		this.childObject = childObject;
+	}
 	
 }

@@ -28,7 +28,7 @@ public class TransCustomerQueryService extends AbstractQueryService<TransCustome
 		try {
 			List<TransCustomerRow> results = dao.query(reqParams);
 			if(results!=null){
-			   resp.setRetmsg("query suc "+results.size()+" records ");
+			   resp.setRetmsg("查询返回"+results.size()+"条记录。  ");
 			   resp.setResult(this.formateResutlData(results));
 			}
 			resp.setRetcode("000");
