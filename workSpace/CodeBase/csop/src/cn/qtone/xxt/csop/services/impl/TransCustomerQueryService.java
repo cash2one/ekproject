@@ -5,6 +5,7 @@ import java.util.List;
 import cn.qtone.xxt.csop.dao.impl.TransCustomerQueryDao;
 import cn.qtone.xxt.csop.dao.impl.TransCustomerRow;
 import cn.qtone.xxt.csop.dao.inter.ResultRow;
+import cn.qtone.xxt.csop.util.CsopLog;
 import cn.qtone.xxt.csop.webservices.bean.RequestParams;
 import cn.qtone.xxt.csop.webservices.bean.ServiceResponse;
 
@@ -16,7 +17,11 @@ import cn.qtone.xxt.csop.webservices.bean.ServiceResponse;
  */
 public class TransCustomerQueryService {
 
-	
+	/**
+	 * 
+	 * @param reqParams
+	 * @return
+	 */
 	public ServiceResponse query(RequestParams reqParams) {
 		TransCustomerQueryDao dao = new TransCustomerQueryDao();
 		ServiceResponse resp = new ServiceResponse();
@@ -30,13 +35,18 @@ public class TransCustomerQueryService {
 		} catch (Exception e) {
 			resp.setRetcode("");
 			resp.setRetmsg("≤È—Ø ß∞‹");
+			CsopLog.error(e.getMessage());
 		}finally{
 			 dao=null;
 		}
 		return resp;
 	}
 
-	
+	/**
+	 * 
+	 * @param rows
+	 * @return
+	 */
 	String formateResutlData(List<TransCustomerRow> rows){
 		StringBuffer resultXml = new StringBuffer();
 		String parent_start ="<column>";
