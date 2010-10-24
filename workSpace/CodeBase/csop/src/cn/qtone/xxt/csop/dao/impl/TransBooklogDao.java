@@ -43,7 +43,7 @@ public class TransBooklogDao extends
 		List<TransBooklogRow> tempSet = null;
 		for(String areaAbb:serviceAreas){
 	    	if(this.isPackageArea(areaAbb)){
-	    	  tempSet = this.packageTransBookLog(areaAbb, studentName, beginDate, endDate);
+//	    	  tempSet = this.packageTransBookLog(areaAbb, studentName, beginDate, endDate);
 	    	}else
 	    	  tempSet = this.baseTransBookLog(areaAbb, studentName, beginDate, endDate);
 	        
