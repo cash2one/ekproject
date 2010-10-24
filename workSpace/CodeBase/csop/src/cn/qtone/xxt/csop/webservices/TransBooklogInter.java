@@ -1,13 +1,15 @@
 package cn.qtone.xxt.csop.webservices;
 
+import cn.qtone.xxt.csop.services.impl.TransBooklogService;
 import cn.qtone.xxt.csop.services.impl.TransCustomerQueryService;
 import cn.qtone.xxt.csop.util.CsopLog;
 import cn.qtone.xxt.csop.webservices.bean.ServiceResponse;
+import cn.qtone.xxt.csop.webservices.bean.TransBooklogParams;
 import cn.qtone.xxt.csop.webservices.bean.TransCustomerQueryParams;
 import cn.qtone.xxt.csop.webservices.util.RequestParamsWrapper;
 
 /**
- * 校讯通--业务定制情况查询
+ * 校讯通--业务历史订购记录查询
  * @author linhansheng
  * 
  */
@@ -19,21 +21,21 @@ public class TransBooklogInter {
 	 * @return
 	 */
 	public String query(String xml) {
-		CsopLog.debug("接收到 [业务定制情况查询] 服务请求......");
-		TransCustomerQueryParams requestParams = null;
+		CsopLog.debug("接收到 [业务历史订购记录查询] 服务请求......");
+		TransBooklogParams requestParams = null;
 		ServiceResponse reponse= null;
-		RequestParamsWrapper<TransCustomerQueryParams> wrapper = null;
-		TransCustomerQueryService service = null;
+		RequestParamsWrapper<TransBooklogParams> wrapper = null;
+		TransBooklogService service = null;
 		try {
-			wrapper = new RequestParamsWrapper<TransCustomerQueryParams>();
+			wrapper = new RequestParamsWrapper<TransBooklogParams>();
 			if (wrapper == null) {
 				CsopLog.error("解释请求参数出错！");
 			}
-			requestParams = wrapper.formParams(xml,TransCustomerQueryParams.class);
+			requestParams = wrapper.formParams(xml,TransBooklogParams.class);
 			if(requestParams==null){
-				return  "服务异常，解释请求报文失败，    对象为空！"; 
+				return  "服务异常，解释请求报文失败, 对象为空！"; 
 			}
-			service = new TransCustomerQueryService();
+			service = new TransBooklogService();
 			reponse = service.query(requestParams);
 			if(reponse!=null){
 			   return reponse.toString();
@@ -53,8 +55,8 @@ public class TransBooklogInter {
 	//测试接口
 	public String queryTest(String phone, String beginDate, String endDate) {
 		CsopLog.debug("接收到 [业务定制情况查询] 服务请求......");
-		TransCustomerQueryService service = new TransCustomerQueryService();
-		TransCustomerQueryParams requestParams = new TransCustomerQueryParams();
+		TransBooklogService service = new TransBooklogService();
+		TransBooklogParams requestParams = new TransBooklogParams();
 		requestParams.setBeginDate(beginDate);
 		requestParams.setEndDate(endDate);
 		requestParams.setTelNo(phone);
