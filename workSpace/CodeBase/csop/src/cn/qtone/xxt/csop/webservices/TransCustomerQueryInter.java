@@ -61,7 +61,6 @@ public class TransCustomerQueryInter {
 		return service.query(requestParams).toString();
 	}
 
-	
 	public static void main(String...srt){
 		System.out.println("test");
 	}
