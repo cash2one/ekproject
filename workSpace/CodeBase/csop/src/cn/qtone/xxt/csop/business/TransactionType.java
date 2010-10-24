@@ -12,6 +12,7 @@ public enum TransactionType {
 	QINQING(3,"亲情电话","is_qin_qing_tel","is_qq_charge","OPEN_QINQING_TEL"),
 	LIUYANBAN(4,"电子留言板","is_liuyanban","is_lyb_charge","OPEN_LIUYANBAN");
 	
+	
 	int code;
 	String cname;
 	String familyField;  //家庭表中的标志位  业务开通状态
