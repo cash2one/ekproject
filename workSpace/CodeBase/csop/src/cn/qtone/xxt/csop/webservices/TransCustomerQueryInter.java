@@ -1,6 +1,6 @@
 package cn.qtone.xxt.csop.webservices;
 
-import cn.qtone.xxt.csop.servicesimpl.TransCustomerQueryService;
+import cn.qtone.xxt.csop.services.impl.TransCustomerQueryService;
 import cn.qtone.xxt.csop.util.CsopLog;
 import cn.qtone.xxt.csop.webservices.bean.ServiceResponse;
 import cn.qtone.xxt.csop.webservices.bean.TransCustomerQueryParams;

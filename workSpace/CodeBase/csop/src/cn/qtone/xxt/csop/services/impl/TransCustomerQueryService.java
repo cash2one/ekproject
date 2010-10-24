@@ -3,11 +3,11 @@ package cn.qtone.xxt.csop.services.impl;
 import java.util.List;
 
 import cn.qtone.xxt.csop.dao.impl.TransCustomerQueryDao;
-import cn.qtone.xxt.csop.dao.inter.ResultRow;
 import cn.qtone.xxt.csop.dao.model.TransCustomerRow;
+import cn.qtone.xxt.csop.inter.AbstractQueryService;
 import cn.qtone.xxt.csop.util.CsopLog;
-import cn.qtone.xxt.csop.webservices.bean.RequestParams;
 import cn.qtone.xxt.csop.webservices.bean.ServiceResponse;
+import cn.qtone.xxt.csop.webservices.bean.TransCustomerQueryParams;
 
 /**
  * 6.4.1.1 业务定制情况查询接口（B005_01）
@@ -15,14 +15,14 @@ import cn.qtone.xxt.csop.webservices.bean.ServiceResponse;
  * @author linhansheng
  * 
  */
-public class TransCustomerQueryService extends AbstractQueryService{
+public class TransCustomerQueryService extends AbstractQueryService<TransCustomerQueryParams,TransCustomerRow>{
 
 	/**
 	 * 
 	 * @param reqParams
 	 * @return
 	 */
-	public ServiceResponse query(RequestParams reqParams) {
+	public ServiceResponse query(TransCustomerQueryParams reqParams) {
 		TransCustomerQueryDao dao = new TransCustomerQueryDao();
 		ServiceResponse resp = new ServiceResponse();
 		try {
@@ -44,11 +44,11 @@ public class TransCustomerQueryService extends AbstractQueryService{
 
 
 	@Override
-	protected String formateResutlData(List<? extends ResultRow> rows) {
+	protected String formateResutlData(List<TransCustomerRow> rows) {
 		StringBuffer resultXml = new StringBuffer();
 		String parent_start ="<column>";
 		String parent_end="</column>";
-		for(TransCustomerRow row :(List<TransCustomerRow>)rows){
+		for(TransCustomerRow row :rows){
 			resultXml.append(parent_start);
 			resultXml.append("<column1>").append(row.getName()).append("</column1>");
 			resultXml.append("<column2>").append(row.getPort()).append("</column2>");

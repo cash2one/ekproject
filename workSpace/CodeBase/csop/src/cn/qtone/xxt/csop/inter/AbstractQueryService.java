@@ -6,7 +6,7 @@ import cn.qtone.xxt.csop.dao.model.TransCustomerRow;
 import cn.qtone.xxt.csop.webservices.bean.RequestParams;
 import cn.qtone.xxt.csop.webservices.bean.ServiceResponse;
 
-public abstract class AbstractQueryService {
+public abstract class AbstractQueryService<Params extends RequestParams, Row extends ResultRow> {
 
 	/**
 	 * 查询接口
@@ -14,15 +14,14 @@ public abstract class AbstractQueryService {
 	 * @param reqParams
 	 * @return
 	 */
-	public abstract ServiceResponse query(RequestParams reqParams);
+	public abstract ServiceResponse query(Params reqParams);
 
-	
 	/**
 	 * 应答数据格式，主要针对多行数据的返回
+	 * 
 	 * @param rows
 	 * @return
 	 */
-	protected abstract String formateResutlData(List<? extends ResultRow> rows);
+	protected abstract String formateResutlData(List<Row> rows);
 
-	
 }
