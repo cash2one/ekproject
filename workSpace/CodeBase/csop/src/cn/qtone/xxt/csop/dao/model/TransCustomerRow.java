@@ -1,6 +1,6 @@
 package cn.qtone.xxt.csop.dao.model;
 
-import cn.qtone.xxt.csop.dao.inter.ResultRow;
+import cn.qtone.xxt.csop.inter.ResultRow;
 
 /**
  * 业务定制情况查询结果
