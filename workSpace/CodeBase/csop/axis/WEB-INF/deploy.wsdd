@@ -4,4 +4,8 @@
 		<parameter name="className" value="cn.qtone.xxt.csop.webservices.TransCustomerQueryInter" />
 		<parameter name="allowedMethods" value="*" />
 	</service>
+	<service name="QTransBooklog" provider="java:RPC">
+		<parameter name="className" value="cn.qtone.xxt.csop.webservices.TransBooklogInter" />
+		<parameter name="allowedMethods" value="*" />
+	</service>
 </deployment>
