@@ -1,6 +1,5 @@
 package cn.qtone.xxt.csop.dao.impl;
 
-import java.awt.geom.Area;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -30,7 +29,7 @@ public class TransCustomerQueryDao extends AbstractTransDao {
 	 * 接口定义的返回数据格式（字段） 业务名称 业务端口 业务内容简介 资费（元） 计费类型  
 	 * 开通方式   订购时间    业务使用状态  扣费时间   营销关联信息
 	 */
-	public List<ResultRow> query(RequestParams reqParams) {
+	public List<TransCustomerRow> query(RequestParams reqParams) {
 		StringBuffer querySql = new StringBuffer();
 		String phone = reqParams.getTelNo();
 		String beginDate = reqParams.getBeginDate();
@@ -63,10 +62,10 @@ public class TransCustomerQueryDao extends AbstractTransDao {
 	 * @param endDate
 	 * @return
 	 */
-	List<ResultRow> baseTransaction(String areaAbb, String phone, String beginDate,String endDate){
+	List<TransCustomerRow> baseTransaction(String areaAbb, String phone, String beginDate,String endDate){
 		BaseDao db = null;
 		ResultSet rs = null;
-		List<ResultRow> rows = new ArrayList<ResultRow>();
+		List<TransCustomerRow> rows = new ArrayList<TransCustomerRow>();
 		try{
 	         db = new BaseDao(DBConnector.getConnection(POOL_NAME));	
              rs = db.query(this.baseTransactionSql(areaAbb, phone, beginDate, endDate));
@@ -170,11 +169,11 @@ public class TransCustomerQueryDao extends AbstractTransDao {
 	
 	
 	// 套餐查询 定制情况
-	List<ResultRow> packageTransaction(String areaAbb, String phone, String beginDate,
+	List<TransCustomerRow> packageTransaction(String areaAbb, String phone, String beginDate,
 			String endDate) {
 		BaseDao db = null;
 		ResultSet rs = null;
-		List<ResultRow> rows = new ArrayList<ResultRow>();
+		List<TransCustomerRow> rows = new ArrayList<TransCustomerRow>();
 		try{
 	         db = new BaseDao(DBConnector.getConnection(POOL_NAME));	
              rs = db.query(this.packageTransactionSql(areaAbb, phone, beginDate, endDate));
@@ -259,5 +258,6 @@ public class TransCustomerQueryDao extends AbstractTransDao {
 		TransCustomerQueryDao test = new TransCustomerQueryDao();
 	     test.baseTransaction("zs","13770536428", null, null);	
 	}
+
 	
 }

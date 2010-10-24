@@ -1,5 +1,7 @@
 package cn.qtone.xxt.csop.webservices;
 
+import cn.qtone.xxt.csop.services.impl.TransCustomerQueryService;
+import cn.qtone.xxt.csop.util.CsopLog;
 import cn.qtone.xxt.csop.webservices.bean.ServiceResponse;
 import cn.qtone.xxt.csop.webservices.bean.TransCustomerQueryParams;
 import cn.qtone.xxt.csop.webservices.util.RequestParamsWrapper;
@@ -9,7 +11,7 @@ import cn.qtone.xxt.csop.webservices.util.RequestParamsWrapper;
  * @author linhansheng
  * 
  */
-public class TransCustomerQueryService {
+public class TransCustomerQueryInter {
 
 	/**
 	 * 服务接口 请求参数需要解释 对应的 xml文件。
@@ -17,23 +19,24 @@ public class TransCustomerQueryService {
 	 * @return
 	 */
 	public String query(String xml) {
-		System.out.println("接收到 [业务定制情况查询] 服务请求......");
+		CsopLog.debug("接收到 [业务定制情况查询] 服务请求......");
 		TransCustomerQueryParams requestParams = null;
 		ServiceResponse reponse= null;
 		RequestParamsWrapper<TransCustomerQueryParams> wrapper = null;
+		TransCustomerQueryService service = null;
 		try {
 			wrapper = new RequestParamsWrapper<TransCustomerQueryParams>();
 			if (wrapper == null) {
-				System.out.println("解释请求参数出错！");
+				CsopLog.error("解释请求参数出错！");
 			}
 			requestParams = wrapper.formParams(xml,TransCustomerQueryParams.class);
 			if(requestParams==null){
 				return  "服务异常，解释请求报文失败，    对象为空！"; 
 			}
-			
-			reponse = query(requestParams.getTelNo(),requestParams.getBeginDate(),requestParams.getEndDate());
+			service = new TransCustomerQueryService();
+			reponse = service.query(requestParams);
 			if(reponse!=null){
-			   return reponse.toXML();
+			   return reponse.toString();
 			}else
 			   return "service suc,but result is null";
 		} catch (Exception e) {
@@ -42,19 +45,20 @@ public class TransCustomerQueryService {
 		}finally{
 			wrapper = null;
 			requestParams = null;
+			service = null;
 		}
 	}
    
-	
-	/**
-	 * @param phone
-	 * @param startDate
-	 * @param endDate
-	 * @return
-	 * 
-	 */
-	private ServiceResponse query(String phone, String startDate, String endDate) {
-		return new ServiceResponse();
+    
+	//测试接口
+	private String queryTest(String phone, String beginDate, String endDate) {
+		CsopLog.debug("接收到 [业务定制情况查询] 服务请求......");
+		TransCustomerQueryService service = new TransCustomerQueryService();
+		TransCustomerQueryParams requestParams = new TransCustomerQueryParams();
+		requestParams.setBeginDate(beginDate);
+		requestParams.setEndDate(endDate);
+		requestParams.setTelNo(phone);
+		return service.query(requestParams).toString();
 	}
 
 }
