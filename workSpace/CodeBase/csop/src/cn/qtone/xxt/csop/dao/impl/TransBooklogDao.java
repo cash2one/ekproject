@@ -139,7 +139,7 @@ public class TransBooklogDao extends
 		
 		//排序
 		mainSql.append(" order by tlog.open_date desc ");  
-		CsopLog.debug("基本业务变更日志SQL："+mainSql.toString());
+//		CsopLog.debug("基本业务变更日志SQL："+mainSql.toString());
 		return mainSql.toString();
 	}
 	
@@ -225,7 +225,7 @@ public class TransBooklogDao extends
 		
 		//排序
 		mainSql.append(" order by tlog.open_date desc ");  
-		CsopLog.debug("基本业务变更日志SQL："+mainSql.toString());
+//		CsopLog.debug("基本业务变更日志SQL："+mainSql.toString());
 		return mainSql.toString();
 	}
 	

@@ -23,6 +23,17 @@ public class XmlHandler {
 			String currentJarPath = XmlHandler.class.getProtectionDomain().getCodeSource().getLocation().getFile();
 			JarFile currentJar;
 			try {
+				
+				if(currentJarPath.indexOf("file:")>=0){
+					System.out.println("加载配置文件路径,路径不正确，包含非法符号[file:]! "+currentJarPath);
+					currentJarPath= currentJarPath.substring((currentJarPath.indexOf("file:")+"file:".length()),currentJarPath.length());
+				}
+				if(currentJarPath.indexOf("!")>0){
+					System.out.println("加载配置文件路径,路径不正确，包含非法符号[!]! "+currentJarPath);
+					currentJarPath= currentJarPath.substring(0,currentJarPath.indexOf("!"));
+				}
+				
+				System.out.println("加载配置文件路径: "+currentJarPath);
 				currentJar = new JarFile(currentJarPath);
 				JarEntry dbEntry = currentJar.getJarEntry(filePath); 
 				InputStream in = currentJar.getInputStream(dbEntry);	

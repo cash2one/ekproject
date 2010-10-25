@@ -243,7 +243,7 @@ public class TransCustomerQueryDao extends AbstractTransDao<TransCustomerQueryPa
 		 if(!Checker.isNull(endDate))
 			 mainSql.append(" and to_char(fp.END_DATE,'YY-MM-DD')<='").append(endDate).append("'");
 	     
-		 CsopLog.debug("套餐业务:"+mainSql.toString());
+//		 CsopLog.debug("套餐业务:"+mainSql.toString());
 		 return mainSql.toString();
 	} 
 
