@@ -49,18 +49,24 @@ public class TransBooklogService extends AbstractQueryService<TransBooklogParams
 
 	@Override
 	public ServiceResponse query(TransBooklogParams requsetParams) {
-		TransBooklogDao dao = new TransBooklogDao();
 		ServiceResponse resp = new ServiceResponse();
+		if(!validator(requsetParams)){
+			resp.setResult("");
+			resp.setRetcode("SV0M95"); //服务调用参数错误
+			resp.setRetmsg("服务调用参数错误");
+		}
+	    TransBooklogDao dao = new TransBooklogDao();
 		try {
 			List<TransBooklogRow> results = dao.query(requsetParams);
 			if(results!=null){
-			   resp.setRetmsg("查询返回"+results.size()+"条记录。  ");
+			   resp.setRetmsg("平台已成功处理该请求,查询返回"+results.size()+"条记录。  ");
 			   resp.setResult(this.formateResutlData(results));
 			}
 			resp.setRetcode("000");
 		} catch (Exception e) {
-			resp.setRetcode("");
-			resp.setRetmsg("查询失败");
+			resp.setRetcode("SV0MMM");
+			resp.setRetmsg("平台处理服务请求失败");
+			resp.setResult("");
 			CsopLog.error(e.getMessage());
 		}finally{
 			 dao=null;

@@ -24,19 +24,24 @@ public class TransCustomerQueryService extends AbstractQueryService<TransCustome
 	 * @return
 	 */
 	public ServiceResponse query(TransCustomerQueryParams reqParams) {
-		TransCustomerQueryDao dao = new TransCustomerQueryDao();
 		ServiceResponse resp = new ServiceResponse();
+		if(!validator(reqParams)){
+			resp.setResult("");
+			resp.setRetcode("SV0M95"); //服务调用参数错误
+			resp.setRetmsg("服务调用参数错误");
+		}
+		TransCustomerQueryDao dao = new TransCustomerQueryDao();
 		try {
 			List<TransCustomerRow> results = dao.query(reqParams);
 			if(results!=null){
-			   resp.setRetmsg("查询返回"+results.size()+"条记录。  ");
+			   resp.setRetmsg("平台已成功处理该请求,查询返回"+results.size()+"条记录。  ");
 			   resp.setResult(this.formateResutlData(results));
 			}
 			resp.setRetcode("000");
 		} catch (Exception e) {
-			resp.setRetcode("");
-			resp.setRetmsg("查询失败");
-			CsopLog.error(e.getMessage());
+			resp.setRetcode("SV0MMM");
+			resp.setRetmsg("平台处理服务请求失败");
+			resp.setResult("");
 		}finally{
 			 dao=null;
 		}
