@@ -125,7 +125,7 @@ public class TransCustomerQueryDao extends AbstractTransDao<TransCustomerQueryPa
 		StringBuffer mainSql = new StringBuffer(" select base.id family,base.phone,base.stu_sequence,base.transaction,");
 		mainSql.append("base.transaction_id,base.is_open,tlog.operator,tlog.reason,");
 		mainSql.append("tlog.package_id,book_type,base.open_date,is_charge,");
-		mainSql.append("nvl(ywt.fee,0)fee,ywt.type ywt_charge_type,ywt.tran_code,kf.UPDATE_DATE kf_date from ( ");
+		mainSql.append("nvl(ywt.fee,0)fee,ywt.type ywt_charge_type,kf.tran_code,kf.UPDATE_DATE kf_date from ( ");
 		
 		StringBuffer baseView = new StringBuffer();
 		for (TransactionType type : TransactionType.values()) {
@@ -150,7 +150,7 @@ public class TransCustomerQueryDao extends AbstractTransDao<TransCustomerQueryPa
 		mainSql.append(" on kf.family_id=base.id and kf.phone=base.phone and base.transaction_id=kf.transaction ");
 		//查询对应的资费
 		mainSql.append(" left join ").append(" yw_Transaction ywt");
-		mainSql.append(" on ywt.TRANSACTION=base.transaction_id and ywt.AREA_ID=").append(area.getAreaIdByAbb(areaAbb));
+		mainSql.append(" on ywt.tran_code = kf.tran_code and ywt.TRANSACTION=base.transaction_id and ywt.AREA_ID=").append(area.getAreaIdByAbb(areaAbb));
 	
 		//查询条件 时间
 		
