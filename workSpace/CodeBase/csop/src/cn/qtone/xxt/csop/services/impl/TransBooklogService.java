@@ -2,6 +2,7 @@ package cn.qtone.xxt.csop.services.impl;
 
 import java.util.List;
 
+import cn.qtone.xxt.csop.business.ServciceResponseParams;
 import cn.qtone.xxt.csop.business.ServiceAgreement;
 import cn.qtone.xxt.csop.dao.impl.TransBooklogDao;
 import cn.qtone.xxt.csop.dao.model.TransBooklogRow;
@@ -32,9 +33,9 @@ public class TransBooklogService extends AbstractQueryService<TransBooklogParams
 			resultXml.append("<column3>").append(row.getStudentName()).append("</column3>");
 			resultXml.append("<column4>").append(row.getParentName()).append("</column4>");
 			resultXml.append("<column5>").append(row.getTransaction()).append("</column5>");
-			resultXml.append("<column6>").append(row.getOperationType()).append("</column6>");
+			resultXml.append("<column6>").append(row.getBookType()).append("</column6>"); //操作方式
 			resultXml.append("<column7>").append(row.getCharge()).append("</column7>");
-			resultXml.append("<column8>").append(row.getOperationType()).append("</column8>");
+			resultXml.append("<column8>").append(row.getOperationType()).append("</column8>");//操作类型
 			resultXml.append("<column9>").append(row.getOperateDate()).append("</column9>");
 			resultXml.append("<column10>").append(row.getReason()).append("</column10>");
 			resultXml.append("<column11>").append(row.getOperator()).append("</column11>");
@@ -52,20 +53,22 @@ public class TransBooklogService extends AbstractQueryService<TransBooklogParams
 		ServiceResponse resp = new ServiceResponse();
 		if(!validator(requsetParams)){
 			resp.setResult("");
-			resp.setRetcode("SV0M95"); //服务调用参数错误
-			resp.setRetmsg("服务调用参数错误");
+			resp.setRetcode(ServciceResponseParams.SV0M95.code()); //服务调用参数错误
+			resp.setRetmsg(ServciceResponseParams.SV0M95.description());
+			return resp;
 		}
 	    TransBooklogDao dao = new TransBooklogDao();
 		try {
 			List<TransBooklogRow> results = dao.query(requsetParams);
 			if(results!=null){
-			   resp.setRetmsg("平台已成功处理该请求,查询返回"+results.size()+"条记录。  ");
+			   resp.setRetmsg(ServciceResponseParams.SUC.description()+",查询返回"+results.size()+"条记录。  ");
 			   resp.setResult(this.formateResutlData(results));
 			}
-			resp.setRetcode("000");
+			resp.setRetcode(ServciceResponseParams.SUC.code());
 		} catch (Exception e) {
-			resp.setRetcode("SV0MMM");
-			resp.setRetmsg("平台处理服务请求失败");
+		    e.printStackTrace();
+			resp.setRetcode(ServciceResponseParams.SV0MMM.code());
+			resp.setRetmsg(ServciceResponseParams.SV0MMM.description());
 			resp.setResult("");
 			CsopLog.error(e.getMessage());
 		}finally{

@@ -1,6 +1,7 @@
 package cn.qtone.xxt.csop.dao.model;
 
 import cn.qtone.xxt.csop.inter.ResultRow;
+import cn.qtone.xxt.csop.util.Checker;
 
 /**
  * 业务定制情况查询结果
@@ -14,26 +15,27 @@ public class TransBooklogRow implements ResultRow {
 	 * 学校 班级 学生姓名 家长姓名 服务名称 操作方式 标准资费（元） 操作类型 操作日期 操作原因 操作人 营销关联信息 备注
 	 */
 
-	String school;
-	String className;
-	String studentName;
-	String parentName;
-	String transaction;
-	String operationType;
-	String charge;
-	String bookType;
-	String operateDate;
-	String reason;
-	String operator;
-	String saleRelationShip;
-	String remark;
+	String school = "";
+	String className = "";
+	String studentName = "";
+	String parentName = "";
+	String transaction = "";
+	String operationType = "";
+	String charge = "";
+	String bookType = "";
+	String operateDate = "";
+	String reason = "";
+	String operator = "";
+	String saleRelationShip = "";
+	String remark = "";
 
 	public String getSchool() {
 		return school;
 	}
 
 	public void setSchool(String school) {
-		this.school = school;
+		if (!Checker.isNull(school))
+			this.school = school;
 	}
 
 	public String getClassName() {
@@ -41,7 +43,8 @@ public class TransBooklogRow implements ResultRow {
 	}
 
 	public void setClassName(String className) {
-		this.className = className;
+		if (!Checker.isNull(className))
+			this.className = className;
 	}
 
 	public String getStudentName() {
@@ -49,7 +52,8 @@ public class TransBooklogRow implements ResultRow {
 	}
 
 	public void setStudentName(String studentName) {
-		this.studentName = studentName;
+		if (!Checker.isNull(studentName))
+			this.studentName = studentName;
 	}
 
 	public String getParentName() {
@@ -57,7 +61,8 @@ public class TransBooklogRow implements ResultRow {
 	}
 
 	public void setParentName(String parentName) {
-		this.parentName = parentName;
+		if (!Checker.isNull(parentName))
+			this.parentName = parentName;
 	}
 
 	public String getTransaction() {
@@ -65,7 +70,8 @@ public class TransBooklogRow implements ResultRow {
 	}
 
 	public void setTransaction(String transaction) {
-		this.transaction = transaction;
+		if (!Checker.isNull(transaction))
+			this.transaction = transaction;
 	}
 
 	public String getOperationType() {
@@ -73,7 +79,8 @@ public class TransBooklogRow implements ResultRow {
 	}
 
 	public void setOperationType(String operationType) {
-		this.operationType = operationType;
+		if (!Checker.isNull(operationType))
+			this.operationType = operationType;
 	}
 
 	public String getCharge() {
@@ -81,7 +88,8 @@ public class TransBooklogRow implements ResultRow {
 	}
 
 	public void setCharge(String charge) {
-		this.charge = charge;
+		if (!Checker.isNull(charge))
+			this.charge = charge;
 	}
 
 	public String getBookType() {
@@ -89,7 +97,8 @@ public class TransBooklogRow implements ResultRow {
 	}
 
 	public void setBookType(String bookType) {
-		this.bookType = bookType;
+		if (!Checker.isNull(bookType))
+			this.bookType = bookType;
 	}
 
 	public String getOperateDate() {
@@ -97,7 +106,8 @@ public class TransBooklogRow implements ResultRow {
 	}
 
 	public void setOperateDate(String operateDate) {
-		this.operateDate = operateDate;
+		if (!Checker.isNull(operateDate))
+			this.operateDate = operateDate;
 	}
 
 	public String getReason() {
@@ -105,7 +115,8 @@ public class TransBooklogRow implements ResultRow {
 	}
 
 	public void setReason(String reason) {
-		this.reason = reason;
+		if (!Checker.isNull(reason))
+			this.reason = reason;
 	}
 
 	public String getOperator() {
@@ -113,7 +124,8 @@ public class TransBooklogRow implements ResultRow {
 	}
 
 	public void setOperator(String operator) {
-		this.operator = operator;
+		if (!Checker.isNull(operator))
+			this.operator = operator;
 	}
 
 	public String getSaleRelationShip() {
@@ -121,7 +133,8 @@ public class TransBooklogRow implements ResultRow {
 	}
 
 	public void setSaleRelationShip(String saleRelationShip) {
-		this.saleRelationShip = saleRelationShip;
+		if (!Checker.isNull(saleRelationShip))
+			this.saleRelationShip = saleRelationShip;
 	}
 
 	public String getRemark() {
@@ -129,6 +142,7 @@ public class TransBooklogRow implements ResultRow {
 	}
 
 	public void setRemark(String remark) {
-		this.remark = remark;
+		if (!Checker.isNull(remark))
+			this.remark = remark;
 	}
 }

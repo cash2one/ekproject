@@ -2,6 +2,7 @@ package cn.qtone.xxt.csop.services.impl;
 
 import java.util.List;
 
+import cn.qtone.xxt.csop.business.ServciceResponseParams;
 import cn.qtone.xxt.csop.business.ServiceAgreement;
 import cn.qtone.xxt.csop.dao.impl.TransCustomerQueryDao;
 import cn.qtone.xxt.csop.dao.model.TransCustomerRow;
@@ -27,21 +28,23 @@ public class TransCustomerQueryService extends AbstractQueryService<TransCustome
 		ServiceResponse resp = new ServiceResponse();
 		if(!validator(reqParams)){
 			resp.setResult("");
-			resp.setRetcode("SV0M95"); //服务调用参数错误
-			resp.setRetmsg("服务调用参数错误");
+			resp.setRetcode(ServciceResponseParams.SV0M95.code()); //服务调用参数错误
+			resp.setRetmsg(ServciceResponseParams.SV0M95.description());
+			return resp;
 		}
 		TransCustomerQueryDao dao = new TransCustomerQueryDao();
 		try {
 			List<TransCustomerRow> results = dao.query(reqParams);
 			if(results!=null){
-			   resp.setRetmsg("平台已成功处理该请求,查询返回"+results.size()+"条记录。  ");
+				 resp.setRetmsg(ServciceResponseParams.SUC.description()+",查询返回"+results.size()+"条记录。  ");
 			   resp.setResult(this.formateResutlData(results));
 			}
-			resp.setRetcode("000");
+			resp.setRetcode(ServciceResponseParams.SUC.code());
 		} catch (Exception e) {
-			resp.setRetcode("SV0MMM");
-			resp.setRetmsg("平台处理服务请求失败");
+			resp.setRetcode(ServciceResponseParams.SV0MMM.code());
+			resp.setRetmsg(ServciceResponseParams.SV0MMM.description());
 			resp.setResult("");
+			CsopLog.error(e.getMessage());
 		}finally{
 			 dao=null;
 		}

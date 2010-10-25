@@ -17,7 +17,7 @@ public class CsopLog {
 	}
 	
 	static void messageHandle(MessageType type,String...messages){
-		System.out.print("["+(type.equals(MessageType.DEBUG)?"DEBUG ":(type.equals(MessageType.INFO)?"INFO ":"ERROR ")));
+		System.out.print("[CSOP-"+(type.equals(MessageType.DEBUG)?"DEBUG ":(type.equals(MessageType.INFO)?"INFO ":"ERROR ")));
 		System.out.print(new Date(System.currentTimeMillis()).toString()+" ]:");
 		if(messages!=null&&messages.length>1){
 			for(String log:messages){

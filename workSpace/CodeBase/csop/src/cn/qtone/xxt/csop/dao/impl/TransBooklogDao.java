@@ -45,7 +45,7 @@ public class TransBooklogDao extends
 	    	if(this.isPackageArea(areaAbb)){
 //	    	  tempSet = this.packageTransBookLog(areaAbb, studentName, beginDate, endDate);
 	    	}else
-	    	  tempSet = this.baseTransBookLog(areaAbb, studentName, beginDate, endDate);
+	    	  tempSet = this.baseTransBookLog(phone,areaAbb, studentName, beginDate, endDate);
 	        
 	    	if(tempSet!=null){
 			    for(TransBooklogRow row :tempSet){
@@ -66,13 +66,13 @@ public class TransBooklogDao extends
 	 * @param endDate
 	 * @return
 	 */
-	List<TransBooklogRow> baseTransBookLog(String areaAbb,String studentName,String beginDate,String endDate){
+	List<TransBooklogRow> baseTransBookLog(String phone,String areaAbb,String studentName,String beginDate,String endDate){
 		List<TransBooklogRow> rows = new ArrayList<TransBooklogRow>();
 		BaseDao db = null;
 		ResultSet rs = null;
 		try{
       		db = new BaseDao(DBConnector.getConnection(POOL_NAME));
-      		rs = db.queryByPage(queryBaseTranscationLogsSql(areaAbb,studentName,beginDate,endDate), 1, record_max_limit);
+      		rs = db.queryByPage(queryBaseTranscationLogsSql(phone,areaAbb,studentName,beginDate,endDate), 1, record_max_limit);
       		TransBooklogRow row = null;
       		while(rs!=null&&rs.next()){
       			   if(rs.getInt("transaction")>0&&rs.getInt("transaction")<5){
@@ -99,7 +99,8 @@ public class TransBooklogDao extends
 			CsopLog.error("查询业务历史订购记录出错... ",e.getMessage());
 		}finally{
 			try {
-				rs.close();
+				if(rs!=null)
+				   rs.close();
       			db.close();
 			} catch (SQLException e) {
 			}
@@ -115,7 +116,7 @@ public class TransBooklogDao extends
 	 * @param endDate
 	 * @return
 	 */
-	String queryBaseTranscationLogsSql(String areaAbb,String studentName,String beginDate,String endDate){
+	String queryBaseTranscationLogsSql(String phone,String areaAbb,String studentName,String beginDate,String endDate){
 		StringBuffer mainSql = new StringBuffer();
 		mainSql.append(" select xj_school.school_name,cla.class_name,stu.name stu_name,fa.name parent_name,tlog.transaction,tlog.open,book_type,reason,operator,open_date ");
 		mainSql.append(" from ").append(areaAbb+"_transaction_log tlog ");
@@ -126,20 +127,22 @@ public class TransBooklogDao extends
 		mainSql.append(" left join "+areaAbb+"_xj_stu_class scla ");
 		mainSql.append(" on scla.stu_sequence=tlog.stu_sequence ");
 		mainSql.append(" left join xj_school on xj_school.id=scla.school_id ");
-		mainSql.append(" left join "+areaAbb+"_xj_class cla on cla.id=scla.class_id and cla.school_id=scla.school_id ");
+		mainSql.append(" left join xj_class cla on cla.id=scla.class_id and cla.school_id=scla.school_id ");
 
 		//查询条件
 		mainSql.append(" where 1=1 ");
 		if(!Checker.isNull(beginDate))
-			mainSql.append(" and to char(tlog.open_date,'YY-MM-DD')>='").append(beginDate).append("'");
-		if(!Checker.isNull(beginDate))
-			mainSql.append(" and to char(tlog.open_date,'YY-MM-DD')<='").append(endDate).append("'");
+			mainSql.append(" and to_char(tlog.open_date,'YYYY-MM-DD')>='").append(beginDate).append("'");
+		if(!Checker.isNull(endDate))
+			mainSql.append(" and to_char(tlog.open_date,'YYYY-MM-DD')<='").append(endDate).append("'");
 		if(!Checker.isNull(studentName)&&("全部".equals(studentName)||"all".equals(studentName.toLowerCase())))
 			mainSql.append(" and stu.name like '%"+studentName+"%'");
+		if(!Checker.isNull(phone))
+			mainSql.append(" and( fa.phone like '"+phone+"'or fa.kf_phone like '"+phone+"')");
 		
 		//排序
 		mainSql.append(" order by tlog.open_date desc ");  
-//		CsopLog.debug("基本业务变更日志SQL："+mainSql.toString());
+		CsopLog.debug("基本业务变更日志SQL："+mainSql.toString());
 		return mainSql.toString();
 	}
 	
@@ -152,13 +155,13 @@ public class TransBooklogDao extends
 	 * @param endDate
 	 * @return
 	 */
-	List<TransBooklogRow> packageTransBookLog(String areaAbb,String studentName,String beginDate,String endDate){
+	List<TransBooklogRow> packageTransBookLog(String phone,String areaAbb,String studentName,String beginDate,String endDate){
 		List<TransBooklogRow> rows = new ArrayList<TransBooklogRow>();
 		BaseDao db = null;
 		ResultSet rs = null;
 		try{
       		db = new BaseDao(DBConnector.getConnection(POOL_NAME));
-      		rs = db.queryByPage(queryBaseTranscationLogsSql(areaAbb,studentName,beginDate,endDate), 1, record_max_limit);
+      		rs = db.queryByPage(queryBaseTranscationLogsSql(phone,areaAbb,studentName,beginDate,endDate), 1, record_max_limit);
       		TransBooklogRow row = null;
       		while(rs!=null&&rs.next()){
       			   if(rs.getInt("transaction")>0)
@@ -184,7 +187,8 @@ public class TransBooklogDao extends
 			CsopLog.error("查询业务历史订购记录出错... ",e.getMessage());
 		}finally{
 			try {
-				rs.close();
+				if(rs!=null)
+					rs.close();
       			db.close();
 			} catch (SQLException e) {
 			}
@@ -201,7 +205,7 @@ public class TransBooklogDao extends
 	 * @param endDate
 	 * @return
 	 */
-	String queryPackageTranscationLogsSql(String areaAbb,String studentName,String beginDate,String endDate){
+	String queryPackageTranscationLogsSql(String phone,String areaAbb,String studentName,String beginDate,String endDate){
 		StringBuffer mainSql = new StringBuffer();
 		mainSql.append(" select xj_school.school_name,cla.class_name,stu.name stu_name,fa.name parent_name,tlog.transaction,tlog.open,book_type,reason,operator,open_date ");
 		mainSql.append(" from ").append(areaAbb+"_transaction_log tlog ");
@@ -212,27 +216,29 @@ public class TransBooklogDao extends
 		mainSql.append(" left join "+areaAbb+"_xj_stu_class scla ");
 		mainSql.append(" on scla.stu_sequence=tlog.stu_sequence ");
 		mainSql.append(" left join xj_school on xj_school.id=scla.school_id ");
-		mainSql.append(" left join "+areaAbb+"_xj_class cla on cla.id=scla.class_id and cla.school_id=scla.school_id ");
+		mainSql.append(" left join xj_class cla on cla.id=scla.class_id and cla.school_id=scla.school_id ");
 
 		//查询条件
 		mainSql.append(" where 1=1 ");
 		if(!Checker.isNull(beginDate))
-			mainSql.append(" and to char(tlog.open_date,'YY-MM-DD')>='").append(beginDate).append("'");
-		if(!Checker.isNull(beginDate))
-			mainSql.append(" and to char(tlog.open_date,'YY-MM-DD')<='").append(endDate).append("'");
+			mainSql.append(" and to_char(tlog.open_date,'YYYY-MM-DD')>='").append(beginDate).append("'");
+		if(!Checker.isNull(endDate))
+			mainSql.append(" and to_char(tlog.open_date,'YYYY-MM-DD')<='").append(endDate).append("'");
 		if(!Checker.isNull(studentName)&&("全部".equals(studentName)||"all".equals(studentName.toLowerCase())))
 			mainSql.append(" and stu.name like '%"+studentName+"%'");
+		if(!Checker.isNull(phone))
+			mainSql.append(" and( fa.phone like '"+phone+"'or fa.kf_phone like '"+phone+"')");
 		
 		//排序
 		mainSql.append(" order by tlog.open_date desc ");  
-//		CsopLog.debug("基本业务变更日志SQL："+mainSql.toString());
+		CsopLog.debug("基本业务变更日志SQL："+mainSql.toString());
 		return mainSql.toString();
 	}
 	
 	
 	public static void main(String...r){
 		TransBooklogDao d = new TransBooklogDao();
-		d.queryBaseTranscationLogsSql("zs","",null,null);
+		d.queryBaseTranscationLogsSql("","zs","",null,null);
 	}
 
 }

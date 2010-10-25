@@ -1,52 +1,53 @@
 package cn.qtone.xxt.csop.dao.model;
 
 import cn.qtone.xxt.csop.inter.ResultRow;
+import cn.qtone.xxt.csop.util.Checker;
 
 /**
  * 业务定制情况查询结果
+ * 
  * @author linhansheng
- *
+ * 
  */
 public class TransCustomerRow implements ResultRow {
 
 	/**
-	 * 业务名称 业务端口 业务内容简介 资费（元） 计费类型 开通方式 
-	 * 订购时间    业务使用状态    扣费时间     营销关联信息
+	 * 业务名称 业务端口 业务内容简介 资费（元） 计费类型 开通方式 订购时间 业务使用状态 扣费时间 营销关联信息
 	 */
 
 	// 业务名称
-	String name;
+	String name = "";
 	// 业务端口
-	String port;
+	String port = "";
 	// 业务内容简介
-	String desc;
-	// 资费（元） 
-	String charge;
+	String desc = "";
+	// 资费（元）
+	String charge = "";
 	// 计费类型
-	String chargeType;
+	String chargeType = "";
 
 	// 开通方式
-	String openType;
+	String openType = "";
 
 	// 订购时间
-	String orderTime;
+	String orderTime = "";
 
 	// 业务使用状态
-	String serviceState;
+	String serviceState = "";
 
 	// 扣费时间
-	String payTime;
+	String payTime = "";
 
 	// 营销关联信息
-	String saleRelationShip;
+	String saleRelationShip = "";
 
-	
 	public String getName() {
 		return name;
 	}
 
 	public void setName(String name) {
-		this.name = name;
+		if (!Checker.isNull(name))
+			this.name = name;
 	}
 
 	public String getPort() {
@@ -54,7 +55,8 @@ public class TransCustomerRow implements ResultRow {
 	}
 
 	public void setPort(String port) {
-		this.port = port;
+		if (!Checker.isNull(port))
+			this.port = port;
 	}
 
 	public String getDesc() {
@@ -62,7 +64,8 @@ public class TransCustomerRow implements ResultRow {
 	}
 
 	public void setDesc(String desc) {
-		this.desc = desc;
+		if (!Checker.isNull(desc))
+			this.desc = desc;
 	}
 
 	public String getCharge() {
@@ -70,7 +73,8 @@ public class TransCustomerRow implements ResultRow {
 	}
 
 	public void setCharge(String charge) {
-		this.charge = charge;
+		if (!Checker.isNull(charge))
+			this.charge = charge;
 	}
 
 	public String getChargeType() {
@@ -78,7 +82,8 @@ public class TransCustomerRow implements ResultRow {
 	}
 
 	public void setChargeType(String chargeType) {
-		this.chargeType = chargeType;
+		if (!Checker.isNull(chargeType))
+			this.chargeType = chargeType;
 	}
 
 	public String getOpenType() {
@@ -86,7 +91,8 @@ public class TransCustomerRow implements ResultRow {
 	}
 
 	public void setOpenType(String openType) {
-		this.openType = openType;
+		if (!Checker.isNull(openType))
+			this.openType = openType;
 	}
 
 	public String getOrderTime() {
@@ -94,7 +100,8 @@ public class TransCustomerRow implements ResultRow {
 	}
 
 	public void setOrderTime(String orderTime) {
-		this.orderTime = orderTime;
+		if (!Checker.isNull(orderTime))
+			this.orderTime = orderTime;
 	}
 
 	public String getServiceState() {
@@ -102,7 +109,8 @@ public class TransCustomerRow implements ResultRow {
 	}
 
 	public void setServiceState(String serviceState) {
-		this.serviceState = serviceState;
+		if (!Checker.isNull(serviceState))
+			this.serviceState = serviceState;
 	}
 
 	public String getPayTime() {
@@ -110,7 +118,8 @@ public class TransCustomerRow implements ResultRow {
 	}
 
 	public void setPayTime(String payTime) {
-		this.payTime = payTime;
+		if (!Checker.isNull(payTime))
+			this.payTime = payTime;
 	}
 
 	public String getSaleRelationShip() {
@@ -118,11 +127,11 @@ public class TransCustomerRow implements ResultRow {
 	}
 
 	public void setSaleRelationShip(String saleRelationShip) {
-		this.saleRelationShip = saleRelationShip;
+		if (!Checker.isNull(saleRelationShip))
+			this.saleRelationShip = saleRelationShip;
 	}
-	
-	public String rowToXml() {
 
+	public String rowToXml() {
 		return null;
 	}
 

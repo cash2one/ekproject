@@ -1,5 +1,7 @@
 package cn.qtone.xxt.csop.webservices;
 
+import cn.qtone.xxt.csop.business.ServciceResponseParams;
+import cn.qtone.xxt.csop.business.ServiceAgreement;
 import cn.qtone.xxt.csop.services.impl.TransCustomerQueryService;
 import cn.qtone.xxt.csop.util.CsopLog;
 import cn.qtone.xxt.csop.webservices.bean.ServiceResponse;
@@ -31,17 +33,17 @@ public class TransCustomerQueryInter {
 			}
 			requestParams = wrapper.formParams(xmlReqest,TransCustomerQueryParams.class);
 			if(requestParams==null){
-				return  "服务异常，解释请求报文失败，    对象为空！"; 
+				return  ServciceResponseParams.SV0M95.description(); 
 			}
 			service = new TransCustomerQueryService();
 			reponse = service.query(requestParams);
 			if(reponse!=null){
 			   return reponse.toString();
 			}else
-			   return "service suc,but result is null";
+			   return ServciceResponseParams.SUC.description();
 		} catch (Exception e) {
 			   e.printStackTrace();
-		       return "serice unsuc,maybe have errors";
+		       return ServciceResponseParams.SV0MMM.description();
 		}finally{
 			wrapper = null;
 			requestParams = null;
@@ -55,6 +57,11 @@ public class TransCustomerQueryInter {
 		CsopLog.debug("接收到 [业务定制情况查询] 服务请求......");
 		TransCustomerQueryService service = new TransCustomerQueryService();
 		TransCustomerQueryParams requestParams = new TransCustomerQueryParams();
+		
+		requestParams.setPlatform(ServiceAgreement.TRANSCATION_CUSTOMER.platform());
+		requestParams.setSysCode(ServiceAgreement.TRANSCATION_CUSTOMER.sysCode());
+		requestParams.setBusiCode(ServiceAgreement.TRANSCATION_CUSTOMER.busiCode());
+		
 		requestParams.setBeginDate(beginDate);
 		requestParams.setEndDate(endDate);
 		requestParams.setTelNo(phone);

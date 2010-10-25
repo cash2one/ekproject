@@ -101,7 +101,7 @@ public class TransCustomerQueryDao extends AbstractTransDao<TransCustomerQueryPa
 				        else if(rs.getInt("ywt_charge_type")==2)
 					    	  nRow.setChargeType("点播");
 				    }
-				  }  
+				  }
 				  nRow.setSaleRelationShip(rs.getString("transaction"));
 				  rows.add(nRow);
 				  nRow = null;
@@ -144,6 +144,7 @@ public class TransCustomerQueryDao extends AbstractTransDao<TransCustomerQueryPa
 		mainSql.append(" )base left join ( ").append(this.lastBaseTransactionLog(areaAbb,phone,beginDate,endDate)).append(" ) tlog ");
 		mainSql.append(" on tlog.family_id = base.id and tlog.stu_sequence = base.stu_sequence ");
 		mainSql.append(" and  tlog.open = base.is_open and tlog.transaction = base.transaction_id ");
+		
 		//扣费记录
 		mainSql.append(" left join ").append(areaAbb).append("_yw_kf_chargerecord kf ");
 		mainSql.append(" on kf.family_id=base.id and kf.phone=base.phone and base.transaction_id=kf.transaction ");
@@ -155,12 +156,12 @@ public class TransCustomerQueryDao extends AbstractTransDao<TransCustomerQueryPa
 		
 		mainSql.append(" where 1=1 ");
 		if(!Checker.isNull(beginDate))
-			mainSql.append(" and to_char(base.open_date,'YY-MM-DD')>='").append(beginDate).append("'");
+			mainSql.append(" and to_char(base.open_date,'YYYY-MM-DD')>='").append(beginDate).append("'");
 		if(!Checker.isNull(endDate))
-			mainSql.append(" and to_char(base.open_date,'YY-MM-DD')<='").append(endDate).append("'");
+			mainSql.append(" and to_char(base.open_date,'YYYY-MM-DD')<='").append(endDate).append("'");
 		
 		baseView = null;
-//		CsopLog.debug("基本业务:"+mainSql.toString());
+		CsopLog.debug("基本业务:"+mainSql.toString());
 		return mainSql.toString();	
 	}
 	
@@ -239,11 +240,11 @@ public class TransCustomerQueryDao extends AbstractTransDao<TransCustomerQueryPa
 		 mainSql.append(" where fa.kf_phone='").append(phone).append("'");	
 		 mainSql.append(" and fp.del = 1 ");//开通的套餐
 		 if(!Checker.isNull(beginDate))
-			 mainSql.append(" and to_char(fp.START_DATE,'YY-MM-DD')>='").append(beginDate).append("'");
+			 mainSql.append(" and to_char(fp.START_DATE,'YYYY-MM-DD')>='").append(beginDate).append("'");
 		 if(!Checker.isNull(endDate))
-			 mainSql.append(" and to_char(fp.END_DATE,'YY-MM-DD')<='").append(endDate).append("'");
+			 mainSql.append(" and to_char(fp.END_DATE,'YYYY-MM-DD')<='").append(endDate).append("'");
 	     
-//		 CsopLog.debug("套餐业务:"+mainSql.toString());
+		 CsopLog.debug("套餐业务:"+mainSql.toString());
 		 return mainSql.toString();
 	} 
 

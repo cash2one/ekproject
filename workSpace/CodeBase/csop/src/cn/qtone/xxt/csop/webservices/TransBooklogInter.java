@@ -1,5 +1,7 @@
 package cn.qtone.xxt.csop.webservices;
 
+import cn.qtone.xxt.csop.business.ServciceResponseParams;
+import cn.qtone.xxt.csop.business.ServiceAgreement;
 import cn.qtone.xxt.csop.services.impl.TransBooklogService;
 import cn.qtone.xxt.csop.services.impl.TransCustomerQueryService;
 import cn.qtone.xxt.csop.util.CsopLog;
@@ -33,17 +35,17 @@ public class TransBooklogInter {
 			}
 			requestParams = wrapper.formParams(xmlReqest,TransBooklogParams.class);
 			if(requestParams==null){
-				return  "服务异常，解释请求报文失败, 对象为空！"; 
+				return  ServciceResponseParams.SV0M95.description(); 
 			}
 			service = new TransBooklogService();
 			reponse = service.query(requestParams);
 			if(reponse!=null){
 			   return reponse.toString();
 			}else
-			   return "service suc,but result is null";
+			   return ServciceResponseParams.SUC.description();
 		} catch (Exception e) {
 			   e.printStackTrace();
-		       return "serice unsuc,maybe have errors";
+			   return ServciceResponseParams.SV0MMM.description();
 		}finally{
 			wrapper = null;
 			requestParams = null;
@@ -54,9 +56,14 @@ public class TransBooklogInter {
     
 	//测试接口
 	public String queryTest(String phone, String beginDate, String endDate) {
-		CsopLog.debug("接收到 [业务定制情况查询] 服务请求......");
+		CsopLog.debug("接收到 [业务历史订购记录查询] 服务请求......");
 		TransBooklogService service = new TransBooklogService();
 		TransBooklogParams requestParams = new TransBooklogParams();
+		
+		requestParams.setPlatform(ServiceAgreement.TRANSCATION_BOOKLOG.platform());
+		requestParams.setSysCode(ServiceAgreement.TRANSCATION_BOOKLOG.sysCode());
+		requestParams.setBusiCode(ServiceAgreement.TRANSCATION_BOOKLOG.busiCode());
+		
 		requestParams.setBeginDate(beginDate);
 		requestParams.setEndDate(endDate);
 		requestParams.setTelNo(phone);

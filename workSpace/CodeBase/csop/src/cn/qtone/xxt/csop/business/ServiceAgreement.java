@@ -11,14 +11,18 @@ import cn.qtone.xxt.csop.webservices.bean.RequestParams;
  */
 public enum ServiceAgreement {
 
-	TRANSCATION_CUSTOMER("B005", "uniteview", "B005_01"),
-	TRANSCATION_BOOKLOG("B005", "uniteview", "B005_03");
+	TRANSCATION_CUSTOMER("业务订购情况查询服务","B005", "uniteview", "B005_01"),
+	TRANSCATION_BOOK("业务受理服务","B005", "uniteview", "B005_02"),
+	TRANSCATION_BOOKLOG("业务订购历史记录查询服务","B005", "uniteview", "B005_03"),
+	TRANSCATION_USESTATE("业务使用状态查询服务","B005", "uniteview", "B005_04");
 
 	String platform; // 平台
 	String busiCode; // 业务代码
 	String sysCode; // 业务平台代码
-
-	ServiceAgreement(String sysCode, String platform, String busiCode) {
+    String cname;
+	
+	ServiceAgreement(String cname,String sysCode, String platform, String busiCode) {
+		this.cname = cname;
 		this.platform = platform;
 		this.busiCode = busiCode;
 		this.sysCode = sysCode;
@@ -28,37 +32,26 @@ public enum ServiceAgreement {
 	 * 服务可用性
 	 */
 	public boolean validator(RequestParams params) {
-		if (!this.getPlatform().equals(params.getPlatform()))
+		if (!platform().equals(params.getPlatform()))
 			return false;
-		if (!this.getSysCode().equals(params.getSysCode()))
+		if (!sysCode().equals(params.getSysCode()))
 			return false;
-		if (!this.getBusiCode().equals(params.getBusiCode()))
+		if (!busiCode().equals(params.getBusiCode()))
 			return false;
-		return false;
+		return true;
 	}
 
-	public String getPlatform() {
+	public String platform() {
 		return platform;
 	}
 
-	public void setPlatform(String platform) {
-		this.platform = platform;
-	}
 
-	public String getBusiCode() {
+	public String busiCode() {
 		return busiCode;
 	}
 
-	public void setBusiCode(String busiCode) {
-		this.busiCode = busiCode;
-	}
-
-	public String getSysCode() {
+	public String sysCode() {
 		return sysCode;
-	}
-
-	public void setSysCode(String sysCode) {
-		this.sysCode = sysCode;
 	}
 
 }
