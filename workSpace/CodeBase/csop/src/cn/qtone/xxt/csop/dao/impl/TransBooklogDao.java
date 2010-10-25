@@ -164,10 +164,7 @@ public class TransBooklogDao extends
       		rs = db.queryByPage(queryPackageTranscationLogsSql(phone,areaAbb,studentName,beginDate,endDate), 1, record_max_limit);
       		TransBooklogRow row = null;
       		while(rs!=null&&rs.next()){
-      			   if(rs.getInt("transaction")>0)
-                      row.setTransaction(TransactionType.values()[rs.getInt("transaction")-1].cname());
-      			   else
-      				   continue;
+      			    
       			    row = new TransBooklogRow();
                     row.setSchool(rs.getString("school_name"));
                     row.setClassName(rs.getString("class_name"));
@@ -178,7 +175,7 @@ public class TransBooklogDao extends
                     row.setOperateDate(rs.getString("open_date"));
                     row.setOperator(rs.getString("operator"));
                     row.setOperationType(rs.getInt("open")==0?"取消":(rs.getInt("open")==1?"开通":"修改收费"));
-                    row.setRemark("备注信息");
+                    row.setRemark(rs.getString("remark"));
                     row.setSaleRelationShip("营销关系");
                     rows.add(row);
                     row = null;
@@ -207,8 +204,10 @@ public class TransBooklogDao extends
 	 */
 	String queryPackageTranscationLogsSql(String phone,String areaAbb,String studentName,String beginDate,String endDate){
 		StringBuffer mainSql = new StringBuffer();
-		mainSql.append(" select xj_school.school_name,cla.class_name,stu.name stu_name,fa.name parent_name,tlog.transaction,tlog.open,book_type,reason,operator,open_date ");
+		mainSql.append(" select xj_school.school_name,cla.class_name,stu.name stu_name,fa.name parent_name,pp.name transaction,pp.remark,tlog.open,book_type,reason,operator,open_date ");
 		mainSql.append(" from ").append(areaAbb+"_transaction_log tlog ");
+		mainSql.append(" left join preferential_package pp ");
+		mainSql.append(" on tlog.package_id=pp.id ");
 		mainSql.append(" left join "+areaAbb+"_xj_student stu ");
 		mainSql.append(" on stu.stu_sequence = tlog.stu_sequence ");
 		mainSql.append(" left join "+areaAbb+"_xj_family fa");
