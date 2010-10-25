@@ -18,7 +18,7 @@ public class TransCustomerQueryInter {
 	 * @param xml
 	 * @return
 	 */
-	public String query(String xml) {
+	public String query(String xmlReqest) {
 		CsopLog.debug("接收到 [业务定制情况查询] 服务请求......");
 		TransCustomerQueryParams requestParams = null;
 		ServiceResponse reponse= null;
@@ -29,7 +29,7 @@ public class TransCustomerQueryInter {
 			if (wrapper == null) {
 				CsopLog.error("解释请求参数出错！");
 			}
-			requestParams = wrapper.formParams(xml,TransCustomerQueryParams.class);
+			requestParams = wrapper.formParams(xmlReqest,TransCustomerQueryParams.class);
 			if(requestParams==null){
 				return  "服务异常，解释请求报文失败，    对象为空！"; 
 			}
@@ -61,8 +61,4 @@ public class TransCustomerQueryInter {
 		return service.query(requestParams).toString();
 	}
 
-	public static void main(String...srt){
-		System.out.println("test");
-	}
-	
 }

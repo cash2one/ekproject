@@ -2,6 +2,7 @@ package cn.qtone.xxt.csop.services.impl;
 
 import java.util.List;
 
+import cn.qtone.xxt.csop.business.ServiceAgreement;
 import cn.qtone.xxt.csop.dao.impl.TransBooklogDao;
 import cn.qtone.xxt.csop.dao.model.TransBooklogRow;
 import cn.qtone.xxt.csop.dao.model.TransCustomerRow;
@@ -65,6 +66,11 @@ public class TransBooklogService extends AbstractQueryService<TransBooklogParams
 			 dao=null;
 		}
 		return resp;
+	}
+
+	@Override
+	protected ServiceAgreement agreement() {
+		return ServiceAgreement.TRANSCATION_BOOKLOG;
 	}
 
 }

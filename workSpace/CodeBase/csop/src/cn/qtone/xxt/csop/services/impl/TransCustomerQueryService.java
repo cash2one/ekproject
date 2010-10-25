@@ -2,6 +2,7 @@ package cn.qtone.xxt.csop.services.impl;
 
 import java.util.List;
 
+import cn.qtone.xxt.csop.business.ServiceAgreement;
 import cn.qtone.xxt.csop.dao.impl.TransCustomerQueryDao;
 import cn.qtone.xxt.csop.dao.model.TransCustomerRow;
 import cn.qtone.xxt.csop.inter.AbstractQueryService;
@@ -65,6 +66,12 @@ public class TransCustomerQueryService extends AbstractQueryService<TransCustome
 		String content = resultXml.toString();
 		resultXml=null;
 		return content;
+	}
+
+
+	@Override
+	protected ServiceAgreement agreement() {
+		return ServiceAgreement.TRANSCATION_CUSTOMER;
 	}
     
 	
