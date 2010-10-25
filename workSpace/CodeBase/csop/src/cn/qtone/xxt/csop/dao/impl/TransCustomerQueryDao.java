@@ -125,7 +125,7 @@ public class TransCustomerQueryDao extends AbstractTransDao<TransCustomerQueryPa
 		StringBuffer mainSql = new StringBuffer(" select base.id family,base.phone,base.stu_sequence,base.transaction,");
 		mainSql.append("base.transaction_id,base.is_open,tlog.operator,tlog.reason,");
 		mainSql.append("tlog.package_id,book_type,base.open_date,is_charge,");
-		mainSql.append("nvl(ywt.fee,0)fee,ywt.type ywt_charge_type,kf.tran_code,kf.UPDATE_DATE kf_date from ( ");
+		mainSql.append("nvl(ywt.fee,0)fee,ywt.type ywt_charge_type,ywt.tran_code,kf.UPDATE_DATE kf_date from ( ");
 		
 		StringBuffer baseView = new StringBuffer();
 		for (TransactionType type : TransactionType.values()) {

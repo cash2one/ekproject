@@ -47,12 +47,13 @@ public class TransBooklogDao extends
 	    	}else
 	    	  tempSet = this.baseTransBookLog(areaAbb, studentName, beginDate, endDate);
 	        
-	    	if(tempSet!=null)
-		    for(TransBooklogRow row :tempSet){
-		    	allResult.add(row);
-		    }
-	    	tempSet.clear();
-	    	tempSet = null;
+	    	if(tempSet!=null){
+			    for(TransBooklogRow row :tempSet){
+			    	allResult.add(row);
+			    }
+		    	tempSet.clear();
+		    	tempSet = null;
+	    	}
 		}
 		return allResult;
 	}
@@ -74,11 +75,12 @@ public class TransBooklogDao extends
       		rs = db.queryByPage(queryBaseTranscationLogsSql(areaAbb,studentName,beginDate,endDate), 1, record_max_limit);
       		TransBooklogRow row = null;
       		while(rs!=null&&rs.next()){
-      			   if(rs.getInt("transaction")>0)
-                      row.setTransaction(TransactionType.values()[rs.getInt("transaction")-1].cname());
-      			   else
+      			   if(rs.getInt("transaction")>0&&rs.getInt("transaction")<5){
+      				 row = new TransBooklogRow();
+      				 row.setTransaction(TransactionType.values()[rs.getInt("transaction")-1].cname());
+      			   }
+                   else
       				   continue;
-      			    row = new TransBooklogRow();
                     row.setSchool(rs.getString("school_name"));
                     row.setClassName(rs.getString("class_name"));
                     row.setStudentName(rs.getString("stu_name"));

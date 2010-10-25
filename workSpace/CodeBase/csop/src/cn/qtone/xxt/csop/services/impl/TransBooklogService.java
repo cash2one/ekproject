@@ -23,6 +23,7 @@ public class TransBooklogService extends AbstractQueryService<TransBooklogParams
 		StringBuffer resultXml = new StringBuffer();
 		String parent_start ="<column>";
 		String parent_end="</column>";
+		//要处理 2 7  12 的取值, 
 		for(TransBooklogRow row :rows){
 			resultXml.append(parent_start);
 			resultXml.append("<column1>").append(row.getSchool()).append("</column1>");
