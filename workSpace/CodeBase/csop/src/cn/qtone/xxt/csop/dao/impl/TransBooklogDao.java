@@ -43,7 +43,7 @@ public class TransBooklogDao extends
 		List<TransBooklogRow> tempSet = null;
 		for(String areaAbb:serviceAreas){
 	    	if(this.isPackageArea(areaAbb)){
-//	    	  tempSet = this.packageTransBookLog(areaAbb, studentName, beginDate, endDate);
+	    	  tempSet = this.packageTransBookLog(phone,areaAbb, studentName, beginDate, endDate);
 	    	}else
 	    	  tempSet = this.baseTransBookLog(phone,areaAbb, studentName, beginDate, endDate);
 	        
@@ -161,7 +161,7 @@ public class TransBooklogDao extends
 		ResultSet rs = null;
 		try{
       		db = new BaseDao(DBConnector.getConnection(POOL_NAME));
-      		rs = db.queryByPage(queryBaseTranscationLogsSql(phone,areaAbb,studentName,beginDate,endDate), 1, record_max_limit);
+      		rs = db.queryByPage(queryPackageTranscationLogsSql(phone,areaAbb,studentName,beginDate,endDate), 1, record_max_limit);
       		TransBooklogRow row = null;
       		while(rs!=null&&rs.next()){
       			   if(rs.getInt("transaction")>0)
@@ -231,7 +231,7 @@ public class TransBooklogDao extends
 		
 		//排序
 		mainSql.append(" order by tlog.open_date desc ");  
-		CsopLog.debug("基本业务变更日志SQL："+mainSql.toString());
+		CsopLog.debug("套餐业务变更日志SQL："+mainSql.toString());
 		return mainSql.toString();
 	}
 	

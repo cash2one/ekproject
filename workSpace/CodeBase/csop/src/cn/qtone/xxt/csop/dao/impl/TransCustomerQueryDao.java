@@ -233,11 +233,11 @@ public class TransCustomerQueryDao extends AbstractTransDao<TransCustomerQueryPa
 		 mainSql.append(" tlog.open_date,tlog.book_type ");
 		 mainSql.append(" from ").append(areaAbb).append("_xj_family fa ");
 		 mainSql.append(" left join ").append(areaAbb).append("_preferential_packager fp ");
-		 mainSql.append(" on fa.id = fp.f_id and fp.phone = fa.kf_phone ");
+		 mainSql.append(" on fa.id = fp.f_id and fp.phone = fa.phone ");
 		 mainSql.append(" left join preferential_package pp ").append(" on fp.pp_id=pp.id");
 		 mainSql.append(" left join ( ").append(this.lastPackageTransactionLog(areaAbb)).append(" )tlog ");
 		 mainSql.append(" on tlog.family_id=fa.id and tlog.phone=fa.kf_phone and tlog.open=1 ");
-		 mainSql.append(" where fa.kf_phone='").append(phone).append("'");	
+		 mainSql.append(" where fa.phone='").append(phone).append("'");	
 		 mainSql.append(" and fp.del = 1 ");//开通的套餐
 		 if(!Checker.isNull(beginDate))
 			 mainSql.append(" and to_char(fp.START_DATE,'YYYY-MM-DD')>='").append(beginDate).append("'");
