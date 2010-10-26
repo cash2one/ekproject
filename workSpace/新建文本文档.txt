@@ -1,6 +1,7 @@
 http://zsqtsm.mpc.cn:4008/
 
-http://zsqtsm.mpc.cn:11638/bugzilla/
+http://192.168.1.163/bugzilla/
+ http://zsqtsm.mpc.cn:11638/bugzilla/
 业务管理-业务定制-营销方案查询定制
 
 开通、取消营销方案时，未对相应家长表的业务进行修改！照成开通无法发送短信；取消无法删除学生
