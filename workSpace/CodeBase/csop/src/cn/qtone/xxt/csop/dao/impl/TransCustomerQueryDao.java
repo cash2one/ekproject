@@ -194,15 +194,15 @@ public class TransCustomerQueryDao extends AbstractTransDao<TransCustomerQueryPa
 		          nRow = new TransCustomerRow();		 
 				  nRow.setName(rs.getString("transaction"));
 				  nRow.setDesc(rs.getString("remark"));
-				  nRow.setPort(rs.getString("tran_code"));
+//				  nRow.setPort(rs.getString("tran_code"));
 				  nRow.setServiceState(rs.getInt("is_open")==0?"未开通":"开通");
 				  if(rs.getInt("is_open")!=0){
 				    nRow.setOpenType(rs.getInt("book_type")==0?"网页定制":"手机上行定制");
 				    nRow.setOrderTime(rs.getString("open_date"));
-				    nRow.setPayTime(rs.getString("kf_date"));
-				    if(rs.getInt("is_charge")!=0){
-				    
-				    }
+//				    nRow.setPayTime(rs.getString("kf_date"));
+//				    if(rs.getInt("is_charge")!=0){
+//				    
+//				    }
 				  }  
 				  nRow.setSaleRelationShip(rs.getString("transaction"));
 				  rows.add(nRow);
@@ -229,16 +229,19 @@ public class TransCustomerQueryDao extends AbstractTransDao<TransCustomerQueryPa
 	 */
 	String packageTransactionSql(String areaAbb, String phone, String beginDate,
 			String endDate){
-		 StringBuffer mainSql = new StringBuffer(" select pp.name transaction,pp.REMARK,pp.IS_FREE is_charge,pp.del is_open, ");
+		 StringBuffer mainSql = new StringBuffer(" select fp.name transaction,fp.REMARK,fp.IS_FREE is_charge,fp.del is_open, ");
 		 mainSql.append(" tlog.open_date,tlog.book_type ");
 		 mainSql.append(" from ").append(areaAbb).append("_xj_family fa ");
-		 mainSql.append(" left join ").append(areaAbb).append("_preferential_packager fp ");
-		 mainSql.append(" on fa.id = fp.f_id and fp.phone = fa.phone ");
-		 mainSql.append(" left join preferential_package pp ").append(" on fp.pp_id=pp.id");
+		 
+		 mainSql.append(" left join ( select a.* ,pp.name,pp.remark,pp.is_free from ").append(areaAbb).append("_preferential_packager a ");
+		 mainSql.append(" left join preferential_package pp on pp.id =a.pp_id ");
+		 mainSql.append(" )fp on fa.id = fp.f_id and fp.phone = fa.phone ");
+		 
 		 mainSql.append(" left join ( ").append(this.lastPackageTransactionLog(areaAbb)).append(" )tlog ");
-		 mainSql.append(" on tlog.family_id=fa.id and tlog.phone=fa.kf_phone and tlog.open=1 ");
+		 mainSql.append(" on tlog.family_id=fa.id and tlog.phone=fa.phone and tlog.open=1 and tlog.package_id = fp.pp_id ");
 		 mainSql.append(" where fa.phone='").append(phone).append("'");	
 		 mainSql.append(" and fp.del = 1 ");//开通的套餐
+		 
 		 if(!Checker.isNull(beginDate))
 			 mainSql.append(" and to_char(fp.START_DATE,'YYYY-MM-DD')>='").append(beginDate).append("'");
 		 if(!Checker.isNull(endDate))

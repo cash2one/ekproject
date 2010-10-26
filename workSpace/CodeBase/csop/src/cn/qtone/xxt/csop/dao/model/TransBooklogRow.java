@@ -145,4 +145,24 @@ public class TransBooklogRow implements ResultRow {
 		if (!Checker.isNull(remark))
 			this.remark = remark;
 	}
+
+	public String formColumnData() {
+		StringBuffer resultXml = new StringBuffer();
+		resultXml.append("<column>");
+		resultXml.append("<column1>").append(getSchool()).append("</column1>");
+		resultXml.append("<column2>").append(getClassName()).append("</column2>");
+		resultXml.append("<column3>").append(getStudentName()).append("</column3>");
+		resultXml.append("<column4>").append(getParentName()).append("</column4>");
+		resultXml.append("<column5>").append(getTransaction()).append("</column5>");
+		resultXml.append("<column6>").append(getBookType()).append("</column6>"); //操作方式
+		resultXml.append("<column7>").append(getCharge()).append("</column7>");
+		resultXml.append("<column8>").append(getOperationType()).append("</column8>");//操作类型
+		resultXml.append("<column9>").append(getOperateDate()).append("</column9>");
+		resultXml.append("<column10>").append(getReason()).append("</column10>");
+		resultXml.append("<column11>").append(getOperator()).append("</column11>");
+		resultXml.append("<column12>").append(getSaleRelationShip()).append("</column12>");
+		resultXml.append("<column13>").append(getRemark()).append("</column13>");
+		resultXml.append("</column>");
+		return resultXml.toString();
+	}
 }

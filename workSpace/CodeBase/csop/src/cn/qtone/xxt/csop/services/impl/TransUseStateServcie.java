@@ -4,24 +4,23 @@ import java.util.List;
 
 import cn.qtone.xxt.csop.business.ServciceResponseParams;
 import cn.qtone.xxt.csop.business.ServiceAgreement;
-import cn.qtone.xxt.csop.dao.impl.TransBooklogDao;
-import cn.qtone.xxt.csop.dao.model.TransBooklogRow;
-import cn.qtone.xxt.csop.dao.model.TransCustomerRow;
+import cn.qtone.xxt.csop.dao.impl.TransUseStateDao;
+import cn.qtone.xxt.csop.dao.model.TransUseStateRow;
 import cn.qtone.xxt.csop.inter.AbstractQueryService;
 import cn.qtone.xxt.csop.util.CsopLog;
 import cn.qtone.xxt.csop.webservices.bean.ServiceResponse;
-import cn.qtone.xxt.csop.webservices.bean.TransBooklogParams;
+import cn.qtone.xxt.csop.webservices.bean.TransUseStateParams;
 
-/**
- * 6.4.1.1 业务定制情况查询（B005_01）
- * 
- * @author linhansheng
- * 
- */
-public class TransBooklogService extends AbstractQueryService<TransBooklogParams,TransBooklogRow>{
+public class TransUseStateServcie extends
+		AbstractQueryService<TransUseStateParams, TransUseStateRow> {
 
 	@Override
-	public ServiceResponse query(TransBooklogParams requsetParams) {
+	protected ServiceAgreement agreement() {
+		return ServiceAgreement.TRANSCATION_USESTATE;
+	}
+
+	@Override
+	public ServiceResponse query(TransUseStateParams requsetParams) {
 		ServiceResponse resp = new ServiceResponse();
 		if(!validator(requsetParams)){
 			resp.setResult("");
@@ -29,9 +28,9 @@ public class TransBooklogService extends AbstractQueryService<TransBooklogParams
 			resp.setRetmsg(ServciceResponseParams.SV0M95.description());
 			return resp;
 		}
-	    TransBooklogDao dao = new TransBooklogDao();
+		TransUseStateDao dao = new TransUseStateDao();
 		try {
-			List<TransBooklogRow> results = dao.query(requsetParams);
+			List<TransUseStateRow> results = dao.query(requsetParams);
 			if(results!=null){
 			   resp.setRetmsg(ServciceResponseParams.SUC.description()+",查询返回"+results.size()+"条记录。  ");
 			   resp.setResult(this.formateResutlData(results));
@@ -48,11 +47,6 @@ public class TransBooklogService extends AbstractQueryService<TransBooklogParams
 			 dao=null;
 		}
 		return resp;
-	}
-
-	@Override
-	protected ServiceAgreement agreement() {
-		return ServiceAgreement.TRANSCATION_BOOKLOG;
 	}
 
 }

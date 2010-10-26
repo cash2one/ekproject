@@ -36,8 +36,9 @@ public class TransCustomerQueryService extends AbstractQueryService<TransCustome
 		try {
 			List<TransCustomerRow> results = dao.query(reqParams);
 			if(results!=null){
-				 resp.setRetmsg(ServciceResponseParams.SUC.description()+",查询返回"+results.size()+"条记录。  ");
+			   resp.setRetmsg(ServciceResponseParams.SUC.description()+",查询返回"+results.size()+"条记录。  ");
 			   resp.setResult(this.formateResutlData(results));
+			   results = null;
 			}
 			resp.setRetcode(ServciceResponseParams.SUC.code());
 		} catch (Exception e) {
@@ -49,31 +50,6 @@ public class TransCustomerQueryService extends AbstractQueryService<TransCustome
 			 dao=null;
 		}
 		return resp;
-	}
-
-
-	@Override
-	protected String formateResutlData(List<TransCustomerRow> rows) {
-		StringBuffer resultXml = new StringBuffer();
-		String parent_start ="<column>";
-		String parent_end="</column>";
-		for(TransCustomerRow row :rows){
-			resultXml.append(parent_start);
-			resultXml.append("<column1>").append(row.getName()).append("</column1>");
-			resultXml.append("<column2>").append(row.getPort()).append("</column2>");
-			resultXml.append("<column3>").append(row.getDesc()).append("</column3>");
-			resultXml.append("<column4>").append(row.getCharge()).append("</column4>");
-			resultXml.append("<column5>").append(row.getChargeType()).append("</column5>");
-			resultXml.append("<column6>").append(row.getOpenType()).append("</column6>");
-			resultXml.append("<column7>").append(row.getOrderTime()).append("</column7>");
-			resultXml.append("<column8>").append(row.getServiceState()).append("</column8>");
-			resultXml.append("<column9>").append(row.getPayTime()).append("</column9>");
-			resultXml.append("<column10>").append(row.getSaleRelationShip()).append("</column10>");
-			resultXml.append(parent_end);
-		}
-		String content = resultXml.toString();
-		resultXml=null;
-		return content;
 	}
 
 

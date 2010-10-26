@@ -18,11 +18,22 @@ public abstract class AbstractQueryService<Params extends RequestParams, Row ext
 	public abstract ServiceResponse query(Params reqParams);
 
 	/**
+	 * 
 	 * 应答数据格式，主要针对多行数据的返回
 	 * @param rows
 	 * @return
 	 */
-	protected abstract String formateResutlData(List<Row> rows);
+	protected String formateResutlData(List<Row> rows){
+		StringBuffer resultXml = new StringBuffer();
+		for(Row row :rows){
+			resultXml.append(row.formColumnData());
+		    row = null;
+		}
+		rows = null;
+		String content = resultXml.toString();
+		resultXml=null;
+		return content;
+	};
 
 	
 	/**

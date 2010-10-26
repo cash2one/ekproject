@@ -2,18 +2,20 @@ package cn.qtone.xxt.csop.webservices;
 
 import cn.qtone.xxt.csop.business.ServciceResponseParams;
 import cn.qtone.xxt.csop.business.ServiceAgreement;
-import cn.qtone.xxt.csop.services.impl.TransCustomerQueryService;
+import cn.qtone.xxt.csop.services.impl.TransBooklogService;
+import cn.qtone.xxt.csop.services.impl.TransUseStateServcie;
 import cn.qtone.xxt.csop.util.CsopLog;
 import cn.qtone.xxt.csop.webservices.bean.ServiceResponse;
-import cn.qtone.xxt.csop.webservices.bean.TransCustomerQueryParams;
+import cn.qtone.xxt.csop.webservices.bean.TransBooklogParams;
+import cn.qtone.xxt.csop.webservices.bean.TransUseStateParams;
 import cn.qtone.xxt.csop.webservices.util.RequestParamsWrapper;
 
 /**
- * 校讯通--业务定制情况查询
+ * 校讯通--业务使用记录查询
  * @author linhansheng
  * 
  */
-public class TransCustomerQueryInter {
+public class TransUseStateInter {
 
 	/**
 	 * 服务接口 请求参数需要解释 对应的 xml文件。
@@ -21,21 +23,21 @@ public class TransCustomerQueryInter {
 	 * @return
 	 */
 	public String query(String xmlReqest) {
-		CsopLog.debug("接收到 [业务定制情况查询] 服务请求......");
-		TransCustomerQueryParams requestParams = null;
+		CsopLog.debug("接收到 [业务使用记录查询] 服务请求......");
+		TransUseStateParams requestParams = null;
 		ServiceResponse reponse= null;
-		RequestParamsWrapper<TransCustomerQueryParams> wrapper = null;
-		TransCustomerQueryService service = null;
+		RequestParamsWrapper<TransUseStateParams> wrapper = null;
+		TransUseStateServcie service = null;
 		try {
-			wrapper = new RequestParamsWrapper<TransCustomerQueryParams>();
+			wrapper = new RequestParamsWrapper<TransUseStateParams>();
 			if (wrapper == null) {
 				CsopLog.error("解释请求参数出错！");
 			}
-			requestParams = wrapper.formParams(xmlReqest,TransCustomerQueryParams.class);
+			requestParams = wrapper.formParams(xmlReqest,TransUseStateParams.class);
 			if(requestParams==null){
 				return  ServciceResponseParams.SV0M95.description(); 
 			}
-			service = new TransCustomerQueryService();
+			service = new TransUseStateServcie();
 			reponse = service.query(requestParams);
 			if(reponse!=null){
 			   return reponse.toString();
@@ -43,7 +45,7 @@ public class TransCustomerQueryInter {
 			   return ServciceResponseParams.SUC.description();
 		} catch (Exception e) {
 			   e.printStackTrace();
-		       return ServciceResponseParams.SV0MMM.description();
+			   return ServciceResponseParams.SV0MMM.description();
 		}finally{
 			wrapper = null;
 			requestParams = null;
@@ -54,19 +56,19 @@ public class TransCustomerQueryInter {
     
 	//测试接口
 	public String queryTest(String phone, String beginDate, String endDate) {
-		CsopLog.debug("接收到 [业务定制情况查询] 服务请求......");
-		TransCustomerQueryService service = new TransCustomerQueryService();
-		TransCustomerQueryParams requestParams = new TransCustomerQueryParams();
+		CsopLog.debug("接收到 [业务使用记录查询] 服务请求......");
+		TransUseStateServcie service = new TransUseStateServcie();
+		TransUseStateParams requestParams = new TransUseStateParams();
 		
-		requestParams.setPlatform(ServiceAgreement.TRANSCATION_CUSTOMER.platform());
-		requestParams.setSysCode(ServiceAgreement.TRANSCATION_CUSTOMER.sysCode());
-		requestParams.setBusiCode(ServiceAgreement.TRANSCATION_CUSTOMER.busiCode());
-		requestParams.setVersion(ServiceAgreement.TRANSCATION_CUSTOMER.version());
+		requestParams.setPlatform(ServiceAgreement.TRANSCATION_USESTATE.platform());
+		requestParams.setSysCode(ServiceAgreement.TRANSCATION_USESTATE.sysCode());
+		requestParams.setBusiCode(ServiceAgreement.TRANSCATION_USESTATE.busiCode());
+		requestParams.setVersion(ServiceAgreement.TRANSCATION_USESTATE.version());
 		
 		requestParams.setBeginDate(beginDate);
 		requestParams.setEndDate(endDate);
 		requestParams.setTelNo(phone);
 		return service.query(requestParams).toString();
 	}
-
+	
 }

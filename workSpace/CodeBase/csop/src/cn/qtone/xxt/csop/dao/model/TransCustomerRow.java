@@ -131,8 +131,22 @@ public class TransCustomerRow implements ResultRow {
 			this.saleRelationShip = saleRelationShip;
 	}
 
-	public String rowToXml() {
-		return null;
+
+	public String formColumnData() {
+		StringBuffer resultXml = new StringBuffer();
+		resultXml.append("<column>");
+		resultXml.append("<column1>").append(this.getName()).append("</column1>");
+		resultXml.append("<column2>").append(this.getPort()).append("</column2>");
+		resultXml.append("<column3>").append(this.getDesc()).append("</column3>");
+		resultXml.append("<column4>").append(this.getCharge()).append("</column4>");
+		resultXml.append("<column5>").append(this.getChargeType()).append("</column5>");
+		resultXml.append("<column6>").append(this.getOpenType()).append("</column6>");
+		resultXml.append("<column7>").append(this.getOrderTime()).append("</column7>");
+		resultXml.append("<column8>").append(this.getServiceState()).append("</column8>");
+		resultXml.append("<column9>").append(this.getPayTime()).append("</column9>");
+		resultXml.append("<column10>").append(this.getSaleRelationShip()).append("</column10>");
+		resultXml.append("</column>");
+		return resultXml.toString();
 	}
 
 }

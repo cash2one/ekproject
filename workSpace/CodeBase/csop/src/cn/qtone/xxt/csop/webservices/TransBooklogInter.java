@@ -63,6 +63,7 @@ public class TransBooklogInter {
 		requestParams.setPlatform(ServiceAgreement.TRANSCATION_BOOKLOG.platform());
 		requestParams.setSysCode(ServiceAgreement.TRANSCATION_BOOKLOG.sysCode());
 		requestParams.setBusiCode(ServiceAgreement.TRANSCATION_BOOKLOG.busiCode());
+		requestParams.setVersion(ServiceAgreement.TRANSCATION_BOOKLOG.version());
 		
 		requestParams.setBeginDate(beginDate);
 		requestParams.setEndDate(endDate);
