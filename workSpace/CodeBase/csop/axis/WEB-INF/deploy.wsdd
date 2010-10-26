@@ -8,4 +8,8 @@
 		<parameter name="className" value="cn.qtone.xxt.csop.webservices.TransBooklogInter" />
 		<parameter name="allowedMethods" value="*" />
 	</service>
+	<service name="QTransUselog" provider="java:RPC">
+		<parameter name="className" value="cn.qtone.xxt.csop.webservices.TransUseStateInter" />
+		<parameter name="allowedMethods" value="*" />
+	</service>
 </deployment>
