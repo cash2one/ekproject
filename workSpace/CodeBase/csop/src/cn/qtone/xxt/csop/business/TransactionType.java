@@ -8,9 +8,9 @@ package cn.qtone.xxt.csop.business;
 public enum TransactionType {
 	
 	DXX(1,"家长短信箱","is_dxx","is_dxx_charge","OPEN_DXX_DATE"),
-	KAOQIN(2,"考勤","is_kaoqin","is_kq_charge","OPEN_KAOQIN_DATE"),
+	KAOQIN(2,"考勤短信","is_kaoqin","is_kq_charge","OPEN_KAOQIN_DATE"),
 	QINQING(3,"亲情电话","is_qin_qing_tel","is_qq_charge","OPEN_QINQING_TEL"),
-	LIUYANBAN(4,"电子留言板","is_liuyanban","is_lyb_charge","OPEN_LIUYANBAN");
+	LIUYANBAN(4,"留言板","is_liuyanban","is_lyb_charge","OPEN_LIUYANBAN");
 	
 	
 	int code;

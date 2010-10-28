@@ -12,8 +12,8 @@ import cn.qtone.xxt.csop.webservices.bean.RequestParams;
  */
 public enum ServiceAgreement {
 
-	TRANSCATION_CUSTOMER("业务订购情况查询服务", "1.0", "B005", "uniteview", "B005_01"), 
-	TRANSCATION_BOOK("业务受理服务", "1.0", "B005", "uniteview", "B005_02"),
+	TRANSCATION_CUSTOMER_QUERY("业务订购情况查询服务", "1.0", "B005", "uniteview", "B005_01"), 
+	TRANSCATION_CUSTOMER_BOOK("业务受理服务", "1.0", "B005", "uniteview", "B005_02"),
 	TRANSCATION_BOOKLOG("业务订购历史记录查询服务", "1.0", "B005", "uniteview", "B005_03"),
 	TRANSCATION_USESTATE("业务使用状态查询服务", "1.0", "B005", "uniteview", "B005_04");
 

@@ -51,7 +51,6 @@ public class TransUseStateDao extends
 	}
 	
 	
-	
 	List<TransUseStateRow> query(String areaAbb,String phone,String beginDate,String endDate){
 		BaseDao db = null;
 		ResultSet rs = null;

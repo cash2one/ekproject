@@ -55,7 +55,7 @@ public class TransCustomerQueryService extends AbstractQueryService<TransCustome
 
 	@Override
 	protected ServiceAgreement agreement() {
-		return ServiceAgreement.TRANSCATION_CUSTOMER;
+		return ServiceAgreement.TRANSCATION_CUSTOMER_QUERY;
 	}
     
 	
