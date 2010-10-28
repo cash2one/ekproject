@@ -124,10 +124,10 @@ public class TransCustomerInter {
 		TransCustomerService service = new TransCustomerService();
 		TransCustomerParams requestParams = new TransCustomerParams();
 		
-		requestParams.setPlatform(ServiceAgreement.TRANSCATION_CUSTOMER_QUERY.platform());
-		requestParams.setSysCode(ServiceAgreement.TRANSCATION_CUSTOMER_QUERY.sysCode());
-		requestParams.setBusiCode(ServiceAgreement.TRANSCATION_CUSTOMER_QUERY.busiCode());
-		requestParams.setVersion(ServiceAgreement.TRANSCATION_CUSTOMER_QUERY.version());
+		requestParams.setPlatform(ServiceAgreement.TRANSCATION_CUSTOMER_BOOK.platform());
+		requestParams.setSysCode(ServiceAgreement.TRANSCATION_CUSTOMER_BOOK.sysCode());
+		requestParams.setBusiCode(ServiceAgreement.TRANSCATION_CUSTOMER_BOOK.busiCode());
+		requestParams.setVersion(ServiceAgreement.TRANSCATION_CUSTOMER_BOOK.version());
 		
 		requestParams.setTelNo(phone);
 		requestParams.setDoFlag(doFlag);
