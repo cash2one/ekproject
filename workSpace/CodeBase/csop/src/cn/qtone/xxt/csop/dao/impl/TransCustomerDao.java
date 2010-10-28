@@ -19,16 +19,20 @@ import cn.qtone.xxt.csop.webservices.bean.TransCustomerParams;
 public class TransCustomerDao extends AbstractTransDao<TransCustomerParams,TransCustomerRow> {
 
 	static String POOL_NAME = "xxt";
-
+	
 	public String customer(TransCustomerParams requsetParams) {
 		String dealType = requsetParams.getDoFlag();
-		int doFlag = ("开通".equals(dealType) ? 1 : 0);
+		int doFlag = ("开通".equals(dealType)||"1".equals(dealType) ? 1 :(("取消".equals(dealType)||"0".equals(dealType)?0:-1)));
+		if(doFlag==-1)
+		  return "服务请求失败，无法区分业务办理类型。";
+		
 		String phone = requsetParams.getTelNo();
 		List<String> areas = phoneServiceInAreas(phone);
+		String transactionName = requsetParams.getBusiFlag();
 		if(areas==null||areas.size()==0)
 		  return "没有该关于该手机用户的业务订购信息";
-		boolean dealStatu = doFlag == 0 ? cancle(phone, areas, null) : book(
-				phone, areas, null);
+		boolean dealStatu = doFlag == 0 ? cancle(phone, areas, transactionName) : book(
+				phone, areas, transactionName);
 		return dealStatu ? "操作成功" : "操作失败";
 	}
 
@@ -37,9 +41,9 @@ public class TransCustomerDao extends AbstractTransDao<TransCustomerParams,Trans
 	 * @param cname
 	 * @return
 	 */
-	int returnTransCodeByCname(String cname) {
+	int returnTransCodeByCname(String name) {
 		for (TransactionType type : TransactionType.values()) {
-			if (type.cname().equals(cname))
+			if (type.cname().equals(name)||type.ename().equals(name))
 				return type.code();
 		}
 		return -1;
@@ -70,7 +74,7 @@ public class TransCustomerDao extends AbstractTransDao<TransCustomerParams,Trans
 		}
 		for (String areaAbb : areaAbbs) {
 			sqls.add(cancleTransactionSql(areaAbb, transCode, phone));
-			sqls.add(addLog(areaAbb,phone,transCode,false));
+//			sqls.add(addLog(areaAbb,phone,transCode,false));
 		}
 
 		if (sqls.size() <= 0)
@@ -105,12 +109,12 @@ public class TransCustomerDao extends AbstractTransDao<TransCustomerParams,Trans
 		String table = areaAbb + "_xj_family_view ";
 		mainSql.append(" update ").append(table);
 		mainSql.append(" set ").append(
-				TransactionType.values()[transCode].familyField()).append("=")
+				TransactionType.values()[transCode-1].familyField()).append("=")
 				.append(0);
 		mainSql.append(" where id in( select id from ").append(areaAbb).append(
 				"_xj_family ");
 		mainSql.append(" where (phone='").append(phone).append(
-				"' or KF_PHONE='").append(phone).append("')");
+				"' or KF_PHONE='").append(phone).append("'))");
 		CsopLog.debug(" 业务取消Sql:" + mainSql);
 		return mainSql.toString();
 	}
