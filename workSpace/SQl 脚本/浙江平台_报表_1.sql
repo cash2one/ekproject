@@ -202,3 +202,10 @@ select * from zs_school_use_state
   values(jh_school_use_seq_id.nextval,30,2010,100,10,5) 
   
  
+select * from ( 
+   select school_id,year,month, sum(type_charge),sum(stu_num)   from tranpackage_type_stat 
+   group by  school_id,year,month
+   order by school_id
+ )
+
+ 
