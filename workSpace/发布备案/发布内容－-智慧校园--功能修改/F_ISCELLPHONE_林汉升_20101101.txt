@@ -1,0 +1,29 @@
+CREATE OR REPLACE FUNCTION QAXXTTEST."F_ISCELLPHONE" (phone varchar2) RETURN NUMBER AS     
+-- 判断是否移动号码0-移动,1-联通,2-电信，-1：非三网电话号码
+p_int  number;
+p_head number;
+p_kind number;
+BEGIN    
+  if length(phone)=11 then    
+     p_int := to_number(phone);
+     p_head := to_number(substr(phone,1,3));
+     
+     if (p_head = 159) or (p_head = 158) or (p_head = 157) or (p_head = 150) or (p_head = 151) or (p_head = 188) or (p_head = 152) or (p_head >= 134 and p_head <= 139) then
+        p_kind := 0;
+     elsif (p_head = 153) or (p_head = 156)or (p_head = 187) or (p_head >= 130 and p_head <= 133)  then
+        p_kind := 1;
+     elsif (p_head = 189) then
+        p_kind := 2;   
+     else
+        p_kind := -1; 
+     end if;
+  else
+        p_kind := -1;   
+  end if;  
+  
+  return p_kind;
+  
+  EXCEPTION    
+     WHEN OTHERS THEN        
+        return -1;
+END;

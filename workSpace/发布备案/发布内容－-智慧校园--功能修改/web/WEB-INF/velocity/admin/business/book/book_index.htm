@@ -1,0 +1,182 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="/css/css.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/base/jquery.js"></script>
+   <link href="/css/subModal.css" rel="stylesheet" type="text/css" />   
+   <link href="/css/tipswindown.css" rel="stylesheet" type="text/css" />  
+    <script language ="javascript" type ="text/javascript" src="/js/common.js"></script>
+    <script language ="javascript" type="text/javascript" src="/js/subModal.js"></script>
+    <script language ="javascript" type="text/javascript" src="/js/msg.js"></script>
+    <script type="text/javascript" src="/js/base/jquery.validate.js"></script>
+    <script language="javascript" src="/js/base/base.js"></script>
+    <script language="javascript" src="/js/base/jquery.history.js"></script>
+    <script language="javascript" src="/js/admin/business/book.js"></script>  
+    <script type="text/javascript" src="/js/base/droplist.js"></script>  
+    <script language="JavaScript" type="text/javascript" src="/js/base/WdatePicker.js"></script>
+    <script language="javascript" src="/js/base/tipswindown.js"></script>
+   
+<script type="text/javascript">
+<!--
+// JavaScript Document
+$(document).ready(function(){
+	$(".m_table tr:even").addClass("alt");
+	$(".m_table tr").mouseover(function(){
+		$(this).addClass("over");}).mouseout(function(){
+		$(this).removeClass("over");}).click(function(){
+		$(this).toggleClass("tr_chouse");
+		
+		})
+});
+//-->
+</script>
+<script type="text/javascript">
+	$(function(){
+		new xxt.droplist.Droplist($('#load_area1'));
+	});	
+</script>
+
+</head>
+<body >
+#include("loading.htm")
+<div class="breadcrumb"><img src="/images/arrow_01.gif"align="absmiddle" /> 当前位置：<a href="#">业务管理</a> &gt;<a href="#">业务定制</a> &gt; <a href="#">营销方案定制</a> | <a href="Javascript:window.history.back()">&lt;&lt;返回上一步</a></div>
+<div class="mainss">
+  <div class="form_txt">
+    <form  class="cmxform" id="commentForm" method="get" action="" > 
+      <div id = "user_query" class="main_table">
+        <table width="100%" border="0" cellpadding="6" cellspacing="1" class="m_table2">
+          <tr>
+            <td width="80" align="right" bgcolor="#F3F9FC" nowrap="nowrap">地区：</td>
+            <td  bgcolor="#FFFFFF">
+                    <input type="hidden"  droplist="load_area" id="load_area1"/>
+					<select droplist="area" id="areaId" bgcolor="#FFFFFF" class="" onchange="new xxt.droplist.Droplist(this,null,[{droplist:'town'},{droplist:'transaction'}]);"></select>			</td>
+			<td width="100" align="right" bgcolor="#F3F9FC" nowrap="nowrap" >镇区：</td>
+			<td nowrap="nowrap">
+			<select droplist="town" id="townId" onchange="new xxt.droplist.Droplist(this);"></select>			</td>
+			<td width="90" align="right" bgcolor="#F3F9FC" nowrap="nowrap">学校：</td>
+			<td nowrap="nowrap">
+			<select droplist="school" id="schoolId" onchange="new xxt.droplist.Droplist(this);"></select>			</td> 
+			<td width="90" align="right" bgcolor="#F3F9FC" nowrap="nowrap">年级：</td>
+			<td  nowrap="nowrap">
+			<select droplist="grade" id="gradeId" onchange="new xxt.droplist.Droplist(this);"></select>			</td>            
+          </tr>
+          <tr>            
+            <td align="right" bgcolor="#F3F9FC">班级：</td>
+			<td >
+				<select droplist="clazz" id="clazzId" onchange="new xxt.droplist.Droplist(this);"></select>			</td>  
+			<td align="right" bgcolor="#F3F9FC">营销方案：</td> 
+			<td bgcolor="#FFFFFF">
+			<select droplist="transaction" id="tranId" onchange="new xxt.droplist.Droplist(this);"></select>			</td>
+			<td align="right" bgcolor="#F3F9FC">查询类型：</td>
+			<td  >
+							<select droplist="queryType" id="queryType"><option value = "-1">全部</option> 
+																<option value = "1">姓名</option>
+																<option value = "2">学藉号</option>
+																<option value = "3">家长姓名</option>
+																<option value = "4">家长手机</option>
+																<option value = "5">班级名</option>
+							</select>
+			
+			</td>
+			<td>
+				<input name="queryText" type="text" width = "150" class="formtext_b80" id="queryText" onkeydown="if(event.keyCode==13) return   (event.srcElement.type==&quot;textarea&quot;)" value="" /> 
+			</td>
+			
+            	
+			<td align="right" colspan = "2">
+				$!purview.query_btn  				
+				<!--<input name="addStudent" type="button" class="but_03" rel="history" value="添加学生" onClick="user.addStudent()">-->
+			</td>
+          </tr>
+         
+          <tr>
+          		<td align="right" bgcolor="#F3F9FC">营销方案：</td> 
+          		<td  colspan = "3" valign="middle" width = "300">
+          		       <input name= "packageIds" id = "packageIds" type="hidden" value="" />
+          		       <input name="packageName" type="text" width = "50%" class="formtext_b80" id="packageName" onClick="user.selectTran()" onkeydown="if(event.keyCode==13) return   (event.srcElement.type==&quot;textarea&quot;)" value="" />
+          			 
+          				
+          		</td>           		
+          		
+          		<td align="right" bgcolor="#F3F9FC">收费类型：</td>	
+          		
+          		<td  >
+          			<select droplist="charge" id="charge"><option value = "0">体验</option> 
+										<option value = "1">收费</option>
+										<option value = "-1">免费</option>										
+				</select>
+          		</td>
+          		<!--<td colspan = "4" align="right" >  -->        		    
+          		<!--	<input name="add"  type="button" class="but_03" rel="history" value="开通所选" onClick="user.add()">-->
+          		<!--	<input name="add"  type="button" class="but_03" rel="history" value="取消所选" onClick="user.del()">-->
+          		<!--</td>-->
+          </tr>
+          <tr>
+          		<td align="right" bgcolor="#F3F9FC">修改原因：</td> 
+          		<td  colspan = "5" valign="middle">
+  			 <table  width = "100%" >
+          		 	<tr>
+          		 		<td colspan = "3">
+	          			<select droplist="reasonType" id="reasonType" onchange="user.changereason()"><option value = "1">确认单开通</option>
+																	<option value = "2">教师致电客服热线开通</option>
+																	<option value = "3">客服致电客服热线开通</option>
+																	<option value = "4">客户致电10086开通</option>
+																	<option value = "5">教师留言开通</option>
+																	<option value = "6">教师提供客户号码开通</option>
+																	<option value = "7">其他</option>
+	          		          		
+	          			<!--input id = "sentMessage" type="checkbox" name="sentMessage" value = "1"  checked  align="top">发送短信通知</input-->
+						<input id="sentMessage" type="hidden" name="sentMessage" value = "0" />
+	          			
+	          		</tr>
+		          	<tr>
+		          	      <td colspan = "3">
+			          		<input type="text" name="reason" id="reason" size="60"  width = "50" class="formtext_b80" maxlength="30" >
+			          		<span style="color:red" id='fontdis' name="fontdis" align="top" >不超过30字</span>
+			          	</td>
+				</tr>				
+			</table>
+			 </td>
+			 <!--<td align="right" colspan = "3">-->
+			 <!--	<input name="add"  type="button" class="but_03" rel="history" value="变更收费类型" onClick="user.edit()">-->
+			 	
+			<!-- </td>-->
+          </tr>
+        </table>
+        <div class="form_control">
+      	<a href="#" onclick="user.excelAll();" class="mbtn4">
+      		<img src="/images/admin/ico/down.gif" width="16" height="16" align="absmiddle" />
+      	导出全部 
+      	</a> 
+      	<a href="#" onclick="user.excelSelect();" class="mbtn4">
+      		<img src="/images/admin/ico/down.gif" width="16" height="16" align="absmiddle" />
+      	导出所选 
+      	</a> 
+      	<a href="#" onclick="user.add();" class="mbtn4">
+      		<img src="/images/admin/ico/edit.gif" width="16" height="16" align="absmiddle" />
+      	开通所选 
+      	</a> 
+      	<a href="#" onclick="user.del();" class="mbtn4">
+      		<img src="/images/admin/ico/del.gif" width="16" height="16" align="absmiddle" />
+      	取消所选 
+      	</a> 
+      	<a href="#" onclick="user.edit();" class="mbtn4">
+      		<img src="/images/admin/ico/edit.gif" width="16" height="16" align="absmiddle" />
+      	变更收费类型 
+      	</a> 
+      	<a href="#" onclick="user.addStudent();" class="mbtn4">
+      		<img src="/images/admin/ico/add.gif" width="16" height="16" align="absmiddle" />
+      	添加学生 
+      	</a> 
+      </div>   
+      </div>   
+      
+    </form>
+  </div>
+  <div  id="user_list" ></div>
+  <div  id="user_add" ></div>
+</div>
+</body>
+</html>
