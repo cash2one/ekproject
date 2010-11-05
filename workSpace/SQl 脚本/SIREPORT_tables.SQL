@@ -7,7 +7,7 @@ ORDER BY a.area_name, a.si_name
 
 -- SI增长率周统计表
 create table si_increase_stat(
-   id number(1111111),
+   id number(20),
    year number(6),
    week_seq number(6),
    si varchar(40),
@@ -19,7 +19,7 @@ create table si_increase_stat(
 
 
 create table si_activity_stat(
-   id number(1111111),
+   id number(20),
    year number(6),
    week_seq number(6),
    si varchar(40),
@@ -31,6 +31,22 @@ create table si_activity_stat(
    kt_percent float(3), 
    activity_percent float(3)
 )
+
+
+--SI 静态数据分析
+create table si_staticdata_stat(
+   id number(20),
+   year number(6),
+   week_seq number(6),
+   si varchar(40),
+   area varchar(40), 
+   school_cnt number(6),
+   stu_cnt number(6),
+   sf_cnt number(6),
+   fee number(6),
+   area_id  number(3)
+)
+
 
 
 
@@ -48,3 +64,16 @@ SELECT   a.area_name 地区, a.si_name si名称, a.jz_cnt 家长总数,
 ORDER BY a.area_name, a.si_name
 
 
+
+
+SELECT   b.NAME, COUNT (DECODE (a.bank, 1, student_cnt, NULL)),
+         SUM (DECODE (a.bank, 1, student_cnt, 0)) ,
+         COUNT (DECODE (a.bank, 2, student_cnt, NULL)),
+         SUM (DECODE (a.bank, 2, student_cnt, 0)),
+         COUNT (DECODE (a.bank, 3, student_cnt, 5, student_cnt, NULL)),
+         SUM (DECODE (a.bank, 3, student_cnt, 5, student_cnt, 0)),
+         COUNT (DECODE (a.bank, 4, student_cnt, NULL)),
+         SUM (DECODE (a.bank, 4, student_cnt, 0))
+    FROM school_bank a, area b
+   WHERE a.area_id = b.ID AND b.ID IN (6, 3, 1, 22, 5, 15, 26, 18)
+GROUP BY b.NAME
