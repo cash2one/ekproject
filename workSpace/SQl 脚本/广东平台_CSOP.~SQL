@@ -1,0 +1,24 @@
+select * from  zs_xj_family_view  fv   
+
+select * from zs_xj_family_view where phone='13800138000'
+
+  select * from preferential_package
+ select * from yw_transaction
+
+select * from fs_transaction_log where phone='13531800003'
+
+   select * from adc_member_order_service
+
+  select * from  zs_yw_kf_chargerecord
+   
+ select * from fs_transaction_log
+
+select * from preferential_package
+
+
+
+
+
+  select * from fs_preferential_packager pp where pp.pp_id in(360,460) and phone='13531800003'
+  
+  
