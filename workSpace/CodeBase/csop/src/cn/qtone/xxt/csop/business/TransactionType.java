@@ -19,7 +19,7 @@ public enum TransactionType {
 	String schoolField;  //学校表中的标志位  业务是否收费
 	String openDate;  //家庭表中对应的业务开通时间
 	
-	TransactionType(int code,String ename,String cname,String familyField,String schoolField,String openDate){
+	TransactionType(int code,String cname,String ename,String familyField,String schoolField,String openDate){
 	   this.code = code;
 	   this.ename = ename;
 	   this.cname = cname;

@@ -83,12 +83,15 @@ public class TransCustomerQueryDao extends AbstractTransDao<TransCustomerQueryPa
              TransCustomerRow nRow = null;
              while(rs!=null&&rs.next()){
 		          nRow = new TransCustomerRow();		 
-				  nRow.setName(rs.getString("transaction"));
-				  nRow.setDesc("业务描述未知");
-				  nRow.setPort(rs.getString("tran_code"));
+				  
+		          if(rs.getInt("transaction_id")<=4)
+		            nRow.setName(TransactionType.values()[rs.getInt("transaction_id")-1].cname());
+		          
+		          nRow.setDesc("业务描述未知");
+				  nRow.setPort(rs.getString("port"));
 				  nRow.setServiceState(rs.getInt("is_open")==0?"未开通":"开通");
 				  if(rs.getInt("is_open")!=0){
-				    nRow.setOpenType(rs.getInt("book_type")==0?"网页定制":"手机上行定制");
+				    nRow.setOpenType(rs.getInt("book_type")==0?"校讯通合作商操作":"短信");
 				    nRow.setOrderTime(rs.getString("open_date"));
 				    nRow.setPayTime(rs.getString("kf_date"));
 				    if(rs.getInt("is_charge")!=0){
@@ -125,7 +128,7 @@ public class TransCustomerQueryDao extends AbstractTransDao<TransCustomerQueryPa
 		StringBuffer mainSql = new StringBuffer(" select base.id family,base.phone,base.stu_sequence,base.transaction,");
 		mainSql.append("base.transaction_id,base.is_open,tlog.operator,tlog.reason,");
 		mainSql.append("tlog.package_id,book_type,base.open_date,is_charge,");
-		mainSql.append("nvl(ywt.fee,0)fee,ywt.type ywt_charge_type,kf.tran_code,kf.UPDATE_DATE kf_date from ( ");
+		mainSql.append("nvl(ywt.fee,0)fee,ywt.type ywt_charge_type,ywt.tran_code,kf.UPDATE_DATE kf_date,ywt.port from ( ");
 		
 		StringBuffer baseView = new StringBuffer();
 		for (TransactionType type : TransactionType.values()) {
@@ -133,13 +136,14 @@ public class TransCustomerQueryDao extends AbstractTransDao<TransCustomerQueryPa
 					+ type.cname() + "' transaction ,'" + type.code()
 					+ "' transaction_id," + type.familyField() + " is_open,xj_school."+type.schoolField()+" is_charge,"+type.openDate()+" open_date ");
 			baseView.append(" from "+areaAbb+"_xj_family fv ");
-			baseView.append(" left join "+areaAbb+"_xj_stu_class on "+areaAbb+"_xj_stu_class.stu_sequence = fv.stu_sequence  ");
-			baseView.append(" left join xj_school on "+areaAbb+"_xj_stu_class.school_id = xj_school.id ");
+			baseView.append(" left join xj_school on fv.school_id = xj_school.id ");
 			baseView.append(" where fv.phone ='"+ phone +"' ");
 			baseView.append(" union ");
 		}
+		
 		baseView.delete(baseView.length()-" union ".length(), baseView.length());
 		mainSql.append(baseView);
+		
 	    //业务日志
 		mainSql.append(" )base left join ( ").append(this.lastBaseTransactionLog(areaAbb,phone,beginDate,endDate)).append(" ) tlog ");
 		mainSql.append(" on tlog.family_id = base.id and tlog.stu_sequence = base.stu_sequence ");
@@ -148,12 +152,15 @@ public class TransCustomerQueryDao extends AbstractTransDao<TransCustomerQueryPa
 		//扣费记录
 		mainSql.append(" left join ").append(areaAbb).append("_yw_kf_chargerecord kf ");
 		mainSql.append(" on kf.family_id=base.id and kf.phone=base.phone and base.transaction_id=kf.transaction ");
-		//查询对应的资费
-		mainSql.append(" left join ").append(" yw_Transaction ywt");
-		mainSql.append(" on ywt.tran_code = kf.tran_code and ywt.TRANSACTION=base.transaction_id and ywt.AREA_ID=").append(area.getAreaIdByAbb(areaAbb));
-	
-		//查询条件 时间
 		
+		//查询对应的资费
+//		mainSql.append(" left join ").append(" yw_Transaction ywt");
+//		mainSql.append(" on ywt.tran_code = kf.tran_code and ywt.TRANSACTION=base.transaction_id and ywt.AREA_ID=").append(area.getAreaIdByAbb(areaAbb));
+		mainSql.append(" LEFT JOIN  ( select ADC.TRAN_ID,ADC.FEE,ADC.TRAN_CODE,ADC.SERVICE_CODE,ADC.PORT,ADC.TYPE from  zs_adc_member_order ao ");
+		mainSql.append(" left join adc_member_order_service adc on ao.tran_id = ADC.TRAN_ID and ao.tran_code = ADC.TRAN_CODE ) ywt");
+		mainSql.append(" ON YWT.TRAN_ID = base.transaction_id ");
+		
+		//查询条件 时间
 		mainSql.append(" where 1=1 ");
 		if(!Checker.isNull(beginDate))
 			mainSql.append(" and to_char(base.open_date,'YYYY-MM-DD')>='").append(beginDate).append("'");
@@ -271,6 +278,9 @@ public class TransCustomerQueryDao extends AbstractTransDao<TransCustomerQueryPa
     	
     	return null;
     }
+    
+    
+       
    
 	public static void main(String...srt){
 		TransCustomerQueryDao test = new TransCustomerQueryDao();
