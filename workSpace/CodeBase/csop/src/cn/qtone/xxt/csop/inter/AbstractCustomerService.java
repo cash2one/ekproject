@@ -6,8 +6,9 @@ import cn.qtone.xxt.csop.business.ServiceAgreement;
 import cn.qtone.xxt.csop.dao.model.TransCustomerRow;
 import cn.qtone.xxt.csop.webservices.bean.RequestParams;
 import cn.qtone.xxt.csop.webservices.bean.ServiceResponse;
+import cn.qtone.xxt.csop.webservices.bean.TransRequestParams;
 
-public abstract class AbstractCustomerService<Params extends RequestParams, Row extends ResultRow> {
+public abstract class AbstractCustomerService<Params extends TransRequestParams, Row extends ResultRow> {
 
 	/**
 	 * 业务办理接口

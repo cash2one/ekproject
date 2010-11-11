@@ -84,12 +84,12 @@ public class TransCustomerQueryDao extends AbstractTransDao<TransCustomerQueryPa
              while(rs!=null&&rs.next()){
 		          nRow = new TransCustomerRow();		 
 				  
-		          if(rs.getInt("transaction_id")<=4)
+		         if(rs.getInt("transaction_id")<=4)
 		            nRow.setName(TransactionType.values()[rs.getInt("transaction_id")-1].cname());
 		          
 		          nRow.setDesc("业务描述未知");
 				  nRow.setPort(rs.getString("port"));
-				  nRow.setServiceState(rs.getInt("is_open")==0?"未开通":"开通");
+				  nRow.setServiceState(rs.getInt("is_open")==0?"暂停":"正常");
 				  if(rs.getInt("is_open")!=0){
 				    nRow.setOpenType(rs.getInt("book_type")==0?"校讯通合作商操作":"短信");
 				    nRow.setOrderTime(rs.getString("open_date"));
@@ -156,9 +156,9 @@ public class TransCustomerQueryDao extends AbstractTransDao<TransCustomerQueryPa
 		//查询对应的资费
 //		mainSql.append(" left join ").append(" yw_Transaction ywt");
 //		mainSql.append(" on ywt.tran_code = kf.tran_code and ywt.TRANSACTION=base.transaction_id and ywt.AREA_ID=").append(area.getAreaIdByAbb(areaAbb));
-		mainSql.append(" LEFT JOIN  ( select ADC.TRAN_ID,ADC.FEE,ADC.TRAN_CODE,ADC.SERVICE_CODE,ADC.PORT,ADC.TYPE from  zs_adc_member_order ao ");
+		mainSql.append(" LEFT JOIN  ( select ao.family_id,ADC.TRAN_ID,ADC.FEE,ADC.TRAN_CODE,ADC.SERVICE_CODE,ADC.PORT,ADC.TYPE from  zs_adc_member_order ao ");
 		mainSql.append(" left join adc_member_order_service adc on ao.tran_id = ADC.TRAN_ID and ao.tran_code = ADC.TRAN_CODE ) ywt");
-		mainSql.append(" ON YWT.TRAN_ID = base.transaction_id ");
+		mainSql.append(" ON YWT.TRAN_ID = base.transaction_id and ywt.family_id = base.id ");
 		
 		//查询条件 时间
 		mainSql.append(" where 1=1 ");
@@ -202,9 +202,9 @@ public class TransCustomerQueryDao extends AbstractTransDao<TransCustomerQueryPa
 				  nRow.setName(rs.getString("transaction"));
 				  nRow.setDesc(rs.getString("remark"));
 //				  nRow.setPort(rs.getString("tran_code"));
-				  nRow.setServiceState(rs.getInt("is_open")==0?"未开通":"开通");
+				  nRow.setServiceState(rs.getInt("is_open")==0?"激活":"正常");
 				  if(rs.getInt("is_open")!=0){
-				    nRow.setOpenType(rs.getInt("book_type")==0?"网页定制":"手机上行定制");
+				    nRow.setOpenType(rs.getInt("book_type")==0?"校讯通合作商操作":"短信");
 				    nRow.setOrderTime(rs.getString("open_date"));
 //				    nRow.setPayTime(rs.getString("kf_date"));
 //				    if(rs.getInt("is_charge")!=0){

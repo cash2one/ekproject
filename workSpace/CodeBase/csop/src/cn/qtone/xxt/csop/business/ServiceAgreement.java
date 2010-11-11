@@ -1,7 +1,7 @@
 package cn.qtone.xxt.csop.business;
 
 import cn.qtone.xxt.csop.util.CsopLog;
-import cn.qtone.xxt.csop.webservices.bean.RequestParams;
+import cn.qtone.xxt.csop.webservices.bean.TransRequestParams;
 
 /**
  * 
@@ -35,7 +35,7 @@ public enum ServiceAgreement {
 	/*
 	 * 服务可用性
 	 */
-	public boolean validator(RequestParams params) {
+	public boolean validator(TransRequestParams params) {
 		if (!platform().equals(params.getPlatform()))
 			return false;
 		if (!version().equals(params.getVersion()))
