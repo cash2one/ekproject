@@ -81,7 +81,7 @@ public class TransCustomerDao extends AbstractTransDao<TransCustomerParams,Trans
 			return false;
 		BaseDao db = null;
 		try {
-			db = new BaseDao(DBConnector.getConnection(POOL_NAME));
+			db = new BaseDao(POOL_NAME,DBConnector.getConnection(POOL_NAME));
 			db.executeBatch(sqls);
 			return true;
 		} catch (Exception e) {

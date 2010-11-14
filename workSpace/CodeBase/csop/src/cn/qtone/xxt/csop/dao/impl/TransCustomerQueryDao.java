@@ -77,7 +77,7 @@ public class TransCustomerQueryDao extends AbstractTransDao<TransCustomerQueryPa
 		ResultSet rs = null;
 		List<TransCustomerRow> rows = new ArrayList<TransCustomerRow>();
 		try{
-	         db = new BaseDao(DBConnector.getConnection(POOL_NAME));	
+	         db = new BaseDao(POOL_NAME,DBConnector.getConnection(POOL_NAME));	
              rs = db.query(this.baseTransactionSql(areaAbb, phone, beginDate, endDate));
 			 
              TransCustomerRow nRow = null;
@@ -193,7 +193,7 @@ public class TransCustomerQueryDao extends AbstractTransDao<TransCustomerQueryPa
 		ResultSet rs = null;
 		List<TransCustomerRow> rows = new ArrayList<TransCustomerRow>();
 		try{
-	         db = new BaseDao(DBConnector.getConnection(POOL_NAME));	
+	         db = new BaseDao(POOL_NAME,DBConnector.getConnection(POOL_NAME));	
              rs = db.query(this.packageTransactionSql(areaAbb, phone, beginDate, endDate));
 			 
              TransCustomerRow nRow = null;

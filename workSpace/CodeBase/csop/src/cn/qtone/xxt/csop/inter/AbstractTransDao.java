@@ -36,7 +36,7 @@ public abstract class AbstractTransDao<Params extends RequestParams,Row extends 
 		BaseDao db=null;
 		ResultSet rs = null;
 		try{
-		   db = new BaseDao(DBConnector.getConnection(POOL_NAME));	
+		   db = new BaseDao(POOL_NAME,DBConnector.getConnection(POOL_NAME));	
 		   rs = db.query(familySql.toString());	
 		   serviceAreas = new ArrayList<String>();
 		   while(rs!=null&&rs.next())			

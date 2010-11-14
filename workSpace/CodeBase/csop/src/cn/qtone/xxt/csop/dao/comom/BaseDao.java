@@ -10,20 +10,44 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
-
 public class BaseDao implements DataControl {
 
 	protected Connection conn;
 	private PreparedStatement pstmt = null;
 	private Statement stmt = null;
 	private PageModel page;
+	String POOL_NAME = "";
 
-	public BaseDao(Connection conn) {
+	public BaseDao(String poolName, Connection conn) {
 		this.conn = conn;
+		this.POOL_NAME = poolName;
+	}
+
+	public BaseDao(String poolName) {
+		this.POOL_NAME = poolName;
+		try {
+			this.conn = DBConnector.getConnection(POOL_NAME);
+		} catch (Exception e) {
+		}
+	}
+
+	/**
+	 * 检查连接
+	 */
+	void checkConnection() {
+		try {
+			if (this.conn == null || this.conn.isClosed()) {
+				this.conn = null;
+				this.conn = DBConnector.getConnection(POOL_NAME);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public boolean execute(String sql) throws DaoException {
 		try {
+			checkSatePrepareExcute();
 			stmt = conn.createStatement();
 			return stmt.execute(sql);
 		} catch (SQLException e) {
@@ -87,7 +111,8 @@ public class BaseDao implements DataControl {
 	}
 
 	public boolean excPreparedDB() throws DaoException {
-		try {			
+		try {
+			checkSatePrepareExcute();
 			return pstmt.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -99,6 +124,7 @@ public class BaseDao implements DataControl {
 
 	public ResultSet queryPreparedDB() throws DaoException {
 		try {
+			checkSatePrepareExcute();
 			return pstmt.executeQuery();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -207,6 +233,9 @@ public class BaseDao implements DataControl {
 			if (pstmt != null)
 				pstmt = null;
 		} catch (Exception e) {
+
+		} finally {
+			checkConnection();
 		}
 	}
 

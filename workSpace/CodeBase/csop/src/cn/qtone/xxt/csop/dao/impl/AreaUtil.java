@@ -55,7 +55,7 @@ public class AreaUtil {
 		ResultSet rs = null;
 		try {
 			conn = DBConnector.getConnection("xxt");
-			dao = new BaseDao(conn);
+			dao = new BaseDao("xxt",conn);
 			rs = dao.query(" select id,abb,is_package from area ");
 			while (rs != null && rs.next()) {
 				areasMap.put(rs.getString("abb") + "_abb", rs.getString("id"));

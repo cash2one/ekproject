@@ -71,7 +71,7 @@ public class TransBooklogDao extends
 		BaseDao db = null;
 		ResultSet rs = null;
 		try{
-      		db = new BaseDao(DBConnector.getConnection(POOL_NAME));
+      		db = new BaseDao(POOL_NAME,DBConnector.getConnection(POOL_NAME));
       		rs = db.queryByPage(queryBaseTranscationLogsSql(phone,areaAbb,studentName,beginDate,endDate), 1, record_max_limit);
       		TransBooklogRow row = null;
       		while(rs!=null&&rs.next()){
@@ -84,7 +84,7 @@ public class TransBooklogDao extends
                     row.setSchool(rs.getString("school_name"));
                     row.setClassName(rs.getString("class_name"));
                     row.setStudentName(rs.getString("stu_name"));
-                    row.setBookType(rs.getInt("book_type")==0?"网页定制":"手机上行定制");
+                    row.setBookType(rs.getInt("book_type")==0?"校讯通客服":"短信");
                     row.setReason(rs.getString("reason"));
                     row.setParentName(rs.getString("parent_name"));
                     row.setOperateDate(rs.getString("open_date"));
@@ -160,7 +160,7 @@ public class TransBooklogDao extends
 		BaseDao db = null;
 		ResultSet rs = null;
 		try{
-      		db = new BaseDao(DBConnector.getConnection(POOL_NAME));
+      		db = new BaseDao(POOL_NAME,DBConnector.getConnection(POOL_NAME));
       		rs = db.queryByPage(queryPackageTranscationLogsSql(phone,areaAbb,studentName,beginDate,endDate), 1, record_max_limit);
       		TransBooklogRow row = null;
       		while(rs!=null&&rs.next()){
@@ -169,7 +169,7 @@ public class TransBooklogDao extends
                     row.setSchool(rs.getString("school_name"));
                     row.setClassName(rs.getString("class_name"));
                     row.setStudentName(rs.getString("stu_name"));
-                    row.setBookType(rs.getInt("book_type")==0?"网页定制":"手机上行定制");
+                    row.setBookType(rs.getInt("book_type")==0?"校讯通客服":"短信");
                     row.setReason(rs.getString("reason"));
                     row.setParentName(rs.getString("parent_name"));
                     row.setOperateDate(rs.getString("open_date"));
