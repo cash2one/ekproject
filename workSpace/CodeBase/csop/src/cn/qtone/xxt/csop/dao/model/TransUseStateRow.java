@@ -104,7 +104,7 @@ public class TransUseStateRow implements ResultRow {
 		resultXml.append("<column5>").append(this.getSendPhone()).append("</column5>");
 		resultXml.append("<column6>").append(this.getRecevicePhone()).append("</column6>"); 
 		resultXml.append("<column7>").append(this.getSendState()).append("</column7>");
-		resultXml.append("<column8>").append(this.getReceviceState()).append("</column7>");
+		resultXml.append("<column8>").append(this.getReceviceState()).append("</column8>");
 		resultXml.append("</column>");
 		return resultXml.toString();
 	}
