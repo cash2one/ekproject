@@ -156,8 +156,9 @@ public class TransCustomerQueryDao extends AbstractTransDao<TransCustomerQueryPa
 		//查询对应的资费
 //		mainSql.append(" left join ").append(" yw_Transaction ywt");
 //		mainSql.append(" on ywt.tran_code = kf.tran_code and ywt.TRANSACTION=base.transaction_id and ywt.AREA_ID=").append(area.getAreaIdByAbb(areaAbb));
+	
 		mainSql.append(" LEFT JOIN  ( select ao.family_id,ADC.TRAN_ID,ADC.FEE,ADC.TRAN_CODE,ADC.SERVICE_CODE,ADC.PORT,ADC.TYPE from  zs_adc_member_order ao ");
-		mainSql.append(" left join adc_member_order_service adc on ao.tran_id = ADC.TRAN_ID and ao.tran_code = ADC.TRAN_CODE ) ywt");
+		mainSql.append(" left join adc_member_order_service adc on ao.tran_id = ADC.TRAN_ID and ao.tran_code = ADC.TRAN_CODE and ao.type =1 and adc.type=1 ) ywt");
 		mainSql.append(" ON YWT.TRAN_ID = base.transaction_id and ywt.family_id = base.id ");
 		
 		//查询条件 时间
@@ -201,16 +202,25 @@ public class TransCustomerQueryDao extends AbstractTransDao<TransCustomerQueryPa
 		          nRow = new TransCustomerRow();		 
 				  nRow.setName(rs.getString("transaction"));
 				  nRow.setDesc(rs.getString("remark"));
-//				  nRow.setPort(rs.getString("tran_code"));
+ 				  nRow.setPort(rs.getString("port"));
 				  nRow.setServiceState(rs.getInt("is_open")==0?"激活":"正常");
 				  if(rs.getInt("is_open")!=0){
-				    nRow.setOpenType(rs.getInt("book_type")==0?"校讯通合作商操作":"短信");
-				    nRow.setOrderTime(rs.getString("open_date"));
-//				    nRow.setPayTime(rs.getString("kf_date"));
-//				    if(rs.getInt("is_charge")!=0){
-//				    
-//				    }
-				  }  
+					    nRow.setOpenType(rs.getInt("book_type")==0?"校讯通合作商操作":"短信");
+					    nRow.setOrderTime(rs.getString("open_date"));
+//					    nRow.setPayTime(rs.getString("kf_date"));
+					    if(rs.getInt("is_charge")!=0){
+					        if(rs.getInt("ywt_charge_type")==0)
+					    	  nRow.setChargeType("免费");  //计费类型	包月、点播
+					        else if(rs.getInt("ywt_charge_type")==1){
+						    	    nRow.setChargeType("包月");
+						    	    nRow.setCharge(rs.getInt("fee")+"元/月");
+					               }
+					        else if(rs.getInt("ywt_charge_type")==2)
+						    	  nRow.setChargeType("点播");
+					    }
+					  }
+				  
+				  
 				  nRow.setSaleRelationShip(rs.getString("transaction"));
 				  rows.add(nRow);
 				  nRow = null;
@@ -237,7 +247,7 @@ public class TransCustomerQueryDao extends AbstractTransDao<TransCustomerQueryPa
 	String packageTransactionSql(String areaAbb, String phone, String beginDate,
 			String endDate){
 		 StringBuffer mainSql = new StringBuffer(" select fp.name transaction,fp.REMARK,fp.IS_FREE is_charge,fp.del is_open, ");
-		 mainSql.append(" tlog.open_date,tlog.book_type ");
+		 mainSql.append(" tlog.open_date,tlog.book_type,nvl(ywt.fee,0)fee,ywt.type ywt_charge_type,ywt.tran_code,ywt.port ");
 		 mainSql.append(" from ").append(areaAbb).append("_xj_family fa ");
 		 
 		 mainSql.append(" left join ( select a.* ,pp.name,pp.remark,pp.is_free from ").append(areaAbb).append("_preferential_packager a ");
@@ -246,6 +256,13 @@ public class TransCustomerQueryDao extends AbstractTransDao<TransCustomerQueryPa
 		 
 		 mainSql.append(" left join ( ").append(this.lastPackageTransactionLog(areaAbb)).append(" )tlog ");
 		 mainSql.append(" on tlog.family_id=fa.id and tlog.phone=fa.phone and tlog.open=1 and tlog.package_id = fp.pp_id ");
+		 
+		 mainSql.append(" left join ( select a.family_id,b.TRAN_ID,b.FEE,b.TRAN_CODE,b.SERVICE_CODE,b.PORT,b.TYPE from fs_adc_member_order a,adc_member_order_service b ");
+		 mainSql.append("  where a.tran_code = b.tran_code  and b.type =2 and a.type=2 ");
+		 mainSql.append("  and exists( select * from fs_xj_family c where c.phone ='"+phone+"' and a.family_id = c.id )  ");
+		 mainSql.append(" ) ywt  on ywt.TRAN_ID = fp.pp_id  ");
+		 
+		 
 		 mainSql.append(" where fa.phone='").append(phone).append("'");	
 		 mainSql.append(" and fp.del = 1 ");//开通的套餐
 		 
