@@ -12,7 +12,7 @@ import cn.qtone.xxt.csop.util.CsopLog;
 import cn.qtone.xxt.csop.webservices.bean.TransCustomerParams;
 
 /**
- *6.4.1.1 业务受理（B005_01）
+ *6.4.1.2 业务受理（B005_01）
  * 
  * @author linhansheng
  */
