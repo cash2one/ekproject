@@ -10,6 +10,7 @@ import cn.qtone.xxt.csop.dao.comom.BaseDao;
 import cn.qtone.xxt.csop.dao.comom.DBConnector;
 import cn.qtone.xxt.csop.dao.model.TransCustomerRow;
 import cn.qtone.xxt.csop.inter.AbstractTransDao;
+import cn.qtone.xxt.csop.inter.TransQueryDao;
 import cn.qtone.xxt.csop.util.Checker;
 import cn.qtone.xxt.csop.util.CsopLog;
 import cn.qtone.xxt.csop.webservices.bean.TransCustomerQueryParams;
@@ -24,7 +25,8 @@ import cn.qtone.xxt.csop.webservices.bean.TransCustomerQueryParams;
  * 
  * @author linhansheng
  */
-public class TransCustomerQueryDao extends AbstractTransDao<TransCustomerQueryParams,TransCustomerRow> {
+public class TransCustomerQueryDao extends AbstractTransDao 
+implements TransQueryDao<TransCustomerQueryParams,TransCustomerRow> {
 
 	/**
 	 * 接口定义的返回数据格式（字段） 业务名称 业务端口 业务内容简介 资费（元） 计费类型  
@@ -105,7 +107,7 @@ public class TransCustomerQueryDao extends AbstractTransDao<TransCustomerQueryPa
 					    	  nRow.setChargeType("点播");
 				    }
 				  }
-				  nRow.setSaleRelationShip(rs.getString("transaction"));
+				  nRow.setSaleRelationShip("营销关联信息");
 				  rows.add(nRow);
 				  nRow = null;
 			 }
@@ -221,7 +223,7 @@ public class TransCustomerQueryDao extends AbstractTransDao<TransCustomerQueryPa
 					  }
 				  
 				  
-				  nRow.setSaleRelationShip(rs.getString("transaction"));
+				  nRow.setSaleRelationShip("营销关联信息");
 				  rows.add(nRow);
 				  nRow = null;
 			 }
@@ -239,7 +241,7 @@ public class TransCustomerQueryDao extends AbstractTransDao<TransCustomerQueryPa
 	}
 	
 	// 套餐查询 定制情况 Sql
-	
+	// (当前订购的)
 	/**
 	 * 业务名称 业务端口 业务内容简介 资费（元） 计费类型  
 	 * 开通方式   订购时间    业务使用状态  扣费时间   营销关联信息
@@ -254,12 +256,16 @@ public class TransCustomerQueryDao extends AbstractTransDao<TransCustomerQueryPa
 		 mainSql.append(" left join preferential_package pp on pp.id =a.pp_id ");
 		 mainSql.append(" )fp on fa.id = fp.f_id and fp.phone = fa.phone ");
 		 
+		 
+		 //套餐日志
 		 mainSql.append(" left join ( ").append(this.lastPackageTransactionLog(areaAbb)).append(" )tlog ");
 		 mainSql.append(" on tlog.family_id=fa.id and tlog.phone=fa.phone and tlog.open=1 and tlog.package_id = fp.pp_id ");
 		 
+		 
+		 //对应的资费
 		 mainSql.append(" left join ( select a.family_id,b.TRAN_ID,b.FEE,b.TRAN_CODE,b.SERVICE_CODE,b.PORT,b.TYPE from fs_adc_member_order a,adc_member_order_service b ");
 		 mainSql.append("  where a.tran_code = b.tran_code  and b.type =2 and a.type=2 ");
-		 mainSql.append("  and exists( select * from fs_xj_family c where c.phone ='"+phone+"' and a.family_id = c.id )  ");
+		 mainSql.append("  and exists( select * from "+areaAbb+"_xj_family c where c.phone ='"+phone+"' and a.family_id = c.id )  ");
 		 mainSql.append(" ) ywt  on ywt.TRAN_ID = fp.pp_id  ");
 		 
 		 
@@ -274,7 +280,54 @@ public class TransCustomerQueryDao extends AbstractTransDao<TransCustomerQueryPa
 		 CsopLog.debug("套餐业务:"+mainSql.toString());
 		 return mainSql.toString();
 	} 
-
+	
+	
+	/**
+	 * 列出该用户在该地区所有套餐状态的
+	 * @param areaAbb
+	 * @param phone
+	 * @param beginDate
+	 * @param endDate
+	 * @return
+	 */
+	String allPackageTransactionSql(String areaAbb, String phone, String beginDate,
+			String endDate){
+		 StringBuffer mainSql = new StringBuffer(" select fp.name transaction,fp.REMARK,fp.IS_FREE is_charge,fp.del is_open, ");
+		 mainSql.append(" tlog.open_date,tlog.book_type,nvl(ywt.fee,0)fee,ywt.type ywt_charge_type,ywt.tran_code,ywt.port ");
+		 mainSql.append(" from ").append(areaAbb).append("_xj_family fa ,preferential_package a ");
+		 
+		 mainSql.append(" left join( select * from (  select * from  "+areaAbb+"_preferential_packager  b");
+		 mainSql.append(" where exists( select * from "+areaAbb+"_xj_family c where c.phone ='"+phone+"' and b.f_id = c.id )) ");
+		 mainSql.append(" ) e  on e.pp_id = a.id ");
+		
+		 //查询对应的日志
+		 mainSql.append(" left join ( ").append(this.lastPackageTransactionLog(areaAbb)).append(" )tlog ");
+		 mainSql.append(" on tlog.family_id =  e.f_id and tlog.package_id = a.id ");
+		
+		 
+		 //对应的资费信息
+		 mainSql.append(" left join ( ");
+		 mainSql.append(" select a.family_id,b.TRAN_ID,b.FEE,b.TRAN_CODE,b.SERVICE_CODE,b.PORT,b.TYPE from "+areaAbb+"_adc_member_order a,adc_member_order_service b ");
+		 mainSql.append(" where a.tran_code = b.tran_code  and b.type =2 ");
+		 mainSql.append(" and exists( select * from "+areaAbb+"_xj_family c where c.phone ='"+phone+"' and a.family_id = c.id ) ");
+		 mainSql.append(" ) adc  on adc.TRAN_ID = a.id ");
+		 
+		 
+		 mainSql.append(" where 1=1");
+		 mainSql.append(" and fa.phone ='"+phone+"' ");
+		 mainSql.append(" and exists (select * from area where area.id = a.area_id and area.abb='"+areaAbb+"') ");
+		 mainSql.append("");
+		 
+		 if(!Checker.isNull(beginDate))
+			 mainSql.append(" and to_char(fp.START_DATE,'YYYY-MM-DD')>='").append(beginDate).append("'");
+		 if(!Checker.isNull(endDate))
+			 mainSql.append(" and to_char(fp.END_DATE,'YYYY-MM-DD')<='").append(endDate).append("'");
+	     
+		 CsopLog.debug("套餐业务:"+mainSql.toString());
+		 return mainSql.toString();
+	} 
+	
+	
 	/*
 	 * 最新的套餐业务的变更日志
 	 */
@@ -297,7 +350,6 @@ public class TransCustomerQueryDao extends AbstractTransDao<TransCustomerQueryPa
     }
     
     
-       
    
 	public static void main(String...srt){
 		TransCustomerQueryDao test = new TransCustomerQueryDao();

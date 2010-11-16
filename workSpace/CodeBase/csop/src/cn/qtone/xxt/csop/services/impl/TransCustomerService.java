@@ -10,7 +10,7 @@ import cn.qtone.xxt.csop.webservices.bean.ServiceResponse;
 import cn.qtone.xxt.csop.webservices.bean.TransCustomerParams;
 
 /**
- * 6.4.1.1 业务受理（B005_02）
+ * 6.4.1.1 业务受理服务（B005_02）
  * 
  * @author linhansheng
  * 
@@ -34,7 +34,7 @@ public class TransCustomerService extends
 		}
 		TransCustomerDao dao = new TransCustomerDao();
 		try {
-			dao.customer(requsetParams);
+			String result = dao.customer(requsetParams);
 			resp.setResult("");
 			resp.setRetcode(ServciceResponseParams.SUC.code());
 			resp.setRetmsg(ServciceResponseParams.SUC.description());

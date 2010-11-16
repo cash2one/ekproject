@@ -13,13 +13,19 @@ import cn.qtone.xxt.csop.webservices.bean.ServiceResponse;
 import cn.qtone.xxt.csop.webservices.bean.TransBooklogParams;
 
 /**
- * 6.4.1.1 业务定制情况查询（B005_01）
  * 
+ * 6.4.1.3 业务历史订购记录查询服务（B005_03）
  * @author linhansheng
  * 
  */
 public class TransBooklogService extends AbstractQueryService<TransBooklogParams,TransBooklogRow>{
 
+	@Override
+	protected ServiceAgreement agreement() {
+		return ServiceAgreement.TRANSCATION_BOOKLOG;
+	}
+
+	
 	@Override
 	public ServiceResponse query(TransBooklogParams requsetParams) {
 		ServiceResponse resp = new ServiceResponse();
@@ -34,7 +40,7 @@ public class TransBooklogService extends AbstractQueryService<TransBooklogParams
 			List<TransBooklogRow> results = dao.query(requsetParams);
 			if(results!=null){
 			   resp.setRetmsg(ServciceResponseParams.SUC.description()+",查询返回"+results.size()+"条记录。  ");
-			   resp.setResult(this.formateResutlData(results));
+			   resp.setResult(formateResutlData(results));
 			   results = null;
 			}
 			resp.setRetcode(ServciceResponseParams.SUC.code());
@@ -49,10 +55,5 @@ public class TransBooklogService extends AbstractQueryService<TransBooklogParams
 		}
 		return resp;
 	}
-
-	@Override
-	protected ServiceAgreement agreement() {
-		return ServiceAgreement.TRANSCATION_BOOKLOG;
-	}
-
+	
 }

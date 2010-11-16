@@ -5,7 +5,8 @@ import cn.qtone.xxt.csop.webservices.bean.TransRequestParams;
 
 /**
  * 
- * 定义请求服务的有效性 验证请求协议
+ * 定义请求服务的有效性 
+ * 验证请求协议
  * 
  * @author LINHANSHENG
  * 

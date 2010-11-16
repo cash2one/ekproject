@@ -10,6 +10,7 @@ import cn.qtone.xxt.csop.dao.comom.BaseDao;
 import cn.qtone.xxt.csop.dao.comom.DBConnector;
 import cn.qtone.xxt.csop.dao.model.TransUseStateRow;
 import cn.qtone.xxt.csop.inter.AbstractTransDao;
+import cn.qtone.xxt.csop.inter.TransQueryDao;
 import cn.qtone.xxt.csop.util.Checker;
 import cn.qtone.xxt.csop.util.CsopLog;
 import cn.qtone.xxt.csop.webservices.bean.TransUseStateParams;
@@ -20,12 +21,11 @@ import cn.qtone.xxt.csop.webservices.bean.TransUseStateParams;
  * @author Solosus
  * 
  */
-public class TransUseStateDao extends
-		AbstractTransDao<TransUseStateParams, TransUseStateRow> {
+public class TransUseStateDao extends AbstractTransDao  
+		implements TransQueryDao<TransUseStateParams, TransUseStateRow> {
 
 	static int max_record_lenght = 200;
 
-	@Override
 	public List<TransUseStateRow> query(TransUseStateParams requestParams) {
 		String phone = requestParams.getTelNo();
 		String beginDate = requestParams.getBeginDate();
@@ -88,7 +88,7 @@ public class TransUseStateDao extends
 				row.setStudentName(rs.getString("name"));
 				row.setSendState("成功");
 				row.setReceviceState("成功");
-				row.setDxType("家长下行");
+				row.setDxType("学校下行");
 				rows.add(row);
 				row = null;
             }

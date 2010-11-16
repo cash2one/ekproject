@@ -11,6 +11,13 @@ import cn.qtone.xxt.csop.util.CsopLog;
 import cn.qtone.xxt.csop.webservices.bean.ServiceResponse;
 import cn.qtone.xxt.csop.webservices.bean.TransUseStateParams;
 
+
+/**
+ * 
+ * 6.4.1.4 业务使用记录查询服务（B005_04）
+ * @author LINHANSHENG 
+ *
+ */
 public class TransUseStateServcie extends
 		AbstractQueryService<TransUseStateParams, TransUseStateRow> {
 
@@ -33,7 +40,7 @@ public class TransUseStateServcie extends
 			List<TransUseStateRow> results = dao.query(requsetParams);
 			if(results!=null){
 			   resp.setRetmsg(ServciceResponseParams.SUC.description()+",查询返回"+results.size()+"条记录。  ");
-			   resp.setResult(this.formateResutlData(results));
+			   resp.setResult(formateResutlData(results));
 			   results = null;
 			}
 			resp.setRetcode(ServciceResponseParams.SUC.code());

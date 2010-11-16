@@ -12,13 +12,17 @@ import cn.qtone.xxt.csop.webservices.bean.ServiceResponse;
 import cn.qtone.xxt.csop.webservices.bean.TransCustomerQueryParams;
 
 /**
- * 6.4.1.1 业务定制情况查询（B005_01）
- * 
+ * 6.4.1.1 业务定制情况查询服务（B005_01）
  * @author linhansheng
  * 
  */
 public class TransCustomerQueryService extends AbstractQueryService<TransCustomerQueryParams,TransCustomerRow>{
 
+	@Override
+	protected ServiceAgreement agreement() {
+		return ServiceAgreement.TRANSCATION_CUSTOMER_QUERY;
+	}
+    
 	/**
 	 * 
 	 * @param reqParams
@@ -37,7 +41,7 @@ public class TransCustomerQueryService extends AbstractQueryService<TransCustome
 			List<TransCustomerRow> results = dao.query(reqParams);
 			if(results!=null){
 			   resp.setRetmsg(ServciceResponseParams.SUC.description()+",查询返回"+results.size()+"条记录。  ");
-			   resp.setResult(this.formateResutlData(results));
+			   resp.setResult(formateResutlData(results));
 			   results = null;
 			}
 			resp.setRetcode(ServciceResponseParams.SUC.code());
@@ -52,11 +56,5 @@ public class TransCustomerQueryService extends AbstractQueryService<TransCustome
 		return resp;
 	}
 
-
-	@Override
-	protected ServiceAgreement agreement() {
-		return ServiceAgreement.TRANSCATION_CUSTOMER_QUERY;
-	}
-    
 	
 }

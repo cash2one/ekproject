@@ -8,10 +8,17 @@ import cn.qtone.xxt.csop.webservices.bean.RequestParams;
 import cn.qtone.xxt.csop.webservices.bean.ServiceResponse;
 import cn.qtone.xxt.csop.webservices.bean.TransRequestParams;
 
+/**
+ *  6.4.1.2 业务受理（B005_02）
+ * @author LINHANSHENG
+ *
+ * @param <Params>
+ * @param <Row>
+ */
 public abstract class AbstractCustomerService<Params extends TransRequestParams, Row extends ResultRow> {
 
 	/**
-	 * 业务办理接口
+	 * 业务受理接口
 	 * 
 	 * @param reqParams
 	 * @return

@@ -8,10 +8,17 @@ import cn.qtone.xxt.csop.webservices.bean.RequestParams;
 import cn.qtone.xxt.csop.webservices.bean.ServiceResponse;
 import cn.qtone.xxt.csop.webservices.bean.TransRequestParams;
 
+/**
+ * 业务查询接口
+ * @author linhansheng 
+ *
+ * @param <Params>
+ * @param <Row>
+ */
 public abstract class AbstractQueryService<Params extends TransRequestParams, Row extends ResultRow> {
 
 	/**
-	 * 查询接口
+	 * 业务查询接口
 	 * 
 	 * @param reqParams
 	 * @return
@@ -34,7 +41,7 @@ public abstract class AbstractQueryService<Params extends TransRequestParams, Ro
 		String content = resultXml.toString();
 		resultXml=null;
 		return content;
-	};
+	}
 
 	
 	/**

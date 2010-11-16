@@ -10,7 +10,7 @@ import cn.qtone.xxt.csop.dao.comom.DBConnector;
 import cn.qtone.xxt.csop.dao.impl.AreaUtil;
 import cn.qtone.xxt.csop.webservices.bean.RequestParams;
 
-public abstract class AbstractTransDao<Params extends RequestParams,Row extends ResultRow> {
+public abstract class AbstractTransDao{
 
 	protected AreaUtil area;
 	protected static String POOL_NAME = "xxt";
@@ -67,9 +67,6 @@ public abstract class AbstractTransDao<Params extends RequestParams,Row extends 
 	protected boolean isPackageArea(String areaAbb){
 		return area.isPackageArea(areaAbb);
 	}
-	
-	
-	public abstract List<Row> query(Params requsetParams);
 	
 	
 }
