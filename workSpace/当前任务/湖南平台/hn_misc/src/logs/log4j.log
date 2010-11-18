@@ -1,0 +1,164 @@
+2010-08-31 21:34:56.671 [com.qtone.datasync.util.SoapMsgHandler]-[ERROR] java.lang.NullPointerException
+2010-08-31 21:34:56.671 [cn.qtone.mm7.common.mail.QtoneMailSender]-[INFO] sending mail ....
+2010-08-31 21:34:56.703 [org.logicalcobwebs.proxool.ProxoolFacade]-[INFO] Proxool 0.9.1 (23-Aug-2008 11:10)
+2010-08-31 21:35:12.390 [org.logicalcobwebs.proxool.hnxxt]-[INFO] Shutting down 'hnxxt' pool immediately [Shutdown Hook]
+2010-08-31 21:35:12.390 [org.logicalcobwebs.proxool.PrototyperController]-[INFO] Stopping Prototyper thread
+2010-08-31 21:35:12.390 [org.logicalcobwebs.proxool.HouseKeeperController]-[INFO] Stopping HouseKeeper thread
+2010-08-31 21:47:06.781 [org.logicalcobwebs.proxool.ProxoolFacade]-[INFO] Proxool 0.9.1 (23-Aug-2008 11:10)
+2010-08-31 21:47:07.953 [com.qtone.datasync.dao.QtoneDataSource]-[ERROR] 获取数据库连接时产生异常
+java.sql.SQLException: Io 异常: The Network Adapter could not establish the connection
+	at oracle.jdbc.driver.DatabaseError.throwSqlException(DatabaseError.java:112)
+	at oracle.jdbc.driver.DatabaseError.throwSqlException(DatabaseError.java:146)
+	at oracle.jdbc.driver.DatabaseError.throwSqlException(DatabaseError.java:255)
+	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:387)
+	at oracle.jdbc.driver.PhysicalConnection.<init>(PhysicalConnection.java:414)
+	at oracle.jdbc.driver.T4CConnection.<init>(T4CConnection.java:165)
+	at oracle.jdbc.driver.T4CDriverExtension.getConnection(T4CDriverExtension.java:35)
+	at oracle.jdbc.driver.OracleDriver.connect(OracleDriver.java:801)
+	at java.sql.DriverManager.getConnection(DriverManager.java:525)
+	at java.sql.DriverManager.getConnection(DriverManager.java:140)
+	at org.logicalcobwebs.proxool.DefaultConnectionBuilder.buildConnection(DefaultConnectionBuilder.java:39)
+	at org.logicalcobwebs.proxool.Prototyper.buildConnection(Prototyper.java:159)
+	at org.logicalcobwebs.proxool.ConnectionPool.getConnection(ConnectionPool.java:211)
+	at org.logicalcobwebs.proxool.ProxoolDriver.connect(ProxoolDriver.java:89)
+	at java.sql.DriverManager.getConnection(DriverManager.java:525)
+	at java.sql.DriverManager.getConnection(DriverManager.java:193)
+	at com.qtone.datasync.dao.QtoneDataSource.getConnection(QtoneDataSource.java:47)
+	at com.qtone.datasync.xxt.server.dao.MiscRequestDao.save(MiscRequestDao.java:49)
+	at com.qtone.datasync.xxt.server.MiscRequestBusiness.handle(MiscRequestBusiness.java:23)
+	at com.qtone.datasync.xxt.server.DefaultMiscRequestHandler.SyncOrderRelationReq(DefaultMiscRequestHandler.java:34)
+	at com.qtone.datasync.util.TestXmlGenerator.main(TestXmlGenerator.java:26)
+2010-08-31 21:47:08.250 [cn.qtone.mm7.common.mail.QtoneMailSender]-[INFO] sending mail ....
+2010-08-31 21:47:15.484 [org.logicalcobwebs.proxool.hnxxt]-[INFO] Shutting down 'hnxxt' pool immediately [Shutdown Hook]
+2010-08-31 21:47:15.500 [org.logicalcobwebs.proxool.PrototyperController]-[INFO] Stopping Prototyper thread
+2010-08-31 21:47:15.500 [org.logicalcobwebs.proxool.HouseKeeperController]-[INFO] Stopping HouseKeeper thread
+2010-08-31 21:49:37.828 [org.logicalcobwebs.proxool.ProxoolFacade]-[INFO] Proxool 0.9.1 (23-Aug-2008 11:10)
+2010-08-31 21:49:39.937 [com.qtone.datasync.dao.QtoneDataSource]-[ERROR] 获取数据库连接时产生异常
+java.sql.SQLException: Io 异常: The Network Adapter could not establish the connection
+	at oracle.jdbc.driver.DatabaseError.throwSqlException(DatabaseError.java:112)
+	at oracle.jdbc.driver.DatabaseError.throwSqlException(DatabaseError.java:146)
+	at oracle.jdbc.driver.DatabaseError.throwSqlException(DatabaseError.java:255)
+	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:387)
+	at oracle.jdbc.driver.PhysicalConnection.<init>(PhysicalConnection.java:414)
+	at oracle.jdbc.driver.T4CConnection.<init>(T4CConnection.java:165)
+	at oracle.jdbc.driver.T4CDriverExtension.getConnection(T4CDriverExtension.java:35)
+	at oracle.jdbc.driver.OracleDriver.connect(OracleDriver.java:801)
+	at java.sql.DriverManager.getConnection(DriverManager.java:525)
+	at java.sql.DriverManager.getConnection(DriverManager.java:140)
+	at org.logicalcobwebs.proxool.DefaultConnectionBuilder.buildConnection(DefaultConnectionBuilder.java:39)
+	at org.logicalcobwebs.proxool.Prototyper.buildConnection(Prototyper.java:159)
+	at org.logicalcobwebs.proxool.ConnectionPool.getConnection(ConnectionPool.java:211)
+	at org.logicalcobwebs.proxool.ProxoolDriver.connect(ProxoolDriver.java:89)
+	at java.sql.DriverManager.getConnection(DriverManager.java:525)
+	at java.sql.DriverManager.getConnection(DriverManager.java:193)
+	at com.qtone.datasync.dao.QtoneDataSource.getConnection(QtoneDataSource.java:47)
+	at com.qtone.datasync.xxt.server.dao.MiscRequestDao.save(MiscRequestDao.java:49)
+	at com.qtone.datasync.xxt.server.MiscRequestBusiness.handle(MiscRequestBusiness.java:23)
+	at com.qtone.datasync.xxt.server.DefaultMiscRequestHandler.SyncOrderRelationReq(DefaultMiscRequestHandler.java:34)
+	at com.qtone.datasync.util.TestXmlGenerator.main(TestXmlGenerator.java:26)
+2010-08-31 21:49:40.234 [cn.qtone.mm7.common.mail.QtoneMailSender]-[INFO] sending mail ....
+2010-08-31 21:49:47.656 [org.logicalcobwebs.proxool.hnxxt]-[INFO] Shutting down 'hnxxt' pool immediately [Shutdown Hook]
+2010-08-31 21:49:47.656 [org.logicalcobwebs.proxool.PrototyperController]-[INFO] Stopping Prototyper thread
+2010-08-31 21:49:47.656 [org.logicalcobwebs.proxool.HouseKeeperController]-[INFO] Stopping HouseKeeper thread
+2010-08-31 21:54:23.328 [org.logicalcobwebs.proxool.ProxoolFacade]-[INFO] Proxool 0.9.1 (23-Aug-2008 11:10)
+2010-08-31 21:54:24.500 [com.qtone.datasync.dao.QtoneDataSource]-[ERROR] 获取数据库连接时产生异常
+java.sql.SQLException: Io 异常: The Network Adapter could not establish the connection
+	at oracle.jdbc.driver.DatabaseError.throwSqlException(DatabaseError.java:112)
+	at oracle.jdbc.driver.DatabaseError.throwSqlException(DatabaseError.java:146)
+	at oracle.jdbc.driver.DatabaseError.throwSqlException(DatabaseError.java:255)
+	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:387)
+	at oracle.jdbc.driver.PhysicalConnection.<init>(PhysicalConnection.java:414)
+	at oracle.jdbc.driver.T4CConnection.<init>(T4CConnection.java:165)
+	at oracle.jdbc.driver.T4CDriverExtension.getConnection(T4CDriverExtension.java:35)
+	at oracle.jdbc.driver.OracleDriver.connect(OracleDriver.java:801)
+	at java.sql.DriverManager.getConnection(DriverManager.java:525)
+	at java.sql.DriverManager.getConnection(DriverManager.java:140)
+	at org.logicalcobwebs.proxool.DefaultConnectionBuilder.buildConnection(DefaultConnectionBuilder.java:39)
+	at org.logicalcobwebs.proxool.Prototyper.buildConnection(Prototyper.java:159)
+	at org.logicalcobwebs.proxool.ConnectionPool.getConnection(ConnectionPool.java:211)
+	at org.logicalcobwebs.proxool.ProxoolDriver.connect(ProxoolDriver.java:89)
+	at java.sql.DriverManager.getConnection(DriverManager.java:525)
+	at java.sql.DriverManager.getConnection(DriverManager.java:193)
+	at com.qtone.datasync.dao.QtoneDataSource.getConnection(QtoneDataSource.java:47)
+	at com.qtone.datasync.xxt.server.dao.MiscRequestDao.save(MiscRequestDao.java:49)
+	at com.qtone.datasync.xxt.server.MiscRequestBusiness.handle(MiscRequestBusiness.java:23)
+	at com.qtone.datasync.xxt.server.DefaultMiscRequestHandler.SyncOrderRelationReq(DefaultMiscRequestHandler.java:34)
+	at com.qtone.datasync.util.TestXmlGenerator.main(TestXmlGenerator.java:26)
+2010-08-31 21:54:24.796 [cn.qtone.mm7.common.mail.QtoneMailSender]-[INFO] sending mail ....
+2010-08-31 21:54:32.640 [org.logicalcobwebs.proxool.hnxxt]-[INFO] Shutting down 'hnxxt' pool immediately [Shutdown Hook]
+2010-08-31 21:54:32.640 [org.logicalcobwebs.proxool.PrototyperController]-[INFO] Stopping Prototyper thread
+2010-08-31 21:54:32.640 [org.logicalcobwebs.proxool.HouseKeeperController]-[INFO] Stopping HouseKeeper thread
+2010-08-31 21:57:46.000 [org.logicalcobwebs.proxool.ProxoolFacade]-[INFO] Proxool 0.9.1 (23-Aug-2008 11:10)
+2010-08-31 21:57:47.187 [com.qtone.datasync.dao.QtoneDataSource]-[ERROR] 获取数据库连接时产生异常
+java.sql.SQLException: Io 异常: The Network Adapter could not establish the connection
+	at oracle.jdbc.driver.DatabaseError.throwSqlException(DatabaseError.java:112)
+	at oracle.jdbc.driver.DatabaseError.throwSqlException(DatabaseError.java:146)
+	at oracle.jdbc.driver.DatabaseError.throwSqlException(DatabaseError.java:255)
+	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:387)
+	at oracle.jdbc.driver.PhysicalConnection.<init>(PhysicalConnection.java:414)
+	at oracle.jdbc.driver.T4CConnection.<init>(T4CConnection.java:165)
+	at oracle.jdbc.driver.T4CDriverExtension.getConnection(T4CDriverExtension.java:35)
+	at oracle.jdbc.driver.OracleDriver.connect(OracleDriver.java:801)
+	at java.sql.DriverManager.getConnection(DriverManager.java:525)
+	at java.sql.DriverManager.getConnection(DriverManager.java:140)
+	at org.logicalcobwebs.proxool.DefaultConnectionBuilder.buildConnection(DefaultConnectionBuilder.java:39)
+	at org.logicalcobwebs.proxool.Prototyper.buildConnection(Prototyper.java:159)
+	at org.logicalcobwebs.proxool.ConnectionPool.getConnection(ConnectionPool.java:211)
+	at org.logicalcobwebs.proxool.ProxoolDriver.connect(ProxoolDriver.java:89)
+	at java.sql.DriverManager.getConnection(DriverManager.java:525)
+	at java.sql.DriverManager.getConnection(DriverManager.java:193)
+	at com.qtone.datasync.dao.QtoneDataSource.getConnection(QtoneDataSource.java:47)
+	at com.qtone.datasync.xxt.server.dao.MiscRequestDao.save(MiscRequestDao.java:49)
+	at com.qtone.datasync.xxt.server.MiscRequestBusiness.handle(MiscRequestBusiness.java:23)
+	at com.qtone.datasync.xxt.server.DefaultMiscRequestHandler.SyncOrderRelationReq(DefaultMiscRequestHandler.java:34)
+	at com.qtone.datasync.util.TestXmlGenerator.main(TestXmlGenerator.java:26)
+2010-08-31 21:57:47.484 [cn.qtone.mm7.common.mail.QtoneMailSender]-[INFO] sending mail ....
+2010-08-31 21:57:54.640 [org.logicalcobwebs.proxool.hnxxt]-[INFO] Shutting down 'hnxxt' pool immediately [Shutdown Hook]
+2010-08-31 21:57:54.640 [org.logicalcobwebs.proxool.PrototyperController]-[INFO] Stopping Prototyper thread
+2010-08-31 21:57:54.640 [org.logicalcobwebs.proxool.HouseKeeperController]-[INFO] Stopping HouseKeeper thread
+2010-08-31 22:02:54.296 [org.logicalcobwebs.proxool.ProxoolFacade]-[INFO] Proxool 0.9.1 (23-Aug-2008 11:10)
+2010-08-31 22:02:55.484 [com.qtone.datasync.dao.QtoneDataSource]-[ERROR] 获取数据库连接时产生异常
+java.sql.SQLException: Io 异常: The Network Adapter could not establish the connection
+	at oracle.jdbc.driver.DatabaseError.throwSqlException(DatabaseError.java:112)
+	at oracle.jdbc.driver.DatabaseError.throwSqlException(DatabaseError.java:146)
+	at oracle.jdbc.driver.DatabaseError.throwSqlException(DatabaseError.java:255)
+	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:387)
+	at oracle.jdbc.driver.PhysicalConnection.<init>(PhysicalConnection.java:414)
+	at oracle.jdbc.driver.T4CConnection.<init>(T4CConnection.java:165)
+	at oracle.jdbc.driver.T4CDriverExtension.getConnection(T4CDriverExtension.java:35)
+	at oracle.jdbc.driver.OracleDriver.connect(OracleDriver.java:801)
+	at java.sql.DriverManager.getConnection(DriverManager.java:525)
+	at java.sql.DriverManager.getConnection(DriverManager.java:140)
+	at org.logicalcobwebs.proxool.DefaultConnectionBuilder.buildConnection(DefaultConnectionBuilder.java:39)
+	at org.logicalcobwebs.proxool.Prototyper.buildConnection(Prototyper.java:159)
+	at org.logicalcobwebs.proxool.ConnectionPool.getConnection(ConnectionPool.java:211)
+	at org.logicalcobwebs.proxool.ProxoolDriver.connect(ProxoolDriver.java:89)
+	at java.sql.DriverManager.getConnection(DriverManager.java:525)
+	at java.sql.DriverManager.getConnection(DriverManager.java:193)
+	at com.qtone.datasync.dao.QtoneDataSource.getConnection(QtoneDataSource.java:48)
+	at com.qtone.datasync.xxt.server.dao.MiscRequestDao.save(MiscRequestDao.java:49)
+	at com.qtone.datasync.xxt.server.MiscRequestBusiness.handle(MiscRequestBusiness.java:23)
+	at com.qtone.datasync.xxt.server.DefaultMiscRequestHandler.SyncOrderRelationReq(DefaultMiscRequestHandler.java:34)
+	at com.qtone.datasync.util.TestXmlGenerator.main(TestXmlGenerator.java:26)
+2010-08-31 22:02:55.796 [cn.qtone.mm7.common.mail.QtoneMailSender]-[INFO] sending mail ....
+2010-08-31 22:03:03.140 [org.logicalcobwebs.proxool.hnxxt]-[INFO] Shutting down 'hnxxt' pool immediately [Shutdown Hook]
+2010-08-31 22:03:03.140 [org.logicalcobwebs.proxool.PrototyperController]-[INFO] Stopping Prototyper thread
+2010-08-31 22:03:03.140 [org.logicalcobwebs.proxool.HouseKeeperController]-[INFO] Stopping HouseKeeper thread
+2010-08-31 22:05:54.640 [org.logicalcobwebs.proxool.ProxoolFacade]-[INFO] Proxool 0.9.1 (23-Aug-2008 11:10)
+2010-08-31 22:05:54.718 [com.qtone.datasync.dao.QtoneDataSource]-[ERROR] 获取数据库连接时产生异常
+java.sql.SQLException: No suitable driver
+	at java.sql.DriverManager.getConnection(DriverManager.java:545)
+	at java.sql.DriverManager.getConnection(DriverManager.java:193)
+	at com.qtone.datasync.dao.QtoneDataSource.getConnection(QtoneDataSource.java:48)
+	at com.qtone.datasync.xxt.server.dao.MiscRequestDao.save(MiscRequestDao.java:49)
+	at com.qtone.datasync.xxt.server.MiscRequestBusiness.handle(MiscRequestBusiness.java:23)
+	at com.qtone.datasync.xxt.server.DefaultMiscRequestHandler.SyncOrderRelationReq(DefaultMiscRequestHandler.java:34)
+	at com.qtone.datasync.util.TestXmlGenerator.main(TestXmlGenerator.java:26)
+2010-08-31 22:05:55.015 [cn.qtone.mm7.common.mail.QtoneMailSender]-[INFO] sending mail ....
+2010-08-31 22:06:01.953 [org.logicalcobwebs.proxool.hnxxt]-[INFO] Shutting down 'hnxxt' pool immediately [Shutdown Hook]
+2010-08-31 22:06:01.953 [org.logicalcobwebs.proxool.PrototyperController]-[INFO] Stopping Prototyper thread
+2010-08-31 22:06:01.953 [org.logicalcobwebs.proxool.HouseKeeperController]-[INFO] Stopping HouseKeeper thread
+2010-08-31 22:09:05.343 [org.logicalcobwebs.proxool.ProxoolFacade]-[INFO] Proxool 0.9.1 (23-Aug-2008 11:10)
+2010-08-31 22:09:08.921 [org.logicalcobwebs.proxool.hnxxt]-[INFO] Shutting down 'hnxxt' pool immediately [Shutdown Hook]
+2010-08-31 22:09:09.093 [org.logicalcobwebs.proxool.PrototyperController]-[INFO] Stopping Prototyper thread
+2010-08-31 22:09:09.093 [org.logicalcobwebs.proxool.HouseKeeperController]-[INFO] Stopping HouseKeeper thread

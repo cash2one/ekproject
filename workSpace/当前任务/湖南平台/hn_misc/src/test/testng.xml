@@ -1,0 +1,13 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="HnDataSync" verbose="1" parallel="methods" thread-count="5">
+	<test name="misc">
+		<packages>
+			<package name="com.qtone.datasync.misc"></package>
+		</packages>
+		
+		<classes>
+			<class name="com.qtone.datasync.misc.MiscRequestTest" />
+		</classes>
+	</test>
+</suite>

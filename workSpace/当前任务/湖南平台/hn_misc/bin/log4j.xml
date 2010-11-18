@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j='http://jakarta.apache.org/log4j/'>
+	<!-- 记录一般日志 -->
+	<appender name="STDOUT" class="org.apache.log4j.ConsoleAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{dd HH:mm:ss,SSS} %-5p %L] [%t] %c{2} - %m%n" />
+		</layout>
+	</appender>
+
+	<appender name="rollingFileAppender" class="org.apache.log4j.RollingFileAppender">
+		<param name="File" value="logs/log4j.log" />
+		<param name="MaxFileSize" value="100MB" />
+		<param name="MaxBackupIndex" value="5" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%-d{yyyy-MM-dd HH:mm:ss.SSS} [%c]-[%p] %m%n" />
+		</layout>
+	</appender>
+
+	<!-- 这个日志记录器是用来记录同步数据的报文的 -->
+	<appender name="xxt_server" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="logs/miscToXxt.log" />
+		<param name="DatePattern" value="yyyyMMdd" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}]%n%m%n" />
+		</layout>
+	</appender>
+
+	<appender name="misc_client" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="logs/xxtToMisc.log" />
+		<param name="DatePattern" value="yyyyMMdd" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] %m%n" />
+		</layout>
+	</appender>
+
+	<logger name="msg.xxt_server"
+		additivity="false">
+		<level value="fatal" />
+		<appender-ref ref="xxt_server" />
+	</logger>
+
+	<logger name="msg.misc_client"
+		additivity="false">
+		<level value="fatal" />
+		<appender-ref ref="misc_client" />
+	</logger>
+	
+	<!--
+	<category name="com.qtone.datasync.util.MsgLog">
+      <priority value="FATAL"/>
+      <appender-ref ref="xxtToMisc" />
+   </category>
+	-->
+
+	<root>
+		<level value="info" />
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="rollingFileAppender" />
+	</root>
+</log4j:configuration>   

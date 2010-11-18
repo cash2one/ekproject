@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="HnxxtSoap" basedir="." default="compile">
+	<property name="src" value="./src" />
+	<property name="dest" value="./WebContent/WEB-INF/classes" />
+	<property name="lib" value="./WebContent/WEB-INF/lib" />
+
+	<!--Set up the path for compile-->
+	<path id="compile.cp">
+		<fileset dir="${lib}">
+			<include name="**/*.jar" />
+		</fileset>
+
+		<!--Donot forget this,Groovy files will reference to the JavaBean under src/java-->
+		<pathelement path="${dest}" />
+	</path>
+
+	<!--Define Groovyc task-->
+	<taskdef name="groovyc" classname="org.codehaus.groovy.ant.Groovyc" classpathref="compile.cp" />
+
+	<!--Init the project compilation with setup the directories-->
+	<target name="init">
+		<mkdir dir="${dest}" />
+	</target>
+
+	<!--compile the project logic code-->
+	<target name="compile" depends="init">
+		<echo>Compiling All Source file....</echo>	
+		<javac destdir="${dest}" fork="yes" source="1.5" target="1.5" debug="on" encoding="GBK">
+			<src path="${src}/java"/>
+			<src path="${src}/test"/>		
+			
+			<classpath refid="compile.cp"/>			
+		</javac>
+		
+		<!--Copy conf files to the classes-->
+		<copy todir="${dest}">
+			<fileset dir="${src}/java">
+				<exclude name="**/*.java" />
+			</fileset>
+			<fileset dir="${src}/test">
+				<exclude name="**/*.java" />
+			</fileset>
+			<fileset dir="${src}/groovy">
+				<exclude name="**/*.groovy" />
+			</fileset>
+		</copy>
+
+		<echo>Finished all compile task!</echo>
+	</target>
+
+	<!--运行同步程序-->
+	<target name="run-app" depends="compile">
+		<java classname="com.qtone.datasync.MainClass" fork="true"
+			failonerror="true">
+			<arg value="-server"/>
+			<classpath refid="compile.cp"/>
+		</java>
+	</target>
+	
+	<!-- 发起一次反向同步 -->
+	<target name="do-sync" depends="compile">
+		<java classname="com.qtone.datasync.local.service.RevertSyncServiceCaller" fork="true"
+			failonerror="true">
+			<arg value=" cs"/>
+			<classpath refid="compile.cp"/>
+		</java>
+	</target>
+
+	<!-- Clean the project -->
+	<target name="clean">
+		<delete dir="${dest}" />
+	</target>
+</project>

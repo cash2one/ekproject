@@ -1,0 +1,5 @@
+<UnSubscribeServiceResp xmlns="http://10.1.2.122/misc/dsmp.xsd">
+	<Version>1.5.0</Version>
+	<MsgType>UnSubscribeServiceResp</MsgType>
+	<hRet>0</hRet>
+</UnSubscribeServiceResp>

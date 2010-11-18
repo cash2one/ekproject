@@ -1,0 +1,73 @@
+[2010-08-31 21:34:56.125]
+<?xml version="1.0" encoding="UTF-8" ?>
+ <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" xmlns="http://www.monternet.com/dsmp/schemas/">
+<SOAP-ENV:Header>
+<TransactionID xmlns="http://www.monternet.com/dsmp/schemas/" xsi:type="xsd:string">00240301801050</TransactionID>
+</SOAP-ENV:Header>
+<SOAP-ENV:Body>
+<UnSubscribeServiceReq xmlns="http://www.monternet.com/dsmp/schemas/">
+<Version>1.5.0</Version>
+<MsgType>UnSubscribeServiceReq</MsgType>
+<Send_Address>
+<DeviceType>400</DeviceType>
+<DeviceID>918522</DeviceID>
+</Send_Address>
+<Dest_Address>
+<DeviceType>0</DeviceType>
+<DeviceID>0023</DeviceID>
+</Dest_Address>
+<FeeUser_ID>
+<UserIDType>1</UserIDType>
+<MSISDN>15973195209</MSISDN>
+<PseudoCode />
+</FeeUser_ID>
+<DestUser_ID>
+<UserIDType>1</UserIDType>
+<MSISDN>15973195209</MSISDN>
+<PseudoCode />
+</DestUser_ID>
+<Service_ID>
+<ServiceIDType>1</ServiceIDType>
+<SPID>918522</SPID>
+<SPServiceID>133351</SPServiceID>
+<AccessNo />
+<FeatureStr />
+</Service_ID>
+<FeatureStr />
+</UnSubscribeServiceReq>
+</SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
+[2010-08-31 21:34:56.953]
+<?xml version="1.0" encoding="GBK"?>
+
+<SyncOrderRelationResp>
+  <MsgType>SyncOrderRelationResp</MsgType>
+  <TransactionID>00240301801050</TransactionID>
+  <Version>1.5.0</Version>
+  <hRet>9014</hRet>
+</SyncOrderRelationResp>
+
+[2010-08-31 21:47:06.656]
+<?xml version="1.0" encoding="utf-8"?><SOAP-ENV:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"    xmlns:xsd="http://www.w3.org/2001/XMLSchema"    xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"    xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"><SOAP-ENV:Header>    <TransactionID xmlns="http://www.monternet.com/dsmp/schemas/">00230045687781</TransactionID></SOAP-ENV:Header><SOAP-ENV:Body><SyncOrderRelationReq xmlns="http://www.monternet.com/dsmp/schemas/"><Version>1.5.0</Version><MsgType>SyncOrderRelationReq</MsgType><Send_Address><DeviceType>0</DeviceType><DeviceID>0023</DeviceID></Send_Address><Dest_Address><DeviceType>400</DeviceType><DeviceID>0</DeviceID></Dest_Address><FeeUser_ID><UserIDType>1</UserIDType><MSISDN>15973195209</MSISDN><PseudoCode></PseudoCode></FeeUser_ID><DestUser_ID><UserIDType>1</UserIDType><MSISDN>15973195209</MSISDN><PseudoCode></PseudoCode></DestUser_ID><LinkID>SP</LinkID><ActionID>2</ActionID><ActionReasonID>1</ActionReasonID><SPID>918522</SPID><SPServiceID>133351</SPServiceID><AccessMode>3</AccessMode><FeatureStr></FeatureStr></SyncOrderRelationReq></SOAP-ENV:Body></SOAP-ENV:Envelope>
+[2010-08-31 21:49:37.703]
+<?xml version="1.0" encoding="utf-8"?><SOAP-ENV:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"    xmlns:xsd="http://www.w3.org/2001/XMLSchema"    xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"    xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"><SOAP-ENV:Header>    <TransactionID xmlns="http://www.monternet.com/dsmp/schemas/">00230045687781</TransactionID></SOAP-ENV:Header><SOAP-ENV:Body><SyncOrderRelationReq xmlns="http://www.monternet.com/dsmp/schemas/"><Version>1.5.0</Version><MsgType>SyncOrderRelationReq</MsgType><Send_Address><DeviceType>0</DeviceType><DeviceID>0023</DeviceID></Send_Address><Dest_Address><DeviceType>400</DeviceType><DeviceID>0</DeviceID></Dest_Address><FeeUser_ID><UserIDType>1</UserIDType><MSISDN>15973195209</MSISDN><PseudoCode></PseudoCode></FeeUser_ID><DestUser_ID><UserIDType>1</UserIDType><MSISDN>15973195209</MSISDN><PseudoCode></PseudoCode></DestUser_ID><LinkID>SP</LinkID><ActionID>2</ActionID><ActionReasonID>1</ActionReasonID><SPID>918522</SPID><SPServiceID>133351</SPServiceID><AccessMode>3</AccessMode><FeatureStr></FeatureStr></SyncOrderRelationReq></SOAP-ENV:Body></SOAP-ENV:Envelope>
+[2010-08-31 21:54:23.203]
+<?xml version="1.0" encoding="utf-8"?><SOAP-ENV:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"    xmlns:xsd="http://www.w3.org/2001/XMLSchema"    xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"    xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"><SOAP-ENV:Header>    <TransactionID xmlns="http://www.monternet.com/dsmp/schemas/">00230045687781</TransactionID></SOAP-ENV:Header><SOAP-ENV:Body><SyncOrderRelationReq xmlns="http://www.monternet.com/dsmp/schemas/"><Version>1.5.0</Version><MsgType>SyncOrderRelationReq</MsgType><Send_Address><DeviceType>0</DeviceType><DeviceID>0023</DeviceID></Send_Address><Dest_Address><DeviceType>400</DeviceType><DeviceID>0</DeviceID></Dest_Address><FeeUser_ID><UserIDType>1</UserIDType><MSISDN>15973195209</MSISDN><PseudoCode></PseudoCode></FeeUser_ID><DestUser_ID><UserIDType>1</UserIDType><MSISDN>15973195209</MSISDN><PseudoCode></PseudoCode></DestUser_ID><LinkID>SP</LinkID><ActionID>2</ActionID><ActionReasonID>1</ActionReasonID><SPID>918522</SPID><SPServiceID>133351</SPServiceID><AccessMode>3</AccessMode><FeatureStr></FeatureStr></SyncOrderRelationReq></SOAP-ENV:Body></SOAP-ENV:Envelope>
+[2010-08-31 21:57:45.875]
+<?xml version="1.0" encoding="utf-8"?><SOAP-ENV:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"    xmlns:xsd="http://www.w3.org/2001/XMLSchema"    xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"    xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"><SOAP-ENV:Header>    <TransactionID xmlns="http://www.monternet.com/dsmp/schemas/">00230045687781</TransactionID></SOAP-ENV:Header><SOAP-ENV:Body><SyncOrderRelationReq xmlns="http://www.monternet.com/dsmp/schemas/"><Version>1.5.0</Version><MsgType>SyncOrderRelationReq</MsgType><Send_Address><DeviceType>0</DeviceType><DeviceID>0023</DeviceID></Send_Address><Dest_Address><DeviceType>400</DeviceType><DeviceID>0</DeviceID></Dest_Address><FeeUser_ID><UserIDType>1</UserIDType><MSISDN>15973195209</MSISDN><PseudoCode></PseudoCode></FeeUser_ID><DestUser_ID><UserIDType>1</UserIDType><MSISDN>15973195209</MSISDN><PseudoCode></PseudoCode></DestUser_ID><LinkID>SP</LinkID><ActionID>2</ActionID><ActionReasonID>1</ActionReasonID><SPID>918522</SPID><SPServiceID>133351</SPServiceID><AccessMode>3</AccessMode><FeatureStr></FeatureStr></SyncOrderRelationReq></SOAP-ENV:Body></SOAP-ENV:Envelope>
+[2010-08-31 22:02:54.156]
+<?xml version="1.0" encoding="utf-8"?><SOAP-ENV:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"    xmlns:xsd="http://www.w3.org/2001/XMLSchema"    xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"    xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"><SOAP-ENV:Header>    <TransactionID xmlns="http://www.monternet.com/dsmp/schemas/">00230045687781</TransactionID></SOAP-ENV:Header><SOAP-ENV:Body><SyncOrderRelationReq xmlns="http://www.monternet.com/dsmp/schemas/"><Version>1.5.0</Version><MsgType>SyncOrderRelationReq</MsgType><Send_Address><DeviceType>0</DeviceType><DeviceID>0023</DeviceID></Send_Address><Dest_Address><DeviceType>400</DeviceType><DeviceID>0</DeviceID></Dest_Address><FeeUser_ID><UserIDType>1</UserIDType><MSISDN>15973195209</MSISDN><PseudoCode></PseudoCode></FeeUser_ID><DestUser_ID><UserIDType>1</UserIDType><MSISDN>15973195209</MSISDN><PseudoCode></PseudoCode></DestUser_ID><LinkID>SP</LinkID><ActionID>2</ActionID><ActionReasonID>1</ActionReasonID><SPID>918522</SPID><SPServiceID>133351</SPServiceID><AccessMode>3</AccessMode><FeatureStr></FeatureStr></SyncOrderRelationReq></SOAP-ENV:Body></SOAP-ENV:Envelope>
+[2010-08-31 22:05:54.515]
+<?xml version="1.0" encoding="utf-8"?><SOAP-ENV:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"    xmlns:xsd="http://www.w3.org/2001/XMLSchema"    xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"    xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"><SOAP-ENV:Header>    <TransactionID xmlns="http://www.monternet.com/dsmp/schemas/">00230045687781</TransactionID></SOAP-ENV:Header><SOAP-ENV:Body><SyncOrderRelationReq xmlns="http://www.monternet.com/dsmp/schemas/"><Version>1.5.0</Version><MsgType>SyncOrderRelationReq</MsgType><Send_Address><DeviceType>0</DeviceType><DeviceID>0023</DeviceID></Send_Address><Dest_Address><DeviceType>400</DeviceType><DeviceID>0</DeviceID></Dest_Address><FeeUser_ID><UserIDType>1</UserIDType><MSISDN>15973195209</MSISDN><PseudoCode></PseudoCode></FeeUser_ID><DestUser_ID><UserIDType>1</UserIDType><MSISDN>15973195209</MSISDN><PseudoCode></PseudoCode></DestUser_ID><LinkID>SP</LinkID><ActionID>2</ActionID><ActionReasonID>1</ActionReasonID><SPID>918522</SPID><SPServiceID>133351</SPServiceID><AccessMode>3</AccessMode><FeatureStr></FeatureStr></SyncOrderRelationReq></SOAP-ENV:Body></SOAP-ENV:Envelope>
+[2010-08-31 22:09:05.203]
+<?xml version="1.0" encoding="utf-8"?><SOAP-ENV:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"    xmlns:xsd="http://www.w3.org/2001/XMLSchema"    xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"    xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"><SOAP-ENV:Header>    <TransactionID xmlns="http://www.monternet.com/dsmp/schemas/">00230045687781</TransactionID></SOAP-ENV:Header><SOAP-ENV:Body><SyncOrderRelationReq xmlns="http://www.monternet.com/dsmp/schemas/"><Version>1.5.0</Version><MsgType>SyncOrderRelationReq</MsgType><Send_Address><DeviceType>0</DeviceType><DeviceID>0023</DeviceID></Send_Address><Dest_Address><DeviceType>400</DeviceType><DeviceID>0</DeviceID></Dest_Address><FeeUser_ID><UserIDType>1</UserIDType><MSISDN>15973195209</MSISDN><PseudoCode></PseudoCode></FeeUser_ID><DestUser_ID><UserIDType>1</UserIDType><MSISDN>15973195209</MSISDN><PseudoCode></PseudoCode></DestUser_ID><LinkID>SP</LinkID><ActionID>2</ActionID><ActionReasonID>1</ActionReasonID><SPID>918522</SPID><SPServiceID>133351</SPServiceID><AccessMode>3</AccessMode><FeatureStr></FeatureStr></SyncOrderRelationReq></SOAP-ENV:Body></SOAP-ENV:Envelope>
+[2010-08-31 22:09:08.921]
+<?xml version="1.0" encoding="GBK"?>
+
+<SyncOrderRelationResp>
+  <MsgType>SyncOrderRelationResp</MsgType>
+  <TransactionID>00230045687781</TransactionID>
+  <Version>1.5.0</Version>
+  <hRet>4004</hRet>
+</SyncOrderRelationResp>
+

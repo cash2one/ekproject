@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+	xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+	xmlns="http://www.monternet.com/dsmp/schemas/">
+	<SOAP-ENV:Header>
+		<TransactionID xmlns="http://www.monternet.com/dsmp/schemas/"
+			xsi:type="xsd:string">1257240316716422000221</TransactionID>
+	</SOAP-ENV:Header>
+	<SOAP-ENV:Body>
+		<UnSubscribeServiceReq xmlns="http://www.monternet.com/dsmp/schemas/">
+			<Version>1.5.0</Version>
+			<MsgType>UnSubscribeServiceReq</MsgType>
+			<Send_Address>
+				<DeviceType>400</DeviceType>
+				<DeviceID>918522</DeviceID>
+			</Send_Address>
+			<Dest_Address>
+				<DeviceType>0</DeviceType>
+				<DeviceID>0023</DeviceID>
+			</Dest_Address>
+			<FeeUser_ID>
+				<UserIDType>1</UserIDType>
+				<MSISDN>15274939124</MSISDN>
+				<PseudoCode />
+			</FeeUser_ID>
+			<DestUser_ID>
+				<UserIDType>1</UserIDType>
+				<MSISDN>15274939124</MSISDN>
+				<PseudoCode />
+			</DestUser_ID>
+			<Service_ID>
+				<ServiceIDType>1</ServiceIDType>
+				<SPID>918522</SPID>
+				<SPServiceID>-WFA</SPServiceID>
+				<AccessNo />
+				<FeatureStr />
+			</Service_ID>
+			<FeatureStr />
+		</UnSubscribeServiceReq>
+	</SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

@@ -1,0 +1,7 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+	<soapenv:Body>
+		<cal:schedule xmlns:cal="http://www.example.com/calendar">
+			<cal:newitem>contentHere</cal:newitem>
+		</cal:schedule>
+	</soapenv:Body>
+</soapenv:Envelope>

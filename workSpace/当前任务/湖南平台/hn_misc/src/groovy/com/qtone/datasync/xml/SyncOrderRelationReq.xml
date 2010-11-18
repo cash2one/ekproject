@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SyncOrderRelationReq xmlns="http://www.monternet.com/dsmp/schemas/">
+	<MsgType>${msgType}</MsgType>
+	<TransactionID>${transactionID}</TransactionID>
+	<Version>1.5.0</Version>
+
+	<Send_Address>
+		<DeviceType>400</DeviceType>
+		<DeviceID>913002</DeviceID>
+	</Send_Address>
+	<Dest_Address>
+		<DeviceType>0</DeviceType>
+		<DeviceID>0024</DeviceID>
+	</Dest_Address>
+
+	<FeeUser_ID>
+		<UserIDType>1</UserIDType>
+		<MSISDN>${phoneFee}</MSISDN>
+		<PseudoCode />
+	</FeeUser_ID>
+	<DestUser_ID>
+		<UserIDType>1</UserIDType>
+		<MSISDN>${phoneUse}</MSISDN>
+		<PseudoCode />
+	</DestUser_ID>
+
+	<ActionID>${action}</ActionID>
+	<ActionReasonID>${actionReason}</ActionReasonID>
+	<SPID>${spId}</SPID>
+	<SPServiceID>${spServiceId}</SPServiceID>
+	<AccessMode></AccessMode>
+	<FeatureStr />
+</SyncOrderRelationReq>

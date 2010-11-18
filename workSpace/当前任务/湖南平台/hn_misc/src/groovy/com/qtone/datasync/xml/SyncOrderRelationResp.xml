@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SyncOrderRelationResp>
+	<MsgType>SyncOrderRelationResp</MsgType>
+	<TransactionID>${bean.transactionID}</TransactionID>
+	<Version>1.5.0</Version>
+	<hRet>${bean.hRet}</hRet>
+</SyncOrderRelationResp>

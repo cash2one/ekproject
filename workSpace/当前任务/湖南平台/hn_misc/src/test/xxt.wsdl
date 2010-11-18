@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="DefaultMiscRequestHandlerService" targetNamespace="http://server.xxt.datasync.qtone.com/" xmlns:ns1="http://schemas.xmlsoap.org/wsdl/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://server.xxt.datasync.qtone.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://server.xxt.datasync.qtone.com/" xmlns:tns="http://server.xxt.datasync.qtone.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:element name="SyncOrderRelationReq" type="tns:SyncOrderRelationReq"/>
+<xs:element name="SyncOrderRelationReqResponse" type="tns:SyncOrderRelationReqResponse"/>
+<xs:complexType name="SyncOrderRelationReq">
+<xs:sequence>
+<xs:element minOccurs="0" name="arg0" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="SyncOrderRelationReqResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="SyncOrderRelationReq">
+    <wsdl:part element="tns:SyncOrderRelationReq" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="SyncOrderRelationReqResponse">
+    <wsdl:part element="tns:SyncOrderRelationReqResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="IMiscRequestHandler">
+    <wsdl:operation name="SyncOrderRelationReq">
+      <wsdl:input message="tns:SyncOrderRelationReq" name="SyncOrderRelationReq">
+    </wsdl:input>
+      <wsdl:output message="tns:SyncOrderRelationReqResponse" name="SyncOrderRelationReqResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="DefaultMiscRequestHandlerServiceSoapBinding" type="tns:IMiscRequestHandler">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="SyncOrderRelationReq">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="SyncOrderRelationReq">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="SyncOrderRelationReqResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="DefaultMiscRequestHandlerService">
+    <wsdl:port binding="tns:DefaultMiscRequestHandlerServiceSoapBinding" name="DefaultMiscRequestHandlerPort">
+      <soap:address location="http://211.142.221.225:8080/services/xxt"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
