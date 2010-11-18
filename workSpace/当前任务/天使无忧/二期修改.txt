@@ -1,0 +1,234 @@
+1.family表增加tswyflag（0正常状态 1等待变更业务 2等待取消业务 3已变更业务）、tswydate（变更业务时间）字段
+-----------------------------
+select 'alter table '||abb||'_xj_family add tswyflag number(1) default 0;' from area;
+select 'alter table '||abb||'_xj_family add tswydate date;' from area;
+select 'COMMENT ON COLUMN '||abb||'_xj_family.tswyflag IS ''天使无忧业务状态 0正常状态 1等待变更业务 2等待取消业务 3已变更业务'';' from area;
+select 'COMMENT ON COLUMN '||abb||'_xj_family.tswydate IS ''变更业务时间'';' from area;
+
+2.新增数据同步失败记录表
+CREATE TABLE businesssynlog(
+        id NUMBER(11) NOT NULL,
+        fakeHeader varchar2(100),
+        account varchar2(20),
+        city varchar2(50),
+        type number(1),
+        op number(1),
+        oldbs number(11),
+        newbs number(11),
+        dt date,
+        returnmsg varchar2(100),
+        primary KEY(id)
+      );
+CREATE SEQUENCE businesssynlog_seq
+          INCREMENT BY 1
+          START WITH 1;
+CREATE OR REPLACE TRIGGER businesssynlog_tri BEFORE
+          INSERT ON businesssynlog
+          FOR EACH ROW
+          BEGIN
+           SELECT businesssynlog_seq.NEXTVAL INTO :NEW.ID FROM DUAL;
+         END;
+/
+COMMENT ON TABLE businesssynlog IS '天使无忧业务数据同步失败记录表';
+COMMENT ON COLUMN businesssynlog.id IS '唯一ID';
+COMMENT ON COLUMN businesssynlog.fakeHeader IS '防伪头标记';
+COMMENT ON COLUMN businesssynlog.account IS '手机号码';
+COMMENT ON COLUMN businesssynlog.city IS '地市名称';
+COMMENT ON COLUMN businesssynlog.type IS '操作方式 1：校讯通平台发起 2：短信上行发起';
+COMMENT ON COLUMN businesssynlog.op IS '操作类型 0取消业务 2变更业务';
+COMMENT ON COLUMN businesssynlog.oldbs IS '原业务 0基础版本 1短信护航 2视频增强 3全功能';
+COMMENT ON COLUMN businesssynlog.newbs IS '变更业务 0基础版本 1短信护航 2视频增强 3全功能；取消业务时无用，值为-1';
+COMMENT ON COLUMN businesssynlog.dt IS '操作时间 格式yyyy-MM-dd HH:mm:ss';
+COMMENT ON COLUMN businesssynlog.returnmsg IS '返回结果';
+
+3.营销方案变更日志表（**_package_log） 0正常取消业务 1正常开通业务 2正常变更业务（不延迟生效，即时生效）
+open=8 变更天使无忧业务
+open=9 取消天使无忧业务
+package_id：
+           变更时为最新的营销方案ID
+           取消时为旧的营销方案ID
+
+4.每次扣费后运行相关脚本：
+select * from zs_xj_family where tswyflag=1;
+select * from zs_xj_family where tswyflag=2;
+
+PRO_HANDEL_TSWY_DATA
+PRO_HANDEL_TSWY_UPDDATA
+
+select * from zs_xj_family where tswyflag=1;
+select * from zs_xj_family where tswyflag=2;
+
+---扣费信息---
+6元/月 ZSTSP6000
+8元/月 ZSTSP8000
+10元/月 ZSTSP1000
+
+端口号：1065706142
+企业代码：419189
+
+insert into tbPrice(iPrice,iPoints,cBusiness,cFunction,iGroup,FeeType,about,iRegistered_Delivery)
+values(-600,0,'ZSTS','P6000',0,3,'天使无忧短信护航版',1);
+insert into tbPrice(iPrice,iPoints,cBusiness,cFunction,iGroup,FeeType,about,iRegistered_Delivery)
+values(-800,0,'ZSTS','P8000',0,3,'天使无忧功能增强版',1);
+insert into tbPrice(iPrice,iPoints,cBusiness,cFunction,iGroup,FeeType,about,iRegistered_Delivery)
+values(-1000,0,'ZSTS','P1000',0,3,'天使无忧功能增强版',1);
+
+
+select * from qx_function order by id desc;
+select * from qx_function_sub order by id desc;
+insert into qx_admin_role_fun_sub(role_id,fun_id,sub_fun_id)
+select id,?,? from qx_admin_role where (type_id=2 or type_id=3) and area_id=1;
+
+
+select * from zs_xj_family where phone='13925380823';
+select * from zs_package_log order by open_date desc;
+select * from package_define order by id desc;
+select * from businesssynlog order by id desc;
+select * from dx_groupsend order by create_time desc;
+select * from zs_tswy_validate where phone='13533609517';
+delete from zs_tswy_validate;
+'13422215791';
+'13533609517';
+select * from zs_xj_family where phone='13422215791';
+'15952006381';
+'13770536428';
+'13533609517';
+'13824798069';
+select * from zs_package_customer where family_id=501545;
+501645;
+501547;
+delete from zs_package_customer where family_id=501545;
+501645;
+501547;
+select * from zs_package_confirmstatus_new
+
+
+handle_package_msg
+alter table handle_package_msg add changepackage varchar2(500);
+
+select * from zs_oa_sendsms order by senddate desc;
+
+http://localhost:8080/jzdx/revert.do?source=13925380823&dest=106570610919&time=20100723142500&data=好的
+http://localhost:8080/jzdx/revert.do?source=15900000004&dest=10657061090000000058&time=20100802091300&data=1
+http://localhost:8080/jzdx/revert.do?source=13590733694&dest=10657061090000000038&time=20100730184900&data=否
+
+-----
+<servlet>
+   <servlet-name>postXml</servlet-name>
+   <servlet-class>cn.qtone.xxt.thirdinter.zstswy.PostXMLUrl</servlet-class>
+</servlet>
+<servlet-mapping>
+   <servlet-name>postXml</servlet-name>
+   <url-pattern>/interface/postxml</url-pattern>
+</servlet-mapping>
+
+1.注册接口、管理密码同步接口、短信发送接口修改下，不需IP认证，放到195
+  本地再改回来（需Ip认证）
+2.扣费拨测
+
+尊敬的家长：您好！您的孩子是XXX，SSS，CCC。您已开通中国移动校讯通服务，资费PPP/月。"校讯通"关爱孩子每一天！详询13411251861。中国移动校讯通
+
+---********部署定时任务使业务变更、取消生效(差这一步操作......)********---
+1.建数据处理历史表
+CREATE TABLE angelsetlog(
+        id NUMBER(11) NOT NULL,
+        opsql varchar2(4000),
+        dt date,
+        type number(1),
+        primary KEY(id)
+      );
+CREATE SEQUENCE angelsetlog_seq
+          INCREMENT BY 1
+          START WITH 1;
+CREATE OR REPLACE TRIGGER angelsetlog_tri BEFORE
+          INSERT ON angelsetlog
+          FOR EACH ROW
+          BEGIN
+           SELECT angelsetlog_seq.NEXTVAL INTO :NEW.ID FROM DUAL;
+         END;
+/
+COMMENT ON TABLE angelsetlog IS '天使无忧定时变更业务记录表';
+COMMENT ON COLUMN angelsetlog.id IS '唯一ID';
+COMMENT ON COLUMN angelsetlog.opsql IS '操作sql语句';
+COMMENT ON COLUMN angelsetlog.dt IS '时间';
+COMMENT ON COLUMN angelsetlog.type IS '1变更业务 2取消业务';
+
+2.部署定时任务 
+TRUNC(LAST_DAY(SYSDATE)) + 1
+00:00:00
+
+begin
+  PRO_HANDEL_TSWY_DATA;
+  PRO_HANDEL_TSWY_UPDDATA;
+  commit;
+end;
+
+*********短信端口**********
+1.验证码 1065706142（原来是10657061） 【相同内容短信可以不停发送】
+2.一般过滤提示短信 1065706142  【相同内容短信半小时内不能重发】
+3.上行短信订购业务（开通、变更、取消） 1065706142**(地区代码)  106570614209(中山地区) 【相同内容短信可以不停发送】
+
+*********营销方案定制日志*********
+/admin/htm/transaction/packagetranlog.htm
+cn.qtone.xxt.admin.transaction.packageTranLog.dao.packageTranLogDAO
+cn.qtone.xxt.admin.transaction.packageTranLog.view.packageTranLogView
+
+*****************2010-09-06(只保留家庭普及套餐和全功能套餐)**********************
+1.清空相关数据
+delete from package_define where id=221 or id=241; //(营销方案定义表，221短信护航241视频增强)
+delete from zs_package_customer where package_id=221 or package_id=241 or package_id=242 or package_id=401; //(营销方案订购关系表)
+delete from zs_tswy_validate; //(验证码数据表)
+delete from zs_package_confirmstatus_new where package_id=221 or package_id=241 or package_id=242 or package_id=401;//(二次确认表)
+delete from zs_package_log where package_id=221 or package_id=241 or package_id=242 or package_id=401;//(日志表)
+update zs_xj_family set tswyflag=0 where tswyflag<>0;
+delete from tswy_log;//(开通天使无忧业务日志)
+
+2.修改代码
+1）cn.qtone.xxt.thirdinter.zstswy.TswyRegService *提示短信的内容需修改
+客户端开通、变更业务时，判断是否还提交短信护航版和视频增强版
+2）cn.qtone.xxt.process.jzdx.messagemanage.handler.TswyMessageHandler 
+   cn.qtone.xxt.admin.transaction.booktranpackage.dao.AngelUtil  sendXXTMdfBusinessMsg方法修改(短信内容确认后，成功开通的提示短信) *
+上行短信开通、取消业务，tswy1开通家庭普及版指令 TSWY2开通全功能版指令；72小时内退订、变更业务（从高到低）即时生效
+3）cn.qtone.xxt.admin.transaction.booktranpackage.bookTranPackageUtil 392行需修改(短信内容确认后，成功开通的提示短信) *
+   cn.qtone.xxt.admin.transaction.booktranpackage.dao.bookTranPackageDAO 如果天使无忧基础版本，不需二次确认
+   cn.qtone.xxt.admin.transaction.inputTranPackage.DealThread 如果天使无忧基础版本，不需二次确认
+
+
+************11月份修改***************
+1.获取验证码时是否还需判断号码是否存在校讯通平台里？
+  需判断号码是否为移动号码?建议客户端也需做输入号码的判断（是否为移动号码）
+
+2.新用户（即在校讯通平台没有对应的号码记录）开通业务（通过软件安装或手机上行方式）时，把对应的记录保存到哪个镇区、哪个学校、哪个班级里，对应的学生姓名和家长姓名是否都设置为手机号码值？
+2.现有用户本来已开通家庭普及版或者没开通天使无忧业务，安装软件时怎么处理？
+2.体验期累积还是指定时间段？例如用户11月1号开通了，本来体验期到1月1日，但如果用户在1月1日前取消或者变更为家庭普及版，然后又在1月1日前再开通业务，是否还继续体验？如果1月1日后再开通，是否就不是体验了？
+2.用户取消业务（全功能版）或者降级（全功能版->家庭普及版），是否还是下月1号生效？
+
+3.新用户（即在校讯通平台没有对应的号码记录）开通家庭普及版后的提示内容是什么？
+
+4.已有用户开通全功能版，如果原来已在使用家庭普及版，是否可以更新版本？更新成功后提示内容是什么？
+
+5.已有用户开通全功能版，如果原来已在使用全功能版，按【天使无忧产品收费功能更改需求】文档的1 4）点的要求处理
+
+安装时套餐选择1，2点是否什么都不操作？3、4点是否都矛盾？
+              3点是否可以选择家庭普及版？
+
+手机上行开通怎么处理？
+
+是否还可以降级？（页面、上行）
+
+软件里只可升级？体验期是否可以累积？ 
+
+1).family表增加expdays(已体验的天数)，last_opendate(最后开通全功能版或变更为全功能版的时间)
+select 'alter table '||abb||'_xj_family add expdays number(5) default 0;' from area;
+select 'alter table '||abb||'_xj_family add last_opendate date;' from area;
+select 'COMMENT ON COLUMN '||abb||'_xj_family.expdays IS ''已体验的天数'';' from area;
+select 'COMMENT ON COLUMN '||abb||'_xj_family.last_opendate IS ''最后开通全功能版或变更为全功能版的时间'';' from area;
+
+2)**_package_customer表增加isexp(是否体验期)
+select 'alter table '||abb||'_package_customer add isexp number(1) default 0;' from area;
+select 'COMMENT ON COLUMN '||abb||'_package_customer.isexp IS ''1：是体验期 0不是体验期'';' from area;
+
+3）用户开通全功能版或变更为全功能版时更新last_opendate字段（触发器处理，同时处理isexp字段），如果expdays>60,isexp=0；如果expdays<=60,isexp=1
+   每天定时（如8点或9点）跑定时任务，如果当前用户在体验期（**_package_customer有记录且isexp＝1），expdays++，如果expdays++>60表示已过体验期，不更新expdays值，即expdays值最大为60，ex》pdays＝57、58、59、60时下发短信给用户确认；如果expdays＋＋＝61，判断最后一条操作日志是否是本月的，是否是open=8（变更天使无忧业务）open=9（取消天使无忧业务），如果是，什么都不处理【因为到等到下月1号生效】；如果没有，降级到家庭普及版；
+
+ 用户确认是否继续使用全功能版，发送tswy2上来，原来是家庭普及版，则做升级；如果原来是全功能版，判断是否过体验期，如果没过，保留体验期；如果已过，更新为正式收费。
