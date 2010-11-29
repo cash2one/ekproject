@@ -131,7 +131,7 @@ implements TransQueryDao<TransCustomerQueryParams,TransCustomerRow> {
 		StringBuffer mainSql = new StringBuffer(" select base.id family,base.phone,base.stu_sequence,base.transaction,");
 		mainSql.append("base.transaction_id,base.is_open,tlog.operator,tlog.reason,");
 		mainSql.append("tlog.package_id,book_type,base.open_date,is_charge,");
-		mainSql.append("nvl(ywt.fee,0)fee,ywt.type ywt_charge_type,ywt.tran_code,kf.UPDATE_DATE kf_date,ywt.port from ( ");
+		mainSql.append("nvl(ywt.fee,0)fee,ywt.type ywt_charge_type,ywt.tran_code,kf.create_time kf_date,kf.source port from ( ");
 		
 		StringBuffer baseView = new StringBuffer();
 		for (TransactionType type : TransactionType.values()) {
@@ -153,9 +153,8 @@ implements TransQueryDao<TransCustomerQueryParams,TransCustomerRow> {
 		mainSql.append(" and  tlog.open = base.is_open and tlog.transaction = base.transaction_id ");
 		
 		//扣费记录  加上时间对应上一个月的扣费记录
-		Calendar calendar = Calendar.getInstance();
-		int lastMonth  = calendar.getTime().getMonth()-1;
-		int year =  calendar.getTime().getYear();
+		int lastMonth  = Calendar.getInstance().getTime().getMonth()-1;
+		int year =  Calendar.getInstance().getTime().getYear();
 		mainSql.append(" left join ").append(areaAbb).append("_yw_kf_chargerecord kf ");
 		mainSql.append(" on kf.family_id=base.id and kf.phone=base.phone and base.transaction_id=kf.transaction and "+" to_char(kf.create_time,'YYYY-MM')='"+year+"-"+lastMonth+"'");
 		
@@ -219,7 +218,6 @@ implements TransQueryDao<TransCustomerQueryParams,TransCustomerRow> {
 				  if(rs.getInt("is_open")!=0){
 					    nRow.setOpenType(rs.getInt("book_type")==0?"校讯通合作商操作":"短信");
 					    nRow.setOrderTime(rs.getString("open_date"));
-//					    nRow.setPayTime(rs.getString("kf_date"));
 					    if(rs.getInt("is_charge")!=0){
 					        if(rs.getInt("ywt_charge_type")==0)
 					    	  nRow.setChargeType("免费");  //计费类型	包月、点播
@@ -229,6 +227,7 @@ implements TransQueryDao<TransCustomerQueryParams,TransCustomerRow> {
 					               }
 					        else if(rs.getInt("ywt_charge_type")==2)
 						    	  nRow.setChargeType("点播");
+					        nRow.setPayTime(rs.getString("kf_date"));
 					    }
 					  }
 				  
@@ -259,18 +258,24 @@ implements TransQueryDao<TransCustomerQueryParams,TransCustomerRow> {
 	String packageTransactionSql(String areaAbb, String phone, String beginDate,
 			String endDate){
 		 StringBuffer mainSql = new StringBuffer(" select fp.name transaction,fp.REMARK,fp.IS_FREE is_charge,fp.del is_open, ");
-		 mainSql.append(" tlog.open_date,tlog.book_type,nvl(ywt.fee,0)fee,ywt.type ywt_charge_type,ywt.tran_code,ywt.port ");
+		 mainSql.append(" tlog.open_date,tlog.book_type,nvl(ywt.fee,0)fee,ywt.type ywt_charge_type,ywt.tran_code,kf.source port,kf.create_time kf_date ");
 		 mainSql.append(" from ").append(areaAbb).append("_xj_family fa ");
 		 
 		 mainSql.append(" left join ( select a.* ,pp.name,pp.remark,pp.is_free from ").append(areaAbb).append("_preferential_packager a ");
 		 mainSql.append(" left join preferential_package pp on pp.id =a.pp_id ");
 		 mainSql.append(" )fp on fa.id = fp.f_id and fp.phone = fa.phone ");
 		 
-		 
 		 //套餐日志
 		 mainSql.append(" left join ( ").append(this.lastPackageTransactionLog(areaAbb)).append(" )tlog ");
 		 mainSql.append(" on tlog.family_id=fa.id and tlog.phone=fa.phone and tlog.open=1 and tlog.package_id = fp.pp_id ");
+
 		 
+		//扣费记录  加上时间对应上一个月的扣费记录
+	     int lastMonth  = Calendar.getInstance().getTime().getMonth()-1;
+		 int year =  Calendar.getInstance().getTime().getYear();
+		 mainSql.append(" left join ").append(areaAbb).append("_yw_kf_chargerecord kf ");
+		 mainSql.append(" on kf.family_id=fa.id and kf.phone=fa.phone and fp.pp_id=kf.transaction and "+" to_char(kf.create_time,'YYYY-MM')='"+year+"-"+lastMonth+"'");
+
 		 
 		 //对应的资费
 		 mainSql.append(" left join ( select a.family_id,b.TRAN_ID,b.FEE,b.TRAN_CODE,b.SERVICE_CODE,b.PORT,b.TYPE from fs_adc_member_order a,adc_member_order_service b ");
@@ -281,6 +286,13 @@ implements TransQueryDao<TransCustomerQueryParams,TransCustomerRow> {
 		 
 		 mainSql.append(" where fa.phone='").append(phone).append("'");	
 		 mainSql.append(" and fp.del = 1 ");//开通的套餐
+		 
+		 
+		 //必须是在校的学生
+	     mainSql.append(" and exists ( select 1 from "+areaAbb+"_xj_student a,"+areaAbb+"_xj_stu_class b,xj_class c ");
+		 mainSql.append(" where a.stu_sequence = b.stu_sequence and b.class_id = c.id and c.class_type=1 and in_school=1 ");
+		 mainSql.append(" and a.stu_sequence = fa.stu_sequence ) ");
+			
 		 
 		 if(!Checker.isNull(beginDate))
 			 mainSql.append(" and to_char(fp.START_DATE,'YYYY-MM-DD')>='").append(beginDate).append("'");
