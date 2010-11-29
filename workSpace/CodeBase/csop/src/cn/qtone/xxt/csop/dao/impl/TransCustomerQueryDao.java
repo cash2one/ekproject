@@ -159,9 +159,6 @@ implements TransQueryDao<TransCustomerQueryParams,TransCustomerRow> {
 		mainSql.append(" on kf.family_id=base.id and kf.phone=base.phone and base.transaction_id=kf.transaction and "+" to_char(kf.create_time,'YYYY-MM')='"+year+"-"+lastMonth+"'");
 		
 		//查询对应的资费
-//		mainSql.append(" left join ").append(" yw_Transaction ywt");
-//		mainSql.append(" on ywt.tran_code = kf.tran_code and ywt.TRANSACTION=base.transaction_id and ywt.AREA_ID=").append(area.getAreaIdByAbb(areaAbb));
-	
 		mainSql.append(" LEFT JOIN  ( select ao.family_id,ADC.TRAN_ID,ADC.FEE,ADC.TRAN_CODE,ADC.SERVICE_CODE,ADC.PORT,ADC.TYPE from  zs_adc_member_order ao ");
 		mainSql.append(" left join adc_member_order_service adc on ao.tran_id = ADC.TRAN_ID and ao.tran_code = ADC.TRAN_CODE and ao.type =1 and adc.type=1 ) ywt");
 		mainSql.append(" ON YWT.TRAN_ID = base.transaction_id and ywt.family_id = base.id ");

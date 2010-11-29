@@ -73,7 +73,6 @@ public class TransCustomerDao extends AbstractTransDao {
 		
 		String[] tempSqls = null;
 		for (String areaAbb : areaAbbs) {
-			
 			if(!area.isPackageArea(areaAbb)){
 				transCode = returnTransCodeByCname(transactionName);
 				tempSqls = cancleBaseTransactionSql(areaAbb, transCode, phone);
@@ -81,7 +80,9 @@ public class TransCustomerDao extends AbstractTransDao {
 				//要获取指定的套餐ID
 				tempSqls = canclePackageTransactionSql(areaAbb, transCode, phone);
 			}
-		
+			if(tempSqls!=null)
+			for(String sql : tempSqls)
+				sqls.add(sql);
 		}
 
 		if (sqls.size() <= 0)
