@@ -3,6 +3,7 @@ package cn.qtone.xxt.csop.dao.impl;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import cn.qtone.xxt.csop.business.TransactionType;
@@ -151,9 +152,12 @@ implements TransQueryDao<TransCustomerQueryParams,TransCustomerRow> {
 		mainSql.append(" on tlog.family_id = base.id and tlog.stu_sequence = base.stu_sequence ");
 		mainSql.append(" and  tlog.open = base.is_open and tlog.transaction = base.transaction_id ");
 		
-		//扣费记录
+		//扣费记录  加上时间对应上一个月的扣费记录
+		Calendar calendar = Calendar.getInstance();
+		int lastMonth  = calendar.getTime().getMonth()-1;
+		int year =  calendar.getTime().getYear();
 		mainSql.append(" left join ").append(areaAbb).append("_yw_kf_chargerecord kf ");
-		mainSql.append(" on kf.family_id=base.id and kf.phone=base.phone and base.transaction_id=kf.transaction ");
+		mainSql.append(" on kf.family_id=base.id and kf.phone=base.phone and base.transaction_id=kf.transaction and "+" to_char(kf.create_time,'YYYY-MM')='"+year+"-"+lastMonth+"'");
 		
 		//查询对应的资费
 //		mainSql.append(" left join ").append(" yw_Transaction ywt");
@@ -165,6 +169,12 @@ implements TransQueryDao<TransCustomerQueryParams,TransCustomerRow> {
 		
 		//查询条件 时间
 		mainSql.append(" where 1=1 ");
+		
+		//必须是在校的学生
+		mainSql.append(" and exists ( select 1 from "+areaAbb+"_xj_student a,"+areaAbb+"_xj_stu_class b,xj_class c ");
+		mainSql.append(" where a.stu_sequence = b.stu_sequence and b.class_id = c.id and c.class_type=1 and in_school=1 ");
+		mainSql.append(" and a.stu_sequence = base.stu_sequence ) ");
+		
 		if(!Checker.isNull(beginDate))
 			mainSql.append(" and to_char(base.open_date,'YYYY-MM-DD')>='").append(beginDate).append("'");
 		if(!Checker.isNull(endDate))

@@ -29,7 +29,10 @@ public abstract class AbstractTransDao{
 		List<String> serviceAreas = null;
 		StringBuffer familySql = new StringBuffer();
 		for(String abb :area.listAreaAbbs()){
-             familySql.append("select '"+abb+"' abb from "+abb+"_xj_family where phone ='").append(phone).append("'");			
+             familySql.append("select '"+abb+"' abb from "+abb+"_xj_family fa where phone ='").append(phone).append("'");
+             familySql.append(" and exists (select 1 from "+abb+"_xj_student a,"+abb+"_xj_stu_class b,xj_class c ");
+             familySql.append(" where a.stu_sequence = b.stu_sequence and b.class_id = c.id and c.class_type=1 and in_school=1 ");
+             familySql.append(" and a.stu_sequence = fa.stu_sequence) ");
              familySql.append(" union ");
 		}
 		familySql.delete(familySql.length()-" union ".length(), familySql.length());
