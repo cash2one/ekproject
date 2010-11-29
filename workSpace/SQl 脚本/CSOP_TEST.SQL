@@ -4,12 +4,22 @@ select * from zs_adc_member_order
 select * from adc_member_order_service
 where tran_id = 360 
 
+
 select * from preferential_package 
+
+select * from fs_preferential_packager
+
+
+select * from fs_transaction_log
+
+select * from
 
 select * from base_transaction
 
 select * from zs_yw_kf_chargerecord
   
+
+
   
 
 ---- Ì×²Í²éÑ¯
@@ -46,6 +56,15 @@ SELECT fp.NAME TRANSACTION, fp.remark, fp.is_free is_charge, fp.del is_open,
      AND tlog.package_id = fp.pp_id
  WHERE fa.phone = '13826098926'
  
+
+
+select * from preferential_package 
+
+select * from fs_preferential_packager
+
+select * from fs_transaction_log
+
+select * from
 
 
 

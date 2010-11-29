@@ -33,11 +33,15 @@ where family_id in (
 select * from zs_xj_family 
 where name   like '%elam%'  
 
+select * from base_transaction bt
+select * from package_basetran pb  left join base_transaction bt on pb.basetran_id = bt.id  where pb.package_id in(101)
+select * from package_define where id in(401,101)
+
 /*查询用户的套餐定制情况*/
 select * from  zs_package_customer
 where family_id = (
         select fa.id from zs_xj_family fa
-    where fa.name like '%elamTTF%'   
+    where fa.name like '%13826098962%'   
 )
 
 select * from area
@@ -47,7 +51,7 @@ select * from package_define
 where id =242
 
 select * from package_define
-where name like '天使无忧全功能版'
+where name like '安全平台%'
 
 /*基本业务表*/
 select * from base_transaction bt
@@ -83,8 +87,17 @@ select * from mz_package_confirmstatus_new pcn where pcn.family_id  =(select  fa
 /* 删除业务*/
 delete from   zs_package_customer where del=0 and family_id=(select  fa.id  from zs_xj_family fa where fa.name like 'Felam3')
 
+<<<<<<< .mine
+select fa.is_dxx,fa.is_kaoqin,fa.is_liuyanban,fa.is_qin_qing_tel,fa.tswyflag,fa.ty  from zs_xj_family fa where fa.name like '13826098962'
+
+select * from dx_groupsend  where object_mobile like '13826098917'  order by create_time desc
+
+--package_define
+select * from package_define
+=======
 select fa.is_dxx,fa.is_kaoqin,fa.is_liuyanban,fa.is_qin_qing_tel  from zs_xj_family fa where fa.name like 'nef'
 
 select * from zs_xj_student  stu where stu.name = 'nelam'
 
 select * from dx_groupsend  where object_mobile like '13826098916'  order by create_time desc
+>>>>>>> .r46

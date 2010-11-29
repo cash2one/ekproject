@@ -1,0 +1,17 @@
+Column Name	ID	Pk	Null?	Data Type	Default	Comments	Histogram
+
+ID	1	1	N	NUMBER		业务id	Yes
+AREA_ID	2		Y	NUMBER		地区ID	Yes
+TYPE	3		Y	NUMBER		业务类别 1 业务方式；2 套餐方式；3 营销方案；4 CP 业务	Yes
+TRAN_ID	4		Y	NUMBER		业务ID	Yes
+SP_ID	5		Y	VARCHAR2 (10 Byte)		SPID	Yes
+PORT	6		Y	VARCHAR2 (20 Byte)		接入端口	Yes
+NAME	7		Y	VARCHAR2 (50 Byte)		业务名称	Yes
+TRAN_CODE	8		Y	VARCHAR2 (10 Byte)		业务代码	Yes
+FEE	9		Y	NUMBER	0	费用（元）	Yes
+CHARGE_MODE	10		Y	NUMBER	0	收费类型：0 免费； 1 包月；2 按条	Yes
+SERVICE_CODE	11		Y	VARCHAR2 (20 Byte)		ADC业务代码	Yes
+SERVICE_NAME	12		Y	VARCHAR2 (50 Byte)		ADC业务名称	Yes
+RN	13		Y	NUMBER		顺序号	Yes
+
+

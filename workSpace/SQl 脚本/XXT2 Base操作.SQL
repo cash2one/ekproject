@@ -4,6 +4,11 @@ where exists (select * from qx_admin_role b where a.role_id = b.id and b.type_id
 and userid like 'admin%'
 
 
+--- 查询移动后台用户
+select * from qx_admin_user a
+where exists (select * from qx_admin_role b where a.role_id = b.id and b.type_id = 2)
+and userid like '%gzchen%'
+
 --- 查询SI 用户
 select * from qx_admin_user a
 where exists (select * from qx_admin_role b where a.role_id = b.id and b.type_id = 3)
@@ -20,3 +25,35 @@ where exists (
 )
 
 
+select * from user_tables
+where table_name like '%USER%'
+
+
+
+select * from fs_user
+
+
+select * from xj_teacher
+where userid like 'zsluhehai1'
+
+
+
+select * from yw_tran_operator
+order by create_time desc
+
+
+select a. from gz_xj_family a
+where exists 
+ ( 
+   select * from gz_xj_student b
+   where a.stu_sequence = b.stu_sequence
+   and b.name like '测试23'
+ )
+ 
+ 
+ select * from gz_synlesson_booklog
+ order by operate_date desc
+ 
+ 
+ select * from yw_tran_import 
+ 
