@@ -1,8 +1,0 @@
-OSGI:  http://developer.51cto.com/art/200909/154863.htm
-   基于OSGi和Spring开发Web应用
-   http://hulongzhou.blog.hexun.com/33843830_d.html
-   用OSGi完成应用的模块化——BPS的设计选择
-   http://developer.51cto.com/art/200705/46957.htm
-
-OSGi and Embedded Jetty
-http://java.dzone.com/articles/osgi-and-embedded-jetty
