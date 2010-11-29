@@ -239,6 +239,8 @@ public class TransBooklogDao extends AbstractTransDao implements
 
 		// 查询条件
 		mainSql.append(" where 1=1 ");
+		
+		
 		if (!Checker.isNull(beginDate))
 			mainSql.append(" and to_char(tlog.open_date,'YYYY-MM-DD')>='")
 					.append(beginDate).append("'");
