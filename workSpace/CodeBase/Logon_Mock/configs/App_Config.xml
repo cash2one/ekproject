@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AppConfig>
+	<Logon-Module post_threads="2" records_batch_loadnum="100">
+	    <TEMP-USER-TABLE>synlesson_logon_temp</TEMP-USER-TABLE><!--中间表 -->
+		<SYN_LESSON_URL_HT paramsFormat="info=%s"
+			req_error_flag="不正确">
+			http://ketang.ldcstudy.com/login/synlogin.form
+		</SYN_LESSON_URL_HT>
+		<SYN_LESSON_URL_KL paramsFormat="gd=Yes&username=%s&password=%s"
+			req_error_flag="不正确">
+			http://gd.91118.com/Interface/logincheck.aspx
+		</SYN_LESSON_URL_KL>
+		<SYN_LESSON_URL_ZX paramsFormat="info=%s"
+			req_error_flag="不正确">
+			http://family.chinaeduonline.cn/login/synlogin.form
+		</SYN_LESSON_URL_ZX>
+		<SYN_LESSON_URL_WW paramsFormat="info=%s"
+			req_error_flag="不正确">
+			http://wawa.chinaeduonline.cn/login/synlogin.form
+		</SYN_LESSON_URL_WW>
+	</Logon-Module>
+</AppConfig>
+
+
