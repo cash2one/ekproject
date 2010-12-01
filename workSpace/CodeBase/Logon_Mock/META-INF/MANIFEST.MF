@@ -1,9 +1,0 @@
-Manifest-Version: 1.0
-Main-Class: cn.qtone.xxt.logonmock.LogonMain
-Class-Path: libs/dom4j-1.6.1.jar
-  libs/jaxen-1.1-beta-6.jar
-  configs/*.xml
-  libs/mysql-connector-java-3.0.14-production-bin.jar
-  libs/ojdbc14.jar
-  libs/struts.jar
-
