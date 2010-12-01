@@ -6,4 +6,5 @@ Class-Path: libs/dom4j-1.6.1.jar
   libs/mysql-connector-java-3.0.14-production-bin.jar
   libs/ojdbc14.jar
   libs/struts.jar
+  libs/log4j-1.2.16.jar
 
