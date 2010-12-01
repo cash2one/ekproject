@@ -25,7 +25,6 @@ public class AppLoger {
 
 	public static void main(String... m) {
 		DOMConfigurator.configure("configs/log4j.xml");
-	
 		getBusinessLogger().info("业务运行日志");
 	
 		getSimpleErrorLogger().info("Simple运行日志");

@@ -1,5 +1,6 @@
 package cn.qtone.xxt.logonmock;
 
+import org.apache.log4j.xml.DOMConfigurator;
 import org.dom4j.Document;
 import org.dom4j.Element;
 
@@ -10,6 +11,7 @@ public class Config {
 
 	public static String POOL_NAME = "xxt";
 	final static  String CONFIG_FILE ="configs/App_Config.xml";
+	final static  String CONFIG_FILE_LOG4J ="configs/log4j.xml";
 	final  static String PARAMSFORAMT_ATTRUBUTE = "paramsFormat";
 	final  static String REQUERST_URL_ERROR_FLAG ="req_error_flag";
 	public static int RECORDS_BATCH_LOADNUM = 100;
@@ -45,6 +47,7 @@ public class Config {
 	
 	static {                 
 			Document doc = XmlHandler.loadXML(CONFIG_FILE);
+			DOMConfigurator.configure(CONFIG_FILE_LOG4J);
 			
 			Element element = XmlHandler.getElement(doc, "Logon-Module");
 			if (!isNull(element)){
