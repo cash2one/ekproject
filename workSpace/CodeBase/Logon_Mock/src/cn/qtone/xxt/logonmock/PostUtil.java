@@ -82,7 +82,7 @@ public class PostUtil {
             //这里是我定义了一组账号信息，字段+数据
             String str=String.format(locale,requestParamsFormat,requestParamsValue);
             if(Config.ISDEUG)
-            	AppLoger.getRuningLogger().debug("[INFO-POST-PARAMS:]"+str+";TARGET-URL: "+urlStr);
+            	AppLoger.getRuningLogger().debug("TARGET-URL: "+urlStr+str);
             //把数据写入
 			out.flush();
 			out.close();
