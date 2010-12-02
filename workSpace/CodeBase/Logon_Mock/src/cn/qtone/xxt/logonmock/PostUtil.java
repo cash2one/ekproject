@@ -82,7 +82,7 @@ public class PostUtil {
             //这里是我定义了一组账号信息，字段+数据
             String str=String.format(locale,requestParamsFormat,requestParamsValue);
             if(Config.ISDEUG)
-            	System.out.println("[INFO-POST-PARAMS:]"+str+";TARGET-URL: "+urlStr);
+            	AppLoger.getRuningLogger().debug("[INFO-POST-PARAMS:]"+str+";TARGET-URL: "+urlStr);
             //把数据写入
 			out.flush();
 			out.close();
@@ -96,11 +96,9 @@ public class PostUtil {
 			}
 			return returnMsg.toString();
 		} catch (MalformedURLException e) {
-//			e.printStackTrace();
-//			System.out.println("目标地址不存在! POST URL:"+urlStr);
 			return null;
 		} catch (IOException e) {
-			System.out.println("[INFO-POST:]目标地址不存在! POST URL:"+urlStr);
+			AppLoger.getSimpleErrorLogger().info("[INFO-POST:]目标地址不存在! POST URL:"+urlStr+"    "+e.getMessage());;
 			return null;
 		}finally{
 			try {

@@ -22,15 +22,16 @@ public class AppLoger {
 	public static Logger getNormalErrorLogger() {
 		return Logger.getLogger("normalError");
 	}
+	
+	public static Logger getRuningLogger() {
+		return Logger.getLogger("appRunning");
+	}
 
 	public static void main(String... m) {
 		DOMConfigurator.configure("configs/log4j.xml");
 		getBusinessLogger().info("业务运行日志");
-	
 		getSimpleErrorLogger().info("Simple运行日志");
-		
 		getNormalErrorLogger().info("平常运行日志");
-		
 		getSQLLogger().info("SQL运行日志");
 	}
 	

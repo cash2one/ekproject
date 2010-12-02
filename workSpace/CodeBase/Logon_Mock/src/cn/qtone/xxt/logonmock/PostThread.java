@@ -50,7 +50,7 @@ class PostThread extends Thread {
 	public void run(){
 		String temp = "";
 		String returnMsg = "";
-		System.out.println("[INFO-POST-THREAD :] :Start run [ Post-TesT-"+threadName+" at "+new Date().toLocaleString()+" ] ");
+		AppLoger.getRuningLogger().info("Start run [ Post-TesT-"+threadName+" at "+new Date().toLocaleString()+" ] ");
 		
 		startTime = System.currentTimeMillis();	
 		int allRecords = this.count(sql.toString());
@@ -72,7 +72,7 @@ class PostThread extends Thread {
 		
 		this.allSpendTime = System.currentTimeMillis()-startTime;
 		container.appendFinishedState(threadName+"");
-		System.out.println("[INFO-POST-THREAD :] :End run [ Post-TesT-"+threadName+" at "+new Date().toLocaleString()+" ] ");
+		AppLoger.getRuningLogger().info("End run [ Post-TesT-"+threadName+" at "+new Date().toLocaleString()+" ] ");
 //		printPostResult();		
 	}    
 
@@ -101,7 +101,7 @@ class PostThread extends Thread {
 			
 			}
     	}catch(Exception e){
-    		e.printStackTrace();
+    		AppLoger.getSimpleErrorLogger().info(e.getMessage());
     	}finally{
     		try {
     			if(rs!=null)
@@ -131,7 +131,7 @@ class PostThread extends Thread {
 	    		info = KetangLoginEncoder.encodeKetangLoginParam("QuanTong","2", userId, requestIp, userAgent);
 	    		returnMsg =util.post(Config.SYN_LESSON_URL_HT,Locale.CHINA, Config.SYN_LESSON_URL_HT_PARAMSFORMAT, info);
 	    		if(Config.ISDEUG)
-	    		  System.out.println("[DEBUG-INFO :] 登录HT后返回信息:"+returnMsg);
+	    			AppLoger.getRuningLogger().info("登录HT后返回信息:"+returnMsg);
 	    		if(util.findKeyWord(returnMsg, Config.SYN_LESSON_URL_HT_REQ_ERROR))
 	    			exceptionCodes+="ht,";
 	    	}
@@ -143,7 +143,7 @@ class PostThread extends Thread {
 				password = XxtBase64.encode(password);
 	        	returnMsg =util.post(Config.SYN_LESSON_URL_KL,Locale.CHINA, Config.SYN_LESSON_URL_KL_PARAMSFORMAT, new String[]{userId,password});
 	        	if(Config.ISDEUG)
-		    	    System.out.println("[DEBUG-INFO :] 登录KL后返回信息:"+returnMsg);
+	        		AppLoger.getRuningLogger().info("登录KL后返回信息:"+returnMsg);
 	        	if(util.findKeyWord(returnMsg, Config.SYN_LESSON_URL_KL_REQ_ERROR))
 	    			exceptionCodes+="kl,";
 	        }
@@ -152,7 +152,7 @@ class PostThread extends Thread {
 			    info = KetangLoginEncoder.encodeKetangLoginParam("QuanTong","2", userId, requestIp, userAgent);
 			    returnMsg =util.post(Config.SYN_LESSON_URL_WW,Locale.CHINA, Config.SYN_LESSON_URL_WW_PARAMSFORMAT, info);
 			    if(Config.ISDEUG)
-		    		  System.out.println("[DEBUG-INFO :] 登录WW后返回信息:"+returnMsg);
+			    	AppLoger.getRuningLogger().info("登录WW后返回信息:"+returnMsg);
 			    if(util.findKeyWord(returnMsg, Config.SYN_LESSON_URL_WW_REQ_ERROR))
 	    			exceptionCodes+="ww,";
 			}
@@ -161,12 +161,12 @@ class PostThread extends Thread {
 				info = KetangLoginEncoder.encodeKetangLoginParam("QuanTong","2", userId, requestIp, userAgent);
 				returnMsg =util.post(Config.SYN_LESSON_URL_ZX,Locale.CHINA, Config.SYN_LESSON_URL_ZX_PARAMSFORMAT, info);
 				if(Config.ISDEUG)
-		    		  System.out.println("[DEBUG-INFO :] 登录ZX后返回信息:"+returnMsg);
+					AppLoger.getRuningLogger().info("登录ZX后返回信息:"+returnMsg);
 				if(util.findKeyWord(returnMsg, Config.SYN_LESSON_URL_ZX_REQ_ERROR))
 	    			exceptionCodes+="zx,";
 			}
     	}catch(Exception e){
-    	   e.printStackTrace();     	
+    		AppLoger.getSimpleErrorLogger().info(e.getMessage());	
     	}finally{
     	    if(!Checker.isNull(exceptionCodes)) 
     		   exceptions.put(userId, exceptionCodes);

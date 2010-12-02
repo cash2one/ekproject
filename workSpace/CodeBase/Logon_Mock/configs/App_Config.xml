@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <AppConfig>
-	<Logon-Module post_threads="4" records_batch_loadnum="200" debug="true">
+	<Logon-Module post_threads="4" records_batch_loadnum="200" debug="false">
 	    <TARGER-AREA>ZS</TARGER-AREA>
 	    <TEMP-USER-TABLE>synlesson_logon_temp</TEMP-USER-TABLE><!--中间表 -->
 		<SYN_LESSON_URL_HT paramsFormat="info=%s"

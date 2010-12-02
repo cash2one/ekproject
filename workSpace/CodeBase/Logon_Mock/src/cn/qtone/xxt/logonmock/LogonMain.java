@@ -39,7 +39,7 @@ public class LogonMain {
 	public void excuteThread(String name, Thread thread) {
 		this.pool.execute(thread);
 		threadsPoolStatus.put(name, Boolean.FALSE);
-		System.out.println("已成功启用线程 [ " + name + " ] 进行模拟登录！");
+		AppLoger.getRuningLogger().info("已成功启用线程 [ " + name + " ] 进行模拟登录！");
 	}
 
 	public void appendFinishedState(String name) {
@@ -52,7 +52,7 @@ public class LogonMain {
 
 	public void shutDownThreadPool() {
 		this.pool.shutdown();
-		System.out.println("[INFO:IMPORTANT ] 程序已经运行完成，并已关闭所有的POST线程。"
+		AppLoger.getRuningLogger().info("程序已经运行完成，并已关闭所有的POST线程。"
 				+ new Date().toLocaleString()+"，[开始时间："+new Date(startTime)+",总耗时："+((endTime-startTime)/1000)+" 秒。]");
 		
 	}
@@ -76,22 +76,23 @@ public class LogonMain {
 		CallableStatement cs = null;
 		try {
 			conn = DBConnector.getConnection(Config.POOL_NAME);
-			System.out.println("1、准备生成中间表的记录！");
+			AppLoger.getRuningLogger().info("1、准备生成中间表的记录！");
 			cs = conn.prepareCall(CALL_PROCEDURE);
 			cs.registerOutParameter(1, Types.NUMERIC);
 			cs.execute();
 			int resultCode = cs.getInt(1);
 			if (Config.ISDEUG)
-				System.out.println("存储过程返回结果为：" + resultCode);
+				AppLoger.getRuningLogger().info("存储过程返回结果为：" + resultCode);
 			if (resultCode == 100) {
-				System.out.println("2、已成功生成中间表的记录,耗时:"+(System.currentTimeMillis()-startTime)/1000+"秒。");
+				AppLoger.getRuningLogger().info("2、已成功生成中间表的记录,耗时:"+(System.currentTimeMillis()-startTime)/1000+"秒。");
 				return true;
 			} else {
-				System.out.println("2、生成中间表的记录失败！");
+				AppLoger.getRuningLogger().info("2、生成中间表的记录失败！");
 				return false;
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+//			e.printStackTrace();
+			AppLoger.getSimpleErrorLogger().info(e.getMessage());
 			return false;
 		} finally {
 			try {
@@ -116,7 +117,7 @@ public class LogonMain {
 			}
 			return records;
 		} catch (Exception e) {
-			e.printStackTrace();
+			AppLoger.getSimpleErrorLogger().info(e.getMessage());
 			return 0;
 		} finally {
 			try {
@@ -142,7 +143,7 @@ public class LogonMain {
 			}
 			return records;
 		} catch (Exception e) {
-			e.printStackTrace();
+			AppLoger.getSimpleErrorLogger().info(e.getMessage());
 			return 0;
 		} finally {
 			try {
@@ -161,13 +162,11 @@ public class LogonMain {
 	 */
 	public static void main(String... srg) {
 
-		System.out
-				.println("-----------------------------------------------------------------------------------------");
-		System.out.println("[INFO-LOGON APP-MAIN:]启动同步课堂用户模拟登录程序");
-		System.out.println("[INFO-LOGON APP-MAIN:]程序配置：" + "[线程数:" + Config.POST_THREAD_NUM
+		AppLoger.getRuningLogger().info("-----------------------------------------------------------------------------------------");
+		AppLoger.getRuningLogger().info("[INFO-LOGON APP-MAIN:]启动同步课堂用户模拟登录程序");
+		AppLoger.getRuningLogger().info("[INFO-LOGON APP-MAIN:]程序配置：" + "[线程数:" + Config.POST_THREAD_NUM
 				+ ",批处理数:" + Config.RECORDS_BATCH_LOADNUM + "]");
-		System.out
-				.println("-----------------------------------------------------------------------------------------");
+		AppLoger.getRuningLogger().info("-----------------------------------------------------------------------------------------");
 
 		LogonMain main = new LogonMain();
 		if (main.perpare()) {
@@ -237,10 +236,10 @@ class ThreadProceStateCheck extends Thread {
 
     public void run(){
         if(logonApp.isAllSubThreadFinished()){
-        	System.out.println("[INFO-LOGON APP-MAIN:] 模拟登录程序所有子线程运行完成。");
+        	AppLoger.getRuningLogger().info("[INFO-LOGON APP-MAIN:] 模拟登录程序所有子线程运行完成。");
         	logonApp.shutDownThreadPool();
         }else{
-        	System.out.println("[INFO-LOGON APP-MAIN:] 模拟登录程序还有子线程未运行完成，请继续等待！");
+        	AppLoger.getRuningLogger().info("[INFO-LOGON APP-MAIN:] 模拟登录程序还有子线程未运行完成，请继续等待！");
         }
     }	
     	

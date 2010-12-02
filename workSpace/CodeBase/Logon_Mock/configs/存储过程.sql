@@ -9,10 +9,10 @@ BEGIN
    DELETE FROM synlesson_logon_temp;
 
 
-   --生成对应的数据
+   --锟斤拷啥锟接︼拷锟斤拷锟斤拷
    INSERT INTO synlesson_logon_temp
                (ID, stu_sequence, syn_tran)
-      SELECT   '1', stu_sequence,
+      SELECT   rownum, stu_sequence,
                TRANSLATE (LTRIM (TYPE, '/'), '*/', '*,') syn_type
           FROM (SELECT ROW_NUMBER () OVER (PARTITION BY stu_sequence ORDER BY stu_sequence,
                         lvl DESC) rn,
