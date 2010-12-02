@@ -188,18 +188,24 @@ public class PostUtil {
 		String userId ="test";
 		String requestIp ="127.0.0.1";
 		String userAgent ="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)";
+		
 		PostUtil util = new PostUtil();
 		String info = KetangLoginEncoder.encodeKetangLoginParam("QuanTong","2", userId, requestIp, userAgent);
 	
 //		String returnMsg = util.post("http://www.baidu.com/baidu", Locale.ENGLISH,"cl=3&tn=baidutop10&wd=%B6%B9%B0%EA", "");
-		String returnMsg =util.post("http://ketang.ldcstudy.com/login/synlogin.form",Locale.CHINA, "info=%s", info);
+		
+		String returnMsg =util.post("http://gd.91118.com/Interface/logincheck.aspx",Locale.CHINA, "gd=Yes&username=%s&password=%s", new String[]{"userid","psw"});
 		System.out.println(returnMsg);
 		
-		returnMsg =util.post("http://family.chinaeduonline.cn/login/synlogin.form",Locale.CHINA, "info=%s", info);
-		System.out.println(returnMsg);
-	
-		returnMsg =util.post("http://wawa.chinaeduonline.cn/login/synlogin.form",Locale.CHINA, "info=%s", info);
-		System.out.println(returnMsg);
+		
+//		String returnMsg =util.post("http://ketang.ldcstudy.com/login/synlogin.form",Locale.CHINA, "info=%s", info);
+//		System.out.println(returnMsg);
+//		
+//		returnMsg =util.post("http://family.chinaeduonline.cn/login/synlogin.form",Locale.CHINA, "info=%s", info);
+//		System.out.println(returnMsg);
+//	
+//		returnMsg =util.post("http://wawa.chinaeduonline.cn/login/synlogin.form",Locale.CHINA, "info=%s", info);
+//		System.out.println(returnMsg);
 		
 	}
 	
