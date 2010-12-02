@@ -18,7 +18,7 @@ public class Config {
 	public static int POST_THREAD_NUM = 2;
 	public static String TEMP_TABLE = "synlesson_logon_temp";
 	public static boolean ISDEUG = false;
-
+	public static boolean URL_FORMATE_STATE = false;
 	public static String TARGET_AREA = "CS";
 	
 	
@@ -55,6 +55,8 @@ public class Config {
 				POST_THREAD_NUM = Integer.parseInt(element.attributeValue("post_threads"));
 				if(!Checker.isNull(element.attributeValue("debug"))&&"true".equals(element.attributeValue("debug").toLowerCase()))
 				   ISDEUG = true; 
+				if(!Checker.isNull(element.attributeValue("paramsFormat"))&&"true".equals(element.attributeValue("paramsFormat").toLowerCase()))
+					URL_FORMATE_STATE = true; 
 			}
 	
 			element = XmlHandler.getElement(doc, "Logon-Module/TARGER-AREA");

@@ -80,10 +80,17 @@ public class PostUtil {
             //获得连接输出流
             OutputStreamWriter out=new OutputStreamWriter(conn.getOutputStream());
             //这里是我定义了一组账号信息，字段+数据
-            String str=String.format(locale,requestParamsFormat,requestParamsValue);
+            
+            String str="";
+            if(Config.URL_FORMATE_STATE)
+               str=String.format(locale,requestParamsFormat,requestParamsValue);
+            else
+               str = requestParamsFormat;
+            
             if(Config.ISDEUG)
             	AppLoger.getRuningLogger().debug("TARGET-URL: "+urlStr+str);
             //把数据写入
+            
             out.write(new String(str.getBytes("ISO-8859-1")));
             out.flush();
 			out.close();
