@@ -72,6 +72,11 @@ public class LogonMain {
 	public boolean perpare() {
 		long startTime = System.currentTimeMillis();
 		StringBuffer createTempRecordSql = new StringBuffer();
+		
+		if(!Config.IS_CALL_PROCEDURE){
+			AppLoger.getRuningLogger().info("直接调用中间表的记录！");
+		    return true;
+		}
 		Connection conn = null;
 		CallableStatement cs = null;
 		try {

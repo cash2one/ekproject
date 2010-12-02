@@ -20,7 +20,7 @@ public class Config {
 	public static boolean ISDEUG = false;
 	public static boolean URL_FORMATE_STATE = false;
 	public static String TARGET_AREA = "CS";
-	
+	public static boolean IS_CALL_PROCEDURE = false;
 	
 	// public static String SYN_LESSON_URL_HT =
 	// "http://ketang.ldcstudy.com/login/synlogin.form?info=";
@@ -59,6 +59,12 @@ public class Config {
 					URL_FORMATE_STATE = true; 
 			}
 	
+			element = XmlHandler.getElement(doc, "Logon-Module/IS_CALL_PROCEDURE");
+			if (!isNull(element)){
+				if(!Checker.isNull(element.getTextTrim())&&"true".equals(element.getTextTrim().toLowerCase()))
+					IS_CALL_PROCEDURE = true; 
+	        }
+			
 			element = XmlHandler.getElement(doc, "Logon-Module/TARGER-AREA");
 			if (!isNull(element)){
 				TARGET_AREA = element.getTextTrim();
