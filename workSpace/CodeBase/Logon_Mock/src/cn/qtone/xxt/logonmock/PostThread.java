@@ -180,7 +180,7 @@ class PostThread extends Thread {
     void recordLoginException(){
         if(this.exceptions.size()>0){
         	for(String userid:exceptions.keySet())
-              AppLoger.getBusinessLogger().info(""+userid+","+exceptions.get(userid));          	
+              AppLoger.getBusinessLogger().info(""+userid+" | "+exceptions.get(userid));          	
         }
     }
     
