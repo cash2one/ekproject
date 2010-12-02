@@ -205,7 +205,7 @@ public class LogonMain {
 					main.excuteThread(threadSeq + "", postThread);
 				}
               
-				appendThreadChecker(main,5);
+				appendThreadChecker(main,Config.THREAD_CHECK_TIMER);
 			}
 
 		}
@@ -241,10 +241,10 @@ class ThreadProceStateCheck extends Thread {
 
     public void run(){
         if(logonApp.isAllSubThreadFinished()){
-        	AppLoger.getRuningLogger().info("[INFO-LOGON APP-MAIN:] 模拟登录程序所有子线程运行完成。");
+        	AppLoger.getRuningLogger().info("模拟登录程序所有子线程运行完成。");
         	logonApp.shutDownThreadPool();
         }else{
-        	AppLoger.getRuningLogger().info("[INFO-LOGON APP-MAIN:] 模拟登录程序还有子线程未运行完成，请继续等待！");
+        	AppLoger.getRuningLogger().info("模拟登录程序还有子线程未运行完成，请继续等待！");
         }
     }	
     	

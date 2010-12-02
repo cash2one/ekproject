@@ -127,7 +127,7 @@ class PostThread extends Thread {
     	String returnMsg ="";
     	try{
     		exceptionCodes = "";
-	    	if(syn_tran.toLowerCase().indexOf("ht")>=0){
+	    	if(Config.HT_IS_RUN&&syn_tran.toLowerCase().indexOf("ht")>=0){
 	    		info = KetangLoginEncoder.encodeKetangLoginParam("QuanTong","2", userId, requestIp, userAgent);
 	    		returnMsg =util.post(Config.SYN_LESSON_URL_HT,Locale.CHINA, Config.SYN_LESSON_URL_HT_PARAMSFORMAT, info);
 	    		if(Config.ISDEUG)
@@ -136,7 +136,7 @@ class PostThread extends Thread {
 	    			exceptionCodes+="ht,";
 	    	}
 	    	
-	        if(syn_tran.toLowerCase().indexOf("kl")>=0){
+	        if(Config.KL_IS_RUN&&syn_tran.toLowerCase().indexOf("kl")>=0){
 	        	if (password == null) {
 					password = stu_sequence + "xxt@2008";
 				}
@@ -148,7 +148,7 @@ class PostThread extends Thread {
 	    			exceptionCodes+="kl,";
 	        }
 	        
-			if(syn_tran.toLowerCase().indexOf("ww")>=0){
+			if(Config.WW_IS_RUN&&syn_tran.toLowerCase().indexOf("ww")>=0){
 			    info = KetangLoginEncoder.encodeKetangLoginParam("QuanTong","2", userId, requestIp, userAgent);
 			    returnMsg =util.post(Config.SYN_LESSON_URL_WW,Locale.CHINA, Config.SYN_LESSON_URL_WW_PARAMSFORMAT, info);
 			    if(Config.ISDEUG)
@@ -157,7 +157,7 @@ class PostThread extends Thread {
 	    			exceptionCodes+="ww,";
 			}
 			
-			if(syn_tran.toLowerCase().indexOf("zx")>=0){
+			if(Config.ZX_IS_RUN&&syn_tran.toLowerCase().indexOf("zx")>=0){
 				info = KetangLoginEncoder.encodeKetangLoginParam("QuanTong","2", userId, requestIp, userAgent);
 				returnMsg =util.post(Config.SYN_LESSON_URL_ZX,Locale.CHINA, Config.SYN_LESSON_URL_ZX_PARAMSFORMAT, info);
 				if(Config.ISDEUG)

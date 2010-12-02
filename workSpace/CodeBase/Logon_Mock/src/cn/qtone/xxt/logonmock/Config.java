@@ -21,6 +21,7 @@ public class Config {
 	public static boolean URL_FORMATE_STATE = false;
 	public static String TARGET_AREA = "CS";
 	public static boolean IS_CALL_PROCEDURE = false;
+	public static int THREAD_CHECK_TIMER = 30;
 	
 	// public static String SYN_LESSON_URL_HT =
 	// "http://ketang.ldcstudy.com/login/synlogin.form?info=";
@@ -34,16 +35,22 @@ public class Config {
 	public static String SYN_LESSON_URL_HT = "http://ketang.ldcstudy.com/login/synlogin.form?info=";
 	public static String SYN_LESSON_URL_HT_PARAMSFORMAT = "";
 	public static String SYN_LESSON_URL_HT_REQ_ERROR ="";
+	public static boolean HT_IS_RUN = false;
+	
 	public static String SYN_LESSON_URL_KL = "http://gd.91118.com/Interface/logincheck.aspx?gd=Yes&username=";
 	public static String SYN_LESSON_URL_KL_PARAMSFORMAT = "";
 	public static String SYN_LESSON_URL_KL_REQ_ERROR ="";
+	public static boolean KL_IS_RUN = false;
+	
 	public static String SYN_LESSON_URL_ZX = "http://family.chinaeduonline.cn/login/synlogin.form?info=";
 	public static String SYN_LESSON_URL_ZX_PARAMSFORMAT = "";
 	public static String SYN_LESSON_URL_ZX_REQ_ERROR ="";
+	public static boolean ZX_IS_RUN = false;
+	
 	public static String SYN_LESSON_URL_WW = "http://wawa.chinaeduonline.cn/login/synlogin.form?info=";
 	public static String SYN_LESSON_URL_WW_PARAMSFORMAT = "";
 	public static String SYN_LESSON_URL_WW_REQ_ERROR ="";
-
+	public static boolean WW_IS_RUN = false;
 	
 	static {                 
 			Document doc = XmlHandler.loadXML(CONFIG_FILE);
@@ -57,6 +64,9 @@ public class Config {
 				   ISDEUG = true; 
 				if(!Checker.isNull(element.attributeValue("paramsFormat"))&&"true".equals(element.attributeValue("paramsFormat").toLowerCase()))
 					URL_FORMATE_STATE = true; 
+				
+				if(!Checker.isNull(element.attributeValue("check_timer")))
+					THREAD_CHECK_TIMER = Integer.parseInt(element.attributeValue("check_timer"));; 
 			}
 	
 			element = XmlHandler.getElement(doc, "Logon-Module/IS_CALL_PROCEDURE");
@@ -82,6 +92,9 @@ public class Config {
 						.attributeValue(PARAMSFORAMT_ATTRUBUTE).trim();
 				SYN_LESSON_URL_HT_REQ_ERROR = element
 				.attributeValue(REQUERST_URL_ERROR_FLAG).trim();
+				
+				if(!Checker.isNull(element.attributeValue("run"))&&"true".equals(element.attributeValue("run").toLowerCase()))
+					HT_IS_RUN = true; 
 			}
 			
 			element = XmlHandler.getElement(doc, "Logon-Module/SYN_LESSON_URL_KL");
@@ -91,6 +104,9 @@ public class Config {
 						.attributeValue(PARAMSFORAMT_ATTRUBUTE).trim();
 				SYN_LESSON_URL_KL_REQ_ERROR = element
 				.attributeValue(REQUERST_URL_ERROR_FLAG).trim();
+				
+				if(!Checker.isNull(element.attributeValue("run"))&&"true".equals(element.attributeValue("run").toLowerCase()))
+					KL_IS_RUN = true; 
 			}
 			
 			element = XmlHandler.getElement(doc, "Logon-Module/SYN_LESSON_URL_ZX");
@@ -100,6 +116,9 @@ public class Config {
 						.attributeValue(PARAMSFORAMT_ATTRUBUTE).trim();
 				SYN_LESSON_URL_ZX_REQ_ERROR = element
 				.attributeValue(REQUERST_URL_ERROR_FLAG).trim();
+				
+				if(!Checker.isNull(element.attributeValue("run"))&&"true".equals(element.attributeValue("run").toLowerCase()))
+					ZX_IS_RUN = true; 
 			}
 			
 			element = XmlHandler.getElement(doc, "Logon-Module/SYN_LESSON_URL_WW");
@@ -109,6 +128,9 @@ public class Config {
 						.attributeValue(PARAMSFORAMT_ATTRUBUTE).trim();
 				SYN_LESSON_URL_WW_REQ_ERROR = element
 				.attributeValue(REQUERST_URL_ERROR_FLAG).trim();
+				
+				if(!Checker.isNull(element.attributeValue("run"))&&"true".equals(element.attributeValue("run").toLowerCase()))
+					WW_IS_RUN = true; 
 			}
 			
 			doc = null;
