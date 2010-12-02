@@ -44,6 +44,15 @@
 		</layout>
 	</appender>
 
+  <!-- 应用日志 -->
+	<appender name="appRunning_debug" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="logs/debug.log" />
+		<param name="Append" value="true" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{ABSOLUTE} %-5p [%c] (%C:%L) - %m%n" />
+		</layout>
+	</appender>
 
 	<!-- 不带执行轨迹错误日志 -->
 	<appender name="simpleError" class="org.apache.log4j.DailyRollingFileAppender">
