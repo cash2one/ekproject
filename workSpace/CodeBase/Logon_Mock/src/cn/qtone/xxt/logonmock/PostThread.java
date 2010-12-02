@@ -166,6 +166,7 @@ class PostThread extends Thread {
 	    			exceptionCodes+="zx,";
 			}
     	}catch(Exception e){
+    		e.printStackTrace();
     		AppLoger.getSimpleErrorLogger().info(e.getMessage());	
     	}finally{
     	    if(!Checker.isNull(exceptionCodes)) 

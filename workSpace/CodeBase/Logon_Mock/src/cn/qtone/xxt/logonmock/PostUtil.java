@@ -84,7 +84,8 @@ public class PostUtil {
             if(Config.ISDEUG)
             	AppLoger.getRuningLogger().debug("TARGET-URL: "+urlStr+str);
             //把数据写入
-			out.flush();
+            out.write(new String(str.getBytes("ISO-8859-1")));
+            out.flush();
 			out.close();
 			
 			br = new BufferedReader(new InputStreamReader(conn
@@ -163,6 +164,12 @@ public class PostUtil {
 		if(content.indexOf("400")>0)
 			return true;
 		if(content.indexOf("405")>0)
+			return true;
+		if(content.indexOf("错误")>0)
+			return true;
+		if(content.indexOf("出错")>0)
+			return true;
+		if(content.indexOf("失败")>0)
 			return true;
 		return false;
 	}
