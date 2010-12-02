@@ -157,6 +157,16 @@ public class PostUtil {
 			return false;
 	}
 	
+	public boolean requestError(String content){
+		if(content==null)
+			return true;
+		if(content.indexOf("400")>0)
+			return true;
+		if(content.indexOf("405")>0)
+			return true;
+		return false;
+	}
+	
 	
 	public static void main(String[] args) {
 	

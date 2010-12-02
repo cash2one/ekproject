@@ -122,7 +122,7 @@ class PostThread extends Thread {
     void tryToLoginSite(String syn_tran,String stu_sequence,String userId,String password){
     	String exceptionCodes = "";
     	String info ="";
-    	String userAgent ="";
+    	String userAgent ="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)";
     	String requestIp ="127.0.0.1";
     	String returnMsg ="";
     	try{
@@ -132,7 +132,7 @@ class PostThread extends Thread {
 	    		returnMsg =util.post(Config.SYN_LESSON_URL_HT,Locale.CHINA, Config.SYN_LESSON_URL_HT_PARAMSFORMAT, info);
 	    		if(Config.ISDEUG)
 	    			AppLoger.getRuningLogger().info("登录HT后返回信息:"+returnMsg);
-	    		if(util.findKeyWord(returnMsg, Config.SYN_LESSON_URL_HT_REQ_ERROR))
+	    		if(returnMsg==null||util.findKeyWord(returnMsg, Config.SYN_LESSON_URL_HT_REQ_ERROR)||util.requestError(returnMsg))
 	    			exceptionCodes+="ht,";
 	    	}
 	    	
@@ -144,7 +144,7 @@ class PostThread extends Thread {
 	        	returnMsg =util.post(Config.SYN_LESSON_URL_KL,Locale.CHINA, Config.SYN_LESSON_URL_KL_PARAMSFORMAT, new String[]{userId,password});
 	        	if(Config.ISDEUG)
 	        		AppLoger.getRuningLogger().info("登录KL后返回信息:"+returnMsg);
-	        	if(util.findKeyWord(returnMsg, Config.SYN_LESSON_URL_KL_REQ_ERROR))
+	        	if(returnMsg==null||util.findKeyWord(returnMsg, Config.SYN_LESSON_URL_KL_REQ_ERROR)||util.requestError(returnMsg))
 	    			exceptionCodes+="kl,";
 	        }
 	        
@@ -153,7 +153,7 @@ class PostThread extends Thread {
 			    returnMsg =util.post(Config.SYN_LESSON_URL_WW,Locale.CHINA, Config.SYN_LESSON_URL_WW_PARAMSFORMAT, info);
 			    if(Config.ISDEUG)
 			    	AppLoger.getRuningLogger().info("登录WW后返回信息:"+returnMsg);
-			    if(util.findKeyWord(returnMsg, Config.SYN_LESSON_URL_WW_REQ_ERROR))
+			    if(returnMsg==null||util.findKeyWord(returnMsg, Config.SYN_LESSON_URL_WW_REQ_ERROR)||util.requestError(returnMsg))
 	    			exceptionCodes+="ww,";
 			}
 			
@@ -162,7 +162,7 @@ class PostThread extends Thread {
 				returnMsg =util.post(Config.SYN_LESSON_URL_ZX,Locale.CHINA, Config.SYN_LESSON_URL_ZX_PARAMSFORMAT, info);
 				if(Config.ISDEUG)
 					AppLoger.getRuningLogger().info("登录ZX后返回信息:"+returnMsg);
-				if(util.findKeyWord(returnMsg, Config.SYN_LESSON_URL_ZX_REQ_ERROR))
+				if(returnMsg==null||util.findKeyWord(returnMsg, Config.SYN_LESSON_URL_ZX_REQ_ERROR)||util.requestError(returnMsg))
 	    			exceptionCodes+="zx,";
 			}
     	}catch(Exception e){
