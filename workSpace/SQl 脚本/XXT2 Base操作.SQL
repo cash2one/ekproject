@@ -21,20 +21,29 @@ and userid like 'zs%'
 SELECT * from config_cache a
 where exists ( 
       select * from qx_function b where a.function_id = b.id 
-      and b.name like '%客服受理统计表%'      
+      and b.name like '%客服服务定制%'      
+)
+
+
+
+SELECT * from config_cache a
+where exists ( 
+      select * from qx_function b where a.function_id = b.id 
+      and b.url like '%whbook%'     
 )
 
 
 select * from user_tables
-where table_name like '%USER%'
+where table_name like '%CPM%C%'
 
 
 
-select * from fs_user
+select * from CZ_CPMESSAGE
 
 
 select * from xj_teacher
 where userid like 'zsluhehai1'
+
 
 
 
@@ -51,9 +60,15 @@ where exists
  )
  
  
- select * from gz_synlesson_booklog
- order by operate_date desc
+
+
+ update yw_tran_import a set type=4 
+ where exists (select 1 from gz_blocklist b 
+                 where b.phone=a.phone and b.del=0 and b.service in()) and operator_id=17531
+                 
+                 
+                 
+ select * from gz_blocklist                 
  
  
- select * from yw_tran_import 
- 
+ select * from gz_tran_confirmstatus
