@@ -10,7 +10,7 @@ order by operate_date desc
 select * from yw_tran_operator
 
 
-select * from BASE_TRANSACTION
+BASE_TRANSACTION
 
  
 --pass cp µº»Î 
@@ -55,18 +55,24 @@ order by id desc
    
    
    
-   IF tran='121' & abb ='gz'
-   
-      
+   IF tran='121' & abb ='gz'    
       insert into cp_business_log(phone,si_id,cp_id,business_id,open,open_date,book_type,operator,reason) values();
       VALUE 
            
       insert into cp_mobiler(mobile,reg_time,business_id,cp_id,order_time,order_type,isorder,is_charge,update_time,first_order_time)
-   
-   
   
    END
+  
+   
+   select b. from yw_tran_operator b
+
+   select * from yw_tran_import 
+
+   select * from BASE_TRANSACTION
+ 
+   select * from gz_tran_confirmstatus
    
    
    
-   select * from gz_worktask_cp_sms
+   select * from yw_tran_import
+   order by id desc
