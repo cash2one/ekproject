@@ -5,3 +5,7 @@ Nkn2j9*&qt0               67.2
 
 
 DBXYD-TF477-46YM4-W74MH-6YDQ8
+
+
+bundles 
+http://ebr.springsource.com/repository/app/bundle;jsessionid=F94C9B7115E571CA0A430CAA9DA5F168.jvm1?query=O
