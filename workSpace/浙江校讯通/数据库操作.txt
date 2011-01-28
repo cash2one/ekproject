@@ -1,0 +1,45 @@
+alter table oa_mobile_msg add stat_sn varchar2(20);
+
+alter table oa_mobile_msg add stat_sn varchar2(20);
+
+
+
+alter table dx_admin_confirmsms add deal_type number(3) default 0;
+
+alter table dx_admin_confirmsms add linkman_ids varchar2(2000);
+
+alter table dx_admin_confirmsms add spend_cent number(6);
+
+alter table dx_admin_confirmsms islong_sms number(3) ;
+
+
+
+
+
+
+
+
+
+
+
+
+
+commit -m "" E:/elam/Workspaces/xxt_zj/src/cn/qtone/xxt/oa/address/publicList/dao/PublicListDAO.java
+    Sending        E:/elam/Workspaces/xxt_zj/src/cn/qtone/xxt/oa/address/publicList/dao/PublicListDAO.java
+    Transmitting file data ...
+    Committed revision 2805.
+commit -m "" E:/elam/Workspaces/xxt_zj/src/cn/qtone/xxt/oa/sms/SendSms/dao/SendSmsDAO.java
+    Sending        E:/elam/Workspaces/xxt_zj/src/cn/qtone/xxt/oa/sms/SendSms/dao/SendSmsDAO.java
+    Transmitting file data ...
+    Committed revision 2806.
+update E:/elam/Workspaces/xxt_zj/src/cn/qtone/xxt/admin/jzdx/oaconfirmsms/dao/OAConfirmSMSDAO.java -r HEAD --force
+    At revision 2806.
+commit -m "" E:/elam/Workspaces/xxt_zj/src/cn/qtone/xxt/admin/jzdx/oaconfirmsms/dao/OAConfirmSMSDAO.java
+    Sending        E:/elam/Workspaces/xxt_zj/src/cn/qtone/xxt/admin/jzdx/oaconfirmsms/dao/OAConfirmSMSDAO.java
+    Transmitting file data ...
+    Committed revision 2807.
+commit -m "" E:/elam/Workspaces/xxt_zj/src/cn/qtone/xxt/admin/jzdx/propertyset/dao/PropertySetDAO.java E:/elam/Workspaces/xxt_zj/src/cn/qtone/xxt/admin/jzdx/propertyset/view/PropertySetView.java
+    Sending        E:/elam/Workspaces/xxt_zj/src/cn/qtone/xxt/admin/jzdx/propertyset/dao/PropertySetDAO.java
+    Sending        E:/elam/Workspaces/xxt_zj/src/cn/qtone/xxt/admin/jzdx/propertyset/view/PropertySetView.java
+
+
