@@ -12,3 +12,6 @@ http://ebr.springsource.com/repository/app/bundle;jsessionid=F94C9B7115E571CA0A4
 
 
 http://waya520.taobao.com/
+
+
+http://bbs.duowan.com/thread-18530611-1-1.html
