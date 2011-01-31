@@ -11,7 +11,5 @@ public interface Template {
 	
       public void setColumnsInfo(String[] title, int[] width);	   
 	
-      
-      
-                  
+                 
 }

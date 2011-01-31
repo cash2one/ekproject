@@ -7,7 +7,9 @@ package cn.elamzs.common.eimport.Anotation;
  */
 public @interface ValidatorRule {
 
-	String name(); //导入的列名 ，需要唯一
+	String ename(); //导入的列名 ，需要唯一
+	
+	int column(); //对应导入文件的列序号
 	
 	boolean check() default false; //设置赋值后是否需要验证值的合法性
 	

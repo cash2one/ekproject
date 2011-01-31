@@ -1,6 +1,7 @@
 
 package cn.elamzs.common.eimport.sample;
 
+import cn.elamzs.common.eimport.Anotation.Restriction;
 import cn.elamzs.common.eimport.Anotation.ValidatorRule;
 
 /**
@@ -10,27 +11,28 @@ import cn.elamzs.common.eimport.Anotation.ValidatorRule;
  *
  *
  */
+@Restriction(check=true)
 public class TestValidator {
 
-    @ValidatorRule(name = "name",check=true)    
+    @ValidatorRule(ename = "name",check=true, column = 1)    
 	public String checkName(String value){
 		//填写验证 value 值是否符合输入合法性	
     	return "不能为空";
 	}
     
-    @ValidatorRule(name = "phone",check=true)
+    @ValidatorRule(ename = "phone",check=true, column = 2)
     public String checkPhone(String value){
     	//填写验证 value 值是否符合输入合法性
     	return "不是合法手机号码";
     }
     
-    @ValidatorRule(name = "num",check=true)
+    @ValidatorRule(ename = "num",check=true, column = 3)
     public String checkNum(String value){
     	//填写验证 value 值是否符合输入合法性	
     	return "不是合法数字";
     }
     
-    @ValidatorRule(name = "remarks",check=false)
+    @ValidatorRule(ename = "remarks",check=false, column = 4)
     public String checkRemarks(String value){
     	//不需要验证 
     	return null;
