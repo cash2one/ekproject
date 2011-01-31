@@ -3,7 +3,7 @@ package cn.elamzs.common.eimport.sample;
 /**
  * 
  * 定义了针对中间表数据的 处理过程
- * 中间表的数据作为数据源
+ * 利用中间表的数据作为数据源
  *  
  * @author Ethan.Lam
  *
