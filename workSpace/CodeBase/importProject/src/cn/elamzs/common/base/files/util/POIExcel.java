@@ -55,82 +55,103 @@ public class POIExcel {
 		} else {// 2007
 			wb = new XSSFWorkbook(is);
 		}
-
 		read(wb);
 	}
 
 	/**
 	 * 具体读取Excel
-	 * 
 	 * @param wb
 	 * @throws Exception
 	 */
 	public static void read(Workbook wb) throws Exception {
 		try {
-
 			for (int k = 0; k < wb.getNumberOfSheets(); k++) {
-
 				// sheet
 				Sheet sheet = wb.getSheetAt(k);
 				int rows = sheet.getPhysicalNumberOfRows();
+				for (int r = 0; r < rows; r++)
+					readRowValues(sheet, r);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
-				for (int r = 0; r < rows; r++) {
-					// 定义 row
-					Row row = sheet.getRow(r);
-					if (row != null) {
-						int cells = row.getPhysicalNumberOfCells();
+	}
 
-						for (short c = 0; c < cells; c++) {
-							Cell cell = row.getCell(c);
-							if (cell != null) {
-								String value = null;
+	public static Workbook createWorkBook(String file){
+	   	return null;
+	}
+	
+	
+	/**
+	 * @param wb
+	 * @param sheet
+	 * @return
+	 */
+    public static Sheet getSheet(Workbook wb,int sheet){
+        int totalNum =  wb.getNumberOfSheets();
+        if(sheet+1<totalNum)
+        	return wb.getSheetAt(sheet);
+    	return null;
+    }
+	
 
-								switch (cell.getCellType()) {
+	/**
+	 * 
+	 * 读取其中一行的数据的值
+	 * 
+	 * @param sheet
+	 * @param rowSeq
+	 */
+	public static void readRowValues(Sheet sheet, int rowSeq) {
+		try {
+			// 定义 row
+			Row row = sheet.getRow(rowSeq);
+			if (row != null) {
+				int cells = row.getPhysicalNumberOfCells();
 
-								case Cell.CELL_TYPE_FORMULA:
-									value = "FORMULA value="
-											+ cell.getCellFormula();
-									break;
+				for (short c = 0; c < cells; c++) {
+					Cell cell = row.getCell(c);
+					if (cell != null) {
+						String value = null;
 
-								case Cell.CELL_TYPE_NUMERIC:
-									if (HSSFDateUtil.isCellDateFormatted(cell)) {
-										value = "DATE value="
-												+ cell.getDateCellValue();
-									} else {
-										value = "NUMERIC value="
-												+ cell.getNumericCellValue();
-									}
+						switch (cell.getCellType()) {
 
-									break;
+						case Cell.CELL_TYPE_FORMULA:
+							value = "FORMULA value=" + cell.getCellFormula();
+							break;
 
-								case Cell.CELL_TYPE_STRING:
-									value = "STRING value="
-											+ cell.getStringCellValue();
-									break;
-
-								case Cell.CELL_TYPE_BOOLEAN:
-									value = "BOOLEAN value="
-											+ cell.getBooleanCellValue();
-
-									cell.getDateCellValue();
-
-									break;
-
-								default:
-								}
-
-								System.out.println(value);
-
+						case Cell.CELL_TYPE_NUMERIC:
+							if (HSSFDateUtil.isCellDateFormatted(cell)) {
+								value = "DATE value=" + cell.getDateCellValue();
+							} else {
+								value = "NUMERIC value="
+										+ cell.getNumericCellValue();
 							}
+
+							break;
+
+						case Cell.CELL_TYPE_STRING:
+							value = "STRING value=" + cell.getStringCellValue();
+							break;
+
+						case Cell.CELL_TYPE_BOOLEAN:
+							value = "BOOLEAN value="
+									+ cell.getBooleanCellValue();
+							break;
+						default:
 						}
+
+						System.out.println(value);
+
 					}
 				}
 			}
 		} catch (Exception e) {
 
-			e.printStackTrace();
-		}
+		} finally {
 
+		}
 	}
 
 	/**
