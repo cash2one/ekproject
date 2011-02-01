@@ -2,6 +2,7 @@ package cn.elamzs.common.base.files.util;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 
 import org.apache.poi.hssf.usermodel.HSSFDateUtil;
@@ -78,8 +79,25 @@ public class POIExcel {
 
 	}
 
-	public static Workbook createWorkBook(String file){
-	   	return null;
+	
+	/**
+	 * 创建工作薄
+	 * @param file
+	 * @return
+	 * @throws Exception 
+	 */
+	public static Workbook createWorkBook(String fileName,boolean flag) throws Exception{
+		Workbook wb = null;
+		if (flag) {// 2003
+			File f = new File(fileName);
+			FileInputStream is = new FileInputStream(f);
+			POIFSFileSystem fs = new POIFSFileSystem(is);
+			wb = new HSSFWorkbook(fs);
+			is.close();
+		} else {// 2007
+			wb = new XSSFWorkbook(fileName);
+		}
+	   	return wb;
 	}
 	
 	
