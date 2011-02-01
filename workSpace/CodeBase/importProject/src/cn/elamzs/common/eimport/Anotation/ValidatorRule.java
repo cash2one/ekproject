@@ -9,7 +9,9 @@ public @interface ValidatorRule {
 
 	String ename(); //导入的列名 ，需要唯一
 	
-	int column(); //对应导入文件的列序号
+	String showName(); //文本中显示的列名
+	
+	int columnSeq(); //对应导入文件的列序号
 	
 	boolean check() default false; //设置赋值后是否需要验证值的合法性
 	

@@ -18,7 +18,7 @@ public abstract class AbstractDataImport implements EImporter {
 	
 	DataValidator validator = null;  //数据验证器
 	
-	FileHandler handle = null;
+	FileHandler handler = null;
 	
 	public AbstractDataImport(DataValidator validator,String fileName){
 	        this.validator = validator;
@@ -38,30 +38,37 @@ public abstract class AbstractDataImport implements EImporter {
 	}
 
 	@Override
-	public String upLoadFile(String dataFile) {
+	public String importFile(String dataFile) {
 		// TODO Auto-generated method stub
+		//根据文件，配置对应的处理类
+		appendDataHandler(dataFile);
+		Thread importThread = new Thread(handler);
+        importThread.start(); 
 		return null;
 	}
 
 	
 	/**
-	 * 
+	 * 根据文件类型，装配对应的处理类
 	 * @param fileName
 	 */
 	void appendDataHandler(String fileName){
+		File file = new File(fileName);
+		
 		String suffix = fileName.substring(fileName.lastIndexOf("."));
 		for(FileType t:FileType.values()){
 			if(FileType.EXCEL_XLS.suffix().equals(suffix)){
                 this.fileType = t;
 			}
 		}
-		
 		if(FileType.EXCEL_XLS.equals(fileType)||FileType.EXCEL_XLSX.equals(fileType))
-			this.handle = (FileHandler) new ExcelImportHandler();
+			this.handler = (FileHandler) new ExcelImportHandler(validator,file);
 		else if(FileType.TXT.equals(fileType))
-			this.handle = new TxtImportHandler();
+			this.handler = new TxtImportHandler(validator,file);
 		
 	};
+	
+	
 	
 	
 }
