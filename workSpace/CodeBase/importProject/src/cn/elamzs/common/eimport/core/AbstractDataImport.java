@@ -62,7 +62,7 @@ public abstract class AbstractDataImport implements EImporter {
 			}
 		}
 		if(FileType.EXCEL_XLS.equals(fileType)||FileType.EXCEL_XLSX.equals(fileType))
-			this.handler = (FileHandler) new ExcelImportHandler(validator,file);
+			this.handler = (FileHandler) new ExcelImportHandler(validator,file,FileType.EXCEL_XLS.equals(fileType)?0:1);
 		else if(FileType.TXT.equals(fileType))
 			this.handler = new TxtImportHandler(validator,file);
 		

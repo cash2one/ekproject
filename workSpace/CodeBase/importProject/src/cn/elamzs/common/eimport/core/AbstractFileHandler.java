@@ -14,9 +14,11 @@ public abstract class AbstractFileHandler implements FileHandler{
 	
     public void run(){
     	System.out.println("Create A new Import Thread and start run data import_pro. ");
-    	
-    	loadDatas();
-    	
+    	try {
+			loadDatas();
+    	} catch (Exception e) {
+			e.printStackTrace();
+		}
     	System.out.println("Create A new Import Thread.....");
     }
     
