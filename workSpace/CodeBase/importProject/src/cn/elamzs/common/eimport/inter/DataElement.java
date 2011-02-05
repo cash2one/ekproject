@@ -87,6 +87,9 @@ public class DataElement {
 	    	return "";
 	    }
 		try{
+			if(validatResult!=null)
+			   validatResult.delete(0, validatResult.length());
+			
 			for(int columnSeq = 0;columnSeq<rowValues.length;columnSeq++){ 
 				//记录当前行的数据
 				this.currentRowValuesMap.put(columnSeq+"", rowValues[columnSeq]);

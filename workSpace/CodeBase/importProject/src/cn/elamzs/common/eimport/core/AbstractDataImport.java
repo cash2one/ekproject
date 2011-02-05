@@ -3,11 +3,13 @@ package cn.elamzs.common.eimport.core;
 import java.io.File;
 
 import cn.elamzs.common.eimport.enums.FileType;
+import cn.elamzs.common.eimport.inter.DataProcess;
 import cn.elamzs.common.eimport.inter.DataValidator;
 import cn.elamzs.common.eimport.inter.EImporter;
 
 /**
- * @author Ethan.Lam
+ * 
+ * @author Ethan.Lam   2011-2-5
  *
  */
 public abstract class AbstractDataImport implements EImporter {
@@ -17,6 +19,8 @@ public abstract class AbstractDataImport implements EImporter {
 	protected String fileName;
 	
 	DataValidator validator = null;  //数据验证器
+	
+	DataProcess dataProcess = null;  //数据处理器
 	
 	FileHandler handler = null;
 	
@@ -61,10 +65,12 @@ public abstract class AbstractDataImport implements EImporter {
                 this.fileType = t;
 			}
 		}
+		
+		//
 		if(FileType.EXCEL_XLS.equals(fileType)||FileType.EXCEL_XLSX.equals(fileType))
-			this.handler = (FileHandler) new ExcelImportHandler(validator,file,FileType.EXCEL_XLS.equals(fileType)?0:1);
+			this.handler = (FileHandler) new ExcelImportHandler(validator,dataProcess,file,FileType.EXCEL_XLS.equals(fileType)?0:1);
 		else if(FileType.TXT.equals(fileType))
-			this.handler = new TxtImportHandler(validator,file);
+			this.handler = new TxtImportHandler(validator,dataProcess,file);
 		
 	};
 	
