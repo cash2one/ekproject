@@ -1,4 +1,4 @@
-package cn.elamzs.common.eimport.inter;
+package cn.elamzs.common.eimport.core;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -6,6 +6,7 @@ import java.util.Map;
 
 import cn.elamzs.common.base.files.util.StringUtil;
 import cn.elamzs.common.eimport.Anotation.ValidatorRule;
+import cn.elamzs.common.eimport.inter.DataValidator;
 
 /**
  * 
@@ -18,8 +19,12 @@ public class DataElement {
 	//记录对输入每行数据验证时的提示结果
 	private StringBuffer validatResult = new StringBuffer();
 
-	//用来记录 列序号-列命名  键值对 数据
+	//用来记录   列序号-列命名  与 列名--列序号   键值对 数据集合   
 	private Map<String,String> valueKeySets = null; 
+
+	
+	//用来记录   列序号-列中文命名   键值对 数据集合   
+	private Map<Integer,String> cnColumnsName = null;
 	
 	//记录当前行的数据（临时内存）
 	private Map<String,String> currentRowValuesMap = new HashMap<String,String>();
@@ -46,15 +51,19 @@ public class DataElement {
 		    	return;
 		    validatorMethodSet = new HashMap<Integer,Method>();
 		    valueKeySets = new HashMap<String,String>();
+		    cnColumnsName = new HashMap<Integer,String>();
+		    
     	    for(Method method:methods){
 		    	 ValidatorRule rule = method.getAnnotation(ValidatorRule.class);		    	
 		    	 if(rule!=null){
 		    		 
-		    		 if(valueKeySets.containsKey(rule.columnSeq()))
+		    		 if(valueKeySets.containsKey("cs_"+rule.columnSeq()))
 		    			 throw new Exception("模版中定义重复的列序号! DataValidator Class:"+validator.getClass().getName()+",column:"+rule.columnSeq());
 		    		 
-		    		 valueKeySets.put(rule.columnSeq()+"", rule.ename());
-		    		 valueKeySets.put(rule.ename(), rule.columnSeq()+"");
+		    		 valueKeySets.put("cs_"+rule.columnSeq(),rule.columnSeq()+"");
+		    		 valueKeySets.put("cn_"+rule.ename(), rule.columnSeq()+"");
+		    		 
+		    		 cnColumnsName.put(rule.columnSeq(),rule.showName());
 		    		 
 		    		 //假如该列配置执行验证的方法，就必须记录该验证的方法
 		    		 if(rule.check())
@@ -110,13 +119,33 @@ public class DataElement {
 	}
 	
 	/**
+	 * 
+	 * 校验导入文件的 导入列  是否与   对应模版类   中所设置要求的一致
+	 * @param columns
+	 * @return 完成匹配的返回 true /不匹配的返回 false
+	 */
+	public boolean checkImpColumnsMatch(String[] columns){
+		if(columns==null||columns.length==0)
+			return false;
+        
+		int columnSeq = 0;
+ 		for(String cname:columns){
+			if(cnColumnsName.containsKey(columnSeq)&&!StringUtil.isEqual(cnColumnsName.get(columnSeq),cname))
+				return false;
+			columnSeq++;
+ 		}
+		return true;
+	}
+	
+	
+	/**
 	 * 返回列对应的值
 	 * @param columnSeq 列序号
 	 * @return
 	 */
 	public String getColumnValue(int columnSeq){
-		if(this.valueKeySets.containsKey(columnSeq+""))
-			return this.currentRowValuesMap.get(this.valueKeySets.get(columnSeq+""));
+		if(this.valueKeySets.containsKey("cs_"+columnSeq))
+			return this.currentRowValuesMap.get(this.valueKeySets.get("cs_"+columnSeq));
 		return "";
 	}
 	
@@ -126,8 +155,8 @@ public class DataElement {
 	 * @return
 	 */
 	public String getColumnValue(String columnName){
-		if(this.valueKeySets.containsKey(columnName))
-			return this.currentRowValuesMap.get(this.valueKeySets.get(columnName));
+		if(this.valueKeySets.containsKey("cn_"+columnName))
+			return this.currentRowValuesMap.get(this.valueKeySets.get("cn_"+columnName));
 		return "";
 	}
 	

@@ -30,24 +30,28 @@ public abstract class AbstractDataImport implements EImporter {
 	}
 
 	@Override
-	public File getImportedResult(String fileIdentifyId) {
+	public File getImportedResult(String fileIdentifyId) throws Exception{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public File getResourceFile(String fileIdentifyId) {
+	public File getResourceFile(String fileIdentifyId) throws Exception{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public String importFile(String dataFile) {
+	public String importFile(String dataFile) throws Exception {
 		// TODO Auto-generated method stub
+		
 		//根据文件，配置对应的处理类
 		appendDataHandler(dataFile);
+		
+		//开始执行文件导入数据处理，启动线程处理
 		Thread importThread = new Thread(handler);
         importThread.start(); 
+        
 		return null;
 	}
 
@@ -55,8 +59,9 @@ public abstract class AbstractDataImport implements EImporter {
 	/**
 	 * 根据文件类型，装配对应的处理类
 	 * @param fileName
+	 * @throws Exception 
 	 */
-	void appendDataHandler(String fileName){
+	void appendDataHandler(String fileName) throws Exception{
 		File file = new File(fileName);
 		
 		String suffix = fileName.substring(fileName.lastIndexOf("."));
