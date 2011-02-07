@@ -11,8 +11,11 @@ import cn.elamzs.common.eimport.inter.DataValidator;
 /**
  * 
  * @author Ethan.Lam   2011-2-5
- * 数据封装类，行列数据
+ * 数据封装类，行列数据对象
  * 
+ * 描述：作用：1、校验行数据（连接对应的校验器），返回对应的校验结果信息
+ *            2、可加载对应的模版信息 。
+ *            3、保存当前行列数据。
  */
 public class DataElement {
 
@@ -83,7 +86,8 @@ public class DataElement {
 	
 	
 	/**
-	 * 验证列对应的值是否合法，不合法的返回
+	 * 
+	 * 执行对应的校验器，验证列对应的值是否合法，不合法的返回
 	 * @param rowValues
 	 * @return 返回验证后的信息
 	 */
