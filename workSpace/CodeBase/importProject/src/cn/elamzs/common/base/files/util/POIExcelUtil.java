@@ -1,17 +1,24 @@
 package cn.elamzs.common.base.files.util;
 
+import java.awt.Color;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 
 import org.apache.poi.hssf.usermodel.HSSFDateUtil;
+import org.apache.poi.hssf.usermodel.HSSFFont;
+import org.apache.poi.hssf.usermodel.HSSFPalette;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.RichTextString;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
@@ -230,6 +237,7 @@ public class POIExcelUtil {
 				newCell= newRow.createCell(cellIndex);
 				newCell.setCellType(Cell.CELL_TYPE_STRING);
 				newCell.setCellValue(columnsName[cellIndex]);
+				setFontColor(0,0,Color.red,wb,wb.getSheetAt(0));
 			}	
 			
 			
@@ -274,6 +282,66 @@ public class POIExcelUtil {
 		}
 
 	}
+	
+	
+	   /**
+	    * 设置字体颜色
+	    * @param rowIndex
+	    * @param colIndex
+	    * @param color
+	    * @param workbook
+	    * @param sheet
+	    */
+	  public static void setFontColor(int rowIndex, int colIndex,Color color,Workbook workbook,  
+	            Sheet sheet) {  
+	        if (sheet == null)  
+	            return;  
+	        if (sheet.getLastRowNum() < rowIndex) {  
+	            throw new IllegalStateException(  
+	                    "rowIndex over maxRowIndex!!!rowIndex:" + rowIndex  
+	                            + "  maxRowIndex:" + sheet.getLastRowNum());  
+	        }  
+	        Row row = sheet.getRow(rowIndex);  
+	        if (row != null) {  
+	            if (row.getPhysicalNumberOfCells() < colIndex) {  
+	                // throw new  
+	                // IllegalStateException("colIndex over maxColIndex!!!colIndex:"+colIndex+"  maxColIndex:"+row.getPhysicalNumberOfCells());  
+	            }  
+	            Cell cell = row.getCell(colIndex);  
+	            if (cell != null) {  
+	                Font font = workbook.createFont();  
+	                if(font instanceof HSSFFont )
+	                  font.setColor(getColor(color,(HSSFWorkbook) workbook).getIndex());  
+	                else if(font instanceof XSSFFont){
+	                  font.setColor((short) color.getRGB());
+	                }
+	                RichTextString ts=cell.getRichStringCellValue();  
+	                ts.applyFont(font);  
+	                cell.setCellValue(ts);  
+	            }  
+	        }  
+	    }  
+	  
+	  
+	  /** 
+	     * 獲取指定顏色對應的HSSF顏色，如果該HSSF顏色不存在，則創建與指定顏色對應的新HSSF顏色 
+	     *  
+	     * @param color 
+	     *            顏色 
+	     * @return HSSF顏色 
+	     */  
+	    public static HSSFColor getColor(Color color,HSSFWorkbook workbook) {  
+	        HSSFPalette palette = workbook.getCustomPalette();  
+	        HSSFColor hssfColor = palette.findColor((byte) color.getRed(),  
+	                (byte) color.getGreen(), (byte) color.getBlue());  
+	        if (hssfColor == null) {  
+	            hssfColor = palette.addColor((byte) color.getRed(), (byte) color  
+	                    .getGreen(), (byte) color.getBlue());  
+	        }  
+	        return hssfColor;  
+	    }  
+	      
+	  
 	
 	/**
 	 * 

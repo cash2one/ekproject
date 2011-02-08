@@ -19,7 +19,7 @@ public @interface ValidatorRule {
 	
 	String showName(); //文本中显示的列名
 	
-	int columnSeq(); //对应导入文件的列序号
+	int columnSeq(); //对应导入文件的列序号    从 0 开始
 	
 	int width() default 50; //列宽设置
 	

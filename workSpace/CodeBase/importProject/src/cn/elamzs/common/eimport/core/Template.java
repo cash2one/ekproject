@@ -1,9 +1,13 @@
 package cn.elamzs.common.eimport.core;
 
+import java.awt.Color;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
+
+import org.apache.poi.ss.usermodel.Workbook;
 
 import cn.elamzs.common.base.files.util.POIExcelUtil;
 import cn.elamzs.common.eimport.Anotation.Restriction;
@@ -108,12 +112,24 @@ public class Template {
      * @return
      */
 	synchronized File createExcleTemplate(FileType type){
-		String columnsNameStr = getImpColumnsName();
-		int[] width = getImpColumnsWidthSet();
-		String [] columnsName = columnsNameStr.split(",");
-		String fileName =ConfigControl.DIR_IMPORT_TEMPLATE+templateName+type.suffix();
-		POIExcelUtil.writeDataToExcel(fileName,columnsName,null,width,FileType.EXCEL_XLS==type?true:false);
-	    return new File(fileName);
+		try{
+			String columnsNameStr = getImpColumnsName();
+			int[] width = getImpColumnsWidthSet();
+			String [] columnsName = columnsNameStr.split(",");
+			String fileName =ConfigControl.DIR_IMPORT_TEMPLATE+templateName+type.suffix();
+			POIExcelUtil.writeDataToExcel(fileName,columnsName,null,width,FileType.EXCEL_XLS==type?true:false);
+			
+//			Workbook wb = POIExcelUtil.openWorkBook(fileName,FileType.EXCEL_XLS==type?true:false);
+//			POIExcelUtil.setFontColor(0,0,Color.red,wb,wb.getSheetAt(0));
+//			FileOutputStream fileOut = new FileOutputStream(fileName);
+//		    wb.write(fileOut);
+//			fileOut.close();
+
+		    return new File(fileName);
+		}catch(Exception e){
+			
+		}
+		return null;
 	}
 	
                  
