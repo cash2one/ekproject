@@ -18,17 +18,23 @@ public class TestDataProcess implements DataProcess {
 		
 	}
 
+	
 	@Override
 	public String[][] createImportResult() throws DataProcessException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	
 	@Override
 	public void forEachRowValueProcess(DataElement data)
 			throws DataProcessException {
-		// TODO Auto-generated method stub
+		for(int index=0;index<4;index++){  
+		  System.out.print(data.getColumnValue(index)+",");
+		}
 		
+		 System.out.print(data.returnRowValidatorMsg());
+		 System.out.println();
 	}
 
 }

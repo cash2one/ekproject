@@ -181,7 +181,7 @@ public class DataElement {
 	 * 返回数据验证后的提示信息
 	 * @return
 	 */
-    String returnRowValidatorMsg(){
+    public String returnRowValidatorMsg(){
 	    if(this.validatResult!=null&&this.validatResult.length()>0)
 	    	return this.validatResult.substring(1);
 	    return "";

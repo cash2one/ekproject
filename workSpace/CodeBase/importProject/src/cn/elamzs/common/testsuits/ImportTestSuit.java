@@ -14,6 +14,14 @@ public class ImportTestSuit {
 		EImporter importer = new ThreadDataImport(v, p);
 		importer.downTemplate(FileType.EXCEL_XLSX);
 	}
+	
+	public static void testImportFile() throws Exception {
+		TestValidator v = new TestValidator();
+		TestDataProcess p = new TestDataProcess();
+		EImporter importer = new ThreadDataImport(v, p);
+		String dataFile = "d:/importfile/src/";
+		importer.importFile(dataFile);
+	}
 
 	public static void main(String... args) throws Exception {
 		testCreateTemplateFile();
