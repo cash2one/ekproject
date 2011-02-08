@@ -111,7 +111,7 @@ public class Template {
 		String columnsNameStr = getImpColumnsName();
 		int[] width = getImpColumnsWidthSet();
 		String [] columnsName = columnsNameStr.split(",");
-		String fileName =ConfigContant.DIR_IMPORT_TEMPLATE+"template_"+templateName+type.suffix();
+		String fileName =ConfigControl.DIR_IMPORT_TEMPLATE+"template_"+templateName+type.suffix();
 		POIExcelUtil.writeDataToExcel(fileName,columnsName,null,width,FileType.EXCEL_XLS==type?true:false);
 	    return new File(fileName);
 	}

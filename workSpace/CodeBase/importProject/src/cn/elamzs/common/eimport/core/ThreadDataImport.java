@@ -45,11 +45,10 @@ public class ThreadDataImport implements EImporter {
 	}
 
 	@Override
-	public File downTemplate(Class<? extends DataValidator> validator,FileType type)
+	public File downTemplate(FileType type)
 			throws Exception {
 		// TODO Auto-generated method stub
-		Object obj = validator.getClass().newInstance();
-		Template template = new Template((DataValidator) obj);
+		Template template = new Template(validator);
 		return template.createImpTemplateDoc(type);
 	}
 	

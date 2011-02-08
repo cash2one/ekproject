@@ -1,6 +1,6 @@
 package cn.elamzs.common.eimport.core;
 
-public class ConfigContant {
+public class ConfigControl {
 	
     public  static String DIR_IMPORT_RESULT = "d:/importfile/result/";
 	

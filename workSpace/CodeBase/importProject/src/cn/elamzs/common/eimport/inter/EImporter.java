@@ -12,8 +12,7 @@ import cn.elamzs.common.eimport.enums.FileType;
 public interface EImporter {
 
 	// 下载导入模版
-	public File downTemplate(Class<? extends DataValidator> validator,
-			FileType type) throws Exception;
+	public File downTemplate(FileType type) throws Exception;
 
 	// 上传文件
 	public String importFile(String dataFile) throws Exception;
