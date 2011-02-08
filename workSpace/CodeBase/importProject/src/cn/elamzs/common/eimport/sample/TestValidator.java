@@ -12,7 +12,7 @@ import cn.elamzs.common.eimport.inter.DataValidator;
  *
  *
  */
-@Restriction(check=true)
+@Restriction(fileName = "导入测试模版",check=true)
 public class TestValidator implements DataValidator{
 
     @ValidatorRule(ename = "name",check=true, columnSeq = 1,showName = "名称")    

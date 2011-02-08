@@ -10,9 +10,11 @@ import cn.elamzs.common.eimport.inter.EImporter;
 /**
  * 
  * @author Ethan.Lam   2011-2-5
- *
+ * 创建对应的线程 执行  文件数据导入 过程
+ * 
+ * 
  */
-public abstract class AbstractDataImport implements EImporter {
+public class ThreadDataImport implements EImporter {
 
 	protected FileType fileType;
 
@@ -24,7 +26,7 @@ public abstract class AbstractDataImport implements EImporter {
 	
 	FileHandler handler = null;
 	
-	public AbstractDataImport(DataValidator validator,String fileName){
+	public ThreadDataImport(DataValidator validator,String fileName){
 	        this.validator = validator;
 	        this.fileName = fileName;
 	}
@@ -41,6 +43,13 @@ public abstract class AbstractDataImport implements EImporter {
 		return null;
 	}
 
+	@Override
+	public File downTemplate(Class<? extends DataValidator> validator)
+			throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 	@Override
 	public String importFile(String dataFile) throws Exception {
 		// TODO Auto-generated method stub
@@ -77,8 +86,7 @@ public abstract class AbstractDataImport implements EImporter {
 		else if(FileType.TXT.equals(fileType))
 			this.handler = new TxtImportHandler(validator,dataProcess,file);
 		
-	};
-	
+	}
 	
 	
 	

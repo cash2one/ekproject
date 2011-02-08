@@ -22,6 +22,7 @@ public class DataElement {
 	//记录对输入每行数据验证时的提示结果
 	private StringBuffer validatResult = new StringBuffer();
 
+	
 	//用来记录   列序号-列命名  与 列名--列序号   键值对 数据集合   
 	private Map<String,String> valueKeySets = null; 
 
@@ -29,20 +30,28 @@ public class DataElement {
 	//用来记录   列序号-列中文命名   键值对 数据集合   
 	private Map<Integer,String> cnColumnsName = null;
 	
+	//用来记录   列序号-列宽   键值对 数据集合   
+	private Map<Integer,Integer> columnsWidth = null;
+	
 	//记录当前行的数据（临时内存）
 	private Map<String,String> currentRowValuesMap = new HashMap<String,String>();
+	
 	
 	//验证器对应的方法
 	private Map<Integer,Method> validatorMethodSet = null;
 	
 	
+	//数据校验器对象
 	private DataValidator validatorObject;
+	
 	
 	public DataElement(DataValidator validator) throws Exception{
 		initValidatorMethods(validator);
 	}
 	
+	
 	/**
+	 * 
 	 * 初始化改验证器的各个方法
 	 * @param validator
 	 * @throws Exception 
@@ -55,6 +64,7 @@ public class DataElement {
 		    validatorMethodSet = new HashMap<Integer,Method>();
 		    valueKeySets = new HashMap<String,String>();
 		    cnColumnsName = new HashMap<Integer,String>();
+		    columnsWidth = new HashMap<Integer,Integer>();
 		    
     	    for(Method method:methods){
 		    	 ValidatorRule rule = method.getAnnotation(ValidatorRule.class);		    	
@@ -67,6 +77,7 @@ public class DataElement {
 		    		 valueKeySets.put("cn_"+rule.ename(), rule.columnSeq()+"");
 		    		 
 		    		 cnColumnsName.put(rule.columnSeq(),rule.showName());
+		    		 columnsWidth.put(rule.columnSeq(), rule.width());
 		    		 
 		    		 //假如该列配置执行验证的方法，就必须记录该验证的方法
 		    		 if(rule.check())
@@ -143,6 +154,7 @@ public class DataElement {
 	
 	
 	/**
+	 * 
 	 * 返回列对应的值
 	 * @param columnSeq 列序号
 	 * @return
@@ -174,5 +186,53 @@ public class DataElement {
 	    	return this.validatResult.substring(1);
 	    return "";
 	}
+
+   
+    /**
+     * 
+     * 返回导入文件中文列名，用 “,” 相隔
+     * @return
+     */
+    public String getImpColumnsName(){
+    	String columnsNameStr = "";
+    	for(int seq = 0;seq<this.cnColumnsName.size();seq++)
+    		columnsNameStr+=","+this.cnColumnsName.get(seq);
+    	return columnsNameStr.substring(1);
+    }
+    
+    /**
+     * 返回导入文件列宽的设置
+     * @return
+     */
+    public int[] getImpColumnsWidthSet(){
+    	int[] columnsWidths = new int[columnsWidth.size()];
+    	for(int seq = 0;seq<this.columnsWidth.size();seq++)
+    		columnsWidths[seq]=columnsWidth.get(seq);
+    	return columnsWidths;
+    }
+    
+    
+	protected void free() throws Throwable {
+		
+		this.cnColumnsName.clear();
+		this.cnColumnsName = null;
+		
+		this.currentRowValuesMap.clear();
+		this.currentRowValuesMap = null;
+		
+		this.validatorMethodSet.clear();
+		this.validatorMethodSet = null;
+		
+		this.validatorObject = null;
+		
+		this.validatResult = null;
+		
+		this.valueKeySets.clear();
+		this.valueKeySets = null;
+		
+	}
 	
+    
+    
+    
 }

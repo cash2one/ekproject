@@ -14,7 +14,8 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface Restriction {
-
+    
+	String fileName();
 	boolean check();
 	float size() default 1;
 	

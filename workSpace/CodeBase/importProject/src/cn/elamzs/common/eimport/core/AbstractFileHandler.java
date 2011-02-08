@@ -8,6 +8,8 @@ import cn.elamzs.common.eimport.inter.DataValidator;
 /**
  * 
  * @author Ethan.Lam   2011-2-5
+ * 文件解析操作
+ * 
  *
  */
 public abstract class AbstractFileHandler implements FileHandler{
@@ -28,7 +30,9 @@ public abstract class AbstractFileHandler implements FileHandler{
 		dataElement = new DataElement(validator);
 	}
 
+    
 	/**
+	 * 
 	 * 验证导入文档是否是符合模版要求
 	 * @return
 	 * @throws Exception
@@ -37,6 +41,7 @@ public abstract class AbstractFileHandler implements FileHandler{
 		return dataElement.checkImpColumnsMatch(returnImpDocColumnsName());
 	}
     
+	
     /**
      * 
      * 数据导入过程控制逻辑主体

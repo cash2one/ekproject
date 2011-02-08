@@ -2,7 +2,7 @@ package cn.elamzs.common.base.files.util;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.InputStream;
 
 import org.apache.poi.hssf.usermodel.HSSFDateUtil;
@@ -101,16 +101,13 @@ public class POIExcelUtil {
 			throws Exception {
 		Workbook wb = null;
 		if (flag) {// 2003
-			File f = new File(fileName);
-			if (!f.exists())
-				f.createNewFile();
-			FileInputStream is = new FileInputStream(f);
-			POIFSFileSystem fs = new POIFSFileSystem(is);
-			wb = new HSSFWorkbook(fs);
-			is.close();
+			wb = new HSSFWorkbook();
 		} else {// 2007
-			wb = new XSSFWorkbook(fileName);
+			wb = new XSSFWorkbook();
 		}
+	    FileOutputStream fileOut = new FileOutputStream(fileName);
+	    wb.write(fileOut);
+	    fileOut.close();
 		return wb;
 	}
 
@@ -198,6 +195,65 @@ public class POIExcelUtil {
 	}
 	
 	/**
+	 * 创建Excel 并写入数据
+	 * @param fileName
+	 * @param columnsName
+	 * @param datas
+	 * @param width
+	 * @param flag
+	 */
+	public static void writeDataToExcel(String fileName,String[] columnsName,String[][] datas,int[] width,boolean flag){
+		Workbook wb = null;
+		try{
+			if (flag) {// 2003
+				wb = new HSSFWorkbook();
+			} else {// 2007
+				wb = new XSSFWorkbook();
+			}
+			
+			int columnsNum = columnsName.length;
+			int totalRowNum = datas.length+1;
+			
+			Sheet sheet = wb.createSheet();
+			
+			Row newRow = null;
+			Cell newCell = null;
+			
+			//设置列宽
+			for(int index=0;index<width.length;index++)
+				sheet.setColumnWidth(index, width[index]*100);
+			
+			
+			//写列表头
+		    newRow = sheet.createRow(0);
+			for(int cellIndex=0;cellIndex<columnsNum;cellIndex++){
+				newCell= newRow.createCell(cellIndex);
+				newCell.setCellType(Cell.CELL_TYPE_STRING);
+				newCell.setCellValue(columnsName[cellIndex]);
+			}	
+			
+			
+			//写数据
+			for(int rowSeq=1;rowSeq<totalRowNum;rowSeq++){
+				newRow = sheet.createRow(rowSeq);
+				for(int cellIndex=0;cellIndex<columnsNum;cellIndex++){
+					 newCell= newRow.createCell(cellIndex);
+					 newCell.setCellType(Cell.CELL_TYPE_STRING);
+					 newCell.setCellValue(datas[rowSeq-1][cellIndex]);
+				}	
+			}
+			
+			FileOutputStream fileOut = new FileOutputStream(fileName);
+		    wb.write(fileOut);
+			fileOut.close();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+	}
+	
+
+	/**
 	 * 具体读取Excel
 	 * @param wb
 	 * @throws Exception
@@ -225,10 +281,13 @@ public class POIExcelUtil {
 	 */
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
+		//读取
 		File f = new File("d:/test.xlsx");
 		FileInputStream is = new FileInputStream(f);
 		System.out.println(f.getName());
 		testReadExcel(openWorkBook(is, false));
-
+        //新建
+		
+		writeDataToExcel("d:/testw.xlsx",new String[]{"A","B"},new String[][]{{"a_1","b_1"},{"a_2","b_2"},{"a_3","b_3"}},new int[]{50,50},false);
 	}
 }

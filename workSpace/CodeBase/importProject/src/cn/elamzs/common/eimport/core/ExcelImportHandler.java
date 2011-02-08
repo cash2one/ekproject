@@ -47,6 +47,7 @@ public class ExcelImportHandler extends AbstractFileHandler {
 	
 	
 	/**
+	 * 
 	 * 开始把文档中的数据读取到内存中
 	 * @throws Exception 
 	 */
@@ -64,7 +65,7 @@ public class ExcelImportHandler extends AbstractFileHandler {
 		int totalRows = sheet.getPhysicalNumberOfRows();
 		String[] rowValues =  null;
 		String validateMsg = "";
-		
+
 		
 		//逐行读取文档中的数据
 		for(int rowSeq = 1;rowSeq<totalRows;rowSeq++){
@@ -82,7 +83,12 @@ public class ExcelImportHandler extends AbstractFileHandler {
 			throws Exception {
 		// TODO Auto-generated method stub
 		
-           		
+		String columnsNameStr = dataElement.getImpColumnsName();
+		int[] width = dataElement.getImpColumnsWidthSet();
+		String [] columnsName = columnsNameStr.split(",");
+		String fileName =ConfigContant.DIR_IMPORT_RESULT+"imp_"+importFile.getName();
+		POIExcelUtil.writeDataToExcel(fileName,columnsName,resultDatas,width,isXlsx==0?true:false);
+		
 		
 	}
 	 
