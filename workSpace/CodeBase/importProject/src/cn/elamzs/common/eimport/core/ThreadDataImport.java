@@ -26,9 +26,10 @@ public class ThreadDataImport implements EImporter {
 	
 	FileHandler handler = null;
 	
-	public ThreadDataImport(DataValidator validator,String fileName){
+	public ThreadDataImport(DataValidator validator,DataProcess dataProcess,String fileName){
 	        this.validator = validator;
 	        this.fileName = fileName;
+	        this.dataProcess = dataProcess;
 	}
 
 	@Override
