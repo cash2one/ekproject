@@ -6,9 +6,9 @@ package cn.elamzs.common.eimport.enums;
  */
 public enum FileType {
       
-	EXCEL_XLS("xls",0),
-	EXCEL_XLSX("xlsx",0),
-	TXT("txt",1);
+	EXCEL_XLS(".xls",0),
+	EXCEL_XLSX(".xlsx",0),
+	TXT(".txt",1);
 	
 	private String suffix; //后缀名
 	private int type;//类型

@@ -40,6 +40,5 @@ public class TxtImportHandler extends AbstractFileHandler {
 		
 	}
 
-	
 
 }

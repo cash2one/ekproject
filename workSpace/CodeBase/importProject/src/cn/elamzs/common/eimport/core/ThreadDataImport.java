@@ -6,6 +6,7 @@ import cn.elamzs.common.eimport.enums.FileType;
 import cn.elamzs.common.eimport.inter.DataProcess;
 import cn.elamzs.common.eimport.inter.DataValidator;
 import cn.elamzs.common.eimport.inter.EImporter;
+import cn.elamzs.common.eimport.inter.Template;
 
 /**
  * 
@@ -44,10 +45,12 @@ public class ThreadDataImport implements EImporter {
 	}
 
 	@Override
-	public File downTemplate(Class<? extends DataValidator> validator)
+	public File downTemplate(Class<? extends DataValidator> validator,FileType type)
 			throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		Object obj = validator.getClass().newInstance();
+		Template template = new Template((DataValidator) obj);
+		return template.createImpTemplateDoc(type);
 	}
 	
 	@Override

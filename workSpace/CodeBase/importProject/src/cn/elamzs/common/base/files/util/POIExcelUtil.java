@@ -212,7 +212,7 @@ public class POIExcelUtil {
 			}
 			
 			int columnsNum = columnsName.length;
-			int totalRowNum = datas.length+1;
+			int totalRowNum = datas!=null?datas.length+1:1;
 			
 			Sheet sheet = wb.createSheet();
 			
@@ -234,6 +234,7 @@ public class POIExcelUtil {
 			
 			
 			//Ð´Êý¾Ý
+			if(datas!=null)
 			for(int rowSeq=1;rowSeq<totalRowNum;rowSeq++){
 				newRow = sheet.createRow(rowSeq);
 				for(int cellIndex=0;cellIndex<columnsNum;cellIndex++){

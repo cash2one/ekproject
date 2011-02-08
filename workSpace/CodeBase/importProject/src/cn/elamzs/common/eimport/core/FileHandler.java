@@ -1,5 +1,7 @@
 package cn.elamzs.common.eimport.core;
 
+import java.io.File;
+
 /**
  * 
  * @author Ethan.Lam 2011-2-7
@@ -32,4 +34,5 @@ public interface FileHandler extends Runnable {
 	public void createImportResultDocument(String[][] resultDatas)
 			throws Exception;
 
+	
 }

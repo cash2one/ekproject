@@ -2,7 +2,7 @@ package cn.elamzs.common.eimport.inter;
 
 import java.io.File;
 
-import cn.elamzs.common.eimport.sample.TestValidator;
+import cn.elamzs.common.eimport.enums.FileType;
 
 /**
  * 
@@ -12,7 +12,7 @@ import cn.elamzs.common.eimport.sample.TestValidator;
 public interface EImporter {
 
 	// 下载导入模版
-	public File downTemplate(Class<? extends DataValidator> validator)
+	public File downTemplate(Class<? extends DataValidator> validator,FileType type)
 			throws Exception;
 
 	// 上传文件
