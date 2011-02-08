@@ -1,4 +1,4 @@
-package cn.elamzs.common.eimport.inter;
+package cn.elamzs.common.eimport.core;
 
 import java.io.File;
 import java.lang.reflect.Method;
@@ -8,8 +8,8 @@ import java.util.Map;
 import cn.elamzs.common.base.files.util.POIExcelUtil;
 import cn.elamzs.common.eimport.Anotation.Restriction;
 import cn.elamzs.common.eimport.Anotation.ValidatorRule;
-import cn.elamzs.common.eimport.core.ConfigContant;
 import cn.elamzs.common.eimport.enums.FileType;
+import cn.elamzs.common.eimport.inter.DataValidator;
 
 /**
  * @author Ethan.Lam
