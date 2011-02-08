@@ -11,7 +11,7 @@ public class ImportTestSuit {
 	public static void testCreateTemplateFile() throws Exception {
 		TestValidator v = new TestValidator();
 		TestDataProcess p = new TestDataProcess();
-		EImporter importer = new ThreadDataImport(v, p, "test.xlsx");
+		EImporter importer = new ThreadDataImport(v, p);
 		importer.downTemplate(FileType.EXCEL_XLSX);
 	}
 

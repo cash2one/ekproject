@@ -18,17 +18,14 @@ public class ThreadDataImport implements EImporter {
 
 	protected FileType fileType;
 
-	protected String fileName;
-	
 	DataValidator validator = null;  //数据验证器
 	
 	DataProcess dataProcess = null;  //数据处理器
 	
 	FileHandler handler = null;
 	
-	public ThreadDataImport(DataValidator validator,DataProcess dataProcess,String fileName){
+	public ThreadDataImport(DataValidator validator,DataProcess dataProcess){
 	        this.validator = validator;
-	        this.fileName = fileName;
 	        this.dataProcess = dataProcess;
 	}
 

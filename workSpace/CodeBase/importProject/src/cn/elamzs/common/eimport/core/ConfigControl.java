@@ -14,6 +14,7 @@ public class ConfigControl {
 	
 	static{
 		try {
+			
 			File _dir = new File(DIR_IMPORT_RESULT); 
 			if(!_dir.exists())
 			  _dir.mkdirs();
