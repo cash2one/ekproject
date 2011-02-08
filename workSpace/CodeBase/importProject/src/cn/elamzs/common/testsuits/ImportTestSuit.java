@@ -19,12 +19,13 @@ public class ImportTestSuit {
 		TestValidator v = new TestValidator();
 		TestDataProcess p = new TestDataProcess();
 		EImporter importer = new ThreadDataImport(v, p);
-		String dataFile = "d:/importfile/src/";
+		String dataFile = "d:/importfile/src/test.xlsx";
 		importer.importFile(dataFile);
 	}
 
 	public static void main(String... args) throws Exception {
-		testCreateTemplateFile();
+//		testCreateTemplateFile();
+		testImportFile();
 	}
 
 }

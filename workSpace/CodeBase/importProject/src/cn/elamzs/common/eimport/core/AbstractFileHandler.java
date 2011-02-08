@@ -1,6 +1,7 @@
 package cn.elamzs.common.eimport.core;
 
 import java.io.File;
+import java.util.Date;
 
 import cn.elamzs.common.eimport.inter.DataProcess;
 import cn.elamzs.common.eimport.inter.DataValidator;
@@ -47,7 +48,7 @@ public abstract class AbstractFileHandler implements FileHandler{
      * 数据导入过程控制逻辑主体
      */
     public void run(){
-    	System.out.println("Create A new Import Thread and start run data import_pro. ");
+    	System.out.println("Create start run data import_pro.["+validator.getClass()+"] At "+new Date().toLocaleString());
     	try {
     		if(validateDoc()){
 	    		
@@ -68,7 +69,7 @@ public abstract class AbstractFileHandler implements FileHandler{
     	} catch (Exception e) {
 			e.printStackTrace();
 		}
-    	System.out.println("Create A new Import Thread.....");
+    	System.out.println("Import Thread  Finished ["+validator.getClass()+"] At "+new Date().toLocaleString());
     }
     
     

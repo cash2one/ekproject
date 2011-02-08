@@ -12,6 +12,7 @@ import cn.elamzs.common.eimport.inter.DataProcess;
  */
 public class TestDataProcess implements DataProcess {
 
+	
 	@Override
 	public void afterLoadAllRowsDataProcess() throws DataProcessException {
 		// TODO Auto-generated method stub

@@ -74,7 +74,7 @@ public class ThreadDataImport implements EImporter {
 		
 		String suffix = fileName.substring(fileName.lastIndexOf("."));
 		for(FileType t:FileType.values()){
-			if(FileType.EXCEL_XLS.suffix().equals(suffix)){
+			if(t.suffix().equals(suffix)){
                 this.fileType = t;
 			}
 		}
