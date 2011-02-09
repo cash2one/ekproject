@@ -227,22 +227,16 @@ public class POIExcelUtil {
 			int totalRowNum = datas!=null?datas.length+1:1;
 			
 			Sheet sheet = wb.createSheet();
-			
 			Row newRow = null;
-			Cell newCell = null;
 			
 			//设置列宽
 			for(int index=0;index<width.length;index++)
 				sheet.setColumnWidth(index, width[index]*100);
 			
-			
 			//写列表头
 		    newRow = sheet.createRow(0);
 			for(int cellIndex=0;cellIndex<columnsNum;cellIndex++){
-				newCell= newRow.createCell(cellIndex);
-				newCell.setCellType(Cell.CELL_TYPE_STRING);
-				newCell.setCellValue(columnsName[cellIndex]);
-				setFontColor(0,0,Color.red,wb,wb.getSheetAt(0));
+				createCell(wb,newRow,cellIndex,columnsName[cellIndex],null,CellStyle.ALIGN_CENTER,Cell.CELL_TYPE_STRING);
 			}	
 			
 			
@@ -251,9 +245,7 @@ public class POIExcelUtil {
 			for(int rowSeq=1;rowSeq<totalRowNum;rowSeq++){
 				newRow = sheet.createRow(rowSeq);
 				for(int cellIndex=0;cellIndex<columnsNum;cellIndex++){
-					 newCell= newRow.createCell(cellIndex);
-					 newCell.setCellType(Cell.CELL_TYPE_STRING);
-					 newCell.setCellValue(datas[rowSeq-1][cellIndex]);
+					createCell(wb,newRow,cellIndex,datas[rowSeq-1][cellIndex],null,CellStyle.ALIGN_CENTER,Cell.CELL_TYPE_STRING);
 				}	
 			}
 			
@@ -292,8 +284,6 @@ public class POIExcelUtil {
 			Sheet sheet = wb.createSheet();
 			
 			Row newRow = null;
-			Cell newCell = null;
-			
 			
 			//设置列宽
 			for(int index=0;index<width.length;index++)
@@ -302,7 +292,7 @@ public class POIExcelUtil {
 			//写列表头
 		    newRow = sheet.createRow(0);
 			for(int cellIndex=0;cellIndex<columnsNum;cellIndex++){
-				createCell(wb,newRow,cellIndex,columnsName[cellIndex],columnsColor[cellIndex]);
+				createCell(wb,newRow,cellIndex,columnsName[cellIndex],columnsColor[cellIndex],CellStyle.ALIGN_CENTER,Cell.CELL_TYPE_STRING);
 			}	
 			
 			//写数据
@@ -310,9 +300,7 @@ public class POIExcelUtil {
 			for(int rowSeq=1;rowSeq<totalRowNum;rowSeq++){
 				newRow = sheet.createRow(rowSeq);
 				for(int cellIndex=0;cellIndex<columnsNum;cellIndex++){
-					 newCell= newRow.createCell(cellIndex);
-					 newCell.setCellType(Cell.CELL_TYPE_STRING);
-					 newCell.setCellValue(datas[rowSeq-1][cellIndex]);
+				    createCell(wb,newRow,cellIndex,datas[rowSeq-1][cellIndex],null,CellStyle.ALIGN_CENTER,Cell.CELL_TYPE_STRING);
 				}	
 			}
 			
@@ -326,14 +314,14 @@ public class POIExcelUtil {
 	}
 	
 	/**
-	 * 
+	 * 创建一个cell
 	 * @param wb
 	 * @param newRow
 	 * @param cellIndex
 	 * @param cellValue
 	 * @return
 	 */
-	public static Cell createCell(Workbook wb,Row newRow,int cellIndex,String cellValue,IndexedColors color){
+	public static void createCell(Workbook wb,Row newRow,int cellIndex,String cellValue,IndexedColors color,short cellAlignment,int cellType){
 		
 		CreationHelper creationHelper = wb.getCreationHelper();
 		RichTextString richTextStr = creationHelper.createRichTextString(cellValue);
@@ -347,11 +335,15 @@ public class POIExcelUtil {
 	    Font font = wb.createFont();
 		font.setItalic(true);
 		font.setUnderline((byte) 1);
-		font.setColor(color.getIndex());
+		
+		if(color!=null)
+			font.setColor(color.getIndex());
+		else
+			font.setColor(IndexedColors.BLACK.getIndex());
+		
 		richTextStr.applyFont(font);
 		newCell.setCellValue(richTextStr);
 		
-		return newCell;
 	}
 	
 	
@@ -376,65 +368,6 @@ public class POIExcelUtil {
 		}
 
 	}
-	
-	
-	   /**
-	    * 设置字体颜色
-	    * @param rowIndex
-	    * @param colIndex
-	    * @param color
-	    * @param workbook
-	    * @param sheet
-	    */
-	  public static void setFontColor(int rowIndex, int colIndex,Color color,Workbook workbook,  
-	            Sheet sheet) {  
-	        if (sheet == null)  
-	            return;  
-	        if (sheet.getLastRowNum() < rowIndex) {  
-	            throw new IllegalStateException(  
-	                    "rowIndex over maxRowIndex!!!rowIndex:" + rowIndex  
-	                            + "  maxRowIndex:" + sheet.getLastRowNum());  
-	        }  
-	        Row row = sheet.getRow(rowIndex);  
-	        if (row != null) {  
-	            if (row.getPhysicalNumberOfCells() < colIndex) {  
-	                // throw new  
-	                // IllegalStateException("colIndex over maxColIndex!!!colIndex:"+colIndex+"  maxColIndex:"+row.getPhysicalNumberOfCells());  
-	            }  
-	            Cell cell = row.getCell(colIndex);  
-	            if (cell != null) {  
-	                Font font = workbook.createFont();  
-	                if(font instanceof HSSFFont )
-	                  font.setColor(getColor(color,(HSSFWorkbook) workbook).getIndex());  
-	                else if(font instanceof XSSFFont){
-	                  font.setColor((short) color.getRGB());
-	                }
-	                RichTextString ts=cell.getRichStringCellValue();  
-	                ts.applyFont(font);  
-	                cell.setCellValue(ts);  
-	            }  
-	        }  
-	    }  
-	  
-	  
-	  /** 
-	     * 獲取指定顏色對應的HSSF顏色，如果該HSSF顏色不存在，則創建與指定顏色對應的新HSSF顏色 
-	     *  
-	     * @param color 
-	     *            顏色 
-	     * @return HSSF顏色 
-	     */  
-	    public static HSSFColor getColor(Color color,HSSFWorkbook workbook) {  
-	        HSSFPalette palette = workbook.getCustomPalette();  
-	        HSSFColor hssfColor = palette.findColor((byte) color.getRed(),  
-	                (byte) color.getGreen(), (byte) color.getBlue());  
-	        if (hssfColor == null) {  
-	            hssfColor = palette.addColor((byte) color.getRed(), (byte) color  
-	                    .getGreen(), (byte) color.getBlue());  
-	        }  
-	        return hssfColor;  
-	    }  
-	      
 	  
 	
 	/**

@@ -12,6 +12,7 @@ public class ImportTestSuit {
 		TestValidator v = new TestValidator();
 		TestDataProcess p = new TestDataProcess();
 		EImporter importer = new ThreadDataImport(v, p);
+		importer.downTemplate(FileType.EXCEL_XLS);
 		importer.downTemplate(FileType.EXCEL_XLSX);
 	}
 	
