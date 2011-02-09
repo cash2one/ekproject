@@ -1,31 +1,32 @@
 package cn.elamzs.common.base.files.util;
 
-import java.awt.Color;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 
-import org.apache.poi.hssf.usermodel.HSSFCellStyle;
+import org.apache.poi.hssf.usermodel.DVConstraint;
 import org.apache.poi.hssf.usermodel.HSSFDataValidation;
 import org.apache.poi.hssf.usermodel.HSSFDateUtil;
-import org.apache.poi.hssf.usermodel.HSSFFont;
-import org.apache.poi.hssf.usermodel.HSSFPalette;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.ClientAnchor;
+import org.apache.poi.ss.usermodel.Comment;
 import org.apache.poi.ss.usermodel.CreationHelper;
+import org.apache.poi.ss.usermodel.DataValidation;
+import org.apache.poi.ss.usermodel.Drawing;
 import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.RichTextString;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFFont;
-import org.apache.poi.xssf.usermodel.XSSFRichTextString;
+import org.apache.poi.ss.util.CellRangeAddressList;
+import org.apache.poi.xssf.usermodel.XSSFDataValidation;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.openxmlformats.schemas.spreadsheetml.x2006.main.CTDataValidation;
 
 /**
  * 
@@ -237,7 +238,7 @@ public class POIExcelUtil {
 			//写列表头
 		    newRow = sheet.createRow(0);
 			for(int cellIndex=0;cellIndex<columnsNum;cellIndex++){
-				createCell(wb,newRow,cellIndex,columnsName[cellIndex],null,CellStyle.ALIGN_CENTER,Cell.CELL_TYPE_STRING,true);
+				createCell(wb,sheet,newRow,cellIndex,columnsName[cellIndex],null,CellStyle.ALIGN_CENTER,Cell.CELL_TYPE_STRING,true,"批注");
 			}	
 			
 			
@@ -246,7 +247,7 @@ public class POIExcelUtil {
 			for(int rowSeq=1;rowSeq<totalRowNum;rowSeq++){
 				newRow = sheet.createRow(rowSeq);
 				for(int cellIndex=0;cellIndex<columnsNum;cellIndex++){
-					createCell(wb,newRow,cellIndex,datas[rowSeq-1][cellIndex],null,CellStyle.ALIGN_CENTER,Cell.CELL_TYPE_STRING,false);
+					createCell(wb,sheet,newRow,cellIndex,datas[rowSeq-1][cellIndex],null,CellStyle.ALIGN_CENTER,Cell.CELL_TYPE_STRING,false,null);
 				}	
 			}
 			
@@ -292,13 +293,13 @@ public class POIExcelUtil {
 				
 			}
 			
-			HSSFDataValidation dataValidation = ExcelDataValidationUtil.addDataValidation(1, (short)0, 3, (short)-1, new String[]{"0","1"}, "输入错误", "0/1");
-//			sheet.addValidationData(dataValidation);
+			//添加数据验证功能
+			addDataValidator(wb,sheet);
 			
 			//写列表头
 		    newRow = sheet.createRow(0);
 			for(int cellIndex=0;cellIndex<columnsNum;cellIndex++){
-				createCell(wb,newRow,cellIndex,columnsName[cellIndex],columnsColor[cellIndex],CellStyle.ALIGN_CENTER,Cell.CELL_TYPE_STRING,true);
+				createCell(wb,sheet,newRow,cellIndex,columnsName[cellIndex],columnsColor[cellIndex],CellStyle.ALIGN_CENTER,Cell.CELL_TYPE_STRING,true,"批注");
 			}	
 			
 			//写数据
@@ -306,7 +307,7 @@ public class POIExcelUtil {
 			for(int rowSeq=1;rowSeq<totalRowNum;rowSeq++){
 				newRow = sheet.createRow(rowSeq);
 				for(int cellIndex=0;cellIndex<columnsNum;cellIndex++){
-				    createCell(wb,newRow,cellIndex,datas[rowSeq-1][cellIndex],null,CellStyle.ALIGN_CENTER,Cell.CELL_TYPE_STRING,false);
+				    createCell(wb,sheet,newRow,cellIndex,datas[rowSeq-1][cellIndex],null,CellStyle.ALIGN_CENTER,Cell.CELL_TYPE_STRING,false,null);
 				}	
 			}
 			
@@ -320,6 +321,30 @@ public class POIExcelUtil {
 	}
 	
 	/**
+	 * 添加文档数据验证
+	 * @param wb
+	 * @param sheet
+	 */
+	public static void addDataValidator(Workbook wb,Sheet sheet){
+
+		//添加列 数据验证
+		DataValidation dataValidation = null;
+		if(wb instanceof HSSFWorkbook){
+			CellRangeAddressList addressList = new CellRangeAddressList(
+				      1, -1, 3,3);
+			DVConstraint dvConstraint = DVConstraint.createExplicitListConstraint(
+				      new String[]{"10", "20", "30"});
+		    dataValidation = new HSSFDataValidation(addressList, dvConstraint);
+			dataValidation.setSuppressDropDownArrow(true);
+			sheet.addValidationData(dataValidation);
+		}else if(wb instanceof XSSFWorkbook){
+	  
+	    	
+	    }
+		
+	}
+	
+	/**
 	 * 创建一个cell
 	 * @param wb
 	 * @param newRow
@@ -327,7 +352,7 @@ public class POIExcelUtil {
 	 * @param cellValue
 	 * @return
 	 */
-	public static void createCell(Workbook wb,Row newRow,int cellIndex,String cellValue,IndexedColors color,short cellAlignment,int cellType,boolean isUnderLine){
+	public static void createCell(Workbook wb,Sheet sheet,Row newRow,int cellIndex,String cellValue,IndexedColors color,short cellAlignment,int cellType,boolean isUnderLine,String commentTip){
 		
 		CreationHelper creationHelper = wb.getCreationHelper();
 		RichTextString richTextStr = creationHelper.createRichTextString(cellValue);
@@ -350,6 +375,19 @@ public class POIExcelUtil {
 		
 		richTextStr.applyFont(font);
 		newCell.setCellValue(richTextStr);
+		
+		
+		//添加批注
+		if(commentTip==null||"".endsWith(commentTip))
+			return;
+		
+		Drawing drawing = sheet.createDrawingPatriarch();
+	    ClientAnchor anchor = creationHelper.createClientAnchor();
+	    Comment comment = drawing.createCellComment(anchor);
+	    richTextStr = creationHelper.createRichTextString(commentTip);
+	    comment.setString(richTextStr);
+	    comment.setAuthor("Apache POI");
+	    newCell.setCellComment(comment);
 		
 	}
 	
