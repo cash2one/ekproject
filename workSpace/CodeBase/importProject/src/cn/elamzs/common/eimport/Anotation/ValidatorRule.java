@@ -27,6 +27,8 @@ public @interface ValidatorRule {
 	
 	int width() default 50; //列宽设置
 	
+	String comment() default ""; //批注
+	
 	boolean check() default false; //设置赋值后是否需要验证值的合法性
 	
 	

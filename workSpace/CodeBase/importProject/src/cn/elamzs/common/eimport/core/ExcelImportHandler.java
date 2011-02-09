@@ -87,7 +87,7 @@ public class ExcelImportHandler extends AbstractFileHandler {
 		int[] width = dataElement.getImpColumnsWidthSet();
 		String [] columnsName = columnsNameStr.split(",");
 		String fileName =ConfigControl.DIR_IMPORT_RESULT+"imp_"+importFile.getName();
-		POIExcelUtil.writeDataToExcel(fileName,columnsName,resultDatas,width,isXlsx==0?true:false);
+		POIExcelUtil.writeDataToExcel(fileName,columnsName,resultDatas,width,isXlsx==0?true:false,null);
 		
 		
 	}

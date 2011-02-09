@@ -36,6 +36,9 @@ public class Template {
 	//用来记录表头的颜色
 	private Map<Integer,IndexedColors> columnsColor = null;
 	
+	//用来记录   列序号-批注    键值对 数据集合   
+	private Map<Integer,String> columnsComment = null;
+	
 	public Template(DataValidator validator) throws Exception{
         this.validator = validator;
         inintTemplateInfos();
@@ -72,6 +75,7 @@ public class Template {
 	   	cnColumnsName = new HashMap<Integer,String>();
 	    columnsWidth = new HashMap<Integer,Integer>();
 	    columnsColor = new HashMap<Integer,IndexedColors>();
+	    columnsComment  = new HashMap<Integer,String>();
 	    
 	    for(Method method:methods){
 	    	 ValidatorRule rule = method.getAnnotation(ValidatorRule.class);		    	
@@ -79,6 +83,7 @@ public class Template {
 	    		 cnColumnsName.put(rule.columnSeq(),rule.showName());
 	    		 columnsWidth.put(rule.columnSeq(), rule.width());
 	    		 columnsColor.put(rule.columnSeq(), rule.color());
+	    		 columnsComment.put(rule.columnSeq(), rule.comment());
 	    	 }
 	    }
 	}
@@ -119,6 +124,16 @@ public class Template {
     	return columnsColors;
     }
     
+    /**
+     * 返回导入文件列的批注
+     * @return
+     */
+    String[] getImpColumnsCommentSet(){
+    	String[] columnsCommentStr = new String[columnsComment.size()];
+    	for(int seq = 0;seq<this.columnsComment.size();seq++)
+    		columnsCommentStr[seq]=columnsComment.get(seq);
+    	return columnsCommentStr;
+    }
     
     
     /**
@@ -129,12 +144,13 @@ public class Template {
      */
 	synchronized File createExcleTemplate(FileType type){
 		try{
-			String columnsNameStr = getImpColumnsName();
-			int[] width = getImpColumnsWidthSet();
-			IndexedColors[] colors = getImpColumnsColorSet(); 
-			String [] columnsName = columnsNameStr.split(",");
+			String columnsNameStr = getImpColumnsName();      //列名称
+			int[] width = getImpColumnsWidthSet();            //列宽
+			IndexedColors[] colors = getImpColumnsColorSet(); //列表头颜色
+			String [] columnsName = columnsNameStr.split(","); 
+			String[] comments = getImpColumnsCommentSet();  //列表头批注
 			String fileName =ConfigControl.DIR_IMPORT_TEMPLATE+templateName+type.suffix();
-			POIExcelUtil.writeDataToExcel(fileName,columnsName,null,width,colors,FileType.EXCEL_XLS==type?true:false);
+			POIExcelUtil.writeDataToExcel(fileName,columnsName,null,width,colors,FileType.EXCEL_XLS==type?true:false,comments);
 		    return new File(fileName);
 		}catch(Exception e){
 			

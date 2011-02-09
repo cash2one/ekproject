@@ -216,7 +216,7 @@ public class POIExcelUtil {
 	 * @param width
 	 * @param flag
 	 */
-	public static void writeDataToExcel(String fileName,String[] columnsName,String[][] datas,int[] width,boolean flag){
+	public static void writeDataToExcel(String fileName,String[] columnsName,String[][] datas,int[] width,boolean flag,String[]columnsComment){
 		Workbook wb = null;
 		try{
 			if (flag) {// 2003
@@ -237,20 +237,23 @@ public class POIExcelUtil {
 			
 			//写列表头
 		    newRow = sheet.createRow(0);
+		    String comment = "";
 			for(int cellIndex=0;cellIndex<columnsNum;cellIndex++){
-				createCell(wb,sheet,newRow,cellIndex,columnsName[cellIndex],null,CellStyle.ALIGN_CENTER,Cell.CELL_TYPE_STRING,true,"批注");
+				comment = columnsComment!=null&&columnsComment.length>cellIndex?columnsComment[cellIndex]:"";
+				createCell(wb,sheet,newRow,cellIndex,columnsName[cellIndex],null,CellStyle.ALIGN_CENTER,Cell.CELL_TYPE_STRING,true,comment);
 			}	
 			
 			
 			//写数据
-			if(datas!=null)
-			for(int rowSeq=1;rowSeq<totalRowNum;rowSeq++){
-				newRow = sheet.createRow(rowSeq);
-				for(int cellIndex=0;cellIndex<columnsNum;cellIndex++){
-					createCell(wb,sheet,newRow,cellIndex,datas[rowSeq-1][cellIndex],null,CellStyle.ALIGN_CENTER,Cell.CELL_TYPE_STRING,false,null);
-				}	
+			if(datas!=null){
+				columnsNum = datas[0].length;
+				for(int rowSeq=1;rowSeq<totalRowNum;rowSeq++){
+					newRow = sheet.createRow(rowSeq);
+					for(int cellIndex=0;cellIndex<columnsNum;cellIndex++){
+						createCell(wb,sheet,newRow,cellIndex,datas[rowSeq-1][cellIndex],null,CellStyle.ALIGN_CENTER,Cell.CELL_TYPE_STRING,false,null);
+					}	
+				}
 			}
-			
 			FileOutputStream fileOut = new FileOutputStream(fileName);
 		    wb.write(fileOut);
 			fileOut.close();
@@ -271,7 +274,7 @@ public class POIExcelUtil {
 	 * @param width
 	 * @param flag
 	 */
-	public static void writeDataToExcel(String fileName,String[] columnsName,String[][] datas,int[] width,IndexedColors[] columnsColor,boolean flag){
+	public static void writeDataToExcel(String fileName,String[] columnsName,String[][] datas,int[] width,IndexedColors[] columnsColor,boolean flag,String[]columnsComment){
 		Workbook wb = null;
 		try{
 			if (flag) {// 2003
@@ -298,17 +301,21 @@ public class POIExcelUtil {
 			
 			//写列表头
 		    newRow = sheet.createRow(0);
+		    String comment = "";
 			for(int cellIndex=0;cellIndex<columnsNum;cellIndex++){
-				createCell(wb,sheet,newRow,cellIndex,columnsName[cellIndex],columnsColor[cellIndex],CellStyle.ALIGN_CENTER,Cell.CELL_TYPE_STRING,true,"批注");
+				comment = columnsComment!=null&&columnsComment.length>cellIndex?columnsComment[cellIndex]:"";
+				createCell(wb,sheet,newRow,cellIndex,columnsName[cellIndex],columnsColor[cellIndex],CellStyle.ALIGN_CENTER,Cell.CELL_TYPE_STRING,true,columnsComment[cellIndex]);
 			}	
 			
 			//写数据
-			if(datas!=null)
-			for(int rowSeq=1;rowSeq<totalRowNum;rowSeq++){
-				newRow = sheet.createRow(rowSeq);
-				for(int cellIndex=0;cellIndex<columnsNum;cellIndex++){
-				    createCell(wb,sheet,newRow,cellIndex,datas[rowSeq-1][cellIndex],null,CellStyle.ALIGN_CENTER,Cell.CELL_TYPE_STRING,false,null);
-				}	
+			if(datas!=null){
+				columnsNum = datas[0].length;
+				for(int rowSeq=1;rowSeq<totalRowNum;rowSeq++){
+					newRow = sheet.createRow(rowSeq);
+					for(int cellIndex=0;cellIndex<columnsNum;cellIndex++){
+					    createCell(wb,sheet,newRow,cellIndex,datas[rowSeq-1][cellIndex],null,CellStyle.ALIGN_CENTER,Cell.CELL_TYPE_STRING,false,null);
+					}	
+				}
 			}
 			
 			FileOutputStream fileOut = new FileOutputStream(fileName);
@@ -347,10 +354,15 @@ public class POIExcelUtil {
 	/**
 	 * 创建一个cell
 	 * @param wb
+	 * @param sheet
 	 * @param newRow
 	 * @param cellIndex
 	 * @param cellValue
-	 * @return
+	 * @param color
+	 * @param cellAlignment
+	 * @param cellType
+	 * @param isUnderLine
+	 * @param commentTip
 	 */
 	public static void createCell(Workbook wb,Sheet sheet,Row newRow,int cellIndex,String cellValue,IndexedColors color,short cellAlignment,int cellType,boolean isUnderLine,String commentTip){
 		
@@ -383,10 +395,14 @@ public class POIExcelUtil {
 		
 		Drawing drawing = sheet.createDrawingPatriarch();
 	    ClientAnchor anchor = creationHelper.createClientAnchor();
+	    anchor.setCol1(1);
+	    anchor.setRow1(1);
+	    anchor.setCol2(3);
+	    anchor.setRow2(8);
 	    Comment comment = drawing.createCellComment(anchor);
 	    richTextStr = creationHelper.createRichTextString(commentTip);
 	    comment.setString(richTextStr);
-	    comment.setAuthor("Apache POI");
+//	    comment.setAuthor("Apache POI");
 	    newCell.setCellComment(comment);
 		
 	}
@@ -429,6 +445,6 @@ public class POIExcelUtil {
 		testReadExcel(openWorkBook(is, false));
         //新建
 		
-		writeDataToExcel("d:/testw.xlsx",new String[]{"A","B"},new String[][]{{"a_1","b_1"},{"a_2","b_2"},{"a_3","b_3"}},new int[]{50,50},false);
+		writeDataToExcel("d:/testw.xlsx",new String[]{"A","B"},new String[][]{{"a_1","b_1"},{"a_2","b_2"},{"a_3","b_3"}},new int[]{50,50},false,null);
 	}
 }

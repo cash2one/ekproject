@@ -26,7 +26,7 @@ public class ImportTestSuit {
 
 	public static void main(String... args) throws Exception {
 		testCreateTemplateFile();
-//		testImportFile();
+		testImportFile();
 	}
 
 }

@@ -23,7 +23,7 @@ public class TestDataProcess implements DataProcess {
 	@Override
 	public String[][] createImportResult() throws DataProcessException {
 		// TODO Auto-generated method stub
-		return null;
+		return new String[][]{{"a_1","123456","11","","test"},{"a_1","123456","11","","test"},{"a_1","123456","11","","test"},{"a_1","123456","11","","test"},{"a_1","123456","11","","test"}};
 	}
 
 	
