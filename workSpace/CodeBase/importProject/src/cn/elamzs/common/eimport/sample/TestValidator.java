@@ -24,7 +24,7 @@ public class TestValidator implements DataValidator{
     	return StringUtil.isNull(value)?"不能为空":"";
 	}
     
-    @ValidatorRule(ename = "phone",check=true, columnSeq = 1,showName = "手机号码",comment="可以为空,可以为空,可以为空,可以为空,可以为空,可以为空,可以为空,可以为空可以为空,可以为空,可以为空,可以为空,可以为空,可以为空")
+    @ValidatorRule(ename = "phone",check=true, columnSeq = 1,showName = "手机号码",comment="可以为空")
     public String checkPhone(String value){
     	//填写验证 value 值是否符合输入合法性
     	return "";
