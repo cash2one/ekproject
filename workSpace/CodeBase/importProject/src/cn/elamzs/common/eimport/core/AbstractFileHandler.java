@@ -65,6 +65,8 @@ public abstract class AbstractFileHandler implements FileHandler{
 				createImportResultDocument(_datas);
 	          
 				_datas = null;
+    		}else{
+    			System.out.println("导入模版版本不正确，请检查或更新最新模版！");
     		}
     	} catch (Exception e) {
 			e.printStackTrace();

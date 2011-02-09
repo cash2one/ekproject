@@ -140,11 +140,13 @@ public class DataElement {
 	 * @return 完成匹配的返回 true /不匹配的返回 false
 	 */
 	public boolean checkImpColumnsMatch(String[] columns){
-		if(columns==null||columns.length==0)
+		if(columns==null||columns.length==0||cnColumnsName.size()>columns.length)
 			return false;
         
 		int columnSeq = 0;
- 		for(String cname:columns){
+ 		
+		//判断导入列的顺序是否一致
+		for(String cname:columns){
 			if(cnColumnsName.containsKey(columnSeq)&&!StringUtil.isEqual(cnColumnsName.get(columnSeq),cname))
 				return false;
 			columnSeq++;

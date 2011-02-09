@@ -83,7 +83,7 @@ public class ExcelImportHandler extends AbstractFileHandler {
 			throws Exception {
 		// TODO Auto-generated method stub
 		
-		String columnsNameStr = dataElement.getImpColumnsName();
+		String columnsNameStr = dataElement.getImpColumnsName()+",处理结果";
 		int[] width = dataElement.getImpColumnsWidthSet();
 		String [] columnsName = columnsNameStr.split(",");
 		String fileName =ConfigControl.DIR_IMPORT_RESULT+"imp_"+importFile.getName();
