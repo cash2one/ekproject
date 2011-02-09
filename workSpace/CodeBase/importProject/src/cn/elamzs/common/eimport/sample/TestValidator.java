@@ -1,6 +1,8 @@
 
 package cn.elamzs.common.eimport.sample;
 
+import org.apache.poi.ss.usermodel.IndexedColors;
+
 import cn.elamzs.common.base.files.util.StringUtil;
 import cn.elamzs.common.eimport.Anotation.Restriction;
 import cn.elamzs.common.eimport.Anotation.ValidatorRule;
@@ -16,7 +18,7 @@ import cn.elamzs.common.eimport.inter.DataValidator;
 @Restriction(fileName = "导入测试模版",check=true)
 public class TestValidator implements DataValidator{
 
-    @ValidatorRule(ename = "name",check=true, columnSeq = 0,showName = "名称")    
+    @ValidatorRule(ename = "name",check=true, columnSeq = 0,showName = "名称", color = IndexedColors.RED)    
 	public String checkName(String value){
 		//填写验证 value 值是否符合输入合法性	
     	return StringUtil.isNull(value)?"不能为空":"";
@@ -28,7 +30,7 @@ public class TestValidator implements DataValidator{
     	return "";
     }
     
-    @ValidatorRule(ename = "num",check=true, columnSeq = 2,showName = "数量")
+    @ValidatorRule(ename = "num",check=true, columnSeq = 2,showName = "数量",color = IndexedColors.RED)
     public String checkNum(String value){
     	//填写验证 value 值是否符合输入合法性	
     	try{

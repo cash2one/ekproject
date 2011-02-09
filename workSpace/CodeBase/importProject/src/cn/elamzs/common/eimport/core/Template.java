@@ -7,6 +7,7 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Workbook;
 
 import cn.elamzs.common.base.files.util.POIExcelUtil;
@@ -29,16 +30,16 @@ public class Template {
 	//用来记录   列序号-列中文命名   键值对 数据集合   
 	private Map<Integer,String> cnColumnsName = null;
 	
-	
 	//用来记录   列序号-列宽   键值对 数据集合   
 	private Map<Integer,Integer> columnsWidth = null;
 	
+	//用来记录表头的颜色
+	private Map<Integer,IndexedColors> columnsColor = null;
 	
 	public Template(DataValidator validator) throws Exception{
         this.validator = validator;
         inintTemplateInfos();
 	}
-	
 	
 	/**
 	 * 
@@ -67,15 +68,17 @@ public class Template {
 	    
 	   	if(methods==null)
 	    	return ;
-	    
-	    cnColumnsName = new HashMap<Integer,String>();
+	   
+	   	cnColumnsName = new HashMap<Integer,String>();
 	    columnsWidth = new HashMap<Integer,Integer>();
+	    columnsColor = new HashMap<Integer,IndexedColors>();
 	    
 	    for(Method method:methods){
 	    	 ValidatorRule rule = method.getAnnotation(ValidatorRule.class);		    	
 	    	 if(rule!=null){
 	    		 cnColumnsName.put(rule.columnSeq(),rule.showName());
 	    		 columnsWidth.put(rule.columnSeq(), rule.width());
+	    		 columnsColor.put(rule.columnSeq(), rule.color());
 	    	 }
 	    }
 	}
@@ -106,6 +109,19 @@ public class Template {
     
     
     /**
+     * 返回导入文件列宽的设置
+     * @return
+     */
+    IndexedColors[] getImpColumnsColorSet(){
+    	 IndexedColors[] columnsColors = new IndexedColors[columnsColor.size()];
+    	for(int seq = 0;seq<this.columnsColor.size();seq++)
+    		columnsColors[seq]=columnsColor.get(seq);
+    	return columnsColors;
+    }
+    
+    
+    
+    /**
      * 
      * 生成Excle模版文件
      * @param type
@@ -115,16 +131,10 @@ public class Template {
 		try{
 			String columnsNameStr = getImpColumnsName();
 			int[] width = getImpColumnsWidthSet();
+			IndexedColors[] colors = getImpColumnsColorSet(); 
 			String [] columnsName = columnsNameStr.split(",");
 			String fileName =ConfigControl.DIR_IMPORT_TEMPLATE+templateName+type.suffix();
-			POIExcelUtil.writeDataToExcel(fileName,columnsName,null,width,FileType.EXCEL_XLS==type?true:false);
-			
-//			Workbook wb = POIExcelUtil.openWorkBook(fileName,FileType.EXCEL_XLS==type?true:false);
-//			POIExcelUtil.setFontColor(0,0,Color.red,wb,wb.getSheetAt(0));
-//			FileOutputStream fileOut = new FileOutputStream(fileName);
-//		    wb.write(fileOut);
-//			fileOut.close();
-
+			POIExcelUtil.writeDataToExcel(fileName,columnsName,null,width,colors,FileType.EXCEL_XLS==type?true:false);
 		    return new File(fileName);
 		}catch(Exception e){
 			

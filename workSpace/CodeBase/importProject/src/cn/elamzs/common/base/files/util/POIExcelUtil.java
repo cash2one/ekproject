@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 
+import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFDateUtil;
 import org.apache.poi.hssf.usermodel.HSSFFont;
 import org.apache.poi.hssf.usermodel.HSSFPalette;
@@ -13,12 +14,16 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.CreationHelper;
 import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.RichTextString;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFFont;
+import org.apache.poi.xssf.usermodel.XSSFRichTextString;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
@@ -260,6 +265,95 @@ public class POIExcelUtil {
 		}
 		
 	}
+	
+	
+	/**
+	 * 
+	 * 创建Excel 并写入数据
+	 * @param fileName
+	 * @param columnsColor
+	 * @param columnsName
+	 * @param datas
+	 * @param width
+	 * @param flag
+	 */
+	public static void writeDataToExcel(String fileName,String[] columnsName,String[][] datas,int[] width,IndexedColors[] columnsColor,boolean flag){
+		Workbook wb = null;
+		try{
+			if (flag) {// 2003
+				wb = new HSSFWorkbook();
+			} else {// 2007
+				wb = new XSSFWorkbook();
+			}
+			
+			int columnsNum = columnsName.length;
+			int totalRowNum = datas!=null?datas.length+1:1;
+			
+			Sheet sheet = wb.createSheet();
+			
+			Row newRow = null;
+			Cell newCell = null;
+			
+			
+			//设置列宽
+			for(int index=0;index<width.length;index++)
+				sheet.setColumnWidth(index, width[index]*100);
+			
+			//写列表头
+		    newRow = sheet.createRow(0);
+			for(int cellIndex=0;cellIndex<columnsNum;cellIndex++){
+				createCell(wb,newRow,cellIndex,columnsName[cellIndex],columnsColor[cellIndex]);
+			}	
+			
+			//写数据
+			if(datas!=null)
+			for(int rowSeq=1;rowSeq<totalRowNum;rowSeq++){
+				newRow = sheet.createRow(rowSeq);
+				for(int cellIndex=0;cellIndex<columnsNum;cellIndex++){
+					 newCell= newRow.createCell(cellIndex);
+					 newCell.setCellType(Cell.CELL_TYPE_STRING);
+					 newCell.setCellValue(datas[rowSeq-1][cellIndex]);
+				}	
+			}
+			
+			FileOutputStream fileOut = new FileOutputStream(fileName);
+		    wb.write(fileOut);
+			fileOut.close();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+	}
+	
+	/**
+	 * 
+	 * @param wb
+	 * @param newRow
+	 * @param cellIndex
+	 * @param cellValue
+	 * @return
+	 */
+	public static Cell createCell(Workbook wb,Row newRow,int cellIndex,String cellValue,IndexedColors color){
+		
+		CreationHelper creationHelper = wb.getCreationHelper();
+		RichTextString richTextStr = creationHelper.createRichTextString(cellValue);
+		
+		Cell newCell= newRow.createCell(cellIndex);
+		CellStyle style = wb.createCellStyle();
+		style.setAlignment(CellStyle.ALIGN_CENTER);
+	    newCell.setCellStyle(style);
+	    newCell.setCellType(Cell.CELL_TYPE_STRING);
+	    
+	    Font font = wb.createFont();
+		font.setItalic(true);
+		font.setUnderline((byte) 1);
+		font.setColor(color.getIndex());
+		richTextStr.applyFont(font);
+		newCell.setCellValue(richTextStr);
+		
+		return newCell;
+	}
+	
 	
 
 	/**

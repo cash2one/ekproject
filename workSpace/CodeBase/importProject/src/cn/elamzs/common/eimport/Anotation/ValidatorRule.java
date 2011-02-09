@@ -5,6 +5,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import org.apache.poi.ss.usermodel.IndexedColors;
+
 /**
  * 定义数据导入中包含的列的属性设置
  * @author Ethan.Lam
@@ -20,6 +22,8 @@ public @interface ValidatorRule {
 	String showName(); //文本中显示的列名
 	
 	int columnSeq(); //对应导入文件的列序号    从 0 开始
+	
+	IndexedColors color() default IndexedColors.BLACK;
 	
 	int width() default 50; //列宽设置
 	
