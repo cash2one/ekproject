@@ -13,7 +13,7 @@ public class ImportTestSuit {
 		TestDataProcess p = new TestDataProcess();
 		EImporter importer = new ThreadDataImport(v, p);
 		importer.downTemplate(FileType.EXCEL_XLS);
-		importer.downTemplate(FileType.EXCEL_XLSX);
+//		importer.downTemplate(FileType.EXCEL_XLSX);
 	}
 	
 	public static void testImportFile() throws Exception {

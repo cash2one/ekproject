@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
+import org.apache.poi.hssf.usermodel.HSSFDataValidation;
 import org.apache.poi.hssf.usermodel.HSSFDateUtil;
 import org.apache.poi.hssf.usermodel.HSSFFont;
 import org.apache.poi.hssf.usermodel.HSSFPalette;
@@ -286,8 +287,13 @@ public class POIExcelUtil {
 			Row newRow = null;
 			
 			//设置列宽
-			for(int index=0;index<width.length;index++)
+			for(int index=0;index<width.length;index++){
 				sheet.setColumnWidth(index, width[index]*100);
+				
+			}
+			
+			HSSFDataValidation dataValidation = ExcelDataValidationUtil.addDataValidation(1, (short)0, 3, (short)-1, new String[]{"0","1"}, "输入错误", "0/1");
+//			sheet.addValidationData(dataValidation);
 			
 			//写列表头
 		    newRow = sheet.createRow(0);
