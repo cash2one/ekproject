@@ -236,7 +236,7 @@ public class POIExcelUtil {
 			//写列表头
 		    newRow = sheet.createRow(0);
 			for(int cellIndex=0;cellIndex<columnsNum;cellIndex++){
-				createCell(wb,newRow,cellIndex,columnsName[cellIndex],null,CellStyle.ALIGN_CENTER,Cell.CELL_TYPE_STRING);
+				createCell(wb,newRow,cellIndex,columnsName[cellIndex],null,CellStyle.ALIGN_CENTER,Cell.CELL_TYPE_STRING,true);
 			}	
 			
 			
@@ -245,7 +245,7 @@ public class POIExcelUtil {
 			for(int rowSeq=1;rowSeq<totalRowNum;rowSeq++){
 				newRow = sheet.createRow(rowSeq);
 				for(int cellIndex=0;cellIndex<columnsNum;cellIndex++){
-					createCell(wb,newRow,cellIndex,datas[rowSeq-1][cellIndex],null,CellStyle.ALIGN_CENTER,Cell.CELL_TYPE_STRING);
+					createCell(wb,newRow,cellIndex,datas[rowSeq-1][cellIndex],null,CellStyle.ALIGN_CENTER,Cell.CELL_TYPE_STRING,false);
 				}	
 			}
 			
@@ -292,7 +292,7 @@ public class POIExcelUtil {
 			//写列表头
 		    newRow = sheet.createRow(0);
 			for(int cellIndex=0;cellIndex<columnsNum;cellIndex++){
-				createCell(wb,newRow,cellIndex,columnsName[cellIndex],columnsColor[cellIndex],CellStyle.ALIGN_CENTER,Cell.CELL_TYPE_STRING);
+				createCell(wb,newRow,cellIndex,columnsName[cellIndex],columnsColor[cellIndex],CellStyle.ALIGN_CENTER,Cell.CELL_TYPE_STRING,true);
 			}	
 			
 			//写数据
@@ -300,7 +300,7 @@ public class POIExcelUtil {
 			for(int rowSeq=1;rowSeq<totalRowNum;rowSeq++){
 				newRow = sheet.createRow(rowSeq);
 				for(int cellIndex=0;cellIndex<columnsNum;cellIndex++){
-				    createCell(wb,newRow,cellIndex,datas[rowSeq-1][cellIndex],null,CellStyle.ALIGN_CENTER,Cell.CELL_TYPE_STRING);
+				    createCell(wb,newRow,cellIndex,datas[rowSeq-1][cellIndex],null,CellStyle.ALIGN_CENTER,Cell.CELL_TYPE_STRING,false);
 				}	
 			}
 			
@@ -321,7 +321,7 @@ public class POIExcelUtil {
 	 * @param cellValue
 	 * @return
 	 */
-	public static void createCell(Workbook wb,Row newRow,int cellIndex,String cellValue,IndexedColors color,short cellAlignment,int cellType){
+	public static void createCell(Workbook wb,Row newRow,int cellIndex,String cellValue,IndexedColors color,short cellAlignment,int cellType,boolean isUnderLine){
 		
 		CreationHelper creationHelper = wb.getCreationHelper();
 		RichTextString richTextStr = creationHelper.createRichTextString(cellValue);
@@ -334,7 +334,8 @@ public class POIExcelUtil {
 	    
 	    Font font = wb.createFont();
 		font.setItalic(true);
-		font.setUnderline((byte) 1);
+		if(isUnderLine)
+		  font.setUnderline((byte) 1);
 		
 		if(color!=null)
 			font.setColor(color.getIndex());
