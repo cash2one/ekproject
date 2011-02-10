@@ -19,15 +19,15 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
  */
 public class FileUploadService {
 
-	private int maxMemorySize;
+	private int maxMemorySize;   //MB
 	private String tempDirectory;
-	private int maxRequestSize;
+	private int maxRequestSize;  //MB
 
 	
 	public FileUploadService(String tempDirectory,int maxMemorySize,int maxRequestSize) {
         this.tempDirectory = tempDirectory;
-        this.maxMemorySize = maxMemorySize;
-        this.maxRequestSize = maxRequestSize;
+        this.maxMemorySize = maxMemorySize*1024*1024;
+        this.maxRequestSize = maxRequestSize*1024*1024;
 	}
 
 	
@@ -51,17 +51,18 @@ public class FileUploadService {
 		while (iter.hasNext()) {
 		    FileItem item = (FileItem) iter.next();
             if(!item.isFormField()){
-            	System.out.println("UpLoad Finished!");
+            	
             	String fieldName = item.getFieldName();
                 String fileName = item.getName();
                 String contentType = item.getContentType();
                 boolean isInMemory = item.isInMemory();
                 long sizeInBytes = item.getSize();
-                System.out.println("fileName: "+fileName);
+                
                 if(fileName==null||"".equals(fileName))
                 	continue;
                 
                 item.write(new File(tempDirectory+"/"+fileName)); 
+               
                 uploadFileFinished();
             }
 		}
