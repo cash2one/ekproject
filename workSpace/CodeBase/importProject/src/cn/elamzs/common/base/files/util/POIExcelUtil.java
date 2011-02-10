@@ -253,50 +253,7 @@ public class POIExcelUtil {
 	 * @param flag
 	 */
 	public static void writeDataToExcel(String fileName,String[] columnsName,String[][] datas,int[] width,boolean flag,String[]columnsComment){
-		Workbook wb = null;
-		try{
-			if (flag) {// 2003
-				wb = new HSSFWorkbook();
-			} else {// 2007
-				wb = new XSSFWorkbook();
-			}
-			
-			int columnsNum = columnsName.length;
-			int totalRowNum = datas!=null?datas.length+1:1;
-			
-			Sheet sheet = wb.createSheet();
-			Row newRow = null;
-			
-			//设置列宽
-			for(int index=0;index<width.length;index++)
-				sheet.setColumnWidth(index, width[index]*100);
-			
-			//写列表头
-		    newRow = sheet.createRow(0);
-		    String comment = "";
-			for(int cellIndex=0;cellIndex<columnsNum;cellIndex++){
-				comment = columnsComment!=null&&columnsComment.length>cellIndex?columnsComment[cellIndex]:"";
-				createCell(wb,sheet,newRow,cellIndex,columnsName[cellIndex],null,CellStyle.ALIGN_CENTER,Cell.CELL_TYPE_STRING,true,comment);
-			}	
-			
-			
-			//写数据
-			if(datas!=null){
-				columnsNum = datas[0].length;
-				for(int rowSeq=1;rowSeq<totalRowNum;rowSeq++){
-					newRow = sheet.createRow(rowSeq);
-					for(int cellIndex=0;cellIndex<columnsNum;cellIndex++){
-						createCell(wb,sheet,newRow,cellIndex,datas[rowSeq-1][cellIndex],null,CellStyle.ALIGN_CENTER,Cell.CELL_TYPE_STRING,false,null);
-					}	
-				}
-			}
-			FileOutputStream fileOut = new FileOutputStream(fileName);
-		    wb.write(fileOut);
-			fileOut.close();
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		
+		writeDataToExcel(fileName, columnsName, datas, width,null,flag,columnsComment);
 	}
 	
 	
@@ -327,9 +284,15 @@ public class POIExcelUtil {
 			Row newRow = null;
 			
 			//设置列宽
-			for(int index=0;index<width.length;index++){
+			int index = 0;
+			for(index=0;index<width.length;index++){
 				sheet.setColumnWidth(index, width[index]*100);
-				
+			}
+			
+			//
+			if(width.length<columnsName.length){
+				for(;index<columnsName.length;index++)
+				  sheet.setColumnWidth(index, 50*100);
 			}
 			
 			//添加数据验证功能
@@ -337,10 +300,13 @@ public class POIExcelUtil {
 			
 			//写列表头
 		    newRow = sheet.createRow(0);
+		    
 		    String comment = "";
+		    IndexedColors color = null;
 			for(int cellIndex=0;cellIndex<columnsNum;cellIndex++){
 				comment = columnsComment!=null&&columnsComment.length>cellIndex?columnsComment[cellIndex]:"";
-				createCell(wb,sheet,newRow,cellIndex,columnsName[cellIndex],columnsColor[cellIndex],CellStyle.ALIGN_CENTER,Cell.CELL_TYPE_STRING,true,columnsComment[cellIndex]);
+				color = columnsColor!=null&&columnsColor.length>cellIndex?columnsColor[cellIndex]:null;
+				createCell(wb,sheet,newRow,cellIndex,columnsName[cellIndex],color,CellStyle.ALIGN_CENTER,Cell.CELL_TYPE_STRING,true,comment);
 			}	
 			
 			//写数据
