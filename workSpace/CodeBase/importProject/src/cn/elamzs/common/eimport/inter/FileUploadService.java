@@ -56,7 +56,6 @@ public class FileUploadService {
                 String contentType = item.getContentType();
                 boolean isInMemory = item.isInMemory();
                 long sizeInBytes = item.getSize();
-                
                 uploadFileFinished();
             }
 		}
@@ -85,17 +84,10 @@ public class FileUploadService {
 			upload.setProgressListener(progressListener);
 	}
 	
-	
 	public void uploadFileFinished(){
-	  new Thread();
+
 		
 	}
-	
-
-}
-
-class Test extends Thread{
-      	
 
 }
 
