@@ -15,7 +15,7 @@ import org.apache.poi.ss.usermodel.IndexedColors;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
-public @interface ValidatorRule {
+public @interface ColumnValidate {
 
 	String ename(); //导入的列名 ，需要唯一
 	

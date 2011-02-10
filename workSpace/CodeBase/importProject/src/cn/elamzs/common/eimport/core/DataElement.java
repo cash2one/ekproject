@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import cn.elamzs.common.base.files.util.StringUtil;
-import cn.elamzs.common.eimport.Anotation.ValidatorRule;
+import cn.elamzs.common.eimport.Anotation.ColumnValidate;
 import cn.elamzs.common.eimport.inter.DataValidator;
 
 /**
@@ -67,7 +67,7 @@ public class DataElement {
 		    columnsWidth = new HashMap<Integer,Integer>();
 		    
     	    for(Method method:methods){
-		    	 ValidatorRule rule = method.getAnnotation(ValidatorRule.class);		    	
+		    	 ColumnValidate rule = method.getAnnotation(ColumnValidate.class);		    	
 		    	 if(rule!=null){
 		    		 
 		    		 if(valueKeySets.containsKey("cs_"+rule.columnSeq()))

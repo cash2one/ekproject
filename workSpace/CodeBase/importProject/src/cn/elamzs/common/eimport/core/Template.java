@@ -12,7 +12,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 
 import cn.elamzs.common.base.files.util.POIExcelUtil;
 import cn.elamzs.common.eimport.Anotation.Restriction;
-import cn.elamzs.common.eimport.Anotation.ValidatorRule;
+import cn.elamzs.common.eimport.Anotation.ColumnValidate;
 import cn.elamzs.common.eimport.enums.FileType;
 import cn.elamzs.common.eimport.inter.DataValidator;
 
@@ -78,7 +78,7 @@ public class Template {
 	    columnsComment  = new HashMap<Integer,String>();
 	    
 	    for(Method method:methods){
-	    	 ValidatorRule rule = method.getAnnotation(ValidatorRule.class);		    	
+	    	 ColumnValidate rule = method.getAnnotation(ColumnValidate.class);		    	
 	    	 if(rule!=null){
 	    		 cnColumnsName.put(rule.columnSeq(),rule.showName());
 	    		 columnsWidth.put(rule.columnSeq(), rule.width());
