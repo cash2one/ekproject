@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
 
 import org.apache.poi.hssf.usermodel.DVConstraint;
 import org.apache.poi.hssf.usermodel.HSSFDataValidation;
@@ -155,34 +157,38 @@ public class POIExcelUtil {
 			if (row != null) {
 				int cells = row.getPhysicalNumberOfCells();
 				rowValues = new String[cells];
+				DecimalFormat df = new DecimalFormat("#");
 				for (short c = 0; c < cells; c++) {
 					Cell cell = row.getCell(c);
 					if (cell != null) {
 						String value = null;
-
 						switch (cell.getCellType()) {
-
-						case Cell.CELL_TYPE_FORMULA:
-							value = cell.getCellFormula();
-							break;
-
-						case Cell.CELL_TYPE_NUMERIC:
-							if (HSSFDateUtil.isCellDateFormatted(cell)) {
-								value = cell.getDateCellValue() + "";
-							} else {
-								value = cell.getNumericCellValue() + "";
-							}
-
-							break;
-
-						case Cell.CELL_TYPE_STRING:
-							value = cell.getStringCellValue();
-							break;
-
-						case Cell.CELL_TYPE_BOOLEAN:
-							value = cell.getBooleanCellValue() + "";
-							break;
-						default:
+                               
+								case Cell.CELL_TYPE_FORMULA:
+									value = cell.getCellFormula();
+									break;
+		
+								case Cell.CELL_TYPE_NUMERIC:
+									if (HSSFDateUtil.isCellDateFormatted(cell)) {
+										value = cell.getDateCellValue() + "";
+									} else {
+									     if(cell.getNumericCellValue() == Double.parseDouble(df.format(cell.getNumericCellValue())))
+									    	 value = df.format(cell.getNumericCellValue());
+							             else 
+							            	 value = String.valueOf(new BigDecimal(cell.getNumericCellValue()).setScale((short)2, BigDecimal.ROUND_HALF_UP).doubleValue());
+//										value = df.format(cell.getNumericCellValue()) + "";
+									}
+									break;
+		
+								case Cell.CELL_TYPE_STRING:
+									value = cell.getStringCellValue();
+									break;
+		
+								case Cell.CELL_TYPE_BOOLEAN:
+									value = cell.getBooleanCellValue() + "";
+									break;
+								
+								default:
 						}
 						rowValues[c] = value;
 					}

@@ -20,7 +20,7 @@ public class ImportTestSuit {
 		TestValidator v = new TestValidator();
 		TestDataProcess p = new TestDataProcess();
 		EImporter importer = new ThreadDataImport(v, p);
-		String dataFile = "d:/importfile/src/test.xlsx";
+		String dataFile = "d:/importfile/src/µº»Î≤‚ ‘ƒ£∞Ê.xlsx";
 		importer.importFile(dataFile);
 	}
 
