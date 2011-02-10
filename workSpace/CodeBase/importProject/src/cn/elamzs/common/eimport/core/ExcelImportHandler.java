@@ -36,7 +36,7 @@ public class ExcelImportHandler extends AbstractFileHandler {
 		
 		if(sheet==null)
 			throw new Exception("该Excel没有包含工作表。");
-		String[] columnsName = POIExcelUtil.getRowValues(sheet, 0);
+		String[] columnsName = POIExcelUtil.getRowValues(wb,sheet, 0);
 	   
 		sheet = null;
 		wb = null;
@@ -69,7 +69,7 @@ public class ExcelImportHandler extends AbstractFileHandler {
 		
 		//逐行读取文档中的数据
 		for(int rowSeq = 1;rowSeq<totalRows;rowSeq++){
-		    rowValues = POIExcelUtil.getRowValues(sheet, rowSeq);
+		    rowValues = POIExcelUtil.getRowValues(wb,sheet, rowSeq);
 		    validateMsg = dataElement.match(rowValues);
 //		    if(!StringUtil.isNull(validateMsg))
 		         dataPro.forEachRowValueProcess(dataElement);

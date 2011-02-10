@@ -20,6 +20,7 @@ import org.apache.poi.ss.usermodel.CreationHelper;
 import org.apache.poi.ss.usermodel.DataValidation;
 import org.apache.poi.ss.usermodel.Drawing;
 import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.FormulaEvaluator;
 import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.RichTextString;
 import org.apache.poi.ss.usermodel.Row;
@@ -149,7 +150,7 @@ public class POIExcelUtil {
 	 * @param sheet
 	 * @param rowSeq
 	 */
-	public static String[] getRowValues(Sheet sheet, int rowSeq) {
+	public static String[] getRowValues(Workbook wb,Sheet sheet, int rowSeq) {
 		String[] rowValues = null;
 		try {
 			// 定义 row
@@ -158,23 +159,46 @@ public class POIExcelUtil {
 				int cells = row.getPhysicalNumberOfCells();
 				rowValues = new String[cells];
 				DecimalFormat df = new DecimalFormat("#");
+				FormulaEvaluator evaluator = wb.getCreationHelper().createFormulaEvaluator();
 				for (short c = 0; c < cells; c++) {
 					Cell cell = row.getCell(c);
 					if (cell != null) {
 						String value = null;
 						switch (cell.getCellType()) {
-                               
+						
 								case Cell.CELL_TYPE_FORMULA:
-									value = cell.getCellFormula();
+									{
+										  switch (evaluator.evaluateInCell(cell).getCellType()) {
+									        case Cell.CELL_TYPE_BOOLEAN:
+									            value= cell.getBooleanCellValue()+"";
+									            break;
+									        case Cell.CELL_TYPE_NUMERIC:
+									        	value=cell.getNumericCellValue()+"";
+									            break;
+									        case Cell.CELL_TYPE_STRING:
+									        	value=cell.getStringCellValue()+"";
+									            break;
+									        case Cell.CELL_TYPE_BLANK:
+									            break;
+									        case Cell.CELL_TYPE_ERROR:
+									        	value=cell.getErrorCellValue()+"";
+									            break;
+									        // CELL_TYPE_FORMULA will never occur
+									        case Cell.CELL_TYPE_FORMULA:
+									            break;
+									    }
+									}
 									break;
 		
 								case Cell.CELL_TYPE_NUMERIC:
 									if (HSSFDateUtil.isCellDateFormatted(cell)) {
 										value = cell.getDateCellValue() + "";
 									} else {
+										 //假如是整数
 									     if(cell.getNumericCellValue() == Double.parseDouble(df.format(cell.getNumericCellValue())))
 									    	 value = df.format(cell.getNumericCellValue());
 							             else 
+							            	 //假如是小数
 							            	 value = String.valueOf(new BigDecimal(cell.getNumericCellValue()).setScale((short)2, BigDecimal.ROUND_HALF_UP).doubleValue());
 //										value = df.format(cell.getNumericCellValue()) + "";
 									}
@@ -428,7 +452,7 @@ public class POIExcelUtil {
 				int rows = sheet.getPhysicalNumberOfRows();
 				String[] rowValues = null;
 				for (int r = 0; r < rows; r++)
-					printRowValues(getRowValues(sheet, r));
+					printRowValues(getRowValues(wb,sheet, r));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
