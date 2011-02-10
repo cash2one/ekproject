@@ -173,8 +173,16 @@ public class POIExcelUtil {
 									            value= cell.getBooleanCellValue()+"";
 									            break;
 									        case Cell.CELL_TYPE_NUMERIC:
-									        	value=cell.getNumericCellValue()+"";
-									            break;
+									        	if (HSSFDateUtil.isCellDateFormatted(cell)) {
+													value = cell.getDateCellValue() + "";
+												} else {
+													    //假如是整数
+												     if(cell.getNumericCellValue() == Double.parseDouble(df.format(cell.getNumericCellValue())))
+												    	 value = df.format(cell.getNumericCellValue());
+										             else //假如是小数
+										            	 value = String.valueOf(new BigDecimal(cell.getNumericCellValue()).setScale((short)2, BigDecimal.ROUND_HALF_UP).doubleValue());
+												}
+												break;
 									        case Cell.CELL_TYPE_STRING:
 									        	value=cell.getStringCellValue()+"";
 									            break;
@@ -197,10 +205,8 @@ public class POIExcelUtil {
 										 //假如是整数
 									     if(cell.getNumericCellValue() == Double.parseDouble(df.format(cell.getNumericCellValue())))
 									    	 value = df.format(cell.getNumericCellValue());
-							             else 
-							            	 //假如是小数
+							             else //假如是小数
 							            	 value = String.valueOf(new BigDecimal(cell.getNumericCellValue()).setScale((short)2, BigDecimal.ROUND_HALF_UP).doubleValue());
-//										value = df.format(cell.getNumericCellValue()) + "";
 									}
 									break;
 		
