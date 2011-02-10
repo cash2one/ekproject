@@ -2,6 +2,7 @@ package cn.elamzs.common.eimport.core;
 
 import java.io.File;
 
+import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 
@@ -86,8 +87,9 @@ public class ExcelImportHandler extends AbstractFileHandler {
 		String columnsNameStr = dataElement.getImpColumnsName()+",处理结果";
 		int[] width = dataElement.getImpColumnsWidthSet();
 		String [] columnsName = columnsNameStr.split(",");
+		
 		String fileName =ConfigControl.DIR_IMPORT_RESULT+"imp_"+importFile.getName();
-		POIExcelUtil.writeDataToExcel(fileName,columnsName,resultDatas,width,isXlsx==0?true:false,null);
+		POIExcelUtil.writeDataToExcel(fileName,columnsName,resultDatas,width,null,IndexedColors.LIGHT_YELLOW,isXlsx==0?true:false,null);
 		
 		
 	}

@@ -150,7 +150,7 @@ public class Template {
 			String [] columnsName = columnsNameStr.split(","); 
 			String[] comments = getImpColumnsCommentSet();  //列表头批注
 			String fileName =ConfigControl.DIR_IMPORT_TEMPLATE+templateName+type.suffix();
-			POIExcelUtil.writeDataToExcel(fileName,columnsName,null,width,colors,FileType.EXCEL_XLS==type?true:false,comments);
+			POIExcelUtil.writeDataToExcel(fileName,columnsName,null,width,colors,IndexedColors.BRIGHT_GREEN,FileType.EXCEL_XLS==type?true:false,comments);
 		    return new File(fileName);
 		}catch(Exception e){
 			

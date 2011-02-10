@@ -253,7 +253,7 @@ public class POIExcelUtil {
 	 * @param flag
 	 */
 	public static void writeDataToExcel(String fileName,String[] columnsName,String[][] datas,int[] width,boolean flag,String[]columnsComment){
-		writeDataToExcel(fileName, columnsName, datas, width,null,flag,columnsComment);
+		writeDataToExcel(fileName, columnsName, datas, width,null,null,flag,columnsComment);
 	}
 	
 	
@@ -267,7 +267,7 @@ public class POIExcelUtil {
 	 * @param width
 	 * @param flag
 	 */
-	public static void writeDataToExcel(String fileName,String[] columnsName,String[][] datas,int[] width,IndexedColors[] columnsColor,boolean flag,String[]columnsComment){
+	public static void writeDataToExcel(String fileName,String[] columnsName,String[][] datas,int[] width,IndexedColors[] columnsTileFontColor,IndexedColors bgColumnColor,boolean flag,String[]columnsComment){
 		Workbook wb = null;
 		try{
 			if (flag) {// 2003
@@ -296,17 +296,17 @@ public class POIExcelUtil {
 			}
 			
 			//添加数据验证功能
-			addDataValidator(wb,sheet);
+//			addDataValidator(wb,sheet);
 			
 			//写列表头
 		    newRow = sheet.createRow(0);
 		    
 		    String comment = "";
-		    IndexedColors color = null;
+		    IndexedColors fontColor = null;
 			for(int cellIndex=0;cellIndex<columnsNum;cellIndex++){
 				comment = columnsComment!=null&&columnsComment.length>cellIndex?columnsComment[cellIndex]:"";
-				color = columnsColor!=null&&columnsColor.length>cellIndex?columnsColor[cellIndex]:null;
-				createCell(wb,sheet,newRow,cellIndex,columnsName[cellIndex],color,CellStyle.ALIGN_CENTER,Cell.CELL_TYPE_STRING,true,comment);
+				fontColor = columnsTileFontColor!=null&&columnsTileFontColor.length>cellIndex?columnsTileFontColor[cellIndex]:null;
+				createCell(wb,sheet,newRow,cellIndex,columnsName[cellIndex],fontColor,bgColumnColor,CellStyle.ALIGN_CENTER,Cell.CELL_TYPE_STRING,true,comment);
 			}	
 			
 			//写数据
@@ -315,7 +315,7 @@ public class POIExcelUtil {
 				for(int rowSeq=1;rowSeq<totalRowNum;rowSeq++){
 					newRow = sheet.createRow(rowSeq);
 					for(int cellIndex=0;cellIndex<columnsNum;cellIndex++){
-					    createCell(wb,sheet,newRow,cellIndex,datas[rowSeq-1][cellIndex],null,CellStyle.ALIGN_CENTER,Cell.CELL_TYPE_STRING,false,null);
+					    createCell(wb,sheet,newRow,cellIndex,datas[rowSeq-1][cellIndex],null,null,CellStyle.ALIGN_CENTER,Cell.CELL_TYPE_STRING,false,null);
 					}	
 				}
 			}
@@ -366,24 +366,31 @@ public class POIExcelUtil {
 	 * @param isUnderLine
 	 * @param commentTip
 	 */
-	public static void createCell(Workbook wb,Sheet sheet,Row newRow,int cellIndex,String cellValue,IndexedColors color,short cellAlignment,int cellType,boolean isUnderLine,String commentTip){
+	public static void createCell(Workbook wb,Sheet sheet,Row newRow,int cellIndex,String cellValue,IndexedColors fontColor,IndexedColors bgColor,short cellAlignment,int cellType,boolean isUnderLine,String commentTip){
 		
 		CreationHelper creationHelper = wb.getCreationHelper();
 		RichTextString richTextStr = creationHelper.createRichTextString(cellValue);
 		
 		Cell newCell= newRow.createCell(cellIndex);
+		
 		CellStyle style = wb.createCellStyle();
 		style.setAlignment(CellStyle.ALIGN_CENTER);
-	    newCell.setCellStyle(style);
+		
+		if(bgColor!=null){
+	      style.setFillForegroundColor(bgColor.getIndex());
+	      style.setFillPattern(CellStyle.BORDER_DASHED);
+		}
+		newCell.setCellStyle(style);
 	    newCell.setCellType(Cell.CELL_TYPE_STRING);
+	    
 	    
 	    Font font = wb.createFont();
 		font.setItalic(true);
 		if(isUnderLine)
 		  font.setUnderline((byte) 1);
 		
-		if(color!=null)
-			font.setColor(color.getIndex());
+		if(fontColor!=null)
+			font.setColor(fontColor.getIndex());
 		else
 			font.setColor(IndexedColors.BLACK.getIndex());
 		
