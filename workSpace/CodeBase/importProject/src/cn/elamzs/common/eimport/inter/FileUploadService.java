@@ -1,6 +1,7 @@
 package cn.elamzs.common.eimport.inter;
 
 import java.io.File;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -60,10 +61,10 @@ public class FileUploadService {
                 
                 if(fileName==null||"".equals(fileName))
                 	continue;
-                
-                item.write(new File(tempDirectory+"/"+fileName)); 
-               
-                uploadFileFinished();
+                String suffix = fileName.substring(fileName.lastIndexOf("."));
+                String newFileName = System.currentTimeMillis()+suffix;
+                item.write(new File(tempDirectory+"/"+newFileName)); 
+                uploadFileFinished(fileName,newFileName);
             }
 		}
 		
@@ -81,18 +82,18 @@ public class FileUploadService {
 			       megaBytes = mBytes;
 			       System.out.println("We are currently reading item " + pItems);
 			       if (pContentLength == -1) {
-			           System.out.println("So far, " + pBytesRead + " bytes have been read.");
+			           System.out.println("So far, " + pBytesRead + " bytes have been read. At "+new Date().toLocaleString());
 			       } else {
 			           System.out.println("So far, " + pBytesRead + " of " + pContentLength
-			                              + " bytes have been read.");
+			                              + " bytes have been read. At "+new Date().toLocaleString());
 			       }
 			   }
 			};
 			upload.setProgressListener(progressListener);
 	}
 	
-	public void uploadFileFinished(){
-
+	public void uploadFileFinished(String srcName,String newName){
+          System.out.println("src:"+srcName+"   new "+newName);
 		
 	}
 
