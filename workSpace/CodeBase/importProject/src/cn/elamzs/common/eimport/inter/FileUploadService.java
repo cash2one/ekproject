@@ -87,13 +87,17 @@ public class FileUploadService {
 	
 	
 	public void uploadFileFinished(){
-	
+	  new Thread();
 		
 	}
 	
 
 }
 
+class Test extends Thread{
+      	
+
+}
 
 
 
