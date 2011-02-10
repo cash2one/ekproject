@@ -11,8 +11,8 @@ import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Workbook;
 
 import cn.elamzs.common.base.files.util.POIExcelUtil;
-import cn.elamzs.common.eimport.Anotation.Restriction;
-import cn.elamzs.common.eimport.Anotation.ColumnValidate;
+import cn.elamzs.common.eimport.annotations.ColumnValidate;
+import cn.elamzs.common.eimport.annotations.Restriction;
 import cn.elamzs.common.eimport.enums.FileType;
 import cn.elamzs.common.eimport.inter.DataValidator;
 

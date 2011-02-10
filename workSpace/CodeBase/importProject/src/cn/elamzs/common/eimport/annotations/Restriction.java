@@ -1,4 +1,4 @@
-package cn.elamzs.common.eimport.Anotation;
+package cn.elamzs.common.eimport.annotations;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

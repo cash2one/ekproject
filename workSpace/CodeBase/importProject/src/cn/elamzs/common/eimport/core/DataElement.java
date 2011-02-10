@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import cn.elamzs.common.base.files.util.StringUtil;
-import cn.elamzs.common.eimport.Anotation.ColumnValidate;
+import cn.elamzs.common.eimport.annotations.ColumnValidate;
 import cn.elamzs.common.eimport.inter.DataValidator;
 
 /**

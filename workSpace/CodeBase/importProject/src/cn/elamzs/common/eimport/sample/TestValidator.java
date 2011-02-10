@@ -4,8 +4,8 @@ package cn.elamzs.common.eimport.sample;
 import org.apache.poi.ss.usermodel.IndexedColors;
 
 import cn.elamzs.common.base.files.util.StringUtil;
-import cn.elamzs.common.eimport.Anotation.Restriction;
-import cn.elamzs.common.eimport.Anotation.ColumnValidate;
+import cn.elamzs.common.eimport.annotations.ColumnValidate;
+import cn.elamzs.common.eimport.annotations.Restriction;
 import cn.elamzs.common.eimport.inter.DataValidator;
 
 /**
