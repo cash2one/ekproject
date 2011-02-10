@@ -34,7 +34,7 @@ public class TestValidator implements DataValidator{
     public String checkNum(String value){
     	//填写验证 value 值是否符合输入合法性	
     	try{
-    	  Integer.parseInt(value);	
+    	  Double.parseDouble(value);	
     	}catch(Exception e){
     	   return "不是合法数字";
     	}
