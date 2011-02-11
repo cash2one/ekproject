@@ -13,26 +13,47 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 /**
- * 文件上传服务
- * 
+ * 文件上传服务处理类
  * @author Ethan.Lam 2011-2-10
  * 
  */
-public class FileUploadService {
+public class FileUploadService implements FileUploadHandle{
 
 	private int maxMemorySize;   //MB
 	private String tempDirectory;
 	private int maxRequestSize;  //MB
 
+	private FileUploadHandle handle = null;
 	
 	public FileUploadService(String tempDirectory,int maxMemorySize,int maxRequestSize) {
         this.tempDirectory = tempDirectory;
         this.maxMemorySize = maxMemorySize*1024*1024;
         this.maxRequestSize = maxRequestSize*1024*1024;
+        this.handle = null;
+	}
+
+	public FileUploadService(FileUploadHandle handle,String tempDirectory) {
+        this.maxMemorySize = maxMemorySize*1024*1024;
+        this.maxRequestSize = maxRequestSize*1024*1024;
+        this.handle = handle;
+	}
+	
+	
+	public FileUploadService(FileUploadHandle handle,String tempDirectory,int maxMemorySize,int maxRequestSize) {
+        this.tempDirectory = tempDirectory;
+        this.maxMemorySize = maxMemorySize*1024*1024;
+        this.maxRequestSize = maxRequestSize*1024*1024;
+        this.handle = handle;
 	}
 
 	
-	public void uploadFile(HttpServletRequest request, String dir)
+	/**
+	 * 处理上传的事件
+	 * @param request
+	 * @param dir
+	 * @throws Exception
+	 */
+	public final void uploadFile(HttpServletRequest request, String dir)
 			throws Exception {
 		
 		boolean isMultipart = ServletFileUpload.isMultipartContent(request);
@@ -61,16 +82,35 @@ public class FileUploadService {
                 
                 if(fileName==null||"".equals(fileName))
                 	continue;
-                String suffix = fileName.substring(fileName.lastIndexOf("."));
-                String newFileName = System.currentTimeMillis()+suffix;
+                
+                String newFileName = fileNamingRule(fileName);
                 item.write(new File(tempDirectory+"/"+newFileName)); 
-                uploadFileFinished(fileName,newFileName);
+                
+                //当上传完文件后执行
+                uploadFinishedEvent(new File(tempDirectory+"/"+newFileName),fileName,newFileName);
             }
 		}
 		
 		
 	}
 	
+	
+	/**
+	 * 文件重命名规则
+	 * @param oldFileName
+	 * @return
+	 */
+    public  String fileNamingRule(String oldFileName){
+    	String suffix = oldFileName.substring(oldFileName.lastIndexOf("."));
+    	return System.currentTimeMillis()+suffix;
+    } 	 
+  	
+	
+	
+   /**
+    * 进度提示函数
+    * @param upload
+    */
 	protected void addProcessListener(ServletFileUpload upload){
 		ProgressListener progressListener = new ProgressListener(){
 			   private long megaBytes = -1;
@@ -92,23 +132,39 @@ public class FileUploadService {
 			upload.setProgressListener(progressListener);
 	}
 	
-	public void uploadFileFinished(String srcName,String newName){
-          System.out.println("src:"+srcName+"   new "+newName);
-		
+	
+	/**
+	  * 当文件上传完后执行的执行的动作
+	  * @param file
+	  * @param oldFileName
+	  * @param newFileName
+	*/
+	public void uploadFinishedEvent(File file,String oldFileName,String newFileName){
+		  if(handle!=null)
+			  handle.uploadFinishedEvent(file,oldFileName, newFileName);
+		  else{
+			  //默认的处理时间
+              System.out.println("src:"+oldFileName+"   new "+newFileName);
+		  }
 	}
+	
+	
+    public static void main(String...args){
+    	String tempDirectory = "d:/test";
+    	
+    	FileUploadService src  = new FileUploadService(new FileUploadHandle(){
 
-}
-
-
-
-class FileInfos {
-
-	private String name;
-	private String id;
-	private String path;
-
-	public FileInfos() {
-
-	}
-
+			@Override
+			public void uploadFinishedEvent(File file, String oldFileName,
+					String newFileName) {
+				
+				
+				
+				
+				
+			}
+			
+    	}, tempDirectory);
+    }
+	
 }
