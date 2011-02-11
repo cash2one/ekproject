@@ -153,12 +153,12 @@ public class FileUploadService implements FileUploadHandle{
     	String tempDirectory = "d:/test";
     	
     	FileUploadService src  = new FileUploadService(new FileUploadHandle(){
-
+ 
+    		private int t = 0;
+    		
 			@Override
 			public void uploadFinishedEvent(File file, String oldFileName,
 					String newFileName) {
-				
-				
 				
 				
 				
