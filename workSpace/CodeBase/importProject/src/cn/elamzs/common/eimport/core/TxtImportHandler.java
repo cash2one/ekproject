@@ -12,8 +12,8 @@ import cn.elamzs.common.eimport.inter.DataValidator;
  */
 public class TxtImportHandler extends AbstractFileHandler {
 
-	public TxtImportHandler(DataValidator validator,DataProcess dataPro,File file) throws Exception {
-		super(validator,dataPro,file);
+	public TxtImportHandler(DataValidator validator,DataProcess dataPro,File file,String storeSubDir) throws Exception {
+		super(validator,dataPro,file,storeSubDir);
 	}
 
 	

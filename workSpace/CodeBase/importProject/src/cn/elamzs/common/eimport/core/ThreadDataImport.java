@@ -50,11 +50,11 @@ public class ThreadDataImport implements EImporter {
 	}
 	
 	@Override
-	public String importFile(String dataFile) throws Exception {
+	public String importFile(String dataFile,String storeSubDir) throws Exception {
 		// TODO Auto-generated method stub
 		
 		//根据文件，配置对应的处理类
-		appendDataHandler(dataFile);
+		appendDataHandler(dataFile,storeSubDir);
 		
 		//开始执行文件导入数据处理，启动线程处理
 		Thread importThread = new Thread(handler);
@@ -69,7 +69,7 @@ public class ThreadDataImport implements EImporter {
 	 * @param fileName
 	 * @throws Exception 
 	 */
-	void appendDataHandler(String fileName) throws Exception{
+	void appendDataHandler(String fileName,String storeSubDir) throws Exception{
 		File file = new File(fileName);
 		
 		String suffix = fileName.substring(fileName.lastIndexOf("."));
@@ -81,9 +81,9 @@ public class ThreadDataImport implements EImporter {
 		
 		//
 		if(FileType.EXCEL_XLS.equals(fileType)||FileType.EXCEL_XLSX.equals(fileType))
-			this.handler = (FileHandler) new ExcelImportHandler(validator,dataProcess,file,FileType.EXCEL_XLS.equals(fileType)?0:1);
+			this.handler = (FileHandler) new ExcelImportHandler(validator,dataProcess,file,storeSubDir,FileType.EXCEL_XLS.equals(fileType)?0:1);
 		else if(FileType.TXT.equals(fileType))
-			this.handler = new TxtImportHandler(validator,dataProcess,file);
+			this.handler = new TxtImportHandler(validator,dataProcess,file,storeSubDir);
 		
 	}
 	

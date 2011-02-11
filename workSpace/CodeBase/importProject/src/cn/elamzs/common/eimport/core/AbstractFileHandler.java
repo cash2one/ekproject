@@ -23,11 +23,14 @@ public abstract class AbstractFileHandler implements FileHandler{
 	
 	protected DataElement dataElement = null;
 	
+	protected String storeSubDir ="";
 	
-    public AbstractFileHandler(DataValidator validator,DataProcess dataProcess,File file) throws Exception{
+	
+    public AbstractFileHandler(DataValidator validator,DataProcess dataProcess,File file,String storeSubDir) throws Exception{
 		this.validator = validator;
 		this.dataPro = dataProcess;
 		importFile = file;
+		this.storeSubDir = storeSubDir!=null?storeSubDir:"";
 		dataElement = new DataElement(validator);
 	}
 
@@ -42,6 +45,17 @@ public abstract class AbstractFileHandler implements FileHandler{
 		return dataElement.checkImpColumnsMatch(returnImpDocColumnsName());
 	}
     
+	/**
+	 * 返回导入结果文件的存放路径
+	 * @return
+	 */
+	protected String resultSavDir(){
+		File _dir = new File(ConfigControl.DIR_IMPORT_RESULT+"/"+storeSubDir+"/");
+		if(!_dir.exists())
+			_dir.mkdirs();
+		return ConfigControl.DIR_IMPORT_RESULT+"/"+this.storeSubDir+"/";
+	}
+	
 	
     /**
      * 

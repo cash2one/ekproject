@@ -22,8 +22,8 @@ public class ExcelImportHandler extends AbstractFileHandler {
 	private int isXlsx = 0; // 0:2003 1:2007
 	
 	
-	public ExcelImportHandler(DataValidator validator,DataProcess dataPro,File file,int isXlsx) throws Exception {
-		super(validator,dataPro,file);	
+	public ExcelImportHandler(DataValidator validator,DataProcess dataPro,File file,String storeSubDir,int isXlsx) throws Exception {
+		super(validator,dataPro,file,storeSubDir);	
 		this.isXlsx = isXlsx;
 	}
 
@@ -88,7 +88,7 @@ public class ExcelImportHandler extends AbstractFileHandler {
 		int[] width = dataElement.getImpColumnsWidthSet();
 		String [] columnsName = columnsNameStr.split(",");
 		
-		String fileName =ConfigControl.DIR_IMPORT_RESULT+"imp_"+importFile.getName();
+		String fileName =resultSavDir()+importFile.getName();
 		POIExcelUtil.writeDataToExcel(fileName,columnsName,resultDatas,width,null,IndexedColors.LIGHT_YELLOW,isXlsx==0?true:false,null);
 		
 		
