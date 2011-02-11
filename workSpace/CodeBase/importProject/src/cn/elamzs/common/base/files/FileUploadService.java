@@ -26,6 +26,7 @@ public class FileUploadService implements FileUploadHandle{
 
 	private FileUploadHandle handle = null;
 	
+	
 	public FileUploadService(String tempDirectory,int maxMemorySize,int maxRequestSize) {
         this.tempDirectory = tempDirectory;
         this.maxMemorySize = maxMemorySize*1024*1024;
@@ -34,8 +35,9 @@ public class FileUploadService implements FileUploadHandle{
 	}
 
 	public FileUploadService(FileUploadHandle handle,String tempDirectory) {
-        this.maxMemorySize = maxMemorySize*1024*1024;
-        this.maxRequestSize = maxRequestSize*1024*1024;
+		this.tempDirectory = tempDirectory;
+		this.maxMemorySize = 10*1024*1024;
+        this.maxRequestSize =10*1024*1024;
         this.handle = handle;
 	}
 	
@@ -89,6 +91,7 @@ public class FileUploadService implements FileUploadHandle{
                 
                 //当单个文件上传完后执行的执行的动作
                 forEachUploadFinishedEvent(new File(tempDirectory+"/"+newFileName),fileName,newFileName);
+                
             }
 		}
 		
@@ -103,7 +106,7 @@ public class FileUploadService implements FileUploadHandle{
 	 */
     public  String fileNamingRule(String oldFileName){
     	String suffix = oldFileName.substring(oldFileName.lastIndexOf("."));
-    	return System.currentTimeMillis()+suffix;
+    	return System.currentTimeMillis()+Math.round(Math.random()*100)+suffix;
     } 	 
   	
 	
@@ -123,10 +126,10 @@ public class FileUploadService implements FileUploadHandle{
 			       megaBytes = mBytes;
 			       System.out.println("We are currently reading item " + pItems);
 			       if (pContentLength == -1) {
-			           System.out.println("So far, " + pBytesRead + " bytes have been read. At "+new Date().toLocaleString());
+			           System.out.println("So far, " + pBytesRead + " bytes have been read 100% . At "+new Date().toLocaleString());
 			       } else {
 			           System.out.println("So far, " + pBytesRead + " of " + pContentLength
-			                              + " bytes have been read. At "+new Date().toLocaleString());
+			                              + " bytes have been read."+(float)((pBytesRead/pContentLength)*100)+"% At "+new Date().toLocaleString());
 			       }
 			   }
 			};
