@@ -1,4 +1,4 @@
-package cn.elamzs.common.eimport.inter;
+package cn.elamzs.common.base.files;
 
 import java.io.File;
 import java.util.Date;
@@ -11,6 +11,7 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.ProgressListener;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+
 
 /**
  * 文件上传服务处理类
