@@ -53,7 +53,7 @@ public abstract class AbstractFileHandler implements FileHandler{
 		File _dir = new File(ConfigControl.DIR_IMPORT_RESULT+"/"+storeSubDir+"/");
 		if(!_dir.exists())
 			_dir.mkdirs();
-		return ConfigControl.DIR_IMPORT_RESULT+"/"+this.storeSubDir+"/";
+		return ConfigControl.DIR_IMPORT_RESULT+"/"+storeSubDir+"/";
 	}
 	
 	
