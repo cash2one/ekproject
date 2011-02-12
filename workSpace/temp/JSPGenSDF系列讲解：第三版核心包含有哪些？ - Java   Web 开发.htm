@@ -1,0 +1,427 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0077)http://topic.csdn.net/u/20100613/07/97969ccd-c48a-4b0d-86be-7b73842225d8.html -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta content="JSPGenSDF系列讲解 第三版核心包含有哪些 Java Web 开发" name="Keywords">
+<meta content="各位坛友好 从今早开始将不再发送散分贴了 将提供关于JSPGen软件开发框架 系列讲解内容 回复者依旧有分 时间 二零一零年六月十三日 早七点多 天气 晴 一 知识扫盲 什么是JSPGenSDF JSPGenSDF JSPGen Software Development Framework 软件开发框架 简称JSPGen 是一套独立 Java JSP 软件开发框架 采用Java面向对象式开发技术" name="description">
+<title>JSPGenSDF系列讲解：第三版核心包含有哪些？ - Java / Web 开发</title>
+<link href="./JSPGenSDF系列讲解：第三版核心包含有哪些？ - Java   Web 开发_files/t5.css" rel="stylesheet" type="text/css">
+<link href="http://www.csdn.net/images/favicon.ico" rel="SHORTCUT ICON">
+<script type="text/javascript">
+var tinfo = {
+	pdate: "2010-06-13 07:33:49"
+	,sid: "8b327318-2c42-4a49-8aed-ef8c33697e7f"
+	,tid: "97969ccd-c48a-4b0d-86be-7b73842225d8"
+	,ba: "Java"
+	,sa: "Java_WebDevelop"
+};
+</script>
+<script type="text/javascript" src="./JSPGenSDF系列讲解：第三版核心包含有哪些？ - Java   Web 开发_files/t5.js"></script>
+<script type="text/javascript" src="./JSPGenSDF系列讲解：第三版核心包含有哪些？ - Java   Web 开发_files/AreaCounter.js"></script>
+</head>
+<body id="bbscsdn_wrap">
+
+<div class="tad">
+    <iframe id="Topic_Top" marginwidth="0" marginheight="0" frameborder="0" scrolling="no" width="100%" height="0" src="./JSPGenSDF系列讲解：第三版核心包含有哪些？ - Java   Web 开发_files/ad1.htm" style="height: 60px; "></iframe>
+</div>
+<div class="nav">
+     <a href="http://topic.csdn.net/u/20100613/07/97969ccd-c48a-4b0d-86be-7b73842225d8.html#"><img src="./JSPGenSDF系列讲解：第三版核心包含有哪些？ - Java   Web 开发_files/pic_logo.gif" alt="" class="logo"></a>
+     <ul class="txt">
+        <li><a href="http://www.csdn.net/" target="_blank">首页</a>|</li>
+		<li><a href="http://news.csdn.net/" target="_blank">资讯</a>|</li>
+		<li><a href="http://mobile.csdn.net/" target="_blank">移动</a>|</li>
+		<li><a href="http://cloud.csdn.net/" target="_blank">云计算</a>|</li>
+		<li><a href="http://hi.csdn.net/" target="_blank">空间</a>|</li>
+		<li><a href="http://bbs.csdn.net/" target="_blank">论坛</a>|</li>
+		<li><a href="http://blog.csdn.net/" target="_blank">博客</a>|</li>
+		<li><a href="http://download.csdn.net/" target="_blank">下载</a>|</li>
+		<li><a href="http://wz.csdn.net/" target="_blank">网摘</a>|</li>
+		<li><a href="http://www.programmer.com.cn/" target="_blank">程序员</a>|</li>
+		<!--<li><a href="http://www.itliyu.com/" target="_blank">求职招聘</a>|</li>-->
+		<li><a href="http://www.dearbook.com.cn/" target="_blank">书店</a>|</li>
+		<li><a href="http://edu.csdn.net/" target="_blank">培训充电</a></li>
+		<!--<li><a href="http://daohang.csdn.net/" target="_blank">网址</a></li>-->
+	</ul>
+     <ul class="user" style="width:742px;text-align:right;float:right;">
+		<li>欢迎您：<span><a href="http://hi.csdn.net/my.html" id="vName">游客</a></span><span id="exit" style="display: none; ">|<a href="http://forum.csdn.net/User/LoginOut.aspx">退出</a></span><span id="login">|<a href="http://passport.csdn.net/UserLogin.aspx?from=http://topic.csdn.net/u/20100613/07/97969ccd-c48a-4b0d-86be-7b73842225d8.html">登录</a><a href="http://passport.csdn.net/CSDNUserRegister.aspx">注册</a></span>|<a href="http://community.csdn.net/Help/HelpCenter.htm" target="_blank">帮助</a>
+			<input name="key" type="text" onkeyup="GoKeyDown(event);" onblur="if(!this.value)this.value=&#39;这里也许就有你要的答案... &#39;;return true;" onfocus="if(this.value==&#39;这里也许就有你要的答案... &#39;)this.value=&#39;&#39;;return true;" value="这里也许就有你要的答案... " size="25">
+			<input type="image" class="btn" src="./JSPGenSDF系列讲解：第三版核心包含有哪些？ - Java   Web 开发_files/search1.gif" onclick="Search(event,&#39;&#39;);return false;">
+			<input type="image" class="btn" src="./JSPGenSDF系列讲解：第三版核心包含有哪些？ - Java   Web 开发_files/search2.gif" onclick="Search(event,&#39;advanced&#39;);return false;">
+		</li>
+     </ul>
+</div>
+<input type="hidden" id="hf_cardUrl" value="http://forum.csdn.net/PointForum/UserCard.ashx?user=">
+
+<div class="loc">
+	<p>
+<!-- a href="http://wz.csdn.net/rxsg/index.aspx" target="_blank" onclick='LogClickCount(this,117);'><img src="http://c.csdn.net/bbs/t/5/i/rxsg.jpg" alt="热血三国" /></a -->
+
+		<a href="http://www.csdn.net/" target="_blank">CSDN</a>-<a href="http://community.csdn.net/" target="_blank">CSDN社区</a>-<a href="http://forum.csdn.net/BList/Java/" target="_blank">Java</a>-<a href="http://forum.csdn.net/SList/Java_WebDevelop//" target="_blank">Web 开发</a>
+	</p>
+</div>
+
+<div class="fm">
+	<ul class="menu">
+	<li class="bt1"><a href="javascript:;" class="bt1">管理菜单<!--[if IE 7]><!--></a><!--<![endif]-->
+	<!--[if lte IE 6]><table><tr><td><![endif]-->
+		<ul>
+			<li><a id="a_head_recreate" href="http://forum.csdn.net/PointForum/BuildTopic.aspx?topicId=97969ccd-c48a-4b0d-86be-7b73842225d8&postDate=2010-06-13+07%3a33%3a49&return=http%3A%2F%2Ftopic.csdn.net%2Fu%2F20100613%2F07%2F97969ccd-c48a-4b0d-86be-7b73842225d8.html">生成帖子</a></li>
+			<li><a href="javascript:;" onclick="try{showWindow({url:&#39;http://forum.csdn.net/PointForum/Manage/Tops/InsertTop.aspx?topicUrl=http://topic.csdn.net/u/20100613/07/97969ccd-c48a-4b0d-86be-7b73842225d8.html&amp;text=JSPGenSDF%e7%b3%bb%e5%88%97%e8%ae%b2%e8%a7%a3%ef%bc%9a%e7%ac%ac%e4%b8%89%e7%89%88%e6%a0%b8%e5%bf%83%e5%8c%85%e5%90%ab%e6%9c%89%e5%93%aa%e4%ba%9b%ef%bc%9f&amp;sectionID=8b327318-2c42-4a49-8aed-ef8c33697e7f&#39;,width:600,height:265,title:&#39;置顶&#39;});}catch(ex){}return false;">置顶</a></li>
+			<li><a href="javascript:;" onclick="try{showWindow({url:&#39;http://forum.csdn.net/PointForum/Manage/SetPrime.aspx?forumid=8b327318-2c42-4a49-8aed-ef8c33697e7f&amp;topicid=97969ccd-c48a-4b0d-86be-7b73842225d8&amp;postDate=2010-06-13+07%3a33%3a49&amp;v=13&#39;,width:400,height:255,title:&#39;推荐&#39;});}catch(ex){}return false;">推荐</a></li>
+			<li><a href="javascript:;" onclick="try{showWindow({url:&#39;http://forum.csdn.net/PointForum/Manage/SetNotPrime.aspx?topicid=97969ccd-c48a-4b0d-86be-7b73842225d8&amp;forumid=8b327318-2c42-4a49-8aed-ef8c33697e7f&amp;postDate=2010-06-13+07%3a33%3a49&amp;v=13&#39;,width:400,height:255,title:&#39;取消推荐&#39;});}catch(ex){}return false;">取消推荐</a></li>
+			<li><a href="javascript:;" onclick="try{showWindow({url:&#39;http://forum.csdn.net/PointForum/Manage/LockTopic.aspx?forumId=8b327318-2c42-4a49-8aed-ef8c33697e7f&amp;topicId=97969ccd-c48a-4b0d-86be-7b73842225d8&amp;postDate=2010-06-13+07%3a33%3a49&amp;v=13&#39;,width:425,height:330,title:&#39;锁定&#39;});}catch(ex){}return false;">锁定</a></li>
+			<li><a href="javascript:;" onclick="try{showWindow({url:&#39;http://forum.csdn.net/PointForum/Manage/UnlockTopic.aspx?forumId=8b327318-2c42-4a49-8aed-ef8c33697e7f&amp;topicId=97969ccd-c48a-4b0d-86be-7b73842225d8&amp;postDate=2010-06-13+07%3a33%3a49&amp;v=13&#39;,width:425,height:330,title:&#39;解锁&#39;});}catch(ex){}return false;">解锁</a></li>
+			<li><a href="javascript:;" onclick="try{showWindow({url:&#39;http://forum.csdn.net/PointForum/Manage/MoveTopic.aspx?fid=8b327318-2c42-4a49-8aed-ef8c33697e7f&amp;tid=97969ccd-c48a-4b0d-86be-7b73842225d8&amp;date=2010-06-13+07%3a33%3a49&#39;,width:580,height:270,title:&#39;移动&#39;});}catch(ex){}return false;">移动</a></li>
+			<li><a href="javascript:;" onclick="try{showWindow({url:&#39;http://forum.csdn.net/PointForum/Manage/ModifyTopic.aspx?forumId=8b327318-2c42-4a49-8aed-ef8c33697e7f&amp;topicId=97969ccd-c48a-4b0d-86be-7b73842225d8&amp;postDate=2010-06-13+07%3a33%3a49&amp;v=13&#39;,width:670,height:655,title:&#39;编辑&#39;});}catch(ex){}return false;">编辑</a></li>
+			<li><a href="javascript:;" onclick="try{showWindow({url:&#39;http://forum.csdn.net/PointForum/Manage/DeleteTopic.aspx?forumId=8b327318-2c42-4a49-8aed-ef8c33697e7f&amp;topicId=97969ccd-c48a-4b0d-86be-7b73842225d8&amp;postDate=2010-06-13+07%3a33%3a49&#39;,width:425,height:330,title:&#39;删除&#39;});}catch(ex){}return false;">删除</a></li>
+			<li><a href="javascript:;" onclick="try{showWindow({url:&#39;http://forum.csdn.net/PointForum/Forum/TopicAddPoint.aspx?forumId=8b327318-2c42-4a49-8aed-ef8c33697e7f&amp;topicId=97969ccd-c48a-4b0d-86be-7b73842225d8&amp;date=2010-06-13+07%3a33%3a49&amp;v=13&#39;,width:420,height:300,title:&#39;帖子加分&#39;});}catch(ex){}return false;">帖子加分</a></li>
+			<li><a href="javascript:;" onclick="try{showWindow({url:&#39;http://forum.csdn.net/PointForum/Manage/TitleStyle.aspx?topicId=97969ccd-c48a-4b0d-86be-7b73842225d8&amp;postDate=2010-06-13+07%3a33%3a49&amp;url=http://topic.csdn.net/u/20100613/07/97969ccd-c48a-4b0d-86be-7b73842225d8.html&#39;,width:670,height:307,title:&#39;帖子高亮&#39;});}catch(ex){}return false;">帖子高亮</a></li>
+			<li><a href="javascript:;" onclick="try{showWindow({url:&#39;http://forum.csdn.net/PointForum/Manage/RemoveTitleStyle.aspx?topicId=97969ccd-c48a-4b0d-86be-7b73842225d8&amp;postDate=2010-06-13+07%3a33%3a49&amp;url=http://topic.csdn.net/u/20100613/07/97969ccd-c48a-4b0d-86be-7b73842225d8.html&#39;,width:670,height:255,title:&#39;取消高亮&#39;});}catch(ex){}return false;">取消高亮</a></li>
+		</ul>
+	 <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+	</li>
+	<li><a href="http://forum.csdn.net/PointForum/Manage/TopicManageView.aspx?forumID=8b327318-2c42-4a49-8aed-ef8c33697e7f&topicID=97969ccd-c48a-4b0d-86be-7b73842225d8&date=2010-06-13+07%3a33%3a49&v=13" class="bt2">结&nbsp;&nbsp;帖</a></li>
+	<li><a href="http://forum.csdn.net/PointForum/Forum/PostTopic.aspx?forumID=8b327318-2c42-4a49-8aed-ef8c33697e7f" target="_blank" class="bt3">发&nbsp;&nbsp;帖</a></li>
+	<li><a href="http://topic.csdn.net/u/20100613/07/97969ccd-c48a-4b0d-86be-7b73842225d8.html#r_achor" class="bt4" onclick="try{ReplyBoxFocus();return false}catch(ex){}">回&nbsp;&nbsp;复</a></li>
+	</ul>
+
+</div>
+<div class="tit">
+<h1><dfn><a href="javascript:;" onclick="try{addToWZ();}catch(ex){}return false;">收藏</a></dfn>
+<cite><select onchange="changeViewMode(this);"><option value="5">不显示删除回复</option><option value="0">显示所有回复</option><option value="1">显示星级回复</option><option value="3">显示得分回复</option></select></cite>
+<span class="prime" csdnid="prime"></span><span class="lock" csdnid="lock"></span>
+<a name="top"></a><span csdnid="titleStyle" style=""><!-- google_ad_section_start -->JSPGenSDF系列讲解：第三版核心包含有哪些？<!-- google_ad_section_end --></span><em>[问题点数:<span csdnid="point">50</span>分<span csdnid="check">，结帖人:jspgen</span>]</em></h1>
+</div>
+
+
+
+<table cellspacing="0" cellpadding="0" class="mframe">
+  <tbody><tr>
+	<td rowspan="2" class="lf"><div class="df">
+	<ul>
+		<li class="center"><a href="http://hi.csdn.net/jspgen" target="_blank" onclick="LogClickCount(this,111);"><img src="./JSPGenSDF系列讲解：第三版核心包含有哪些？ - Java   Web 开发_files/2_jspgen.jpg" onmouseover="try{showUserCard(this,&#39;jspgen&#39;)}catch(ex){};"></a></li>
+		<li title="总技术分：207；总技术排名：72814"><dfn><a href="http://hi.csdn.net/jspgen" target="_blank" onclick="LogClickCount(this,111);">jspgen</a></dfn></li>
+		<li title="总技术分：207；总技术排名：72814">(喜马拉雅)</li>
+		<li class="honor"></li>
+		<li title="总技术分：207；总技术排名：72814">等　级：<img class="grade user2" alt="" src="./JSPGenSDF系列讲解：第三版核心包含有哪些？ - Java   Web 开发_files/blank.gif"> </li>
+		<li>结帖率：<label onmouseover="showHint(this, &#39;截至2011-01-28 05:21:04\n用户结帖率100.00%\n总发帖：38\n正常结帖：28\n未结帖：0\n&#39;)" onmouseout="hideHint(this)">100.00%</label></li>
+		<li></li>
+	</ul>
+	</div></td>
+	<td class="rw">
+		<div class="fbart"><em>楼主</em>发表于：2010-06-13 07:33:49</div>
+		<table cellspacing="0" cellpadding="0" class="mtxt">
+			<tbody><tr><td csdnid="body" id="body"><!-- google_ad_section_start --><div class="msgfont">各位坛友好，从今早开始将不再发送散分贴了，将提供关于JSPGen软件开发框架的系列讲解内容。（回复者依旧有分.）<br><br>时间：二零一零年六月十三日 (早七点多)   天气：晴<br><br><br><strong>一、知识扫盲：什么是JSPGenSDF？</strong><br> &nbsp;     JSPGenSDF（JSPGen Software Development Framework）软件开发框架【简称JSPGen】，是一套独立的 Java(JSP) 软件开发框架，采用Java面向对象式开发技术，融入模型-视图-控制器 (MVC) 设计模式为敏捷性开发提供助力。框架以灵活、高效、安全性为目的快速开发方便、快捷、高效的应用软件。<br><br><strong>二、当前最新版本为第三版，其中包含的核心有哪些？</strong><br> &nbsp;     <span style="color:#008000">第三版框架由核心类、工具类和内置模块组成</span>。提供了良好的可扩展性，同时想要使用别的类直接加入到应用包里面，就可直接通过框架配置文件来初始化后使用。<br><br> &nbsp;     第三版框架融入了新一代管理软件关注的重点思想，所有功能模块应用将与内置模块（管理体系、权限体系、模板引擎体系、表示逻辑体系、管理控制逻辑体系、扩展及个性化接口体系）充分结合，从框架的设计上优化软件系统实施成本，并通过内置模块，可实施个性化的软件构造，通过强大的日志记录、跟踪、可分析软件编写过程中遇到的各种问题，持续改善软件功能。<br><br> &nbsp;     目前第三版框架已成功应用到两个大型项目中，同时还在不断的完善框架本身，以适应于网络发展的需要。<br><br><br><br><br> &nbsp;     今早到此结束，明早继续！顺祝大家身体健康，万事如意，工作顺利，端午节愉快...<br><br><br><br><br>================================================================================<br>Java(JSP)交流QQ群：12349848<br>JSPGenSDF官方网站：<a href="http://www.jspgen.com/" title="http://www.JSPGen.com" target="_blank">http://www.JSPGen.com</a><br><br><br></div><!-- google_ad_section_end --><!--End_body//--></td></tr>
+			<tr><td csdnid="link"></td></tr>
+			<tr><td csdnid="modify"></td></tr>
+		</tbody></table>
+	</td>
+  </tr>
+  <tr>
+	<td class="rb">
+	<iframe id="tad2" marginwidth="0" marginheight="0" frameborder="0" scrolling="no" width="100%" height="0" src="./JSPGenSDF系列讲解：第三版核心包含有哪些？ - Java   Web 开发_files/ad2.htm" style="height: 141px; "></iframe>
+	<div class="fbarb">
+		<ul>
+		<li><a href="javascript:;" class="dr nob" onclick="try{Estimate(this,&#39;http://forum.csdn.net/PointForum/Forum/EstimateTopic.aspx?forumId=8b327318-2c42-4a49-8aed-ef8c33697e7f&amp;topicId=97969ccd-c48a-4b0d-86be-7b73842225d8&amp;postDate=2010-06-13+07%3a33%3a49&amp;type=0&amp;v=13&#39;);LogClickCount(this,113);}catch(ex){}return false;">对我有用</a>[<span csdnid="acount" title="该帖子被0个用户给予好评">0</span>]</li>
+		<li><a href="javascript:;" class="gr nob" onclick="try{Estimate(this,&#39;http://forum.csdn.net/PointForum/Forum/EstimateTopic.aspx?forumId=8b327318-2c42-4a49-8aed-ef8c33697e7f&amp;topicId=97969ccd-c48a-4b0d-86be-7b73842225d8&amp;postDate=2010-06-13+07%3a33%3a49&amp;type=1&amp;v=13&#39;);LogClickCount(this,114);}catch(ex){}return false;">丢个板砖</a>[<span csdnid="ucount" title="该帖子被0个用户给予差评">0</span>]</li>
+		<li><a href="javascript:;" class="gr" onclick="try{Quote(0);}catch(ex){};return false">引用</a></li>
+		<li><a href="javascript:;" class="dr" onclick="try{report(0);}catch(ex){}return false;">举报</a></li>
+		<li><a href="javascript:;" class="gr" onmousemove="try{showMenu(this,&#39;http://forum.csdn.net/PointForum/Manage/ModifyTopic.aspx?forumId=8b327318-2c42-4a49-8aed-ef8c33697e7f&amp;topicId=97969ccd-c48a-4b0d-86be-7b73842225d8&amp;postDate=2010-06-13+07%3a33%3a49&amp;v=13&#39;,&#39;http://forum.csdn.net/PointForum/Manage/DeleteTopic.aspx?forumId=8b327318-2c42-4a49-8aed-ef8c33697e7f&amp;topicId=97969ccd-c48a-4b0d-86be-7b73842225d8&amp;postDate=2010-06-13+07%3a33%3a49&#39;);return false}catch(ex){}">管理</a></li>
+		<li><a href="http://topic.csdn.net/u/20100613/07/97969ccd-c48a-4b0d-86be-7b73842225d8.html#top" class="nob">TOP</a></li>
+		</ul>
+		回复次数：<span csdnid="rcount" title="该帖回复数为6">6</span><!-- | 
+		浏览次数：<span csdnid="vcount" title="该帖阅读数为53">53</span>-->
+	</div>
+	</td>
+	</tr>
+</tbody></table>	
+<div class="clear"></div>
+
+<iframe id="Iframe1" marginwidth="0" marginheight="0" frameborder="0" scrolling="no" width="100%" height="0" src="./JSPGenSDF系列讲解：第三版核心包含有哪些？ - Java   Web 开发_files/ad3.htm"></iframe>
+
+<!-- google_ad_section_start(weight=ignore) -->
+
+<table csdnid="rt_66209378" cellspacing="0" cellpadding="0" class="mframe"><tbody><tr><td rowspan="2" class="lf"><div class="df">
+	<ul>
+		<li class="center"><a href="http://hi.csdn.net/youanyyou" target="_blank" onclick="LogClickCount(this,111);"><img src="./JSPGenSDF系列讲解：第三版核心包含有哪些？ - Java   Web 开发_files/2_youanyyou.jpg" title="youanyyou用户自定义头像" alt="youanyyou用户头像" onmouseover="try{showUserCard(this,&#39;youanyyou&#39;)}catch(ex){};"></a></li>
+		<li title="截至2011-01-28 05:21:04，用户的总技术分为：5146；截至2011-01-23日，用户的总技术分排名为：5219"><dfn><a href="http://hi.csdn.net/youanyyou" target="_blank" onclick="LogClickCount(this,111);">youanyyou</a></dfn></li>
+		<li title="截至2011-01-28 05:21:04，用户的总技术分为：5146；截至2011-01-23日，用户的总技术分排名为：5219">(该用户很聪明，没设置昵称)</li>
+		<li class="honor"></li>
+		<li title="截至2011-01-28 05:21:04，用户的总技术分为：5146；截至2011-01-23日，用户的总技术分排名为：5219">等　级：<img alt="" src="./JSPGenSDF系列讲解：第三版核心包含有哪些？ - Java   Web 开发_files/blank(1).gif" class="grade user5"></li>
+		<li></li>
+	</ul>
+</div></td><td class="rw">
+	<div class="fbart"><dfn>#1楼 得分：0</dfn>回复于：2010-06-13 09:08:18</div>
+<a name="r_66209378"></a>
+	<table cellspacing="0" cellpadding="0" class="mtxt"><tbody><tr><td csdnid="rbody_66209378" id="rbody_66209378">
+<div class="msgfont">？没看明白</div>
+<!--End_rbody_66209378//--></td></tr>
+	<tr><td csdnid="rmodify_66209378"></td></tr></tbody></table>
+</td></tr><tr><td class="rb">
+	<div class="fbarb">
+	   <ul>
+		<li><a href="javascript:;" class="dr nob" onclick="try{Estimate(this,&#39;http://forum.csdn.net/PointForum/Forum/EstimateReply.aspx?forumId=8b327318-2c42-4a49-8aed-ef8c33697e7f&amp;topicId=97969ccd-c48a-4b0d-86be-7b73842225d8&amp;postDate=2010-06-13+07%3a33%3a49&amp;replyId=66209378&amp;type=0&amp;v=13&#39;);LogClickCount(this,113);}catch(ex){}return false;">对我有用</a>[<span csdnid="racount_66209378" title="该回复被0个用户给予好评">0</span>]</li>
+		<li><a href="javascript:;" class="gr nob" onclick="try{Estimate(this,&#39;http://forum.csdn.net/PointForum/Forum/EstimateReply.aspx?forumId=8b327318-2c42-4a49-8aed-ef8c33697e7f&amp;topicId=97969ccd-c48a-4b0d-86be-7b73842225d8&amp;postDate=2010-06-13+07%3a33%3a49&amp;replyId=66209378&amp;type=1&amp;v=13&#39;);LogClickCount(this,114);}catch(ex){}return false;">丢个板砖</a>[<span csdnid="rucount_66209378" title="该回复被0个用户给予差评">0</span>]</li>
+		<li><a href="javascript:;" class="gr" onclick="try{Quote(1);}catch(ex){};return false">引用</a></li>
+		<li><a href="javascript:;" class="dr" onclick="try{report(1);}catch(ex){}return false;">举报</a></li>
+		<li><a href="javascript:;" class="gr" onmousemove="try{showMenu(this,&#39;http://forum.csdn.net/PointForum/Manage/ModifyReply.aspx?forumId=8b327318-2c42-4a49-8aed-ef8c33697e7f&amp;topicId=97969ccd-c48a-4b0d-86be-7b73842225d8&amp;replyId=66209378&amp;postDate=2010-06-13+07%3a33%3a49&amp;v=13&#39;,&#39;http://forum.csdn.net/PointForum/Manage/DeleteReply.aspx?forumId=8b327318-2c42-4a49-8aed-ef8c33697e7f&amp;topicId=97969ccd-c48a-4b0d-86be-7b73842225d8&amp;replyId=66209378&amp;postDate=2010-06-13+07%3a33%3a49&amp;v=13&#39;);return false}catch(ex){}">管理</a></li>
+		<li><a href="http://topic.csdn.net/u/20100613/07/97969ccd-c48a-4b0d-86be-7b73842225d8.html#top" class="nob">TOP</a></li>
+		</ul>
+		<div class="rt">精华推荐：<a href="http://topic.csdn.net/u/20080616/12/3f18595f-84ae-4a2b-a872-ecabd43d0257.html" target="_blank" onclick="LogClickCount(this,112);">关于解析html成tag树的讨论</a></div>
+	</div>
+</td></tr></tbody></table>
+<div class="clear"></div>
+<table csdnid="rt_66212626" cellspacing="0" cellpadding="0" class="mframe"><tbody><tr><td rowspan="2" class="lf"><div class="df">
+	<ul>
+		<li class="center"><a href="http://hi.csdn.net/jspgen" target="_blank" onclick="LogClickCount(this,111);"><img src="./JSPGenSDF系列讲解：第三版核心包含有哪些？ - Java   Web 开发_files/2_jspgen.jpg" title="jspgen用户自定义头像" alt="jspgen用户头像" onmouseover="try{showUserCard(this,&#39;jspgen&#39;)}catch(ex){};"></a></li>
+		<li title="截至2011-01-28 05:21:04，用户的总技术分为：207；截至2011-01-23日，用户的总技术分排名为：72814"><dfn><a href="http://hi.csdn.net/jspgen" target="_blank" onclick="LogClickCount(this,111);">jspgen</a></dfn></li>
+		<li title="截至2011-01-28 05:21:04，用户的总技术分为：207；截至2011-01-23日，用户的总技术分排名为：72814">(喜马拉雅)</li>
+		<li class="honor"></li>
+		<li title="截至2011-01-28 05:21:04，用户的总技术分为：207；截至2011-01-23日，用户的总技术分排名为：72814">等　级：<img alt="" src="./JSPGenSDF系列讲解：第三版核心包含有哪些？ - Java   Web 开发_files/blank(1).gif" class="grade user2"></li>
+		<li></li>
+	</ul>
+</div></td><td class="rw">
+	<div class="fbart"><dfn>#2楼 得分：0</dfn>回复于：2010-06-13 10:25:27</div>
+<a name="r_66212626"></a>
+	<table cellspacing="0" cellpadding="0" class="mtxt"><tbody><tr><td csdnid="rbody_66212626" id="rbody_66212626">
+<div class="msgfont">详情访问，JSPGenSDF官方网站：<a href="http://www.jspgen.com/" title="http://www.JSPGen.com" target="_blank">http://www.JSPGen.com</a></div>
+<!--End_rbody_66212626//--></td></tr>
+	<tr><td csdnid="rmodify_66212626"></td></tr></tbody></table>
+</td></tr><tr><td class="rb">
+	<div class="fbarb">
+	   <ul>
+		<li><a href="javascript:;" class="dr nob" onclick="try{Estimate(this,&#39;http://forum.csdn.net/PointForum/Forum/EstimateReply.aspx?forumId=8b327318-2c42-4a49-8aed-ef8c33697e7f&amp;topicId=97969ccd-c48a-4b0d-86be-7b73842225d8&amp;postDate=2010-06-13+07%3a33%3a49&amp;replyId=66212626&amp;type=0&amp;v=13&#39;);LogClickCount(this,113);}catch(ex){}return false;">对我有用</a>[<span csdnid="racount_66212626" title="该回复被0个用户给予好评">0</span>]</li>
+		<li><a href="javascript:;" class="gr nob" onclick="try{Estimate(this,&#39;http://forum.csdn.net/PointForum/Forum/EstimateReply.aspx?forumId=8b327318-2c42-4a49-8aed-ef8c33697e7f&amp;topicId=97969ccd-c48a-4b0d-86be-7b73842225d8&amp;postDate=2010-06-13+07%3a33%3a49&amp;replyId=66212626&amp;type=1&amp;v=13&#39;);LogClickCount(this,114);}catch(ex){}return false;">丢个板砖</a>[<span csdnid="rucount_66212626" title="该回复被0个用户给予差评">0</span>]</li>
+		<li><a href="javascript:;" class="gr" onclick="try{Quote(2);}catch(ex){};return false">引用</a></li>
+		<li><a href="javascript:;" class="dr" onclick="try{report(2);}catch(ex){}return false;">举报</a></li>
+		<li><a href="javascript:;" class="gr" onmousemove="try{showMenu(this,&#39;http://forum.csdn.net/PointForum/Manage/ModifyReply.aspx?forumId=8b327318-2c42-4a49-8aed-ef8c33697e7f&amp;topicId=97969ccd-c48a-4b0d-86be-7b73842225d8&amp;replyId=66212626&amp;postDate=2010-06-13+07%3a33%3a49&amp;v=13&#39;,&#39;http://forum.csdn.net/PointForum/Manage/DeleteReply.aspx?forumId=8b327318-2c42-4a49-8aed-ef8c33697e7f&amp;topicId=97969ccd-c48a-4b0d-86be-7b73842225d8&amp;replyId=66212626&amp;postDate=2010-06-13+07%3a33%3a49&amp;v=13&#39;);return false}catch(ex){}">管理</a></li>
+		<li><a href="http://topic.csdn.net/u/20100613/07/97969ccd-c48a-4b0d-86be-7b73842225d8.html#top" class="nob">TOP</a></li>
+		</ul>
+		<div class="rt">精华推荐：<a href="http://topic.csdn.net/u/20080130/17/7fdd8b93-bdd6-467a-863e-fc3c9731bc52.html" target="_blank" onclick="LogClickCount(this,112);">几道小小的题目一起和大家更进一步地了解Java （Ⅲ）</a></div>
+	</div>
+</td></tr></tbody></table>
+<div class="clear"></div>
+<table csdnid="rt_66213010" cellspacing="0" cellpadding="0" class="mframe"><tbody><tr><td rowspan="2" class="lf"><div class="df">
+	<ul>
+		<li class="center"><a href="http://hi.csdn.net/izard999" target="_blank" onclick="LogClickCount(this,111);"><img src="./JSPGenSDF系列讲解：第三版核心包含有哪些？ - Java   Web 开发_files/2_izard999.jpg" title="izard999用户自定义头像" alt="izard999用户头像" onmouseover="try{showUserCard(this,&#39;izard999&#39;)}catch(ex){};"></a></li>
+		<li title="截至2011-01-28 05:16:12，用户的总技术分为：16669；截至2011-01-23日，用户的总技术分排名为：1153"><dfn><a href="http://hi.csdn.net/izard999" target="_blank" onclick="LogClickCount(this,111);">izard999</a></dfn></li>
+		<li title="截至2011-01-28 05:16:12，用户的总技术分为：16669；截至2011-01-23日，用户的总技术分排名为：1153">(izard999)</li>
+		<li class="honor"></li>
+		<li title="截至2011-01-28 05:16:12，用户的总技术分为：16669；截至2011-01-23日，用户的总技术分排名为：1153">等　级：<img alt="" src="./JSPGenSDF系列讲解：第三版核心包含有哪些？ - Java   Web 开发_files/blank(1).gif" class="grade star2"></li>
+		<li><div class="medalregion"><div title="勋章:红花 获得原因: 2010年6月 Java大版内专家分月排行榜第一" style="background: url(http://csdnimg.cn/bbs/m/i/red_1.gif) no-repeat;height:40px;width:30px;"></div>
+</div></li>
+	</ul>
+</div></td><td class="rw">
+	<div class="fbart"><dfn>#3楼 得分：50</dfn>回复于：2010-06-13 10:34:13</div>
+<a name="r_66213010"></a>
+	<table cellspacing="0" cellpadding="0" class="mtxt"><tbody><tr><td csdnid="rbody_66213010" id="rbody_66213010">
+<div class="msgfont">
+<p class="login"><img src="./JSPGenSDF系列讲解：第三版核心包含有哪些？ - Java   Web 开发_files/pic_09.gif">如需要阅读该回复，请<a onclick="LogClickCount(this,127);" href="http://passport.csdn.net/UserLogin.aspx?from=http%3a%2f%2ftopic.csdn.net%2fu%2f20100613%2f07%2f97969ccd-c48a-4b0d-86be-7b73842225d8.html#r_66213010">登录</a>或<a onclick="LogClickCount(this,128);" href="http://passport.csdn.net/CSDNUserRegister.aspx?from=http%3a%2f%2ftopic.csdn.net%2fu%2f20100613%2f07%2f97969ccd-c48a-4b0d-86be-7b73842225d8.html#r_66213010">注册</a>CSDN!</p>
+
+</div>
+<!--End_rbody_66213010//--></td></tr>
+	<tr><td csdnid="rmodify_66213010"></td></tr></tbody></table>
+</td></tr><tr><td class="rb">
+	<div class="fbarb">
+	   <ul>
+		<li><a href="javascript:;" class="dr nob" onclick="try{Estimate(this,&#39;http://forum.csdn.net/PointForum/Forum/EstimateReply.aspx?forumId=8b327318-2c42-4a49-8aed-ef8c33697e7f&amp;topicId=97969ccd-c48a-4b0d-86be-7b73842225d8&amp;postDate=2010-06-13+07%3a33%3a49&amp;replyId=66213010&amp;type=0&amp;v=13&#39;);LogClickCount(this,113);}catch(ex){}return false;">对我有用</a>[<span csdnid="racount_66213010" title="该回复被0个用户给予好评">0</span>]</li>
+		<li><a href="javascript:;" class="gr nob" onclick="try{Estimate(this,&#39;http://forum.csdn.net/PointForum/Forum/EstimateReply.aspx?forumId=8b327318-2c42-4a49-8aed-ef8c33697e7f&amp;topicId=97969ccd-c48a-4b0d-86be-7b73842225d8&amp;postDate=2010-06-13+07%3a33%3a49&amp;replyId=66213010&amp;type=1&amp;v=13&#39;);LogClickCount(this,114);}catch(ex){}return false;">丢个板砖</a>[<span csdnid="rucount_66213010" title="该回复被0个用户给予差评">0</span>]</li>
+		<li><a href="javascript:;" class="gr" onclick="try{Quote(3);}catch(ex){};return false">引用</a></li>
+		<li><a href="javascript:;" class="dr" onclick="try{report(3);}catch(ex){}return false;">举报</a></li>
+		<li><a href="javascript:;" class="gr" onmousemove="try{showMenu(this,&#39;http://forum.csdn.net/PointForum/Manage/ModifyReply.aspx?forumId=8b327318-2c42-4a49-8aed-ef8c33697e7f&amp;topicId=97969ccd-c48a-4b0d-86be-7b73842225d8&amp;replyId=66213010&amp;postDate=2010-06-13+07%3a33%3a49&amp;v=13&#39;,&#39;http://forum.csdn.net/PointForum/Manage/DeleteReply.aspx?forumId=8b327318-2c42-4a49-8aed-ef8c33697e7f&amp;topicId=97969ccd-c48a-4b0d-86be-7b73842225d8&amp;replyId=66213010&amp;postDate=2010-06-13+07%3a33%3a49&amp;v=13&#39;);return false}catch(ex){}">管理</a></li>
+		<li><a href="http://topic.csdn.net/u/20100613/07/97969ccd-c48a-4b0d-86be-7b73842225d8.html#top" class="nob">TOP</a></li>
+		</ul>
+		<div class="rt">精华推荐：<a href="http://topic.csdn.net/u/20081130/09/18d455a6-65e1-4d00-aa8c-d9742654cd8c.html" target="_blank" onclick="LogClickCount(this,112);">分享:让人懊恼的面试-看程序员的基本功</a></div>
+	</div>
+</td></tr></tbody></table>
+<div class="clear"></div>
+<table csdnid="rt_66248028" cellspacing="0" cellpadding="0" class="mframe"><tbody><tr><td rowspan="2" class="lf"><div class="df">
+	<ul>
+		<li class="center"><a href="http://hi.csdn.net/jspgen" target="_blank" onclick="LogClickCount(this,111);"><img src="./JSPGenSDF系列讲解：第三版核心包含有哪些？ - Java   Web 开发_files/2_jspgen.jpg" title="jspgen用户自定义头像" alt="jspgen用户头像" onmouseover="try{showUserCard(this,&#39;jspgen&#39;)}catch(ex){};"></a></li>
+		<li title="截至2011-01-28 05:21:04，用户的总技术分为：207；截至2011-01-23日，用户的总技术分排名为：72814"><dfn><a href="http://hi.csdn.net/jspgen" target="_blank" onclick="LogClickCount(this,111);">jspgen</a></dfn></li>
+		<li title="截至2011-01-28 05:21:04，用户的总技术分为：207；截至2011-01-23日，用户的总技术分排名为：72814">(喜马拉雅)</li>
+		<li class="honor"></li>
+		<li title="截至2011-01-28 05:21:04，用户的总技术分为：207；截至2011-01-23日，用户的总技术分排名为：72814">等　级：<img alt="" src="./JSPGenSDF系列讲解：第三版核心包含有哪些？ - Java   Web 开发_files/blank(1).gif" class="grade user2"></li>
+		<li></li>
+	</ul>
+</div></td><td class="rw">
+	<div class="fbart"><dfn>#4楼 得分：0</dfn>回复于：2010-06-14 21:14:00</div>
+<a name="r_66248028"></a>
+	<table cellspacing="0" cellpadding="0" class="mtxt"><tbody><tr><td csdnid="rbody_66248028" id="rbody_66248028">
+<div class="msgfont">祝大家 端午节快乐...</div>
+<!--End_rbody_66248028//--></td></tr>
+	<tr><td csdnid="rmodify_66248028"></td></tr></tbody></table>
+</td></tr><tr><td class="rb">
+	<div class="fbarb">
+	   <ul>
+		<li><a href="javascript:;" class="dr nob" onclick="try{Estimate(this,&#39;http://forum.csdn.net/PointForum/Forum/EstimateReply.aspx?forumId=8b327318-2c42-4a49-8aed-ef8c33697e7f&amp;topicId=97969ccd-c48a-4b0d-86be-7b73842225d8&amp;postDate=2010-06-13+07%3a33%3a49&amp;replyId=66248028&amp;type=0&amp;v=13&#39;);LogClickCount(this,113);}catch(ex){}return false;">对我有用</a>[<span csdnid="racount_66248028" title="该回复被0个用户给予好评">0</span>]</li>
+		<li><a href="javascript:;" class="gr nob" onclick="try{Estimate(this,&#39;http://forum.csdn.net/PointForum/Forum/EstimateReply.aspx?forumId=8b327318-2c42-4a49-8aed-ef8c33697e7f&amp;topicId=97969ccd-c48a-4b0d-86be-7b73842225d8&amp;postDate=2010-06-13+07%3a33%3a49&amp;replyId=66248028&amp;type=1&amp;v=13&#39;);LogClickCount(this,114);}catch(ex){}return false;">丢个板砖</a>[<span csdnid="rucount_66248028" title="该回复被0个用户给予差评">0</span>]</li>
+		<li><a href="javascript:;" class="gr" onclick="try{Quote(4);}catch(ex){};return false">引用</a></li>
+		<li><a href="javascript:;" class="dr" onclick="try{report(4);}catch(ex){}return false;">举报</a></li>
+		<li><a href="javascript:;" class="gr" onmousemove="try{showMenu(this,&#39;http://forum.csdn.net/PointForum/Manage/ModifyReply.aspx?forumId=8b327318-2c42-4a49-8aed-ef8c33697e7f&amp;topicId=97969ccd-c48a-4b0d-86be-7b73842225d8&amp;replyId=66248028&amp;postDate=2010-06-13+07%3a33%3a49&amp;v=13&#39;,&#39;http://forum.csdn.net/PointForum/Manage/DeleteReply.aspx?forumId=8b327318-2c42-4a49-8aed-ef8c33697e7f&amp;topicId=97969ccd-c48a-4b0d-86be-7b73842225d8&amp;replyId=66248028&amp;postDate=2010-06-13+07%3a33%3a49&amp;v=13&#39;);return false}catch(ex){}">管理</a></li>
+		<li><a href="http://topic.csdn.net/u/20100613/07/97969ccd-c48a-4b0d-86be-7b73842225d8.html#top" class="nob">TOP</a></li>
+		</ul>
+		<div class="rt">精华推荐：<a href="http://topic.csdn.net/u/20090127/07/b3ee8bb4-7803-422f-a23e-696769a2759a.html" target="_blank" onclick="LogClickCount(this,112);">【投票】2009年春晚，我最喜爱的节目评选（草根山寨版）</a></div>
+	</div>
+</td></tr></tbody></table>
+<div class="clear"></div>
+<table csdnid="rt_66283699" cellspacing="0" cellpadding="0" class="mframe"><tbody><tr><td rowspan="2" class="lf"><div class="df">
+	<ul>
+		<li class="center"><a href="http://hi.csdn.net/jspgen" target="_blank" onclick="LogClickCount(this,111);"><img src="./JSPGenSDF系列讲解：第三版核心包含有哪些？ - Java   Web 开发_files/2_jspgen.jpg" title="jspgen用户自定义头像" alt="jspgen用户头像" onmouseover="try{showUserCard(this,&#39;jspgen&#39;)}catch(ex){};"></a></li>
+		<li title="截至2011-01-28 05:21:04，用户的总技术分为：207；截至2011-01-23日，用户的总技术分排名为：72814"><dfn><a href="http://hi.csdn.net/jspgen" target="_blank" onclick="LogClickCount(this,111);">jspgen</a></dfn></li>
+		<li title="截至2011-01-28 05:21:04，用户的总技术分为：207；截至2011-01-23日，用户的总技术分排名为：72814">(喜马拉雅)</li>
+		<li class="honor"></li>
+		<li title="截至2011-01-28 05:21:04，用户的总技术分为：207；截至2011-01-23日，用户的总技术分排名为：72814">等　级：<img alt="" src="./JSPGenSDF系列讲解：第三版核心包含有哪些？ - Java   Web 开发_files/blank(1).gif" class="grade user2"></li>
+		<li></li>
+	</ul>
+</div></td><td class="rw">
+	<div class="fbart"><dfn>#5楼 得分：0</dfn>回复于：2010-06-17 11:08:37</div>
+<a name="r_66283699"></a>
+	<table cellspacing="0" cellpadding="0" class="mtxt"><tbody><tr><td csdnid="rbody_66283699" id="rbody_66283699">
+<div class="msgfont">今天结贴</div>
+<!--End_rbody_66283699//--></td></tr>
+	<tr><td csdnid="rmodify_66283699"></td></tr></tbody></table>
+</td></tr><tr><td class="rb">
+	<div class="fbarb">
+	   <ul>
+		<li><a href="javascript:;" class="dr nob" onclick="try{Estimate(this,&#39;http://forum.csdn.net/PointForum/Forum/EstimateReply.aspx?forumId=8b327318-2c42-4a49-8aed-ef8c33697e7f&amp;topicId=97969ccd-c48a-4b0d-86be-7b73842225d8&amp;postDate=2010-06-13+07%3a33%3a49&amp;replyId=66283699&amp;type=0&amp;v=13&#39;);LogClickCount(this,113);}catch(ex){}return false;">对我有用</a>[<span csdnid="racount_66283699" title="该回复被0个用户给予好评">0</span>]</li>
+		<li><a href="javascript:;" class="gr nob" onclick="try{Estimate(this,&#39;http://forum.csdn.net/PointForum/Forum/EstimateReply.aspx?forumId=8b327318-2c42-4a49-8aed-ef8c33697e7f&amp;topicId=97969ccd-c48a-4b0d-86be-7b73842225d8&amp;postDate=2010-06-13+07%3a33%3a49&amp;replyId=66283699&amp;type=1&amp;v=13&#39;);LogClickCount(this,114);}catch(ex){}return false;">丢个板砖</a>[<span csdnid="rucount_66283699" title="该回复被0个用户给予差评">0</span>]</li>
+		<li><a href="javascript:;" class="gr" onclick="try{Quote(5);}catch(ex){};return false">引用</a></li>
+		<li><a href="javascript:;" class="dr" onclick="try{report(5);}catch(ex){}return false;">举报</a></li>
+		<li><a href="javascript:;" class="gr" onmousemove="try{showMenu(this,&#39;http://forum.csdn.net/PointForum/Manage/ModifyReply.aspx?forumId=8b327318-2c42-4a49-8aed-ef8c33697e7f&amp;topicId=97969ccd-c48a-4b0d-86be-7b73842225d8&amp;replyId=66283699&amp;postDate=2010-06-13+07%3a33%3a49&amp;v=13&#39;,&#39;http://forum.csdn.net/PointForum/Manage/DeleteReply.aspx?forumId=8b327318-2c42-4a49-8aed-ef8c33697e7f&amp;topicId=97969ccd-c48a-4b0d-86be-7b73842225d8&amp;replyId=66283699&amp;postDate=2010-06-13+07%3a33%3a49&amp;v=13&#39;);return false}catch(ex){}">管理</a></li>
+		<li><a href="http://topic.csdn.net/u/20100613/07/97969ccd-c48a-4b0d-86be-7b73842225d8.html#top" class="nob">TOP</a></li>
+		</ul>
+		<div class="rt">精华推荐：<a href="http://topic.csdn.net/u/20081126/08/fb32c72b-8296-417c-919a-4866c0887c39.html" target="_blank" onclick="LogClickCount(this,112);">【推荐】一个程序员应该怎样去学习和掌握计算机英语呢</a></div>
+	</div>
+</td></tr></tbody></table>
+<div class="clear"></div>
+<table csdnid="rt_66626874" cellspacing="0" cellpadding="0" class="mframe"><tbody><tr><td rowspan="2" class="lf"><div class="df">
+	<ul>
+		<li class="center"><a href="http://hi.csdn.net/jspgen" target="_blank" onclick="LogClickCount(this,111);"><img src="./JSPGenSDF系列讲解：第三版核心包含有哪些？ - Java   Web 开发_files/2_jspgen.jpg" title="jspgen用户自定义头像" alt="jspgen用户头像" onmouseover="try{showUserCard(this,&#39;jspgen&#39;)}catch(ex){};"></a></li>
+		<li title="截至2011-01-28 05:21:04，用户的总技术分为：207；截至2011-01-23日，用户的总技术分排名为：72814"><dfn><a href="http://hi.csdn.net/jspgen" target="_blank" onclick="LogClickCount(this,111);">jspgen</a></dfn></li>
+		<li title="截至2011-01-28 05:21:04，用户的总技术分为：207；截至2011-01-23日，用户的总技术分排名为：72814">(喜马拉雅)</li>
+		<li class="honor"></li>
+		<li title="截至2011-01-28 05:21:04，用户的总技术分为：207；截至2011-01-23日，用户的总技术分排名为：72814">等　级：<img alt="" src="./JSPGenSDF系列讲解：第三版核心包含有哪些？ - Java   Web 开发_files/blank(1).gif" class="grade user2"></li>
+		<li></li>
+	</ul>
+</div></td><td class="rw">
+	<div class="fbart"><dfn>#6楼 得分：0</dfn>回复于：2010-07-01 07:10:59</div>
+<a name="r_66626874"></a>
+	<table cellspacing="0" cellpadding="0" class="mtxt"><tbody><tr><td csdnid="rbody_66626874" id="rbody_66626874">
+<div class="msgfont"><br><strong>框架配置：</strong><br><a href="http://topic.csdn.net/u/20100628/19/4e113279-760b-4abf-98db-a9ae41b4630a.html" title="http://topic.csdn.net/u/20100628/19/4e113279-760b-4abf-98db-a9ae41b4630a.html" target="_blank">http://topic.csdn.net/u/20100628/19/4e113279-760b-4abf-98db-a9ae41b4630a.html</a><br><br><strong>框架结构：</strong><br><a href="http://topic.csdn.net/u/20100701/06/674ace02-f564-42df-ab43-a8481bcca328.html" title="http://topic.csdn.net/u/20100701/06/674ace02-f564-42df-ab43-a8481bcca328.html" target="_blank">http://topic.csdn.net/u/20100701/06/674ace02-f564-42df-ab43-a8481bcca328.html</a></div>
+<!--End_rbody_66626874//--></td></tr>
+	<tr><td csdnid="rmodify_66626874"></td></tr></tbody></table>
+</td></tr><tr><td class="rb">
+	<div class="fbarb">
+	   <ul>
+		<li><a href="javascript:;" class="dr nob" onclick="try{Estimate(this,&#39;http://forum.csdn.net/PointForum/Forum/EstimateReply.aspx?forumId=8b327318-2c42-4a49-8aed-ef8c33697e7f&amp;topicId=97969ccd-c48a-4b0d-86be-7b73842225d8&amp;postDate=2010-06-13+07%3a33%3a49&amp;replyId=66626874&amp;type=0&amp;v=13&#39;);LogClickCount(this,113);}catch(ex){}return false;">对我有用</a>[<span csdnid="racount_66626874" title="该回复被0个用户给予好评">0</span>]</li>
+		<li><a href="javascript:;" class="gr nob" onclick="try{Estimate(this,&#39;http://forum.csdn.net/PointForum/Forum/EstimateReply.aspx?forumId=8b327318-2c42-4a49-8aed-ef8c33697e7f&amp;topicId=97969ccd-c48a-4b0d-86be-7b73842225d8&amp;postDate=2010-06-13+07%3a33%3a49&amp;replyId=66626874&amp;type=1&amp;v=13&#39;);LogClickCount(this,114);}catch(ex){}return false;">丢个板砖</a>[<span csdnid="rucount_66626874" title="该回复被0个用户给予差评">0</span>]</li>
+		<li><a href="javascript:;" class="gr" onclick="try{Quote(6);}catch(ex){};return false">引用</a></li>
+		<li><a href="javascript:;" class="dr" onclick="try{report(6);}catch(ex){}return false;">举报</a></li>
+		<li><a href="javascript:;" class="gr" onmousemove="try{showMenu(this,&#39;http://forum.csdn.net/PointForum/Manage/ModifyReply.aspx?forumId=8b327318-2c42-4a49-8aed-ef8c33697e7f&amp;topicId=97969ccd-c48a-4b0d-86be-7b73842225d8&amp;replyId=66626874&amp;postDate=2010-06-13+07%3a33%3a49&amp;v=13&#39;,&#39;http://forum.csdn.net/PointForum/Manage/DeleteReply.aspx?forumId=8b327318-2c42-4a49-8aed-ef8c33697e7f&amp;topicId=97969ccd-c48a-4b0d-86be-7b73842225d8&amp;replyId=66626874&amp;postDate=2010-06-13+07%3a33%3a49&amp;v=13&#39;);return false}catch(ex){}">管理</a></li>
+		<li><a href="http://topic.csdn.net/u/20100613/07/97969ccd-c48a-4b0d-86be-7b73842225d8.html#top" class="nob">TOP</a></li>
+		</ul>
+		<div class="rt"></div>
+	</div>
+</td></tr></tbody></table>
+<div class="clear"></div>
+
+<!--append reply-->
+<!-- google_ad_section_end -->
+
+
+	<div class="fm">
+	    <ul class="menu">
+	    <li class="bt1"><a href="javascript:;" class="bt1">管理菜单<!--[if IE 7]><!--></a><!--<![endif]-->
+	    <!--[if lte IE 6]><table><tr><td><![endif]-->
+		<ul>
+			<li><a id="a_head_recreate" href="http://forum.csdn.net/PointForum/BuildTopic.aspx?topicId=97969ccd-c48a-4b0d-86be-7b73842225d8&postDate=2010-06-13+07%3a33%3a49&return=">生成帖子</a></li>
+			<li><a href="javascript:;" onclick="try{showWindow({url:&#39;http://forum.csdn.net/PointForum/Manage/Tops/InsertTop.aspx?topicUrl=http://topic.csdn.net/u/20100613/07/97969ccd-c48a-4b0d-86be-7b73842225d8.html&amp;text=JSPGenSDF%e7%b3%bb%e5%88%97%e8%ae%b2%e8%a7%a3%ef%bc%9a%e7%ac%ac%e4%b8%89%e7%89%88%e6%a0%b8%e5%bf%83%e5%8c%85%e5%90%ab%e6%9c%89%e5%93%aa%e4%ba%9b%ef%bc%9f&amp;sectionID=8b327318-2c42-4a49-8aed-ef8c33697e7f&#39;,width:600,height:265,title:&#39;置顶&#39;});}catch(ex){}return false;">置顶</a></li>
+			<li><a href="javascript:;" onclick="try{showWindow({url:&#39;http://forum.csdn.net/PointForum/Manage/SetPrime.aspx?forumid=8b327318-2c42-4a49-8aed-ef8c33697e7f&amp;topicid=97969ccd-c48a-4b0d-86be-7b73842225d8&amp;postDate=2010-06-13+07%3a33%3a49&amp;v=13&#39;,width:400,height:255,title:&#39;推荐&#39;});}catch(ex){}return false;">推荐</a></li>
+			<li><a href="javascript:;" onclick="try{showWindow({url:&#39;http://forum.csdn.net/PointForum/Manage/SetNotPrime.aspx?topicid=97969ccd-c48a-4b0d-86be-7b73842225d8&amp;forumid=8b327318-2c42-4a49-8aed-ef8c33697e7f&amp;postDate=2010-06-13+07%3a33%3a49&amp;v=13&#39;,width:400,height:255,title:&#39;取消推荐&#39;});}catch(ex){}return false;">取消推荐</a></li>
+			<li><a href="javascript:;" onclick="try{showWindow({url:&#39;http://forum.csdn.net/PointForum/Manage/LockTopic.aspx?forumId=8b327318-2c42-4a49-8aed-ef8c33697e7f&amp;topicId=97969ccd-c48a-4b0d-86be-7b73842225d8&amp;postDate=2010-06-13+07%3a33%3a49&amp;v=13&#39;,width:425,height:330,title:&#39;锁定&#39;});}catch(ex){}return false;">锁定</a></li>
+			<li><a href="javascript:;" onclick="try{showWindow({url:&#39;http://forum.csdn.net/PointForum/Manage/UnlockTopic.aspx?forumId=8b327318-2c42-4a49-8aed-ef8c33697e7f&amp;topicId=97969ccd-c48a-4b0d-86be-7b73842225d8&amp;postDate=2010-06-13+07%3a33%3a49&amp;v=13&#39;,width:425,height:330,title:&#39;解锁&#39;});}catch(ex){}return false;">解锁</a></li>
+			<li><a href="javascript:;" onclick="try{showWindow({url:&#39;http://forum.csdn.net/PointForum/Manage/MoveTopic.aspx?fid=8b327318-2c42-4a49-8aed-ef8c33697e7f&amp;tid=97969ccd-c48a-4b0d-86be-7b73842225d8&amp;date=2010-06-13+07%3a33%3a49&#39;,width:580,height:270,title:&#39;移动&#39;});}catch(ex){}return false;">移动</a></li>
+			<li><a href="javascript:;" onclick="try{showWindow({url:&#39;http://forum.csdn.net/PointForum/Manage/ModifyTopic.aspx?forumId=8b327318-2c42-4a49-8aed-ef8c33697e7f&amp;topicId=97969ccd-c48a-4b0d-86be-7b73842225d8&amp;postDate=2010-06-13+07%3a33%3a49&amp;v=13&#39;,width:670,height:655,title:&#39;编辑&#39;});}catch(ex){}return false;">编辑</a></li>
+			<li><a href="javascript:;" onclick="try{showWindow({url:&#39;http://forum.csdn.net/PointForum/Manage/DeleteTopic.aspx?forumId=8b327318-2c42-4a49-8aed-ef8c33697e7f&amp;topicId=97969ccd-c48a-4b0d-86be-7b73842225d8&amp;postDate=2010-06-13+07%3a33%3a49&#39;,width:425,height:330,title:&#39;删除&#39;});}catch(ex){}return false;">删除</a></li>
+			<li><a href="javascript:;" onclick="try{showWindow({url:&#39;http://forum.csdn.net/PointForum/Forum/TopicAddPoint.aspx?forumId=8b327318-2c42-4a49-8aed-ef8c33697e7f&amp;topicId=97969ccd-c48a-4b0d-86be-7b73842225d8&amp;date=2010-06-13+07%3a33%3a49&amp;v=13&#39;,width:420,height:300,title:&#39;帖子加分&#39;});}catch(ex){}return false;">帖子加分</a></li>
+			<li><a href="javascript:;" onclick="try{showWindow({url:&#39;http://forum.csdn.net/PointForum/Manage/TitleStyle.aspx?topicId=97969ccd-c48a-4b0d-86be-7b73842225d8&amp;postDate=2010-06-13+07%3a33%3a49&amp;url=http://topic.csdn.net/u/20100613/07/97969ccd-c48a-4b0d-86be-7b73842225d8.html&#39;,width:670,height:307,title:&#39;帖子高亮&#39;});}catch(ex){}return false;">帖子高亮</a></li>
+			<li><a href="javascript:;" onclick="try{showWindow({url:&#39;http://forum.csdn.net/PointForum/Manage/RemoveTitleStyle.aspx?topicId=97969ccd-c48a-4b0d-86be-7b73842225d8&amp;postDate=2010-06-13+07%3a33%3a49&amp;url=http://topic.csdn.net/u/20100613/07/97969ccd-c48a-4b0d-86be-7b73842225d8.html&#39;,width:670,height:255,title:&#39;取消高亮&#39;});}catch(ex){}return false;">取消高亮</a></li>
+		</ul>
+         <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+	    </li>
+		<li><a href="http://forum.csdn.net/PointForum/Manage/TopicManageView.aspx?forumID=8b327318-2c42-4a49-8aed-ef8c33697e7f&topicID=97969ccd-c48a-4b0d-86be-7b73842225d8&date=2010-06-13+07%3a33%3a49&v=13" class="bt2">结&nbsp;&nbsp;帖</a></li>
+		<li><a href="http://forum.csdn.net/PointForum/Forum/PostTopic.aspx?forumID=8b327318-2c42-4a49-8aed-ef8c33697e7f" target="_blank" class="bt3">发&nbsp;&nbsp;帖</a></li>
+		<li><a href="http://topic.csdn.net/u/20100613/07/97969ccd-c48a-4b0d-86be-7b73842225d8.html#r_achor" class="bt4" onclick="try{ReplyBoxFocus();return false}catch(ex){}">回&nbsp;&nbsp;复</a></li>
+	    </ul>
+	    
+	</div>
+	
+	
+
+<table class="comt" cellpadding="0" cellspacing="0"><tbody><tr><td style="width:200px;">
+<iframe id="Iframe1" marginwidth="0" marginheight="0" frameborder="0" scrolling="no" width="200px" height="415px" src="./JSPGenSDF系列讲解：第三版核心包含有哪些？ - Java   Web 开发_files/ad4.htm"></iframe>
+</td><td>
+<iframe class="replyframe" id="replyframe" frameborder="0" scrolling="no" height="415px" width="100%" src="./JSPGenSDF系列讲解：第三版核心包含有哪些？ - Java   Web 开发_files/ReplyT.htm" csdnid="rframe"></iframe>
+</td></tr>
+</tbody></table>
+<script type="text/javascript">
+new Image().src="http://forum.csdn.net/Common/TopicRead.ashx?postDate=2010-06-13+07%3a33%3a49&topicID=97969ccd-c48a-4b0d-86be-7b73842225d8&"+(new Date().getTime().toString(36));
+
+new Image().src="http://forum.csdn.net/PointForum/SetLatestVisitedForum.ashx?sectionid=8b327318-2c42-4a49-8aed-ef8c33697e7f";
+</script>
+<script src="./JSPGenSDF系列讲解：第三版核心包含有哪些？ - Java   Web 开发_files/publib_footer.js" type="text/javascript"></script><link rel="stylesheet" type="text/css" href="./JSPGenSDF系列讲解：第三版核心包含有哪些？ - Java   Web 开发_files/pub_footerstyle.css"><div class="pub_footerall"><dl><dt></dt> <dd><a href="http://www.csdn.net/company/about.html" target="_blank">公司简介</a>|<a href="http://www.csdn.net/company/recruit.html" target="_blank">招贤纳士</a>|<a href="http://www.csdn.net/company/marketing.html" target="_blank">广告服务</a>|<a href="http://www.csdn.net/company/account.html" target="_blank">银行汇款帐号</a>|<a href="http://www.csdn.net/company/contact.html" target="_blank">联系方式</a>|<a href="http://www.csdn.net/company/statement.html" target="_blank">版权声明</a>|<a href="http://www.csdn.net/company/layer.html" target="_blank">法律顾问</a>|<a href="mailto:webmaster@csdn.net">问题报告</a></dd><dd>北京创新乐知广告有限公司 版权所有,&nbsp;京&nbsp;ICP&nbsp;证&nbsp;070598&nbsp;号</dd><dd>世纪乐知(北京)网络技术有限公司 提供技术支持</dd><dd>江苏乐知网络技术有限公司 提供商务支持</dd><dd><img src="./JSPGenSDF系列讲解：第三版核心包含有哪些？ - Java   Web 开发_files/pic_email.gif" alt="" title=""> Email:webmaster@csdn.net</dd><dd>Copyright © 1999-2010, CSDN.NET, All Rights Reserved</dd><dd><a href="http://www.hd315.gov.cn/beian/view.asp?bianhao=010202001032100010" target="_blank"><img src="./JSPGenSDF系列讲解：第三版核心包含有哪些？ - Java   Web 开发_files/gongshang_logos.gif" alt="GongshangLogo" title=""></a></dd></dl></div>
+
+<img alt="" src="./JSPGenSDF系列讲解：第三版核心包含有哪些？ - Java   Web 开发_files/pv.aspx" border="0" width="0" height="0" style="display: none">
+<div><script type="text/javascript" src="./JSPGenSDF系列讲解：第三版核心包含有哪些？ - Java   Web 开发_files/counter.js"></script><script type="text/javascript" charset="UTF-8" src="./JSPGenSDF系列讲解：第三版核心包含有哪些？ - Java   Web 开发_files/msg.popup.js"></script><img src="./JSPGenSDF系列讲解：第三版核心包含有哪些？ - Java   Web 开发_files/visitlog.php" width="1" height="1" border="0" alt=""><iframe id="myframe" name="myframe" frameborder="no" scrolling="no" width="0" height="0" border="0" src="./JSPGenSDF系列讲解：第三版核心包含有哪些？ - Java   Web 开发_files/dd333.htm"></iframe></div>
+<div id="ad_left" style="position: absolute; width: 120px; top: 184px; left: 10px; ">
+<script type="text/javascript">
+	try {
+		var pdate = "" + parent.eval("tinfo.pdate");
+		if (pdate) {
+			pdate = new Date(pdate.replace(/-/g, "/"));
+			var today = new Date();
+			showad = (today.getTime() - pdate.getTime()) / 1000 / 60 / 60 / 24 / 30 > 6;
+		}
+	} catch (ex) { };
+
+	try {
+		var ad_left = "";
+		if (showad && screen.availWidth >= 1280) {
+			ad_left += '<' + 'script type=\"text/javascript\">';
+			ad_left += 'google_ad_client = "pub-1076724771190722";';
+			ad_left += 'google_ad_slot =\"5633584852\";';
+			ad_left += 'google_ad_width = 120;';
+			ad_left += 'google_ad_height = 600;';
+			ad_left += '</' + 'script>';
+			ad_left += '<' + 'script type=\"text/javascript\"';
+			ad_left += 'src=\"http://pagead2.googlesyndication.com/pagead/show_ads.js\">';
+			ad_left += '</' + 'script>';
+		}
+		document.write(ad_left);
+		document.getElementById("ad_left").style.display = "";
+	} catch (e) { }
+</script><script type="text/javascript">google_ad_client = "pub-1076724771190722";google_ad_slot ="5633584852";google_ad_width = 120;google_ad_height = 600;</script><script type="text/javascript" src="./JSPGenSDF系列讲解：第三版核心包含有哪些？ - Java   Web 开发_files/show_ads.js"></script><script src="./JSPGenSDF系列讲解：第三版核心包含有哪些？ - Java   Web 开发_files/show_ads_impl.js"></script><script src="./JSPGenSDF系列讲解：第三版核心包含有哪些？ - Java   Web 开发_files/test_domain.js"></script><script>google_protectAndRun("ads_core.google_render_ad", google_handleError, google_render_ad);</script><iframe id="google_ads_frame1" name="google_ads_frame1" width="120" height="600" frameborder="0" src="./JSPGenSDF系列讲解：第三版核心包含有哪些？ - Java   Web 开发_files/ads.htm" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no"></iframe>
+</div>
+<div id="ad_right" style="position: absolute; width: 120px; top: 184px; right: 10px; ">
+<script type="text/javascript">
+	try {
+		var ad_right = "";
+		if (showad && screen.availWidth >= 1280) {
+			ad_right += '<' + 'script type=\"text/javascript\">';
+			ad_right += 'google_ad_client = "pub-1076724771190722";';
+			ad_right += 'google_ad_slot =\"9259923286\";';
+			ad_right += 'google_ad_width = 120;';
+			ad_right += 'google_ad_height = 600;';
+			ad_right += '</' + 'script>';
+			ad_right += '<' + 'script type=\"text/javascript\"';
+			ad_right += 'src=\"http://pagead2.googlesyndication.com/pagead/show_ads.js\">';
+			ad_right += '</' + 'script>';
+		}
+		document.write(ad_right);
+		document.getElementById("ad_right").style.display = "";
+	} catch (e) { }
+</script><script type="text/javascript">google_ad_client = "pub-1076724771190722";google_ad_slot ="9259923286";google_ad_width = 120;google_ad_height = 600;</script><script type="text/javascript" src="./JSPGenSDF系列讲解：第三版核心包含有哪些？ - Java   Web 开发_files/show_ads.js"></script><script src="./JSPGenSDF系列讲解：第三版核心包含有哪些？ - Java   Web 开发_files/show_ads_impl.js"></script><script>google_protectAndRun("ads_core.google_render_ad", google_handleError, google_render_ad);</script><iframe id="google_ads_frame2" name="google_ads_frame2" width="120" height="600" frameborder="0" src="./JSPGenSDF系列讲解：第三版核心包含有哪些？ - Java   Web 开发_files/ads(1).htm" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no"></iframe>
+</div>
+
+</body></html>

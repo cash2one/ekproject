@@ -1,0 +1,738 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0055)http://tech.ccidnet.com/art/302/20100901/2171991_1.html -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=GBK">
+
+<title>Java Web开发使用第三方提供的标签库的步骤 - 产品和技术 - 赛迪网</title>
+<meta name="keywords" content="Java">
+<meta name="description" content="Java Web开发使用第三方提供的标签库的步骤">
+<link href="./Java Web开发使用第三方提供的标签库的步骤 - 产品和技术 - 赛迪网_files/zx-yj.css" rel="stylesheet" type="text/css">
+<link href="./Java Web开发使用第三方提供的标签库的步骤 - 产品和技术 - 赛迪网_files/reset.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+<!--
+body {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	width:950px;
+	margin:0 auto;
+	font-size:12px;
+	color:#585858;
+	font-weight:normal;
+}
+.temp p{ color:#424242; font-size:14px; line-height:28px; font-weight:normal; text-align:left;}
+-->
+</style>
+<script language="JavaScript" src="./Java Web开发使用第三方提供的标签库的步骤 - 产品和技术 - 赛迪网_files/toupiao_news.js"></script><script language="javascript">
+<!--
+var newWindow=null;
+var checkit=false;
+function check(ID1,ID2){
+	for (var i=0;i<form1.answer.length;i++) {
+		if (form1.answer[i].checked) {checkit=true;break}
+	}
+	if(!checkit) {
+		alert("请选择你的答案！");
+		return false;
+	}
+	if(parseInt(ID2)==123){
+		return true;
+	}else{
+		if(GetCookie("qid")==ID1){
+			alert('您已经投过票！谢谢！');
+			return false;
+		}else{
+			SetCookie("qid",ID1);
+			return true;
+		}
+	}
+}
+function windowOpener(loadpos){
+	if(!newWindow||newWindow.closed){
+		newWindow=window.open(loadpos,'surveywin','toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,top=50,left=350,width=450,height=280');
+	}else{
+		newWindow.focus();
+	}
+}
+var never=new Date();
+never.setTime(never.getTime()+60*1000);
+function SetCookie(name,value){
+	var expString=';expires='+never.toGMTString();
+	document.cookie=name+'='+escape(value)+expString;
+}
+function GetCookie(name){
+	var result=null;
+	var myCookie=' '+document.cookie+';';
+	var searchName=' '+name+'=';
+	var startOfCookie=myCookie.indexOf(searchName);
+	var endOfCookie;
+	if(startOfCookie!=-1){
+		startOfCookie+=searchName.length;
+		endOfCookie=myCookie.indexOf(';',startOfCookie);
+		result=unescape(myCookie.substring(startOfCookie,endOfCookie));
+	}
+	return result;
+}
+//-->
+</script>
+
+
+<script language="javascript" src="./Java Web开发使用第三方提供的标签库的步骤 - 产品和技术 - 赛迪网_files/miit_art.js"></script>
+</head>
+<body>
+<script language="javascript" src="./Java Web开发使用第三方提供的标签库的步骤 - 产品和技术 - 赛迪网_files/blank_news.js"></script><iframe width="0" height="0" resizable="no" scrolling="no" frameborder="0" marginheight="0" marginwidth="0" src="http://image6.ccidnet.com:8081/ad_files/image/news/art/blank.gif"></iframe>
+
+<script type="text/javascript" src="./Java Web开发使用第三方提供的标签库的步骤 - 产品和技术 - 赛迪网_files/flash.js"></script>
+<!-- 通栏广告位 start -->
+<div class="pic1" id="guanggao1"></div>
+<div class="clear"></div>
+<!-- 通栏广告位 end-->
+<div class="bg10">
+    <script language="JavaScript" src="./Java Web开发使用第三方提供的标签库的步骤 - 产品和技术 - 赛迪网_files/ccidnet_header.js"></script><link rel="shortcut icon" href="http://www.ccidnet.com/favicon.ico" type="image/x-icon"> 
+<style>
+body {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	margin:0 auto;
+      font-family:"宋体";
+}
+.nleft{ float:left;}
+.nright{ float:right;}
+.clear{ clear:both;}
+.bg{ background:none!important;}
+.p1{padding-bottom:0 !important;}
+.cy-new-div1{width:930px;height:27px; background:url(http://image.ccidnet.com/hearder/cy-new-top1.jpg) top left repeat-x;padding:0 10px;padding-top:8px; color:#5a5a5a; font-size:14px;}
+	.cy-new-div1 a{ font-size:14px;color:#5a5a5a;margin:0 2px;text-decoration:none}
+.cy-new-div2{margin-top:4px;width:950px;}
+	.cy-new-left1{width:192px;}
+	.cy-new-left2{width:580px;margin-left:5px;}
+	.cy-new-left3{width:160px;}
+	.cy-new-div1-zi1{margin-top:2px;}
+.cy-news-input1{width:101px;height:18px; background:url(http://image.ccidnet.com/hearder/cy-new-input1.jpg) top left no-repeat; border:0;margin-right:5px;padding:0 3px;}
+.cy-news-icon1{ background:url(http://image.ccidnet.com/hearder/cy-new-icon1.jpg) 2px 4px no-repeat;padding-left:13px;}
+	.cy-new-ul1 li{ float:left;}
+	.cy-new-ul2 li{ float:left;}
+</style>
+<div class="cy-new-div1">
+		<img src="./Java Web开发使用第三方提供的标签库的步骤 - 产品和技术 - 赛迪网_files/logo2j.jpg" class="nleft"><div class="nleft cy-new-div1-zi1"><a href="http://www.ccidnet.com/" target="_blank">首页</a>|<a href="http://news.ccidnet.com/" target="_blank">新闻中心</a>|<a href="http://miit.ccidnet.com/" target="_blank">产业和信息化</a>|<a href="http://tech.ccidnet.com/" target="_blank">产品和技术</a>|<a href="http://bbs.ccidnet.com/" target="_blank">社区</a>|<a href="http://blog.ccidnet.com/" target="_blank">博客</a>|<a href="http://service.ccidnet.com/" target="_blank">赛迪服务</a>|<a href="http://www.ccidreport.com/" target="_blank">情报中心</a></div>
+       <a href="http://www.ccidnet.com/" target="_blank"><img src="./Java Web开发使用第三方提供的标签库的步骤 - 产品和技术 - 赛迪网_files/cy-new-logo.jpg" alt="工业和信息化融合的网络领航者" class="nright"></a>
+	</div>
+
+</div>
+<!-- 通栏广告位 start-->
+<div class="pic1" id="guanggao2"></div>
+<div class="clear"></div>
+<!-- 通栏广告位 end-->
+	<div class="nav1">
+    	<div class="zx-logo nleft"><a href="http://tech.ccidnet.com/" target="_blank" title="产品和技术"><img src="./Java Web开发使用第三方提供的标签库的步骤 - 产品和技术 - 赛迪网_files/fuw-logo.jpg" border="0/"></a></div>
+        <div class="zx-nav nright">
+            <div class="nleft zx-nav-zi">
+            	<ul>
+                	<!--特全区开始-->                 
+                    <!--
+
+<li>热点推荐：</li>
+                    <li><a href="http://product.ccidnet.com/art/3381/20100412/2032025_1.html" target="_blank">戴尔E54芯500G硬盘电脑3699元</a> 
+<a href="http://product.ccidnet.com/art/3381/20100412/2032123_1.html" target="_blank">戴尔XPS 8100独显机送音箱</a></li>
+
+-->
+ 
+                </ul>
+            </div>
+            <ul class="nright zx-nav-list">
+			<form name="form_1" method="post" action="http://java.ccidnet.com/image/mailweek1.jsp" style="margin:0px" target="_blank">
+            	<li><select name="id" id="id" style="width:85px" class="selsec1 margin1">
+            	  <option value="80">服务器周刊</option>
+				  <option value="219">IT技术周刊</option>
+            	</select>
+            	  <input type="text" class="input1" name="email" onfocus="this.value=&#39;&#39;" value="请输入E-mail">
+				  <input type="hidden" value="1" name="cmd">
+                  <input type="hidden" value="sendnote" name="yes">
+            	</li>
+                <li> <input name="imageField" type="button" class="btn1" style="cursor:hand" onclick="document.form_1.submit();"></li>
+			</form>
+            <ul>
+        </ul></ul></div>
+    </div>
+    <div class="clear"></div>
+    <div class="clear"></div>
+	
+    <div class="cont1">
+    	<div class="nleft cont-left-div">
+		<div id="guanggao3"><!--638广告位--></div>
+<div class="clear"></div>
+<div id="guanggao4"><!--638广告位2--></div>
+<div class="clear"></div>
+        <div class="cont-left-div-1">
+			<h1>
+            	<span class="nleft font0">
+				&nbsp;<a href="http://www.ccidnet.com/" class="font0" target="_blank">赛迪网</a>&nbsp;&gt;&nbsp;<a href="http://tech.ccidnet.com/" target="_blank" class="font0">产品和技术</a>&nbsp;&gt;&nbsp;<a href="http://tech.ccidnet.com/col/302/302.html" target="_blank" class="font0">最新更新</a>&nbsp;&gt;&nbsp;文章
+				</span>
+                <span class="nright" style="margin-top:7px;">
+				<script language="javascript">
+				function changeactionzs(){
+					var channellvalue = document.searchForm1.channelid.value;
+					var searchwordvalues = document.searchForm1.searchword.value;
+					if (channellvalue == "001"){
+						document.searchForm1.wd.value = document.searchForm1.searchword.value;
+						document.searchForm1.action = "http://event.ccidnet.com/baidu";
+					}
+					else if(channellvalue == "002"){
+						document.searchForm1.q.value = document.searchForm1.searchword.value;
+						document.searchForm1.method = "get";
+						document.searchForm1.action = "http://www.google.com/custom";
+					}
+					else{
+					   document.searchForm1.action =  "http://search.ccidnet.com/search.wct";
+					}
+				}
+				</script>
+				<form name="searchForm1" method="post" action="http://search.ccidnet.com/search.wct" style="margin:0px" target="_blank" onsubmit="changeactionzs()">
+					<input name="channelid" id="channelid" value="1649" type="hidden">
+					<input type="hidden" name="search5" value="page">
+                    <input type="hidden" name="wd" value="">
+                    <input type="hidden" name="client" value="pub-3653458698766474">
+                    <input type="hidden" name="q" value="">
+                    <input type="hidden" name="domains" value="www.ccidnet.com">
+                    <input type="hidden" name="sitesearch" value="www.ccidnet.com">
+					<input name="searchword" id="searchword" type="text" class="input4">
+					<input name="searchSubmit" type="submit" style="cursor:hand" value="" class="btn3">
+				</form>
+				</span>
+            </h1>
+            <div class="clear"></div>
+            <div class="cont-div2">
+            	<h2>Java Web开发使用第三方提供的标签库的步骤 </h2>
+				
+				<h3>
+				发布时间：2010.09.01 08:53
+				&nbsp;&nbsp;&nbsp;&nbsp;
+				来源：赛迪网&nbsp;&nbsp;&nbsp;&nbsp;
+				作者：晴岚
+				</h3>
+				
+				<div class="temp">
+				<p style="text-indent:2em">【赛迪网报道】假定甲方打算使用乙方开发的标签库。乙方把与标签库相关的所有文件打包成为一个JAR文件（假定名为standard.jar），在这个JAR文件中包含以下内容：
+</p><p style="text-indent:2em">
+</p><p style="text-indent:2em">所有标签处理类及相关类的.class文件。
+</p><p style="text-indent:2em">
+</p><p style="text-indent:2em">META-INF目录。在这个目录下有一个描述标签库的TLD文件（假定名为c.TLD文件），在这个TLD文件中，假定为标签库设置的uri为"http://java.sun. com/jsp/jstl/core"：
+</p><p style="text-indent:2em">
+</p><p style="text-indent:2em"></p><center><ccid_nobr>
+<table width="400" border="1" cellspacing="0" cellpadding="2" bordercolorlight="black" bordercolordark="#FFFFFF" align="center">
+<tbody><tr>
+    <td bgcolor="e6e6e6" class="code" style="font-size:9pt">
+    <pre><ccid_code>&lt;taglib xmlns="http://java.sun.com/xml/ns/j2ee"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee 
+http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+version="2.0"&gt;         
+&lt;description&gt;JSTL 1.1 core library&lt;/description&gt;   
+&lt;display-name&gt;JSTL core&lt;/display-name&gt;   
+&lt;tlib-version&gt;1.1&lt;/tlib-version&gt;   
+&lt;short-name&gt;c&lt;/short-name&gt;   
+&lt;uri&gt;http://java.sun.com/jsp/jstl/core&lt;/uri&gt; 
+…  &lt;/taglib&gt;</ccid_code></pre> 
+   </td>
+  </tr>
+</tbody></table>
+</ccid_nobr></center>
+<p style="text-indent:2em">甲方要开发一个helloapp应用，可以采用两种方式使用乙方的标签库。第一种方式包括如下步骤。
+</p><p style="text-indent:2em">
+</p><p style="text-indent:2em">（1）把standard.jar文件复制到<catalina_home>/lib目录或者helloapp/WEB- INF/lib目录下。
+</catalina_home></p><p style="text-indent:2em">
+</p><p style="text-indent:2em">（2）在JSP文件中通过taglib指令声明标签库，taglib指令中的uri属性应该与上述c.TLD文件中的<uri>元素匹配。例如以下sample.jsp使用了乙方提供的标签库中的<out>标签：
+</out></uri></p><p style="text-indent:2em">
+</p><p style="text-indent:2em">&lt;%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %&gt; <c:out value="${param.username}" default="unknown"> 当Servlet容器运行以上out.jsp时，会自动到stardard.jar文件的META-INF目录中读取c.TLD文件。
+</c:out></p><p style="text-indent:2em">
+</p><p style="text-indent:2em">甲方使用乙方的标签库的第二种方式包括如下步骤。
+</p><p style="text-indent:2em">
+</p><p style="text-indent:2em">（1）把乙方的standard.jar文件展开，然后把META-INF目录中的c.TLD文件复制到helloapp/WEB-INF目录下。
+</p><p style="text-indent:2em">
+</p><p style="text-indent:2em">（2）从乙方的standard.jar文件的展开目录中删除META-INF目录下的c.TLD文件，再把不包含c.TLD文件的展开目录重新打包为standardNew.jar文件。
+</p><p style="text-indent:2em">
+</p><p style="text-indent:2em">（3）把standardNew.jar文件复制到<catalina_home>/lib目录或者helloapp/ WEB-INF/lib目录下。
+</catalina_home></p><p style="text-indent:2em">
+</p><p style="text-indent:2em">（4）在helloapp应用的web.xml文件中声明引入标签库：
+</p><p style="text-indent:2em">
+</p><p style="text-indent:2em"></p><center><ccid_nobr>
+<table width="400" border="1" cellspacing="0" cellpadding="2" bordercolorlight="black" bordercolordark="#FFFFFF" align="center">
+<tbody><tr>
+    <td bgcolor="e6e6e6" class="code" style="font-size:9pt">
+    <pre><ccid_code>&lt;taglib&gt;   &lt;taglib-uri&gt;/corelib&lt;/taglib-uri&gt;   
+&lt;taglib-location&gt;/WEB-INF/c.tld&lt;/taglib-location&gt; 
+&lt;/taglib&gt;</ccid_code></pre> 
+   </td>
+  </tr>
+</tbody></table>
+</ccid_nobr></center>
+<p style="text-indent:2em">（5）在JSP文件中通过taglib指令声明标签库，taglib指令中的uri属性应该与上述web.xml文件中的<taglib-uri>元素匹配。例如以下sample.jsp使用了乙方提供的标签库中的<out>标签：
+</out></taglib-uri></p><p style="text-indent:2em">
+</p><p style="text-indent:2em">&lt;%@ taglib uri="corelib" prefix="c" %&gt; <c:out value="${param.username}" default="unknown"> 比较上述两种方式，可以看出第一种方式更加方便，因此本章将采用第一种方式使用JSTL标签库。
+            	</c:out></p></div>
+				<h5>
+				
+				
+				
+				</h5>
+				
+            <h6 class="font7">[<a href="http://comment1.ccidnet.com/comment/disp/add_newcomment?articleID=2171991&columnID=302&articleTitle=Java+Web%BF%AA%B7%A2%CA%B9%D3%C3%B5%DA%C8%FD%B7%BD%CC%E1%B9%A9%B5%C4%B1%EA%C7%A9%BF%E2%B5%C4%B2%BD%D6%E8&articleTime=2010-09-01&articleURL=http://tech.ccidnet.com%2Fart%2F302%2F20100901%2F2171991_1.html" target="_blank">发表评论</a>][<a href="javascript:self.print()">打印</a>][<a href="http://blog.ccidnet.com/" target="_blank">进入博客</a>][<a href="http://bbs.ccidnet.com/" target="_blank">进入论坛</a>][<a href="mailto:?subject=%E3%80%90%E8%B5%9B%E8%BF%AA%E7%BD%91%E3%80%91%E2%80%9D&body=%E6%88%91%E5%9C%A8%E3%80%90%E8%B5%9B%E8%BF%AA%E7%BD%91%E3%80%91%E4%B8%8A%E7%9C%8B%E5%88%B0%E2%80%9C%E2%80%9D%E8%BF%99%E7%AF%87%E6%96%87%E7%AB%A0%EF%BC%8C%E7%89%B9%E5%90%91%E6%82%A8%E6%8E%A8%E8%8D%90%20%20%20%20%20%20%20%20%20%20%20%20%20http://tech.ccidnet.com/art/302/20100901/2171991_1.html">推荐给朋友</a>]</h6>
+            </div>
+            
+          </div>
+			<div class="clear"></div>
+            <div class="cont-left-div-2">
+            	<h2>相关文章</h2>
+                <ul>
+				
+                </ul>
+            </div>
+            <div class="clear"></div>
+            <div class="cont-left-div-3 nleft">
+            	<h2><a href="http://blog.ccidnet.com/">博文精读</a></h2>
+                <ul>
+                	<li><a href="http://tantao.blog.ccidnet.com/blog-htm-itemid-20571223-uid-239786-do-showone-type-blog.html" class="font7 nleft" target="_blank">垂直搜索嚣张侵权的时代即将终结</a><span class="nright font7">01-28</span></li><li><a href="http://zhangf.blog.ccidnet.com/blog-htm-itemid-20570658-uid-95536-do-showone-type-blog.html" class="font7 nleft" target="_blank">爱帮网为什么败诉了还在“混淆视听”？</a><span class="nright font7">01-28</span></li><li><a href="http://zhangshuyue.blog.ccidnet.com/blog-htm-itemid-20568095-uid-11711-do-showone-type-blog.html" class="font7 nleft" target="_blank">国产数码奢侈品为何越卖越贵？</a><span class="nright font7">01-28</span></li><li><a href="http://wangk.blog.ccidnet.com/blog-htm-itemid-20566548-uid-244311-do-showone-type-blog.html" class="font7 nleft" target="_blank">微软云计算的三种运营模式</a><span class="nright font7">01-28</span></li><li><a href="http://hexiaini235.blog.ccidnet.com/blog-htm-itemid-20566186-uid-968908-do-showone-type-blog.html" class="font7 nleft" target="_blank">快递也“春运”，因为电商基础设施不给</a><span class="nright font7">01-28</span></li><li><a href="http://zhangf.blog.ccidnet.com/blog-htm-itemid-20564704-uid-95536-do-showone-type-blog.html" class="font7 nleft" target="_blank">试看谁能占得AMD APU先机？</a><span class="nright font7">01-28</span></li><li><a href="http://jiaweb.blog.ccidnet.com/blog-htm-itemid-20564632-uid-88995-do-showone-type-blog.html" class="font7 nleft" target="_blank">增值分销：IT分销的新蓝海</a><span class="nright font7">01-28</span></li><li><a href="http://majihua.blog.ccidnet.com/blog-htm-itemid-20563179-uid-269701-do-showone-type-blog.html" class="font7 nleft" target="_blank">WiFi会改变生活方式吗</a><span class="nright font7">01-28</span></li>
+                </ul>
+            </div>
+            <div class="cont-left-div-3 nright">
+            	<h2><a href="http://bbs.ccidnet.com/">社区精华</a></h2>
+                <ul>
+                	<li><a href="http://bbs.tech.ccidnet.com/read.php?tid=954616" class="font7 nleft" target="_blank">菜鸟级人员学习BI前景如何？</a><span class="nright font7">01-21</span></li><li><a href="http://bbs.tech.ccidnet.com/read.php?tid=954115" class="font7 nleft" target="_blank">多图详解，教你如何激发DDR3全部潜能</a><span class="nright font7">01-18</span></li><li><a href="http://bbs.tech.ccidnet.com/read.php?tid=944212" class="font7 nleft" target="_blank">链路均衡后dns解析疑难问题的处理绝招</a><span class="nright font7">12-30</span></li><li><a href="http://bbs.tech.ccidnet.com/read.php?tid=943060" class="font7 nleft" target="_blank">微软梁戈碧：用友是Windows Azure中国合</a><span class="nright font7">12-28</span></li><li><a href="http://bbs.tech.ccidnet.com/read.php?tid=943059" class="font7 nleft" target="_blank">张亚勤：云还在建立格局</a><span class="nright font7">12-28</span></li><li><a href="http://bbs.tech.ccidnet.com/read.php?tid=943058" class="font7 nleft" target="_blank">移动与微软携手推动云计算应用</a><span class="nright font7">12-28</span></li><li><a href="http://bbs.tech.ccidnet.com/read.php?tid=943057" class="font7 nleft" target="_blank">微软COO:我们是“混合云”</a><span class="nright font7">12-28</span></li><li><a href="http://bbs.tech.ccidnet.com/read.php?tid=943056" class="font7 nleft" target="_blank">孙永杰：2010年微软“7”字的喜与忧</a><span class="nright font7">12-28</span></li>
+                </ul>
+            </div>
+            <div class="clear"></div>
+            <div class="cont-left-div-4">
+
+            	
+            <script src="./Java Web开发使用第三方提供的标签库的步骤 - 产品和技术 - 赛迪网_files/article"></script><table width="100%" align="center" border="0" cellspacing="0" cellpadding="0" style="border:1px solid #e2e3e4">          <tbody><tr>             <td width="100%" height="20" align="left" background="">              &nbsp;&nbsp;&nbsp;&nbsp;<b><font style="FONT-SIZE: 12px; COLOR: #022DA9; LINE-HEIGHT: 130%; TEXT-DECORATION: none">发表评论:</font></b>             </td>          </tr>       		  <tr><td>	               <table width="90%" border="0" cellspacing="0" cellpadding="0" style="FONT-SIZE: 12px; COLOR: #000000; LINE-HEIGHT: 16px; TEXT-DECORATION: none" align="center"><form name="commentform" action="http://comment1.ccidnet.com/comment/disp/add_comment" method="post" target="_blank" onsubmit="return ValidateInput()"></form><input type="hidden" name="articleID" value="2171991"> <input type="hidden" name="columnID" value="302"> <input type="hidden" name="articleTitle" value="Java Web开发使用第三方提供的标签库的步骤"><input type="hidden" name="articleTime" value="2010-09-01"> <input type="hidden" name="articleURL" value="http://tech.ccidnet.com/art/302/20100901/2171991_1.html">                 <tbody><tr>                   <td colspan="2">                                        笔名<font color="red">*</font> :                    <input type="text" name="username" style="FONT-SIZE: 12px; COLOR: #000000; LINE-HEIGHT: 16px; TEXT-DECORATION: none" size="12" value="网友">&nbsp;&nbsp;&nbsp;&nbsp;                    E-mail :                     <input type="text" name="email" style="FONT-SIZE: 12px; COLOR: #000000; LINE-HEIGHT: 16px; TEXT-DECORATION: none" size="12"> &nbsp;&nbsp;&nbsp;&nbsp;                    匿名<input type="checkbox" name="chkhide">                  </td>                  <td> <div align="center">                <input type="image" border="0" name="imageField" src="./Java Web开发使用第三方提供的标签库的步骤 - 产品和技术 - 赛迪网_files/button_tijiao.gif" width="53" height="21">                                    </div></td></tr>                <tr>                   <td>                   <textarea name="content" style="FONT-SIZE: 12px; COLOR: #000000; LINE-HEIGHT: 16px; TEXT-DECORATION: none" cols="75" rows="4"></textarea>                    </td>                                    </tr>                      </tbody></table>                          </td></tr>         </tbody></table>            
+                
+            </div>
+        </div>
+        <div class="nright cont-right">
+        	<!--右侧 引入-->
+			
+        	
+				 <!-- 300*250 广告位1 -->
+<div class="guanggao1" id="guanggao_r1"></div>
+            <div class="clear"></div>
+        	<div class="cont-right-div1">
+			<script language="JScript">
+			function subME(){
+				
+				searchForm.target = "_blank";
+				searchForm.action = "http://www.ccidreport.com/market/template/search_retmain.jsp";
+				searchForm.submit();
+				event.returnValue=false;
+			}
+			function toSearch(val){
+				searchForm.search_word.value = val;
+				subME();
+			}
+			function KeyDown(){
+				if (event.keyCode == 13){
+					if(searchForm.search_word.value!=""){
+						subMEe();
+					}
+				}
+			}
+			function subMEe(){
+				
+				searchForm.target = "_blank";
+				searchForm.action = "http://www.ccidreport.com/market/template/search_retmain.jsp";
+				searchForm.submit();
+				event.returnValue=false;
+			}
+			function showC(val){
+				document.getElementById("an1").className = "c1";
+				document.getElementById("an2").className = "c2";
+				
+				document.getElementById("an"+val).className = "c"+val+" c"+val+"hover";
+				
+				if(val == "1"){
+					document.getElementById("hn1").style.display = "block"
+					document.getElementById("un1").style.display = "block";
+					document.getElementById("un2").style.display = "none";
+				}else{
+					document.getElementById("hn1").style.display = "none"
+					document.getElementById("un1").style.display = "none";
+					document.getElementById("un2").style.display = "block";
+				}
+				
+			}
+			</script>
+				
+				<style>
+				 	.input10{width:70px;}
+				 </style>
+				
+                <h2>
+					<ul class="c-hd">
+						<li><a href="http://www.ccidreport.com/" id="an1" target="_blank" onmouseover="showC(&#39;1&#39;);" class="c1 c1hover"></a></li>
+						<li><a href="http://www.ccidedu.com/" id="an2" target="_blank" onmouseover="showC(&#39;2&#39;);" class="c2"></a></li>
+					</ul>
+                </h2>
+                <h1 id="hn1">
+				<form method="post" name="searchForm">
+				<select name="select" style="width:72px" class="selsec1 margin1">
+            	  <option value="1001">中文报告</option>
+				  <option value="2001">英文报告</option>
+				  <option value="1005">名录数据</option>
+				  <option value="1003">管理光盘</option>
+				  <option value="1004">培训招生</option>
+		          <option value="1002">中文文章</option>
+				  <option value="2002">英文文章</option>
+            	</select>
+				<select name="select2" style="width:60px" class="selsec1 margin1">
+				  <option value="1">标题</option>
+				  <option value="2">全文</option>
+				</select>
+				<input name="search_word" id="search_word" value="请输入关键字" onfocus="this.value=&#39;&#39;;" onkeypress="javascript:KeyDown();" type="text" class="input10">
+				<input name="subMe" type="button" style="cursor:hand" onclick="subME();" class="btn3 margin1">
+				</form>
+				</h1>
+                <div class="clear"></div>
+                <ul id="un1" class="cont-right-list1">
+				
+                 
+
+
+
+
+
+
+
+
+
+
+<li><a href="http://www.ccidreport.com/report/content/6/201002/179036.html" target="_blank" title="2009-2010年中国电子政务发展研究年度报告">2009-2010年中国电子政务发展研究年度报告</a></li>
+
+<li><a href="http://www.ccidreport.com/report/content/6/201002/179037.html" target="_blank" title="2009-2010年中国金字工程市场研究年度报告">2009-2010年中国金字工程市场研究年度报告</a></li>
+
+<li><a href="http://www.ccidreport.com/report/content/6/201002/179038.html" target="_blank" title="2009-2010年中国环保行业信息化发展研究年度报告">2009-2010年中国环保行业信息化发展研究年度</a></li>
+
+<li><a href="http://www.ccidreport.com/report/content/6/201002/179039.html" target="_blank" title="2009-2010年中国社保行业信息化发展研究年度报告">2009-2010年中国社保行业信息化发展研究年度</a></li>
+
+<li><a href="http://www.ccidreport.com/report/content/6/201002/179040.html" target="_blank" title="2009-2010年中国医疗行业信息化发展研究年度报告">2009-2010年中国医疗行业信息化发展研究年度</a></li>
+
+<li><a href="http://www.ccidreport.com/report/content/6/201002/179041.html" target="_blank" title="2009-2010年中国轨道交通行业信息化发展研究年度报告">2009-2010年中国轨道交通行业信息化发展研究</a></li>
+
+<li><a href="http://www.ccidreport.com/report/content/6/201002/179042.html" target="_blank" title="2009-2010年中国智能交通行业信息化发展研究年度报告">2009-2010年中国智能交通行业信息化发展研究</a></li>
+
+<li><a href="http://www.ccidreport.com/report/content/3/201002/179043.html" target="_blank" title="2009-2010年中国4-6级城市PC市场研究年度报告">2009-2010年中国4-6级城市PC市场研究年度报告</a></li>
+
+<li><a href="http://www.ccidreport.com/report/content/6/201002/179044.html" target="_blank" title="2009-2010年中国物流行业信息化发展研究年度报告">2009-2010年中国物流行业信息化发展研究年度</a></li>
+
+<li><a href="http://www.ccidreport.com/report/content/6/201002/179045.html" target="_blank" title="2009-2010年中国保险业信息化发展研究年度报告">2009-2010年中国保险业信息化发展研究年度报告</a></li>
+
+                </ul>
+                <ul id="un2" style="display:none" class="cont-right-list1">
+                	<!--特全区开始-->                 
+                    <li><a href="http://www.ccidedu.com/ad/tongping2.html" class="font7" target="_blank">[面授]2010年上半年软考考前面授辅导招生计划</a></li>
+                    <li><a <li=""></a><a href="http://www.ccidedu.com/art/27515/20100408/2030013_1.html" class="font7" target="_blank">[面授]赛迪教育案例与论文分析及冲刺班开班通知</a></li>
+
+<li><a href="http://www.ccidedu.com/art/27515/20100409/2030669_1.html" class="font7" target="_blank">[面授]系统集成项目管理工程师5天集中培训班</a></li>             
+                    <li><a href="http://www.ccidedu.com/art/27515/20100409/2030675_1.html" class="font7" target="_blank">[面授]信息系统项目管理师5天集中培训班</a></li>
+                    <li><a href="http://www.ccidedu.com/art/27515/20100111/1976877_1.html" class="font7" target="_blank">[远程]系统集成项目管理工程师远程在线辅导招生</a></li>
+                    <li><a href="http://www.ccidedu.com/ad/tongping.html" class="font7" target="_blank">[远程]赛迪网校软考相关培训课程优惠活动</a></li>
+                    <li><a href="http://www.ccidedu.com/art/1919/20100126/1987805_1.html" class="font7" target="_blank">[远程]信息系统项目管理师强化辅导课程上线</a></li>
+                    <li><a href="http://www.ccidedu.com/art/1919/20100128/1989869_1.html" class="font7" target="_blank">[远程]系统集成项目管理工程师强化辅导课程上线</a></li>
+                    <li><a href="http://www.ccidedu.com/art/1919/20090220/1684061_1.html" class="font7" target="_blank">[远程]赛迪网校-网络工程师全套课程大优惠</a></li>
+                    <li><a href="http://www.ccidedu.com/art/12169/20070905/1202071_1.html" class="font7" target="_blank">[远程]计算机病毒分析与防范技术课程上线</a></li>
+                    <li><a href="http://www.ccidedu.com/art/12153/20070903/1199561_1.html" class="font7" target="_blank">[远程]赛迪网校-j2ee软件工程师中高级课程上线</a></li>
+ 
+                </ul>
+            </div>
+            <!-- 情报中心 end -->
+			<!-- 广告位 -->
+            <div class="guanggao1 margin2" id="guanggao_r2"></div>
+            <!-- 高端对话 start -->
+            <div class="cont-right-div2">
+			
+                <h2><a href="http://tech.ccidnet.com/col/32955/32955.html" class="nright font4" target="_blank" id="more_gddh">更多&gt;&gt;</a></h2>
+              <div class="clear"></div>
+                <ul class="cont-hd1">
+					
+					<li><a href="http://tech.ccidnet.com/col/32955/32955.html" id="gddh_a3" onmouseover="show(&#39;gddh&#39;,&#39;3&#39;);" target="_blank" class="a3 a3hover">产品和技术</a></li>
+					<li><a href="http://news.ccidnet.com/col/960/960.html" id="gddh_a1" onmouseover="show(&#39;gddh&#39;,&#39;1&#39;);" target="_blank" class="a1">新闻中心</a></li>
+					<li><a href="http://miit.ccidnet.com/col/32929/32929.html" id="gddh_a2" onmouseover="show(&#39;gddh&#39;,&#39;2&#39;);" target="_blank" class="a2">产业和信息化</a></li>
+					
+                </ul>
+                <div class="clear"></div>
+				
+                <div class="p2" id="div_gddh_a2_1" style="display:none">
+                	<h3 class="font6"><a href="http://miit.ccidnet.com/art/32929/20100831/2170363_1.html" class="font6" target="_blank" title="欧阳钟灿：LED背光源电视要取代普通CCFL背投">欧阳钟灿：LED背光源电视要取代普通CCFL背</a></h3>
+                    <div class="clear"></div>
+                	<div class="p2-pic nleft"><a href="http://miit.ccidnet.com/art/32929/20100831/2170363_1.html" target="_blank" title="欧阳钟灿：LED背光源电视要取代普通CCFL背投"><img src="./Java Web开发使用第三方提供的标签库的步骤 - 产品和技术 - 赛迪网_files/2070807.jpg" width="60" height="60"></a></div><a href="http://miit.ccidnet.com/art/32929/20100831/2170363_1.html" target="_blank" title="欧阳钟灿：LED背光源电视要取代普通CCFL背投">
+                    </a><div class="p2-zi nright"><a href="http://miit.ccidnet.com/art/32929/20100831/2170363_1.html" target="_blank" title="欧阳钟灿：LED背光源电视要取代普通CCFL背投">
+                    </a><p><a href="http://miit.ccidnet.com/art/32929/20100831/2170363_1.html" target="_blank" title="欧阳钟灿：LED背光源电视要取代普通CCFL背投"></a><a href="http://miit.ccidnet.com/art/32929/20100831/2170363_1.html" class="font7" title="近日，《平板电视能效限定值及能效等级》在业界翘首以盼的期待声中终于出台并引起广泛关注，商家直言其出台将会助推LED背光源液晶电视的发展进程。中国科学院院士、中国物理学会液晶分会会长欧阳钟灿院士在接受赛迪网专访时表示，“LED背投液晶电视要取" target="_blank">近日，《平板电视能效限定值及能效等级》在业界翘首以盼的期待声中终于出台并引起广泛关注，商</a>…</p>
+                    </div>
+                </div>
+				
+                <div class="clear" id="div_gddh_a2_2" style="display:none"></div>
+                <div class="p2  bg p1" id="div_gddh_a2_3" style="display:none">
+                	<h3 class="font6"><a href="http://miit.ccidnet.com/art/32929/20100831/2170367_1.html" class="font6" target="_blank" title="荆海：LED背光源液晶电视为主导是发展必然">荆海：LED背光源液晶电视为主导是发展必然</a></h3>
+                    <div class="clear"></div>
+                	<div class="p2-pic nleft"><a href="http://miit.ccidnet.com/art/32929/20100831/2170367_1.html" target="_blank" title="荆海：LED背光源液晶电视为主导是发展必然"><img src="./Java Web开发使用第三方提供的标签库的步骤 - 产品和技术 - 赛迪网_files/2070809.jpg" width="60" height="60"></a></div><a href="http://miit.ccidnet.com/art/32929/20100831/2170367_1.html" target="_blank" title="荆海：LED背光源液晶电视为主导是发展必然">
+                    </a><div class="p2-zi nright"><a href="http://miit.ccidnet.com/art/32929/20100831/2170367_1.html" target="_blank" title="荆海：LED背光源液晶电视为主导是发展必然">
+                    </a><p><a href="http://miit.ccidnet.com/art/32929/20100831/2170367_1.html" target="_blank" title="荆海：LED背光源液晶电视为主导是发展必然"></a><a href="http://miit.ccidnet.com/art/32929/20100831/2170367_1.html" class="font7" title="最近出台的《平板电视能效标准》引起了业内外的高度关注和广泛热议。北京液晶工程研究开发中心荆海研究员于近日在接受赛迪网专访时表示，LED背光源液晶电视将成为市场主导方向，其发展是必然结果。
+" target="_blank">最近出台的《平板电视能效标准》引起了业内外的高度关注和广泛热议。北京液晶工程研究开发中心</a>…</p>
+                    </div>
+                </div>
+				
+				
+                <div class="p2" id="div_gddh_a1_1" style="display:none">
+                	<h3 class="font6"><a href="http://news.ccidnet.com/art/960/20100824/2162463_1.html" class="font6" target="_blank" title="大众点评龙伟:团购需消费者网站和商户三赢">大众点评龙伟:团购需消费者网站和商户三赢</a></h3>
+                    <div class="clear"></div>
+                	<div class="p2-pic nleft"><a href="http://news.ccidnet.com/art/960/20100824/2162463_1.html" target="_blank" title="大众点评龙伟:团购需消费者网站和商户三赢"><img src="./Java Web开发使用第三方提供的标签库的步骤 - 产品和技术 - 赛迪网_files/2067155.jpg" width="60" height="60"></a></div><a href="http://news.ccidnet.com/art/960/20100824/2162463_1.html" target="_blank" title="大众点评龙伟:团购需消费者网站和商户三赢">
+                    </a><div class="p2-zi nright"><a href="http://news.ccidnet.com/art/960/20100824/2162463_1.html" target="_blank" title="大众点评龙伟:团购需消费者网站和商户三赢">
+                    </a><p><a href="http://news.ccidnet.com/art/960/20100824/2162463_1.html" target="_blank" title="大众点评龙伟:团购需消费者网站和商户三赢"></a><a href="http://news.ccidnet.com/art/960/20100824/2162463_1.html" class="font7" title="龙伟表示，大众点评拥有庞大的用户群和商户资源，做团购更有优势，而那些从零做起的团购网站，未来要坚持的路还很长" target="_blank">龙伟表示，大众点评拥有庞大的用户群和商户资源，做团购更有优势，而那些从零做起的团购网站，</a>…</p>
+                    </div>
+                </div>
+				
+                <div class="clear" id="div_gddh_a1_2" style="display:none"></div>
+                <div class="p2  bg p1" id="div_gddh_a1_3" style="display:none">
+                	<h3 class="font6"><a href="http://news.ccidnet.com/art/960/20100819/2159131_1.html" class="font6" target="_blank" title="乐淘网副总裁：淘宝名鞋馆对乐淘没有冲击">乐淘网副总裁：淘宝名鞋馆对乐淘没有冲击</a></h3>
+                    <div class="clear"></div>
+                	<div class="p2-pic nleft"><a href="http://news.ccidnet.com/art/960/20100819/2159131_1.html" target="_blank" title="乐淘网副总裁：淘宝名鞋馆对乐淘没有冲击"><img src="./Java Web开发使用第三方提供的标签库的步骤 - 产品和技术 - 赛迪网_files/2065905.jpg" width="60" height="60"></a></div><a href="http://news.ccidnet.com/art/960/20100819/2159131_1.html" target="_blank" title="乐淘网副总裁：淘宝名鞋馆对乐淘没有冲击">
+                    </a><div class="p2-zi nright"><a href="http://news.ccidnet.com/art/960/20100819/2159131_1.html" target="_blank" title="乐淘网副总裁：淘宝名鞋馆对乐淘没有冲击">
+                    </a><p><a href="http://news.ccidnet.com/art/960/20100819/2159131_1.html" target="_blank" title="乐淘网副总裁：淘宝名鞋馆对乐淘没有冲击"></a><a href="http://news.ccidnet.com/art/960/20100819/2159131_1.html" class="font7" title="陈虎表示乐淘短期内不会考虑做广告投放，将主要集中在提升用户体验上面。同时针对淘宝上线的“名鞋馆”，陈虎表示将不会对乐淘造成任何冲击和影响" target="_blank">陈虎表示乐淘短期内不会考虑做广告投放，将主要集中在提升用户体验上面。同时针对淘宝上线的“</a>…</p>
+                    </div>
+                </div>
+				
+				
+                <div class="p2" id="div_gddh_a3_1">
+                	<h3 class="font6"><a href="http://product.ccidnet.com/art/32955/20100831/2170955_1.html" class="font6" target="_blank" title="李晋凯：一体机是电脑细分化的产物">李晋凯：一体机是电脑细分化的产物</a></h3>
+                    <div class="clear"></div>
+                	<div class="p2-pic nleft"><a href="http://product.ccidnet.com/art/32955/20100831/2170955_1.html" target="_blank" title="李晋凯：一体机是电脑细分化的产物"><img src="./Java Web开发使用第三方提供的标签库的步骤 - 产品和技术 - 赛迪网_files/2070881.jpg" width="60" height="60"></a></div><a href="http://product.ccidnet.com/art/32955/20100831/2170955_1.html" target="_blank" title="李晋凯：一体机是电脑细分化的产物">
+                    </a><div class="p2-zi nright"><a href="http://product.ccidnet.com/art/32955/20100831/2170955_1.html" target="_blank" title="李晋凯：一体机是电脑细分化的产物">
+                    </a><p><a href="http://product.ccidnet.com/art/32955/20100831/2170955_1.html" target="_blank" title="李晋凯：一体机是电脑细分化的产物"></a><a href="http://product.ccidnet.com/art/32955/20100831/2170955_1.html" class="font7" title="得益于拥有台式机性能和笔记本产品的便携性特点，一体机自从上市以来一直是市场的热点产品之一" target="_blank">得益于拥有台式机性能和笔记本产品的便携性特点，一体机自从上市以来一直是市场的热点产品之一</a>…</p>
+                    </div>
+                </div>
+				
+                <div class="clear" id="div_gddh_a3_2"></div>
+                <div class="p2  bg p1" id="div_gddh_a3_3">
+                	<h3 class="font6"><a href="http://tech.ccidnet.com/art/32955/20100830/2169953_1.html" class="font6" target="_blank" title="融合架构　打造云时代下的数据中心">融合架构　打造云时代下的数据中心</a></h3>
+                    <div class="clear"></div>
+                	<div class="p2-pic nleft"><a href="http://tech.ccidnet.com/art/32955/20100830/2169953_1.html" target="_blank" title="融合架构　打造云时代下的数据中心"><img src="./Java Web开发使用第三方提供的标签库的步骤 - 产品和技术 - 赛迪网_files/2070599.jpg" width="60" height="60"></a></div><a href="http://tech.ccidnet.com/art/32955/20100830/2169953_1.html" target="_blank" title="融合架构　打造云时代下的数据中心">
+                    </a><div class="p2-zi nright"><a href="http://tech.ccidnet.com/art/32955/20100830/2169953_1.html" target="_blank" title="融合架构　打造云时代下的数据中心">
+                    </a><p><a href="http://tech.ccidnet.com/art/32955/20100830/2169953_1.html" target="_blank" title="融合架构　打造云时代下的数据中心"></a><a href="http://tech.ccidnet.com/art/32955/20100830/2169953_1.html" class="font7" title="日前H3C正式对外公布了一系列数据中心解决方案，解决传统数据中心所面临的问题，打造云计算时代下的新一代数据中心。此次发布，H3C明确提出了“标准化、虚拟化、智能化”的新一代数据中心发展方向" target="_blank">日前H3C正式对外公布了一系列数据中心解决方案，解决传统数据中心所面临的问题，打造云计算时</a>…</p>
+                    </div>
+                </div>
+				
+            </div>
+			<!-- 高端对话 end -->
+			<!-- 广告位 -->
+            <div class="guanggao1 margin2" id="guanggao_r3">
+            </div>
+			<!-- 热点专题 start -->
+            <div class="cont-right-div2 height1">
+			
+                <h2 class="bgh2"><a href="http://tech.ccidnet.com/col/32957/32957.html" class="nright font4" target="_blank" id="more_rdzt">更多&gt;&gt;</a></h2>
+              <div class="clear"></div>
+                <ul class="cont-hd1">
+				
+					<li><a href="http://tech.ccidnet.com/col/32957/32957.html" id="rdzt_a3" onmouseover="show(&#39;rdzt&#39;,&#39;3&#39;);" target="_blank" class="a3 a3hover">产品和技术</a></li>
+					<li><a href="http://news.ccidnet.com/col/957/957.html" id="rdzt_a1" onmouseover="show(&#39;rdzt&#39;,&#39;1&#39;);" target="_blank" class="a1">新闻中心</a></li>
+					<li><a href="http://miit.ccidnet.com/col/32933/32933.html" id="rdzt_a2" onmouseover="show(&#39;rdzt&#39;,&#39;2&#39;);" target="_blank" class="a2">产业和信息化</a></li>
+				
+					
+                </ul>
+                <div class="clear"></div>
+				
+				<div class="p3" id="div_rdzt_a2_1" style="display:none">
+                	<h3 class="font6"><a href="http://miit.ccidnet.com/art/32933/20100831/2170575_1.html" class="font6" target="_blank" title="平板电视国标出台 加速LED电视推广进程">平板电视国标出台 加速LED电视推广进程</a></h3>
+                    <div class="clear"></div>
+                	<div class="p2-pic1 nleft"><a href="http://miit.ccidnet.com/art/32933/20100831/2170575_1.html" target="_blank" title="平板电视国标出台 加速LED电视推广进程"><img src="./Java Web开发使用第三方提供的标签库的步骤 - 产品和技术 - 赛迪网_files/2070703.jpg" width="90" height="60"></a></div><a href="http://miit.ccidnet.com/art/32933/20100831/2170575_1.html" target="_blank" title="平板电视国标出台 加速LED电视推广进程">
+                    </a><div class="p2-zi1 nright"><a href="http://miit.ccidnet.com/art/32933/20100831/2170575_1.html" target="_blank" title="平板电视国标出台 加速LED电视推广进程">
+                    </a><p><a href="http://miit.ccidnet.com/art/32933/20100831/2170575_1.html" target="_blank" title="平板电视国标出台 加速LED电视推广进程"></a><a href="http://miit.ccidnet.com/art/32933/20100831/2170575_1.html" class="font7" title="“环保和低碳”是当下最热门的名词，为进一步推动绿色低碳发展理念，国家于近日推出了《平板电视能效限定值及能效等级》。标准的出台无疑会加速平板电视的优胜劣汰，而LED平板电视凭借其诸多优势必会在这次竞争中脱颖而出。" target="_blank">“环保和低碳”是当下最热门的名词，为进一步推动绿色低碳发展理念，国家于近日推出了</a>…</p>
+                    </div>
+                </div>
+				
+                <div class="clear" id="div_rdzt_a2_2" style="display:none"></div>
+                <div class="p3 bg" id="div_rdzt_a2_3" style="display:none">
+                	<h3 class="font6"><a href="http://miit.ccidnet.com/art/32933/20100830/2168753_1.html" class="font6" target="_blank" title="盛大锦书低价撼市 行业清洗还是自杀式袭击？">盛大锦书低价撼市 行业清洗还是自杀式袭击</a></h3>
+                    <div class="clear"></div>
+                	<div class="p2-pic1 nleft"><a href="http://miit.ccidnet.com/art/32933/20100830/2168753_1.html" target="_blank" title="盛大锦书低价撼市 行业清洗还是自杀式袭击？"><img src="./Java Web开发使用第三方提供的标签库的步骤 - 产品和技术 - 赛迪网_files/2069695.jpg" width="90" height="60"></a></div><a href="http://miit.ccidnet.com/art/32933/20100830/2168753_1.html" target="_blank" title="盛大锦书低价撼市 行业清洗还是自杀式袭击？">
+                    </a><div class="p2-zi1 nright"><a href="http://miit.ccidnet.com/art/32933/20100830/2168753_1.html" target="_blank" title="盛大锦书低价撼市 行业清洗还是自杀式袭击？">
+                    </a><p><a href="http://miit.ccidnet.com/art/32933/20100830/2168753_1.html" target="_blank" title="盛大锦书低价撼市 行业清洗还是自杀式袭击？"></a><a href="http://miit.ccidnet.com/art/32933/20100830/2168753_1.html" class="font7" title="前不久，盛大强势进入电纸书领域，引起行业不小的震动。行业关注的焦点并不是这款叫做Bambook的电子书，而是盛大的运营模式。从这款硬件产品来看，可以说没有太多新意，只是一本普普通通的电纸书，没有什么了不起的功能，及让人眼前一亮的创新。" target="_blank">前不久，盛大强势进入电纸书领域，引起行业不小的震动。行业关注的焦点并不是这款叫做</a>…</p>
+                    </div>
+                </div>
+				
+				
+                <div class="p3" id="div_rdzt_a1_1" style="display:none">
+                	<h3 class="font6"><a href="http://news.ccidnet.com/art/957/20100831/2171121_1.html" class="font6" target="_blank" title="专题：惠普争抢3PAR，怕被戴尔超越？">专题：惠普争抢3PAR，怕被戴尔超越？</a></h3>
+                    <div class="clear"></div>
+                	<div class="p2-pic1 nleft"><a href="http://news.ccidnet.com/art/957/20100831/2171121_1.html" target="_blank" title="专题：惠普争抢3PAR，怕被戴尔超越？"><img src="./Java Web开发使用第三方提供的标签库的步骤 - 产品和技术 - 赛迪网_files/2070953.jpg" width="90" height="60"></a></div><a href="http://news.ccidnet.com/art/957/20100831/2171121_1.html" target="_blank" title="专题：惠普争抢3PAR，怕被戴尔超越？">
+                    </a><div class="p2-zi1 nright"><a href="http://news.ccidnet.com/art/957/20100831/2171121_1.html" target="_blank" title="专题：惠普争抢3PAR，怕被戴尔超越？">
+                    </a><p><a href="http://news.ccidnet.com/art/957/20100831/2171121_1.html" target="_blank" title="专题：惠普争抢3PAR，怕被戴尔超越？"></a><a href="http://news.ccidnet.com/art/957/20100831/2171121_1.html" class="font7" title="在戴尔提出11.5亿美元收购3PAR后不几天，惠普即以16亿美元的高价出手“搅局”，随后两家公司展开了关于3PAR的一场竞购战，两周之内，3PAR共接到了六次报价" target="_blank">在戴尔提出11.5亿美元收购3PAR后不几天，惠普即以16亿美元的高价出手“搅局”，随后两</a>…</p>
+                    </div>
+                </div>
+				
+                <div class="clear" id="div_rdzt_a1_2" style="display:none"></div>
+                <div class="p3 bg" id="div_rdzt_a1_3" style="display:none">
+                	<h3 class="font6"><a href="http://news.ccidnet.com/art/957/20100827/2167353_1.html" class="font6" target="_blank" title="专题：办法实施在即 第三方支付安全问题遭拷问">专题：办法实施在即 第三方支付安全问题遭</a></h3>
+                    <div class="clear"></div>
+                	<div class="p2-pic1 nleft"><a href="http://news.ccidnet.com/art/957/20100827/2167353_1.html" target="_blank" title="专题：办法实施在即 第三方支付安全问题遭拷问"><img src="./Java Web开发使用第三方提供的标签库的步骤 - 产品和技术 - 赛迪网_files/2069051.jpg" width="90" height="60"></a></div><a href="http://news.ccidnet.com/art/957/20100827/2167353_1.html" target="_blank" title="专题：办法实施在即 第三方支付安全问题遭拷问">
+                    </a><div class="p2-zi1 nright"><a href="http://news.ccidnet.com/art/957/20100827/2167353_1.html" target="_blank" title="专题：办法实施在即 第三方支付安全问题遭拷问">
+                    </a><p><a href="http://news.ccidnet.com/art/957/20100827/2167353_1.html" target="_blank" title="专题：办法实施在即 第三方支付安全问题遭拷问"></a><a href="http://news.ccidnet.com/art/957/20100827/2167353_1.html" class="font7" title="第三方支付方式虽然方便快捷，但由于当前我国电子支付方面的法律较为滞后，对第三方支付市场监管不够，法律地位和责任均不明确" target="_blank">第三方支付方式虽然方便快捷，但由于当前我国电子支付方面的法律较为滞后，对第三方支</a>…</p>
+                    </div>
+                </div>
+				
+				
+                <div class="p3" id="div_rdzt_a3_1">
+                	<h3 class="font6"><a href="http://product.ccidnet.com/art/32957/20100830/2169903_1.html" class="font6" target="_blank" title="从核研究到3D动画 全球超算应用大盘点 ">从核研究到3D动画 全球超算应用大盘点 </a></h3>
+                    <div class="clear"></div>
+                	<div class="p2-pic1 nleft"><a href="http://product.ccidnet.com/art/32957/20100830/2169903_1.html" target="_blank" title="从核研究到3D动画 全球超算应用大盘点 "><img src="./Java Web开发使用第三方提供的标签库的步骤 - 产品和技术 - 赛迪网_files/2070581.jpg" width="90" height="60"></a></div><a href="http://product.ccidnet.com/art/32957/20100830/2169903_1.html" target="_blank" title="从核研究到3D动画 全球超算应用大盘点 ">
+                    </a><div class="p2-zi1 nright"><a href="http://product.ccidnet.com/art/32957/20100830/2169903_1.html" target="_blank" title="从核研究到3D动画 全球超算应用大盘点 ">
+                    </a><p><a href="http://product.ccidnet.com/art/32957/20100830/2169903_1.html" target="_blank" title="从核研究到3D动画 全球超算应用大盘点 "></a><a href="http://product.ccidnet.com/art/32957/20100830/2169903_1.html" class="font7" title="数十年来的发展，让HPC的计算能力越来越强，首款进入千万亿次的超算系统是著名的IBM走鹃，而目前全球排名第一的是美洲豹系统，其Linpack测试性能已经达到了1.75 PFlop/s。" target="_blank">数十年来的发展，让HPC的计算能力越来越强，首款进入千万亿次的超算系统是著名的IBM走</a>…</p>
+                    </div>
+                </div>
+				
+                <div class="clear" id="div_rdzt_a3_2"></div>
+                <div class="p3 bg" id="div_rdzt_a3_3">
+                	<h3 class="font6"><a href="http://tech.ccidnet.com/art/32957/20100827/2168361_1.html" class="font6" target="_blank" title="云时代下的Web应用安全">云时代下的Web应用安全</a></h3>
+                    <div class="clear"></div>
+                	<div class="p2-pic1 nleft"><a href="http://tech.ccidnet.com/art/32957/20100827/2168361_1.html" target="_blank" title="云时代下的Web应用安全"><img src="./Java Web开发使用第三方提供的标签库的步骤 - 产品和技术 - 赛迪网_files/2069681.jpg" width="90" height="60"></a></div><a href="http://tech.ccidnet.com/art/32957/20100827/2168361_1.html" target="_blank" title="云时代下的Web应用安全">
+                    </a><div class="p2-zi1 nright"><a href="http://tech.ccidnet.com/art/32957/20100827/2168361_1.html" target="_blank" title="云时代下的Web应用安全">
+                    </a><p><a href="http://tech.ccidnet.com/art/32957/20100827/2168361_1.html" target="_blank" title="云时代下的Web应用安全"></a><a href="http://tech.ccidnet.com/art/32957/20100827/2168361_1.html" class="font7" title="云时代下的Web应用安全" target="_blank">云时代下的Web应用安全</a>…</p>
+                    </div>
+                </div>
+				
+                <div class="clear"></div>
+		
+            </div>
+<!-- 广告位 -->
+            <div class="guanggao1 margin2" id="guanggao_r4">
+            </div>
+            <div class="cont-right-div2 height2">
+                <h2 class="bgh3"></h2>
+              <div class="clear"></div>
+                <ul class="cont-hd1">
+					
+					<li><a href="http://tech.ccidnet.com/col/32963/32963.html" id="wzph_a3" onmouseover="show(&#39;wzph&#39;,&#39;3&#39;);" target="_blank" class="a3 a3hover">产品和技术</a></li>
+					<li><a href="http://news.ccidnet.com/col/1032/1032.html" id="wzph_a1" onmouseover="show(&#39;wzph&#39;,&#39;1&#39;);" target="_blank" class="a1">新闻中心</a></li>
+					<li><a href="http://miit.ccidnet.com/col/32559/32559.html" id="wzph_a2" onmouseover="show(&#39;wzph&#39;,&#39;2&#39;);" target="_blank" class="a2">产业和信息化</a></li>
+					
+                </ul>
+                <div class="clear"></div>
+                <div class="num" id="div_wzph_a2" style="display:none">
+                	<ul>
+					
+
+
+
+  
+                <li><a href="http://miit.ccidnet.com/art/32559/20110210/2306945_1.html" target="_blank" title="10日:HP推首款webOS平板电脑TouchPad" class="font7">10日:HP推首款webOS平板电脑TouchPad</a></li>
+			      
+                <li><a href="http://miit.ccidnet.com/art/32559/20110210/2306967_1.html" target="_blank" title="平板电脑大战将爆发 评:性能质量是决胜关键" class="font7">平板电脑大战将爆发 评:性能质量是决胜</a></li>
+			      
+                <li><a href="http://miit.ccidnet.com/art/32559/20110211/2307859_1.html" target="_blank" title="传苹果开发廉价版iPhone 裸机价200美元" class="font7">传苹果开发廉价版iPhone 裸机价200美元</a></li>
+			      
+                <li><a href="http://miit.ccidnet.com/art/32559/20110210/2306953_1.html" target="_blank" title="Gartner称2010年全球智能手机销量增长72%" class="font7">Gartner称2010年全球智能手机销量增长7</a></li>
+			      
+                <li><a href="http://miit.ccidnet.com/art/32559/20110211/2307891_1.html" target="_blank" title="政府坐等摘桃  物联网身陷应用推广困局" class="font7">政府坐等摘桃  物联网身陷应用推广困局</a></li>
+			      
+                <li><a href="http://miit.ccidnet.com/art/32559/20110211/2307775_1.html" target="_blank" title="三网融合苹果“抢道”运营商或将成管道" class="font7">三网融合苹果“抢道”运营商或将成管道</a></li>
+			      
+                <li><a href="http://miit.ccidnet.com/art/32559/20110211/2307795_1.html" target="_blank" title="手机充电器中国标准不等于欧盟标准" class="font7">手机充电器中国标准不等于欧盟标准</a></li>
+			      
+                <li><a href="http://miit.ccidnet.com/art/32559/20110211/2307753_1.html" target="_blank" title="Office Depot称黑莓平板电脑将定价为499美元" class="font7">Office Depot称黑莓平板电脑将定价为49</a></li>
+			      
+                <li><a href="http://miit.ccidnet.com/art/32559/20110207/2306755_1.html" target="_blank" title="摩托罗拉Xoom平板电脑3G合约将类似iPad" class="font7">摩托罗拉Xoom平板电脑3G合约将类似iPad</a></li>
+			      
+                <li><a href="http://miit.ccidnet.com/art/32559/20110208/2306801_1.html" target="_blank" title="诺基亚等海外品牌将遭中国本土手机厂商阻击" class="font7">诺基亚等海外品牌将遭中国本土手机厂商</a></li>
+			    
+                    </ul>
+                </div>
+				<div class="num" id="div_wzph_a1" style="display:none">
+                	<ul>
+					
+
+
+
+  
+                <li><a href="http://news.ccidnet.com/art/1032/20110210/2306865_1.html" target="_blank" title="传诺基亚首款MeeGo智能手机已胎死腹中" class="font7">传诺基亚首款MeeGo智能手机已胎死腹中</a></li>
+			      
+                <li><a href="http://news.ccidnet.com/art/1032/20110209/2306809_1.html" target="_blank" title="Facebook CEO扎克伯格人身安全遭遇威胁" class="font7">Facebook CEO扎克伯格人身安全遭遇威胁</a></li>
+			      
+                <li><a href="http://news.ccidnet.com/art/1032/20110210/2307621_1.html" target="_blank" title="名模宫如敏不雅照成网络热门搜索(图)" class="font7">名模宫如敏不雅照成网络热门搜索(图)</a></li>
+			      
+                <li><a href="http://news.ccidnet.com/art/1032/20110211/2307987_1.html" target="_blank" title="诺基亚今日将宣布重大战略：或加入新生态系统" class="font7">诺基亚今日将宣布重大战略：或加入新生</a></li>
+			      
+                <li><a href="http://news.ccidnet.com/art/1032/20110210/2306945_1.html" target="_blank" title="10日:HP推首款webOS平板电脑TouchPad" class="font7">10日:HP推首款webOS平板电脑TouchPad</a></li>
+			      
+                <li><a href="http://news.ccidnet.com/art/1032/20110210/2306967_1.html" target="_blank" title="平板电脑大战将爆发 评:性能质量是决胜关键" class="font7">平板电脑大战将爆发 评:性能质量是决胜</a></li>
+			      
+                <li><a href="http://news.ccidnet.com/art/1032/20110210/2307599_1.html" target="_blank" title="iPhone 4供不应求真相：为维持高额利润" class="font7">iPhone 4供不应求真相：为维持高额利润</a></li>
+			      
+                <li><a href="http://news.ccidnet.com/art/1032/20110210/2307011_1.html" target="_blank" title="Verizon版iPhone拆解分析 iPhone 5雏型曝光" class="font7">Verizon版iPhone拆解分析 iPhone 5雏型</a></li>
+			      
+                <li><a href="http://news.ccidnet.com/art/1032/20110211/2307859_1.html" target="_blank" title="传苹果开发廉价版iPhone 裸机价200美元" class="font7">传苹果开发廉价版iPhone 裸机价200美元</a></li>
+			      
+                <li><a href="http://news.ccidnet.com/art/1032/20110211/2307757_1.html" target="_blank" title="红杉投资飞鹤2年半按原价脱手 对赌全面失败" class="font7">红杉投资飞鹤2年半按原价脱手 对赌全面</a></li>
+			    
+                    </ul>
+                </div>
+				<div class="num" id="div_wzph_a3">
+                	<ul>
+					
+                    </ul>
+                </div>
+            </div>
+
+
+<span id="right_src1" style="display:none"></span>
+<span id="right_src2" style="display:none"></span>
+<span id="right_src3" style="display:none"></span>
+<span id="right_src4" style="display:none"></span>
+
+<script language="javascript" src="./Java Web开发使用第三方提供的标签库的步骤 - 产品和技术 - 赛迪网_files/guanggao.js"></script>
+<script>innerGuangGao_right();</script>
+            
+        </div>
+    </div>
+<div class="clear"></div>
+
+
+<span id="src1" style="display:none"></span>
+<span id="src2" style="display:none"></span>
+<span id="src3" style="display:none"></span>
+<span id="src4" style="display:none"></span>
+
+<script language="javascript" src="./Java Web开发使用第三方提供的标签库的步骤 - 产品和技术 - 赛迪网_files/guanggao_left.js"></script>
+<script>innerGuangGao();</script>
+<!-- 点击排行开始 -->
+
+<script src="./Java Web开发使用第三方提供的标签库的步骤 - 产品和技术 - 赛迪网_files/do_click.jsp"></script>
+<!-- 点击排行结束 -->
+<div class="clear"></div>
+<script src="./Java Web开发使用第三方提供的标签库的步骤 - 产品和技术 - 赛迪网_files/ccidnet_art_footer.js"></script><style>
+a {color: #42495b;text-decoration: none;} 
+.d-bottom{ font-size: 12px;text-align:center;width:950px; border-top:2px  #CCCCCC solid;margin-top:10px;padding-top:5px;}
+.d-bottom a{ font-size: 12px;text-align:center; line-height:180%;color: #42495b;}
+</style>
+<iframe src="./Java Web开发使用第三方提供的标签库的步骤 - 产品和技术 - 赛迪网_files/aleax_counts.htm" height="0" width="0"></iframe>
+<script language="javascript" src="./Java Web开发使用第三方提供的标签库的步骤 - 产品和技术 - 赛迪网_files/ccidstat.js"></script><script language="javascript" type="text/javascript" src="./Java Web开发使用第三方提供的标签库的步骤 - 产品和技术 - 赛迪网_files/urlstat.js"></script><script language="javascript" type="text/javascript">var _PCSWebSite="100009";var _PCSImage="countlogo1.gif";</script><script language="javascript" type="text/javascript" src="./Java Web开发使用第三方提供的标签库的步骤 - 产品和技术 - 赛迪网_files/count.js"></script><script src="./Java Web开发使用第三方提供的标签库的步骤 - 产品和技术 - 赛迪网_files/count.php"></script>
+<iframe src="./Java Web开发使用第三方提供的标签库的步骤 - 产品和技术 - 赛迪网_files/copyright_20040226_07.htm" height="0" width="0"></iframe>
+<div class="d-bottom">
+	<br><a href="http://www.ccidnet.com/" target="_blank">返回主页</a> | <a href="http://image.ccidnet.com/help/webmap.html" target="_blank">网站地图</a> | <a href="http://image.ccidnet.com/help/aboutus.html" target="_blank">关于我们</a> | <a href="http://register.ccidnet.com/passport/service/agreement.htm" target="_blank">新用户注册</a> | <a href="http://search.ccidnet.com/" target="_blank">网站检索</a> | <a href="mailto:ad@staff.ccidnet.com" target="_blank">联系广告</a> | <a href="http://www.ccidnet.com/hr/index.html" target="_blank">招聘精英</a>
+<br>联系我们：<a href="mailto:webmaster@staff.ccidnet.com" target="_blank">webmaster@staff.ccidnet.com</a> Tel:8610-88558907/08 
+<br>广告发布：<a href="mailto:ad@staff.ccidnet.com" target="_blank">ad@staff.ccidnet.com</a> Tel:8610-88558945 8610-88558948 
+<br>方案、案例展示：<a href="mailto:project@staff.ccidnet.com" target="_blank">project@staff.ccidnet.com</a> Tel:8610-88558922 
+<br><a href="http://image.ccidnet.com/help/copyright.htm" target="_blank">Copyright 2000-2011 CCIDnet.All rights reserved.</a>  
+<br><table width="200" border="0" align="center" cellpadding="0" cellspacing="0" style="margin:0 auto;width:200px;">
+  <tbody><tr>
+    <td align="center">京ICP000080号 网站-3</td>
+    <td><img src="./Java Web开发使用第三方提供的标签库的步骤 - 产品和技术 - 赛迪网_files/315.gif"></td>
+  </tr>
+</tbody></table>
+
+</div>
+
+
+
+<!--ccidnet_page_end-->
+
+</body></html>
