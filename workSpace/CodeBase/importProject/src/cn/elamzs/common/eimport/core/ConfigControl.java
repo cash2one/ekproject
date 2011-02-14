@@ -2,7 +2,11 @@ package cn.elamzs.common.eimport.core;
 
 import java.io.File;
 import java.io.IOException;
-
+/**
+ * ”¶”√≈‰÷√
+ * @author Ethan.Lam  2011-2-14
+ *
+ */
 public class ConfigControl {
 	
     public  static String DIR_IMPORT_RESULT = "d:/importfile/result/";

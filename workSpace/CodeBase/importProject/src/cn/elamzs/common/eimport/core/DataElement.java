@@ -214,7 +214,7 @@ public class DataElement {
     }
     
     
-	protected void free() throws Throwable {
+	protected void free(){
 		
 		this.cnColumnsName.clear();
 		this.cnColumnsName = null;

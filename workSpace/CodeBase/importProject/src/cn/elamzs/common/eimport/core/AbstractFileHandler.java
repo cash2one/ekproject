@@ -63,15 +63,6 @@ public abstract class AbstractFileHandler implements FileHandler{
 	}
 	
 	
-	/**
-	 * 当导入完成时执行
-	 */
-	protected void markImportFinished(String resultFile){
-		
-		
-	}
-	
-	
     /**
      * 
      * 数据导入过程控制逻辑主体
@@ -96,13 +87,17 @@ public abstract class AbstractFileHandler implements FileHandler{
 				if(listenner!=null){
 					listenner.afterImportData(importTaskId,fileLocation);
 				}
-				
 				_datas = null;
+				
     		}else{
     			System.out.println("导入模版版本不正确，请检查或更新最新模版！");
     		}
     	} catch (Exception e) {
 			e.printStackTrace();
+		}finally{
+			dataElement.free();
+			dataElement = null;
+			dataPro = null;
 		}
     	System.out.println("Import Thread import_pro_"+importTaskId+" Finished ["+validator.getClass()+"] At "+new Date().toLocaleString());
     }
