@@ -25,10 +25,10 @@ public interface FileManager {
 	/**
 	 * 利用文件ID 找到对应 的文件存放的路径
 	 * @param fileId
-	 * @param type
+	 * @param suffix
 	 * @return
 	 */
-	public String getFileLocatePath(String fileId, String type);
+	public String getFileLocatePath(String fileId, String suffix);
 
 	
 	/**

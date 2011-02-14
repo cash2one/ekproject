@@ -15,7 +15,7 @@ public interface EImporter {
 	public File downTemplate(FileType type) throws Exception;
 
 	// 上传文件
-	public String importFile(String dataFile,String storeSubDir) throws Exception;
+	public String importFile(String dataFile,String alias,String storeSubDir) throws Exception;
 
 	// 返回源文件（上传的文件）
 	public File getResourceFile(String fileIdentifyId) throws Exception;

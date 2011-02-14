@@ -2,6 +2,7 @@ package cn.elamzs.common.eimport.core;
 
 import java.io.File;
 
+import cn.elamzs.common.base.files.util.FileOperateUtil;
 import cn.elamzs.common.eimport.enums.FileType;
 import cn.elamzs.common.eimport.inter.DataProcess;
 import cn.elamzs.common.eimport.inter.DataValidator;
@@ -50,11 +51,10 @@ public class ThreadDataImport implements EImporter {
 	}
 	
 	@Override
-	public String importFile(String dataFile,String storeSubDir) throws Exception {
+	public String importFile(String dataFile,String alias,String storeSubDir) throws Exception {
 		// TODO Auto-generated method stub
 		
-		//根据文件，配置对应的处理类
-		appendDataHandler(dataFile,storeSubDir);
+		importTaskPrepare(alias,dataFile,storeSubDir);
 		
 		//开始执行文件导入数据处理，启动线程处理
 		Thread importThread = new Thread(handler);
@@ -64,12 +64,54 @@ public class ThreadDataImport implements EImporter {
 	}
 
 	
+	void importTaskPrepare(String fileAlias,String srcFile,String subDirName) throws Exception{
+		File _src = new File(srcFile);
+		String _newFileName  = reNameFile(srcFile);
+		String _cpyObj =  ConfigControl.DIR_IMPORT_SRC+"/"+(subDirName!=null?subDirName:"")+"/"+_newFileName; 
+		
+		//copy导入文件到指定保存目录
+		FileOperateUtil.copyFile(_src, new File(_cpyObj));
+		
+		String importTaskId = createImportTaskId(fileAlias,_cpyObj,subDirName);
+		//根据文件，配置对应的处理类
+		appendDataHandler(importTaskId,_cpyObj,subDirName);
+	}
+	
+	
+	
+	/**
+	 * 
+	 * 为导入文件重新命名，保证唯一的文件名
+	 * @param srcFile
+	 * @return
+	 */
+	String reNameFile(String srcFile){
+		String suffix = srcFile.substring(srcFile.lastIndexOf("."));
+		return System.currentTimeMillis()+suffix;
+	}
+	
+	
+	/**
+	 * 
+	 * 创建唯一的导入任务ID 标识
+	 * @param alias      文件显示的名称
+	 * @param srcFile    导入文件的全路径
+	 * @param subDirName 定位在那个子文件夹中
+	 * @return
+	 */
+	String createImportTaskId(String alias,String srcFile,String subDirName){
+		String taskId = System.currentTimeMillis()+"";
+		//保存这个任务信息记录,
+		return taskId;
+	}
+	
+	
 	/**
 	 * 根据文件类型，装配对应的处理类
 	 * @param fileName
 	 * @throws Exception 
 	 */
-	void appendDataHandler(String fileName,String storeSubDir) throws Exception{
+	void appendDataHandler(String importTaskId,String fileName,String storeSubDir) throws Exception{
 		File file = new File(fileName);
 		
 		String suffix = fileName.substring(fileName.lastIndexOf("."));
@@ -79,11 +121,10 @@ public class ThreadDataImport implements EImporter {
 			}
 		}
 		
-		//
 		if(FileType.EXCEL_XLS.equals(fileType)||FileType.EXCEL_XLSX.equals(fileType))
-			this.handler = (FileHandler) new ExcelImportHandler(validator,dataProcess,file,storeSubDir,FileType.EXCEL_XLS.equals(fileType)?0:1);
+			this.handler = (FileHandler) new ExcelImportHandler(importTaskId,validator,dataProcess,file,storeSubDir,FileType.EXCEL_XLS.equals(fileType)?0:1);
 		else if(FileType.TXT.equals(fileType))
-			this.handler = new TxtImportHandler(validator,dataProcess,file,storeSubDir);
+			this.handler = new TxtImportHandler(importTaskId,validator,dataProcess,file,storeSubDir);
 		
 	}
 	

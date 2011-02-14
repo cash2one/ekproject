@@ -22,8 +22,8 @@ public class ExcelImportHandler extends AbstractFileHandler {
 	private int isXlsx = 0; // 0:2003 1:2007
 	
 	
-	public ExcelImportHandler(DataValidator validator,DataProcess dataPro,File file,String storeSubDir,int isXlsx) throws Exception {
-		super(validator,dataPro,file,storeSubDir);	
+	public ExcelImportHandler(String importTaskId,DataValidator validator,DataProcess dataPro,File file,String storeSubDir,int isXlsx) throws Exception {
+		super(importTaskId,validator,dataPro,file,storeSubDir);	
 		this.isXlsx = isXlsx;
 	}
 
@@ -95,5 +95,4 @@ public class ExcelImportHandler extends AbstractFileHandler {
 	}
 
 
-	
 }

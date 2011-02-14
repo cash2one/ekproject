@@ -25,10 +25,13 @@ public abstract class AbstractFileHandler implements FileHandler{
 	
 	protected String storeSubDir ="";
 	
+	protected String importTaskId;
 	
-    public AbstractFileHandler(DataValidator validator,DataProcess dataProcess,File file,String storeSubDir) throws Exception{
+	
+    public AbstractFileHandler(String importTaskId,DataValidator validator,DataProcess dataProcess,File file,String storeSubDir) throws Exception{
 		this.validator = validator;
 		this.dataPro = dataProcess;
+		this.importTaskId = importTaskId;
 		importFile = file;
 		this.storeSubDir = storeSubDir!=null?storeSubDir:"";
 		dataElement = new DataElement(validator);
@@ -57,12 +60,21 @@ public abstract class AbstractFileHandler implements FileHandler{
 	}
 	
 	
+	/**
+	 * 当导入完成时执行
+	 */
+	protected void markImportFinished(String resultFile){
+		
+		
+	}
+	
+	
     /**
      * 
      * 数据导入过程控制逻辑主体
      */
     public void run(){
-    	System.out.println("Create start run data import_pro.["+validator.getClass()+"] At "+new Date().toLocaleString());
+    	System.out.println("Create start run data import_pro_"+importTaskId+".["+validator.getClass()+"] At "+new Date().toLocaleString());
     	try {
     		if(validateDoc()){
 	    		
@@ -85,7 +97,7 @@ public abstract class AbstractFileHandler implements FileHandler{
     	} catch (Exception e) {
 			e.printStackTrace();
 		}
-    	System.out.println("Import Thread  Finished ["+validator.getClass()+"] At "+new Date().toLocaleString());
+    	System.out.println("Import Thread import_pro_"+importTaskId+" Finished ["+validator.getClass()+"] At "+new Date().toLocaleString());
     }
     
     
