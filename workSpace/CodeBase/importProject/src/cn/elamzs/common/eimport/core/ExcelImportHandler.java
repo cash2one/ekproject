@@ -10,6 +10,7 @@ import cn.elamzs.common.base.files.util.POIExcelUtil;
 import cn.elamzs.common.base.files.util.StringUtil;
 import cn.elamzs.common.eimport.inter.DataProcess;
 import cn.elamzs.common.eimport.inter.DataValidator;
+import cn.elamzs.common.eimport.inter.ImportHandleListener;
 
 /**
  * 
@@ -22,8 +23,8 @@ public class ExcelImportHandler extends AbstractFileHandler {
 	private int isXlsx = 0; // 0:2003 1:2007
 	
 	
-	public ExcelImportHandler(String importTaskId,DataValidator validator,DataProcess dataPro,File file,String storeSubDir,int isXlsx) throws Exception {
-		super(importTaskId,validator,dataPro,file,storeSubDir);	
+	public ExcelImportHandler(String importTaskId,DataValidator validator,DataProcess dataPro,ImportHandleListener listenner,File file,String storeSubDir,int isXlsx) throws Exception {
+		super(importTaskId,validator,dataPro,listenner,file,storeSubDir);	
 		this.isXlsx = isXlsx;
 	}
 

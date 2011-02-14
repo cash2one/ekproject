@@ -7,6 +7,7 @@ import cn.elamzs.common.eimport.enums.FileType;
 import cn.elamzs.common.eimport.inter.DataProcess;
 import cn.elamzs.common.eimport.inter.DataValidator;
 import cn.elamzs.common.eimport.inter.EImporter;
+import cn.elamzs.common.eimport.inter.ImportHandleListener;
 
 /**
  * 
@@ -23,7 +24,9 @@ public class ThreadDataImport implements EImporter {
 	
 	DataProcess dataProcess = null;  //数据处理器
 	
-	FileHandler handler = null;
+	FileHandler handler = null; //具体的文件导入分析器
+	
+	ImportHandleListener listenner = null; //导入事件监听器
 	
 	public ThreadDataImport(DataValidator validator,DataProcess dataProcess){
 	        this.validator = validator;
@@ -70,9 +73,10 @@ public class ThreadDataImport implements EImporter {
 		String _cpyObj =  ConfigControl.DIR_IMPORT_SRC+"/"+(subDirName!=null?subDirName:"")+"/"+_newFileName; 
 		
 		//copy导入文件到指定保存目录
-		FileOperateUtil.copyFile(_src, new File(_cpyObj));
+		FileOperateUtil.moveFile(_src, new File(_cpyObj));
 		
 		String importTaskId = createImportTaskId(fileAlias,_cpyObj,subDirName);
+		
 		//根据文件，配置对应的处理类
 		appendDataHandler(importTaskId,_cpyObj,subDirName);
 	}
@@ -100,9 +104,15 @@ public class ThreadDataImport implements EImporter {
 	 * @return
 	 */
 	String createImportTaskId(String alias,String srcFile,String subDirName){
-		String taskId = System.currentTimeMillis()+"";
+		String importTaskSeqId = System.currentTimeMillis()+"";
 		//保存这个任务信息记录,
-		return taskId;
+		if(listenner!=null)
+		   listenner.beforeImportData(importTaskSeqId, alias, srcFile);
+		else{
+			
+			
+		}
+		return importTaskSeqId;
 	}
 	
 	
@@ -122,9 +132,9 @@ public class ThreadDataImport implements EImporter {
 		}
 		
 		if(FileType.EXCEL_XLS.equals(fileType)||FileType.EXCEL_XLSX.equals(fileType))
-			this.handler = (FileHandler) new ExcelImportHandler(importTaskId,validator,dataProcess,file,storeSubDir,FileType.EXCEL_XLS.equals(fileType)?0:1);
+			this.handler = (FileHandler) new ExcelImportHandler(importTaskId,validator,dataProcess,listenner,file,storeSubDir,FileType.EXCEL_XLS.equals(fileType)?0:1);
 		else if(FileType.TXT.equals(fileType))
-			this.handler = new TxtImportHandler(importTaskId,validator,dataProcess,file,storeSubDir);
+			this.handler = new TxtImportHandler(importTaskId,validator,dataProcess,listenner,file,storeSubDir);
 		
 	}
 	

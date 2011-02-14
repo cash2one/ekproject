@@ -4,6 +4,7 @@ import java.io.File;
 
 import cn.elamzs.common.eimport.inter.DataProcess;
 import cn.elamzs.common.eimport.inter.DataValidator;
+import cn.elamzs.common.eimport.inter.ImportHandleListener;
 
 /**
  * 
@@ -12,8 +13,8 @@ import cn.elamzs.common.eimport.inter.DataValidator;
  */
 public class TxtImportHandler extends AbstractFileHandler {
 
-	public TxtImportHandler(String importTaskId,DataValidator validator,DataProcess dataPro,File file,String storeSubDir) throws Exception {
-		super(importTaskId,validator,dataPro,file,storeSubDir);
+	public TxtImportHandler(String importTaskId,DataValidator validator,DataProcess dataPro,ImportHandleListener listenner,File file,String storeSubDir) throws Exception {
+		super(importTaskId,validator,dataPro,listenner,file,storeSubDir);
 	}
 
 	

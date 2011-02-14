@@ -5,6 +5,7 @@ import java.util.Date;
 
 import cn.elamzs.common.eimport.inter.DataProcess;
 import cn.elamzs.common.eimport.inter.DataValidator;
+import cn.elamzs.common.eimport.inter.ImportHandleListener;
 
 /**
  * 
@@ -28,7 +29,7 @@ public abstract class AbstractFileHandler implements FileHandler{
 	protected String importTaskId;
 	
 	
-    public AbstractFileHandler(String importTaskId,DataValidator validator,DataProcess dataProcess,File file,String storeSubDir) throws Exception{
+    public AbstractFileHandler(String importTaskId,DataValidator validator,DataProcess dataProcess,ImportHandleListener listenner,File file,String storeSubDir) throws Exception{
 		this.validator = validator;
 		this.dataPro = dataProcess;
 		this.importTaskId = importTaskId;

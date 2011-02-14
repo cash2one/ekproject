@@ -8,9 +8,11 @@ package cn.elamzs.common.eimport.inter;
  */
 public interface ImportHandleListener {
 
-	public void prepare();
 	
-	public void finished();
+	public void beforeImportData(String importTaskSeqId,String fileAliasName,String srcFile);
+	
+	
+	public void afterImportData(String importTaskSeqId);
 	
 	
 }
