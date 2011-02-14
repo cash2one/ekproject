@@ -10,8 +10,10 @@ import java.nio.channels.FileChannel;
 import java.nio.channels.FileChannel.MapMode;
 import java.util.Date;
 /**
- * 文件对象操作
+ * 
+ * 文件操作工具
  * 1、复制文件
+ * 2、移动文件
  * 
  * @author Ethan.Lam  2011-2-14
  *
@@ -151,6 +153,12 @@ public class FileOperateUtil {
 	}
 	
 
+	/**
+	 * 复制文件
+	 * @param src
+	 * @param dest
+	 * @throws Exception
+	 */
 	public static void copyFile(File src,File dest) throws Exception{
 			if(!src.exists())
 			   return;
@@ -161,6 +169,12 @@ public class FileOperateUtil {
 	}
 		 
 	 
+   /**
+    * 复制文件	
+    * @param src
+    * @param dest
+    * @throws Exception
+    */
 	public static void copyFile(String src,String dest) throws Exception{
 		File _f1 = new File(src);
 		if(!_f1.exists())
@@ -174,5 +188,35 @@ public class FileOperateUtil {
 		forTransfer(_f1,_f2);
 	}
 	
+	
 
+	/**
+	 * 移动文件
+	 * @param src
+	 * @param dest
+	 * @throws Exception
+	 */
+	public static void moveFile(File src,File dest) throws Exception{
+		if(src.exists()){
+		   copyFile(src, dest);
+		   src.delete();
+		}
+	}
+		 
+	 
+   /**
+    * 移动文件	
+    * @param src
+    * @param dest
+    * @throws Exception
+    */
+	public static void moveFile(String src,String dest) throws Exception{
+		File _src = new File(src);
+		if(_src.exists()){
+		    moveFile(_src,new File(dest));
+		   _src.delete();
+	    }
+	}
+	
+	
 }
