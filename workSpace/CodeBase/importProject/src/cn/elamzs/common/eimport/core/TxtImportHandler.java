@@ -34,11 +34,11 @@ public class TxtImportHandler extends AbstractFileHandler {
 
 	
 	@Override
-	public void createImportResultDocument(String[][] resultDatas)
+	public String createImportResultDocument(String[][] resultDatas)
 			throws Exception {
 		// TODO Auto-generated method stub
 
-		
+		return "";
 	}
 
 

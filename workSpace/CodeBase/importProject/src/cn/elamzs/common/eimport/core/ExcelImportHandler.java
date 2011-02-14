@@ -81,7 +81,7 @@ public class ExcelImportHandler extends AbstractFileHandler {
 
 
 	@Override
-	public void createImportResultDocument(String[][] resultDatas)
+	public String createImportResultDocument(String[][] resultDatas)
 			throws Exception {
 		// TODO Auto-generated method stub
 		
@@ -89,10 +89,10 @@ public class ExcelImportHandler extends AbstractFileHandler {
 		int[] width = dataElement.getImpColumnsWidthSet();
 		String [] columnsName = columnsNameStr.split(",");
 		
-		String fileName =resultSavDir()+importFile.getName();
-		POIExcelUtil.writeDataToExcel(fileName,columnsName,resultDatas,width,null,IndexedColors.LIGHT_YELLOW,isXlsx==0?true:false,null);
+		String fileLocation =resultSavDir()+importFile.getName();
+		POIExcelUtil.writeDataToExcel(fileLocation,columnsName,resultDatas,width,null,IndexedColors.LIGHT_YELLOW,isXlsx==0?true:false,null);
 		
-		
+		return fileLocation;
 	}
 
 

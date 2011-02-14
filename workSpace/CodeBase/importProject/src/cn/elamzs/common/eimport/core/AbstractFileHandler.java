@@ -28,12 +28,14 @@ public abstract class AbstractFileHandler implements FileHandler{
 	
 	protected String importTaskId;
 	
+	protected ImportHandleListener listenner=null;
 	
     public AbstractFileHandler(String importTaskId,DataValidator validator,DataProcess dataProcess,ImportHandleListener listenner,File file,String storeSubDir) throws Exception{
 		this.validator = validator;
 		this.dataPro = dataProcess;
 		this.importTaskId = importTaskId;
 		importFile = file;
+		this.listenner = listenner;
 		this.storeSubDir = storeSubDir!=null?storeSubDir:"";
 		dataElement = new DataElement(validator);
 	}
@@ -89,8 +91,12 @@ public abstract class AbstractFileHandler implements FileHandler{
 				String[][] _datas = dataPro.createImportResult();
 				
 				//把生成的结果数据存放到对应的文件中
-				createImportResultDocument(_datas);
+				String fileLocation = createImportResultDocument(_datas);
 	          
+				if(listenner!=null){
+					listenner.afterImportData(importTaskId,fileLocation);
+				}
+				
 				_datas = null;
     		}else{
     			System.out.println("导入模版版本不正确，请检查或更新最新模版！");

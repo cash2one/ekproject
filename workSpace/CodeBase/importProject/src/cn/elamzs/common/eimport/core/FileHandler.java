@@ -31,7 +31,7 @@ public interface FileHandler extends Runnable {
 	 * @param resultDatas
 	 * @throws Exception
 	 */
-	public void createImportResultDocument(String[][] resultDatas)
+	public String createImportResultDocument(String[][] resultDatas)
 			throws Exception;
 
 	
