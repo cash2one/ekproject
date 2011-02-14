@@ -73,7 +73,7 @@ public class ThreadDataImport implements EImporter {
 		String _cpyObj =  ConfigControl.DIR_IMPORT_SRC+"/"+(subDirName!=null?subDirName:"")+"/"+_newFileName; 
 		
 		//copy导入文件到指定保存目录
-		FileOperateUtil.moveFile(_src, new File(_cpyObj));
+		FileOperateUtil.copyFile(_src, new File(_cpyObj));
 		
 		String importTaskId = createImportTaskId(fileAlias,_cpyObj,subDirName);
 		
