@@ -25,7 +25,7 @@ public class TasksContainer {
 	}
 
 	void initialize() {
-		Document doc = XmlHandler.loadXML("TaskConfig.xml");
+		Document doc = XmlHandler.loadXML("configs/TaskConfig.xml");
 		if (doc == null)
 			return;
 		
