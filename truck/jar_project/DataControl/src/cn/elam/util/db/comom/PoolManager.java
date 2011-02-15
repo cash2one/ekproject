@@ -1,6 +1,5 @@
 package cn.elam.util.db.comom;
 
-import java.io.FileInputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -13,8 +12,9 @@ import cn.elam.util.common.Checker;
 import cn.elam.util.common.Trans;
 import cn.elam.util.file.xml.XmlHandler;
 
+
 /**
- * Êı¾İÁ¬½Ó³Ø
+ * æ•°æ®è¿æ¥æ± 
  * 
  * @author ethanlam
  * 
@@ -44,7 +44,7 @@ class PoolManager {
 	}
 
 	/**
-	 * »ñÈ¡¶ÔÓ¦µÄÊı¾İÔ´
+	 * è·å–å¯¹åº”çš„æ•°æ®æº
 	 * 
 	 * @param poolName
 	 * @return
@@ -52,14 +52,14 @@ class PoolManager {
 	 */
 	public GenericDataSource getDBPool(String poolName) throws DaoException {
 		if (!DB_POOL.containsKey(poolName)) {
-			throw new DaoException("ÕÒ²»µ½¶ÔÓ¦µÄÊı¾İÁ¬½Ó³Ø¶ÔÏó¡£");
+			throw new DaoException("æ‰¾ä¸åˆ°å¯¹åº”çš„æ•°æ®è¿æ¥æ± å¯¹è±¡ã€‚");
 		}
 		return DB_POOL.get(poolName);
 
 	}
 
 	static void loadDBConfigXml() {
-		Document doc = XmlHandler.loadXML("PoolConfig.xml");
+		Document doc = XmlHandler.loadXML("configs/PoolConfig.xml");
 		Element element = XmlHandler.getElement(doc, "enable");
 		String poolNames = element.getTextTrim();
 		Element poolObject = null;
@@ -68,7 +68,7 @@ class PoolManager {
 		for (String pool : poolNames.split(",")) {
 			poolObject = XmlHandler.getElement(doc, "pools/" + pool);
 			if (poolObject == null) {
-				System.out.println("ÕÒ²»µ½ " + pool + "Õâ¸öÅäÖÃÏî£¡");
+				System.out.println("æ‰¾ä¸åˆ° " + pool + "è¿™ä¸ªé…ç½®é¡¹ï¼");
 				continue;
 			}
 			db = new GenericDataSource();

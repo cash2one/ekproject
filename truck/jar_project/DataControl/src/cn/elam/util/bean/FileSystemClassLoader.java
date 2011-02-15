@@ -8,8 +8,8 @@ import java.io.InputStream;
 
 /**
  * 
- * @author etnanlam
- *  文件系统类加载器
+ * @author Ethan.Lam  2011-2-15
+ *
  */
 public class FileSystemClassLoader extends ClassLoader { 
 
