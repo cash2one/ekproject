@@ -100,17 +100,23 @@ public abstract class BaseTask implements Task {
 	}
 
     /**
-     * 任务初始化
+     * 任务初始化，当任务首次初始化时被调用，任务循环重复执行期间 不再被 调用此方法。
+     * 
+     * 
      */
 	protected abstract void initialize();
 
+	
 	/**
 	 * 实际任务业务逻辑
 	 */
 	protected abstract void task();
 
+	
 	/**
-	 * 任务退出时资源释放
+	 * 
+	 * 任务退出，当任务退出任务对象容器时 被调用，任务循环重复执行期间   不会重复调用此方法。
+	 * 
 	 */
 	protected abstract void release();
 
