@@ -11,6 +11,11 @@ import cn.elam.util.common.Checker;
 import cn.elam.util.common.Trans;
 import cn.elam.util.file.xml.XmlHandler;
 
+/**
+ * ÈÎÎñÈÝÆ÷
+ * @author Ethan.Lam  2011-2-15
+ *
+ */
 public class TasksContainer {
 
 	List<Task> tasks = null;

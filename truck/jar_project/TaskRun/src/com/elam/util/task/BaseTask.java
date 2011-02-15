@@ -7,7 +7,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 
 /**
- * 
+ * 任务抽象类
  * @author ethanlam 任务
  * 
  */
