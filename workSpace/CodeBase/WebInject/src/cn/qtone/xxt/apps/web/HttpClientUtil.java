@@ -1,356 +1,116 @@
 package cn.qtone.xxt.apps.web;
 
-
 import java.io.IOException;
-import java.util.logging.Logger;
 
-import org.apache.commons.httpclient.DefaultHttpMethodRetryHandler;
+import org.apache.commons.httpclient.Cookie;
 import org.apache.commons.httpclient.HttpClient;
+import org.apache.commons.httpclient.HttpException;
+import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
-import org.apache.commons.httpclient.params.HttpMethodParams;
-import org.apache.http.HttpException;
-import org.apache.http.HttpStatus;
-import org.apache.http.NameValuePair;
-
 
 
 /**
- * HttpClientUtil 使用httpclient 3.1
- * 
- * @author viruscodecn@gmail.com
- * @project JavaFramework 1.0 2010-11-30
+ * HttpClient
+ * @author Ethan.Lam  2011-2-15
+ *
  */
 public class HttpClientUtil {
-	private static final String CONTENT_CHARSET = "utf-8";// httpclient读取内容时使用的字符集
 
+	
 	/**
-	 * get new http client
-	 * 
+	 * �½�һ�� HttpClient ʵ��
+	 * @param logonSite
+	 * @param port
 	 * @return
 	 */
-	public static HttpClient getHttpClient() {
-		try {
-			HttpClient httpClient = new HttpClient();
-			return httpClient;
-		} catch (Exception e) {
-		}
-		return null;
+	public static HttpClient newHttpClient(String logonSite,int port){
+		HttpClient client = new HttpClient();  
+        client.getHostConfiguration().setHost(logonSite, port);  
+        return client;
 	}
-
+	
+	
+	
 	/**
-	 * 关闭
-	 * 
-	 * @param httpClient
-	 */
-	public static void close(HttpClient httpClient) {
-		if (httpClient != null)
-			httpClient = null;
-	}
-
-	/**
-	 * 获取get方法的执行结果
-	 * 
-	 * @param httpClient
-	 * @param getUrl
+	 * ����һ�� POST 
+	 * @param requestUrl  ����ĵ�ַ
+	 * @param userAgent   
+	 * @param hrefUrl     ��ת��ַ
+	 * @param NameValuePairs  �ύ����
 	 * @return
 	 */
-	public static boolean getMethodReturnBoolean(HttpClient httpClient,
-			String getUrl) {
-		GetMethod getMethod = null;
-		try {
-			getMethod = new GetMethod(getUrl);
-			getMethod.getParams().setParameter(HttpMethodParams.RETRY_HANDLER,
-					new DefaultHttpMethodRetryHandler());
-			// 执行getMethod
-			int statusCode = httpClient.executeMethod(getMethod);
-
-			return HttpClientUtil.isSucess(statusCode);
-		} catch (HttpException e) {
-			// 发生致命的异常，可能是协议不对或者返回的内容有问题
-			System.out.println("Please check your provided http address!");
-			return false;
-		} catch (IOException e) {
-			// 发生网络异常
-			return false;
-		} finally {
-			// 释放连接
-			if (getMethod != null)
-				getMethod.releaseConnection();
-		}
+	public static PostMethod newPostMethod(String requestUrl,String userAgent,String hrefUrl,String[][] NameValuePairs){
+		 PostMethod post = new PostMethod(requestUrl);  
+	        NameValuePair ie = new NameValuePair("User-Agent",userAgent);     
+	        NameValuePair url = new NameValuePair("url", hrefUrl!=null?hrefUrl:"");  
+	        NameValuePair paramValueSet = null;
+	        if(NameValuePairs!=null){
+	        	  NameValuePair[] paramsSet = new NameValuePair[NameValuePairs.length+2];
+	        	  paramsSet[0] =  ie;
+	        	  paramsSet[1] =  url;
+	        	  int index = 2;
+	        	  for(String[] param : NameValuePairs){
+                	  paramsSet[index++] =  new NameValuePair(param[0],param[1]);
+                  }
+	        	  post.setRequestBody(paramsSet); 
+	        }else{
+	        	  post.setRequestBody(new NameValuePair[]{ie,url}); 
+	        }
+	        return post;
 	}
-
+	
+	
 	/**
-	 * get 方法超时时间
-	 * 
-	 * @param httpClient
-	 * @param getUrl
+	 * ���沢���� cookies
+	 * @param client
+	 */
+	public static Cookie[] addCookies(HttpClient client){
+		  Cookie[] cookies = client.getState().getCookies();  
+	      if(cookies!=null)
+		    client.getState().addCookies(cookies);  
+	      return cookies;
+	}
+	
+	
+	/**
+	 * ����һ�� GetMethod ʵ��
+	 * @param requestUrl
+	 * @param cookies
 	 * @return
 	 */
-	public static int getMethodTimeOut(HttpClient httpClient, String getUrl) {
-		GetMethod getMethod = null;
-		try {
-			Long beginTime = System.nanoTime();
-			getMethod = new GetMethod(getUrl);
-			getMethod.getParams().setParameter(HttpMethodParams.RETRY_HANDLER,
-					new DefaultHttpMethodRetryHandler());
-			// 执行getMethod
-			int statusCode = httpClient.executeMethod(getMethod);
-			long endTime = System.nanoTime();
-
-			if (HttpClientUtil.isSucess(statusCode))
-				return (int) (endTime - beginTime) / 1000;
-			else
-				return 0;
-		} catch (HttpException e) {
-			// 发生致命的异常，可能是协议不对或者返回的内容有问题
-			System.out.println("Please check your provided http address!");
-			return 0;
-		} catch (IOException e) {
-			// 发生网络异常
-			return 0;
-		} finally {
-			// 释放连接
-			if (getMethod != null)
-				getMethod.releaseConnection();
-		}
+	public static GetMethod newGetMethod(String requestUrl,Cookie[] cookies){
+	       GetMethod get = new GetMethod(requestUrl);  
+	       get.setRequestHeader("Cookie", cookies.toString());  
+	       return get;
 	}
-
-	/**
-	 * 获取get的size(KB)
-	 * 
-	 * @param httpClient
-	 * @param getUrl
-	 * @return
-	 */
-	public static String getMethodDataSize(HttpClient httpClient, String getUrl) {
-		GetMethod getMethod = null;
-		try {
-			getMethod = new GetMethod(getUrl);
-			getMethod.getParams().setParameter(HttpMethodParams.RETRY_HANDLER,
-					new DefaultHttpMethodRetryHandler());
-			// 执行getMethod
-			int statusCode = httpClient.executeMethod(getMethod);
-
-			if (HttpClientUtil.isSucess(statusCode))
-				return String
-						.valueOf(getMethod.getResponseBody().length / 1000);
-			else
-				return "0";
-		} catch (HttpException e) {
-			// 发生致命的异常，可能是协议不对或者返回的内容有问题
-			System.out.println("Please check your provided http address!");
-			return "0";
-		} catch (IOException e) {
-			// 发生网络异常
-			return "0";
-		} finally {
-			// 释放连接
-			if (getMethod != null)
-				getMethod.releaseConnection();
-		}
+	
+	
+	
+	public static void main(String...srt) throws HttpException, IOException{
+		
+	    String LOGON_SITE = "http://admin.zj.monternet.com:8080/sp/index.jsp";  
+		int LOGON_PORT = 8080;
+		String loginReq = "http://admin.zj.monternet.com:8080/sp/SPLogin";
+		String UserAgent = "Mozilla/4.0 (compatible; MSIE 6.0; Windows 2000)";
+		String hrefUrl ="/sp/index.jsp";
+		
+		HttpClient client = newHttpClient(LOGON_SITE,LOGON_PORT);
+		PostMethod post = newPostMethod(loginReq,UserAgent,hrefUrl,new String[][]{{"selectAccount","SPPREREG"},{"USER","qtone"},{"PASSWORD","qtone2010"}});
+		
+		client.executeMethod(post);  
+		Cookie[] cookies  = addCookies(client);
+		post.releaseConnection();
+		
+		
+		String dataUrl="http://admin.zj.monternet.com:8080/sp/indict/queryIndictICD.jsp?subsId=&userName=&status=1&queryTime=0&fromDate=2010-02-01&toDate=2011-02-15&pageNum=1&currentPageNo=1&pageSize=100&navigatePage_toPageSize=100&navigatePage_toPageNum=1";
+		GetMethod get = newGetMethod(dataUrl,cookies);
+		client.executeMethod(get);
+		String responseString = get.getResponseBodyAsString();  
+	    System.out.println(responseString);  
+		get.releaseConnection();
+		
 	}
-
-
-	public static String getMethodDataResult(HttpClient httpClient,
-			String getUrl) {
-		GetMethod getMethod = null;
-		try {
-			getMethod = new GetMethod(getUrl);
-			getMethod.getParams().setParameter(HttpMethodParams.RETRY_HANDLER,
-					new DefaultHttpMethodRetryHandler());
-			// 执行getMethod
-			int statusCode = httpClient.executeMethod(getMethod);
-			if (HttpClientUtil.isSucess(statusCode))
-				return getMethod.getResponseBodyAsString();
-			return null;
-		} catch (HttpException e) {
-			// 发生致命的异常，可能是协议不对或者返回的内容有问题
-			System.out.println("Please check your provided http address!");
-			return "0";
-		} catch (IOException e) {
-			// 发生网络异常
-			return "0";
-		} finally {
-			// 释放连接
-			if (getMethod != null)
-				getMethod.releaseConnection();
-		}
-	}
-
-	/**
-	 * 检测是否可以post成功,默认utf-8
-	 * 
-	 * @param httpClient
-	 * @param postUrl
-	 * @param data
-	 * @return
-	 */
-	public static boolean postMethodReturnBoolean(HttpClient httpClient,
-			String postUrl, NameValuePair[] data) {
-		return postMethodReturnBoolean(httpClient, postUrl, data,
-				CONTENT_CHARSET);
-	}
-
-	/**
-	 * 检测是否可以post成功
-	 * 
-	 * @param httpClient
-	 * @param postUrl
-	 * @param data
-	 * @return
-	 */
-	public static boolean postMethodReturnBoolean(HttpClient httpClient,
-			String postUrl, NameValuePair[] data, String encoding) {
-		encoding = encoding.trim();
-		PostMethod postMethod = null;
-		try {
-			postMethod = new PostMethod(postUrl);
-			postMethod.setRequestBody(data);
-			httpClient.getParams().setParameter(
-					HttpMethodParams.HTTP_CONTENT_CHARSET, CONTENT_CHARSET);
-			int statusCode = httpClient.executeMethod(postMethod);
-
-			return HttpClientUtil.isSucess(statusCode);
-		} catch (Exception e) {
-			return false;
-		} finally {
-			// 释放连接
-			if (postMethod != null)
-				postMethod.releaseConnection();
-		}
-	}
-
-	/**
-	 * post 超时时间，默认utf-8
-	 * 
-	 * @param httpClient
-	 * @param postUrl
-	 * @param data
-	 * @return
-	 */
-	public static int postMethodTimeout(HttpClient httpClient, String postUrl,
-			NameValuePair[] data) {
-		return postMethodTimeout(httpClient, postUrl, data, CONTENT_CHARSET);
-	}
-
-	/**
-	 * post 超时时间
-	 * 
-	 * @param httpClient
-	 * @param postUrl
-	 * @param data
-	 * @return
-	 */
-	public static int postMethodTimeout(HttpClient httpClient, String postUrl,
-			NameValuePair[] data, String encoding) {
-		encoding = encoding.trim();
-		PostMethod postMethod = null;
-		try {
-			postMethod = new PostMethod(postUrl);
-			postMethod.setRequestBody(data);
-			httpClient.getParams().setParameter(
-					HttpMethodParams.HTTP_CONTENT_CHARSET, CONTENT_CHARSET);
-			Long beginTime = System.nanoTime();
-			int statusCode = httpClient.executeMethod(postMethod);
-			long endTime = System.nanoTime();
-
-			if (HttpClientUtil.isSucess(statusCode))
-				return (int) (endTime - beginTime) / 1000;
-			else
-				return 0;
-		} catch (Exception e) {
-			return 0;
-		} finally {
-			// 释放连接
-			if (postMethod != null)
-				postMethod.releaseConnection();
-		}
-	}
-
-	/**
-	 * 获取post的size(KB),默认utf-8
-	 * 
-	 * @param httpClient
-	 * @param postUrl
-	 * @param data
-	 * @return
-	 */
-	public static String postMethodDataSize(HttpClient httpClient,
-			String postUrl, NameValuePair[] data) {
-		return postMethodDataSize(httpClient, postUrl, data, CONTENT_CHARSET);
-	}
-
-	/**
-	 * 获取post的size(KB)
-	 * 
-	 * @param httpClient
-	 * @param postUrl
-	 * @param data
-	 * @return
-	 */
-	public static String postMethodDataSize(HttpClient httpClient,
-			String postUrl, NameValuePair[] data, String encoding) {
-		encoding = encoding.trim();
-		PostMethod postMethod = null;
-		try {
-			postMethod = new PostMethod(postUrl);
-			postMethod.setRequestBody(data);
-			httpClient.getParams().setParameter(
-					HttpMethodParams.HTTP_CONTENT_CHARSET, CONTENT_CHARSET);
-			int statusCode = httpClient.executeMethod(postMethod);
-
-			if (HttpClientUtil.isSucess(statusCode))
-				return String
-						.valueOf(postMethod.getResponseBody().length / 1000);
-			else
-				return "0";
-		} catch (Exception e) {
-			return "0";
-		} finally {
-			// 释放连接
-			if (postMethod != null)
-				postMethod.releaseConnection();
-		}
-	}
-
-
-	public static String postMethodResult(HttpClient httpClient,
-			String postUrl, NameValuePair[] data, String encoding) {
-		encoding = encoding.trim();
-		PostMethod postMethod = null;
-		try {
-			postMethod = new PostMethod(postUrl);
-			postMethod.setRequestBody(data);
-			httpClient.getParams().setParameter(
-					HttpMethodParams.HTTP_CONTENT_CHARSET, CONTENT_CHARSET);
-			int statusCode = httpClient.executeMethod(postMethod);
-			if (HttpClientUtil.isSucess(statusCode))
-				return postMethod.getResponseBodyAsString();
-			else
-				return null;
-		} catch (Exception e) {
-			return "0";
-		} finally {
-			// 释放连接
-			if (postMethod != null)
-				postMethod.releaseConnection();
-		}
-	}
-
-	/**
-	 * 检测是否执行成功
-	 * 
-	 * @param statusCode
-	 * @return
-	 */
-	public static boolean isSucess(int statusCode) {
-		if (statusCode == HttpStatus.SC_OK
-				|| statusCode == HttpStatus.SC_ACCEPTED
-				|| statusCode == HttpStatus.SC_MOVED_PERMANENTLY
-				|| statusCode == HttpStatus.SC_MOVED_TEMPORARILY
-				|| statusCode == HttpStatus.SC_TEMPORARY_REDIRECT)
-			return true;
-		return false;
-	}
+	
+	
 }
