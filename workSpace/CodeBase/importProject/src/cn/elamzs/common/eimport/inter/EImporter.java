@@ -18,9 +18,9 @@ public interface EImporter {
 	public String importFile(String dataFile,String alias,String storeSubDir) throws Exception;
 
 	// 返回源文件（上传的文件）
-	public File getResourceFile(String fileIdentifyId) throws Exception;
+	public File getResourceFile(String importTaskSeq) throws Exception;
 
 	// 返回用户导入文件后的结果
-	public File getImportedResult(String fileIdentifyId) throws Exception;
+	public File getImportedResult(String importTaskSeq) throws Exception;
 
 }

@@ -9,9 +9,9 @@ package cn.elamzs.common.eimport.inter;
 public interface ImportHandleListener {
 
 	
-	public void beforeImportData(String importTaskSeqId,String fileAliasName,String srcFileLocation);
+	public void beforeImportData(final String importTaskSeqId,final String fileAliasName,final  String srcFileLocation);
 	
-	public void afterImportData(String importTaskSeqId,String resultFileLocation);
+	public void afterImportData(final String importTaskSeqId,final String resultFileLocation);
 	
 	
 }

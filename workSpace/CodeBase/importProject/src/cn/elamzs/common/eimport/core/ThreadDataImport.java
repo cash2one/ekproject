@@ -28,19 +28,20 @@ public class ThreadDataImport implements EImporter {
 	
 	ImportHandleListener listenner = null; //导入事件监听器
 	
+	
 	public ThreadDataImport(DataValidator validator,DataProcess dataProcess){
 	        this.validator = validator;
 	        this.dataProcess = dataProcess;
 	}
 
 	@Override
-	public File getImportedResult(String fileIdentifyId) throws Exception{
+	public File getImportedResult(String importTaskSeq) throws Exception{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public File getResourceFile(String fileIdentifyId) throws Exception{
+	public File getResourceFile(String importTaskSeq) throws Exception{
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -67,18 +68,30 @@ public class ThreadDataImport implements EImporter {
 	}
 
 	
+    /**
+     * 正式执行文件导入前的管理操作
+     * 对源文件的备份、分配导入任务ID、调用外围事件监听器  等	
+     * @param fileAlias
+     * @param srcFile
+     * @param subDirName
+     * @throws Exception
+     */
 	void importTaskPrepare(String fileAlias,String srcFile,String subDirName) throws Exception{
 		File _src = new File(srcFile);
-		String _newFileName  = reNameFile(srcFile);
+		String suffix = srcFile.substring(srcFile.lastIndexOf("."));
+		String importTaskSeqId = reNameFileId(srcFile);
+		
+		String _newFileName  = importTaskSeqId+suffix;
 		String _cpyObj =  ConfigControl.DIR_IMPORT_SRC+"/"+(subDirName!=null?subDirName:"")+"/"+_newFileName; 
 		
 		//copy导入文件到指定保存目录
 		FileOperateUtil.copyFile(_src, new File(_cpyObj));
 		
-		String importTaskId = createImportTaskId(fileAlias,_cpyObj,subDirName);
+		//调用事件监听
+		invokeImportListenner(importTaskSeqId,fileAlias,_cpyObj,subDirName);
 		
 		//根据文件，配置对应的处理类
-		appendDataHandler(importTaskId,_cpyObj,subDirName);
+		appendDataHandler(importTaskSeqId,_cpyObj,subDirName);
 	}
 	
 	
@@ -89,30 +102,26 @@ public class ThreadDataImport implements EImporter {
 	 * @param srcFile
 	 * @return
 	 */
-	String reNameFile(String srcFile){
-		String suffix = srcFile.substring(srcFile.lastIndexOf("."));
-		return System.currentTimeMillis()+suffix;
+	String reNameFileId(String srcFile){
+		return System.currentTimeMillis()+"";
 	}
 	
 	
 	/**
 	 * 
-	 * 创建唯一的导入任务ID 标识
 	 * @param alias      文件显示的名称
 	 * @param srcFile    导入文件的全路径
 	 * @param subDirName 定位在那个子文件夹中
 	 * @return
 	 */
-	String createImportTaskId(String alias,String srcFile,String subDirName){
-		String importTaskSeqId = System.currentTimeMillis()+"";
+	void invokeImportListenner(final String importTaskSeqId,final  String alias,final  String srcFile,final String subDirName){
 		//保存这个任务信息记录,
 		if(listenner!=null)
 		   listenner.beforeImportData(importTaskSeqId, alias, srcFile);
 		else{
-			
+		   //
 			
 		}
-		return importTaskSeqId;
 	}
 	
 	
