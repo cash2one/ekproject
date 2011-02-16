@@ -12,6 +12,7 @@ import java.util.Map;
 
 import cn.elam.util.db.comom.BaseDao;
 import cn.elam.util.db.comom.DBConnector;
+import cn.qtone.xxt.apps.web.AppLoger;
 
 /**
  * 
@@ -38,7 +39,7 @@ public class XxtComplaintYwDao {
 				}
 			_conn.close();
 		} catch (Exception e) {
-			e.printStackTrace();
+			AppLoger.getSQLLogger().info(e.getMessage());
 		}finally{
 			try {
 				if(!_conn.isClosed())
@@ -88,7 +89,7 @@ public class XxtComplaintYwDao {
             infos.clear();
             infos = null;
 		}catch(Exception e){
-			e.printStackTrace();
+			AppLoger.getSQLLogger().info(e.getMessage());
 			recordNotInserItem(item,2);
 		}finally{
 		    try {
@@ -111,7 +112,10 @@ public class XxtComplaintYwDao {
 	 * @param type   
 	 */
 	void recordNotInserItem(ComplaintItem item,int type){
-		System.out.println("失败"+(type==0?"没找到电话号码":(type==1?"没找到对应的学生信息":"入库失败")));
+		String error_msg = (type==0?"没找到对应的电话号码":(type==1?"没找到对应的学生信息":"记录入库失败"));
+		error_msg = error_msg +"  ---  详细："+item.getUser()+","+item.getBrand()+","+item.getContent()+","+item.getCreateTime()+","+item.getDeadline()+","+item.getRank();
+		AppLoger.getBusinessLogger().info(error_msg);		
+		
 	}
 	
 	
@@ -180,7 +184,7 @@ public class XxtComplaintYwDao {
 			}
 			
 		}catch(Exception e){
-			e.printStackTrace();
+			AppLoger.getSQLLogger().info(e.getMessage());
 		}finally{
 				try {
 					if(rs!=null)
@@ -215,7 +219,7 @@ public class XxtComplaintYwDao {
 			    abbList.add(rs.getString(1));
 			rs.close();
 		} catch (Exception e) {			
-			e.printStackTrace();
+			AppLoger.getSQLLogger().info(e.getMessage());
 		}finally{
 			try {
 				if(rs!=null)

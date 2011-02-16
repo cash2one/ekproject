@@ -13,6 +13,7 @@ import org.apache.commons.httpclient.methods.PostMethod;
 import org.htmlcleaner.HtmlCleaner;
 import org.htmlcleaner.TagNode;
 
+import cn.qtone.xxt.apps.web.AppLoger;
 import cn.qtone.xxt.apps.web.HttpClientUtil;
 
 import com.elam.util.task.BaseTask;
@@ -33,12 +34,12 @@ public class FetchDataTask extends BaseTask {
 
 	@Override
 	protected void initialize() {
-		
+		AppLoger.getRuningLogger().info("初始化并启动 MISC 数据抽取程序。");
 	}
 
 	@Override
 	protected void release() {
-		
+		AppLoger.getRuningLogger().info("MISC 数据抽取程序关闭");
 	}
 
 	
@@ -47,6 +48,7 @@ public class FetchDataTask extends BaseTask {
 	 * 循环执行
 	 */
 	protected void task() {
+		AppLoger.getRuningLogger().info("开始执行数据抽取任务");
 		String LOGON_SITE = "http://admin.zj.monternet.com:8080/sp/index.jsp"; //首页
 		int LOGON_PORT = 8080;
 		String loginReq = "http://admin.zj.monternet.com:8080/sp/SPLogin";    //验证请求页面
@@ -67,7 +69,7 @@ public class FetchDataTask extends BaseTask {
 			
 			//抓取页面，并提取页面数据
 			List<ComplaintItem> items = startToFetchComplaintListDatas(client);
-			System.out.println("测试，新的数据有:"+(items!=null?items.size():"0"));
+			AppLoger.getRuningLogger().info("获取新的数据有:"+(items!=null?items.size():"0"));
 			
 			fetchComplaintDetail(client,items);
 //			printDatas(items);
@@ -79,11 +81,12 @@ public class FetchDataTask extends BaseTask {
 			items = null;
 			cookies = null;
 		}catch(Exception e){
-			e.printStackTrace();
+			AppLoger.getSimpleErrorLogger().info(e.getMessage());
 		}finally{
 			post.releaseConnection();
 			client = null;
 		}	
+		AppLoger.getRuningLogger().info("结束执行数据抽取任务");
 		
 	}
 
@@ -157,7 +160,7 @@ public class FetchDataTask extends BaseTask {
 			cookies = null;
 			return get.getResponseBodyAsString();
 		} catch (Exception e) {
-			e.printStackTrace();
+			AppLoger.getSimpleErrorLogger().info(e.getMessage());
 			return "";
 		} finally {
 			client = null;
@@ -177,7 +180,7 @@ public class FetchDataTask extends BaseTask {
              try{
             	 getComplaintDetailInfos(client,item);
              }catch(Exception e){
-                e.printStackTrace();	 
+            	 AppLoger.getSimpleErrorLogger().info(e.getMessage());	 
              }        
         }
 		
@@ -231,16 +234,7 @@ public class FetchDataTask extends BaseTask {
 		cookies = null;
 	}
 	
-	
-	
-	/**
-	 * 入库处理
-	 */
-	void insertIntoXxtDB(){
-		
-		
-		
-	}
+
 	
 	/**
 	 * 测试打印获取的数据信息
