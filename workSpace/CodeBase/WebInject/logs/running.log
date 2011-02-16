@@ -1,0 +1,29 @@
+11:13:41,377 INFO  [appRunning] (cn.qtone.xxt.apps.web.misc.FetchDataTask:37) - 初始化并启动 MISC 数据抽取程序。
+11:13:51,380 INFO  [appRunning] (cn.qtone.xxt.apps.web.misc.FetchDataTask:51) - 开始执行数据抽取任务
+11:13:53,507 INFO  [appRunning] (cn.qtone.xxt.apps.web.misc.FetchDataTask:72) - 获取新的数据有:43
+11:14:02,632 INFO  [appRunning] (cn.qtone.xxt.apps.web.misc.FetchDataTask:89) - 结束执行数据抽取任务
+11:14:02,632 INFO  [appRunning] (cn.qtone.xxt.apps.web.misc.FetchDataTask:51) - 开始执行数据抽取任务
+11:14:04,336 INFO  [appRunning] (cn.qtone.xxt.apps.web.misc.FetchDataTask:72) - 获取新的数据有:43
+11:14:12,865 INFO  [appRunning] (cn.qtone.xxt.apps.web.misc.FetchDataTask:89) - 结束执行数据抽取任务
+11:14:12,866 INFO  [appRunning] (cn.qtone.xxt.apps.web.misc.FetchDataTask:51) - 开始执行数据抽取任务
+11:14:14,393 INFO  [appRunning] (cn.qtone.xxt.apps.web.misc.FetchDataTask:72) - 获取新的数据有:43
+11:14:23,834 INFO  [appRunning] (cn.qtone.xxt.apps.web.misc.FetchDataTask:89) - 结束执行数据抽取任务
+11:14:23,835 INFO  [appRunning] (cn.qtone.xxt.apps.web.misc.FetchDataTask:51) - 开始执行数据抽取任务
+11:14:25,563 INFO  [appRunning] (cn.qtone.xxt.apps.web.misc.FetchDataTask:72) - 获取新的数据有:43
+11:14:33,983 INFO  [appRunning] (cn.qtone.xxt.apps.web.misc.FetchDataTask:89) - 结束执行数据抽取任务
+11:14:33,984 INFO  [appRunning] (cn.qtone.xxt.apps.web.misc.FetchDataTask:51) - 开始执行数据抽取任务
+11:46:48,378 INFO  [appRunning] (cn.qtone.xxt.apps.web.misc.FetchDataTask:37) - 初始化并启动 MISC 数据抽取程序。
+11:46:58,416 INFO  [appRunning] (cn.qtone.xxt.apps.web.misc.FetchDataTask:51) - 开始执行数据抽取任务
+11:47:00,734 INFO  [appRunning] (cn.qtone.xxt.apps.web.misc.FetchDataTask:72) - 获取新的数据有:35
+11:47:08,499 INFO  [appRunning] (cn.qtone.xxt.apps.web.misc.FetchDataTask:89) - 结束执行数据抽取任务
+11:47:08,499 INFO  [appRunning] (cn.qtone.xxt.apps.web.misc.FetchDataTask:51) - 开始执行数据抽取任务
+11:47:10,149 INFO  [appRunning] (cn.qtone.xxt.apps.web.misc.FetchDataTask:72) - 获取新的数据有:35
+11:47:17,553 INFO  [appRunning] (cn.qtone.xxt.apps.web.misc.FetchDataTask:89) - 结束执行数据抽取任务
+11:47:18,416 INFO  [appRunning] (cn.qtone.xxt.apps.web.misc.FetchDataTask:51) - 开始执行数据抽取任务
+11:47:20,105 INFO  [appRunning] (cn.qtone.xxt.apps.web.misc.FetchDataTask:72) - 获取新的数据有:35
+11:47:26,922 INFO  [appRunning] (cn.qtone.xxt.apps.web.misc.FetchDataTask:89) - 结束执行数据抽取任务
+11:47:28,417 INFO  [appRunning] (cn.qtone.xxt.apps.web.misc.FetchDataTask:51) - 开始执行数据抽取任务
+11:47:29,929 INFO  [appRunning] (cn.qtone.xxt.apps.web.misc.FetchDataTask:72) - 获取新的数据有:35
+11:47:37,113 INFO  [appRunning] (cn.qtone.xxt.apps.web.misc.FetchDataTask:89) - 结束执行数据抽取任务
+11:47:38,416 INFO  [appRunning] (cn.qtone.xxt.apps.web.misc.FetchDataTask:51) - 开始执行数据抽取任务
+11:47:39,813 INFO  [appRunning] (cn.qtone.xxt.apps.web.misc.FetchDataTask:72) - 获取新的数据有:35
