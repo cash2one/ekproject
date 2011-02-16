@@ -31,6 +31,8 @@ public class XxtComplaintYwDao {
 	private final static String NOT_FIND_PHONE = "NOT_FOUND_PHONE";
 	private final static String MATCH_YW_MODEL = "MATCH_YW_MODEL";
 	
+	private List<ComplaintItem> needSendItems = new ArrayList<ComplaintItem>();
+	
 	public void insert(List<ComplaintItem> items) {
 		Connection _conn = null;
 		BaseDao db = null;
