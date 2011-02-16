@@ -85,5 +85,8 @@ public class YwComplaintUtil {
 		return text;
 	}
 	
-
+	public static String valueToString(String value){
+		return value!=null?value:"";
+	}
+	
 }
