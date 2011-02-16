@@ -1,4 +1,4 @@
-package cn.elam.util.common;
+﻿package cn.elam.util.common;
 
 import java.util.*;
 import javax.mail.*;
@@ -15,7 +15,7 @@ public class MailBoxService {
 
 	public static void main(String[] args) {
 		MailBoxService src = new MailBoxService("alex86825@163.com",
-				"smtp.163.com", "alex86825", "alex672988", "true",false);
+				"smtp.163.com", "alex86825", "", "true",false);
 		src.sendMail("ethanlamzs@gmail.com", "hello", "just a test"+Math.random());
 		
 	}
@@ -132,7 +132,7 @@ public class MailBoxService {
 			message.saveChanges();
 
 			Transport transport = s.getTransport("smtp");
-			transport.connect("smtp.163.com", "alex86825", "alex672988");// 163邮箱的用户名和密码
+			transport.connect("smtp.163.com", "alex86825", "");// 163邮箱的用户名和密码
 			transport.sendMessage(message, message.getAllRecipients());
 			transport.close();
 
