@@ -1,5 +1,0 @@
-Manifest-Version: 1.0
-Class-Path: lib/dom4j-1.6.1.jar lib/jaxen-1.1-beta-6.jar lib/mysql-con
- nector-java-3.0.14-production-bin.jar lib/ojdbc14.jar lib/struts.jar
-Main-Class: cn.elam.testcases.db.QueryTestCase
-

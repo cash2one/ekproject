@@ -28,6 +28,10 @@ public abstract class BaseTask implements Task {
 		loadAndRun();
 	}
 
+	
+	/**
+	 * 加载并运行任务
+	 */
 	void loadAndRun(){
 		scheduler = Executors.newScheduledThreadPool(1);
 		initialize();
@@ -36,6 +40,10 @@ public abstract class BaseTask implements Task {
 		TaskLog.info(taskItem.getName(), "已完成任务加载并进入任务管理器中。");
 	}
 	
+	
+   /**
+    * 首次运行的延时时间
+    */
 	void firstRunDelayTime() {
 		this.firstRunTime = 10;
 	}
@@ -65,8 +73,10 @@ public abstract class BaseTask implements Task {
 				;
 			}
 		};
+		
+		
 	  taskHandle = scheduler.scheduleAtFixedRate(task,
-				(firstRunTime >= 0 ? firstRunTime : 60), taskItem.getSeconds(),
+				(firstRunTime >= 0 ? firstRunTime : 60), taskItem.getSeconds()*taskItem.getMinTimeAccuMethod(),
 				SECONDS);
 
 	}

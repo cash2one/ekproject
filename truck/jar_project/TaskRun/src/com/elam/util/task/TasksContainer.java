@@ -54,10 +54,10 @@ public class TasksContainer {
 	}
 
 	Task createTaskObject(String classPath, TaskItem item) {
-		Class clazz = BeanUtil.loadClass(classPath);
+		Class clazz = com.elam.util.task.bean.BeanUtil.loadClass(classPath);
 		if (clazz == null)
 			return null;
-		return (Task) BeanUtil.createInstance(clazz, item);
+		return (Task) com.elam.util.task.bean.BeanUtil.createInstance(clazz, item);
 	}
 
 	boolean isConfigChange() {
