@@ -1,8 +1,11 @@
 package cn.qtone.xxt.apps.web.misc;
 
 import java.io.IOException;
-import java.net.URLEncoder;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.httpclient.Cookie;
@@ -153,8 +156,10 @@ public class FetchDataTask extends BaseTask {
 	 */
 	String fetchSrcDataHtmlPage(HttpClient client) {
 		try {
+			DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+			String queryTimePer = df.format(new Date());
 			Cookie[] cookies = HttpClientUtil.addCookies(client);
-			String dataUrl = "http://admin.zj.monternet.com:8080/sp/indict/queryIndictICD.jsp?subsId=&userName=&status=1&queryTime=0&fromDate=2010-02-01&toDate=2011-02-15&pageNum=1&currentPageNo=1&pageSize=100&navigatePage_toPageSize=100&navigatePage_toPageNum=1";
+			String dataUrl = "http://admin.zj.monternet.com:8080/sp/indict/queryIndictICD.jsp?subsId=&userName=&status=1&queryTime=0&fromDate="+queryTimePer+"&toDate="+queryTimePer+"&pageNum=1&currentPageNo=1&pageSize=100&navigatePage_toPageSize=100&navigatePage_toPageNum=1";
 			GetMethod get = HttpClientUtil.newGetMethod(dataUrl, cookies);
 			client.executeMethod(get);
 			cookies = null;
@@ -242,8 +247,18 @@ public class FetchDataTask extends BaseTask {
 	 */
 	void printDatas(List<ComplaintItem> items ){
 		for(ComplaintItem i : items)
-			   System.out.println(i.getId()+","+i.getUser()+","+i.getBrand()+","+i.getArea()+","+i.getContent());
+			 System.out.println(i.getId()+","+i.getUser()+","+i.getBrand()+","+i.getArea()+","+i.getContent());
 	    items = null;
+	}
+
+	
+	/**
+	 * 判断流水号是否已经加入系统中
+	 * @param eventId
+	 * @return
+	 */
+	boolean isNeedCollect(String eventId){
+		return true;
 	}
 	
 	

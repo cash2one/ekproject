@@ -1,10 +1,13 @@
 package cn.qtone.xxt.apps.web.misc;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -58,7 +61,7 @@ public class XxtComplaintYwDao {
 	 */
 	void insertSqlWrapper(Connection conn,ComplaintItem item){
 		//加入号码符合条件，就插入到数据库中，加入不符合 就记录该条投诉记录
-		
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		PreparedStatement stmt = null;
 		try{
 			Map<String,String> infos = matchFamilyAndStudentInfosByPhone(conn,item.getUser());
@@ -66,29 +69,38 @@ public class XxtComplaintYwDao {
             	int error_type = "true".equals(infos.get(NOT_FIND_PHONE))?0:1;
             	recordNotInserItem(item,error_type);
             }else{
-				StringBuffer sql =new StringBuffer(" insert into YW_COMPLAINT_TYPE (COMPLAINT_TIME,NEEDHANDLE_TIME,PHONE,REMARK,FAMILY_ID,AREA_ID,SI_ID, "); //7
+            	//要对处理时间进行 减半处理
+				StringBuffer sql =new StringBuffer(" insert into YW_COMPLAINT (PHONE,REMARK,FAMILY_ID,AREA_ID,SI_ID, "); //7
 				sql.append("TOWN_NAME,SCHOOL_NAME,CLASS_NAME,STU_NAME,TRANPACKAGE_NAME,");;  //5
-				sql.append("HANDLER_ID,HANDLE_STATUS,HANDLE_RESULT,REASON_ID,TSQD,HANDLE_TYPE,KHMYD,YHJXSY)"); //8
-				sql.append("values(?,?,?,?,?,?,?,?,?,?,?,?,1,1,'',1,1,1,1,1)");
+				sql.append("HANDLER_ID,HANDLE_STATUS,HANDLE_RESULT,REASON_ID,REASON_OTHER,TSQD,HANDLE_TYPE,KHMYD,YHJXSY,COMPLAINT_LEVEL,CUSTOMER_TYPE,create_time,HANDLE_TIME,COMPLAINT_TIME,NEEDHANDLE_TIME)"); //8
+				sql.append("values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,10086,?,1,1,?,?,sysdate,sysdate,");
+				sql.append("to_date('"+item.getCreateTime()+"' , 'yyyy-mm-dd hh24:mi:ss'), to_date('"+item.getDeadline()+"' , 'yyyy-mm-dd hh24:mi:ss'))");
 				stmt = conn.prepareStatement(sql.toString());
-				stmt.setString(1, item.getCreateTime());
-				stmt.setString(2, item.getDeadline());
-				stmt.setString(3, item.getUser());
-				stmt.setString(4, item.getContent());
-				stmt.setString(5, infos.get("family_id"));
-				stmt.setString(6, infos.get("area_id"));
-				stmt.setString(7, infos.get("si_id"));
-				stmt.setString(8, infos.get("town_name"));
-				stmt.setString(9, infos.get("school_name"));
-				stmt.setString(10, infos.get("class_name"));
-				stmt.setString(11, infos.get("student_name"));
-				stmt.setString(12, infos.get("tranpackage_name"));
+				stmt.setString(1, item.getUser());
+				stmt.setString(2, item.getContent());
+				stmt.setString(3, infos.get("family_id"));
+				stmt.setString(4, infos.get("area_id"));
+				stmt.setString(5, infos.get("si_id"));
+				stmt.setString(6, infos.get("town_name"));
+				stmt.setString(7, infos.get("school_name"));
+				stmt.setString(8, infos.get("class_name"));
+				stmt.setString(9, infos.get("student_name"));
+				stmt.setString(10,infos.get("tranpackage_name"));
+				stmt.setString(11, "1");    //处理人 ID
+				stmt.setString(12, "2"); //处理完
+				stmt.setString(13, "处理完成"); //处理结果
+				stmt.setString(14, "-1");  //理由ID
+				stmt.setString(15, "其他理由"); //其他理由 
+				stmt.setString(16, "人工"); //处理类型
+				stmt.setString(17, YwComplaintUtil.getComplaintLevelCode(item.getRank())); //投诉水平
+				stmt.setString(18, YwComplaintUtil.getCustomerTypeCode(item.getBrand())); //客户类型
 				stmt.execute();
 				stmt.close();
             }
             infos.clear();
             infos = null;
 		}catch(Exception e){
+			e.printStackTrace();
 			AppLoger.getSQLLogger().info(e.getMessage());
 			recordNotInserItem(item,2);
 		}finally{
