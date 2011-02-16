@@ -263,7 +263,7 @@ public class FetchDataTask extends BaseTask {
 	 * @return
 	 */
 	boolean isNeedCollect(ComplaintItem item){
-        return ItemsCheckHelper.getHelper().isNewItem(item);
+        return ItemsCheckHelper.getHelper().isNewItemJudgeFromDB(item);
 	}
 	
 	
