@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<poolConfig>
+   <enable default="xxt">zjxxt</enable>
+   <pools>
+       <zjxxt driver="oracle.jdbc.driver.OracleDriver" connectionPoolSize="10" minConnectionPoolSize="2" >
+           <url>jdbc:oracle:thin:@61.142.114.252:1521:orcl</url>
+           <user>zjxxt</user>
+           <pwd>zjxxt2010$%^</pwd>
+       </zjxxt>
+   </pools>
+</poolConfig>
+
+
