@@ -4,9 +4,10 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.httpclient.Cookie;
 import org.apache.commons.httpclient.HttpClient;
@@ -122,7 +123,11 @@ public class FetchDataTask extends BaseTask {
 						 item.setCreateTime(tdNodes[6].getText().toString());
 						 item.setDeadline(tdNodes[7].getText().toString());
 						 item.setReplyUrl(fetchReplyUrl(tdNodes[0]));
-						 ComplaintItemList.add(item);
+						 
+						 if(isNeedCollect(item))
+						    ComplaintItemList.add(item);
+						 else
+							 item = null;
 					 }
 				}
 			}
@@ -257,8 +262,8 @@ public class FetchDataTask extends BaseTask {
 	 * @param eventId
 	 * @return
 	 */
-	boolean isNeedCollect(String eventId){
-		return true;
+	boolean isNeedCollect(ComplaintItem item){
+        return ItemsCheckHelper.getHelper().isNewItem(item);
 	}
 	
 	

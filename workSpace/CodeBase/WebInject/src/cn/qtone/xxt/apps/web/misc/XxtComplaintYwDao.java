@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -100,6 +101,7 @@ public class XxtComplaintYwDao {
             }
             infos.clear();
             infos = null;
+            df = null;
 		}catch(Exception e){
 			e.printStackTrace();
 			AppLoger.getSQLLogger().info(e.getMessage());
@@ -124,9 +126,15 @@ public class XxtComplaintYwDao {
 	 */
 	String reSetDeadline(ComplaintItem item){
 		//处理时间要减半
-		
-		
-		
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		try {
+			long difTime = df.parse(item.getDeadline()).getTime() - df.parse(item.getCreateTime()).getTime();
+			String newTime = df.format(new Date(df.parse(item.getCreateTime()).getTime()+(difTime/2)));
+			df = null;
+			return newTime;
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 		return item.getDeadline(); 
 	}
 	

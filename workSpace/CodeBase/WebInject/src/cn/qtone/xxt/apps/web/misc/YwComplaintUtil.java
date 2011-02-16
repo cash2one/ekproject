@@ -4,11 +4,14 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+/**
+ * 工具
+ * @author Ethan.Lam  2011-2-16
+ *
+ */
 public class YwComplaintUtil {
 	
-	
 	public static String HANDLER_ID = "1";  //处理人的ID
-	
 	
 	//客户类型 （1全球通金卡、2全球通银卡、3动感地带、4大众卡）、
 	public static String getCustomerTypeText(String customer_type){

@@ -8,6 +8,7 @@ public class Main {
 	
 	public static void main(String... args) {
 		DOMConfigurator.configure("configs/log4j.xml");
+		//启动对应的任务
 		TasksContainer container = new TasksContainer();
 	}
 	
