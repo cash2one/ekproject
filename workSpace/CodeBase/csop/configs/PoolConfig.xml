@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <poolConfig>
-<<<<<<< .mine
    <enable default="xxt">zjxxt</enable>
-=======
-   <enable default="xxt">xxt,hnxxt,hdadmin</enable>
->>>>>>> .r296
    <pools>
        <zjxxt driver="oracle.jdbc.driver.OracleDriver" connectionPoolSize="10" minConnectionPoolSize="2" >
            <url>jdbc:oracle:thin:@61.142.114.252:1521:orcl</url>
