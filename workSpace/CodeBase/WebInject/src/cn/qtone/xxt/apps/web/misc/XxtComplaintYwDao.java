@@ -29,7 +29,7 @@ public class XxtComplaintYwDao {
 
 	private final static String POOL_NAME = "zjxxt";
 	private final static String NOT_FIND_PHONE = "NOT_FOUND_PHONE";
-	private final static String NOT_FIND_YW = "NOT_FOUND_YW";
+	private final static String MATCH_YW_MODEL = "MATCH_YW_MODEL";
 	
 	public void insert(List<ComplaintItem> items) {
 		Connection _conn = null;
@@ -67,8 +67,11 @@ public class XxtComplaintYwDao {
 		PreparedStatement stmt = null;
 		try{
 			Map<String,String> infos = matchFamilyAndStudentInfosByPhone(conn,item.getUser());
-            if("true".equals(infos.get(NOT_FIND_PHONE))||"true".equals(infos.get(NOT_FIND_YW))){
+            if("true".equals(infos.get(NOT_FIND_PHONE))||!"".equals(infos.get(MATCH_YW_MODEL))){
             	int error_type = "true".equals(infos.get(NOT_FIND_PHONE))?0:1;
+            	error_type=error_type!=0?("NOT_RESULT".equals(infos.get(MATCH_YW_MODEL))?1:2):error_type;
+            	
+            	//出错定义为 0：找不到电话号码 ；1:无学生信息；2:多条学生记录 ；3：插入数据库时发生错误
             	recordNotInserItem(item,error_type);
             }else{
             	//要对处理时间进行 减半处理
@@ -89,7 +92,7 @@ public class XxtComplaintYwDao {
 				stmt.setString(9, infos.get("student_name"));
 				stmt.setString(10,infos.get("tranpackage_name"));
 				stmt.setString(11, YwComplaintUtil.CREATE_ID); //处理人 ID
-				stmt.setString(12, "0"); //处理中
+				stmt.setString(12, "0"); //待处理
 				stmt.setString(13, "0"); //处理结果
 				stmt.setString(14, "-1");  //理由ID
 				stmt.setString(15, "其他理由"); //其他理由 
@@ -105,7 +108,7 @@ public class XxtComplaintYwDao {
 		}catch(Exception e){
 			e.printStackTrace();
 			AppLoger.getSQLLogger().info(e.getMessage());
-			recordNotInserItem(item,2);
+			recordNotInserItem(item,3);
 		}finally{
 		    try {
 			      if(stmt!=null)	
@@ -143,15 +146,21 @@ public class XxtComplaintYwDao {
 	 * 出现一下情况的 必须记录 
 	 * 1‘ 找不到对应的号码信息                   type = 0
 	 * 2、根据号码找不到对应家长 学生 （订购）信息的         type = 1
-	 * 3、插入到数据库失败的                            type = 2
+	 * 3、找到多条学生记录信息，不确定性   type = 3
+	 * 4、插入到数据库失败的                            type = 4
 	 * @param item
 	 * @param type   
 	 */
 	void recordNotInserItem(ComplaintItem item,int type){
-		String error_msg = (type==0?"没找到对应的电话号码":(type==1?"没找到对应的学生信息":"记录入库失败"));
+		String error_msg = "";
+		switch(type){
+		   case 0 : error_msg ="没找到对应的电话号码";break;
+		   case 1 : error_msg ="没找到对应的学生信息";break;
+		   case 2 : error_msg ="找到多条学生记录信息，不确定性";break;
+		   case 3 : error_msg ="入库失败的记录";break;
+		}
 		error_msg = error_msg +"  ---  详细："+item.getUser()+","+item.getBrand()+","+item.getContent()+","+item.getCreateTime()+","+item.getDeadline()+","+item.getRank();
 		AppLoger.getBusinessLogger().info(error_msg);		
-		
 	}
 	
 	
@@ -165,7 +174,7 @@ public class XxtComplaintYwDao {
 	 * @param phone
 	 */
 	Map<String,String> matchFamilyAndStudentInfosByPhone(Connection conn,String phone){
-		Map<String,String> infos = new HashMap<String,String>();
+		Map<String,String> infos = null;
 		Statement stmt = null;
 		ResultSet rs = null;
 		try{
@@ -179,6 +188,8 @@ public class XxtComplaintYwDao {
 			}else
 			   infos.put(NOT_FIND_PHONE, "false");
 			
+			List<String[]> valuesList = new ArrayList<String[]>();
+			String[] tempValue = null;
 			for(String abb : abbList){
 				StringBuffer sql=new StringBuffer("");
 				String stu_table = abb+"_xj_student";
@@ -198,27 +209,27 @@ public class XxtComplaintYwDao {
 				sql.append("left join town tw on tw.id=sch.town_id ");
 				sql.append("where f.phone='").append(phone).append("'");
 //				System.out.println(sql.toString());
-				
 				rs = stmt.executeQuery(sql.toString());
-				if(rs!=null&&rs.next()){
-                     infos.put("school_id", rs.getString("school_id"));					
-                     infos.put("school_name", rs.getString("school_name"));	
-                     infos.put("area_id", rs.getString("area_id"));	
-                     infos.put("class_name", rs.getString("class_name"));	
-                     infos.put("student_name", rs.getString("student_name"));	
-                     infos.put("stu_sequence", rs.getString("stu_sequence"));	
-                     infos.put("family_id", rs.getString("family_id"));	
-                     infos.put("school_id", rs.getString("school_id"));	
-                     infos.put("si_id", rs.getString("si_id"));	
-                     infos.put("town_name", rs.getString("town_name"));	
-                     infos.put("tranpackage_name", rs.getString("tranpackage_name"));	
-                     infos.put("charge", rs.getString("charge"));
-                     infos.put(NOT_FIND_YW, "false");
-					 break;
+				while(rs!=null&&rs.next()){
+					 tempValue = new String[]{
+						   YwComplaintUtil.valueToString(rs.getString("school_id")),
+						   YwComplaintUtil.valueToString(rs.getString("school_name")),
+						   YwComplaintUtil.valueToString(rs.getString("area_id")),
+						   YwComplaintUtil.valueToString(rs.getString("class_name")),
+						   YwComplaintUtil.valueToString(rs.getString("student_name")),
+						   YwComplaintUtil.valueToString(rs.getString("stu_sequence")),
+						   YwComplaintUtil.valueToString(rs.getString("family_id")),
+						   YwComplaintUtil.valueToString(rs.getString("school_id")),
+						   YwComplaintUtil.valueToString(rs.getString("si_id")),
+						   YwComplaintUtil.valueToString(rs.getString("town_name")),
+						   YwComplaintUtil.valueToString(rs.getString("tranpackage_name")),
+						   YwComplaintUtil.valueToString(rs.getString("charge"))
+					 };
+					 valuesList.add(tempValue);
 				}
+				infos = checkQueryResult(valuesList);
 				rs.close();
 			}
-			
 		}catch(Exception e){
 			AppLoger.getSQLLogger().info(e.getMessage());
 		}finally{
@@ -233,6 +244,68 @@ public class XxtComplaintYwDao {
 				}
 			return infos;	
 		}
+	}
+	
+	
+	/**
+	 * 当能查询到对应的学生 家庭信息时并且只有一条记录对应时，直接返回
+	 * 当查询到有条记录时，要根据如下的情况做出判断，并适当返回
+     * 注意：如果出现一个家长对应多个学生，并且这些学生所在学校不是同一个 SI 管辖或地区   下的，就直接返回空结果,通知其手动完成信息录入操作
+	 * @param list
+	 * @return
+	 */
+	Map<String,String> checkQueryResult(List<String[]> list){
+		Map<String,String> infos = new HashMap<String,String>();
+		//当能查询到对应的学生 家庭信息时并且只有一条记录对应时，直接返回
+		//当查询到有条记录时，要根据如下的情况做出判断，并适当返回
+        //注意：如果出现一个家长对应多个学生，并且这些学生所在学校不是同一个 SI 管辖或地区   下的，就直接返回空结果,通知其手动完成信息录入操作
+		boolean isSameArea = false;
+		boolean isSameSI = false;
+		String lastArea ="";
+		String lastSI = "";
+		String[] tempValues = null; 
+		if(list!=null&&list.size()>0){
+			isSameArea = true;
+			isSameSI = true;
+			for(String[] temp:list){
+				if(!"".equals(lastArea)&&!lastArea.equals(temp[2])){
+					isSameArea = false;
+					break;
+				}else
+					lastArea = temp[2];
+				
+				if(!"".equals(lastSI)&&!lastSI.equals(temp[8])){
+					isSameSI = false;
+					break;
+				}else
+					lastArea = temp[8];
+				temp = null;
+			}
+		}
+		
+		//当只有一条纪录时 或 查询的记录同属 一个地区 和 SI 的，那么就返回第一条记录
+		if(list!=null&&(list.size()==1||(isSameArea&&isSameSI))){
+			tempValues = list.get(0);
+			infos.put("school_id", tempValues[0]);					
+	        infos.put("school_name", tempValues[1]);	
+	        infos.put("area_id", tempValues[2]);	
+	        infos.put("class_name", tempValues[3]);	
+	        infos.put("student_name", tempValues[4]);	
+	        infos.put("stu_sequence", tempValues[5]);	
+	        infos.put("family_id", tempValues[6]);	
+	        infos.put("school_id", tempValues[7]);	
+	        infos.put("si_id", tempValues[8]);	
+	        infos.put("town_name", tempValues[9]);	
+	        infos.put("tranpackage_name", tempValues[10]);	
+	        infos.put("charge", tempValues[11]);
+		}else if(list==null||list.size()==0){
+			infos.put(MATCH_YW_MODEL, "NOT_RESULT");
+		}else
+			infos.put(MATCH_YW_MODEL, "MUITL");
+		if(list!=null)
+			list.clear();
+		list = null;
+		return infos;
 	}
 	
 	 /**
