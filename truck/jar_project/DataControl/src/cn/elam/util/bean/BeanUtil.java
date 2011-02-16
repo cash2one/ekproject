@@ -58,7 +58,7 @@ public class BeanUtil {
 	}
 
 	public static Class loadClass(String classPath) {
-		ClassLoader loader = BeanUtil.class.getClassLoader();
+		ClassLoader loader = ClassLoader.getSystemClassLoader();
 		if (loader == null)
 			return null;
 		try {
