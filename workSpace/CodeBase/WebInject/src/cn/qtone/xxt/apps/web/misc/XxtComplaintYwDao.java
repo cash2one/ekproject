@@ -53,6 +53,7 @@ public class XxtComplaintYwDao {
 		}
 	}
 
+	
 	/**
 	 * 组成插入语句
 	 * @param conn
@@ -73,8 +74,8 @@ public class XxtComplaintYwDao {
 				StringBuffer sql =new StringBuffer(" insert into YW_COMPLAINT (PHONE,REMARK,FAMILY_ID,AREA_ID,SI_ID, "); //7
 				sql.append("TOWN_NAME,SCHOOL_NAME,CLASS_NAME,STU_NAME,TRANPACKAGE_NAME,");;  //5
 				sql.append("HANDLER_ID,HANDLE_STATUS,HANDLE_RESULT,REASON_ID,REASON_OTHER,TSQD,HANDLE_TYPE,KHMYD,YHJXSY,COMPLAINT_LEVEL,CUSTOMER_TYPE,create_time,HANDLE_TIME,COMPLAINT_TIME,NEEDHANDLE_TIME)"); //8
-				sql.append("values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,10086,?,1,1,?,?,sysdate,sysdate,");
-				sql.append("to_date('"+item.getCreateTime()+"' , 'yyyy-mm-dd hh24:mi:ss'), to_date('"+item.getDeadline()+"' , 'yyyy-mm-dd hh24:mi:ss'))");
+				sql.append("values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,10086,?,1,1,?,?,sysdate,sysdate,");
+				sql.append("to_date('"+item.getCreateTime()+"' , 'yyyy-mm-dd hh24:mi:ss'), to_date('"+reSetDeadline(item)+"' , 'yyyy-mm-dd hh24:mi:ss'))");
 				stmt = conn.prepareStatement(sql.toString());
 				stmt.setString(1, item.getUser());
 				stmt.setString(2, item.getContent());
@@ -86,7 +87,7 @@ public class XxtComplaintYwDao {
 				stmt.setString(8, infos.get("class_name"));
 				stmt.setString(9, infos.get("student_name"));
 				stmt.setString(10,infos.get("tranpackage_name"));
-				stmt.setString(11, "1");    //处理人 ID
+				stmt.setString(11, YwComplaintUtil.HANDLER_ID); //处理人 ID
 				stmt.setString(12, "2"); //处理完
 				stmt.setString(13, "处理完成"); //处理结果
 				stmt.setString(14, "-1");  //理由ID
@@ -112,6 +113,21 @@ public class XxtComplaintYwDao {
 				  e.printStackTrace();
 			 }
 		}
+	}
+	
+	
+	/**
+	 * 
+	 * 重新计算 处理截至日期
+	 * @param item
+	 * @return
+	 */
+	String reSetDeadline(ComplaintItem item){
+		//处理时间要减半
+		
+		
+		
+		return item.getDeadline(); 
 	}
 	
 	/**
@@ -173,7 +189,7 @@ public class XxtComplaintYwDao {
 				sql.append("left join tranpackage_define dd on DD.SALEMODALID = cc.xxt_salemodalid ");
 				sql.append("left join town tw on tw.id=sch.town_id ");
 				sql.append("where f.phone='").append(phone).append("'");
-				System.out.println(sql.toString());
+//				System.out.println(sql.toString());
 				
 				rs = stmt.executeQuery(sql.toString());
 				if(rs!=null&&rs.next()){
