@@ -72,6 +72,10 @@ public class FetchDataTask extends BaseTask {
 			fetchComplaintDetail(client,items);
 //			printDatas(items);
 			
+			XxtComplaintYwDao dao = new XxtComplaintYwDao();
+			dao.insert(items);
+			dao = null;
+			
 			items = null;
 			cookies = null;
 		}catch(Exception e){
