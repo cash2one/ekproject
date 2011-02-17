@@ -87,9 +87,10 @@ public class FetchDataTask extends BaseTask {
 			//调用邮件服务接口
 			String messageBody = dao.wrapperEMailMessageContent();
 			if(messageBody!=null&&!"".equals(messageBody)){
-				MailBoxService mailBox = new MailBoxService("alex86825@163.com",
-						"smtp.163.com", "alex86825", "alex672988", "true",false);
-				mailBox.sendMail("ethanlamzs@gmail.com", "校讯通投诉处理邮件提醒_"+new Date(), messageBody);
+				
+				MailBoxService mailBox = new MailBoxService(SysCfg.fromAddress,
+						SysCfg.stmpHost, SysCfg.userName, SysCfg.password, SysCfg.auth,false);
+				mailBox.sendMail(SysCfg.toAddress, SysCfg.email_title+"_"+new Date(), messageBody);
 				mailBox = null;
 			}
 			dao = null;

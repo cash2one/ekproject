@@ -185,7 +185,7 @@ public class XxtComplaintYwDao {
 		
 		StringBuffer message = new StringBuffer();
 	    message.append("注意：以下投诉记录无法在校讯通投诉管理中进行自动处理，请核对以下的投诉记录！");
-	    message.append("<CRLF>");
+	    message.append("<br/><br/>");
 	    int index = 1;
 		for(ComplaintItem item : needSendItems){
 	    	message.append(index).append("：MISC流水号 : ").append(item.getId());
@@ -194,8 +194,9 @@ public class XxtComplaintYwDao {
 	    	message.append("   ").append(item.getCreateTime());
 	    	message.append("   ").append(item.getDeadline());
 	        message.append("   ").append(item.getRank());
-	        message.append("<CRLF>").append(item.getContent());
-	        message.append("<CRLF><CRLF>");
+	        message.append("<br/>").append(item.getContent());
+	        message.append("<br/><br/>");
+	        index++;
 	    }
 		return message.toString();
 	}
