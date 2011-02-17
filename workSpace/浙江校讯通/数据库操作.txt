@@ -45,6 +45,25 @@ commit -m "" E:/elam/Workspaces/xxt_zj/src/cn/qtone/xxt/admin/jzdx/propertyset/d
 
 
 
+cn/qtone/xxt/process/jzdx/messagemanage/RevertMessage.java
+cn/qtone/xxt/process/jzdx/messagemanage/handler/SIConfirmMessageHandlerOASms.java
+cn/qtone/xxt/process/jzdx/messagemanage/smsport/IRevertSmsPort.java
+cn/qtone/xxt/process/jzdx/messagemanage/smsport/RevertSmsPort.java
+cn/qtone/xxt/process/jzdx/messagemanage/smsport/RevertSmsPort_hn.java
+cn/qtone/xxt/process/jzdx/messagemanage/smsport/RevertSmsPort_jx.java
+cn/qtone/xxt/process/jzdx/messagemanage/smsport/RevertSmsPort_zj.java
+
+
+
+http://localhost:8080/jzdx/revert.do?source=15274939124&dest=10657061880137281&data=1
+
+
+
+出错用例
+
+1、=======
+
+
 
 cn/qtone/xxt/process/jzdx/messagemanage/RevertMessage.java
 cn/qtone/xxt/process/jzdx/messagemanage/handler/SIConfirmMessageHandlerOASms.java
@@ -61,5 +80,3 @@ cn/qtone/xxt/process/jzdx/messagemanage/smsport/RevertSmsPort_zj.java
 
 
 出错用例
-
-1、
