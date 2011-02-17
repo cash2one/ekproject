@@ -69,8 +69,8 @@ public class XxtComplaintYwDao {
 		PreparedStatement stmt = null;
 		try{
 			Map<String,String> infos = matchFamilyAndStudentInfosByPhone(conn,item.getUser());
-            if("true".equals(infos.get(NOT_FIND_PHONE))||!"".equals(infos.get(MATCH_YW_MODEL))){
-            	int error_type = "true".equals(infos.get(NOT_FIND_PHONE))?0:1;
+            if("true".equals(infos.get(NOT_FIND_PHONE))||(infos.get(MATCH_YW_MODEL)!=null&&!"".equals(infos.get(MATCH_YW_MODEL)))){
+            	int error_type = infos==null||"true".equals(infos.get(NOT_FIND_PHONE))?0:1;
             	error_type=error_type!=0?("NOT_RESULT".equals(infos.get(MATCH_YW_MODEL))?1:2):error_type;
             	
             	//出错定义为 0：找不到电话号码 ；1:无学生信息；2:多条学生记录 ；3：插入数据库时发生错误
@@ -104,7 +104,9 @@ public class XxtComplaintYwDao {
 				stmt.execute();
 				stmt.close();
             }
-            infos.clear();
+            
+            if(infos!=null)
+                infos.clear();
             infos = null;
             df = null;
 		}catch(Exception e){
@@ -185,10 +187,10 @@ public class XxtComplaintYwDao {
 			stmt = conn.createStatement();
 			
 			if(abbList==null||abbList.size()==0){
+			   infos = new HashMap<String,String>();
                infos.put(NOT_FIND_PHONE, "true");
                return infos;
-			}else
-			   infos.put(NOT_FIND_PHONE, "false");
+			}
 			
 			List<String[]> valuesList = new ArrayList<String[]>();
 			String[] tempValue = null;
@@ -225,7 +227,7 @@ public class XxtComplaintYwDao {
 						   YwComplaintUtil.valueToString(rs.getString("si_id")),
 						   YwComplaintUtil.valueToString(rs.getString("town_name")),
 						   YwComplaintUtil.valueToString(rs.getString("tranpackage_name")),
-						   YwComplaintUtil.valueToString(rs.getString("charge"))
+						   YwComplaintUtil.valueToString(rs.getString("charge")),
 					 };
 					 valuesList.add(tempValue);
 				}
@@ -233,6 +235,7 @@ public class XxtComplaintYwDao {
 				rs.close();
 			}
 		}catch(Exception e){
+			e.printStackTrace();
 			AppLoger.getSQLLogger().info(e.getMessage());
 		}finally{
 				try {

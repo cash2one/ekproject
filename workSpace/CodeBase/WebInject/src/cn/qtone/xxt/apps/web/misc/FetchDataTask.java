@@ -85,6 +85,7 @@ public class FetchDataTask extends BaseTask {
 			items = null;
 			cookies = null;
 		}catch(Exception e){
+			e.printStackTrace();
 			AppLoger.getSimpleErrorLogger().info(e.getMessage());
 		}finally{
 			post.releaseConnection();
