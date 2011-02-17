@@ -188,12 +188,12 @@ public class XxtComplaintYwDao {
 	    int index = 1;
 		for(ComplaintItem item : needSendItems){
 	    	message.append(index).append("£ºMISCÁ÷Ë®ºÅ : ").append(item.getId());
-	    	message.append("£¬").append(item.getUser());
-	    	message.append("   ").append(item.getBrand());
-	    	message.append("   ").append(item.getCreateTime());
-	    	message.append("   ").append(item.getDeadline());
-	        message.append("   ").append(item.getRank());
-	        message.append("<br/>").append(item.getContent());
+	    	message.append("   ").append(item.getUser());
+	    	message.append("      ").append(item.getBrand());
+	    	message.append("      ").append(item.getCreateTime());
+	    	message.append("      ").append(item.getDeadline());
+	        message.append("      ").append(item.getRank());
+	        message.append("<br/>      ").append(item.getContent());
 	        message.append("<br/><br/>");
 	        index++;
 	    }
