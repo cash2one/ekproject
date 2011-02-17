@@ -1,0 +1,7 @@
+ 2011-02-17 15:52:31,933 INFO  [appRunning] (cn.qtone.xxt.apps.web.misc.FetchDataTask:41) - 初始化并启动 MISC 数据抽取程序。
+ 2011-02-17 15:52:41,940 INFO  [appRunning] (cn.qtone.xxt.apps.web.misc.FetchDataTask:57) - 开始执行数据抽取任务
+ 2011-02-17 15:52:43,778 INFO  [appRunning] (cn.qtone.xxt.apps.web.misc.FetchDataTask:78) - 获取到今天的投诉记录数据数 :15条
+ 2011-02-17 15:52:50,370 INFO  [appRunning] (cn.qtone.xxt.apps.web.misc.FetchDataTask:106) - 结束执行数据抽取任务
+ 2011-02-17 15:53:41,939 INFO  [appRunning] (cn.qtone.xxt.apps.web.misc.FetchDataTask:57) - 开始执行数据抽取任务
+ 2011-02-17 15:53:43,781 INFO  [appRunning] (cn.qtone.xxt.apps.web.misc.FetchDataTask:78) - 获取到今天的投诉记录数据数 :15条
+ 2011-02-17 15:53:47,281 INFO  [appRunning] (cn.qtone.xxt.apps.web.misc.FetchDataTask:106) - 结束执行数据抽取任务
