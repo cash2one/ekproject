@@ -73,7 +73,7 @@ public class FetchDataTask extends BaseTask {
 			
 			//抓取页面，并提取页面数据
 			List<ComplaintItem> items = startToFetchComplaintListDatas(client);
-			AppLoger.getRuningLogger().info("获取新的数据有:"+(items!=null?items.size():"0"));
+			AppLoger.getRuningLogger().info("获取到今天的投诉记录数据数 :"+(items!=null?items.size():"0")+"条");
 			
 			fetchComplaintDetail(client,items);
 //			printDatas(items);
@@ -124,11 +124,7 @@ public class FetchDataTask extends BaseTask {
 						 item.setCreateTime(tdNodes[6].getText().toString());
 						 item.setDeadline(tdNodes[7].getText().toString());
 						 item.setReplyUrl(fetchReplyUrl(tdNodes[0]));
-						 
-						 if(isNeedCollect(item))
-						    ComplaintItemList.add(item);
-						 else
-							 item = null;
+						 ComplaintItemList.add(item);
 					 }
 				}
 			}

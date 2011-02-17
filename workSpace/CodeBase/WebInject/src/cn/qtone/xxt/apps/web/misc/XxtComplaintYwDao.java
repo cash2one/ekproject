@@ -41,7 +41,8 @@ public class XxtComplaintYwDao {
 			 _conn = DBConnector.getConnection(POOL_NAME);
 			if (items != null && items.size() > 0)
 				for (ComplaintItem item : items){
-					insertSqlWrapper(_conn,item);
+				   if(ItemsCheckHelper.getHelper().isNewItemJudgeFromDB(item)) //是否需要过滤该记录,是否是重复的投诉
+					   insertSqlWrapper(_conn,item);
 				}
 			_conn.close();
 		} catch (Exception e) {
