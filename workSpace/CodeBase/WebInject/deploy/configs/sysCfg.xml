@@ -7,8 +7,8 @@
 		<fromAddress>alex86825@163.com</fromAddress>
 		<toAddress>ethanlamzs@gmail.com</toAddress>
 		<stmpHost>smtp.163.com</stmpHost>
-		<userName>alex86825</userName>
-		<password>alex672988</password>
+		<userName></userName>
+		<password></password>
 		<auth>true</auth>
    </email>
 </Configs>
