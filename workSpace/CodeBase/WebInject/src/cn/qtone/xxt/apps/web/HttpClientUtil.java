@@ -11,7 +11,7 @@ import org.apache.commons.httpclient.methods.PostMethod;
 
 
 /**
- * HttpClient
+ * HttpClient 工具类 用作页面分析作用
  * @author Ethan.Lam  2011-2-15
  *
  */
