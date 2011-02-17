@@ -27,7 +27,6 @@ import cn.qtone.xxt.apps.web.AppLoger;
  */
 public class XxtComplaintYwDao {
 
-	private final static String POOL_NAME = "zjxxt";
 	private final static String NOT_FIND_PHONE = "NOT_FOUND_PHONE";
 	private final static String MATCH_YW_MODEL = "MATCH_YW_MODEL";
 	
@@ -41,7 +40,7 @@ public class XxtComplaintYwDao {
 		BaseDao db = null;
 		List<String> sqls = new ArrayList<String>();
 		try {
-			 _conn = DBConnector.getConnection(POOL_NAME);
+			 _conn = DBConnector.getConnection(SysCfg.DB_POOL_NAME);
 			if (items != null && items.size() > 0)
 				for (ComplaintItem item : items){
 				   if(ItemsCheckHelper.getHelper().isNewItemJudgeFromDB(item)) //是否需要过滤该记录,是否是重复的投诉
@@ -359,7 +358,7 @@ public class XxtComplaintYwDao {
 		List<String> abbList = null;//在全局表中查询该手机号码所属的地区ID
 		ResultSet rs=null;
 		try {
-			db = new BaseDao(DBConnector.getConnection(POOL_NAME));
+			db = new BaseDao(DBConnector.getConnection(SysCfg.DB_POOL_NAME));
 			abbList =new ArrayList<String>();
 			db.preparedExeDB("select distinct abb from family_phone where phone = ?");
 			db.setString(1, phone);

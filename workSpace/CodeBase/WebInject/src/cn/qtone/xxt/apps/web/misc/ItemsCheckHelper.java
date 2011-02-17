@@ -61,7 +61,7 @@ public class ItemsCheckHelper {
 		boolean isNewComplaint = true;
 //		System.out.println(item.getId()+","+item.getUser()+","+item.getBrand()+","+item.getArea()+","+item.getContent());
 		try{
-			db = new BaseDao(DBConnector.getConnection("zjxxt"));
+			db = new BaseDao(DBConnector.getConnection(SysCfg.DB_POOL_NAME));
 			db.preparedExeDB("select * from complaint_event_log where event_id =? and phone = ? and to_char(update_time,'yyyy-mm-dd hh24:mi:ss')=?");
 			db.setString(1, item.getId());
 			db.setString(2, item.getUser());

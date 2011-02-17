@@ -17,34 +17,41 @@ import cn.elam.util.file.xml.XmlHandler;
  */
 public class SysCfg {
 
-	public static String fromAddress; // 发件人
-	public static String toAddress; // 收件人
-	public static String stmpHost; // 发信箱
-	public static String userName; //
-	public static String password;
-	public static String auth; // is ssl 验证登录
-	public static String email_title;
+	public static String DB_POOL_NAME = "zjxxt";
+	public static String COMPLAINT_CREATE_USERID = "1"; 
+	
+	public static String EMAIL_FROM_ADDRESS; // 发件人
+	public static String EMAIL_TO_ADDRESS; // 收件人
+	public static String EMAIL_STMP_HOST; // 发信箱
+	public static String EMAIL_USER_NAME; //
+	public static String EMAIL_USER_PWD;
+	public static String EMAIL_AUTH; // is ssl 验证登录
+	public static String EMAIL_TITLE_SET;
 	
 	static {
-		Document doc = XmlHandler.loadXML("configs/sysCfg.xml");
-		Element element = XmlHandler.getElement(doc, "email/fromAddress");
-		fromAddress = element.getTextTrim();
-		element = XmlHandler.getElement(doc, "email/toAddress");
-		toAddress = element.getTextTrim();
-		element = XmlHandler.getElement(doc, "email/stmpHost");
-		stmpHost = element.getTextTrim();
-		element = XmlHandler.getElement(doc, "email/userName");
-		userName = element.getTextTrim();
-		element = XmlHandler.getElement(doc, "email/password");
-		password = element.getTextTrim();
-		element = XmlHandler.getElement(doc, "email/auth");
-		auth = element != null ? element.getTextTrim() : "false";
-		element = XmlHandler.getElement(doc, "email/email_title");
-		email_title = element != null ? element.getTextTrim() : "校讯通投诉处理邮件提醒";
+			Document doc = XmlHandler.loadXML("configs/sysCfg.xml");
+			Element element = XmlHandler.getElement(doc, "email/fromAddress");
+			EMAIL_FROM_ADDRESS = element.getTextTrim();
+			element = XmlHandler.getElement(doc, "email/toAddress");
+			EMAIL_TO_ADDRESS = element.getTextTrim();
+			element = XmlHandler.getElement(doc, "email/stmpHost");
+			EMAIL_STMP_HOST = element.getTextTrim();
+			element = XmlHandler.getElement(doc, "email/userName");
+			EMAIL_USER_NAME = element.getTextTrim();
+			element = XmlHandler.getElement(doc, "email/password");
+			EMAIL_USER_PWD = element.getTextTrim();
+			element = XmlHandler.getElement(doc, "email/auth");
+			EMAIL_AUTH = element != null ? element.getTextTrim() : "false";
+			element = XmlHandler.getElement(doc, "email/email_title");
+			EMAIL_TITLE_SET = element != null ? element.getTextTrim() : "校讯通投诉处理邮件提醒";
+			element = XmlHandler.getElement(doc, "DBPool");
+			DB_POOL_NAME = element != null ? element.getTextTrim() : "zjxxt";
+			element = XmlHandler.getElement(doc, "Complaint_CreaterId");
+			COMPLAINT_CREATE_USERID = element != null ? element.getTextTrim() : "1";
 	}
 
 	public static void main(String... str) {
-		System.out.println(SysCfg.fromAddress);
+		System.out.println(SysCfg.EMAIL_FROM_ADDRESS);
 	}
 
 }

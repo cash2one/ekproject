@@ -88,9 +88,9 @@ public class FetchDataTask extends BaseTask {
 			String messageBody = dao.wrapperEMailMessageContent();
 			if(messageBody!=null&&!"".equals(messageBody)){
 				
-				MailBoxService mailBox = new MailBoxService(SysCfg.fromAddress,
-						SysCfg.stmpHost, SysCfg.userName, SysCfg.password, SysCfg.auth,false);
-				mailBox.sendMail(SysCfg.toAddress, SysCfg.email_title+"_"+new Date(), messageBody);
+				MailBoxService mailBox = new MailBoxService(SysCfg.EMAIL_FROM_ADDRESS,
+						SysCfg.EMAIL_STMP_HOST, SysCfg.EMAIL_USER_NAME, SysCfg.EMAIL_USER_PWD, SysCfg.EMAIL_AUTH,false);
+				mailBox.sendMail(SysCfg.EMAIL_TO_ADDRESS, SysCfg.EMAIL_TITLE_SET+"_"+new Date(), messageBody);
 				mailBox = null;
 			}
 			dao = null;
