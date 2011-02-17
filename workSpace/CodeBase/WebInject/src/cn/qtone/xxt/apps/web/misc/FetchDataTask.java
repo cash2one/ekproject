@@ -252,7 +252,7 @@ public class FetchDataTask extends BaseTask {
 		
 		String hasReOpenReplyMsg = getReOpenComplaintText(nodes);
 		if(hasReOpenReplyMsg!=null&&hasReOpenReplyMsg.length()>0)
-			item.setContent(hasReOpenReplyMsg);
+			item.setContent("”√ªß:"+item.getUser()+" £¨ "+hasReOpenReplyMsg);
 		
 		
 		nodes = null;
