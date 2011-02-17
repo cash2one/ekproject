@@ -14,8 +14,8 @@ import javax.mail.internet.*;
 public class MailBoxService {
 
 	public static void main(String[] args) {
-		MailBoxService src = new MailBoxService("alex86825@163.com",
-				"smtp.163.com", "alex86825", "alex672988", "true",false);
+		MailBoxService src = new MailBoxService("ethanlamzs@sina.cn",
+				"smtp.sina.cn", "ethanlamzs@sina.cn", "889276", "true",true);
 		src.sendMail("ethanlamzs@gmail.com", "hello", "just a test <br /> testestest"+Math.random());
 		
 	}
