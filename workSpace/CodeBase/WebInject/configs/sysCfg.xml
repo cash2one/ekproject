@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configs>
-   <DBPool></DBPool>
-   <Complaint_CreaterId></Complaint_CreaterId>
+   <DBPool>zjxxt</DBPool>
+   <Complaint_CreaterId>1</Complaint_CreaterId>
    <email>
         <email_title>校讯通投诉处理邮件提醒</email_title>
 		<fromAddress>alex86825@163.com</fromAddress>
