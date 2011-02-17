@@ -41,13 +41,13 @@ public class SysCfg {
 			element = XmlHandler.getElement(doc, "email/password");
 			EMAIL_USER_PWD = element.getTextTrim();
 			element = XmlHandler.getElement(doc, "email/auth");
-			EMAIL_AUTH = element != null ? element.getTextTrim() : "false";
+			EMAIL_AUTH = element!= null&&!Checker.isNull( element.getTextTrim())? element.getTextTrim() : "false";
 			element = XmlHandler.getElement(doc, "email/email_title");
-			EMAIL_TITLE_SET = element != null ? element.getTextTrim() : "校讯通投诉处理邮件提醒";
+			EMAIL_TITLE_SET = element!= null&&!Checker.isNull( element.getTextTrim())? element.getTextTrim() : "校讯通投诉处理邮件提醒";
 			element = XmlHandler.getElement(doc, "DBPool");
-			DB_POOL_NAME = element != null ? element.getTextTrim() : "zjxxt";
+			DB_POOL_NAME = element!= null&&!Checker.isNull( element.getTextTrim())? element.getTextTrim() : "zjxxt";
 			element = XmlHandler.getElement(doc, "Complaint_CreaterId");
-			COMPLAINT_CREATE_USERID = element != null ? element.getTextTrim() : "1";
+			COMPLAINT_CREATE_USERID = element!= null&&!Checker.isNull( element.getTextTrim())? element.getTextTrim() : "1";
 	}
 
 	public static void main(String... str) {
