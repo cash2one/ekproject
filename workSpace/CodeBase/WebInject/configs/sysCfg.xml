@@ -4,11 +4,11 @@
    <Complaint_CreaterId>1</Complaint_CreaterId>
    <email>
         <email_title>校讯通投诉处理邮件提醒</email_title>
-		<fromAddress>alex86825@163.com</fromAddress>
+		<fromAddress>ethanlamzs@sina.cn</fromAddress>
 		<toAddress>ethanlamzs@gmail.com</toAddress>
-		<stmpHost>smtp.163.com</stmpHost>
-		<userName></userName>
-		<password></password>
+		<stmpHost>smtp.sina.cn</stmpHost>
+		<userName>ethanlamzs@sina.cn</userName>
+		<password>889276</password>
 		<auth>true</auth>
    </email>
 </Configs>

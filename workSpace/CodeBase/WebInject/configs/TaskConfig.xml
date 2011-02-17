@@ -2,7 +2,7 @@
 <TasksConfig>
 	<global></global>
 	<tasks>
-		<task id="task_01" name="FetchMiscData" startTimeAt="10:10" period="10" periodType="sec">
+		<task id="task_01" name="FetchMiscData" startTimeAt="10:10" period="60" periodType="sec">
 			cn.qtone.xxt.apps.web.misc.FetchDataTask
        </task>
 	</tasks>
