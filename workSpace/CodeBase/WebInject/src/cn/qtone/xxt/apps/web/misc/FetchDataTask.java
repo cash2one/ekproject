@@ -135,7 +135,7 @@ public class FetchDataTask extends BaseTask {
 						 item.setDealState(tdNodes[5].getText().toString());
 						 item.setCreateTime(tdNodes[6].getText().toString());
 						 item.setDeadline(tdNodes[7].getText().toString());
-						 item.setReplyUrl(fetchReplyUrl(tdNodes[0]));
+						 item.setReplyUrl(fetchReplyUrl(tdNodes[8]));
 						 ComplaintItemList.add(item);
 					 }
 				}
@@ -226,9 +226,9 @@ public class FetchDataTask extends BaseTask {
 		get.releaseConnection();
 		
 		HtmlCleaner cleaner = new HtmlCleaner();
-		TagNode node = cleaner.clean(content);
-		Object[] trs = node.getElementsByName("tr", true);
-
+		TagNode nodes = cleaner.clean(content);
+		Object[] trs = nodes.getElementsByName("tr", true);
+		
 		//提取对应投诉内容文本
 		if (trs.length != 0) {
 			TagNode trNode = null;
@@ -236,6 +236,8 @@ public class FetchDataTask extends BaseTask {
 			for (Object tr : trs) {
 				trNode = (TagNode) tr;
 				tdNodes = trNode.getElementsByName("td",true);
+				
+				//获取投诉内容
 				if (tdNodes!=null&&tdNodes.length==2) {
 					 if(tdNodes[0]!=null&&tdNodes[0].getText().toString().trim().startsWith("投诉内容")){
 						 content = tdNodes[1].getText().toString().trim();
@@ -247,13 +249,63 @@ public class FetchDataTask extends BaseTask {
 				trNode =null;
 			}
 		}
-		node = null;
+		
+		String hasReOpenReplyMsg = getReOpenComplaintText(nodes);
+		if(hasReOpenReplyMsg!=null&&hasReOpenReplyMsg.length()>0)
+			item.setContent(hasReOpenReplyMsg);
+		
+		
+		nodes = null;
 		cleaner = null;
 		get = null;
 		cookies = null;
 	}
 	
-
+	
+	
+	/**
+	 * 
+	 * 获取重新打开贴的最新投诉内容
+	 * @param nodes
+	 * @return
+	 */
+    String getReOpenComplaintText(TagNode nodes ){
+    	String newestReply = "";
+    	try{
+			Object[] tables = nodes.getElementsByName("table", true);
+			boolean isComplaintReply = false;
+			TagNode tableNode = null;
+			TagNode[] trNodes = null;
+			TagNode[] tdNodes = null;
+			if (tables.length != 0) {
+				for (Object table : tables) {
+					tableNode = (TagNode) table;
+					//回复的帖子
+					if("center".equals(tableNode.getAttributeByName("align"))){
+						trNodes = tableNode.getElementsByName("tr", true);	
+						tdNodes = trNodes[0].getElementsByName("td", true);
+						if(tdNodes!=null&&tdNodes.length==4&&tdNodes[3].getText().toString().trim().indexOf("KF")>=0){
+							isComplaintReply = true;
+						}
+						
+						if(isComplaintReply){
+							tdNodes = trNodes[1].getElementsByName("td", true);
+							if(tdNodes!=null&&tdNodes.length==2&&tdNodes[0].getText().toString().trim().indexOf("帖子的内容")>=0){
+								newestReply = tdNodes[1].getText().toString().trim();
+								isComplaintReply = false;
+							}
+						}
+						isComplaintReply = false;
+					}
+				}
+			}
+    	}catch(Exception e){
+    		AppLoger.getSimpleErrorLogger().info(e.getMessage()+":获取重新打开的投诉贴的内容失败！");
+    	}
+    	return newestReply;
+    }
+	
+	
 	
 	/**
 	 * 测试打印获取的数据信息
