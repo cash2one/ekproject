@@ -15,8 +15,8 @@ public class MailBoxService {
 
 	public static void main(String[] args) {
 		MailBoxService src = new MailBoxService("alex86825@163.com",
-				"smtp.163.com", "alex86825", "", "true",false);
-		src.sendMail("ethanlamzs@gmail.com", "hello", "just a test"+Math.random());
+				"smtp.163.com", "alex86825", "alex672988", "true",false);
+		src.sendMail("ethanlamzs@gmail.com", "hello", "just a test <br /> testestest"+Math.random());
 		
 	}
 
@@ -31,6 +31,7 @@ public class MailBoxService {
 		this.password = password;
 	}
 
+	
 	public MailBoxService(String mailAddress, String smtpHost, String userName,
 			String password, String auth) {
 		this.mailAddress = mailAddress;
@@ -50,6 +51,12 @@ public class MailBoxService {
 		this.isDebug = isDebug;
 	}
 
+	/**
+	 * 属性配置
+	 * @param smtpHost
+	 * @param auth
+	 * @return
+	 */
 	Properties createProperties(String smtpHost, String auth) {
 		Properties props = new Properties();
 		props.put("mail.smtp.host", smtpHost);
@@ -57,6 +64,13 @@ public class MailBoxService {
 		return props;
 	}
 
+	
+	/**
+	 * 发送邮件
+	 * @param receviceAddress
+	 * @param title
+	 * @param messageBody
+	 */
 	public void sendMail(String receviceAddress, String title,
 			String messageBody) {
 		Properties props = createProperties(smtpHost, auth);
@@ -97,6 +111,11 @@ public class MailBoxService {
 
 	}
 
+	
+	
+	/**
+	 * 测试方法
+	 */
 	private static void jmail2() {
 		try {
 
