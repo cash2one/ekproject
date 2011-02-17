@@ -1,5 +1,7 @@
 package cn.qtone.xxt.apps.web.misc;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -87,6 +89,27 @@ public class YwComplaintUtil {
 	
 	public static String valueToString(String value){
 		return value!=null?value:"";
+	}
+	
+	
+	/**
+	 * 
+	 * 重新计算 处理截至日期
+	 * @param item
+	 * @return
+	 */
+	static String reSetDeadline(ComplaintItem item){
+		//处理时间要减半
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		try {
+			long difTime = df.parse(item.getDeadline()).getTime() - df.parse(item.getCreateTime()).getTime();
+			String newTime = df.format(new Date(df.parse(item.getCreateTime()).getTime()+(difTime/2)));
+			df = null;
+			return newTime;
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return item.getDeadline(); 
 	}
 	
 }

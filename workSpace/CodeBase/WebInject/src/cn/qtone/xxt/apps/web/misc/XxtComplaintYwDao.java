@@ -84,7 +84,7 @@ public class XxtComplaintYwDao {
 				sql.append("TOWN_NAME,SCHOOL_NAME,CLASS_NAME,STU_NAME,TRANPACKAGE_NAME,");;  //5
 				sql.append("CREATE_ID,HANDLE_STATUS,FLAG,REASON_ID,REASON_OTHER,TSQD,HANDLE_TYPE,KHMYD,YHJXSY,COMPLAINT_LEVEL,CUSTOMER_TYPE,create_time,COMPLAINT_TIME,NEEDHANDLE_TIME)"); //8
 				sql.append("values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,10086,?,1,1,?,?,sysdate,");
-				sql.append("to_date('"+item.getCreateTime()+"' , 'yyyy-mm-dd hh24:mi:ss'), to_date('"+reSetDeadline(item)+"' , 'yyyy-mm-dd hh24:mi:ss'))");
+				sql.append("to_date('"+item.getCreateTime()+"' , 'yyyy-mm-dd hh24:mi:ss'), to_date('"+YwComplaintUtil.reSetDeadline(item)+"' , 'yyyy-mm-dd hh24:mi:ss'))");
 				stmt = conn.prepareStatement(sql.toString());
 				stmt.setString(1, item.getUser());
 				stmt.setString(2, item.getContent());
@@ -128,25 +128,6 @@ public class XxtComplaintYwDao {
 	}
 	
 	
-	/**
-	 * 
-	 * 重新计算 处理截至日期
-	 * @param item
-	 * @return
-	 */
-	String reSetDeadline(ComplaintItem item){
-		//处理时间要减半
-		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		try {
-			long difTime = df.parse(item.getDeadline()).getTime() - df.parse(item.getCreateTime()).getTime();
-			String newTime = df.format(new Date(df.parse(item.getCreateTime()).getTime()+(difTime/2)));
-			df = null;
-			return newTime;
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		return item.getDeadline(); 
-	}
 	
 	/**
 	 * 
@@ -191,7 +172,7 @@ public class XxtComplaintYwDao {
 	    	message.append("   ").append(item.getUser());
 	    	message.append("      ").append(item.getBrand());
 	    	message.append("      ").append(item.getCreateTime());
-	    	message.append("      ").append(item.getDeadline());
+	    	message.append("      ").append(YwComplaintUtil.reSetDeadline(item));
 	        message.append("      ").append(item.getRank());
 	        message.append("<br/>      ").append(item.getContent());
 	        message.append("<br/><br/>");
