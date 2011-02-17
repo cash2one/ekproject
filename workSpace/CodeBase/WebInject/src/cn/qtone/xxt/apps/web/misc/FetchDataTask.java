@@ -5,9 +5,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.commons.httpclient.Cookie;
 import org.apache.commons.httpclient.HttpClient;
@@ -17,6 +15,7 @@ import org.apache.commons.httpclient.methods.PostMethod;
 import org.htmlcleaner.HtmlCleaner;
 import org.htmlcleaner.TagNode;
 
+import cn.elam.util.common.MailBoxService;
 import cn.qtone.xxt.apps.web.AppLoger;
 import cn.qtone.xxt.apps.web.HttpClientUtil;
 
@@ -32,6 +31,7 @@ import com.elam.util.task.TaskItem;
  */
 public class FetchDataTask extends BaseTask {
 
+	
 	public FetchDataTask(TaskItem taskItem) {
 		super(taskItem);
 	}
@@ -39,6 +39,8 @@ public class FetchDataTask extends BaseTask {
 	@Override
 	protected void initialize() {
 		AppLoger.getRuningLogger().info("初始化并启动 MISC 数据抽取程序。");
+		
+		
 	}
 
 	@Override
@@ -80,8 +82,17 @@ public class FetchDataTask extends BaseTask {
 			
 			XxtComplaintYwDao dao = new XxtComplaintYwDao();
 			dao.insert(items);
-			dao = null;
 			
+			
+			//调用邮件服务接口
+			String messageBody = dao.wrapperEMailMessageContent();
+			if(messageBody!=null&&!"".equals(messageBody)){
+				MailBoxService mailBox = new MailBoxService("alex86825@163.com",
+						"smtp.163.com", "alex86825", "alex672988", "true",false);
+				mailBox.sendMail("ethanlamzs@gmail.com", "校讯通投诉处理邮件提醒_"+new Date(), messageBody);
+				mailBox = null;
+			}
+			dao = null;
 			items = null;
 			cookies = null;
 		}catch(Exception e){

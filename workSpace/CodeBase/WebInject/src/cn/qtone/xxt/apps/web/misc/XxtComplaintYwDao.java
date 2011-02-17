@@ -31,7 +31,10 @@ public class XxtComplaintYwDao {
 	private final static String NOT_FIND_PHONE = "NOT_FOUND_PHONE";
 	private final static String MATCH_YW_MODEL = "MATCH_YW_MODEL";
 	
+	
+	//此处的记录是为了发邮件做缓存的
 	private List<ComplaintItem> needSendItems = new ArrayList<ComplaintItem>();
+	
 	
 	public void insert(List<ComplaintItem> items) {
 		Connection _conn = null;
@@ -165,8 +168,38 @@ public class XxtComplaintYwDao {
 		   case 3 : error_msg ="入库失败的记录";break;
 		}
 		error_msg = error_msg +"  ---  详细："+item.getUser()+","+item.getBrand()+","+item.getContent()+","+item.getCreateTime()+","+item.getDeadline()+","+item.getRank();
+		
+		//记录无法进行操作的记录
 		AppLoger.getBusinessLogger().info(error_msg);		
+		this.needSendItems.add(item);
+		
 	}
+	
+	/**
+	 * 邮件的内容
+	 * @return
+	 */
+	public String wrapperEMailMessageContent(){
+		if(this.needSendItems.size()==0)
+		   return null;
+		
+		StringBuffer message = new StringBuffer();
+	    message.append("注意：以下投诉记录无法在校讯通投诉管理中进行自动处理，请核对以下的投诉记录！");
+	    message.append("<CRLF>");
+	    int index = 1;
+		for(ComplaintItem item : needSendItems){
+	    	message.append(index).append("：MISC流水号 : ").append(item.getId());
+	    	message.append("，").append(item.getUser());
+	    	message.append("   ").append(item.getBrand());
+	    	message.append("   ").append(item.getCreateTime());
+	    	message.append("   ").append(item.getDeadline());
+	        message.append("   ").append(item.getRank());
+	        message.append("<CRLF>").append(item.getContent());
+	        message.append("<CRLF><CRLF>");
+	    }
+		return message.toString();
+	}
+	
 	
 	
 	/**
