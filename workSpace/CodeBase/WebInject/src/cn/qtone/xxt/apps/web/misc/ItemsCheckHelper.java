@@ -96,4 +96,41 @@ public class ItemsCheckHelper {
 	}
 	
 	
+	/**
+	 * 从数据库中判断是否是重新打开的投诉记录
+	 * 如果无 则需要返回false，有则返回true
+	 * @param item
+	 * @return
+	 */
+	public boolean isRepOpenComplaintItem(ComplaintItem item){
+		BaseDao db = null;
+		ResultSet rs=null;
+		boolean isReOpenFlag = false;
+//		System.out.println(item.getId()+","+item.getUser()+","+item.getBrand()+","+item.getArea()+","+item.getContent());
+		try{
+			db = new BaseDao(DBConnector.getConnection(SysCfg.DB_POOL_NAME));
+			db.preparedExeDB("select * from complaint_event_log where event_id =? and phone = ? ");
+			db.setString(1, item.getId());
+			db.setString(2, item.getUser());
+			rs = db.queryPreparedDB();
+			if(rs!=null&&rs.next())
+				isReOpenFlag = true;
+			rs.close();
+			return isReOpenFlag;
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			   try {
+					if(rs!=null)
+					   rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			rs = null;
+			db.close();
+		}
+		return isReOpenFlag;
+	}
+	
+	
 }

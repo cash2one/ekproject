@@ -250,7 +250,7 @@ public class FetchDataTask extends BaseTask {
 			}
 		}
 		
-		String hasReOpenReplyMsg = getReOpenComplaintText(nodes);
+		String hasReOpenReplyMsg = getReOpenComplaintText(item,nodes);
 		if(hasReOpenReplyMsg!=null&&hasReOpenReplyMsg.length()>0)
 			item.setContent("”√ªß:"+item.getUser()+" £¨ "+hasReOpenReplyMsg);
 		
@@ -269,8 +269,12 @@ public class FetchDataTask extends BaseTask {
 	 * @param nodes
 	 * @return
 	 */
-    String getReOpenComplaintText(TagNode nodes ){
+    String getReOpenComplaintText(ComplaintItem item,TagNode nodes ){
     	String newestReply = "";
+    	
+    	if(!ItemsCheckHelper.getHelper().isRepOpenComplaintItem(item))
+    		return "";
+    	
     	try{
 			Object[] tables = nodes.getElementsByName("table", true);
 			boolean isComplaintReply = false;
