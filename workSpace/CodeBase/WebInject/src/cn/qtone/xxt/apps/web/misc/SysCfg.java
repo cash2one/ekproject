@@ -50,10 +50,12 @@ public class SysCfg {
 			DB_POOL_NAME = element!= null&&!Checker.isNull( element.getTextTrim())? element.getTextTrim() : "zjxxt";
 			element = XmlHandler.getElement(doc, "Complaint_CreaterId");
 			COMPLAINT_CREATE_USERID = element!= null&&!Checker.isNull( element.getTextTrim())? element.getTextTrim() : "1";
-			
-			element = XmlHandler.getElement(doc, "fetch-datas-set/page-size");
-			FETCH_DATA_SIZE = element!= null&&!Checker.isNull( element.getTextTrim())? Integer.parseInt(element.getTextTrim()): 300;
-	
+			try{
+				element = XmlHandler.getElement(doc, "fetch-datas-set/page-size");
+				FETCH_DATA_SIZE = element!= null&&!Checker.isNull( element.getTextTrim())? Integer.parseInt(element.getTextTrim()): 300;
+			}catch(Exception e){
+				FETCH_DATA_SIZE = 300;
+			}
 	}
 
 	public static void main(String... str) {
