@@ -29,6 +29,8 @@ public class SysCfg {
 	public static String EMAIL_TITLE_SET;
 	
 	public static int FETCH_DATA_SIZE=300;  //设置取数据量
+	public static String DATAS_STORE_TABLE_NAME ="YW_COMPLAINT";
+	
 	
 	static {
 			Document doc = XmlHandler.loadXML("configs/sysCfg.xml");
@@ -50,6 +52,8 @@ public class SysCfg {
 			DB_POOL_NAME = element!= null&&!Checker.isNull( element.getTextTrim())? element.getTextTrim() : "zjxxt";
 			element = XmlHandler.getElement(doc, "Complaint_CreaterId");
 			COMPLAINT_CREATE_USERID = element!= null&&!Checker.isNull( element.getTextTrim())? element.getTextTrim() : "1";
+			element = XmlHandler.getElement(doc, "fetch-datas-set/store_table");
+			DATAS_STORE_TABLE_NAME = element!= null&&!Checker.isNull( element.getTextTrim())? element.getTextTrim() : "YW_COMPLAINT";
 			try{
 				element = XmlHandler.getElement(doc, "fetch-datas-set/page-size");
 				FETCH_DATA_SIZE = element!= null&&!Checker.isNull( element.getTextTrim())? Integer.parseInt(element.getTextTrim()): 300;

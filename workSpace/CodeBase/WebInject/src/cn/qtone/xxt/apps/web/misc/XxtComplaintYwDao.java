@@ -80,7 +80,7 @@ public class XxtComplaintYwDao {
             	recordNotInserItem(item,error_type);
             }else{
             	//要对处理时间进行 减半处理
-				StringBuffer sql =new StringBuffer(" insert into YW_COMPLAINT (PHONE,REMARK,FAMILY_ID,AREA_ID,SI_ID, "); //7
+				StringBuffer sql =new StringBuffer(" insert into "+SysCfg.DATAS_STORE_TABLE_NAME+" (PHONE,REMARK,FAMILY_ID,AREA_ID,SI_ID, "); //7
 				sql.append("TOWN_NAME,SCHOOL_NAME,CLASS_NAME,STU_NAME,TRANPACKAGE_NAME,");;  //5
 				sql.append("CREATE_ID,HANDLE_STATUS,FLAG,REASON_ID,REASON_OTHER,TSQD,HANDLE_TYPE,KHMYD,YHJXSY,COMPLAINT_LEVEL,CUSTOMER_TYPE,create_time,COMPLAINT_TIME,NEEDHANDLE_TIME)"); //8
 				sql.append("values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,10086,?,1,1,?,?,sysdate,");
