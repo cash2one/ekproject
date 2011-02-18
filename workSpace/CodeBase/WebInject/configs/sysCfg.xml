@@ -4,6 +4,7 @@
    <Complaint_CreaterId>1</Complaint_CreaterId>
    <fetch-datas-set>
        <page-size>300</page-size>
+       <store_table>YW_COMPLAINT</store_table>
    </fetch-datas-set>
    <email>
         <email_title>校讯通投诉处理邮件提醒</email_title>
