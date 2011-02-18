@@ -178,6 +178,8 @@ public class XxtComplaintYwDao {
 	        message.append("<br/><br/>");
 	        index++;
 	    }
+		needSendItems.clear();
+		needSendItems = null;
 		return message.toString();
 	}
 	
