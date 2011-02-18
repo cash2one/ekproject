@@ -36,14 +36,12 @@ public class FetchDataTask extends BaseTask {
 		super(taskItem);
 	}
 
-	@Override
 	protected void initialize() {
 		AppLoger.getRuningLogger().info("初始化并启动 MISC 数据抽取程序。");
 		
 		
 	}
 
-	@Override
 	protected void release() {
 		AppLoger.getRuningLogger().info("MISC 数据抽取程序关闭");
 	}
