@@ -173,7 +173,7 @@ public class FetchDataTask extends BaseTask {
 			DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 			String queryTimePer = df.format(new Date());
 			Cookie[] cookies = HttpClientUtil.addCookies(client);
-			String dataUrl = "http://admin.zj.monternet.com:8080/sp/indict/queryIndictICD.jsp?subsId=&userName=&status=1&queryTime=0&fromDate="+queryTimePer+"&toDate="+queryTimePer+"&pageNum=1&currentPageNo=1&pageSize=100&navigatePage_toPageSize=100&navigatePage_toPageNum=1";
+			String dataUrl = "http://admin.zj.monternet.com:8080/sp/indict/queryIndictICD.jsp?subsId=&userName=&status=1&queryTime=0&fromDate="+queryTimePer+"&toDate="+queryTimePer+"&pageNum=1&currentPageNo=1&pageSize="+SysCfg.FETCH_DATA_SIZE+"&navigatePage_toPageSize="+SysCfg.FETCH_DATA_SIZE+"&navigatePage_toPageNum=1";
 			GetMethod get = HttpClientUtil.newGetMethod(dataUrl, cookies);
 			client.executeMethod(get);
 			cookies = null;

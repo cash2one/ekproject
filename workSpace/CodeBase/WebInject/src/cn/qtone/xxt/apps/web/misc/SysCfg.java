@@ -28,6 +28,8 @@ public class SysCfg {
 	public static String EMAIL_AUTH; // is ssl 验证登录
 	public static String EMAIL_TITLE_SET;
 	
+	public static int FETCH_DATA_SIZE=300;  //设置取数据量
+	
 	static {
 			Document doc = XmlHandler.loadXML("configs/sysCfg.xml");
 			Element element = XmlHandler.getElement(doc, "email/fromAddress");
@@ -48,6 +50,10 @@ public class SysCfg {
 			DB_POOL_NAME = element!= null&&!Checker.isNull( element.getTextTrim())? element.getTextTrim() : "zjxxt";
 			element = XmlHandler.getElement(doc, "Complaint_CreaterId");
 			COMPLAINT_CREATE_USERID = element!= null&&!Checker.isNull( element.getTextTrim())? element.getTextTrim() : "1";
+			
+			element = XmlHandler.getElement(doc, "fetch-datas-set/page-size");
+			FETCH_DATA_SIZE = element!= null&&!Checker.isNull( element.getTextTrim())? Integer.parseInt(element.getTextTrim()): 300;
+	
 	}
 
 	public static void main(String... str) {
