@@ -66,7 +66,7 @@ public class FetchDataTask extends BaseTask {
 			client = HttpClientUtil.newHttpClient(LOGON_SITE, LOGON_PORT);
 			post = HttpClientUtil.newPostMethod(loginReq, UserAgent, hrefUrl,
 					new String[][] { { "selectAccount", "SPPREREG" },
-							{ "USER", "qtone" }, { "PASSWORD", "qtone2010" } });
+							{ "USER", SysCfg.MISC_USER_NAME }, { "PASSWORD", SysCfg.MISC_USER_PWD } });
 			client.executeMethod(post);
 			Cookie[] cookies = HttpClientUtil.addCookies(client);
 			post.releaseConnection();
@@ -91,6 +91,7 @@ public class FetchDataTask extends BaseTask {
 				mailBox.sendMail(SysCfg.EMAIL_TO_ADDRESS, SysCfg.EMAIL_TITLE_SET+"_"+new Date(), messageBody);
 				mailBox = null;
 			}
+			post.releaseConnection();
 			dao = null;
 			items = null;
 			cookies = null;
@@ -98,7 +99,7 @@ public class FetchDataTask extends BaseTask {
 			e.printStackTrace();
 			AppLoger.getSimpleErrorLogger().info(e.getMessage());
 		}finally{
-			post.releaseConnection();
+			post=null;
 			client = null;
 		}	
 		AppLoger.getRuningLogger().info("结束执行数据抽取任务");
@@ -170,6 +171,7 @@ public class FetchDataTask extends BaseTask {
 		try {
 			DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 			String queryTimePer = df.format(new Date());
+//			String queryTimePer = "2011-02-18";
 			Cookie[] cookies = HttpClientUtil.addCookies(client);
 			String dataUrl = "http://admin.zj.monternet.com:8080/sp/indict/queryIndictICD.jsp?subsId=&userName=&status=1&queryTime=0&fromDate="+queryTimePer+"&toDate="+queryTimePer+"&pageNum=1&currentPageNo=1&pageSize="+SysCfg.FETCH_DATA_SIZE+"&navigatePage_toPageSize="+SysCfg.FETCH_DATA_SIZE+"&navigatePage_toPageNum=1";
 			GetMethod get = HttpClientUtil.newGetMethod(dataUrl, cookies);

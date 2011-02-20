@@ -81,9 +81,9 @@ public class XxtComplaintYwDao {
             }else{
             	//要对处理时间进行 减半处理
 				StringBuffer sql =new StringBuffer(" insert into "+SysCfg.DATAS_STORE_TABLE_NAME+" (PHONE,REMARK,FAMILY_ID,AREA_ID,SI_ID, "); //7
-				sql.append("TOWN_NAME,SCHOOL_NAME,CLASS_NAME,STU_NAME,TRANPACKAGE_NAME,");;  //5
-				sql.append("CREATE_ID,HANDLE_STATUS,FLAG,REASON_ID,REASON_OTHER,TSQD,HANDLE_TYPE,KHMYD,YHJXSY,COMPLAINT_LEVEL,CUSTOMER_TYPE,create_time,COMPLAINT_TIME,NEEDHANDLE_TIME)"); //8
-				sql.append("values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,10086,?,1,1,?,?,sysdate,");
+//				sql.append("TOWN_NAME,SCHOOL_NAME,CLASS_NAME,STU_NAME,");;  //5
+				sql.append("CREATE_ID,HANDLE_STATUS,FLAG,REASON_ID,COMPLAINT_LEVEL,CUSTOMER_TYPE,create_time,COMPLAINT_TIME,NEEDHANDLE_TIME)"); //8
+				sql.append("values(?,?,?,?,?,?,?,?,?,?,?,sysdate,");
 				sql.append("to_date('"+item.getCreateTime()+"' , 'yyyy-mm-dd hh24:mi:ss'), to_date('"+YwComplaintUtil.reSetDeadline(item)+"' , 'yyyy-mm-dd hh24:mi:ss'))");
 				stmt = conn.prepareStatement(sql.toString());
 				stmt.setString(1, item.getUser());
@@ -91,19 +91,19 @@ public class XxtComplaintYwDao {
 				stmt.setString(3, infos.get("family_id"));
 				stmt.setString(4, infos.get("area_id"));
 				stmt.setString(5, infos.get("si_id"));
-				stmt.setString(6, infos.get("town_name"));
-				stmt.setString(7, infos.get("school_name"));
-				stmt.setString(8, infos.get("class_name"));
-				stmt.setString(9, infos.get("student_name"));
-				stmt.setString(10,infos.get("tranpackage_name"));
-				stmt.setString(11, YwComplaintUtil.CREATE_ID); //处理人 ID
-				stmt.setString(12, "0"); //待处理
-				stmt.setString(13, "0"); //处理结果
-				stmt.setString(14, "-1");  //理由ID
-				stmt.setString(15, "其他理由"); //其他理由 
-				stmt.setString(16, "人工"); //处理类型
-				stmt.setString(17, YwComplaintUtil.getComplaintLevelCode(item.getRank())); //投诉水平
-				stmt.setString(18, YwComplaintUtil.getCustomerTypeCode(item.getBrand())); //客户类型
+//				stmt.setString(6, infos.get("town_name"));
+//				stmt.setString(7, infos.get("school_name"));
+//				stmt.setString(8, infos.get("class_name"));
+//				stmt.setString(9, infos.get("student_name"));
+//				stmt.setString(10,infos.get("tranpackage_name"));
+				stmt.setString(6, YwComplaintUtil.CREATE_ID); //处理人 ID
+				stmt.setString(7, "0"); //待处理
+				stmt.setString(8, "0"); //处理结果
+				stmt.setString(9, "-1");  //理由ID
+//				stmt.setString(15, "其他理由"); //其他理由 
+//				stmt.setString(16, "人工"); //处理类型
+				stmt.setString(10, YwComplaintUtil.getComplaintLevelCode(item.getRank())); //投诉水平
+				stmt.setString(11, YwComplaintUtil.getCustomerTypeCode(item.getBrand())); //客户类型
 				stmt.execute();
 				stmt.close();
             }

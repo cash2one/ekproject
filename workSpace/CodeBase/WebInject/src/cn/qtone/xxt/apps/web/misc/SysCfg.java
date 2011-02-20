@@ -28,6 +28,10 @@ public class SysCfg {
 	public static String EMAIL_AUTH; // is ssl 验证登录
 	public static String EMAIL_TITLE_SET;
 	
+	public static String MISC_USER_NAME; //MISC 系统用户信息
+	public static String MISC_USER_PWD;
+	
+	
 	public static int FETCH_DATA_SIZE=300;  //设置取数据量
 	public static String DATAS_STORE_TABLE_NAME ="YW_COMPLAINT";
 	
@@ -35,6 +39,7 @@ public class SysCfg {
 	static {
 			Document doc = XmlHandler.loadXML("configs/sysCfg.xml");
 			Element element = XmlHandler.getElement(doc, "email/fromAddress");
+			
 			EMAIL_FROM_ADDRESS = element.getTextTrim();
 			element = XmlHandler.getElement(doc, "email/toAddress");
 			EMAIL_TO_ADDRESS = element.getTextTrim();
@@ -54,6 +59,13 @@ public class SysCfg {
 			COMPLAINT_CREATE_USERID = element!= null&&!Checker.isNull( element.getTextTrim())? element.getTextTrim() : "1";
 			element = XmlHandler.getElement(doc, "fetch-datas-set/store_table");
 			DATAS_STORE_TABLE_NAME = element!= null&&!Checker.isNull( element.getTextTrim())? element.getTextTrim() : "YW_COMPLAINT";
+			
+			element = XmlHandler.getElement(doc, "fetch-datas-set/username");
+			MISC_USER_NAME = element!= null&&!Checker.isNull( element.getTextTrim())? element.getTextTrim() : "qtone";
+			
+			element = XmlHandler.getElement(doc, "fetch-datas-set/password");
+			MISC_USER_PWD = element!= null&&!Checker.isNull( element.getTextTrim())? element.getTextTrim() : "qtone2010";
+			
 			try{
 				element = XmlHandler.getElement(doc, "fetch-datas-set/page-size");
 				FETCH_DATA_SIZE = element!= null&&!Checker.isNull( element.getTextTrim())? Integer.parseInt(element.getTextTrim()): 300;
