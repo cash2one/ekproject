@@ -3,6 +3,8 @@
    <DBPool>zjxxt</DBPool>
    <Complaint_CreaterId>1</Complaint_CreaterId>
    <fetch-datas-set>
+       <username>qtone</username>
+       <password>qtone2010</password>
        <page-size>300</page-size>
        <store_table>YW_COMPLAINT</store_table>
    </fetch-datas-set>
