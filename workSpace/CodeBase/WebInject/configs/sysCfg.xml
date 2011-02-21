@@ -12,6 +12,8 @@
         <email_title>校讯通投诉处理邮件提醒</email_title>
 		<fromAddress>ethanlamzs@sina.cn</fromAddress>
 		<toAddress>ethanlamzs@gmail.com</toAddress>
+		<toAddress2>ethanlamzs@gmail.com</toAddress2>
+		<toAddresstest>ethanlamzs@gmail.com</toAddresstest>
 		<stmpHost>smtp.sina.cn</stmpHost>
 		<userName>ethanlamzs@sina.cn</userName>
 		<password>889276</password>
