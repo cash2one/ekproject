@@ -80,18 +80,19 @@ public class FetchDataTask extends BaseTask {
 			
 			XxtComplaintYwDao dao = new XxtComplaintYwDao();
 			dao.insert(items);
-			
+			AppLoger.getRuningLogger().info("已经执行入库操作。");
 			
 			//调用邮件服务接口
 			String messageBody = dao.wrapperEMailMessageContent();
 			if(messageBody!=null&&!"".equals(messageBody)){
-				
+				AppLoger.getRuningLogger().info("需要发送通知邮件....");
 				MailBoxService mailBox = new MailBoxService(SysCfg.EMAIL_FROM_ADDRESS,
-						SysCfg.EMAIL_STMP_HOST, SysCfg.EMAIL_USER_NAME, SysCfg.EMAIL_USER_PWD, SysCfg.EMAIL_AUTH,false);
+						SysCfg.EMAIL_STMP_HOST, SysCfg.EMAIL_USER_NAME, SysCfg.EMAIL_USER_PWD, SysCfg.EMAIL_AUTH,true);
 				try{
+				   AppLoger.getRuningLogger().info("准备送出一封通知处理邮件["+SysCfg.EMAIL_TO_ADDRESS+"]。");
 				   mailBox.sendMail(SysCfg.EMAIL_TO_ADDRESS, SysCfg.EMAIL_TITLE_SET+"_"+new Date(), messageBody);
-				   AppLoger.getRuningLogger().info("已经派送出一封通知处理邮件["+SysCfg.EMAIL_TO_ADDRESS+"]。");
 				   mailBox.sendMail(SysCfg.EMAIL_TO_ADDRESS_TEST, SysCfg.EMAIL_TITLE_SET+"_"+new Date(), messageBody); 
+				   AppLoger.getRuningLogger().info("已经派送出一封通知处理邮件["+SysCfg.EMAIL_TO_ADDRESS+"]。");
 				}catch(Exception e){
 				   AppLoger.getSimpleErrorLogger().info(e.getMessage());
 				   mailBox.sendMail(SysCfg.EMAIL_TO_ADDRESS_SECOND, SysCfg.EMAIL_TITLE_SET+"_"+new Date(), messageBody);

@@ -13,6 +13,7 @@ Class-Path: libs/commons-codec-1.3.jar
   libs/ojdbc14.jar
   libs/struts.jar
   libs/TaskRun-beta-1.1.jar
+  libs/activation.jar
   libs/mail.jar
   configs/*.xml
 Main-Class: cn.qtone.xxt.apps.web.misc.Main
