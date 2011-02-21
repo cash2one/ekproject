@@ -13,7 +13,7 @@ import javax.mail.internet.*;
  */
 public class MailBoxService {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		MailBoxService src = new MailBoxService("ethanlamzs@sina.cn",
 				"smtp.sina.cn", "ethanlamzs@sina.cn", "889276", "true",true);
 		src.sendMail("ethanlamzs@gmail.com", "hello", "just a test <br /> testestest"+Math.random());
@@ -70,9 +70,10 @@ public class MailBoxService {
 	 * @param receviceAddress
 	 * @param title
 	 * @param messageBody
+	 * @throws Exception 
 	 */
 	public void sendMail(String receviceAddress, String title,
-			String messageBody) {
+			String messageBody) throws Exception {
 		Properties props = createProperties(smtpHost, auth);
 		Session s = Session.getInstance(props);
 		s.setDebug(isDebug);
@@ -107,6 +108,7 @@ public class MailBoxService {
 
 		} catch (MessagingException e) {
 			System.out.println(e.toString());
+			throw new Exception("发送邮件失败,To_Address :"+receviceAddress);
 		}
 
 	}

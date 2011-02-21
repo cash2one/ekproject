@@ -26,7 +26,6 @@ public class BaseDao implements DataControl {
 		this.conn = conn;
 	}
 
-	@Override
 	public boolean execute(String sql) throws DaoException {
 		try {
 			stmt = conn.createStatement();
@@ -39,7 +38,6 @@ public class BaseDao implements DataControl {
 		return false;
 	}
 
-	@Override
 	public boolean executeBatch(List<String> sqls) throws DaoException {
 		try {
 			stmt = conn.createStatement();
@@ -57,7 +55,6 @@ public class BaseDao implements DataControl {
 		return true;
 	}
 
-	@Override
 	public ResultSet query(String sql) throws DaoException {
 		try {
 			stmt = conn.createStatement();
@@ -70,7 +67,6 @@ public class BaseDao implements DataControl {
 		return null;
 	}
 
-	@Override
 	public boolean update(String sql) throws DaoException {
 		try {
 			stmt = conn.createStatement();
@@ -83,7 +79,6 @@ public class BaseDao implements DataControl {
 		return false;
 	}
 
-	@Override
 	public void preparedExeDB(String sql) throws DaoException {
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -92,7 +87,6 @@ public class BaseDao implements DataControl {
 		}
 	}
 
-	@Override
 	public boolean excPreparedDB() throws DaoException {
 		try {
 			return pstmt.execute();
@@ -104,7 +98,6 @@ public class BaseDao implements DataControl {
 		return false;
 	}
 
-	@Override
 	public ResultSet queryPreparedDB() throws DaoException {
 		try {
 			return pstmt.executeQuery();
@@ -117,7 +110,7 @@ public class BaseDao implements DataControl {
 	}
 
 	/**
-	 * ÉèÖÃ²ÎÊý
+	 * ï¿½ï¿½ï¿½Ã²ï¿½ï¿½ï¿½
 	 * 
 	 * @param parameterIndex
 	 * @param x
@@ -128,7 +121,7 @@ public class BaseDao implements DataControl {
 	}
 
 	/**
-	 * ÉèÖÃObjectÀàÐÍµÄ²ÎÊý
+	 * ï¿½ï¿½ï¿½ï¿½Objectï¿½ï¿½ï¿½ÍµÄ²ï¿½ï¿½ï¿½
 	 * 
 	 * @param parameterIndex
 	 * @param paramValue
@@ -142,7 +135,7 @@ public class BaseDao implements DataControl {
 	}
 
 	/**
-	 * ÉèÖÃbyteÀàÐÍµÄ²ÎÊý
+	 * ï¿½ï¿½ï¿½ï¿½byteï¿½ï¿½ï¿½ÍµÄ²ï¿½ï¿½ï¿½
 	 * 
 	 * @param parameterIndex
 	 * @param paramValue
@@ -156,7 +149,7 @@ public class BaseDao implements DataControl {
 	}
 
 	/**
-	 * ÉèÖÃshortÀàÐÍµÄ²ÎÊý
+	 * ï¿½ï¿½ï¿½ï¿½shortï¿½ï¿½ï¿½ÍµÄ²ï¿½ï¿½ï¿½
 	 * 
 	 * @param parameterIndex
 	 * @param paramValue
@@ -214,12 +207,10 @@ public class BaseDao implements DataControl {
 		this.conn = null;
 	}
 
-	@Override
 	public PageModel getPage() throws DaoException {
 		return page;
 	}
 
-	@Override
 	public ResultSet queryByPage(String sql, int pageIndex, int pagePerNum)
 			throws DaoException {
 		ResultSet rs = null;
