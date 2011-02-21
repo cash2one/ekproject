@@ -81,9 +81,9 @@ public class XxtComplaintYwDao {
             }else{
             	//要对处理时间进行 减半处理
 				StringBuffer sql =new StringBuffer(" insert into "+SysCfg.DATAS_STORE_TABLE_NAME+" (PHONE,REMARK,FAMILY_ID,AREA_ID,SI_ID, "); //7
-//				sql.append("TOWN_NAME,SCHOOL_NAME,CLASS_NAME,STU_NAME,");;  //5
+				sql.append("TOWN_NAME,SCHOOL_NAME,CLASS_NAME,STU_NAME,tranpackage_name,");;  //5
 				sql.append("CREATE_ID,HANDLE_STATUS,FLAG,REASON_ID,COMPLAINT_LEVEL,CUSTOMER_TYPE,create_time,COMPLAINT_TIME,NEEDHANDLE_TIME)"); //8
-				sql.append("values(?,?,?,?,?,?,?,?,?,?,?,sysdate,");
+				sql.append("values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,sysdate,");
 				sql.append("to_date('"+item.getCreateTime()+"' , 'yyyy-mm-dd hh24:mi:ss'), to_date('"+YwComplaintUtil.reSetDeadline(item)+"' , 'yyyy-mm-dd hh24:mi:ss'))");
 				stmt = conn.prepareStatement(sql.toString());
 				stmt.setString(1, item.getUser());
@@ -91,19 +91,19 @@ public class XxtComplaintYwDao {
 				stmt.setString(3, infos.get("family_id"));
 				stmt.setString(4, infos.get("area_id"));
 				stmt.setString(5, infos.get("si_id"));
-//				stmt.setString(6, infos.get("town_name"));
-//				stmt.setString(7, infos.get("school_name"));
-//				stmt.setString(8, infos.get("class_name"));
-//				stmt.setString(9, infos.get("student_name"));
-//				stmt.setString(10,infos.get("tranpackage_name"));
-				stmt.setString(6, YwComplaintUtil.CREATE_ID); //处理人 ID
-				stmt.setString(7, "0"); //待处理
-				stmt.setString(8, "0"); //处理结果
-				stmt.setString(9, "-1");  //理由ID
+				stmt.setString(6, infos.get("town_name"));
+				stmt.setString(7, infos.get("school_name"));
+				stmt.setString(8, infos.get("class_name"));
+				stmt.setString(9, infos.get("student_name"));
+				stmt.setString(10,infos.get("tranpackage_name"));
+				stmt.setString(11, YwComplaintUtil.CREATE_ID); //处理人 ID
+				stmt.setString(12, "0"); //待处理
+				stmt.setString(13, "0"); //处理结果
+				stmt.setString(14, "-1");  //理由ID
 //				stmt.setString(15, "其他理由"); //其他理由 
 //				stmt.setString(16, "人工"); //处理类型
-				stmt.setString(10, YwComplaintUtil.getComplaintLevelCode(item.getRank())); //投诉水平
-				stmt.setString(11, YwComplaintUtil.getCustomerTypeCode(item.getBrand())); //客户类型
+				stmt.setString(15, YwComplaintUtil.getComplaintLevelCode(item.getRank())); //投诉水平
+				stmt.setString(16, YwComplaintUtil.getCustomerTypeCode(item.getBrand())); //客户类型
 				stmt.execute();
 				stmt.close();
             }
@@ -147,6 +147,7 @@ public class XxtComplaintYwDao {
 		   case 2 : error_msg ="找到多条学生记录信息，不确定性";break;
 		   case 3 : error_msg ="入库失败的记录";break;
 		}
+		item.setErrorTip(error_msg);
 		error_msg = error_msg +"  ---  详细："+item.getUser()+","+item.getBrand()+","+item.getContent()+","+item.getCreateTime()+","+item.getDeadline()+","+item.getRank();
 		
 		//记录无法进行操作的记录
@@ -170,11 +171,12 @@ public class XxtComplaintYwDao {
 		for(ComplaintItem item : needSendItems){
 	    	message.append(index).append("：MISC流水号 : ").append(item.getId());
 	    	message.append("   ").append(item.getUser());
-	    	message.append("      ").append(item.getBrand());
+	    	message.append("<font color=red>       ").append(item.getBrand()).append("</font>");
 	    	message.append("      ").append(item.getCreateTime());
-	    	message.append("      ").append(YwComplaintUtil.reSetDeadline(item));
+	    	message.append("<font color=red>       ").append(YwComplaintUtil.reSetDeadline(item)).append("</font>");
 	        message.append("      ").append(item.getRank());
 	        message.append("<br/>      ").append(item.getContent());
+	        message.append("<br/>").append("<span><font color=red>").append("自动处理程序失败原因:").append(item.getErrorTip()).append("<font></span>");
 	        message.append("<br/><br/>");
 	        index++;
 	    }

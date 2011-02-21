@@ -19,6 +19,16 @@ public class ComplaintItem {
 	String replyUrl = "";
 	String createTime; // 派单时间
 	String deadline; // 最后时限
+	
+	String errorTip;
+
+	public String getErrorTip() {
+		return errorTip;
+	}
+
+	public void setErrorTip(String errorTip) {
+		this.errorTip = errorTip;
+	}
 
 	public String getId() {
 		return id;
