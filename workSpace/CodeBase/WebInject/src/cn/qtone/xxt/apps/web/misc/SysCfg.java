@@ -22,6 +22,8 @@ public class SysCfg {
 	
 	public static String EMAIL_FROM_ADDRESS; // 发件人
 	public static String EMAIL_TO_ADDRESS; // 收件人
+	public static String EMAIL_TO_ADDRESS_SECOND; // 收件人
+	public static String EMAIL_TO_ADDRESS_TEST; // 收件人
 	public static String EMAIL_STMP_HOST; // 发信箱
 	public static String EMAIL_USER_NAME; //
 	public static String EMAIL_USER_PWD;
@@ -38,11 +40,19 @@ public class SysCfg {
 	
 	static {
 			Document doc = XmlHandler.loadXML("configs/sysCfg.xml");
-			Element element = XmlHandler.getElement(doc, "email/fromAddress");
 			
+			Element element = XmlHandler.getElement(doc, "email/fromAddress");
 			EMAIL_FROM_ADDRESS = element.getTextTrim();
+			
 			element = XmlHandler.getElement(doc, "email/toAddress");
 			EMAIL_TO_ADDRESS = element.getTextTrim();
+			
+			element = XmlHandler.getElement(doc, "email/toAddresstest");
+			EMAIL_TO_ADDRESS_TEST = element.getTextTrim();
+			
+			element = XmlHandler.getElement(doc, "email/toAddress2");
+			EMAIL_TO_ADDRESS_SECOND = element!= null&&!Checker.isNull( element.getTextTrim())? element.getTextTrim() :EMAIL_TO_ADDRESS;
+			
 			element = XmlHandler.getElement(doc, "email/stmpHost");
 			EMAIL_STMP_HOST = element.getTextTrim();
 			element = XmlHandler.getElement(doc, "email/userName");
