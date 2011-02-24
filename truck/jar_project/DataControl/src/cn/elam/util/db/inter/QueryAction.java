@@ -10,6 +10,6 @@ import java.sql.ResultSet;
  */
 public interface QueryAction<Model extends DataModel> {
 
-	public Model wrapperItem(ResultSet rs);
+	public Model wrapperItem(ResultSet rs) throws Exception;
 
 }

@@ -64,7 +64,6 @@ public class QueryWrapperDao {
 	}
 
 	/**
-	 * 
 	 * @param queryAction
 	 * @param sql
 	 * @return
