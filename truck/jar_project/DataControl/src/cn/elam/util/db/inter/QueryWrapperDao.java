@@ -11,12 +11,19 @@ import cn.elam.util.db.comom.DBConnector;
 import cn.elam.util.db.comom.PageModel;
 import cn.elam.util.db.impl.BaseDao;
 
-public class TestQuery {
+/**
+ * 
+ * 查询接口
+ * 
+ * @author Ethan.Lam 2011-2-24
+ * 
+ */
+public class QueryWrapperDao {
 
 	private PageModel page;
 	private String DB_CONNECTION = "";
 
-	public TestQuery(String POOL_NAME) {
+	public QueryWrapperDao(String POOL_NAME) {
 		this.DB_CONNECTION = POOL_NAME;
 	}
 
@@ -56,7 +63,6 @@ public class TestQuery {
 		return dataList;
 	}
 
-	
 	/**
 	 * 
 	 * @param queryAction
@@ -64,7 +70,8 @@ public class TestQuery {
 	 * @return
 	 * @throws Exception
 	 */
-	public DataModel getItem(QueryAction<? extends DataModel> queryAction, String sql) throws Exception {
+	public DataModel getItem(QueryAction<? extends DataModel> queryAction,
+			String sql) throws Exception {
 		Connection db = null;
 		BaseDao dao = null;
 		ResultSet rs = null;
@@ -72,8 +79,8 @@ public class TestQuery {
 			db = DBConnector.getConnection(DB_CONNECTION);
 			dao = new BaseDao(db);
 			rs = dao.query(sql);
-			if(rs != null && rs.next())
-			   return queryAction.wrapperItem(rs);
+			if (rs != null && rs.next())
+				return queryAction.wrapperItem(rs);
 			return null;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -82,7 +89,15 @@ public class TestQuery {
 			rs.close();
 			dao.close();
 		}
-		
+
+	}
+
+	/**
+	 * 当前分页信息
+	 * @return
+	 */
+	public PageModel getPageModel() {
+		return page;
 	}
 
 	/**
@@ -92,7 +107,7 @@ public class TestQuery {
 	 */
 
 	public static void main(String... strs) throws Exception {
-		TestQuery query = new TestQuery("");
+		QueryWrapperDao query = new QueryWrapperDao("");
 
 		List<TModel> list = query.list(new QueryAction<TModel>() {
 			public TModel wrapperItem(ResultSet rs) {
