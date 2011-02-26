@@ -10,8 +10,11 @@ import cn.elam.util.db.inter.DataModel;
 import cn.elam.util.db.inter.QueryAction;
 import cn.elamzs.common.eimport.item.TaskModel;
 
+
 /**
+ * 
  * @author Ethan.Lam 2011-2-23 保存文件信息服务
+ * 
  */
 public class FileStorePersisService {
 
@@ -93,42 +96,5 @@ public class FileStorePersisService {
 			}}, sql);
 		
 	}
-	
-	
-	public static void main(String...str) throws Exception{
-		
-//		FileStorePersisService srv = new FileStorePersisService();
-//		List<TaskModel> tasks = srv.query(null, 1, 100);
-//	    for(TaskModel task : tasks)
-//	    	System.out.println(task.getFileName());
-		QueryWrapperDao query = new QueryWrapperDao("impDB");
-		List<Area> list = query.list(new QueryAction<Area>() {
-			public Area wrapperItem(ResultSet rs) throws Exception {
-				// TODO Auto-generated method stub
-				Area a = new Area();
-				a.setAbb(rs.getString("abb"));
-				return a;
-			}
-		}, "select abb from area",3, 10);
 
-		for(Area a : list){
-			System.out.println(a.getAbb());
-		}
-		
-	}
-	
-
-}
-class Area implements DataModel {
-    
-	private String abb;
-
-	public String getAbb() {
-		return abb;
-	}
-
-	public void setAbb(String abb) {
-		this.abb = abb;
-	}
-	
 }
