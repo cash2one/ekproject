@@ -1,5 +1,9 @@
 package cn.elam.util.db.comom;
-
+/**
+ * 当前查询结果集合 的分页信息
+ * @author Ethan.Lam   2011-2-26
+ *
+ */
 public class PageModel {
 
 	int currentPage = 1;

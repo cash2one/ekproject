@@ -1,5 +1,7 @@
 package cn.elam.util.db.comom;
-
+/*
+ * 数据库类型
+ */
 public enum DBType {
 
 	ORACLE(0, "Oracle"),

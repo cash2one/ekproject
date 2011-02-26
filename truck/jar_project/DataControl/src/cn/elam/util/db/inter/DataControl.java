@@ -6,7 +6,11 @@ import java.util.List;
 import cn.elam.util.db.comom.DaoException;
 import cn.elam.util.db.comom.PageModel;
 
-
+/**
+ * 数据访问接口
+ * @author Ethan.Lam   2011-2-26
+ *
+ */
 public interface DataControl {
 
 	public ResultSet query(String sql) throws DaoException;

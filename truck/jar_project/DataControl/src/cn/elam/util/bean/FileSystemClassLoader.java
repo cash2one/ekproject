@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * 
+ * 类加载器（通过直接读取文件方式加载）
  * @author Ethan.Lam  2011-2-15
  *
  */

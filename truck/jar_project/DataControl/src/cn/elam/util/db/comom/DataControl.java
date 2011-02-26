@@ -4,7 +4,11 @@ import java.sql.ResultSet;
 import java.util.List;
 
 
-
+/**
+ * 基本访问层的功能定义接口
+ * @author Ethan.Lam   2011-2-26
+ *
+ */
 public interface DataControl {
 
 	public ResultSet query(String sql) throws DaoException;

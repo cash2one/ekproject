@@ -7,7 +7,11 @@ import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
-
+/**
+ * XML 文件加载工具
+ * @author Ethan.Lam   2011-2-26
+ *
+ */
 public class XmlHandler {
 
 	public static Document loadXML(String filePath) {

@@ -14,7 +14,7 @@ import cn.elam.util.file.xml.XmlHandler;
 
 
 /**
- * 数据连接池
+ * 数据连接池  管理器
  * 
  * @author ethanlam
  * 

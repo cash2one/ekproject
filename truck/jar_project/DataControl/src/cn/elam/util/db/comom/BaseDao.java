@@ -12,6 +12,7 @@ import java.util.List;
 
 /**
  * 
+ * 基本的数据库操作接口实现
  * @author Ethan.Lam   2011-2-26
  *
  */

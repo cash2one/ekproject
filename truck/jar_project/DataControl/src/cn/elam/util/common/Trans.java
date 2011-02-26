@@ -1,5 +1,10 @@
 package cn.elam.util.common;
 
+/**
+ * 数据类型 转换
+ * @author Ethan.Lam   2011-2-26
+ *
+ */
 public class Trans {
 
 	public static long StringTolong(String txt) {

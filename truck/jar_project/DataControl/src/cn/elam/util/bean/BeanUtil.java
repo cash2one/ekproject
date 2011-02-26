@@ -11,6 +11,11 @@ import java.util.Vector;
  */
 public class BeanUtil {
 
+	/**
+	 * 返回该类的所有成员变量
+	 * @param clazz
+	 * @return
+	 */
 	public static Vector<Field> getAllDeclaredFields(Class clazz) {
 		Vector<Field> fileds = new Vector<Field>(5);
 		Vector<Field> temps = null;
@@ -29,6 +34,13 @@ public class BeanUtil {
 		return fileds;
 	}
 
+	
+	/**
+	 * 实例化一个类对象
+	 * @param clazz
+	 * @param params
+	 * @return
+	 */
 	public static Object createInstance(Class clazz, Object... params) {
 		try {
 			if (params == null || params.length == 0)
@@ -45,6 +57,11 @@ public class BeanUtil {
 		return null;
 	}
 
+	/**
+	 * 返回对象对应的 类属性（类名）
+	 * @param params
+	 * @return
+	 */
 	public static Class[] getClassType(Object... params) {
 		if (params == null || params.length == 0)
 			return null;
@@ -57,6 +74,11 @@ public class BeanUtil {
 		}
 	}
 
+	/**
+	 * 类加载器
+	 * @param classPath
+	 * @return
+	 */
 	public static Class loadClass(String classPath) {
 		ClassLoader loader = ClassLoader.getSystemClassLoader();
 		if (loader == null)

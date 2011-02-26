@@ -9,7 +9,11 @@ import cn.elam.util.db.comom.DBConnector;
 import cn.elam.util.db.comom.DaoException;
 import cn.elam.util.db.impl.BaseDao;
 
-
+/**
+ * 测试用例
+ * @author Ethan.Lam   2011-2-26
+ *
+ */
 public class QueryTestCase {
 
 	public static void main(String... srt) {
