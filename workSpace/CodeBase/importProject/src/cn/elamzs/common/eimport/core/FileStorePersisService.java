@@ -101,9 +101,7 @@ public class FileStorePersisService {
 //		List<TaskModel> tasks = srv.query(null, 1, 100);
 //	    for(TaskModel task : tasks)
 //	    	System.out.println(task.getFileName());
-		
 		QueryWrapperDao query = new QueryWrapperDao("impDB");
-
 		List<Area> list = query.list(new QueryAction<Area>() {
 			public Area wrapperItem(ResultSet rs) throws Exception {
 				// TODO Auto-generated method stub
