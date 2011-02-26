@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<poolConfig>
+   <enable default="xxt">xxt</enable>
+   <pools>
+       <xxt driver="oracle.jdbc.driver.OracleDriver" connectionPoolSize="10" minConnectionPoolSize="2" >
+           <url>jdbc:oracle:thin:@61.142.114.252:1521:orcl</url>
+           <user>gdxxt</user>
+           <pwd>gdxxt2010$%^</pwd>
+       </xxt>
+   </pools>
+</poolConfig>
+
+
