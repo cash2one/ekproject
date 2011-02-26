@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Class-Path: libs/commons-codec-1.3.jar
+  libs/dom4j-1.6.1.jar
+  libs/jaxen-1.1-beta-6.jar
+  libs/mysql-connector-java-3.0.14-production-bin.jar
+  libs/ojdbc14.jar
+  libs/struts.jar
+  libs/activation.jar
+  libs/mail.jar
+  configs/*.xml
+Main-Class: cn.elam.util.db.impl.QueryWrapperDao
+
