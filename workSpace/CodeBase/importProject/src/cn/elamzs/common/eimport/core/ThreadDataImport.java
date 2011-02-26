@@ -12,7 +12,7 @@ import cn.elamzs.common.eimport.inter.ImportHandleListener;
 /**
  * 
  * @author Ethan.Lam   2011-2-5
- * 创建对应的线程 执行  文件数据导入 过程
+ * 文件导入服务类，创建线程完成文件导入的 对应的操作过程
  * 
  * 
  */
@@ -28,7 +28,6 @@ public class ThreadDataImport implements EImporter {
 	
 	ImportHandleListener listenner = null; //导入事件监听器
 	
-	
 	public ThreadDataImport(DataValidator validator,DataProcess dataProcess){
 	        this.validator = validator;
 	        this.dataProcess = dataProcess;
@@ -40,12 +39,14 @@ public class ThreadDataImport implements EImporter {
 		return null;
 	}
 
+	
 	@Override
 	public File getResourceFile(String importTaskSeq) throws Exception{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	
 	@Override
 	public File downTemplate(FileType type)
 			throws Exception {
@@ -93,7 +94,6 @@ public class ThreadDataImport implements EImporter {
 		//根据文件，配置对应的处理类
 		appendDataHandler(importTaskSeqId,_cpyObj,subDirName);
 	}
-	
 	
 	
 	/**

@@ -14,6 +14,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 
 /**
+ * 
  * 文件上传服务处理类
  * @author Ethan.Lam 2011-2-10
  * 
@@ -84,7 +85,7 @@ public class FileUploadService implements FileUploadHandle{
                 item.write(new File(tempDirectory+"/"+newFileName)); 
                 
                 //当单个文件上传完后执行的执行的动作
-                forEachFileUploadFinished(new File(tempDirectory+"/"+newFileName),fileName,newFileName);
+                forEachFileUploadFinishedEvent(new File(tempDirectory+"/"+newFileName),fileName,newFileName);
                 
             }
 		}
@@ -137,9 +138,9 @@ public class FileUploadService implements FileUploadHandle{
 	  * @param oldFileName
 	  * @param newFileName
 	*/
-	public void forEachFileUploadFinished(File file,String oldFileName,String newFileName){
+	public void forEachFileUploadFinishedEvent(File file,String oldFileName,String newFileName){
 		  if(handle!=null)
-			  handle.forEachFileUploadFinished(file,oldFileName, newFileName);
+			  handle.forEachFileUploadFinishedEvent(file,oldFileName, newFileName);
 		  else{
 			  //默认的处理时间
               System.out.println("src:"+oldFileName+"   new "+newFileName);
@@ -155,8 +156,10 @@ public class FileUploadService implements FileUploadHandle{
     		private int t = 0;
     		
 			@Override
-			public void forEachFileUploadFinished(File file, String oldFileName,
+			public void forEachFileUploadFinishedEvent(File file, String oldFileName,
 					String newFileName) {
+				
+				
 				
 			}
 			

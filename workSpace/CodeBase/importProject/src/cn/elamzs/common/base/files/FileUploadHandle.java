@@ -16,6 +16,6 @@ public interface FileUploadHandle {
 	  * @param oldFileName
 	  * @param newFileName
 	*/
-	public void forEachFileUploadFinished(File file,String oldFileName,String newFileName);
+	public void forEachFileUploadFinishedEvent(File file,String oldFileName,String newFileName);
 	
 }
