@@ -44,7 +44,7 @@ public class PageModel {
 		int endRow = 0;
 		
 		startRow = (this.currentPage-1)*pageNum;
-		endRow=startRow+pageNum;
+		endRow=startRow+pageNum-1;
 		
 		if (DBType.ORACLE.equals(db)) {
 			sql.append(" SELECT * FROM ( SELECT A.*, ROWNUM RN  FROM ( ");

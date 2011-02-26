@@ -1,15 +1,17 @@
-package cn.elam.util.db.inter;
+package cn.elam.util.db.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
 import cn.elam.util.db.comom.DBConnector;
 import cn.elam.util.db.comom.PageModel;
-import cn.elam.util.db.impl.BaseDao;
+import cn.elam.util.db.inter.DataModel;
+import cn.elam.util.db.inter.QueryAction;
 
 /**
  * 
@@ -99,6 +101,8 @@ public class QueryWrapperDao {
 		return page;
 	}
 
+	
+	
 	/**
 	 * 
 	 * @param strs
@@ -106,19 +110,35 @@ public class QueryWrapperDao {
 	 */
 
 	public static void main(String... strs) throws Exception {
-		QueryWrapperDao query = new QueryWrapperDao("");
+		QueryWrapperDao query = new QueryWrapperDao("xxt");
 
-		List<TModel> list = query.list(new QueryAction<TModel>() {
-			public TModel wrapperItem(ResultSet rs) {
+		List<Area> list = query.list(new QueryAction<Area>() {
+			public Area wrapperItem(ResultSet rs) throws Exception {
 				// TODO Auto-generated method stub
-				return null;
+				Area a = new Area();
+				a.setAbb(rs.getString("abb"));
+				return a;
 			}
-		}, "sql", 10, 100);
+		}, "select abb from area",3, 10);
 
+		for(Area a : list){
+			System.out.println(a.getAbb());
+		}
+		
 	}
 
 }
 
-class TModel implements DataModel {
+class Area implements DataModel {
+    
+	private String abb;
 
+	public String getAbb() {
+		return abb;
+	}
+
+	public void setAbb(String abb) {
+		this.abb = abb;
+	}
+	
 }
