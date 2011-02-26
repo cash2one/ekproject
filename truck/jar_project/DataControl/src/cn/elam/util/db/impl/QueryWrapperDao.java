@@ -15,7 +15,7 @@ import cn.elam.util.db.inter.QueryAction;
 
 /**
  * 
- * 查询接口
+ * 简单的查询接口方法
  * 
  * @author Ethan.Lam 2011-2-24
  * 

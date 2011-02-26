@@ -10,7 +10,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
-
+/**
+ * 
+ * @author Ethan.Lam   2011-2-26
+ *
+ */
 public class BaseDao implements DataControl {
 
 	protected Connection conn;
