@@ -13,7 +13,7 @@ import cn.elamzs.common.eimport.item.TaskModel;
 
 /**
  * 
- * @author Ethan.Lam 2011-2-23 保存文件信息服务
+ * @author Ethan.Lam 2011-2-23 保存任务信息持久化服务
  * 
  */
 public class FileStorePersisService {
