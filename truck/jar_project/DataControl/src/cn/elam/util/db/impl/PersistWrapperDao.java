@@ -43,23 +43,24 @@ public class PersistWrapperDao<Model extends DataModel> {
             StringBuffer insertSql = new StringBuffer();
             StringBuffer paramStr  = new StringBuffer();
             StringBuffer valuesStr = new StringBuffer();
+            
             for(String paramName : persistValueSet.keySet()){
             	paramStr.append(",").append(paramName);
             	valuesStr.append(",").append("?");
             }
+            
             insertSql.append("insert into ").append(persistTableName).append("");
             insertSql.append("(").append(paramStr.substring(1)).append(")");
             insertSql.append("values(").append(valuesStr.substring(1)).append(")");
             System.out.println(insertSql.toString());
-            
             dao.preparedExeDB(insertSql.toString());
+     
             int parameterIndex = 1;
             for(Object value : persistValueSet.values()){
             	dao.setObject(parameterIndex,value);
+            	parameterIndex++;
             }
             dao.excPreparedDB();
-            
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

@@ -58,7 +58,8 @@ public class QueryWrapperDao<Model extends DataModel> {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			rs.close();
+			if(rs!=null)
+		   	    rs.close();
 			dao.close();
 		}
 		return dataList;
@@ -118,7 +119,7 @@ public class QueryWrapperDao<Model extends DataModel> {
 				a.setAbb(rs.getString("abb"));
 				return a;
 			}
-		}, "select abb from area",3, 10);
+		}, "select abb from area",1, 10);
 
 		for(Area a : list){
 			System.out.println(a.getAbb());
