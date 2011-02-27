@@ -3,19 +3,19 @@ package cn.elamzs.common.eimport.item;
 import cn.elam.util.db.inter.DataModel;
 
 /**
- * 
+ * 导入任务信息的 持久化bean
  * @author Ethan.Lam   2011-2-24
  *
  */
 public class TaskModel implements DataModel {
 
-	private int handerId;
-	private String fileName;
-	private String srcPath;
-	private String resultPath;
-	private String startTime;
-	private String finishedTime;
-	private int state;
+	private int handerId;   //导入时创建的ID 唯一
+	private String fileName;  //导入的原文件名称
+	private String srcPath;  //导入源文件路径
+	private String resultPath; //导入结果文件
+	private String startTime;  //任务开始时间
+	private String finishedTime;  //任务结束时间
+	private int state;  //任务状态
 
 	public int getState() {
 		return state;

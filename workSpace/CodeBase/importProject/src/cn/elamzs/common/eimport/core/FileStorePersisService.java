@@ -5,8 +5,10 @@ import java.util.List;
 import java.util.Map;
 
 import cn.elam.util.db.comom.PageModel;
+import cn.elam.util.db.impl.PersistWrapperDao;
 import cn.elam.util.db.impl.QueryWrapperDao;
 import cn.elam.util.db.inter.DataModel;
+import cn.elam.util.db.inter.PersistAction;
 import cn.elam.util.db.inter.QueryAction;
 import cn.elamzs.common.eimport.item.TaskModel;
 
@@ -76,7 +78,7 @@ public class FileStorePersisService {
     */
 	public TaskModel getTaskInfo(String taskHandlerId) throws Exception{
 		QueryWrapperDao dao = new QueryWrapperDao(POOL_NAME);
-		String sql = " select handler_id,file_name,src_path,result_path,state,to_char(start_time,'yyyy-MM-dd hh:mmLss'),to_char(finish_time,'yyyy-MM-dd hh:mmLss') from " + TASKS_TABLE;
+		String sql = " select handler_id,file_name,src_path,result_path,state,to_char(start_time,'yyyy-MM-dd hh:mmLss') start_time,to_char(finish_time,'yyyy-MM-dd hh:mmLss') finish_time from " + TASKS_TABLE;
 		sql +=" where handler_id = "+taskHandlerId;
 		
 		return (TaskModel) dao.getItem(new QueryAction<TaskModel>(){
@@ -96,5 +98,29 @@ public class FileStorePersisService {
 			}}, sql);
 		
 	}
+	
+   /**
+    * 保存任务信息	
+    * @param task
+ * @throws Exception 
+    */
+	public void crateTask(TaskModel task) throws Exception{
+		PersistWrapperDao dao = new PersistWrapperDao(POOL_NAME);
+		dao.persist(new PersistAction<TaskModel>(){
+
+			@Override
+			public Map<String, Object> persistParamValues(DataModel arg0)
+					throws Exception {
+				// TODO Auto-generated method stub
+				
+				
+				
+				return null;
+			}
+			
+		},task,TASKS_TABLE);
+	}
+	
+	
 
 }
