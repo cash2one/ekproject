@@ -14,13 +14,12 @@ import cn.elam.util.db.inter.DataModel;
 import cn.elam.util.db.inter.QueryAction;
 
 /**
- * 
- * 简单的查询接口方法
- * 
- * @author Ethan.Lam 2011-2-24
- * 
+ * 简单封装的数据查询接口方法
+ * @author Ethan.Lam   2011-2-27
+ * @param <Model>  持久化对象类型
+ *   
  */
-public class QueryWrapperDao {
+public class QueryWrapperDao<Model extends DataModel> {
 
 	private PageModel page;
 	private String DB_CONNECTION = "";
@@ -39,12 +38,12 @@ public class QueryWrapperDao {
 	 * @return
 	 * @throws Exception
 	 */
-	public List list(QueryAction<? extends DataModel> queryAction, String sql,
+	public List<Model> list(QueryAction<Model> queryAction, String sql,
 			int currentPage, int pageSize) throws Exception {
 		Connection db = null;
 		BaseDao dao = null;
-		List<DataModel> dataList = new ArrayList<DataModel>();
-		DataModel model = null;
+		List<Model> dataList = new ArrayList<Model>();
+		Model model = null;
 		ResultSet rs = null;
 		try {
 			db = DBConnector.getConnection(DB_CONNECTION);
@@ -71,7 +70,7 @@ public class QueryWrapperDao {
 	 * @return
 	 * @throws Exception
 	 */
-	public DataModel getItem(QueryAction<? extends DataModel> queryAction,
+	public Model getItem(QueryAction<Model> queryAction,
 			String sql) throws Exception {
 		Connection db = null;
 		BaseDao dao = null;
@@ -110,9 +109,9 @@ public class QueryWrapperDao {
 	 */
 
 	public static void main(String... strs) throws Exception {
-		QueryWrapperDao query = new QueryWrapperDao("xxt");
+		QueryWrapperDao<Area> query = new QueryWrapperDao<Area>("xxt");
 
-		List<Area> list = query.list(new QueryAction<Area>() {
+		List<Area> list = query.list(new QueryAction() {
 			public Area wrapperItem(ResultSet rs) throws Exception {
 				// TODO Auto-generated method stub
 				Area a = new Area();

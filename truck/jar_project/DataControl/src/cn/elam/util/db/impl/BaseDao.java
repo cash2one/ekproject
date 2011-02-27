@@ -14,7 +14,11 @@ import cn.elam.util.db.comom.DBType;
 import cn.elam.util.db.comom.DaoException;
 import cn.elam.util.db.comom.PageModel;
 import cn.elam.util.db.inter.DataControl;
-
+/**
+ * 基本数据访问层功能
+ * @author Ethan.Lam   2011-2-27
+ *
+ */
 public class BaseDao implements DataControl {
 
 	protected Connection conn;
