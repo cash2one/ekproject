@@ -3,6 +3,7 @@ package cn.elamzs.common.eimport.core;
 import java.io.File;
 import java.util.Date;
 
+import cn.elamzs.common.eimport.config.ConfigSetting;
 import cn.elamzs.common.eimport.inter.DataProcess;
 import cn.elamzs.common.eimport.inter.DataValidator;
 import cn.elamzs.common.eimport.inter.ImportHandleListener;
@@ -56,10 +57,10 @@ public abstract class AbstractFileHandler implements FileHandler{
 	 * @return
 	 */
 	protected String resultSavDir(){
-		File _dir = new File(ConfigControl.DIR_IMPORT_RESULT+"/"+storeSubDir+"/");
+		File _dir = new File(ConfigSetting.DIR_IMPORT_RESULT+"/"+storeSubDir+"/");
 		if(!_dir.exists())
 			_dir.mkdirs();
-		return ConfigControl.DIR_IMPORT_RESULT+"/"+storeSubDir+"/";
+		return ConfigSetting.DIR_IMPORT_RESULT+"/"+storeSubDir+"/";
 	}
 	
 	

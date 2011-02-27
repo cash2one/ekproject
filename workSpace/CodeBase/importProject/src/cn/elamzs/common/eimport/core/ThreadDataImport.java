@@ -3,6 +3,9 @@ package cn.elamzs.common.eimport.core;
 import java.io.File;
 
 import cn.elamzs.common.base.files.util.FileOperateUtil;
+import cn.elamzs.common.eimport.config.ConfigSetting;
+import cn.elamzs.common.eimport.core.handler.ExcelImportHandler;
+import cn.elamzs.common.eimport.core.handler.TxtImportHandler;
 import cn.elamzs.common.eimport.enums.FileType;
 import cn.elamzs.common.eimport.inter.DataProcess;
 import cn.elamzs.common.eimport.inter.DataValidator;
@@ -12,7 +15,7 @@ import cn.elamzs.common.eimport.inter.ImportHandleListener;
 /**
  * 
  * @author Ethan.Lam   2011-2-5
- * 文件导入服务类，创建线程完成文件导入的 对应的操作过程
+ * 创建线程完成文件导入的 对应的操作过程
  * 
  * 
  */
@@ -83,7 +86,7 @@ public class ThreadDataImport implements EImporter {
 		String importTaskSeqId = reNameFileId(srcFile);
 		
 		String _newFileName  = importTaskSeqId+suffix;
-		String _cpyObj =  ConfigControl.DIR_IMPORT_SRC+"/"+(subDirName!=null?subDirName:"")+"/"+_newFileName; 
+		String _cpyObj =  ConfigSetting.DIR_IMPORT_SRC+"/"+(subDirName!=null?subDirName:"")+"/"+_newFileName; 
 		
 		//copy导入文件到指定保存目录
 		FileOperateUtil.copyFile(_src, new File(_cpyObj));

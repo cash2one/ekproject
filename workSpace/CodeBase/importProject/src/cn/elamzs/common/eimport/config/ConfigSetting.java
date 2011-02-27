@@ -1,4 +1,4 @@
-package cn.elamzs.common.eimport.core;
+package cn.elamzs.common.eimport.config;
 
 import java.io.File;
 import java.io.IOException;
@@ -7,7 +7,7 @@ import java.io.IOException;
  * @author Ethan.Lam  2011-2-14
  *
  */
-public class ConfigControl {
+public class ConfigSetting {
 	
     public  static String DIR_IMPORT_RESULT = "d:/importfile/result/";
 	

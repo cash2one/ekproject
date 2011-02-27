@@ -13,6 +13,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import cn.elamzs.common.base.files.util.POIExcelUtil;
 import cn.elamzs.common.eimport.annotations.ColumnValidate;
 import cn.elamzs.common.eimport.annotations.Restriction;
+import cn.elamzs.common.eimport.config.ConfigSetting;
 import cn.elamzs.common.eimport.enums.FileType;
 import cn.elamzs.common.eimport.inter.DataValidator;
 
@@ -149,7 +150,7 @@ public class Template {
 			IndexedColors[] colors = getImpColumnsColorSet(); //列表头颜色
 			String [] columnsName = columnsNameStr.split(","); 
 			String[] comments = getImpColumnsCommentSet();  //列表头批注
-			String fileName =ConfigControl.DIR_IMPORT_TEMPLATE+templateName+type.suffix();
+			String fileName =ConfigSetting.DIR_IMPORT_TEMPLATE+templateName+type.suffix();
 			POIExcelUtil.writeDataToExcel(fileName,columnsName,null,width,colors,IndexedColors.BRIGHT_GREEN,FileType.EXCEL_XLS==type?true:false,comments);
 		    return new File(fileName);
 		}catch(Exception e){
