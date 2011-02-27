@@ -1,5 +1,6 @@
 package cn.elam.util.db.sample;
 
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.util.HashMap;
 import java.util.List;
@@ -35,9 +36,10 @@ public class DaoTestCase {
 	public static void persistSample() throws Exception{
 		
 		TaskModel data = new TaskModel();
-		data.setFileName("test.xls");
-		data.setSrcPath("src/test.xls");
-		data.setResultPath("res/test.xls");
+		data.setFileName(Math.floor(Math.random()*1000)+"_test.xls");
+		data.setSrcPath("src/"+Math.floor(Math.random()*1000)+"_test.xls");
+		data.setResultPath("res/"+Math.floor(Math.random()*1000)+"_test.xls");
+		data.setStartTime("sysdate");
 		data.setState(1);
 		
 		new PersistWrapperDao<TaskModel>("xxt").persist(new PersistAction<TaskModel>(){
@@ -51,6 +53,8 @@ public class DaoTestCase {
 				valueSet.put("src_path",data.getSrcPath());
 				valueSet.put("result_path",data.getResultPath());
 				valueSet.put("state",data.getState());
+				valueSet.put("start_time", new Date(System.currentTimeMillis()));
+				valueSet.put("finish_time", new Date(System.currentTimeMillis()+(1000*20)));
 				return valueSet;
 			}
 			
@@ -63,7 +67,7 @@ public class DaoTestCase {
 	
 	//查询接口测试
 	public static void querySample() throws Exception{
- 		StringBuffer sql =new StringBuffer(" select handler_id,file_name,src_path,result_path,state,to_char(start_time,'yyyy-MM-dd hh:mmLss') start_time,to_char(finish_time,'yyyy-MM-dd hh:mmLss') finish_time from eimport_task_status ");
+ 		StringBuffer sql =new StringBuffer(" select handler_id,file_name,src_path,result_path,state,to_char(start_time,'yyyy-MM-dd hh:mm:ss') start_time,to_char(finish_time,'yyyy-MM-dd hh:mm:ss') finish_time from eimport_task_status ");
 		List<TaskModel> list = new QueryWrapperDao<TaskModel>("xxt").list(new QueryAction<TaskModel>(){
 			@Override
 			public TaskModel wrapperItem(ResultSet rs) throws Exception {
@@ -82,7 +86,7 @@ public class DaoTestCase {
 		
 		
 		for(TaskModel task : list){
-			System.out.println(task.getFileName()+","+task.getSrcPath()+","+task.getResultPath()+","+task.getState());
+			System.out.println(task.getFileName()+","+task.getSrcPath()+","+task.getResultPath()+","+task.getState()+","+task.getStartTime()+","+task.getFinishedTime());
 		}
 	}
 
