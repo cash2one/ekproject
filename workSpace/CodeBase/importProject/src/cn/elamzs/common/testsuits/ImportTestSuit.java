@@ -21,7 +21,7 @@ public class ImportTestSuit {
 		TestDataProcess p = new TestDataProcess();
 		EImporter importer = new ThreadDataImport(v, p);
 		String dataFile = "d:/importfile/src/导入测试模版.xlsx";
-		importer.importFile(dataFile,"别名","TEST");
+		importer.importFile(dataFile,"别名","TEST","Test");
 	}
 
 	public static void main(String... args) throws Exception {

@@ -18,11 +18,10 @@ import cn.elamzs.common.eimport.item.TaskModel;
  * @author Ethan.Lam   2011-2-5
  * 创建线程完成文件导入的 对应的操作过程
  * 
- * 
  */
 public class ThreadDataImport implements EImporter {
 
-	protected FileType fileType;
+	protected FileType fileType;  //文件类型
 
 	DataValidator validator = null;  //数据验证器
 	
@@ -35,6 +34,10 @@ public class ThreadDataImport implements EImporter {
 	FileStorePersisService srv;
 	
 	
+	/**
+	 * @param validator
+	 * @param dataProcess
+	 */
 	public ThreadDataImport(DataValidator validator,DataProcess dataProcess){
 	        this.validator = validator;
 	        this.dataProcess = dataProcess;
@@ -42,7 +45,10 @@ public class ThreadDataImport implements EImporter {
 	}
 
 	
-	@Override
+    /**
+     * 返回导入数据后形成的处理结果
+	 * @param importTaskSeq
+     */
 	public File getImportedResult(String importTaskSeq) throws Exception{
 		// TODO Auto-generated method stub
 		TaskModel task = srv.getTaskInfo(importTaskSeq);
@@ -58,7 +64,12 @@ public class ThreadDataImport implements EImporter {
 	}
 
 	
-	@Override
+	/**
+	 * 
+	 * 返回源导入数据的文件
+	 * @param importTaskSeq  导入任务ID
+	 * 
+	 */
 	public File getResourceFile(String importTaskSeq) throws Exception{
 		// TODO Auto-generated method stub
 		TaskModel task = srv.getTaskInfo(importTaskSeq);
@@ -74,7 +85,13 @@ public class ThreadDataImport implements EImporter {
 	}
 
 	
-	@Override
+	
+	/**
+	 * 
+	 * 下载导入模版
+	 * @param type 文件类型
+	 *  
+	 */
 	public File downTemplate(FileType type)
 			throws Exception {
 		// TODO Auto-generated method stub
@@ -82,21 +99,32 @@ public class ThreadDataImport implements EImporter {
 		return template.createImpTemplateDoc(type);
 	}
 	
-	@Override
-	public String importFile(String dataFile,String alias,String storeSubDir) throws Exception {
+	
+	
+	/**
+	 * 
+	 * 启动文件导入过程
+	 * @param  dataFile     文件全路径
+	 * @param  alias        文件名称（别名）
+	 * @param  storeSubDir  子目录
+	 * @param  taskType  任务类型注释
+	 * 
+	 */
+	public String importFile(String dataFile,String alias,String storeSubDir,String taskType) throws Exception {
 		// TODO Auto-generated method stub
 		
-		importTaskPrepare(alias,dataFile,storeSubDir);
+		String taskId = importTaskPrepare(alias,dataFile,storeSubDir);
 		
 		//开始执行文件导入数据处理，启动线程处理
 		Thread importThread = new Thread(handler);
         importThread.start(); 
         
-		return null;
+		return taskId;
 	}
 
 	
     /**
+     * 
      * 正式执行文件导入前的管理操作
      * 对源文件的备份、分配导入任务ID、调用外围事件监听器  等	
      * @param fileAlias
@@ -104,7 +132,7 @@ public class ThreadDataImport implements EImporter {
      * @param subDirName
      * @throws Exception
      */
-	void importTaskPrepare(String fileAlias,String srcFile,String subDirName) throws Exception{
+	String importTaskPrepare(String fileAlias,String srcFile,String subDirName) throws Exception{
 		File _src = new File(srcFile);
 		String suffix = srcFile.substring(srcFile.lastIndexOf("."));
 		String importTaskSeqId = reNameFileId(srcFile);
@@ -124,12 +152,13 @@ public class ThreadDataImport implements EImporter {
 		task.setState(0);
         srv.crateTask(task);
 		
-        
 		//调用事件监听
 		invokeImportListenner(importTaskSeqId,fileAlias,_cpyObj,subDirName);
 		
 		//根据文件，配置对应的处理类
 		appendDataHandler(importTaskSeqId,_cpyObj,subDirName);
+		
+		return importTaskSeqId;
 	}
 	
 	
