@@ -11,6 +11,7 @@ import cn.elamzs.common.eimport.inter.DataProcess;
 import cn.elamzs.common.eimport.inter.DataValidator;
 import cn.elamzs.common.eimport.inter.EImporter;
 import cn.elamzs.common.eimport.inter.ImportHandleListener;
+import cn.elamzs.common.eimport.item.TaskModel;
 
 /**
  * 
@@ -31,22 +32,45 @@ public class ThreadDataImport implements EImporter {
 	
 	ImportHandleListener listenner = null; //导入事件监听器
 	
+	FileStorePersisService srv;
+	
+	
 	public ThreadDataImport(DataValidator validator,DataProcess dataProcess){
 	        this.validator = validator;
 	        this.dataProcess = dataProcess;
+	        srv = new FileStorePersisService();
 	}
 
+	
 	@Override
 	public File getImportedResult(String importTaskSeq) throws Exception{
 		// TODO Auto-generated method stub
-		return null;
+		TaskModel task = srv.getTaskInfo(importTaskSeq);
+		if(task!=null&&task.getState()!=1)
+			return null;
+		else{
+			File file = new File(task.getResultPath());
+		    if(file.exists())
+		    	return file;
+		    else
+		    	return null;
+		}
 	}
 
 	
 	@Override
 	public File getResourceFile(String importTaskSeq) throws Exception{
 		// TODO Auto-generated method stub
-		return null;
+		TaskModel task = srv.getTaskInfo(importTaskSeq);
+		if(task!=null)
+			return null;
+		else{
+			File file = new File(task.getSrcPath());
+		    if(file.exists())
+		    	return file;
+		    else
+		    	return null;
+		}
 	}
 
 	
@@ -91,6 +115,16 @@ public class ThreadDataImport implements EImporter {
 		//copy导入文件到指定保存目录
 		FileOperateUtil.copyFile(_src, new File(_cpyObj));
 		
+	
+		//持久化任务信息
+		TaskModel task = new TaskModel();
+		task.setHanderId(importTaskSeqId);
+		task.setFileName(fileAlias);
+		task.setSrcPath(_cpyObj);
+		task.setState(0);
+        srv.crateTask(task);
+		
+        
 		//调用事件监听
 		invokeImportListenner(importTaskSeqId,fileAlias,_cpyObj,subDirName);
 		

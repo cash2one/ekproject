@@ -28,6 +28,8 @@ public class FileStorePersisService {
 
 	private PageModel pageBean;
 
+
+	
 	public FileStorePersisService() {
 
 	}
@@ -46,7 +48,7 @@ public class FileStorePersisService {
 	public List<TaskModel> query(Map<String,String> options,int currentPage, int pageSize)
 			throws Exception {
 		QueryWrapperDao<TaskModel> dao = new QueryWrapperDao<TaskModel>(ConfigSetting.PERSIST_POOL_NAME);
-		StringBuffer sql =new StringBuffer(" select handler_id,file_name,src_path,result_path,state,to_char(start_time,'yyyy-MM-dd hh:mmLss'),to_char(finish_time,'yyyy-MM-dd hh:mmLss') from " + TASKS_TABLE);
+		StringBuffer sql =new StringBuffer(" select handler_id,file_name,task_type,src_path,result_path,state,to_char(start_time,'yyyy-MM-dd hh:mmLss'),to_char(finish_time,'yyyy-MM-dd hh:mmLss') from " + TASKS_TABLE);
 		sql.append(" where 1=1 ");
         if(options!=null){
         	if(options.containsKey("state"))
@@ -59,8 +61,9 @@ public class FileStorePersisService {
 			@Override
 			public TaskModel wrapperItem(ResultSet rs) throws Exception {
 				TaskModel model = new TaskModel();
-				model.setHanderId(rs.getInt("handler_id"));
+				model.setHanderId(rs.getString("handler_id"));
 				model.setFileName("file_name");
+				model.setTaskType(rs.getString("task_type"));
 				model.setSrcPath(rs.getString("src_path"));
 				model.setResultPath(rs.getString("result_path"));
 				model.setStartTime(rs.getString("start_time"));
@@ -80,7 +83,7 @@ public class FileStorePersisService {
     */
 	public TaskModel getTaskInfo(String taskHandlerId) throws Exception{
 		QueryWrapperDao<TaskModel> dao = new QueryWrapperDao<TaskModel>(ConfigSetting.PERSIST_POOL_NAME);
-		String sql = " select handler_id,file_name,src_path,result_path,state,to_char(start_time,'yyyy-MM-dd hh:mmLss') start_time,to_char(finish_time,'yyyy-MM-dd hh:mmLss') finish_time from " + TASKS_TABLE;
+		String sql = " select handler_id,file_name,src_path,task_type,result_path,state,to_char(start_time,'yyyy-MM-dd hh:mmLss') start_time,to_char(finish_time,'yyyy-MM-dd hh:mmLss') finish_time from " + TASKS_TABLE;
 		sql +=" where handler_id = "+taskHandlerId;
 		
 		return dao.getItem(new QueryAction<TaskModel>(){
@@ -89,8 +92,9 @@ public class FileStorePersisService {
 			public TaskModel wrapperItem(ResultSet rs) throws Exception {
 				// TODO Auto-generated method stub
 				TaskModel model = new TaskModel();
-				model.setHanderId(rs.getInt("handler_id"));
+				model.setHanderId(rs.getString("handler_id"));
 				model.setFileName("file_name");
+				model.setTaskType(rs.getString("task_type"));
 				model.setSrcPath(rs.getString("src_path"));
 				model.setResultPath(rs.getString("result_path"));
 				model.setStartTime(rs.getString("start_time"));
@@ -119,6 +123,7 @@ public class FileStorePersisService {
 				valueSet.put("src_path",data.getSrcPath());
 				valueSet.put("result_path",data.getResultPath());
 				valueSet.put("state",data.getState());
+				valueSet.put("task_type",data.getTaskType());
 				valueSet.put("start_time", new Date(System.currentTimeMillis()));
 				return valueSet;
 			}
@@ -128,20 +133,47 @@ public class FileStorePersisService {
 	
 	
 	/**
-	 * 更新任务
+	 * 更新导入任务信息
 	 * @param task
 	 * @param type   
 	 * @throws Exception
 	 */
-	public void updateTask(TaskModel task,int operateType) throws Exception{
+	public void updateTask(TaskModel task,UPADTE_OPERATION operateType) throws Exception{
 		PersistWrapperDao dao = new PersistWrapperDao(ConfigSetting.PERSIST_POOL_NAME);
 		int newState = 0;
-		String updateSql = " update "+TASKS_TABLE+" set state = ?,result_path=? where hander_id = ? ";
-		switch(operateType){
+		String updateSql = " update "+TASKS_TABLE+" set state = ?,result_path=?,finish_time=sysdate where hander_id = ? ";
+		switch(operateType.type){
 		    case 1:dao.persist(updateSql,task.getState(),task.getResultPath(),task.getHanderId());break; //完成任务
 		}
 	}
 	
+	
+	/**
+	 * 更新操作选项
+	 * @author Ethan.Lam   2011-3-1
+	 *
+	 */
+	enum UPADTE_OPERATION{
+		
+		IMP_FINISH_STATE(1,"导入完成时");
+		
+		private int type;
+	    private String mean;
+		
+		UPADTE_OPERATION(int type,String mean){
+		   this.type = type;
+		   this.mean = mean;
+		}
+		
+		public int type(){
+			return this.type;
+		}
+ 
+		public String mean(){
+			return this.mean;
+		}
+		
+	}
 	
 
 }

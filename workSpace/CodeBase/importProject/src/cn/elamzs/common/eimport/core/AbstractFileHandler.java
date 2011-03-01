@@ -4,9 +4,11 @@ import java.io.File;
 import java.util.Date;
 
 import cn.elamzs.common.eimport.config.ConfigSetting;
+import cn.elamzs.common.eimport.core.FileStorePersisService.UPADTE_OPERATION;
 import cn.elamzs.common.eimport.inter.DataProcess;
 import cn.elamzs.common.eimport.inter.DataValidator;
 import cn.elamzs.common.eimport.inter.ImportHandleListener;
+import cn.elamzs.common.eimport.item.TaskModel;
 
 /**
  * 
@@ -85,9 +87,21 @@ public abstract class AbstractFileHandler implements FileHandler{
 				//把生成的结果数据存放到对应的文件中
 				String fileLocation = createImportResultDocument(_datas);
 	          
+				FileStorePersisService srv = new FileStorePersisService();
+				
+				//当导入数据完成时,更新对应任务的状态信息
+				TaskModel task = new TaskModel();
+				task.setHanderId(importTaskId);
+				task.setResultPath(fileLocation);
+				task.setState(1);
+				srv.updateTask(task, UPADTE_OPERATION.IMP_FINISH_STATE);
+				task = null;
+				srv = null;
+				
 				if(listenner!=null){
 					listenner.afterImportData(importTaskId,fileLocation);
 				}
+				
 				_datas = null;
 				
     		}else{

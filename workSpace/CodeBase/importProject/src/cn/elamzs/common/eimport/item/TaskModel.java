@@ -9,12 +9,22 @@ import cn.elam.util.db.inter.DataModel;
  */
 public class TaskModel implements DataModel {
 
-	private int handerId;   //导入时创建的ID 唯一
+	private String handerId;   //导入时创建的ID 唯一
 	private String fileName;  //导入的原文件名称
 	private String srcPath;  //导入源文件路径
 	private String resultPath; //导入结果文件
 	private String startTime;  //任务开始时间
 	private String finishedTime;  //任务结束时间
+	private String taskType; //任务类型
+	
+	public String getTaskType() {
+		return taskType;
+	}
+
+	public void setTaskType(String taskType) {
+		this.taskType = taskType;
+	}
+
 	private int state;  //任务状态
 
 	public int getState() {
@@ -25,11 +35,11 @@ public class TaskModel implements DataModel {
 		this.state = state;
 	}
 
-	public int getHanderId() {
+	public String getHanderId() {
 		return handerId;
 	}
 
-	public void setHanderId(int handerId) {
+	public void setHanderId(String handerId) {
 		this.handerId = handerId;
 	}
 
