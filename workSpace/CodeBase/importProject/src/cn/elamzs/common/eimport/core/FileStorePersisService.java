@@ -1,6 +1,8 @@
 package cn.elamzs.common.eimport.core;
 
+import java.sql.Date;
 import java.sql.ResultSet;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -10,17 +12,17 @@ import cn.elam.util.db.impl.QueryWrapperDao;
 import cn.elam.util.db.inter.DataModel;
 import cn.elam.util.db.inter.PersistAction;
 import cn.elam.util.db.inter.QueryAction;
+import cn.elamzs.common.eimport.config.ConfigSetting;
 import cn.elamzs.common.eimport.item.TaskModel;
 
 
 /**
  * 
- * @author Ethan.Lam 2011-2-23 保存任务信息持久化服务
+ * @author Ethan.Lam 2011-2-23 
+ * 任务信息持久化服务
  * 
  */
 public class FileStorePersisService {
-
-	private String POOL_NAME = "impDB";
 
 	private String TASKS_TABLE = "eimport_task_status";
 
@@ -43,7 +45,7 @@ public class FileStorePersisService {
 	 */
 	public List<TaskModel> query(Map<String,String> options,int currentPage, int pageSize)
 			throws Exception {
-		QueryWrapperDao dao = new QueryWrapperDao(POOL_NAME);
+		QueryWrapperDao<TaskModel> dao = new QueryWrapperDao<TaskModel>(ConfigSetting.PERSIST_POOL_NAME);
 		StringBuffer sql =new StringBuffer(" select handler_id,file_name,src_path,result_path,state,to_char(start_time,'yyyy-MM-dd hh:mmLss'),to_char(finish_time,'yyyy-MM-dd hh:mmLss') from " + TASKS_TABLE);
 		sql.append(" where 1=1 ");
         if(options!=null){
@@ -77,11 +79,11 @@ public class FileStorePersisService {
     * @throws Exception
     */
 	public TaskModel getTaskInfo(String taskHandlerId) throws Exception{
-		QueryWrapperDao dao = new QueryWrapperDao(POOL_NAME);
+		QueryWrapperDao<TaskModel> dao = new QueryWrapperDao<TaskModel>(ConfigSetting.PERSIST_POOL_NAME);
 		String sql = " select handler_id,file_name,src_path,result_path,state,to_char(start_time,'yyyy-MM-dd hh:mmLss') start_time,to_char(finish_time,'yyyy-MM-dd hh:mmLss') finish_time from " + TASKS_TABLE;
 		sql +=" where handler_id = "+taskHandlerId;
 		
-		return (TaskModel) dao.getItem(new QueryAction<TaskModel>(){
+		return dao.getItem(new QueryAction<TaskModel>(){
 
 			@Override
 			public TaskModel wrapperItem(ResultSet rs) throws Exception {
@@ -105,20 +107,39 @@ public class FileStorePersisService {
  * @throws Exception 
     */
 	public void crateTask(TaskModel task) throws Exception{
-		PersistWrapperDao dao = new PersistWrapperDao(POOL_NAME);
+		PersistWrapperDao<TaskModel> dao = new PersistWrapperDao<TaskModel>(ConfigSetting.PERSIST_POOL_NAME);
 		dao.persist(new PersistAction<TaskModel>(){
 
 			@Override
-			public Map<String, Object> persistParamValues(DataModel arg0)
+			public Map<String, Object> persistParamValues(TaskModel data)
 					throws Exception {
 				// TODO Auto-generated method stub
-				
-				
-				
-				return null;
+				Map<String,Object> valueSet = new HashMap<String,Object>();
+				valueSet.put("file_name", data.getFileName());
+				valueSet.put("src_path",data.getSrcPath());
+				valueSet.put("result_path",data.getResultPath());
+				valueSet.put("state",data.getState());
+				valueSet.put("start_time", new Date(System.currentTimeMillis()));
+				return valueSet;
 			}
 			
 		},task,TASKS_TABLE);
+	}
+	
+	
+	/**
+	 * 更新任务
+	 * @param task
+	 * @param type   
+	 * @throws Exception
+	 */
+	public void updateTask(TaskModel task,int operateType) throws Exception{
+		PersistWrapperDao dao = new PersistWrapperDao(ConfigSetting.PERSIST_POOL_NAME);
+		int newState = 0;
+		String updateSql = " update "+TASKS_TABLE+" set state = ?,result_path=? where hander_id = ? ";
+		switch(operateType){
+		    case 1:dao.persist(updateSql,task.getState(),task.getResultPath(),task.getHanderId());break; //完成任务
+		}
 	}
 	
 	
