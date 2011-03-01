@@ -69,4 +69,34 @@ public class PersistWrapperDao<Model extends DataModel> {
 
 	}
 	
+	/**
+	 * 持久化语句
+	 * @param pstmSql  预处理语句
+	 * @param args     预处理对应的参数
+	 * @throws Exception
+	 */
+	public void persist(String pstmSql,Object...paramsValue) throws Exception {
+		Connection db = null;
+		BaseDao dao = null;
+		if(pstmSql==null||pstmSql.length()==0)
+			return;
+		
+		try {
+			db = DBConnector.getConnection(DB_CONNECTION);
+			dao = new BaseDao(db);
+            dao.preparedExeDB(pstmSql);
+            int parameterIndex = 1;
+            for(Object value : paramsValue){
+            	dao.setObject(parameterIndex,value);
+            	parameterIndex++;
+            }
+            dao.excPreparedDB();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			dao.close();
+		}
+
+	}
+	
 }
