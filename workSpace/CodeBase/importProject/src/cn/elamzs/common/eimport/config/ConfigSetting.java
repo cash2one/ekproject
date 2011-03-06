@@ -32,7 +32,7 @@ public class ConfigSetting {
 	static {
 		try {
 			
-			Document doc = XmlHandler.loadXML("configs/EImportCfg.xml");
+			Document doc = XmlHandler.loadXML(DOMConfigurator.configureXml);
 
 			Element element = XmlHandler.getElement(doc, "DBPool");
 			PERSIST_POOL_NAME = element != null
