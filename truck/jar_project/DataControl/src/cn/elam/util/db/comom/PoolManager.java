@@ -10,6 +10,7 @@ import org.dom4j.Element;
 
 import cn.elam.util.common.Checker;
 import cn.elam.util.common.Trans;
+import cn.elam.util.db.DBDOMConfigurator;
 import cn.elam.util.file.xml.XmlHandler;
 
 
@@ -59,7 +60,7 @@ class PoolManager {
 	}
 
 	static void loadDBConfigXml() {
-		Document doc = XmlHandler.loadXML("configs/PoolConfig.xml");
+		Document doc = XmlHandler.loadXML(DBDOMConfigurator.configureXml);
 		Element element = XmlHandler.getElement(doc, "enable");
 		String poolNames = element.getTextTrim();
 		Element poolObject = null;
