@@ -1,4 +1,4 @@
-package cn.elamzs.common.eimport.config;
+package cn.elamzs.common.eimport;
 
 /**
  * 

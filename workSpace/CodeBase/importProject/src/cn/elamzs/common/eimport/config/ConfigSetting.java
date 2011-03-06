@@ -8,6 +8,7 @@ import org.dom4j.Element;
 
 import cn.elam.util.common.Checker;
 import cn.elam.util.file.xml.XmlHandler;
+import cn.elamzs.common.eimport.DOMConfigurator;
 
 /**
  * ”¶”√≈‰÷√
