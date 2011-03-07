@@ -27,16 +27,32 @@ public class FileUploadService implements FileUploadHandle{
 
 	private FileUploadHandle handle = null;
 	
-	
+	/**
+	 * 
+	 * @param tempDirectory
+	 * @param maxMemorySize
+	 * @param maxRequestSize
+	 */
 	public FileUploadService(String tempDirectory,int maxMemorySize,int maxRequestSize) {
 		this(null,tempDirectory,maxMemorySize, maxRequestSize);
 	}
 
+	/**
+	 * 
+	 * @param handle
+	 * @param tempDirectory
+	 */
 	public FileUploadService(FileUploadHandle handle,String tempDirectory) {
-        this(handle,tempDirectory,10*1024*1024, 10*1024*1024);
+        this(handle,tempDirectory,12*1024*1024, 10*1024*1024);
 	}
 	
-	
+	/**
+	 * 
+	 * @param handle
+	 * @param tempDirectory
+	 * @param maxMemorySize
+	 * @param maxRequestSize
+	 */
 	public FileUploadService(FileUploadHandle handle,String tempDirectory,int maxMemorySize,int maxRequestSize) {
         this.tempDirectory = tempDirectory;
         this.maxMemorySize = maxMemorySize*1024*1024;
