@@ -1,7 +1,7 @@
 
 --记录导入任务状态的表
 create table  eimport_task_status(
-      handler_id number(10),
+      handler_id varchar2(30),
       file_name varchar2(30),
       src_path varchar2(200),
       result_path varchar2(200),
