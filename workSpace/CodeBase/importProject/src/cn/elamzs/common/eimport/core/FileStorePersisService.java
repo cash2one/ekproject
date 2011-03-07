@@ -119,6 +119,7 @@ public class FileStorePersisService {
 					throws Exception {
 				// TODO Auto-generated method stub
 				Map<String,Object> valueSet = new HashMap<String,Object>();
+				valueSet.put("handler_id", data.getHanderId());
 				valueSet.put("file_name", data.getFileName());
 				valueSet.put("src_path",data.getSrcPath());
 				valueSet.put("result_path",data.getResultPath());
