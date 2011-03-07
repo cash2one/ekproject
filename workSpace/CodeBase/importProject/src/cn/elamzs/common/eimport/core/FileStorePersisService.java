@@ -112,24 +112,8 @@ public class FileStorePersisService {
     */
 	public void crateTask(TaskModel task) throws Exception{
 		PersistWrapperDao<TaskModel> dao = new PersistWrapperDao<TaskModel>(ConfigSetting.PERSIST_POOL_NAME);
-		dao.persist(new PersistAction<TaskModel>(){
-
-			@Override
-			public Map<String, Object> persistParamValues(TaskModel data)
-					throws Exception {
-				// TODO Auto-generated method stub
-				Map<String,Object> valueSet = new HashMap<String,Object>();
-				valueSet.put("handler_id", data.getHanderId());
-				valueSet.put("file_name", data.getFileName());
-				valueSet.put("src_path",data.getSrcPath());
-				valueSet.put("result_path",data.getResultPath());
-				valueSet.put("state",data.getState());
-				valueSet.put("task_type",data.getTaskType());
-				valueSet.put("start_time", new Date(System.currentTimeMillis()));
-				return valueSet;
-			}
-			
-		},task,TASKS_TABLE);
+		String insertSql = "insert into "+TASKS_TABLE+"(handler_id,file_name,src_path,task_type,state,start_time)values(?,?,?,?,?,sysdate)";
+		dao.persist(insertSql, task.getHanderId(),task.getFileName(),task.getSrcPath(),task.getTaskType(),task.getState());
 	}
 	
 	
