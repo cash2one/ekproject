@@ -143,7 +143,13 @@ public class ThreadDataImport implements EImporter {
 		//copy导入文件到指定保存目录
 		FileOperateUtil.copyFile(_src, new File(_cpyObj));
 		
-	
+		//调用事件监听
+		invokeImportListenner(importTaskSeqId,fileAlias,_cpyObj,subDirName);
+		
+		//根据文件，配置对应的处理类
+		appendDataHandler(importTaskSeqId,_cpyObj,subDirName);
+		
+		
 		//持久化任务信息
 		TaskModel task = new TaskModel();
 		task.setHanderId(importTaskSeqId);
@@ -151,13 +157,7 @@ public class ThreadDataImport implements EImporter {
 		task.setSrcPath(_cpyObj);
 		task.setState(0);
         srv.crateTask(task);
-		
-		//调用事件监听
-		invokeImportListenner(importTaskSeqId,fileAlias,_cpyObj,subDirName);
-		
-		//根据文件，配置对应的处理类
-		appendDataHandler(importTaskSeqId,_cpyObj,subDirName);
-		
+
 		return importTaskSeqId;
 	}
 	

@@ -3,20 +3,40 @@ package cn.elamzs.common.eimport.item;
 import cn.elam.util.db.inter.DataModel;
 
 /**
- * 导入任务信息的 持久化bean
+ * 
+ * 导入任务信息的 持久化bean对象
  * @author Ethan.Lam   2011-2-24
  *
  */
 public class TaskModel implements DataModel {
 
-	private String handerId;   //导入时创建的ID 唯一
-	private String fileName;  //导入的原文件名称
-	private String srcPath;  //导入源文件路径
-	private String resultPath; //导入结果文件
-	private String startTime;  //任务开始时间
+	private String handerId;      //导入时创建的ID 唯一
+	private String fileName;      //导入的原文件名称
+	private String srcPath;       //导入源文件路径
+	private String resultPath;    //导入结果文件
+	private String startTime;     //任务开始时间
 	private String finishedTime;  //任务结束时间
-	private String taskType; //任务类型
+	private String taskType;    //任务类型
+	private int recordNum;     //文件的数据记录行
+	private int procTime;  //任务总耗时（秒）
+
 	
+	public int getRecordNum() {
+		return recordNum;
+	}
+
+	public void setRecordNum(int recordNum) {
+		this.recordNum = recordNum;
+	}
+
+	public int getProcTime() {
+		return procTime;
+	}
+
+	public void setProcTime(int procTime) {
+		this.procTime = procTime;
+	}
+
 	public String getTaskType() {
 		return taskType;
 	}
