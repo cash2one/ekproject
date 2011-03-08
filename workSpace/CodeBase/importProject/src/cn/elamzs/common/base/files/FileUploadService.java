@@ -62,7 +62,7 @@ public class FileUploadService implements FileUploadHandle{
 
 	
 	/**
-	 * 处理上传的事件
+	 * 开始处理文件上传
 	 * @param request
 	 * @param dir
 	 * @throws Exception
