@@ -8,7 +8,7 @@ import org.dom4j.Element;
 
 import cn.elam.util.common.Checker;
 import cn.elam.util.file.xml.XmlHandler;
-import cn.elamzs.common.eimport.DOMConfigurator;
+import cn.elamzs.common.eimport.EImportConfigurator;
 
 /**
  * ”¶”√≈‰÷√
@@ -33,7 +33,7 @@ public class ConfigSetting {
 	static {
 		try {
 			
-			Document doc = XmlHandler.loadXML(DOMConfigurator.configureXml);
+			Document doc = XmlHandler.loadXML(EImportConfigurator.configureXml);
 
 			Element element = XmlHandler.getElement(doc, "DBPool");
 			PERSIST_POOL_NAME = element != null

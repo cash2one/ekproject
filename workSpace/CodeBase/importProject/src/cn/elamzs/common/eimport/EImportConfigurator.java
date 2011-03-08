@@ -5,7 +5,7 @@ package cn.elamzs.common.eimport;
  * @author Ethan.Lam   2011-3-6
  *
  */
-public class DOMConfigurator {
+public class EImportConfigurator {
 
 	public static String configureXml = "configs/EImportCfg.xml";
 
