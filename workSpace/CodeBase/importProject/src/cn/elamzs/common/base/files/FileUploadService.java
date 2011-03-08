@@ -43,7 +43,7 @@ public class FileUploadService implements FileUploadHandle{
 	 * @param tempDirectory
 	 */
 	public FileUploadService(FileUploadHandle handle,String tempDirectory) {
-        this(handle,tempDirectory,12*1024*1024, 10*1024*1024);
+        this(handle,tempDirectory,12,10);
 	}
 	
 	/**
@@ -55,6 +55,10 @@ public class FileUploadService implements FileUploadHandle{
 	 */
 	public FileUploadService(FileUploadHandle handle,String tempDirectory,int maxMemorySize,int maxRequestSize) {
         this.tempDirectory = tempDirectory;
+        File _dir = new File(tempDirectory);
+        if(!_dir.exists())
+            _dir.mkdirs();
+        
         this.maxMemorySize = maxMemorySize*1024*1024;
         this.maxRequestSize = maxRequestSize*1024*1024;
         this.handle = handle;
@@ -67,7 +71,7 @@ public class FileUploadService implements FileUploadHandle{
 	 * @param dir
 	 * @throws Exception
 	 */
-	public final void uploadFile(HttpServletRequest request, String dir)
+	public final void uploadFile(HttpServletRequest request)
 			throws Exception {
 		
 		boolean isMultipart = ServletFileUpload.isMultipartContent(request);
