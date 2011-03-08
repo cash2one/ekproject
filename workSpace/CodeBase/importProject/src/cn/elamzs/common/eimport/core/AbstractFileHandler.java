@@ -13,7 +13,7 @@ import cn.elamzs.common.eimport.item.TaskModel;
 /**
  * 
  * @author Ethan.Lam   2011-2-5
- * 文件解析操作
+ * 抽象定义的文件解析处理器接口
  * 
  *
  */
@@ -33,6 +33,16 @@ public abstract class AbstractFileHandler implements FileHandler{
 	
 	protected ImportHandleListener listenner=null;
 	
+	/**
+	 * 
+	 * @param importTaskId
+	 * @param validator
+	 * @param dataProcess
+	 * @param listenner
+	 * @param file
+	 * @param storeSubDir
+	 * @throws Exception
+	 */
     public AbstractFileHandler(String importTaskId,DataValidator validator,DataProcess dataProcess,ImportHandleListener listenner,File file,String storeSubDir) throws Exception{
 		this.validator = validator;
 		this.dataPro = dataProcess;
@@ -45,7 +55,6 @@ public abstract class AbstractFileHandler implements FileHandler{
 
     
 	/**
-	 * 
 	 * 验证导入文档是否是符合模版要求
 	 * @return
 	 * @throws Exception
@@ -67,11 +76,10 @@ public abstract class AbstractFileHandler implements FileHandler{
 	
 	
     /**
-     * 
      * 数据导入过程控制逻辑主体
      */
     public void run(){
-    	System.out.println("Create start run data import_pro_"+importTaskId+".["+validator.getClass()+"] At "+new Date().toLocaleString());
+    	System.out.println("启动线程执行数据文件导入过程 ,ID:"+importTaskId+".["+validator.getClass()+"] 时间： "+new Date().toLocaleString());
     	try {
     		if(validateDoc()){
 	    		
@@ -86,10 +94,14 @@ public abstract class AbstractFileHandler implements FileHandler{
 				
 				//把生成的结果数据存放到对应的文件中
 				String fileLocation = createImportResultDocument(_datas);
-	          
-				FileStorePersisService srv = new FileStorePersisService();
 				
+				
+				if(listenner!=null){
+					listenner.afterImportData(importTaskId,fileLocation);
+				}
+                				
 				//当导入数据完成时,更新对应任务的状态信息
+				FileStorePersisService srv = new FileStorePersisService();
 				TaskModel task = new TaskModel();
 				task.setHanderId(importTaskId);
 				task.setResultPath(fileLocation);
@@ -97,10 +109,6 @@ public abstract class AbstractFileHandler implements FileHandler{
 				srv.updateTask(task, UPADTE_OPERATION.IMP_FINISH_STATE);
 				task = null;
 				srv = null;
-				
-				if(listenner!=null){
-					listenner.afterImportData(importTaskId,fileLocation);
-				}
 				
 				_datas = null;
 				
@@ -114,7 +122,7 @@ public abstract class AbstractFileHandler implements FileHandler{
 			dataElement = null;
 			dataPro = null;
 		}
-    	System.out.println("Import Thread import_pro_"+importTaskId+" Finished ["+validator.getClass()+"] At "+new Date().toLocaleString());
+    	System.out.println("数据导入过程处理完毕，ID："+importTaskId+"，["+validator.getClass()+"] 时间："+new Date().toLocaleString());
     }
     
     

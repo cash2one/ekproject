@@ -74,8 +74,7 @@ public class ExcelImportHandler extends AbstractFileHandler {
 		for(int rowSeq = 1;rowSeq<totalRows;rowSeq++){
 		    rowValues = POIExcelUtil.getRowValues(wb,sheet, rowSeq);
 		    validateMsg = dataElement.match(rowValues);
-//		    if(!StringUtil.isNull(validateMsg))
-		         dataPro.forEachRowValueProcess(dataElement);
+		    dataPro.forEachRowValueProcess(dataElement);
 		    rowValues = null;
 		}
 	}
