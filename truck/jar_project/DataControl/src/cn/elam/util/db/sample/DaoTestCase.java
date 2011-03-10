@@ -44,7 +44,6 @@ public class DaoTestCase {
 		
 		new PersistWrapperDao<TaskModel>("xxt").persist(new PersistAction<TaskModel>(){
 
-			@Override
 			public Map<String, Object> persistParamValues(TaskModel data)
 					throws Exception {
 				// TODO Auto-generated method stub
@@ -69,7 +68,7 @@ public class DaoTestCase {
 	public static void querySample() throws Exception{
  		StringBuffer sql =new StringBuffer(" select handler_id,file_name,src_path,result_path,state,to_char(start_time,'yyyy-MM-dd hh:mm:ss') start_time,to_char(finish_time,'yyyy-MM-dd hh:mm:ss') finish_time from eimport_task_status ");
 		List<TaskModel> list = new QueryWrapperDao<TaskModel>("xxt").list(new QueryAction<TaskModel>(){
-			@Override
+			
 			public TaskModel wrapperItem(ResultSet rs) throws Exception {
 				// TODO Auto-generated method stub
 				TaskModel model = new TaskModel();
