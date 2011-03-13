@@ -102,11 +102,9 @@ public abstract class AbstractFileHandler implements FileHandler{
 				//把生成的结果数据存放到对应的文件中
 				String fileLocation = createImportResultDocument(_datas);
 				
-				
 				if(listenner!=null){
 					listenner.afterImportData(importTaskId,fileLocation);
 				}
-				
                 				
 				//当导入数据成功执行完成时,更新对应任务的状态信息,
 				task.setResultPath(fileLocation);
