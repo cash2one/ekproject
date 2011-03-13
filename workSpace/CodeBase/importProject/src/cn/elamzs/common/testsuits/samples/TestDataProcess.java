@@ -8,9 +8,8 @@ import cn.elamzs.common.eimport.inter.DataProcess;
 
 
 /**
- * 
  * @author Ethan.Lam   2011-2-7
- *
+ * 
  */
 public class TestDataProcess implements DataProcess {
 
@@ -51,6 +50,15 @@ public class TestDataProcess implements DataProcess {
 		 System.out.println();
 		 values[4] = data.returnRowValidatorMsg();
 		 valueSet.add(values);
+	}
+
+
+	@Override
+	public void freeOpertion() {
+		// TODO Auto-generated method stub
+		//ÊÍ·Å×ÊÔ´
+		valueSet.clear();
+		valueSet = null;
 	}
 
 }

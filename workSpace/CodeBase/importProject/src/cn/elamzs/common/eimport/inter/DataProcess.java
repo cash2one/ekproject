@@ -40,5 +40,10 @@ public interface DataProcess {
 
    
 	
+	/**
+	 * 最后被执行的方法
+	 */
+	public void freeOpertion();
+	
 	
 }

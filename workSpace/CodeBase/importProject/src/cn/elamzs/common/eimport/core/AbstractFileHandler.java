@@ -121,6 +121,7 @@ public abstract class AbstractFileHandler implements FileHandler{
 			task.setState(TaskState.IMP_ERROR);
 		}finally{
 			dataElement.free();
+			dataPro.freeOpertion();
 			dataElement = null;
 			dataPro = null;
 		}
