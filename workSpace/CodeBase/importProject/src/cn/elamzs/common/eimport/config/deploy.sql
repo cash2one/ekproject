@@ -7,6 +7,8 @@ create table  eimport_task_status(
       result_path varchar2(200),
       state number(3),
       TASK_TYPE varchar2(300),
+      proc_time number(10);
+      record_num number(6);
       start_time Date,
       finish_time Date 
 )

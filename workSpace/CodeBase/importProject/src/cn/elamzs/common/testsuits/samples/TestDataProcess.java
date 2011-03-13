@@ -1,4 +1,4 @@
-package cn.elamzs.common.eimport.sample;
+package cn.elamzs.common.testsuits.samples;
 
 import java.util.Vector;
 

@@ -1,5 +1,5 @@
 
-package cn.elamzs.common.eimport.sample;
+package cn.elamzs.common.testsuits.samples;
 
 import org.apache.poi.ss.usermodel.IndexedColors;
 

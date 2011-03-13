@@ -19,7 +19,7 @@ public class TaskModel implements DataModel {
 	private String finishedTime;  //任务结束时间
 	private String taskType;    //任务类型
 	private int recordNum;     //文件的数据记录行
-	private int procTime;  //任务总耗时（秒）
+	private long procTime;  //任务总耗时（秒）
 	private int state;  //任务状态      0:未执行；1：导入成功   2：导入失败
 
 	
@@ -31,11 +31,11 @@ public class TaskModel implements DataModel {
 		this.recordNum = recordNum;
 	}
 
-	public int getProcTime() {
+	public long getProcTime() {
 		return procTime;
 	}
 
-	public void setProcTime(int procTime) {
+	public void setProcTime(long procTime) {
 		this.procTime = procTime;
 	}
 

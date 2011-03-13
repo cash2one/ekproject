@@ -3,8 +3,8 @@ package cn.elamzs.common.testsuits;
 import cn.elamzs.common.eimport.core.ThreadDataImport;
 import cn.elamzs.common.eimport.enums.FileType;
 import cn.elamzs.common.eimport.inter.EImporter;
-import cn.elamzs.common.eimport.sample.TestDataProcess;
-import cn.elamzs.common.eimport.sample.TestValidator;
+import cn.elamzs.common.testsuits.samples.TestDataProcess;
+import cn.elamzs.common.testsuits.samples.TestValidator;
 
 public class ImportTestSuit {
 

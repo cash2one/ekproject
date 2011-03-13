@@ -85,7 +85,7 @@ public abstract class AbstractFileHandler implements FileHandler{
     	FileStorePersisService srv = new FileStorePersisService();
 		TaskModel task = new TaskModel();
 		task.setHanderId(importTaskId);
-    	
+    	long spendTime = System.currentTimeMillis();//耗时计算
 		try {
     		if(validateDoc()){
 	    		
@@ -129,6 +129,8 @@ public abstract class AbstractFileHandler implements FileHandler{
 		
 		try {
 			//保存任务信息
+			spendTime = (System.currentTimeMillis() - spendTime)/1000;//秒
+			task.setProcTime(spendTime);
 			srv.updateTask(task, UPADTE_OPERATION.IMP_FINISH_STATE);
 		} catch (Exception e) {
 			e.printStackTrace();
