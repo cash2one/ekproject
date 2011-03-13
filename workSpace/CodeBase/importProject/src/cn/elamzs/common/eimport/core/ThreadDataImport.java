@@ -7,6 +7,7 @@ import cn.elamzs.common.eimport.config.ConfigSetting;
 import cn.elamzs.common.eimport.core.handler.ExcelImportHandler;
 import cn.elamzs.common.eimport.core.handler.TxtImportHandler;
 import cn.elamzs.common.eimport.enums.FileType;
+import cn.elamzs.common.eimport.enums.TaskState;
 import cn.elamzs.common.eimport.inter.DataProcess;
 import cn.elamzs.common.eimport.inter.DataValidator;
 import cn.elamzs.common.eimport.inter.EImporter;
@@ -155,7 +156,7 @@ public class ThreadDataImport implements EImporter {
 		task.setHanderId(importTaskSeqId);
 		task.setFileName(fileAlias);
 		task.setSrcPath(_cpyObj);
-		task.setState(0);
+		task.setState(TaskState.IMP_READY);
         srv.crateTask(task);
 
 		return importTaskSeqId;

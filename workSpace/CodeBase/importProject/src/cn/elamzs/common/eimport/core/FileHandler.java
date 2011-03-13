@@ -19,10 +19,10 @@ public interface FileHandler extends Runnable {
 	
 	/**
 	 * 把文本中的数据读入到内存中，实施数据验证过程
-	 * 
+	*  @return 导入文件数据的总记录行数
 	 * @throws Exception
 	 */
-	public void loadDatas() throws Exception;
+	public int loadDatas() throws Exception;
 
 	
 	/**

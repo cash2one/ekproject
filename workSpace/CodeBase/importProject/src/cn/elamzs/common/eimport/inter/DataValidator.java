@@ -1,7 +1,7 @@
 package cn.elamzs.common.eimport.inter;
 
 /**
- * 数据验证器
+ * 数据验证器（模版）
  * @author Ethan.Lam
  *
  */

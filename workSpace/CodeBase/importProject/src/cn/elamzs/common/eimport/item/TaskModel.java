@@ -1,6 +1,7 @@
 package cn.elamzs.common.eimport.item;
 
 import cn.elam.util.db.inter.DataModel;
+import cn.elamzs.common.eimport.enums.TaskState;
 
 /**
  * 
@@ -19,6 +20,7 @@ public class TaskModel implements DataModel {
 	private String taskType;    //任务类型
 	private int recordNum;     //文件的数据记录行
 	private int procTime;  //任务总耗时（秒）
+	private int state;  //任务状态      0:未执行；1：导入成功   2：导入失败
 
 	
 	public int getRecordNum() {
@@ -45,16 +47,19 @@ public class TaskModel implements DataModel {
 		this.taskType = taskType;
 	}
 
-	private int state;  //任务状态
-
+	
 	public int getState() {
 		return state;
+	}
+
+	public void setState(TaskState state) {
+		this.state = state.type();
 	}
 
 	public void setState(int state) {
 		this.state = state;
 	}
-
+	
 	public String getHanderId() {
 		return handerId;
 	}
@@ -102,9 +107,5 @@ public class TaskModel implements DataModel {
 	public void setFinishedTime(String finishedTime) {
 		this.finishedTime = finishedTime;
 	}
-	
-	
-	
-	
 	
 }

@@ -27,10 +27,10 @@ public class TxtImportHandler extends AbstractFileHandler {
 	
 	
 	@Override
-	public void loadDatas() {
+	public int loadDatas() {
 		// TODO Auto-generated method stub
 	
-		
+		return 0;
 	}
 
 	

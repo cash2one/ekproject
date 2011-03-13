@@ -126,9 +126,9 @@ public class FileStorePersisService {
 	public void updateTask(TaskModel task,UPADTE_OPERATION operateType) throws Exception{
 		PersistWrapperDao dao = new PersistWrapperDao(ConfigSetting.PERSIST_POOL_NAME);
 		int newState = 0;
-		String updateSql = " update "+TASKS_TABLE+" set state = ?,result_path=?,finish_time=sysdate where handler_id = ? ";
+		String updateSql = " update "+TASKS_TABLE+" set state = ?,result_path=?,finish_time=sysdate,record_num=? where handler_id = ? ";
 		switch(operateType.type){
-		    case 1:dao.persist(updateSql,task.getState(),task.getResultPath(),task.getHanderId());break; //完成任务
+		    case 1:dao.persist(updateSql,task.getState(),task.getResultPath(),task.getRecordNum(),task.getHanderId());break; //完成任务
 		}
 	}
 	

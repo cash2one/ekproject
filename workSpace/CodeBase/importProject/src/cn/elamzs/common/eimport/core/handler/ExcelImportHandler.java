@@ -55,7 +55,7 @@ public class ExcelImportHandler extends AbstractFileHandler {
 	 * @throws Exception 
 	 */
 	@Override
-	public void loadDatas() throws Exception {
+	public int loadDatas() throws Exception {
 		// TODO Auto-generated method stub
 		
 		Workbook wb = POIExcelUtil.openWorkBook(importFile, isXlsx==0?true:false);
@@ -77,6 +77,8 @@ public class ExcelImportHandler extends AbstractFileHandler {
 		    dataPro.forEachRowValueProcess(dataElement);
 		    rowValues = null;
 		}
+		
+		return totalRows;
 	}
 
 
