@@ -110,8 +110,6 @@ public abstract class AbstractFileHandler implements FileHandler{
 				task.setResultPath(fileLocation);
 				task.setState(TaskState.IMP_SUC);
 			
-				task = null;
-				srv = null;
 				_datas = null;
 				
     		}else{
@@ -132,6 +130,8 @@ public abstract class AbstractFileHandler implements FileHandler{
 			spendTime = (System.currentTimeMillis() - spendTime)/1000;//√Î
 			task.setProcTime(spendTime);
 			srv.updateTask(task, UPADTE_OPERATION.IMP_FINISH_STATE);
+			task = null;
+			srv = null;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -114,7 +114,7 @@ public class ThreadDataImport implements EImporter {
 	public String importFile(String dataFile,String alias,String storeSubDir,String taskType) throws Exception {
 		// TODO Auto-generated method stub
 		
-		String taskId = importTaskPrepare(alias,dataFile,storeSubDir);
+		String taskId = importTaskPrepare(alias,dataFile,storeSubDir,taskType);
 		
 		//开始执行文件导入数据处理，启动线程处理
 		Thread importThread = new Thread(handler);
@@ -133,7 +133,7 @@ public class ThreadDataImport implements EImporter {
      * @param subDirName
      * @throws Exception
      */
-	String importTaskPrepare(String fileAlias,String srcFile,String subDirName) throws Exception{
+	String importTaskPrepare(String fileAlias,String srcFile,String subDirName,String taskType) throws Exception{
 		File _src = new File(srcFile);
 		String suffix = srcFile.substring(srcFile.lastIndexOf("."));
 		String importTaskSeqId = reNameFileId(srcFile);
@@ -157,6 +157,7 @@ public class ThreadDataImport implements EImporter {
 		task.setFileName(fileAlias);
 		task.setSrcPath(_cpyObj);
 		task.setState(TaskState.IMP_READY);
+		task.setTaskType(taskType);
         srv.crateTask(task);
 
 		return importTaskSeqId;
