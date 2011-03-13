@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configs>
+   <DBPool></DBPool>
+   <DIR_IMPORT_TEMPLATE></DIR_IMPORT_TEMPLATE>
+   <DIR_IMPORT_SRC></DIR_IMPORT_SRC>
+   <DIR_IMPORT_RESULT></DIR_IMPORT_RESULT>
+</Configs>
+
+
