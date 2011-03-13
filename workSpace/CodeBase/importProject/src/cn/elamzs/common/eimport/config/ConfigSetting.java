@@ -59,6 +59,10 @@ public class ConfigSetting {
 					.getTextTrim() : "d:/importfile/template/";
 			;
 
+			DIR_IMPORT_RESULT = DIR_IMPORT_RESULT.replace("\\", "/");
+			DIR_IMPORT_SRC = DIR_IMPORT_SRC.replace("\\", "/");
+			DIR_IMPORT_TEMPLATE = DIR_IMPORT_TEMPLATE.replace("\\", "/");
+			
 			File _dir = new File(DIR_IMPORT_RESULT);
 			if (!_dir.exists())
 				_dir.mkdirs();
