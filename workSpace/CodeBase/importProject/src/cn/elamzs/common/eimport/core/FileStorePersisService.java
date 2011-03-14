@@ -108,7 +108,7 @@ public class FileStorePersisService {
    /**
     * 保存任务信息	
     * @param task
- * @throws Exception 
+    * @throws Exception 
     */
 	public void crateTask(TaskModel task) throws Exception{
 		PersistWrapperDao<TaskModel> dao = new PersistWrapperDao<TaskModel>(ConfigSetting.PERSIST_POOL_NAME);
