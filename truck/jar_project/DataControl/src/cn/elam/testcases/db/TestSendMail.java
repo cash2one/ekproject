@@ -17,7 +17,9 @@ public class TestSendMail {
 		
 		MailBoxService src = null;
 	
-		int type = args.length>0?(!"".equals(args[0])?Integer.parseInt(args[0]):0):0;
+		String targetMail =args.length>0?args[0]:"109006340@qq.com";
+		
+		int type = args.length>2?(!"".equals(args[1])?Integer.parseInt(args[1]):0):0;
 		
 		while(type==0){
 			
@@ -34,11 +36,11 @@ public class TestSendMail {
 				
 					 case 0:{
 						 
-						    System.out.println("使用alex86825@163.com发送。");
+						    System.out.println("使用alex86825@163.com发送  到"+targetMail);
 							src = new MailBoxService("alex86825@163.com",
 									"smtp.163.com", "alex86825", "alex672988", "true", true);
 			
-							src.sendMail("ethanlamzs@gmail.com",
+							src.sendMail(targetMail,
 									"test_alex672988" + Math.random(), message);
 			
 							break;
@@ -46,11 +48,11 @@ public class TestSendMail {
 					 
 						case 1:{
 							
-							System.out.println("使用zjxxtnoticer@163.com发送。");
+							System.out.println("使用zjxxtnoticer@163.com发送 到"+targetMail);
 							src = new MailBoxService("zjxxtnoticer@163.com",
 									"smtp.163.com", "zjxxtnoticer", "zjxxt0760", "true", true);
 			
-							src.sendMail("ethanlamzs@gmail.com",
+							src.sendMail(targetMail,
 									"hello_zjxxtnoticer163" + Math.random(), message);
 			
 							break;
@@ -59,11 +61,11 @@ public class TestSendMail {
 						
 						case 2:{
 							
-							System.out.println("使用zjxxtnoticer@sina.cn发送。");
+							System.out.println("使用zjxxtnoticer@sina.cn发送 到"+targetMail);
 							src = new MailBoxService("zjxxtnoticer@sina.cn",
 									"smtp.sina.cn", "zjxxtnoticer", "zjxxt0760", "true", true);
 			
-							src.sendMail("ethanlamzs@gmail.com",
+							src.sendMail(targetMail,
 									"hello_zjxxtnoticersina" + Math.random(), message);
 							
 							break;
@@ -73,29 +75,29 @@ public class TestSendMail {
 		                case 3:{
 							
 		                	
-							System.out.println("使用zjxxtnoticer@sina.cn发送。");
+							System.out.println("使用zjxxtnoticer@sina.cn发送 到"+targetMail);
 							src = new MailBoxService("zjxxtnoticer@sina.cn",
 									"smtp.sina.cn", "zjxxtnoticer", "zjxxt0760", "true", true);
 			
-							src.sendMail("ethanlamzs@gmail.com",
+							src.sendMail(targetMail,
 									"hello_zjxxtnoticersina" + Math.random(), message);
 							
 							
 							
-							System.out.println("使用zjxxtnoticer@sina.cn发送。");
+							System.out.println("使用zjxxtnoticer@sina.cn发送 到"+targetMail);
 							src = new MailBoxService("zjxxtnoticer@sina.cn",
 									"smtp.sina.cn", "zjxxtnoticer", "zjxxt0760", "true", true);
 			
-							src.sendMail("ethanlamzs@gmail.com",
+							src.sendMail(targetMail,
 									"hello_zjxxtnoticersina" + Math.random(), message);
 							
 							
 							
-							System.out.println("使用zjxxtnoticer@163.com发送。");
+							System.out.println("使用zjxxtnoticer@163.com发送 到"+targetMail);
 							src = new MailBoxService("zjxxtnoticer@163.com",
 									"smtp.163.com", "zjxxtnoticer", "zjxxt0760", "true", true);
 			
-							src.sendMail("ethanlamzs@gmail.com",
+							src.sendMail(targetMail,
 									"hello_zjxxtnoticer163" + Math.random(), message);
 			
 							
