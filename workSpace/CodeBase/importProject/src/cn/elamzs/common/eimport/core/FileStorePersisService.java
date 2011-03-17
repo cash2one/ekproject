@@ -48,7 +48,7 @@ public class FileStorePersisService {
 	public List<TaskModel> query(Map<String,String> options,int currentPage, int pageSize)
 			throws Exception {
 		QueryWrapperDao<TaskModel> dao = new QueryWrapperDao<TaskModel>(ConfigSetting.PERSIST_POOL_NAME);
-		StringBuffer sql =new StringBuffer(" select handler_id,file_name,task_type,src_path,result_path,state,to_char(start_time,'yyyy-MM-dd hh:mmLss'),to_char(finish_time,'yyyy-MM-dd hh:mmLss') from " + TASKS_TABLE);
+		StringBuffer sql =new StringBuffer(" select handler_id,file_name,task_type,src_path,result_path,state,to_char(start_time,'yyyy-MM-dd hh:mm:ss'),to_char(finish_time,'yyyy-MM-dd hh:mm:ss') from " + TASKS_TABLE);
 		sql.append(" where 1=1 ");
         if(options!=null){
         	if(options.containsKey("state"))
@@ -62,7 +62,7 @@ public class FileStorePersisService {
 			public TaskModel wrapperItem(ResultSet rs) throws Exception {
 				TaskModel model = new TaskModel();
 				model.setHanderId(rs.getString("handler_id"));
-				model.setFileName("file_name");
+				model.setFileName(rs.getString("file_name"));
 				model.setTaskType(rs.getString("task_type"));
 				model.setSrcPath(rs.getString("src_path"));
 				model.setResultPath(rs.getString("result_path"));
@@ -160,5 +160,13 @@ public class FileStorePersisService {
 		
 	}
 	
-
+    public static void main(String...art) throws Exception{
+    	try{
+    	FileStorePersisService ser = new FileStorePersisService();
+        ser.query(null, 1, 100);   	
+    	}catch(Exception e){
+    		e.printStackTrace();
+    	}
+    	}
+	
 }
