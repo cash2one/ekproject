@@ -48,7 +48,7 @@ public class FileStorePersisService {
 	public List<TaskModel> query(Map<String,String> options,int currentPage, int pageSize)
 			throws Exception {
 		QueryWrapperDao<TaskModel> dao = new QueryWrapperDao<TaskModel>(ConfigSetting.PERSIST_POOL_NAME);
-		StringBuffer sql =new StringBuffer(" select handler_id,file_name,task_type,src_path,result_path,state,to_char(start_time,'yyyy-MM-dd hh:mm:ss'),to_char(finish_time,'yyyy-MM-dd hh:mm:ss') from " + TASKS_TABLE);
+		StringBuffer sql =new StringBuffer(" select handler_id,proc_time,record_num,file_name,task_type,src_path,result_path,state,to_char(start_time,'yyyy-MM-dd hh:mm:ss') start_time ,to_char(finish_time,'yyyy-MM-dd hh:mm:ss') finish_time from " + TASKS_TABLE);
 		sql.append(" where 1=1 ");
         if(options!=null){
         	if(options.containsKey("state"))
@@ -69,6 +69,8 @@ public class FileStorePersisService {
 				model.setStartTime(rs.getString("start_time"));
 				model.setState(rs.getInt("state"));
 				model.setFinishedTime(rs.getString("finish_time"));
+				model.setProcTime(rs.getInt("proc_time"));
+				model.setRecordNum(rs.getInt("record_num"));
 				return model;
 			}
 		}, sql.toString(), currentPage, pageSize);
@@ -83,7 +85,7 @@ public class FileStorePersisService {
     */
 	public TaskModel getTaskInfo(String taskHandlerId) throws Exception{
 		QueryWrapperDao<TaskModel> dao = new QueryWrapperDao<TaskModel>(ConfigSetting.PERSIST_POOL_NAME);
-		String sql = " select handler_id,file_name,src_path,task_type,result_path,state,to_char(start_time,'yyyy-MM-dd hh:mmLss') start_time,to_char(finish_time,'yyyy-MM-dd hh:mmLss') finish_time from " + TASKS_TABLE;
+		String sql = " select handler_id,file_name,proc_time,record_num,src_path,task_type,result_path,state,to_char(start_time,'yyyy-MM-dd hh:mm:ss') start_time,to_char(finish_time,'yyyy-MM-dd hh:mm:ss') finish_time from " + TASKS_TABLE;
 		sql +=" where handler_id = "+taskHandlerId;
 		
 		return dao.getItem(new QueryAction<TaskModel>(){
@@ -100,6 +102,8 @@ public class FileStorePersisService {
 				model.setStartTime(rs.getString("start_time"));
 				model.setState(rs.getInt("state"));
 				model.setFinishedTime(rs.getString("finish_time"));
+				model.setProcTime(rs.getInt("proc_time"));
+				model.setRecordNum(rs.getInt("record_num"));
 				return model;
 			}}, sql);
 		
