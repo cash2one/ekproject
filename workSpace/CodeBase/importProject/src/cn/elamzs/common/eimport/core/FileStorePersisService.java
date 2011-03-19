@@ -95,7 +95,7 @@ public class FileStorePersisService {
 				// TODO Auto-generated method stub
 				TaskModel model = new TaskModel();
 				model.setHanderId(rs.getString("handler_id"));
-				model.setFileName("file_name");
+				model.setFileName(rs.getString("file_name"));
 				model.setTaskType(rs.getString("task_type"));
 				model.setSrcPath(rs.getString("src_path"));
 				model.setResultPath(rs.getString("result_path"));

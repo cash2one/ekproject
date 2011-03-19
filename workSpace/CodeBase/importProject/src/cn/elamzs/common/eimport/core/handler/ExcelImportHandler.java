@@ -78,7 +78,7 @@ public class ExcelImportHandler extends AbstractFileHandler {
 		    rowValues = null;
 		}
 		
-		return totalRows;
+		return totalRows>=1?totalRows-1:0;
 	}
 
 
