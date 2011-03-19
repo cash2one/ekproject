@@ -29,7 +29,8 @@ public class FileDownLoadService {
 		OutputStream out = null;
 		try {
 			out = response.getOutputStream();
-			if (!new File(fileLocation).exists()) {
+			File target = new File(fileLocation);
+			if (!target.exists()||target.isDirectory()) {
 				StringBuffer html = new StringBuffer();
 				html.append("<script>");
 				html.append("alert('找不到文件，下载失败！')");
