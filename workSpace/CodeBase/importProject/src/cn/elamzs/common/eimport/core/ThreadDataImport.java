@@ -50,7 +50,7 @@ public class ThreadDataImport implements EImporter {
      * 返回导入数据后形成的处理结果
 	 * @param importTaskSeq
      */
-	public File getImportedResult(String importTaskSeq) throws Exception{
+	public TaskModel getImportedResult(String importTaskSeq) throws Exception{
 		// TODO Auto-generated method stub
 		TaskModel task = srv.getTaskInfo(importTaskSeq);
 		if(task!=null&&task.getState()!=1)
@@ -58,7 +58,7 @@ public class ThreadDataImport implements EImporter {
 		else{
 			File file = new File(task.getResultPath());
 		    if(file.exists())
-		    	return file;
+		    	return task;
 		    else
 		    	return null;
 		}
@@ -71,15 +71,15 @@ public class ThreadDataImport implements EImporter {
 	 * @param importTaskSeq  导入任务ID
 	 * 
 	 */
-	public File getResourceFile(String importTaskSeq) throws Exception{
+	public TaskModel getResourceFile(String importTaskSeq) throws Exception{
 		// TODO Auto-generated method stub
 		TaskModel task = srv.getTaskInfo(importTaskSeq);
 		if(task!=null)
-			return null;
+			return task;
 		else{
 			File file = new File(task.getSrcPath());
 		    if(file.exists())
-		    	return file;
+		    	return task;
 		    else
 		    	return null;
 		}

@@ -3,6 +3,7 @@ package cn.elamzs.common.eimport.inter;
 import java.io.File;
 
 import cn.elamzs.common.eimport.enums.FileType;
+import cn.elamzs.common.eimport.item.TaskModel;
 
 /**
  * 数据文件导入服务接口
@@ -39,7 +40,7 @@ public interface EImporter {
 	 * @return                 返回源上传的文件 
 	 * @throws Exception
 	 */
-	public File getResourceFile(String importTaskSeq) throws Exception;
+	public TaskModel getResourceFile(String importTaskSeq) throws Exception;
 
 	
 	/**
@@ -48,7 +49,7 @@ public interface EImporter {
 	 * @return               返回用户导入文件后的结果
 	 * @throws Exception
 	 */
-	public File getImportedResult(String importTaskSeq) throws Exception;
+	public TaskModel getImportedResult(String importTaskSeq) throws Exception;
 
 	
 }
