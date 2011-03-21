@@ -1,0 +1,288 @@
+CREATE OR REPLACE PROCEDURE ZJXXT.PRO_JH_BUSINESS(checkDate in varchar) 
+IS
+p_date          date;
+p_date2          date;
+p_hh          VARCHAR2(4);
+p_cnt   number;
+/******************************************************************************
+金华每月积分
+活动时间
+2010年11月1日-2011年6月30日
+
+活动对象
+使用校讯通统一平台且拥有移动号码的教师
+
+活动规则
+1)登录平台,每次1分,必须有一次有实际操作，每天最多5分
+2)群发通知,每次2分,每天最多5分
+3)个性化短信,每次3分,发送信息内容应有50%不同，且一次仅发一个号码，每天最多90分
+4)学生/家长回复短信,每次3分,学生/家长通过校讯通平台回复给教师，每天最多120分
+5)成绩导入,每次50分,全班成绩导入，每月最多100分
+6)成绩发送,每次50分,不能重复发成绩，每月最多100分
+
+话费兑换规则:
+1)兑换时间 次月20日前
+2)兑换方式 以移动话费方式充入移动手机号码中，教师在兑换时可将话费充入自己手机号码中，由市公司统一充值，充值后不得更改、取消
+3)兑换规则
+3-1)每50积分兑换1元话费
+3-2)低于500分的不参加兑换活动
+3-3)高于5000分的按5000分兑换
+3-4)兑换后不足50的积分余额不能兑换话费
+3-5)积分以月为单位进行兑换，隔月清零
+
+注:该活动仅适用于拥有移动号码的教师，对于没有移动号码的教师，各县市分公司可结合新放号政策一起推广
+
+******************************************************************************/
+begin
+
+if checkDate is null then
+  p_date := sysdate - 1;  --当前日期的前一天
+else
+  p_date:=to_date(checkDate,'YYYY-MM-DD HH24:MI');
+end if;
+p_date2 := to_date(to_char(p_date,'YYYY-MM-DD'),'YYYY-MM-DD HH24:MI');
+
+select distinct(to_char(sysdate,'hh24')) into p_hh from area;
+
+
+
+
+
+
+--1) 每天的登陆log插入积分明细表,每天最多积5分,1次1分
+insert into am_centdetail (area_id,school_id,teacher_id,user_id,cent,type,dt)
+ select 10 area_id,a.school_id,b.id teacher_id,b.userid,1 cent,1 type,p_date2 from jh_logs a,xj_teacher b 
+ where a.user_id=b.id  and a.type=9 and to_char(a.dt,'YYYY-MM-DD')= to_char(p_date,'YYYY-MM-DD');
+
+--2) 群发通知,每天最多积5分,每次2分
+insert into am_centdetail (area_id,school_id,teacher_id,user_id,cent,type,dt)
+select 10 area_id,a.school_id,b.id teacher_id,b.userid,2 cent,2 type,p_date2 from 
+(
+select * from jh_dx_sms where id  in (select max(id) from jh_dx_sms group by stat_sn) 
+) a,xj_teacher b 
+where a.user_id=b.id and to_char(a.dt,'YYYY-MM-DD')= to_char(p_date,'YYYY-MM-DD') and type=0 and kind in(1,4,5);
+
+
+--3)个性化短信,每天最多积90分,每次3分
+insert into am_centdetail (area_id,school_id,teacher_id,user_id,cent,type,dt)
+select 10 area_id,a.school_id,b.id teacher_id,b.userid,3 cent,3 type,p_date2 from jh_dx_sms a,xj_teacher b 
+where a.user_id=b.id and to_char(a.dt,'YYYY-MM-DD')= to_char(p_date,'YYYY-MM-DD') and type=0 and kind=2;
+
+--4)家长回复,每天最多积120分,每次3分
+insert into am_centdetail (area_id,school_id,teacher_id,user_id,cent,type,dt)
+select 10 area_id,a.school_id,b.id teacher_id,b.userid,3 cent,4 type,p_date2  from jh_dx_recsms a,xj_teacher b
+where a.receive_id=b.id and to_char(a.dt,'YYYY-MM-DD')= to_char(p_date,'YYYY-MM-DD');
+
+
+--5)成绩导入,logs表,每次50分,每月最多100分
+insert into am_centdetail (area_id,school_id,teacher_id,user_id,cent,type,dt)
+select 10 area_id,a.school_id,b.id teacher_id,b.userid,50 cent,5 type,p_date2  from jh_logs a,xj_teacher b
+where type=12 and a.user_id=b.id and to_char(a.dt,'YYYY-MM-DD')= to_char(p_date,'YYYY-MM-DD');
+
+--6)成绩发送,每天最多积50分,每月最多100分  (短信不重复的判断暂时没加)
+insert into am_centdetail (area_id,school_id,teacher_id,user_id,cent,type,dt)
+select 10 area_id,a.school_id,b.id teacher_id,b.userid,50 cent,6 type,p_date2 from 
+(
+select * from jh_dx_sms where id  in (select max(id) from jh_dx_sms group by stat_sn) 
+) a,xj_teacher b 
+where a.user_id=b.id and to_char(a.dt,'YYYY-MM-DD')= to_char(p_date,'YYYY-MM-DD') and type=0 and kind=3;
+
+ commit;
+--=====================================================================
+--=====================================================================
+--delete am_cent_temp where year=to_char(p_date,'YYYY') and month=to_char(p_date,'MM');
+--commit;
+--按类型汇总              
+--1)汇总登陆log积分 至临时表
+            INSERT INTO am_cent_temp
+                    (area_id, user_id, si_id, school_id, school_name, YEAR, MONTH,
+                     cent, is_leader, dt, is_confirm, user_name,type)
+           SELECT d.area_id, c.userid, a.user_id, b.school_id, d.school_name, to_number(to_char(p_date,'yyyy')),  to_number(to_char(p_date,'mm')),
+                  b.cent, '2', TO_DATE ( to_char(p_date,'yyyy-mm-dd')  ,'yyyy-mm-dd'), '1', c.username,1
+             FROM qx_user_school a,
+                  (SELECT   teacher_id, school_id,decode(SUM (cent),0,0,1,1,2,2,3,3,4,4,5,5,5) AS cent
+                       FROM am_centdetail
+                     WHERE type=1 
+                    -- and TO_CHAR (dt, 'yyyy-mm-dd') <=   to_char(p_date,'yyyy-mm') || '-31'  and
+                    -- TO_CHAR (dt, 'yyyy-mm-dd') >=  to_char(p_date,'yyyy-mm') || '-01' 
+                    and to_char(dt,'YYYY-MM-DD')= to_char(p_date,'YYYY-MM-DD') 
+                    AND area_id = 10
+                   GROUP BY teacher_id, school_id) b,
+                  xj_teacher c,
+                  xj_school d
+            WHERE a.school_id = b.school_id
+              AND b.teacher_id = c.ID
+              AND d.ID = b.school_id;  
+              
+              
+--2)汇总群发短信积分  至临时表
+            INSERT INTO am_cent_temp
+                    (area_id, user_id, si_id, school_id, school_name, YEAR, MONTH,
+                     cent, is_leader, dt, is_confirm, user_name,type)
+           SELECT d.area_id, c.userid, a.user_id, b.school_id, d.school_name, to_number(to_char(p_date,'yyyy')),  to_number(to_char(p_date,'mm')),
+                  b.cent, '2', TO_DATE ( to_char(p_date,'yyyy-mm-dd')  ,'yyyy-mm-dd'), '1', c.username,2
+             FROM qx_user_school a,
+                  (SELECT   teacher_id, school_id,decode(SUM (cent),0,0,1,1,2,2,3,3,4,4,5,5,5) AS cent
+                       FROM am_centdetail
+                    WHERE type=2  
+                    -- and TO_CHAR (dt, 'yyyy-mm-dd') <=  to_char(p_date,'yyyy-mm') || '-31' and 
+                     --TO_CHAR (dt, 'yyyy-mm-dd') >=   to_char(p_date,'yyyy-mm') || '-01' AND area_id = 10
+                    and to_char(dt,'YYYY-MM-DD')= to_char(p_date,'YYYY-MM-DD')  AND area_id = 10
+                   GROUP BY teacher_id, school_id) b,
+                  xj_teacher c,
+                  xj_school d
+            WHERE a.school_id = b.school_id
+              AND b.teacher_id = c.ID
+              AND d.ID = b.school_id;     
+              
+--3)汇总个性短信积分  至临时表
+            INSERT INTO am_cent_temp
+                    (area_id, user_id, si_id, school_id, school_name, YEAR, MONTH,
+                     cent, is_leader, dt, is_confirm, user_name,type)
+           SELECT d.area_id, c.userid, a.user_id, b.school_id, d.school_name, to_number(to_char(p_date,'yyyy')),  to_number(to_char(p_date,'mm')),
+                  b.cent, '2', TO_DATE ( to_char(p_date,'yyyy-mm-dd')  ,'yyyy-mm-dd'), '1', c.username,3
+             FROM qx_user_school a,
+                  (SELECT   teacher_id, school_id,case when sum(cent)<91 then sum(cent) else 90 end as cent 
+                       FROM am_centdetail
+                    WHERE type=3  
+                     --and TO_CHAR (dt, 'yyyy-mm-dd') <=  to_char(p_date,'yyyy-mm') || '-31' and 
+                     --TO_CHAR (dt, 'yyyy-mm-dd') >=  to_char(p_date,'yyyy-mm') || '-01' AND area_id = 10
+                     and to_char(dt,'YYYY-MM-DD')= to_char(p_date,'YYYY-MM-DD')  AND area_id = 10
+                   GROUP BY teacher_id, school_id) b,
+                  xj_teacher c,
+                  xj_school d
+            WHERE a.school_id = b.school_id
+              AND b.teacher_id = c.ID
+              AND d.ID = b.school_id;  
+              
+--4)汇总学生/家长回复短信  至临时表    每天最多120
+            INSERT INTO am_cent_temp
+                    (area_id, user_id, si_id, school_id, school_name, YEAR, MONTH,
+                     cent, is_leader, dt, is_confirm, user_name,type)
+           SELECT d.area_id, c.userid, a.user_id, b.school_id, d.school_name, to_number(to_char(p_date,'yyyy')),  to_number(to_char(p_date,'mm')),
+                  b.cent, '2', TO_DATE ( to_char(p_date,'yyyy-mm-dd')  ,'yyyy-mm-dd'), '1', c.username,4
+             FROM qx_user_school a,
+                  (SELECT   teacher_id, school_id,case when sum(cent)<121 then sum(cent) else 120 end as cent 
+                       FROM am_centdetail
+                    WHERE type=4  
+                     --and TO_CHAR (dt, 'yyyy-mm-dd') <=  to_char(p_date,'yyyy-mm') || '-31' and 
+                     --TO_CHAR (dt, 'yyyy-mm-dd') >=  to_char(p_date,'yyyy-mm') || '-01' AND area_id = 10  
+                     and to_char(dt,'YYYY-MM-DD')= to_char(p_date,'YYYY-MM-DD')  AND area_id = 10                  
+                   GROUP BY teacher_id, school_id) b,
+                  xj_teacher c,
+                  xj_school d
+            WHERE a.school_id = b.school_id
+              AND b.teacher_id = c.ID
+              AND d.ID = b.school_id;    
+              
+ 
+--5)汇总成绩导入  至临时表    每天最多100
+            INSERT INTO am_cent_temp
+                    (area_id, user_id, si_id, school_id, school_name, YEAR, MONTH,
+                     cent, is_leader, dt, is_confirm, user_name,type)
+           SELECT d.area_id, c.userid, a.user_id, b.school_id, d.school_name, to_number(to_char(p_date,'yyyy')),  to_number(to_char(p_date,'mm')),
+                  b.cent, '2', TO_DATE ( to_char(p_date,'yyyy-mm-dd')  ,'yyyy-mm-dd'), '1', c.username,5
+             FROM qx_user_school a,
+                  (SELECT   teacher_id, school_id,case when sum(cent)<101 then sum(cent) else 100 end as cent 
+                       FROM am_centdetail
+                    WHERE type=5  
+                     --and TO_CHAR (dt, 'yyyy-mm-dd') <=  to_char(p_date,'yyyy-mm') || '-31' and 
+                     --TO_CHAR (dt, 'yyyy-mm-dd') >=  to_char(p_date,'yyyy-mm') || '-01' AND area_id = 10
+                     and to_char(dt,'YYYY-MM-DD')= to_char(p_date,'YYYY-MM-DD')  AND area_id = 10
+                   GROUP BY teacher_id, school_id) b,
+                  xj_teacher c,
+                  xj_school d
+            WHERE a.school_id = b.school_id
+              AND b.teacher_id = c.ID
+              AND d.ID = b.school_id;              
+
+
+--6)汇总成绩发送  至临时表    每天最多100
+            INSERT INTO am_cent_temp
+                    (area_id, user_id, si_id, school_id, school_name, YEAR, MONTH,
+                     cent, is_leader, dt, is_confirm, user_name,type)
+           SELECT d.area_id, c.userid, a.user_id, b.school_id, d.school_name, to_number(to_char(p_date,'yyyy')),  to_number(to_char(p_date,'mm')),
+                  b.cent, '2', TO_DATE ( to_char(p_date,'yyyy-mm-dd')  ,'yyyy-mm-dd'), '1', c.username,6
+             FROM qx_user_school a,
+                  (SELECT   teacher_id, school_id,case when sum(cent)<101 then sum(cent) else 100 end as cent 
+                       FROM am_centdetail
+                    WHERE type=6  
+                     --and TO_CHAR (dt, 'yyyy-mm-dd') <=  to_char(p_date,'yyyy-mm') || '-31' and 
+                     --TO_CHAR (dt, 'yyyy-mm-dd') >=  to_char(p_date,'yyyy-mm') || '-01' AND area_id = 10
+                     and to_char(dt,'YYYY-MM-DD')= to_char(p_date,'YYYY-MM-DD')  AND area_id = 10
+                   GROUP BY teacher_id, school_id) b,
+                  xj_teacher c,
+                  xj_school d
+            WHERE a.school_id = b.school_id
+              AND b.teacher_id = c.ID
+              AND d.ID = b.school_id;  
+              
+
+
+
+--=====================================================================
+--=====================================================================  
+         
+--从临表表汇总至积分总表  
+--
+ delete from am_cent where area_id=10 and to_char(dt,'yyyy-mm')= to_char(p_date,'yyyy-mm'); 
+ --delete from am_cent WHERE TO_CHAR (dt, 'yyyy-mm-dd') <= to_char(p_date,'yyyy-mm')  || '-31' and
+--                       TO_CHAR (dt, 'yyyy-mm-dd') >=  to_char(p_date,'yyyy-mm') || '-01' AND area_id = 10;
+ commit;
+ 
+ 
+ 
+INSERT INTO am_cent (area_id, user_id, si_id, school_id, school_name, YEAR, MONTH,
+                     cent, is_leader, dt, is_confirm, user_name)
+                     
+SELECT d.area_id, c.userid, a.user_id, b.school_id, d.school_name, to_number(to_char(p_date,'yyyy')),
+           to_number(to_char(p_date,'mm')),
+                  b.cent, '2', TO_DATE ( to_char(p_date,'yyyy-mm-dd') ,'yyyy-mm-dd'), '1', c.username
+             FROM qx_user_school a,
+ (
+ 
+ select user_id, school_id,sum(cent) cent from (   
+ select * from (
+  SELECT   user_id, school_id, SUM (cent) AS cent FROM am_cent_temp
+     WHERE TO_CHAR (dt, 'yyyy-mm') = to_char(p_date,'yyyy-mm')  AND area_id = 10
+     and type in('1','2','3','4')
+     GROUP BY user_id, school_id
+ ) k1 union all
+ 
+  select * from (
+  SELECT   user_id, school_id,case when sum(cent)>100 then 100  else sum(cent) end cent 
+  FROM am_cent_temp
+     WHERE TO_CHAR (dt, 'yyyy-mm') = to_char(p_date,'yyyy-mm')  AND area_id = 10
+     and type in('5')
+     GROUP BY user_id, school_id
+ ) union all
+   
+ select * from (
+  SELECT   user_id, school_id,case when sum(cent)>100 then 100  else sum(cent) end cent  
+  FROM am_cent_temp
+     WHERE TO_CHAR (dt, 'yyyy-mm') = to_char(p_date,'yyyy-mm')  AND area_id = 10
+     and type in('6')
+     GROUP BY user_id, school_id
+ ) k3  
+ ) GROUP BY user_id, school_id
+ 
+ 
+  ) b,xj_teacher c, xj_school d
+ WHERE a.school_id = b.school_id  AND b.user_id = c.userid   AND d.ID = b.school_id;
+             
+ 
+ 
+ commit;
+ 
+
+
+
+
+               exception
+                when others then
+                    qtone.log_error('PRO_JH_BUSINESS','处理过程出错','错误代码:' ||sqlcode||' '||sqlerrm);
+   
+
+
+END PRO_JH_BUSINESS;
+/
