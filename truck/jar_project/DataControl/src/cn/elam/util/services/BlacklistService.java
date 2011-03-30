@@ -6,7 +6,7 @@ import cn.elam.util.monitor.FileWatchdog;
 
 /**
  * 
- * 用例 当文件有修改时，执行重新加载
+ * 用例       当文件有修改时，执行重新加载
  * @author Ethan.Lam  2011-3-30
  *
  */
