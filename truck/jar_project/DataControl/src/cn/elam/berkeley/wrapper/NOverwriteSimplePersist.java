@@ -29,27 +29,21 @@ public class NOverwriteSimplePersist<DATA> extends SimplePersist<DATA> {
 	protected boolean persist(String aKey, DATA aData, PersistOperation operation) {
 		DBEnvironment envir = new DBEnvironment(configPath);
 		Database myDatabase = envir.openDataBase(dataBaseName);
+		Database myClazzDatabase = envir.openDataBase(CLAZZ_DB);
 		DatabaseEntry theKey = null;
 		DatabaseEntry theData = null;
+		DatabaseEntry theClassName = null;
 		try {
 			theKey = new DatabaseEntry(aKey.getBytes("UTF-8"));
-			   theData = new DatabaseEntry();
-	            EntryBinding myBinding = null;
-	            if(aData instanceof Long)
-	            	myBinding =  TupleBinding.getPrimitiveBinding(Long.class);
-	            else if(aData instanceof Double)
-	            	myBinding =  TupleBinding.getPrimitiveBinding(Double.class);
-	            else if(aData instanceof Float)
-	           	    myBinding =  TupleBinding.getPrimitiveBinding(Float.class);
-	            else if(aData instanceof Short)
-	           	    myBinding =  TupleBinding.getPrimitiveBinding(Short.class);
-	            else if(aData instanceof Integer)
-	           	    myBinding =  TupleBinding.getPrimitiveBinding(Integer.class);
-	            else if(aData instanceof Byte)
-	           	    myBinding =  TupleBinding.getPrimitiveBinding(Byte.class);
-	            else if(aData instanceof String)
-	           	    myBinding =  TupleBinding.getPrimitiveBinding(String.class);
-	            myBinding.objectToEntry(aData, theData);
+			theData = new DatabaseEntry();
+			
+			
+			theClassName = new DatabaseEntry(aData.getClass().getName().getBytes("UTF-8"));
+			myClazzDatabase.put(null, theKey, theClassName);
+			 
+			 
+	        EntryBinding myBinding  =  TupleBinding.getPrimitiveBinding(aData.getClass());
+	        myBinding.objectToEntry(aData, theData);
 	            
 			OperationStatus t = null;
 			if (operation == PersistOperation.UPDATE_DATA) {
@@ -65,6 +59,7 @@ public class NOverwriteSimplePersist<DATA> extends SimplePersist<DATA> {
 		} finally {
 			theKey = null;
 			theData = null;
+			myClazzDatabase.close();
 			myDatabase.close();
 			envir.close();
 		}

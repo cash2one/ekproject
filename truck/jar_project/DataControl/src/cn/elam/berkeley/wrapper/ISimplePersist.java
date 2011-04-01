@@ -8,7 +8,7 @@ package cn.elam.berkeley.wrapper;
 public interface ISimplePersist<DATA> {
 	public boolean persist(String aKey, DATA aData);
 
-	public DATA query(String aKey);
+	public DATA getValue(String aKey);
 
 	public boolean delete(String aKey);
 

@@ -24,12 +24,14 @@ public class SimplePersist<DATA> implements ISimplePersist<DATA> {
 
 	protected String configPath = "";
 	protected String dataBaseName = "";
-
-	private Class<DATA> persistentClass = null;
+	protected final String CLAZZ_DB = "DataClazzDB";
+	
+	protected Class<DATA> persistentClass = null;
 	
 	public SimplePersist(String configPath, String dataBaseName) {
 		this.configPath = configPath;
 		this.dataBaseName = dataBaseName;
+//		persistentClass = (Class<DATA>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];  
 	}
 
 	
@@ -44,29 +46,22 @@ public class SimplePersist<DATA> implements ISimplePersist<DATA> {
 			PersistOperation operation) {
 		DBEnvironment envir = new DBEnvironment(configPath);
 		Database myDatabase = envir.openDataBase(dataBaseName);
+		Database myClazzDatabase = envir.openDataBase(CLAZZ_DB);
 		DatabaseEntry theKey = null;
 		DatabaseEntry theData = null;
+		DatabaseEntry theClassName = null;
 		try {
-			theKey = new DatabaseEntry(aKey.getBytes("UTF-8"));
-            theData = new DatabaseEntry();
-            EntryBinding myBinding = null;
-            if(aData instanceof Long)
-            	myBinding =  TupleBinding.getPrimitiveBinding(Long.class);
-            else if(aData instanceof Double)
-            	myBinding =  TupleBinding.getPrimitiveBinding(Double.class);
-            else if(aData instanceof Float)
-           	    myBinding =  TupleBinding.getPrimitiveBinding(Float.class);
-            else if(aData instanceof Short)
-           	    myBinding =  TupleBinding.getPrimitiveBinding(Short.class);
-            else if(aData instanceof Integer)
-           	    myBinding =  TupleBinding.getPrimitiveBinding(Integer.class);
-            else if(aData instanceof Byte)
-           	    myBinding =  TupleBinding.getPrimitiveBinding(Byte.class);
-            else if(aData instanceof String)
-           	    myBinding =  TupleBinding.getPrimitiveBinding(String.class);
-            myBinding.objectToEntry(aData, theData);
+			
+			 theKey = new DatabaseEntry(aKey.getBytes("UTF-8"));
+             theData = new DatabaseEntry();
             
-			OperationStatus t = myDatabase.put(null, theKey, theData);
+             EntryBinding myBinding  =  TupleBinding.getPrimitiveBinding(aData.getClass());
+             myBinding.objectToEntry(aData, theData);
+			 OperationStatus t = myDatabase.put(null, theKey, theData);
+			
+			 theClassName = new DatabaseEntry(aData.getClass().getName().getBytes("UTF-8"));
+			 myClazzDatabase.put(null, theKey, theClassName);
+			
 			return t == OperationStatus.KEYEXIST ? false : true;
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
@@ -75,6 +70,7 @@ public class SimplePersist<DATA> implements ISimplePersist<DATA> {
 			theKey = null;
 			theData = null;
 			myDatabase.close();
+			myClazzDatabase.close();
 			envir.close();
 		}
 	}
@@ -83,20 +79,21 @@ public class SimplePersist<DATA> implements ISimplePersist<DATA> {
 		return persist(aKey, aData, PersistOperation.CREATE_DATA);
 	}
 
-	public DATA query(String aKey) {
+	
+	
+	@SuppressWarnings("unchecked")  
+	public DATA getValue(String aKey) {
 		DBEnvironment envir = new DBEnvironment(configPath);
 		Database myDatabase = envir.openDataBase(dataBaseName);
+		Database myClazzDatabase = envir.openDataBase(CLAZZ_DB);
 		DATA foundData = null;
 		try {
-			
+			Class dataClazz  = getDataClass(aKey);
+			if(dataClazz==null)
+				return null;
 			DatabaseEntry theKey = new DatabaseEntry(aKey.getBytes("UTF-8"));
-			DatabaseEntry theData = new DatabaseEntry();
-//			if (myDatabase.get(null, theKey, theData, LockMode.DEFAULT) == OperationStatus.SUCCESS) {
-//				byte[] retData = theData.getData();
-//				foundData = new String(retData, "UTF-8");
-//			}
-			this.persistentClass = checkClazz();
-	        EntryBinding myBinding = TupleBinding.getPrimitiveBinding(persistentClass);
+			DatabaseEntry theData = new DatabaseEntry();			
+	        EntryBinding myBinding = TupleBinding.getPrimitiveBinding(dataClazz);
 	        OperationStatus retVal = myDatabase.get(null, theKey, theData,LockMode.DEFAULT);
 	        String retKey = null;
 	        if (retVal == OperationStatus.SUCCESS) {
@@ -107,45 +104,31 @@ public class SimplePersist<DATA> implements ISimplePersist<DATA> {
            e.printStackTrace();
 		} finally {
 			myDatabase.close();
+			myClazzDatabase.close();
 			envir.close();
 		}
 		return foundData;
 	}
 
 	
-	public Class checkClazz(){
-	   	try {
-			Type type  = this.getClass().getMethod("query", String.class).getGenericReturnType();
-			return type.getClass();
+	private Class getDataClass(String aKey){
+		DBEnvironment envir = new DBEnvironment(configPath);
+		Database myClazzDatabase = envir.openDataBase(CLAZZ_DB);
+		try {
+		    DatabaseEntry theKey = new DatabaseEntry(aKey.getBytes("UTF-8"));
+		    DatabaseEntry theData = new DatabaseEntry();
+		    if (myClazzDatabase.get(null, theKey, theData, LockMode.DEFAULT) ==OperationStatus.SUCCESS) {
+		        byte[] retData = theData.getData();
+		        String dataClazz = new String(retData, "UTF-8");
+		        return getClass().forName(dataClazz);
+		    } 
 		} catch (Exception e) {
-			e.printStackTrace();
+		}finally {
+			myClazzDatabase.close();
+			envir.close();
 		}
-		 return null;
+		return null;
 	}
-	
-	
-	static Class getClass(Type type, int i) {     
-        if (type instanceof ParameterizedType) { // 处理泛型类型     
-            return getGenericClass((ParameterizedType) type, i);     
-        } else if (type instanceof TypeVariable) {     
-            return (Class) getClass(((TypeVariable) type).getBounds()[0], 0); // 处理泛型擦拭对象     
-        } else {// class本身也是type，强制转型     
-            return (Class) type;     
-        }     
-    }     
-	
-	static Class getGenericClass(ParameterizedType parameterizedType, int i) {     
-	        Object genericClass = parameterizedType.getActualTypeArguments()[i];     
-	        if (genericClass instanceof ParameterizedType) { // 处理多级泛型     
-	            return (Class) ((ParameterizedType) genericClass).getRawType();     
-	        } else if (genericClass instanceof GenericArrayType) { // 处理数组泛型     
-	            return (Class) ((GenericArrayType) genericClass).getGenericComponentType();     
-	        } else if (genericClass instanceof TypeVariable) { // 处理泛型擦拭对象     
-	            return (Class) getClass(((TypeVariable) genericClass).getBounds()[0], 0);     
-	        } else {     
-	            return (Class) genericClass;     
-	        }     
-	    }    
 	
 	
 	public boolean update(String aKey, DATA aData) {
@@ -168,6 +151,8 @@ public class SimplePersist<DATA> implements ISimplePersist<DATA> {
 		return false;
 	}
 
+
+	
 	public enum PersistOperation {
 		UPDATE_DATA, CREATE_DATA;
 	}

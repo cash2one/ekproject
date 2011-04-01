@@ -10,23 +10,22 @@ public class SimpleCase {
 	static String dataBase = "sampleDatabase";
 
 	public static void main(String... args) {
-		String aKey = "test_number";
-		String aData = "value_one";
+		String aKey = "tkey_1";
+		String aData = "OldValue";
+		String aData_new = "NewValue";
 		Integer number = 10;
 		
-		ISimplePersist dao = new NOverwriteSimplePersist<String>(config, dataBase);
-		System.out.println(dao.query(aKey));
+		ISimplePersist dao = new SimplePersist(config, dataBase);
+		System.out.println(dao.persist(aKey, aData));
+		System.out.println(dao.getValue(aKey));
+		System.out.println(dao.update(aKey, aData_new));
+		System.out.println(dao.getValue(aKey));
 		
-//		System.out.println(dao.persist(aKey, number));
-//		System.out.println(dao.query(aKey));
-//		System.out.println(dao.update(aKey, number+1000));
-//		System.out.println(dao.query(aKey));
-		
-//		dao = new SimplePersist<String>(config, dataBase);
-//		System.out.println(dao.persist(aKey, aData));
-//		System.out.println(dao.query(aKey));
-//		System.out.println(dao.update(aKey, "value_two"));
-//		System.out.println(dao.query(aKey));
+		dao = new NOverwriteSimplePersist(config, dataBase);
+		System.out.println(dao.persist(aKey, aData));
+		System.out.println(dao.getValue(aKey));
+		System.out.println(dao.update(aKey, aData_new));
+		System.out.println(dao.getValue(aKey));
 	}
 
 }

@@ -2,6 +2,11 @@ package cn.elam.berkeley;
 
 import java.io.File;
 
+import cn.elam.berkeley.sample.MyData;
+
+import com.sleepycat.bind.EntryBinding;
+import com.sleepycat.bind.serial.SerialBinding;
+import com.sleepycat.bind.serial.StoredClassCatalog;
 import com.sleepycat.je.Database;
 import com.sleepycat.je.DatabaseConfig;
 import com.sleepycat.je.DatabaseEntry;
@@ -21,11 +26,13 @@ public class DBContorl {
 
 		DBContorl run = new DBContorl();
 		run.openDataBase("export/dbEnv", "sampleDatabase");
-		// run.insert("test", "测试测试测试");
-		run.readData("key");
+		run.insert("test", "测试测试测试");
 		run.readData("test");
-		run.delete("key");
+//		run.delete("key");
+		run.saveObject();
+		run.readObject();
 		run.closeDataBase();
+		
 		// System.out.println("测试");
 	}
 
@@ -135,4 +142,66 @@ public class DBContorl {
 		}
 	}
 
+	/**
+	 * 
+	 */
+	public void saveObject(){
+		String aKey = "myData";
+		MyData data2Store = new MyData();
+		data2Store.setLong(123456789l);
+		data2Store.setDouble(1234.9876543);
+		data2Store.setDescription("A test instance of this class");
+		try {
+		    DatabaseConfig myDbConfig = new DatabaseConfig();
+		    myDbConfig.setAllowCreate(true);
+		    myDbConfig.setSortedDuplicates(true);
+		    Database myDatabase = myDbEnvironment.openDatabase(null, "myDb", myDbConfig);
+		    myDbConfig.setSortedDuplicates(false);
+		       //打开用来存储类信息的库
+		    Database myClassDb = myDbEnvironment.openDatabase(null, "classDb", myDbConfig);
+		    // 3）创建catalog
+		    StoredClassCatalog classCatalog = new StoredClassCatalog(myClassDb);
+		   // 4）绑定数据和类
+		    EntryBinding dataBinding = new SerialBinding(classCatalog, MyData.class);
+		    DatabaseEntry theKey = new DatabaseEntry(aKey.getBytes("UTF-8"));
+		   // 向DatabaseEntry里写数据
+		    DatabaseEntry theData = new DatabaseEntry();
+		    dataBinding.objectToEntry(data2Store, theData);
+		    myDatabase.put(null, theKey, theData);
+		    myDatabase.close();
+		    myClassDb.close();
+		} catch (Exception e) {
+		    // 错误处理
+		}
+	}
+	
+	
+	public void readObject(){
+		String aKey = "myData";
+		try {
+		    DatabaseConfig myDbConfig = new DatabaseConfig();
+		    myDbConfig.setAllowCreate(false);
+		    Database myDatabase = myDbEnvironment.openDatabase(null, "myDb", myDbConfig);
+		       //用来存储类信息的库
+		    Database myClassDb = myDbEnvironment.openDatabase(null, "classDb", myDbConfig);
+		 
+		    // 实例化catalog
+		    StoredClassCatalog classCatalog = new StoredClassCatalog(myClassDb);
+		    // 创建绑定对象
+		    EntryBinding dataBinding = new SerialBinding(classCatalog,
+		                                                 MyData.class);
+		    DatabaseEntry theKey = new DatabaseEntry(aKey.getBytes("UTF-8"));
+		    DatabaseEntry theData = new DatabaseEntry();
+		    myDatabase.get(null, theKey, theData, LockMode.DEFAULT);
+		    // Recreate the MyData object from the retrieved DatabaseEntry using
+		    // 根据存储的类信息还原数据
+		    MyData retrievedData=(MyData)dataBinding.entryToObject(theData);
+		    myClassDb.close();
+		    myDatabase.close();
+		} catch (Exception e) {
+		    // Exception handling goes here
+		}
+	}
+	
+	
 }

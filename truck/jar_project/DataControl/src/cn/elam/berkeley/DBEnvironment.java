@@ -11,6 +11,7 @@ import com.sleepycat.je.EnvironmentConfig;
 /***
  * 
  * Berkeley DB 运行环境
+ * 
  * @author Ethan.Lam 2011-3-31
  * 
  */
@@ -18,15 +19,17 @@ public class DBEnvironment {
 
 	Environment environment = null;
 
+	private boolean immediatelySync = false;
+
 	public DBEnvironment(String configPath) {
 		environment = init(configPath);
 	}
 
-	public DBEnvironment(String configPath,boolean immediatelySync) {
-		environment = init(configPath);
-		this.setEnvironmentSync(immediatelySync);
+	public DBEnvironment(String configPath, boolean immediatelySync) {
+		this(configPath);
+		this.immediatelySync = immediatelySync;
 	}
-	
+
 	/**
 	 * 打开database环境 JE要求在任何DATABASE操作前，要先打开数据库环境，就像我们要使用数据库的话必须得先建立连接一样。
 	 * 你可以通过数据库环境来创建和打开database，或者更改database名称和删除database.
@@ -59,12 +62,12 @@ public class DBEnvironment {
 	}
 
 	/**
-	 *  在关闭环境前清理下日志
+	 * 在关闭环境前清理下日志
 	 */
 	void cleanLog() {
 		try {
 			if (environment != null) {
-				  environment.cleanLog();
+				environment.cleanLog();
 			}
 		} catch (DatabaseException e) {
 
@@ -75,20 +78,22 @@ public class DBEnvironment {
 	 * 当你对database进行了写操作的时候，你的修改不一定马上就能生效，有的时候他仅仅是缓存在RAM中，如果想让你的修改立即生效，
 	 * 则可以使用Environment.sync()方法来把数据同步到磁盘中去。
 	 */
-	public void setEnvironmentSync(boolean immediatelySync) {
-		if (immediatelySync) {
-			if (environment != null)
-				environment.sync();
-		}
+	public void immediatelySync() {
+		if (environment != null)
+			environment.sync();
 	}
-	
+
 	/**
 	 * 关闭数据库环境
 	 */
 	public void close() {
+		if (this.immediatelySync)
+			immediatelySync();
+		
 		cleanLog();
-		if(environment!=null)
-		   environment.close();
+		
+		if (environment != null)
+			environment.close();
 	}
 
 }
