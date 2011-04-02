@@ -89,9 +89,7 @@ public class DBEnvironment {
 	public void close() {
 		if (this.immediatelySync)
 			immediatelySync();
-		
 		cleanLog();
-		
 		if (environment != null)
 			environment.close();
 	}

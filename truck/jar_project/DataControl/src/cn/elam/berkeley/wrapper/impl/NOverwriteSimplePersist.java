@@ -1,4 +1,4 @@
-package cn.elam.berkeley.wrapper;
+package cn.elam.berkeley.wrapper.impl;
 
 import java.io.UnsupportedEncodingException;
 
@@ -10,7 +10,7 @@ import com.sleepycat.je.LockMode;
 import com.sleepycat.je.OperationStatus;
 
 import cn.elam.berkeley.DBEnvironment;
-import cn.elam.berkeley.wrapper.SimplePersist.PersistOperation;
+import cn.elam.berkeley.wrapper.impl.SimplePersist.PersistOperation;
 
 /**
  * 简单维护 索引 ---值 （KEY - VALUE）的关系 索引与值是一一对应的,不是一对多的关系

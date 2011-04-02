@@ -1,4 +1,4 @@
-package cn.elam.berkeley.wrapper;
+package cn.elam.berkeley.wrapper.impl;
 
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.GenericArrayType;
@@ -7,6 +7,7 @@ import java.lang.reflect.Type;
 import java.lang.reflect.TypeVariable;
 
 import cn.elam.berkeley.DBEnvironment;
+import cn.elam.berkeley.wrapper.ISimplePersist;
 
 import com.sleepycat.bind.EntryBinding;
 import com.sleepycat.bind.tuple.TupleBinding;
