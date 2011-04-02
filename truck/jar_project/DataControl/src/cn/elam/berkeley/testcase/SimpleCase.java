@@ -1,9 +1,9 @@
 package cn.elam.berkeley.testcase;
 
-import java.lang.reflect.Type;
-
+import cn.elam.berkeley.sample.MyData;
+import cn.elam.berkeley.wrapper.IObjectPersist;
 import cn.elam.berkeley.wrapper.ISimplePersist;
-import cn.elam.berkeley.wrapper.impl.NOverwriteSimplePersist;
+import cn.elam.berkeley.wrapper.impl.ObjectPersist;
 import cn.elam.berkeley.wrapper.impl.SimplePersist;
 
 public class SimpleCase {
@@ -23,7 +23,19 @@ public class SimpleCase {
 		System.out.println(dao.update(aKey, aData_new));
 		System.out.println(aData_new.equals(dao.getValue(aKey)));
         System.out.println("测试通过");
-	
+//	
+        
+        IObjectPersist daoObj = new ObjectPersist(config, dataBase);
+        MyData data  = new MyData();
+        data.setDescription("test");
+        data.setDouble(10000);
+        data.setLong(10000);
+        aKey = aKey+"_A";
+		System.out.println(daoObj.persist(aKey, data));
+		
+		MyData old = (MyData) daoObj.getValue(aKey, MyData.class); 
+        System.out.println("测试通过");
+        
 	}
 
 

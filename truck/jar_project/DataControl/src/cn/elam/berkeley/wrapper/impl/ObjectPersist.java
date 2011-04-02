@@ -70,6 +70,7 @@ public class ObjectPersist implements IObjectPersist {
 			theKey = null;
 			theData = null;
 			myDatabase.close();
+			myClassDb.close();
 			envir.close();
 		}
 	}
