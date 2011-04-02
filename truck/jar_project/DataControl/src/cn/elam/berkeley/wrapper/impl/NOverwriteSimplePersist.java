@@ -37,10 +37,8 @@ public class NOverwriteSimplePersist<DATA> extends SimplePersist<DATA> {
 			theKey = new DatabaseEntry(aKey.getBytes("UTF-8"));
 			theData = new DatabaseEntry();
 			
-			
 			theClassName = new DatabaseEntry(aData.getClass().getName().getBytes("UTF-8"));
 			myClazzDatabase.put(null, theKey, theClassName);
-			 
 			 
 	        EntryBinding myBinding  =  TupleBinding.getPrimitiveBinding(aData.getClass());
 	        myBinding.objectToEntry(aData, theData);
