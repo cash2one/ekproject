@@ -101,6 +101,7 @@ public class AppLoger {
 
 	public static void main(String... m) {
 		DOMConfigurator.configure("configs/log4j.xml");
+		RuningLoggerInfo("测试是否可行");
 	}
 
 }
