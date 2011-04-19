@@ -13,6 +13,8 @@ import cn.elam.util.file.xml.XmlHandler;
 
 /**
  * 任务容器
+ * 1、加载任务配置文件中的对象
+ * 2、初始化任务，并设置周期地执行任务。
  * @author Ethan.Lam  2011-2-15
  *
  */
