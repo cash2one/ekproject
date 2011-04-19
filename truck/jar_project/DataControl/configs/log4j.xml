@@ -55,24 +55,24 @@
 	</appender>
 
 	<!-- 不带执行轨迹错误日志 -->
-	<appender name="simpleError" class="org.apache.log4j.DailyRollingFileAppender">
+	<!-- appender name="simpleError" class="org.apache.log4j.DailyRollingFileAppender">
 		<param name="File" value="logs/error.simple.log" />
 		<param name="Append" value="true" />
 		<param name="DatePattern" value="'.'yyyy-MM-dd" />
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern" value=" %d  %-5p [%c] (%C:%L) - %m%n" />
 		</layout>
-	</appender>
+	</appender -->
 
 	<!-- 带执行轨迹错误日志 -->
-	<appender name="normalError" class="org.apache.log4j.DailyRollingFileAppender">
+	<!-- appender name="normalError" class="org.apache.log4j.DailyRollingFileAppender">
 		<param name="File" value="logs/error.normal.log" />
 		<param name="Append" value="true" />
 		<param name="DatePattern" value="'.'yyyy-MM-dd" />
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern" value=" %d{ABSOLUTE} %-5p [%c] (%C:%L) - %m%n" />
 		</layout>
-	</appender>
+	</appender -->
 
 	<logger name="sql" additivity="true">
 		<priority value="info" />
@@ -86,6 +86,7 @@
 		<priority value="info" />
 		<appender-ref ref="appRunning" />
 	</logger>
+	<!-- 
 	<logger name="simpleError" additivity="true">
 		<priority value="info" />
 		<appender-ref ref="simpleError" />
@@ -94,6 +95,7 @@
 		<priority value="info" />
 		<appender-ref ref="normalError" />
 	</logger>
+	 -->
 	<root>
 		<appender-ref ref="STDOUT" />
 		<priority value="error" />
