@@ -8,5 +8,7 @@
 	<classpathentry kind="lib" path="libs/mysql-connector-java-3.0.14-production-bin.jar"/>
 	<classpathentry kind="lib" path="libs/ojdbc14.jar"/>
 	<classpathentry kind="lib" path="libs/struts.jar"/>
+	<classpathentry kind="lib" path="libs/je-4.1.7.jar"/>
+	<classpathentry kind="lib" path="libs/log4j-1.2.16.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
