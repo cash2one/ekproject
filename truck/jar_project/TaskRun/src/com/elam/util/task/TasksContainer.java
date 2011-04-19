@@ -65,9 +65,22 @@ public class TasksContainer {
 	}
 	
 	void listCurrentTasks(){
-         for(Task task :this.tasks){
+		 for(Task task :this.tasks){
                      	 
          }	
+	}
+	
+	
+	/**
+	 * ÖĞ¶ÏÈÎÎñ
+	 */
+	public void interruptAllTask(){
+		if(tasks!=null)
+		for(Task task :this.tasks){
+        	 if(task instanceof BaseTask){
+        		 ((BaseTask) task).interrupt();
+        	 }
+        }
 	}
 	
 	public static void main(String...s){
