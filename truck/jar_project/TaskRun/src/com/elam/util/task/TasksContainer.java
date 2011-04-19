@@ -20,40 +20,48 @@ public class TasksContainer {
 
 	List<Task> tasks = null;
 
+	public String Config_File = "configs/TaskConfig.xml";
+	
 	public TasksContainer() {
-		initialize();
+	
 	}
 
-	void initialize() {
-		Document doc = XmlHandler.loadXML("configs/TaskConfig.xml");
-		if (doc == null)
-			return;
-		
-		tasks = new ArrayList<Task>();
-		Element element = XmlHandler.getElement(doc, "global");
-		List<Element> taskItems = XmlHandler.getElements(doc, "tasks/task");
-		TaskItem taskItem = null;
-		Task task = null;
-		if (taskItems != null) {
-			for (Element item : taskItems) {
-				taskItem = new TaskItem();
-				taskItem.setName(item.attributeValue("name"));
-				taskItem.setTimeType(Checker.isNull(item
-						.attributeValue("periodType")) ? "sec" : item
-						.attributeValue("periodType"));
-				taskItem.setSeconds(Checker.isNull(item
-						.attributeValue("period")) ? 10 : Trans
-						.StringToInt(item.attributeValue("period")));
-				task = createTaskObject(item.getText().trim(), taskItem);
-				if (task != null)
-					tasks.add(task);
+	public void initialize() {
+		try{
+			Document doc = XmlHandler.loadXML(Config_File);
+			if (doc == null)
+				return;
+			
+			tasks = new ArrayList<Task>();
+			Element element = XmlHandler.getElement(doc, "global");
+			List<Element> taskItems = XmlHandler.getElements(doc, "tasks/task");
+			TaskItem taskItem = null;
+			Task task = null;
+			if (taskItems != null) {
+				for (Element item : taskItems) {
+					taskItem = new TaskItem();
+					taskItem.setName(item.attributeValue("name"));
+					taskItem.setTimeType(Checker.isNull(item
+							.attributeValue("periodType")) ? "sec" : item
+							.attributeValue("periodType"));
+					taskItem.setSeconds(Checker.isNull(item
+							.attributeValue("period")) ? 10 : Trans
+							.StringToInt(item.attributeValue("period")));
+					task = createTaskObject(item.getText().trim(), taskItem);
+					if (task != null)
+						tasks.add(task);
+				}
+			} else {
+				TaskLog.info("管理器", "没有配置对应的任务！");
 			}
-		} else {
-			TaskLog.info("管理器", "没有配置对应的任务！");
+		}catch(Exception e){
+			TaskLog.error("管理器","任务容器对象初始化失败!", e);
 		}
+		
 	}
 
 	Task createTaskObject(String classPath, TaskItem item) {
+		TaskLog.info("管理器", "正创建任务对象["+item.getName()+"]");
 		Class clazz = com.elam.util.task.bean.BeanUtil.loadClass(classPath);
 		if (clazz == null)
 			return null;
@@ -75,6 +83,7 @@ public class TasksContainer {
 	 * 中断任务
 	 */
 	public void interruptAllTask(){
+		TaskLog.info("管理器", "中断管理容器中的所有任务！");
 		if(tasks!=null)
 		for(Task task :this.tasks){
         	 if(task instanceof BaseTask){
@@ -85,5 +94,6 @@ public class TasksContainer {
 	
 	public static void main(String...s){
 		TasksContainer container = new TasksContainer();
+		container.initialize();
 	}
 }
