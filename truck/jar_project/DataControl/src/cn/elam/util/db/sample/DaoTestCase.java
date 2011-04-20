@@ -72,7 +72,7 @@ public class DaoTestCase {
 			public TaskModel wrapperItem(ResultSet rs) throws Exception {
 				// TODO Auto-generated method stub
 				TaskModel model = new TaskModel();
-				model.setHanderId(rs.getInt("handler_id"));
+				model.setHanderId(rs.getString("handler_id"));
 				model.setFileName(rs.getString("file_name"));
 				model.setSrcPath(rs.getString("src_path"));
 				model.setResultPath(rs.getString("result_path"));
@@ -93,7 +93,7 @@ public class DaoTestCase {
 
 class TaskModel implements DataModel {
 
-	private int handerId; // 导入时创建的ID 唯一
+	private String handerId; // 导入时创建的ID 唯一
 	private String fileName; // 导入的原文件名称
 	private String srcPath; // 导入源文件路径
 	private String resultPath; // 导入结果文件
@@ -109,11 +109,11 @@ class TaskModel implements DataModel {
 		this.state = state;
 	}
 
-	public int getHanderId() {
+	public String getHanderId() {
 		return handerId;
 	}
 
-	public void setHanderId(int handerId) {
+	public void setHanderId(String handerId) {
 		this.handerId = handerId;
 	}
 
