@@ -1,5 +1,6 @@
 package cn.elam.util.db.impl;
 
+
 import java.sql.Clob;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
@@ -14,9 +15,11 @@ import cn.elam.util.db.comom.DBType;
 import cn.elam.util.db.comom.DaoException;
 import cn.elam.util.db.comom.PageModel;
 import cn.elam.util.db.inter.DataControl;
+
 /**
- * 基本数据访问层功能
- * @author Ethan.Lam   2011-2-27
+ * 
+ * 基本的数据库操作接口实现
+ * @author Ethan.Lam   2011-2-26
  *
  */
 public class BaseDao implements DataControl {
@@ -44,10 +47,10 @@ public class BaseDao implements DataControl {
 
 	public boolean executeBatch(List<String> sqls) throws DaoException {
 		try {
+			checkSatePrepareExcute();
 			stmt = conn.createStatement();
 			for (String sql : sqls) {
 				stmt.addBatch(sql);
-
 			}
 			stmt.executeBatch();
 		} catch (SQLException e) {
@@ -61,6 +64,7 @@ public class BaseDao implements DataControl {
 
 	public ResultSet query(String sql) throws DaoException {
 		try {
+			checkSatePrepareExcute();
 			stmt = conn.createStatement();
 			return stmt.executeQuery(sql);
 		} catch (SQLException e) {
@@ -73,6 +77,7 @@ public class BaseDao implements DataControl {
 
 	public boolean update(String sql) throws DaoException {
 		try {
+			checkSatePrepareExcute();
 			stmt = conn.createStatement();
 			return stmt.execute(sql);
 		} catch (SQLException e) {
@@ -85,6 +90,7 @@ public class BaseDao implements DataControl {
 
 	public void preparedExeDB(String sql) throws DaoException {
 		try {
+			checkSatePrepareExcute();
 			pstmt = conn.prepareStatement(sql);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -92,7 +98,7 @@ public class BaseDao implements DataControl {
 	}
 
 	public boolean excPreparedDB() throws DaoException {
-		try {
+		try {			
 			return pstmt.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -114,7 +120,7 @@ public class BaseDao implements DataControl {
 	}
 
 	/**
-	 * ���ò���
+	 * 璁剧疆鍙傛暟
 	 * 
 	 * @param parameterIndex
 	 * @param x
@@ -125,7 +131,7 @@ public class BaseDao implements DataControl {
 	}
 
 	/**
-	 * ����Object���͵Ĳ���
+	 * 璁剧疆Object绫诲瀷鐨勫弬鏁�
 	 * 
 	 * @param parameterIndex
 	 * @param paramValue
@@ -139,7 +145,7 @@ public class BaseDao implements DataControl {
 	}
 
 	/**
-	 * ����byte���͵Ĳ���
+	 * 璁剧疆byte绫诲瀷鐨勫弬鏁�
 	 * 
 	 * @param parameterIndex
 	 * @param paramValue
@@ -153,7 +159,7 @@ public class BaseDao implements DataControl {
 	}
 
 	/**
-	 * ����short���͵Ĳ���
+	 * 璁剧疆short绫诲瀷鐨勫弬鏁�
 	 * 
 	 * @param parameterIndex
 	 * @param paramValue
@@ -191,8 +197,28 @@ public class BaseDao implements DataControl {
 	}
 
 	void clear() {
-		stmt = null;
-		pstmt = null;
+		try {
+			// if(stmt!=null)
+			// stmt.close();
+			// stmt = null;
+			// if(pstmt!=null)
+			// pstmt = null;
+		} catch (Exception e) {
+		}
+	}
+
+	/**
+	 * 
+	 */
+	void checkSatePrepareExcute() {
+		try {
+			if (stmt != null)
+				stmt.close();
+			stmt = null;
+			if (pstmt != null)
+				pstmt = null;
+		} catch (Exception e) {
+		}
 	}
 
 	public void close() {
@@ -220,6 +246,7 @@ public class BaseDao implements DataControl {
 		ResultSet rs = null;
 		try {
 			int allRecords = 0;
+			checkSatePrepareExcute();
 			stmt = conn.createStatement();
 
 			rs = stmt.executeQuery(" select count(*) from (" + sql + ") ");
