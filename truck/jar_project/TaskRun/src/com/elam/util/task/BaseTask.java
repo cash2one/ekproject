@@ -63,8 +63,7 @@ public abstract class BaseTask implements Task {
 							TaskLog.info(taskItem.getName(), "ÍË³öÈÎÎñ¡£");
 						} catch (Exception e) {
 							errorTimes++;
-							TaskLog.error(taskItem.getName(), e.getMessage(), e
-									.getMessage());
+							TaskLog.error(taskItem.getName(), e.getMessage(), e);
 							e.printStackTrace();
 						} finally {
 

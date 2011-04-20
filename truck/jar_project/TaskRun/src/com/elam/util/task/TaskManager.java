@@ -2,6 +2,8 @@ package com.elam.util.task;
 
 import java.io.File;
 
+import com.elam.util.task.inter.TaskLogger;
+
 /**
  * 
  * @author ethanlam 任务管理
@@ -59,6 +61,15 @@ public class TaskManager {
 	}
 
 	/**
+	 * 订阅日志服务
+	 * @param observer
+	 */
+	public void appendLogger(TaskLogger observer){
+		if(observer!=null)
+	 	    LoggerService.getService().addObserver(observer);
+	}
+	
+	/**
 	 * @author Ethan.Lam 2011-3-30
 	 */
 	private class ConfigWatchDog extends FileWatchdog {
@@ -72,6 +83,20 @@ public class TaskManager {
 	public static void main(String...args){
 		TaskManager mgr = new TaskManager();
 		mgr.initializeTaskContainer();
+		mgr.appendLogger(new TaskLogger() {
+			
+			@Override
+			public void error(String message, Throwable t) {
+				System.out.println("我观察到抛出错误信息：" + message);
+			}
+
+			@Override
+			public void info(String message) {
+				// TODO Auto-generated method stub
+				System.out.println("我观察到一般消息：" + message);
+			}
+
+		});
 		mgr.start();
 	}
 

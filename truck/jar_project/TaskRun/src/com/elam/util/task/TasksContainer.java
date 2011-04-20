@@ -18,7 +18,7 @@ import cn.elam.util.file.xml.XmlHandler;
  * @author Ethan.Lam  2011-2-15
  *
  */
-public class TasksContainer {
+class TasksContainer {
 
 	List<Task> tasks = null;
 
