@@ -15,16 +15,18 @@ public abstract class BaseTask implements Task {
 
 	Object locker = new Object();
 	boolean worked = true;
-	int runTimes = 0;
-	int errorTimes = 0;
 	long firstRunTime = 0; // 计算距离第一次被执行的时间差，倒计时
+	long maxOvertime = 0 ; // 线程超时
 	ScheduledExecutorService scheduler = null;
 	TaskItem taskItem = null;
 	ScheduledFuture taskHandle = null;
+	TaskStatus statusBean = new TaskStatus();
 	
 	public BaseTask(TaskItem taskItem) {
 		this.taskItem = taskItem;
 		TaskLog.info(taskItem.getName(), "任务初始化加载。");
+		statusBean.setMaxOvertime(maxOvertime);
+		statusBean.setName(taskItem.getName());
 		loadAndRun();
 	}
 
@@ -52,19 +54,22 @@ public abstract class BaseTask implements Task {
 	 * 加载任务
 	 */
 	void startTask() {
+		//创建任务
 		Runnable task = new Runnable() {
 			public void run() {
 				if (worked)
 					synchronized (locker) {
 						try {
-							runTimes++;
+							statusBean.setRunTimes();
+							statusBean.setLastExeTimestamp(System.currentTimeMillis());
 							TaskLog.info(taskItem.getName(), "开始执行任务。");
 							task();
-							TaskLog.info(taskItem.getName(), "退出任务。");
+							statusBean.setExecuteTime(System.currentTimeMillis() - statusBean.getLastExeTimestamp());
+							TaskLog.info(taskItem.getName(), "退出任务,本次总耗时:"+(statusBean.getExecuteTime()/1000)+"s。");
+							TaskLog.info(taskItem.getName(),statusBean.getStateMessage());
 						} catch (Exception e) {
-							errorTimes++;
+							statusBean.setErrorTimes();
 							TaskLog.error(taskItem.getName(), e.getMessage(), e);
-							e.printStackTrace();
 						} finally {
 
 						}
@@ -74,6 +79,7 @@ public abstract class BaseTask implements Task {
 		};
 		
 		
+      //周期地执行任务
 	  taskHandle = scheduler.scheduleAtFixedRate(task,
 				(firstRunTime >= 0 ? firstRunTime : 60), taskItem.getSeconds()*taskItem.getMinTimeAccuMethod(),
 				SECONDS);
@@ -81,17 +87,34 @@ public abstract class BaseTask implements Task {
 	}
 
 	/**
+	 * 
+	 * 判断任务是否超时，如果发生超时，则需要重启该任务线程，此方法供轮询使用
+	 * @return
+	 */
+	public boolean isOverTime(){
+		if((System.currentTimeMillis()-statusBean.getLastExeTimestamp())/1000>getTaskItem().getSeconds()*2)
+			return true;
+		else if(maxOvertime>0&&(System.currentTimeMillis()-statusBean.getLastExeTimestamp())/1000>this.maxOvertime)
+			return true;
+		else
+			return false;
+	}
+	
+	
+	/**
 	 * 中断任务
 	 */
     public void interrupt(){
     	 this.worked = false;
-    	 scheduler.schedule(new Runnable() {
-    	      public void run() {
-    	    	  taskHandle.cancel(true);
-    	    	  release();
-    	      }
-    	    }, 30, SECONDS);
-    	 scheduler.shutdown();
+    	 if(scheduler!=null){
+	    	 scheduler.schedule(new Runnable() {
+	    	      public void run() {
+	    	    	  taskHandle.cancel(true);
+	    	    	  release();
+	    	      }
+	    	    }, 30, SECONDS);
+	    	 scheduler.shutdown();
+    	 }
     	 scheduler = null;
     }
     
@@ -101,9 +124,14 @@ public abstract class BaseTask implements Task {
     public void reStart(){
     	TaskLog.info(taskItem.getName(), "任务重新加载中......");
     	this.worked = true;
-    	loadAndRun();
+    	interrupt(); //中断当前任务的执行
+    	loadAndRun(); //重新加载任务
     }
   
+    /**
+     * 获取任务对象（设置）属性
+     * @return
+     */
     public TaskItem getTaskItem() {
 		return taskItem;
 	}

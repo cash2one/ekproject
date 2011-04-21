@@ -1,12 +1,12 @@
 package com.elam.util.task;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.dom4j.Document;
 import org.dom4j.Element;
 
-import cn.elam.util.bean.BeanUtil;
 import cn.elam.util.common.Checker;
 import cn.elam.util.common.Trans;
 import cn.elam.util.file.xml.XmlHandler;
@@ -28,6 +28,12 @@ class TasksContainer {
 	
 	}
 
+	public TasksContainer(String configFile) throws Exception {
+		this.Config_File = configFile;
+		if(!new File(configFile).exists()||new File(configFile).isDirectory())
+			throw new Exception("无法找到配置文件["+configFile+"],加载失败。");
+	}
+	
 	public void initialize() {
 		try{
 			Document doc = XmlHandler.loadXML(Config_File);
