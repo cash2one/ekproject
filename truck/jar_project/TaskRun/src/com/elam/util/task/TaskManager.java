@@ -46,7 +46,7 @@ public class TaskManager {
 	/**
 	 * 重启所有任务对象
 	 */
-	public void reBoot() {
+	public void reboot() {
 		try {
 			TaskLog.info("管理器","将重启任务管理器！");
 			Thread.sleep(1 * 1000);// 
@@ -76,7 +76,7 @@ public class TaskManager {
 		@Override
 		protected void doOnChange(File file) {
 			TaskLog.info("管理器","配置文件" + file.getName() + "发生改变，重新加载任务管理器！");
-			reBoot();
+			reboot();
 		}
 	}
 	
