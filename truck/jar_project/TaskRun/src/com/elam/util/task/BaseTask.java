@@ -66,7 +66,7 @@ public abstract class BaseTask implements Task {
 							task();
 							statusBean.setExecuteTime(System.currentTimeMillis() - statusBean.getLastExeTimestamp());
 							TaskLog.info(taskItem.getName(), "退出任务,本次总耗时:"+(statusBean.getExecuteTime()/1000)+"s。");
-							TaskLog.info(taskItem.getName(),statusBean.getStateMessage());
+//							TaskLog.info(taskItem.getName(),statusBean.getStateMessage());
 						} catch (Exception e) {
 							statusBean.setErrorTimes();
 							TaskLog.error(taskItem.getName(), e.getMessage(), e);
@@ -92,6 +92,9 @@ public abstract class BaseTask implements Task {
 	 * @return
 	 */
 	public boolean isOverTime(){
+		if(statusBean.getLastExeTimestamp()==0)
+		    return false;
+		
 		if((System.currentTimeMillis()-statusBean.getLastExeTimestamp())/1000>getTaskItem().getSeconds()*2)
 			return true;
 		else if(maxOvertime>0&&(System.currentTimeMillis()-statusBean.getLastExeTimestamp())/1000>this.maxOvertime)
@@ -136,6 +139,14 @@ public abstract class BaseTask implements Task {
 		return taskItem;
 	}
 
+    
+    /**
+     * 返回状态对象
+     */
+	public TaskStatus getState() {
+		return this.statusBean;
+	}
+    
     /**
      * 任务初始化，当任务首次初始化时被调用，任务循环重复执行期间 不再被 调用此方法。
      * 

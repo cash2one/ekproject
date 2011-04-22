@@ -26,18 +26,14 @@ public class TestTask extends BaseTask{
 	protected void task() {
 		// TODO Auto-generated method stub
 		try {
-			Thread.sleep(3*1000);
+			int st = (int)(Math.random()*10);
+			System.out.println("π “‚∫ƒ ±"+st+"√Î°£");
+			Thread.sleep(st*1000);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		TaskLog.info(getTaskItem().getName(), " execute TestTask....");
 	}
 
-	@Override
-	public TaskStatus getState() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }

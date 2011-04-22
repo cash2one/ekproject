@@ -29,11 +29,14 @@ class TasksContainer {
 	}
 
 	public TasksContainer(String configFile) throws Exception {
-		this.Config_File = configFile;
+		this.Config_File = configFile!=null&&!"".equals(configFile)?configFile:this.Config_File;
 		if(!new File(configFile).exists()||new File(configFile).isDirectory())
 			throw new Exception("无法找到配置文件["+configFile+"],加载失败。");
 	}
 	
+	/**
+	 * 任务对象初始化
+	 */
 	public void initialize() {
 		try{
 			Document doc = XmlHandler.loadXML(Config_File);
@@ -68,6 +71,12 @@ class TasksContainer {
 		
 	}
 
+	/**
+	 * 创建并启动任务
+	 * @param classPath
+	 * @param item
+	 * @return
+	 */
 	Task createTaskObject(String classPath, TaskItem item) {
 		TaskLog.info("管理器", "正创建任务对象["+item.getName()+"]");
 		Class clazz = com.elam.util.task.bean.BeanUtil.loadClass(classPath);
@@ -76,14 +85,29 @@ class TasksContainer {
 		return (Task) com.elam.util.task.bean.BeanUtil.createInstance(clazz, item);
 	}
 
+	
 	boolean isConfigChange() {
           return false;
 	}
 	
-	void listCurrentTasks(){
-		 for(Task task :this.tasks){
-                     	 
+	/**
+	 * 
+	 * 列出对应状态的线程
+	 * @param state ： 0：所有任务线程；1：未发生超时的任务 ；2：超时任务
+	 * @return
+	 */
+	public List<Task> listCurrentTasks(int state){
+		 List<Task> ctasks = new ArrayList<Task>();
+		 if(tasks!=null)
+		 for(Task task :tasks){
+             if(state==2&&task.isOverTime())//任务超时的
+            	 ctasks.add(task);
+             else if(state==1&&!task.isOverTime()) //未发生超时的任务
+            	 ctasks.add(task);
+             else 
+            	 ctasks.add(task);
          }	
+		 return ctasks;
 	}
 	
 	
