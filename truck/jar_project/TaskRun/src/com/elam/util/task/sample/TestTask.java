@@ -27,8 +27,8 @@ public class TestTask extends BaseTask{
 		// TODO Auto-generated method stub
 		try {
 			int st = (int)(Math.random()*10);
-			System.out.println("故意耗时"+st+"秒。");
-			Thread.sleep(st*1000);
+			System.out.println("故意耗时"+(st*2)+"秒。");
+			Thread.sleep((st*2)*1000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

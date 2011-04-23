@@ -29,7 +29,6 @@ public class TaskManager {
 		    container = new TasksContainer();
 		}else
 			container = new TasksContainer(configFile);
-		
 		setDaemonThreads();
 	}
 	
@@ -47,9 +46,9 @@ public class TaskManager {
 	
 		
 	    //ÈÎÎñ×´Ì¬¼àÊÓÆ÷
-		TaskOverTimeChecker checker = new TaskOverTimeChecker();
-		checker.setName("daemon_TaskOverTimeChecker");
-		checker.start();
+//		TaskOverTimeChecker checker = new TaskOverTimeChecker();
+//		checker.setName("daemon_TaskOverTimeChecker");
+//		checker.start();
 		
 	}
 	

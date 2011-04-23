@@ -57,12 +57,12 @@ public abstract class BaseTask implements Task {
 		//创建任务
 		Runnable task = new Runnable() {
 			public void run() {
-				if (worked)
+				if (worked){
 					synchronized (locker) {
 						try {
 							statusBean.setRunTimes();
-							statusBean.setLastExeTimestamp(System.currentTimeMillis());
 							TaskLog.info(taskItem.getName(), "开始执行任务。");
+							statusBean.setLastExeTimestamp(System.currentTimeMillis());
 							task();
 							statusBean.setExecuteTime(System.currentTimeMillis() - statusBean.getLastExeTimestamp());
 							TaskLog.info(taskItem.getName(), "退出任务,本次总耗时:"+(statusBean.getExecuteTime()/1000)+"s。");
@@ -74,7 +74,7 @@ public abstract class BaseTask implements Task {
 
 						}
 					}
-				;
+				}		
 			}
 		};
 		
@@ -95,9 +95,9 @@ public abstract class BaseTask implements Task {
 		if(statusBean.getLastExeTimestamp()==0)
 		    return false;
 		
-		if((System.currentTimeMillis()-statusBean.getLastExeTimestamp())/1000>getTaskItem().getSeconds()*2)
+		if((System.currentTimeMillis()-statusBean.getLastExeTimestamp())/1000>getTaskItem().getSeconds())
 			return true;
-		else if(maxOvertime>0&&(System.currentTimeMillis()-statusBean.getLastExeTimestamp())/1000>this.maxOvertime)
+		else if(maxOvertime>0&&(System.currentTimeMillis()-statusBean.getLastExeTimestamp())/1000>maxOvertime)
 			return true;
 		else
 			return false;
