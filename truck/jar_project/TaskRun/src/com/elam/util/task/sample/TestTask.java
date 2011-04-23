@@ -26,11 +26,20 @@ public class TestTask extends BaseTask{
 	protected void task() {
 		// TODO Auto-generated method stub
 		try {
-			int st = (int)(Math.random()*10);
-			System.out.println("故意耗时"+(st*2)+"秒。");
-			Thread.sleep((st*2)*1000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+			int st = (int)(Math.random()*100);
+//			if(st>0)
+//				Thread.sleep((st*3)*1000);
+//			System.out.println("故意耗时"+(st*2)+"秒。");
+			if(st/2==1){
+				TaskLog.info(getTaskItem().getName(),"故意耗时");
+				while(true){
+					st = (int)(Math.random()*10);
+					if(st/2==1)
+						break;
+				}
+			}	
+		} catch (Exception e) {
+			TaskLog.error(getTaskItem().getName(),"发生异常", e);
 		}
 		TaskLog.info(getTaskItem().getName(), " execute TestTask....");
 	}

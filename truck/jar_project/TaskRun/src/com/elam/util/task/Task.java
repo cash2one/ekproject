@@ -20,12 +20,12 @@ public interface Task {
 	/**
 	 * 中断任务
 	 */
-	public void interrupt();
+	public void interrupt()throws Exception;
 
 	/**
 	 * 重启任务
 	 */
-	public void reStart();
+	public void reStart()throws Exception;
 
 	/**
 	 * 获取任务对象（设置）属性

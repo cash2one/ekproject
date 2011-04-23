@@ -114,7 +114,7 @@ class TasksContainer {
 	/**
 	 * 中断任务
 	 */
-	public void interruptAllTask(){
+	public void interruptAllTask()throws Exception{
 		TaskLog.info("管理器", "中断管理容器中的所有任务！");
 		if(tasks!=null)
 		for(Task task :this.tasks){

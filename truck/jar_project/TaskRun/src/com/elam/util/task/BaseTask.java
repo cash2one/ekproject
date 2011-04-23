@@ -13,7 +13,7 @@ import java.util.concurrent.ScheduledFuture;
  */
 public abstract class BaseTask implements Task {
 
-	Object locker = new Object();
+	Object locker = null; //对象锁
 	boolean worked = true;
 	long firstRunTime = 0; // 计算距离第一次被执行的时间差，倒计时
 	long maxOvertime = 0 ; // 线程超时
@@ -25,7 +25,7 @@ public abstract class BaseTask implements Task {
 	public BaseTask(TaskItem taskItem) {
 		this.taskItem = taskItem;
 		TaskLog.info(taskItem.getName(), "任务初始化加载。");
-		statusBean.setMaxOvertime(maxOvertime);
+		statusBean.setMaxOvertime(taskItem.getSeconds()*2*1000);//默认设置为两倍的时间间隔
 		statusBean.setName(taskItem.getName());
 		loadAndRun();
 	}
@@ -36,10 +36,13 @@ public abstract class BaseTask implements Task {
 	 */
 	void loadAndRun(){
 		scheduler = Executors.newScheduledThreadPool(1);
+		locker = new Object();//创建锁对象
 		initialize();
 		firstRunDelayTime();
+		this.worked = true;
 		startTask();
 		TaskLog.info(taskItem.getName(), "已完成任务加载并进入任务管理器中。");
+	    statusBean.setLastExeTimestamp(0);
 	}
 	
 	
@@ -107,27 +110,34 @@ public abstract class BaseTask implements Task {
 	/**
 	 * 中断任务
 	 */
-    public void interrupt(){
+    public void interrupt() throws Exception{
     	 this.worked = false;
     	 if(scheduler!=null){
-	    	 scheduler.schedule(new Runnable() {
-	    	      public void run() {
-	    	    	  taskHandle.cancel(true);
-	    	    	  release();
-	    	      }
-	    	    }, 30, SECONDS);
-	    	 scheduler.shutdown();
+//	    	 scheduler.schedule(new Runnable() {
+//	    	      public void run() {
+//	    	    	  taskHandle.cancel(true);
+//	    	    	  TaskLog.info(taskItem.getName(), "任务已被中断！");
+//	    	    	  release();
+//	    	      }
+//	    	    }, 5, SECONDS);
+    		  taskHandle.cancel(true);
+    		  if(taskHandle.isCancelled())
+    		     scheduler.shutdown();
+    		  release();
+	    	  TaskLog.info(taskItem.getName(), "任务已被中断！");
     	 }
+    	 taskHandle = null;
     	 scheduler = null;
     }
     
     /**
      * 重启任务
+     * @throws Exception 
      */
-    public void reStart(){
+    public void reStart() throws Exception{
     	TaskLog.info(taskItem.getName(), "任务重新加载中......");
-    	this.worked = true;
     	interrupt(); //中断当前任务的执行
+    	statusBean.setRebootTimes();
     	loadAndRun(); //重新加载任务
     }
   

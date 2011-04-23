@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.List;
 
+import cn.elam.util.loger.AppLoger;
+
 import com.elam.util.task.inter.TaskLogger;
 
 /**
@@ -43,12 +45,12 @@ public class TaskManager {
 		File configFileHander = new File(container.Config_File);
 		dog.addFile(configFileHander);// 
 		dog.start();// c
-	
+		
 		
 	    //任务状态监视器
-//		TaskOverTimeChecker checker = new TaskOverTimeChecker();
-//		checker.setName("daemon_TaskOverTimeChecker");
-//		checker.start();
+		TaskOverTimeChecker checker = new TaskOverTimeChecker();
+		checker.setName("daemon_TaskOverTimeChecker");
+		checker.start();
 		
 	}
 	
@@ -56,7 +58,7 @@ public class TaskManager {
 	/**
 	 * 
 	 */
-	public void start() {
+	public void start() throws Exception {
 		TaskLog.info(manageName,"执行管理器中的任务！");
 		if (container != null)
 			container.initialize();
@@ -64,8 +66,9 @@ public class TaskManager {
 
 	/**
 	 * 关闭所有任务
+	 * @throws Exception 
 	 */
-	public void stop() {
+	public void stop() throws Exception {
 		TaskLog.info(manageName,"正在关闭任务管理器！");
 		if (container != null)
 			container.interruptAllTask();
@@ -74,7 +77,7 @@ public class TaskManager {
 	/**
 	 * 重启所有任务对象
 	 */
-	public void reboot() {
+	public void reboot() throws Exception{
 		try {
 			TaskLog.info(manageName,"将重启任务管理器！");
 			Thread.sleep(1 * 1000);// 
@@ -104,7 +107,11 @@ public class TaskManager {
 		@Override
 		protected void doOnChange(File file) {
 			TaskLog.info(manageName,"配置文件" + file.getName() + "发生改变，重新加载任务管理器！");
-			reboot();
+			try {
+				reboot();
+			} catch (Exception e) {
+				TaskLog.error(manageName, "重启失败！", e);
+			}
 		}
 	}
 	
@@ -116,13 +123,14 @@ public class TaskManager {
 			
 			@Override
 			public void error(String message, Throwable t) {
-//				System.out.println("我观察到抛出错误信息：" + message);
+               AppLoger.RuningLoggerError(message, t);				
 			}
 
 			@Override
 			public void info(String message) {
 				// TODO Auto-generated method stub
 //				System.out.println("我观察到一般消息：" + message);
+				AppLoger.RuningLoggerInfo(message);
 			}
 
 		});
@@ -165,7 +173,7 @@ public class TaskManager {
 			while(true){
 				// TODO Auto-generated method stub
 				try{
-					TaskLog.info(manageName,"守护线程【TaskOverTimeChecker】，开始执行。");
+//					TaskLog.info(manageName,"守护线程【TaskOverTimeChecker】，开始执行。");
 					checkTaskRunStatus();
 					TaskLog.info(manageName,"守护线程【TaskOverTimeChecker】，执行结束并退出！");
 				    Thread.sleep(taskOverTimeCheckerSleepTime*1000);
