@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Class-Path: libs/dataContorlUtil-beta-1.1.2.jar
+Class-Path: libs/DataContorlUtil-beta-1.1.2.jar
   libs/dom4j-1.6.1.jar
   libs/jaxen-1.1-beta-6.jar
   libs/log4j-1.2.16.jar
