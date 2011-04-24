@@ -82,7 +82,7 @@ public class TaskStatus {
 	public String getStateMessage() {
 		return "状态信息：任务已被执行【" + this.getRunTimes()
 				+ "】次，其中执行时发生异常有【" + this.getErrorTimes() + "】次，重启次数【"+this.getRebootTimes()+"】次，上一次执行耗时为【"
-				+ this.getExecuteTime() / 1000 + "】秒，时间戳为【"
+				+ (this.lastExeTimestamp>0?this.getExecuteTime() / 1000:"N/A") + "】秒，时间戳为【"
 				+ new Date(this.getLastExeTimestamp()) + "】，当前超时设置为【"
 				+ this.getMaxOvertime() / 1000 + "】秒。";
 	}

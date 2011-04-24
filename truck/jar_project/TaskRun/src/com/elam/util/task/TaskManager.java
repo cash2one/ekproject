@@ -17,7 +17,8 @@ public class TaskManager {
 	TasksContainer container = null;
 
 	String manageName = "管理器";
-	int taskOverTimeCheckerSleepTime = 10;
+	int taskOverTimeCheckerSleepTime = 20;
+	String configFile ="";
 	
 	/**
 	 * 初始化任务容器 加载任务对象
@@ -29,8 +30,10 @@ public class TaskManager {
 			throw new FileNotFoundException("找不到配置文件["+configFile+"]，无法初始化 TaskManager！");
 		else if(null==configFile||"".equals(configFile)){
 		    container = new TasksContainer();
-		}else
+		}else{
+			this.configFile = configFile;
 			container = new TasksContainer(configFile);
+		}
 		setDaemonThreads();
 	}
 	
@@ -70,8 +73,10 @@ public class TaskManager {
 	 */
 	public void stop() throws Exception {
 		TaskLog.info(manageName,"正在关闭任务管理器！");
-		if (container != null)
+		if (container != null){
 			container.interruptAllTask();
+		    container.close();
+		}
 	}
 
 	/**
@@ -82,9 +87,11 @@ public class TaskManager {
 			TaskLog.info(manageName,"将重启任务管理器！");
 			Thread.sleep(1 * 1000);// 
 			stop();
-			if (container == null){
-				container = new TasksContainer();
-			}
+			container = null;
+			if(null!=configFile&&!"".equals(configFile))
+				 container = new TasksContainer(configFile);
+			else
+				 container = new TasksContainer();
 			container.initialize();
 		} catch (Exception ex) {
 			TaskLog.error(manageName,"Reboot任务管理器失败！",ex);
@@ -143,17 +150,19 @@ public class TaskManager {
 	 */
 	void checkTaskRunStatus()throws Exception{
 		//所有任务	
+		if(container!=null){
 		List<Task> allTasks = container.listCurrentTasks(0);
-		if(allTasks!=null){
-            for(Task o:allTasks){
-            	if(o.isOverTime()){
-	            	TaskLog.info(manageName,"发现任务执行超时："+ o.getState().getStateMessage());
-	            	o.reStart(); //发现任务有超时情况就重启改任务
-            	}else{
-            		if(o.getState()!=null)
-            		  TaskLog.info(manageName,o.getState().getStateMessage());
-            	}
-            }
+			if(allTasks!=null){
+	            for(Task o:allTasks){
+	            	if(o.isOverTime()){
+		            	TaskLog.info(manageName,"发现任务执行超时："+ o.getState().getStateMessage());
+		            	o.reStart(); //发现任务有超时情况就重启改任务
+	            	}else{
+	            		if(o.getState()!=null)
+	            		  TaskLog.info(manageName,o.getState().getStateMessage());
+	            	}
+	            }
+			}
 		}
 	}
 	

@@ -42,6 +42,10 @@ public interface Task {
 	public TaskStatus getState();
 
 	
-
+    /**
+     * ÍË³öÈÎÎñ
+     * @throws Exception
+     */
+	public void exit() throws Exception;
 	
 }

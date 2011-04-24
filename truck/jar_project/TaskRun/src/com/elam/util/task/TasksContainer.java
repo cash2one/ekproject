@@ -110,6 +110,18 @@ class TasksContainer {
 		 return ctasks;
 	}
 	
+	/**
+	 * 关闭任务管理器
+	 */
+	public void close()throws Exception{
+		if(tasks!=null)
+		for(Task task :this.tasks){
+        	 task.exit();
+        }
+		tasks.clear();
+		tasks = null;
+		TaskLog.info("管理器", "已关闭任务管理器！");
+	}
 	
 	/**
 	 * 中断任务
@@ -118,11 +130,12 @@ class TasksContainer {
 		TaskLog.info("管理器", "中断管理容器中的所有任务！");
 		if(tasks!=null)
 		for(Task task :this.tasks){
-        	 if(task instanceof BaseTask){
-        		 ((BaseTask) task).interrupt();
-        	 }
+        	 task.interrupt();
         }
 	}
+	
+	
+	
 	
 	public static void main(String...s){
 		TasksContainer container = new TasksContainer();

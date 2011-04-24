@@ -28,8 +28,8 @@ public class TestTask extends BaseTask{
 		try {
 			int st = (int)(Math.random()*10);
 			if(st>0)
-				Thread.sleep((st*2)*1000);
-			TaskLog.info(getTaskItem().getName(),"故意耗时"+(st*2)+"秒。");
+				Thread.sleep((st*3)*1000);
+			TaskLog.info(getTaskItem().getName(),"故意耗时"+(st*3)+"秒。");
 //			if(st/2==1){
 //				TaskLog.info(getTaskItem().getName(),"故意耗时");
 //				while(true){

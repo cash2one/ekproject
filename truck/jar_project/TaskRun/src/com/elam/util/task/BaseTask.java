@@ -113,16 +113,16 @@ public abstract class BaseTask implements Task {
     public void interrupt() throws Exception{
     	 this.worked = false;
     	 if(scheduler!=null){
-//	    	 scheduler.schedule(new Runnable() {
-//	    	      public void run() {
-//	    	    	  taskHandle.cancel(true);
-//	    	    	  TaskLog.info(taskItem.getName(), "任务已被中断！");
-//	    	    	  release();
-//	    	      }
-//	    	    }, 5, SECONDS);
-    		  taskHandle.cancel(true);
-    		  if(taskHandle.isCancelled())
-    		     scheduler.shutdown();
+	    	 scheduler.schedule(new Runnable() {
+	    	      public void run() {
+	    	    	  taskHandle.cancel(true);
+	    	    	  TaskLog.info(taskItem.getName(), "任务已被中断！");
+	    	    	  release();
+	    	      }
+	    	    }, 30, SECONDS);
+//    		  taskHandle.cancel(true);
+//    		  if(taskHandle.isCancelled())
+    		  scheduler.shutdown();
     		  release();
 	    	  TaskLog.info(taskItem.getName(), "任务已被中断！");
     	 }
@@ -141,6 +141,23 @@ public abstract class BaseTask implements Task {
     	loadAndRun(); //重新加载任务
     }
   
+    
+    /**
+     * 退出任务
+     */
+    public void exit()throws Exception{
+    	worked = false;
+    	if(taskHandle!=null)
+    	    taskHandle.cancel(true);
+    	taskHandle = null;
+    	if(scheduler!=null)
+    	scheduler.shutdownNow();
+    	scheduler = null;
+    	statusBean = null;
+    	TaskLog.info(taskItem.getName(), "已退出任务。");
+    	taskItem = null;
+    }
+    
     /**
      * 获取任务对象（设置）属性
      * @return
