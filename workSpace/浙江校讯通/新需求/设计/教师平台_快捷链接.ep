@@ -1,0 +1,520 @@
+<?xml version="1.0"?>
+<Document xmlns="http://www.evolus.vn/Namespace/Pencil"><Properties/><Pages><Page><Properties><Property name="name">Untitled Page</Property><Property name="id">1304912334487_7598</Property><Property name="width">567</Property><Property name="height">394</Property><Property name="dimBackground">false</Property><Property name="backgroundColor">#ffffff</Property></Properties><Content><g xmlns="http://www.w3.org/2000/svg" p:type="Shape" xmlns:p="http://www.evolus.vn/Namespace/Pencil" p:def="Evolus.Common:Bitmap" id="9e3d2456bc84450f9d2e50828f039874" transform="matrix(1, 0, 0, 1, 27, 16)"><p:metadata><p:property name="box"><![CDATA[123,47]]></p:property><p:property name="imageData"><![CDATA[175,66,../../../../../../C:/Users/Solosus/Desktop/hbyanshi/images/ico_13_0.png]]></p:property><p:property name="withBlur"><![CDATA[false]]></p:property><p:property name="fillColor"><![CDATA[#FFFFFF00]]></p:property><p:property name="strokeColor"><![CDATA[#000000FF]]></p:property><p:property name="strokeStyle"><![CDATA[0|]]></p:property></p:metadata>
+            <defs>
+                <filter height="1.2558399" y="-0.12792" width="1.06396" x="-0.03198" p:name="imageShading" id="d38cf21f6f2f44e1b081b396f7b2c463">
+                    <feGaussianBlur stdDeviation="1.3325" in="SourceAlpha"/>
+                </filter>
+                <g p:name="container" id="2effc9b2b3ca443aa11c68bf1c7860a7">
+                    <rect style="fill: rgb(255, 255, 255); stroke: rgb(0, 0, 0); stroke-opacity: 1; stroke-width: 0pt; fill-opacity: 0;" p:name="bgRect" id="68c149188ad9458e89c0f5228ba5c012" width="123" height="47" transform="translate(0)"/>
+                    <g p:name="imageContainer" id="428e38e7aadd45ce92b49678b48087f3" transform="scale(0.702857, 0.712121)">
+                        <image x="0" y="0" p:name="image" id="fbbcc26ae8db42188dc7a717a737680e" xlink:href="../../../../../../C:/Users/Solosus/Desktop/hbyanshi/images/ico_13_0.png" xmlns:xlink="http://www.w3.org/1999/xlink" width="175" height="66"/>
+                    </g>
+                </g>
+            </defs>
+            <use xlink:href="#2effc9b2b3ca443aa11c68bf1c7860a7" xmlns:xlink="http://www.w3.org/1999/xlink" transform="translate(1, 1)" p:filter="url(#d38cf21f6f2f44e1b081b396f7b2c463)" style="opacity: 0.6; visibility: hidden;" p:name="bgCopy" id="241215ef250f4f66b42917072cc1b98d"/>
+            <use xlink:href="#2effc9b2b3ca443aa11c68bf1c7860a7" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </g><g xmlns="http://www.w3.org/2000/svg" p:type="Shape" xmlns:p="http://www.evolus.vn/Namespace/Pencil" p:def="Evolus.Common:Bitmap" id="effd784ee51e4beab9e9634a4c659f79" transform="matrix(1, 0, 0, 1, 27, 119)"><p:metadata><p:property name="box"><![CDATA[124,47]]></p:property><p:property name="imageData"><![CDATA[175,66,../../../../../../C:/Users/Solosus/Desktop/hbyanshi/images/ico_12_0.png]]></p:property><p:property name="withBlur"><![CDATA[false]]></p:property><p:property name="fillColor"><![CDATA[#FFFFFF00]]></p:property><p:property name="strokeColor"><![CDATA[#000000FF]]></p:property><p:property name="strokeStyle"><![CDATA[0|]]></p:property></p:metadata>
+            <defs>
+                <filter height="1.2558399" y="-0.12792" width="1.06396" x="-0.03198" p:name="imageShading" id="83f8c79b3b7b481aa5064215611b9b7a">
+                    <feGaussianBlur stdDeviation="1.3325" in="SourceAlpha"/>
+                </filter>
+                <g p:name="container" id="1b74f9385c4e43f5875588701756dcd0">
+                    <rect style="fill: rgb(255, 255, 255); stroke: rgb(0, 0, 0); stroke-opacity: 1; stroke-width: 0pt; fill-opacity: 0;" p:name="bgRect" id="eb8b334ceaee4b3e982458916e34ffd9" width="124" height="47" transform="translate(0)"/>
+                    <g p:name="imageContainer" id="2e959c8251eb47ea90740824b8894716" transform="scale(0.708571, 0.712121)">
+                        <image x="0" y="0" p:name="image" id="75468b7efe8c4e0fb9939f5b985b970c" xlink:href="../../../../../../C:/Users/Solosus/Desktop/hbyanshi/images/ico_12_0.png" xmlns:xlink="http://www.w3.org/1999/xlink" width="175" height="66"/>
+                    </g>
+                </g>
+            </defs>
+            <use xlink:href="#1b74f9385c4e43f5875588701756dcd0" xmlns:xlink="http://www.w3.org/1999/xlink" transform="translate(1, 1)" p:filter="url(#83f8c79b3b7b481aa5064215611b9b7a)" style="opacity: 0.6; visibility: hidden;" p:name="bgCopy" id="39f74e8a4cc54a50badaa320b3631c3b"/>
+            <use xlink:href="#1b74f9385c4e43f5875588701756dcd0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </g><g xmlns="http://www.w3.org/2000/svg" p:type="Shape" xmlns:p="http://www.evolus.vn/Namespace/Pencil" p:def="Evolus.Common:Bitmap" id="5c6e6fba1abf49ce99eec5f495f695b3" transform="matrix(1, 0, 0, 1, 183, 71)"><p:metadata><p:property name="box"><![CDATA[115,43]]></p:property><p:property name="imageData"><![CDATA[175,66,../../../../../../C:/Users/Solosus/Desktop/hbyanshi/images/ico_14_0.png]]></p:property><p:property name="withBlur"><![CDATA[false]]></p:property><p:property name="fillColor"><![CDATA[#FFFFFF00]]></p:property><p:property name="strokeColor"><![CDATA[#000000FF]]></p:property><p:property name="strokeStyle"><![CDATA[0|]]></p:property></p:metadata>
+            <defs>
+                <filter height="1.2558399" y="-0.12792" width="1.06396" x="-0.03198" p:name="imageShading" id="413d9e0f10b845ccb848edcc5cb61288">
+                    <feGaussianBlur stdDeviation="1.3325" in="SourceAlpha"/>
+                </filter>
+                <g p:name="container" id="7f595272a199404bb40e7946c9f2aff4">
+                    <rect style="fill: rgb(255, 255, 255); stroke: rgb(0, 0, 0); stroke-opacity: 1; stroke-width: 0pt; fill-opacity: 0;" p:name="bgRect" id="2b37810335e1473ebab9001023dc3f07" width="115" height="43" transform="translate(0)"/>
+                    <g p:name="imageContainer" id="a9c1f08993af4092a2ac14b035fad06b" transform="scale(0.657143, 0.651515)">
+                        <image x="0" y="0" p:name="image" id="79fc0bdc2b304364aaa54fd4c754f066" xlink:href="../../../../../../C:/Users/Solosus/Desktop/hbyanshi/images/ico_14_0.png" xmlns:xlink="http://www.w3.org/1999/xlink" width="175" height="66"/>
+                    </g>
+                </g>
+            </defs>
+            <use xlink:href="#7f595272a199404bb40e7946c9f2aff4" xmlns:xlink="http://www.w3.org/1999/xlink" transform="translate(1, 1)" p:filter="url(#413d9e0f10b845ccb848edcc5cb61288)" style="opacity: 0.6; visibility: hidden;" p:name="bgCopy" id="342fbf9151b74593acb6fc409606eab2"/>
+            <use xlink:href="#7f595272a199404bb40e7946c9f2aff4" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </g><g xmlns="http://www.w3.org/2000/svg" p:type="Shape" xmlns:p="http://www.evolus.vn/Namespace/Pencil" p:def="Evolus.Common:Bitmap" id="d389269b2eb64cbaa889e9ac5845129b" transform="matrix(1, 0, 0, 1, 27, 63)"><p:metadata><p:property name="box"><![CDATA[124,47]]></p:property><p:property name="imageData"><![CDATA[175,66,../../../../../../C:/Users/Solosus/Desktop/hbyanshi/images/ico_11_0.png]]></p:property><p:property name="withBlur"><![CDATA[false]]></p:property><p:property name="fillColor"><![CDATA[#FFFFFF00]]></p:property><p:property name="strokeColor"><![CDATA[#000000FF]]></p:property><p:property name="strokeStyle"><![CDATA[0|]]></p:property></p:metadata>
+            <defs>
+                <filter height="1.2558399" y="-0.12792" width="1.06396" x="-0.03198" p:name="imageShading" id="374bb7f6dcbe41b9a7deb903d838aded">
+                    <feGaussianBlur stdDeviation="1.3325" in="SourceAlpha"/>
+                </filter>
+                <g p:name="container" id="87d172f8c79543f582356bf5aa607d8e">
+                    <rect style="fill: rgb(255, 255, 255); stroke: rgb(0, 0, 0); stroke-opacity: 1; stroke-width: 0pt; fill-opacity: 0;" p:name="bgRect" id="1b1d64bbf5b0486ca6fa33d82ec44885" width="124" height="47" transform="translate(0)"/>
+                    <g p:name="imageContainer" id="37406f01003148b3a382f0192c120e07" transform="scale(0.708571, 0.712121)">
+                        <image x="0" y="0" p:name="image" id="30c81898bc1045cdb048a01c2962b180" xlink:href="../../../../../../C:/Users/Solosus/Desktop/hbyanshi/images/ico_11_0.png" xmlns:xlink="http://www.w3.org/1999/xlink" width="175" height="66"/>
+                    </g>
+                </g>
+            </defs>
+            <use xlink:href="#87d172f8c79543f582356bf5aa607d8e" xmlns:xlink="http://www.w3.org/1999/xlink" transform="translate(1, 1)" p:filter="url(#374bb7f6dcbe41b9a7deb903d838aded)" style="opacity: 0.6; visibility: hidden;" p:name="bgCopy" id="7b45f3b699124d118cafc0409157160c"/>
+            <use xlink:href="#87d172f8c79543f582356bf5aa607d8e" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </g><g xmlns="http://www.w3.org/2000/svg" p:type="Shape" xmlns:p="http://www.evolus.vn/Namespace/Pencil" p:def="Evolus.Common:Bitmap" id="1e6ada4bd8c84650b8874f16c45c8308" transform="matrix(1, 0, 0, 1, 171, 182)"><p:metadata><p:property name="box"><![CDATA[111,42]]></p:property><p:property name="imageData"><![CDATA[175,66,../../../../../../C:/Users/Solosus/Desktop/hbyanshi/images/ico_22_0.png]]></p:property><p:property name="withBlur"><![CDATA[false]]></p:property><p:property name="fillColor"><![CDATA[#FFFFFF00]]></p:property><p:property name="strokeColor"><![CDATA[#000000FF]]></p:property><p:property name="strokeStyle"><![CDATA[0|]]></p:property></p:metadata>
+            <defs>
+                <filter height="1.2558399" y="-0.12792" width="1.06396" x="-0.03198" p:name="imageShading" id="b44c76fb8f8d4cad8955eeea01c7db1e">
+                    <feGaussianBlur stdDeviation="1.3325" in="SourceAlpha"/>
+                </filter>
+                <g p:name="container" id="5c88f82827194b5391a43d6a622fe141">
+                    <rect style="fill: rgb(255, 255, 255); stroke: rgb(0, 0, 0); stroke-opacity: 1; stroke-width: 0pt; fill-opacity: 0;" p:name="bgRect" id="c5c3ad1015e04e78961fac00bd3f0a8d" width="111" height="42" transform="translate(0)"/>
+                    <g p:name="imageContainer" id="a2443a2689804c3abbe50ab7583cb8b4" transform="scale(0.634286, 0.636364)">
+                        <image x="0" y="0" p:name="image" id="7cb40355d98e45089de6169191e084bf" xlink:href="../../../../../../C:/Users/Solosus/Desktop/hbyanshi/images/ico_22_0.png" xmlns:xlink="http://www.w3.org/1999/xlink" width="175" height="66"/>
+                    </g>
+                </g>
+            </defs>
+            <use xlink:href="#5c88f82827194b5391a43d6a622fe141" xmlns:xlink="http://www.w3.org/1999/xlink" transform="translate(1, 1)" p:filter="url(#b44c76fb8f8d4cad8955eeea01c7db1e)" style="opacity: 0.6; visibility: hidden;" p:name="bgCopy" id="7a9da73ea71b452bace1b10ca42caf66"/>
+            <use xlink:href="#5c88f82827194b5391a43d6a622fe141" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </g><g xmlns="http://www.w3.org/2000/svg" p:type="Shape" xmlns:p="http://www.evolus.vn/Namespace/Pencil" p:def="Evolus.Common:Bitmap" id="a2899c3519aa44908b0145a1a8291d44" transform="matrix(1, 0, 0, 1, 25, 182)"><p:metadata><p:property name="box"><![CDATA[127,48]]></p:property><p:property name="imageData"><![CDATA[175,66,../../../../../../C:/Users/Solosus/Desktop/hbyanshi/images/ico_21_0.png]]></p:property><p:property name="withBlur"><![CDATA[false]]></p:property><p:property name="fillColor"><![CDATA[#FFFFFF00]]></p:property><p:property name="strokeColor"><![CDATA[#000000FF]]></p:property><p:property name="strokeStyle"><![CDATA[0|]]></p:property></p:metadata>
+            <defs>
+                <filter height="1.2558399" y="-0.12792" width="1.06396" x="-0.03198" p:name="imageShading" id="b5dcc22f497b47b6a70e8c715f73543b">
+                    <feGaussianBlur stdDeviation="1.3325" in="SourceAlpha"/>
+                </filter>
+                <g p:name="container" id="cda8a14063ea46fd999fa67c7548cc50">
+                    <rect style="fill: rgb(255, 255, 255); stroke: rgb(0, 0, 0); stroke-opacity: 1; stroke-width: 0pt; fill-opacity: 0;" p:name="bgRect" id="96f1a16ea5704e0c874e62bba99db8cc" width="127" height="48" transform="translate(0)"/>
+                    <g p:name="imageContainer" id="c905be8b6c29486eb257d6c6c71fded8" transform="scale(0.725714, 0.727273)">
+                        <image x="0" y="0" p:name="image" id="8a408eb678944a12aed9d56211a87c08" xlink:href="../../../../../../C:/Users/Solosus/Desktop/hbyanshi/images/ico_21_0.png" xmlns:xlink="http://www.w3.org/1999/xlink" width="175" height="66"/>
+                    </g>
+                </g>
+            </defs>
+            <use xlink:href="#cda8a14063ea46fd999fa67c7548cc50" xmlns:xlink="http://www.w3.org/1999/xlink" transform="translate(1, 1)" p:filter="url(#b5dcc22f497b47b6a70e8c715f73543b)" style="opacity: 0.6; visibility: hidden;" p:name="bgCopy" id="ea8dc9db242d4c448bb1f440a3ac72e1"/>
+            <use xlink:href="#cda8a14063ea46fd999fa67c7548cc50" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </g><g xmlns="http://www.w3.org/2000/svg" p:type="Shape" xmlns:p="http://www.evolus.vn/Namespace/Pencil" p:def="Evolus.Common:Bitmap" id="f8a850c9c0ba4818b94de8b738d81c6f" transform="matrix(1, 0, 0, 1, 382, 239)"><p:metadata><p:property name="box"><![CDATA[117,44]]></p:property><p:property name="imageData"><![CDATA[175,66,../../../../../../C:/Users/Solosus/Desktop/hbyanshi/images/ico_25_0.png]]></p:property><p:property name="withBlur"><![CDATA[false]]></p:property><p:property name="fillColor"><![CDATA[#FFFFFF00]]></p:property><p:property name="strokeColor"><![CDATA[#000000FF]]></p:property><p:property name="strokeStyle"><![CDATA[0|]]></p:property></p:metadata>
+            <defs>
+                <filter height="1.2558399" y="-0.12792" width="1.06396" x="-0.03198" p:name="imageShading" id="5a8f6196d50b4372900f4c5dd36b1267">
+                    <feGaussianBlur stdDeviation="1.3325" in="SourceAlpha"/>
+                </filter>
+                <g p:name="container" id="f0fc526609494e7ca9ae0814f2c18ba5">
+                    <rect style="fill: rgb(255, 255, 255); stroke: rgb(0, 0, 0); stroke-opacity: 1; stroke-width: 0pt; fill-opacity: 0;" p:name="bgRect" id="757d8c602faa447fbdebcdcd841ed05b" width="117" height="44" transform="translate(0)"/>
+                    <g p:name="imageContainer" id="30d3c6c7961e4df5a7ebed840c3d747c" transform="scale(0.668571, 0.666667)">
+                        <image x="0" y="0" p:name="image" id="3814548d370443a88b284324ddffacc9" xlink:href="../../../../../../C:/Users/Solosus/Desktop/hbyanshi/images/ico_25_0.png" xmlns:xlink="http://www.w3.org/1999/xlink" width="175" height="66"/>
+                    </g>
+                </g>
+            </defs>
+            <use xlink:href="#f0fc526609494e7ca9ae0814f2c18ba5" xmlns:xlink="http://www.w3.org/1999/xlink" transform="translate(1, 1)" p:filter="url(#5a8f6196d50b4372900f4c5dd36b1267)" style="opacity: 0.6; visibility: hidden;" p:name="bgCopy" id="24b28f4c343d44939c7d6a28a8bd43a8"/>
+            <use xlink:href="#f0fc526609494e7ca9ae0814f2c18ba5" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </g><g xmlns="http://www.w3.org/2000/svg" p:type="Shape" xmlns:p="http://www.evolus.vn/Namespace/Pencil" p:def="Evolus.Common:Bitmap" id="c4d585f3da0845a09f0279dc2dc19bd4" transform="matrix(1, 0, 0, 1, 309, 330)"><p:metadata><p:property name="box"><![CDATA[109,42]]></p:property><p:property name="imageData"><![CDATA[175,66,../../../../../../C:/Users/Solosus/Desktop/hbyanshi/images/ico_26_0.png]]></p:property><p:property name="withBlur"><![CDATA[false]]></p:property><p:property name="fillColor"><![CDATA[#FFFFFF00]]></p:property><p:property name="strokeColor"><![CDATA[#000000FF]]></p:property><p:property name="strokeStyle"><![CDATA[0|]]></p:property></p:metadata>
+            <defs>
+                <filter height="1.2558399" y="-0.12792" width="1.06396" x="-0.03198" p:name="imageShading" id="1070b17b855745948f29b26113c01feb">
+                    <feGaussianBlur stdDeviation="1.3325" in="SourceAlpha"/>
+                </filter>
+                <g p:name="container" id="4b99bb54a105414b947eed79705a6730">
+                    <rect style="fill: rgb(255, 255, 255); stroke: rgb(0, 0, 0); stroke-opacity: 1; stroke-width: 0pt; fill-opacity: 0;" p:name="bgRect" id="40c79c83ecab4bf0aa60eca978f3a514" width="109" height="42" transform="translate(0)"/>
+                    <g p:name="imageContainer" id="16e21289330d40b582b743e9e34cdaa8" transform="scale(0.622857, 0.636364)">
+                        <image x="0" y="0" p:name="image" id="62aca10df66f432ab5c334bcc4d71a9d" xlink:href="../../../../../../C:/Users/Solosus/Desktop/hbyanshi/images/ico_26_0.png" xmlns:xlink="http://www.w3.org/1999/xlink" width="175" height="66"/>
+                    </g>
+                </g>
+            </defs>
+            <use xlink:href="#4b99bb54a105414b947eed79705a6730" xmlns:xlink="http://www.w3.org/1999/xlink" transform="translate(1, 1)" p:filter="url(#1070b17b855745948f29b26113c01feb)" style="opacity: 0.6; visibility: hidden;" p:name="bgCopy" id="b1369194ecaf4a9792095f5f4ddb17ec"/>
+            <use xlink:href="#4b99bb54a105414b947eed79705a6730" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </g><g xmlns="http://www.w3.org/2000/svg" p:type="Shape" xmlns:p="http://www.evolus.vn/Namespace/Pencil" p:def="Evolus.Common:Bitmap" id="7520d0cefb0d46a59cd74eb144e1d4c3" transform="matrix(1, 0, 0, 1, 25, 254)"><p:metadata><p:property name="box"><![CDATA[126,48]]></p:property><p:property name="imageData"><![CDATA[175,66,../../../../../../C:/Users/Solosus/Desktop/hbyanshi/images/ico_23_0.png]]></p:property><p:property name="withBlur"><![CDATA[false]]></p:property><p:property name="fillColor"><![CDATA[#FFFFFF00]]></p:property><p:property name="strokeColor"><![CDATA[#000000FF]]></p:property><p:property name="strokeStyle"><![CDATA[0|]]></p:property></p:metadata>
+            <defs>
+                <filter height="1.2558399" y="-0.12792" width="1.06396" x="-0.03198" p:name="imageShading" id="0ac48a92c14a469c813fa1d733de3c66">
+                    <feGaussianBlur stdDeviation="1.3325" in="SourceAlpha"/>
+                </filter>
+                <g p:name="container" id="d13f4e796a2240a9beb8c216bdb033b2">
+                    <rect style="fill: rgb(255, 255, 255); stroke: rgb(0, 0, 0); stroke-opacity: 1; stroke-width: 0pt; fill-opacity: 0;" p:name="bgRect" id="4680754f302e4b1591f9e23ce01f65c4" width="126" height="48" transform="translate(0)"/>
+                    <g p:name="imageContainer" id="fe2b638dd7544810bc72215310548956" transform="scale(0.72, 0.727273)">
+                        <image x="0" y="0" p:name="image" id="4d36f8e555c94f0abd01f19e8cfdea5d" xlink:href="../../../../../../C:/Users/Solosus/Desktop/hbyanshi/images/ico_23_0.png" xmlns:xlink="http://www.w3.org/1999/xlink" width="175" height="66"/>
+                    </g>
+                </g>
+            </defs>
+            <use xlink:href="#d13f4e796a2240a9beb8c216bdb033b2" xmlns:xlink="http://www.w3.org/1999/xlink" transform="translate(1, 1)" p:filter="url(#0ac48a92c14a469c813fa1d733de3c66)" style="opacity: 0.6; visibility: hidden;" p:name="bgCopy" id="ae29eb37e4db4b9da7298e3324eb15e6"/>
+            <use xlink:href="#d13f4e796a2240a9beb8c216bdb033b2" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </g><g xmlns="http://www.w3.org/2000/svg" p:type="Shape" xmlns:p="http://www.evolus.vn/Namespace/Pencil" p:def="Evolus.Common:Bitmap" id="912f24651b75447b9a888976dcf15fac" transform="matrix(1, 0, 0, 1, 171, 254)"><p:metadata><p:property name="box"><![CDATA[113,43]]></p:property><p:property name="imageData"><![CDATA[175,66,../../../../../../C:/Users/Solosus/Desktop/hbyanshi/images/ico_24_0.png]]></p:property><p:property name="withBlur"><![CDATA[false]]></p:property><p:property name="fillColor"><![CDATA[#FFFFFF00]]></p:property><p:property name="strokeColor"><![CDATA[#000000FF]]></p:property><p:property name="strokeStyle"><![CDATA[0|]]></p:property></p:metadata>
+            <defs>
+                <filter height="1.2558399" y="-0.12792" width="1.06396" x="-0.03198" p:name="imageShading" id="f7a18e80d91e455c9ca1561907a43ff1">
+                    <feGaussianBlur stdDeviation="1.3325" in="SourceAlpha"/>
+                </filter>
+                <g p:name="container" id="50fa8fa5d37f43df9c8cff0047e5017a">
+                    <rect style="fill: rgb(255, 255, 255); stroke: rgb(0, 0, 0); stroke-opacity: 1; stroke-width: 0pt; fill-opacity: 0;" p:name="bgRect" id="96629296ce5e4380bd8cb01dc37b9ee8" width="113" height="43" transform="translate(0)"/>
+                    <g p:name="imageContainer" id="77c6109fe79c4a11b80a66fbba41a679" transform="scale(0.645714, 0.651515)">
+                        <image x="0" y="0" p:name="image" id="c19f482bfc934c3cb6c656835ced0ec7" xlink:href="../../../../../../C:/Users/Solosus/Desktop/hbyanshi/images/ico_24_0.png" xmlns:xlink="http://www.w3.org/1999/xlink" width="175" height="66"/>
+                    </g>
+                </g>
+            </defs>
+            <use xlink:href="#50fa8fa5d37f43df9c8cff0047e5017a" xmlns:xlink="http://www.w3.org/1999/xlink" transform="translate(1, 1)" p:filter="url(#f7a18e80d91e455c9ca1561907a43ff1)" style="opacity: 0.6; visibility: hidden;" p:name="bgCopy" id="c634902d8f4a449b90998d5144bb1e53"/>
+            <use xlink:href="#50fa8fa5d37f43df9c8cff0047e5017a" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </g><g xmlns="http://www.w3.org/2000/svg" p:type="Shape" xmlns:p="http://www.evolus.vn/Namespace/Pencil" p:def="Evolus.Common:Bitmap" id="f9e792efabdb448c9985bd68dbee99b2" transform="matrix(1, 0, 0, 1, 326, 33)"><p:metadata><p:property name="box"><![CDATA[151,31]]></p:property><p:property name="imageData"><![CDATA[159,32,../../../../../../C:/Users/Solosus/Desktop/hbyanshi/images/title_1.png]]></p:property><p:property name="withBlur"><![CDATA[false]]></p:property><p:property name="fillColor"><![CDATA[#FFFFFF00]]></p:property><p:property name="strokeColor"><![CDATA[#000000FF]]></p:property><p:property name="strokeStyle"><![CDATA[0|]]></p:property></p:metadata>
+            <defs>
+                <filter height="1.2558399" y="-0.12792" width="1.06396" x="-0.03198" p:name="imageShading" id="7207533e35be4ecd8ea77f95cc9617b4">
+                    <feGaussianBlur stdDeviation="1.3325" in="SourceAlpha"/>
+                </filter>
+                <g p:name="container" id="cc2e93bfd0ad4139bfa0387d33bfab17">
+                    <rect style="fill: rgb(255, 255, 255); stroke: rgb(0, 0, 0); stroke-opacity: 1; stroke-width: 0pt; fill-opacity: 0;" p:name="bgRect" id="1b2cc33e199f44b8a9be602df393ece3" width="151" height="31" transform="translate(0)"/>
+                    <g p:name="imageContainer" id="372adb74ab1a42448b2204dd2bcf1f86" transform="scale(0.949686, 0.96875)">
+                        <image x="0" y="0" p:name="image" id="77a1b93a30e248d2984449bc2b4cddd3" xlink:href="../../../../../../C:/Users/Solosus/Desktop/hbyanshi/images/title_1.png" xmlns:xlink="http://www.w3.org/1999/xlink" width="159" height="32"/>
+                    </g>
+                </g>
+            </defs>
+            <use xlink:href="#cc2e93bfd0ad4139bfa0387d33bfab17" xmlns:xlink="http://www.w3.org/1999/xlink" transform="translate(1, 1)" p:filter="url(#7207533e35be4ecd8ea77f95cc9617b4)" style="opacity: 0.6; visibility: hidden;" p:name="bgCopy" id="aceb4499d7d94193be65a4e7fc72d2ea"/>
+            <use xlink:href="#cc2e93bfd0ad4139bfa0387d33bfab17" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </g><g xmlns="http://www.w3.org/2000/svg" p:type="Shape" xmlns:p="http://www.evolus.vn/Namespace/Pencil" p:def="Evolus.Common:Bitmap" id="bb1e352ac4954c64a22274a211a29346" transform="matrix(1, 0, 0, 1, 299, 71)"><p:metadata><p:property name="box"><![CDATA[168,34]]></p:property><p:property name="imageData"><![CDATA[159,32,../../../../../../C:/Users/Solosus/Desktop/hbyanshi/images/title_2.png]]></p:property><p:property name="withBlur"><![CDATA[false]]></p:property><p:property name="fillColor"><![CDATA[#FFFFFF00]]></p:property><p:property name="strokeColor"><![CDATA[#000000FF]]></p:property><p:property name="strokeStyle"><![CDATA[0|]]></p:property></p:metadata>
+            <defs>
+                <filter height="1.2558399" y="-0.12792" width="1.06396" x="-0.03198" p:name="imageShading" id="ff06c7450bdf48109b502a73d7a65538">
+                    <feGaussianBlur stdDeviation="1.3325" in="SourceAlpha"/>
+                </filter>
+                <g p:name="container" id="f5e774257e634be89051038ce027a783">
+                    <rect style="fill: rgb(255, 255, 255); stroke: rgb(0, 0, 0); stroke-opacity: 1; stroke-width: 0pt; fill-opacity: 0;" p:name="bgRect" id="9905a5cedfc44c1387ee9160bd306576" width="168" height="34" transform="translate(0)"/>
+                    <g p:name="imageContainer" id="976051ba0f084592a8ca9b1904bdf01c" transform="scale(1.0566, 1.0625)">
+                        <image x="0" y="0" p:name="image" id="5c94b42215ba4c89953201edff1c0776" xlink:href="../../../../../../C:/Users/Solosus/Desktop/hbyanshi/images/title_2.png" xmlns:xlink="http://www.w3.org/1999/xlink" width="159" height="32"/>
+                    </g>
+                </g>
+            </defs>
+            <use xlink:href="#f5e774257e634be89051038ce027a783" xmlns:xlink="http://www.w3.org/1999/xlink" transform="translate(1, 1)" p:filter="url(#ff06c7450bdf48109b502a73d7a65538)" style="opacity: 0.6; visibility: hidden;" p:name="bgCopy" id="b15e579515a64b5a8832f8cd7d08ad96"/>
+            <use xlink:href="#f5e774257e634be89051038ce027a783" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </g></Content></Page><Page><Properties><Property name="name">test</Property><Property name="id">1304927566716_8368</Property><Property name="width">1024</Property><Property name="height">768</Property><Property name="dimBackground">false</Property><Property name="backgroundColor">#FFFFFFFF</Property><Property name="background">transparent</Property></Properties><Content><g xmlns="http://www.w3.org/2000/svg" p:type="Shape" xmlns:p="http://www.evolus.vn/Namespace/Pencil" p:def="Evolus.Common:Bitmap" id="3de751eab98649539e9f3368f9d00061" transform="matrix(1, 0, 0, 1, 80, 66)"><p:metadata><p:property name="box"><![CDATA[182,70]]></p:property><p:property name="imageData"><![CDATA[175,66,../../../../../../C:/Users/Solosus/Desktop/hbyanshi/images/ico_13_0.png]]></p:property><p:property name="withBlur"><![CDATA[false]]></p:property><p:property name="fillColor"><![CDATA[#FFFFFF00]]></p:property><p:property name="strokeColor"><![CDATA[#000000FF]]></p:property><p:property name="strokeStyle"><![CDATA[0|]]></p:property></p:metadata>
+            <defs>
+                <filter height="1.2558399" y="-0.12792" width="1.06396" x="-0.03198" p:name="imageShading" id="5ef348fa8d0a4e8d9416e10f5ec22202">
+                    <feGaussianBlur stdDeviation="1.3325" in="SourceAlpha"/>
+                </filter>
+                <g p:name="container" id="71719968f06b47e1893026db3ec65fb6">
+                    <rect style="fill: rgb(255, 255, 255); stroke: rgb(0, 0, 0); stroke-opacity: 1; stroke-width: 0pt; fill-opacity: 0;" p:name="bgRect" id="795cbb424f5345568072773e738a9406" width="182" height="70" transform="translate(0)"/>
+                    <g p:name="imageContainer" id="6d149849f64c4fefa11e3cd6c07db0f4" transform="scale(1.04, 1.06061)">
+                        <image x="0" y="0" p:name="image" id="663610773c12403e991e5eacb9f5536f" xlink:href="../../../../../../C:/Users/Solosus/Desktop/hbyanshi/images/ico_13_0.png" xmlns:xlink="http://www.w3.org/1999/xlink" width="175" height="66"/>
+                    </g>
+                </g>
+            </defs>
+            <use xlink:href="#71719968f06b47e1893026db3ec65fb6" xmlns:xlink="http://www.w3.org/1999/xlink" transform="translate(1, 1)" p:filter="url(#5ef348fa8d0a4e8d9416e10f5ec22202)" style="opacity: 0.6; visibility: hidden;" p:name="bgCopy" id="e5c7086d982b48a585b4d48fe1c0425d"/>
+            <use xlink:href="#71719968f06b47e1893026db3ec65fb6" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </g><g xmlns="http://www.w3.org/2000/svg" p:type="Shape" xmlns:p="http://www.evolus.vn/Namespace/Pencil" p:def="Evolus.Common:Bitmap" id="f1bc1ff8f5a544bfa882178e22eac2cb" transform="matrix(1, 0, 0, 1, 81, 251)"><p:metadata><p:property name="box"><![CDATA[187,70]]></p:property><p:property name="imageData"><![CDATA[175,66,../../../../../../C:/Users/Solosus/Desktop/hbyanshi/images/ico_12_0.png]]></p:property><p:property name="withBlur"><![CDATA[false]]></p:property><p:property name="fillColor"><![CDATA[#FFFFFF00]]></p:property><p:property name="strokeColor"><![CDATA[#000000FF]]></p:property><p:property name="strokeStyle"><![CDATA[0|]]></p:property></p:metadata>
+            <defs>
+                <filter height="1.2558399" y="-0.12792" width="1.06396" x="-0.03198" p:name="imageShading" id="05d0d9c13a86432599dfdea84d46e8c3">
+                    <feGaussianBlur stdDeviation="1.3325" in="SourceAlpha"/>
+                </filter>
+                <g p:name="container" id="7359c658c1c74344a5efcc9c82b39d78">
+                    <rect style="fill: rgb(255, 255, 255); stroke: rgb(0, 0, 0); stroke-opacity: 1; stroke-width: 0pt; fill-opacity: 0;" p:name="bgRect" id="e19a66ea670847fca6cd35bd689513b3" width="187" height="70" transform="translate(0)"/>
+                    <g p:name="imageContainer" id="3982f09e9cce43298ceeb0bc9661a229" transform="scale(1.06857, 1.06061)">
+                        <image x="0" y="0" p:name="image" id="9d259057b7664b319b0df379e86ed159" xlink:href="../../../../../../C:/Users/Solosus/Desktop/hbyanshi/images/ico_12_0.png" xmlns:xlink="http://www.w3.org/1999/xlink" width="175" height="66"/>
+                    </g>
+                </g>
+            </defs>
+            <use xlink:href="#7359c658c1c74344a5efcc9c82b39d78" xmlns:xlink="http://www.w3.org/1999/xlink" transform="translate(1, 1)" p:filter="url(#05d0d9c13a86432599dfdea84d46e8c3)" style="opacity: 0.6; visibility: hidden;" p:name="bgCopy" id="64401994c7dd4608a014cb94e9e162cd"/>
+            <use xlink:href="#7359c658c1c74344a5efcc9c82b39d78" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </g><g xmlns="http://www.w3.org/2000/svg" p:type="Shape" xmlns:p="http://www.evolus.vn/Namespace/Pencil" p:def="Evolus.Common:Bitmap" id="246b88002165405e9612eecd0c0ef3ef" transform="matrix(1, 0, 0, 1, 81, 342)"><p:metadata><p:property name="box"><![CDATA[187,70]]></p:property><p:property name="imageData"><![CDATA[175,66,../../../../../../C:/Users/Solosus/Desktop/hbyanshi/images/ico_14_0.png]]></p:property><p:property name="withBlur"><![CDATA[false]]></p:property><p:property name="fillColor"><![CDATA[#FFFFFF00]]></p:property><p:property name="strokeColor"><![CDATA[#000000FF]]></p:property><p:property name="strokeStyle"><![CDATA[0|]]></p:property></p:metadata>
+            <defs>
+                <filter height="1.2558399" y="-0.12792" width="1.06396" x="-0.03198" p:name="imageShading" id="d8a56aba28ab4839808882461d02fc3b">
+                    <feGaussianBlur stdDeviation="1.3325" in="SourceAlpha"/>
+                </filter>
+                <g p:name="container" id="ab514beb3d1244bb8a8b5bec5f4abfb8">
+                    <rect style="fill: rgb(255, 255, 255); stroke: rgb(0, 0, 0); stroke-opacity: 1; stroke-width: 0pt; fill-opacity: 0;" p:name="bgRect" id="3cbafade09504c4d870a3e64085ec1d9" width="187" height="70" transform="translate(0)"/>
+                    <g p:name="imageContainer" id="ebb2805ac68a4c09bd2412bf7bf748c8" transform="scale(1.06857, 1.06061)">
+                        <image x="0" y="0" p:name="image" id="177c696ee7e347078b3f41445606b21c" xlink:href="../../../../../../C:/Users/Solosus/Desktop/hbyanshi/images/ico_14_0.png" xmlns:xlink="http://www.w3.org/1999/xlink" width="175" height="66"/>
+                    </g>
+                </g>
+            </defs>
+            <use xlink:href="#ab514beb3d1244bb8a8b5bec5f4abfb8" xmlns:xlink="http://www.w3.org/1999/xlink" transform="translate(1, 1)" p:filter="url(#d8a56aba28ab4839808882461d02fc3b)" style="opacity: 0.6; visibility: hidden;" p:name="bgCopy" id="d4491c9f9e09493b95b94a0cf9e5fc9d"/>
+            <use xlink:href="#ab514beb3d1244bb8a8b5bec5f4abfb8" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </g><g xmlns="http://www.w3.org/2000/svg" p:type="Shape" xmlns:p="http://www.evolus.vn/Namespace/Pencil" p:def="Evolus.Common:Bitmap" id="7f32fb72aad14dadaca7b5613a61c9f0" transform="matrix(1, 0, 0, 1, 80, 157)"><p:metadata><p:property name="box"><![CDATA[185,70]]></p:property><p:property name="imageData"><![CDATA[175,66,../../../../../../C:/Users/Solosus/Desktop/hbyanshi/images/ico_11_0.png]]></p:property><p:property name="withBlur"><![CDATA[false]]></p:property><p:property name="fillColor"><![CDATA[#FFFFFF00]]></p:property><p:property name="strokeColor"><![CDATA[#000000FF]]></p:property><p:property name="strokeStyle"><![CDATA[0|]]></p:property></p:metadata>
+            <defs>
+                <filter height="1.2558399" y="-0.12792" width="1.06396" x="-0.03198" p:name="imageShading" id="5782e7f50350430a8c672927828c4783">
+                    <feGaussianBlur stdDeviation="1.3325" in="SourceAlpha"/>
+                </filter>
+                <g p:name="container" id="ff3a1dc000e343fa800cb1a5d4a660cd">
+                    <rect style="fill: rgb(255, 255, 255); stroke: rgb(0, 0, 0); stroke-opacity: 1; stroke-width: 0pt; fill-opacity: 0;" p:name="bgRect" id="5a3ae80e2dff45efbb036494c95b9c4a" width="185" height="70" transform="translate(0)"/>
+                    <g p:name="imageContainer" id="215253e0de9c44009d0adf4a291e6ea4" transform="scale(1.05714, 1.06061)">
+                        <image x="0" y="0" p:name="image" id="be684d2b1b4d4e02be8fb079e42db719" xlink:href="../../../../../../C:/Users/Solosus/Desktop/hbyanshi/images/ico_11_0.png" xmlns:xlink="http://www.w3.org/1999/xlink" width="175" height="66"/>
+                    </g>
+                </g>
+            </defs>
+            <use xlink:href="#ff3a1dc000e343fa800cb1a5d4a660cd" xmlns:xlink="http://www.w3.org/1999/xlink" transform="translate(1, 1)" p:filter="url(#5782e7f50350430a8c672927828c4783)" style="opacity: 0.6; visibility: hidden;" p:name="bgCopy" id="b441890f092e4a65ab1c6678326e7c44"/>
+            <use xlink:href="#ff3a1dc000e343fa800cb1a5d4a660cd" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </g><g xmlns="http://www.w3.org/2000/svg" p:type="Shape" xmlns:p="http://www.evolus.vn/Namespace/Pencil" p:def="Evolus.Common:Bitmap" id="bd253702b4024f20a0c82fce7c55d630" transform="matrix(1, 0, 0, 1, 315, 349)"><p:metadata><p:property name="box"><![CDATA[186,70]]></p:property><p:property name="imageData"><![CDATA[175,66,../../../../../../C:/Users/Solosus/Desktop/hbyanshi/images/ico_22_0.png]]></p:property><p:property name="withBlur"><![CDATA[false]]></p:property><p:property name="fillColor"><![CDATA[#FFFFFF00]]></p:property><p:property name="strokeColor"><![CDATA[#000000FF]]></p:property><p:property name="strokeStyle"><![CDATA[0|]]></p:property></p:metadata>
+            <defs>
+                <filter height="1.2558399" y="-0.12792" width="1.06396" x="-0.03198" p:name="imageShading" id="041c9a420b3c446a9f2d4f790708559d">
+                    <feGaussianBlur stdDeviation="1.3325" in="SourceAlpha"/>
+                </filter>
+                <g p:name="container" id="6c252bddca3e4c6d962e2840158695ef">
+                    <rect style="fill: rgb(255, 255, 255); stroke: rgb(0, 0, 0); stroke-opacity: 1; stroke-width: 0pt; fill-opacity: 0;" p:name="bgRect" id="55485d90daf3453f95b0d6cc01f92ff6" width="186" height="70" transform="translate(0)"/>
+                    <g p:name="imageContainer" id="f9af1712bb5a4ec2b88b29185dca977a" transform="scale(1.06286, 1.06061)">
+                        <image x="0" y="0" p:name="image" id="2302e858d93346308df122ce52b2bd03" xlink:href="../../../../../../C:/Users/Solosus/Desktop/hbyanshi/images/ico_22_0.png" xmlns:xlink="http://www.w3.org/1999/xlink" width="175" height="66"/>
+                    </g>
+                </g>
+            </defs>
+            <use xlink:href="#6c252bddca3e4c6d962e2840158695ef" xmlns:xlink="http://www.w3.org/1999/xlink" transform="translate(1, 1)" p:filter="url(#041c9a420b3c446a9f2d4f790708559d)" style="opacity: 0.6; visibility: hidden;" p:name="bgCopy" id="6b3cd6472cf14ffa8013df20402fea54"/>
+            <use xlink:href="#6c252bddca3e4c6d962e2840158695ef" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </g><g xmlns="http://www.w3.org/2000/svg" p:type="Shape" xmlns:p="http://www.evolus.vn/Namespace/Pencil" p:def="Evolus.Common:Bitmap" id="cb4706d9f0324a2ca131775ae9089858" transform="matrix(1, 0, 0, 1, 320, 67)"><p:metadata><p:property name="box"><![CDATA[179,68]]></p:property><p:property name="imageData"><![CDATA[175,66,../../../../../../C:/Users/Solosus/Desktop/hbyanshi/images/ico_21_0.png]]></p:property><p:property name="withBlur"><![CDATA[false]]></p:property><p:property name="fillColor"><![CDATA[#FFFFFF00]]></p:property><p:property name="strokeColor"><![CDATA[#000000FF]]></p:property><p:property name="strokeStyle"><![CDATA[0|]]></p:property></p:metadata>
+            <defs>
+                <filter height="1.2558399" y="-0.12792" width="1.06396" x="-0.03198" p:name="imageShading" id="bc799bdb92394e68a1a4c57e018e7150">
+                    <feGaussianBlur stdDeviation="1.3325" in="SourceAlpha"/>
+                </filter>
+                <g p:name="container" id="b40aa54e1197400aba6c8059c5bbee5b">
+                    <rect style="fill: rgb(255, 255, 255); stroke: rgb(0, 0, 0); stroke-opacity: 1; stroke-width: 0pt; fill-opacity: 0;" p:name="bgRect" id="86f7aa0cbcdb4f1eb308326234ea470f" width="179" height="68" transform="translate(0)"/>
+                    <g p:name="imageContainer" id="3fd25137926f40608d2d03dfbf4ec085" transform="scale(1.02286, 1.0303)">
+                        <image x="0" y="0" p:name="image" id="716798dc66ac47eea9e54bfaaa56141a" xlink:href="../../../../../../C:/Users/Solosus/Desktop/hbyanshi/images/ico_21_0.png" xmlns:xlink="http://www.w3.org/1999/xlink" width="175" height="66"/>
+                    </g>
+                </g>
+            </defs>
+            <use xlink:href="#b40aa54e1197400aba6c8059c5bbee5b" xmlns:xlink="http://www.w3.org/1999/xlink" transform="translate(1, 1)" p:filter="url(#bc799bdb92394e68a1a4c57e018e7150)" style="opacity: 0.6; visibility: hidden;" p:name="bgCopy" id="81dda8d902164898a379513efa44de99"/>
+            <use xlink:href="#b40aa54e1197400aba6c8059c5bbee5b" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </g><g xmlns="http://www.w3.org/2000/svg" p:type="Shape" xmlns:p="http://www.evolus.vn/Namespace/Pencil" p:def="Evolus.Common:Bitmap" id="2be35ae617834340b1cd61b131c48374" transform="matrix(1, 0, 0, 1, 314, 535)"><p:metadata><p:property name="box"><![CDATA[181,68]]></p:property><p:property name="imageData"><![CDATA[175,66,../../../../../../C:/Users/Solosus/Desktop/hbyanshi/images/ico_25_0.png]]></p:property><p:property name="withBlur"><![CDATA[false]]></p:property><p:property name="fillColor"><![CDATA[#FFFFFF00]]></p:property><p:property name="strokeColor"><![CDATA[#000000FF]]></p:property><p:property name="strokeStyle"><![CDATA[0|]]></p:property></p:metadata>
+            <defs>
+                <filter height="1.2558399" y="-0.12792" width="1.06396" x="-0.03198" p:name="imageShading" id="a41e2b118df04dd68d509bf0d3d9756a">
+                    <feGaussianBlur stdDeviation="1.3325" in="SourceAlpha"/>
+                </filter>
+                <g p:name="container" id="c13bc79c81b8422f965ea58e3fa1dde7">
+                    <rect style="fill: rgb(255, 255, 255); stroke: rgb(0, 0, 0); stroke-opacity: 1; stroke-width: 0pt; fill-opacity: 0;" p:name="bgRect" id="71d9e430c497497a9d9ebb43609dd9a5" width="181" height="68" transform="translate(0)"/>
+                    <g p:name="imageContainer" id="318ce6e176e7403885b6059682cdb5ad" transform="scale(1.03429, 1.0303)">
+                        <image x="0" y="0" p:name="image" id="dd85ef447e93460ca2fbbaf0babb1cd5" xlink:href="../../../../../../C:/Users/Solosus/Desktop/hbyanshi/images/ico_25_0.png" xmlns:xlink="http://www.w3.org/1999/xlink" width="175" height="66"/>
+                    </g>
+                </g>
+            </defs>
+            <use xlink:href="#c13bc79c81b8422f965ea58e3fa1dde7" xmlns:xlink="http://www.w3.org/1999/xlink" transform="translate(1, 1)" p:filter="url(#a41e2b118df04dd68d509bf0d3d9756a)" style="opacity: 0.6; visibility: hidden;" p:name="bgCopy" id="ac517369de394726ab2f2c9cb4844fe3"/>
+            <use xlink:href="#c13bc79c81b8422f965ea58e3fa1dde7" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </g><g xmlns="http://www.w3.org/2000/svg" p:type="Shape" xmlns:p="http://www.evolus.vn/Namespace/Pencil" p:def="Evolus.Common:Bitmap" id="62a57ea16c54475c8c60bc16db9eb7e3" transform="matrix(1, 0, 0, 1, 315, 446)"><p:metadata><p:property name="box"><![CDATA[180,69]]></p:property><p:property name="imageData"><![CDATA[175,66,../../../../../../C:/Users/Solosus/Desktop/hbyanshi/images/ico_26_0.png]]></p:property><p:property name="withBlur"><![CDATA[false]]></p:property><p:property name="fillColor"><![CDATA[#FFFFFF00]]></p:property><p:property name="strokeColor"><![CDATA[#000000FF]]></p:property><p:property name="strokeStyle"><![CDATA[0|]]></p:property></p:metadata>
+            <defs>
+                <filter height="1.2558399" y="-0.12792" width="1.06396" x="-0.03198" p:name="imageShading" id="328899c320a04fb8a98d59628bbdc404">
+                    <feGaussianBlur stdDeviation="1.3325" in="SourceAlpha"/>
+                </filter>
+                <g p:name="container" id="e64436b483ad436e9a6b8864f8b7e98a">
+                    <rect style="fill: rgb(255, 255, 255); stroke: rgb(0, 0, 0); stroke-opacity: 1; stroke-width: 0pt; fill-opacity: 0;" p:name="bgRect" id="aa5d373eff0e4431829820c4a85fa485" width="180" height="69" transform="translate(0)"/>
+                    <g p:name="imageContainer" id="bb10a868a0474f89bd884251181c85e5" transform="scale(1.02857, 1.04545)">
+                        <image x="0" y="0" p:name="image" id="b4c644d6fd2641b3a169de0685fd6249" xlink:href="../../../../../../C:/Users/Solosus/Desktop/hbyanshi/images/ico_26_0.png" xmlns:xlink="http://www.w3.org/1999/xlink" width="175" height="66"/>
+                    </g>
+                </g>
+            </defs>
+            <use xlink:href="#e64436b483ad436e9a6b8864f8b7e98a" xmlns:xlink="http://www.w3.org/1999/xlink" transform="translate(1, 1)" p:filter="url(#328899c320a04fb8a98d59628bbdc404)" style="opacity: 0.6; visibility: hidden;" p:name="bgCopy" id="9bdc8c5329ef454da38e19f93ab424fc"/>
+            <use xlink:href="#e64436b483ad436e9a6b8864f8b7e98a" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </g><g xmlns="http://www.w3.org/2000/svg" p:type="Shape" xmlns:p="http://www.evolus.vn/Namespace/Pencil" p:def="Evolus.Common:Bitmap" id="bb222568009f492283a7baa2b62d8cf0" transform="matrix(1, 0, 0, 1, 318, 156)"><p:metadata><p:property name="box"><![CDATA[181,69]]></p:property><p:property name="imageData"><![CDATA[175,66,../../../../../../C:/Users/Solosus/Desktop/hbyanshi/images/ico_23_0.png]]></p:property><p:property name="withBlur"><![CDATA[false]]></p:property><p:property name="fillColor"><![CDATA[#FFFFFF00]]></p:property><p:property name="strokeColor"><![CDATA[#000000FF]]></p:property><p:property name="strokeStyle"><![CDATA[0|]]></p:property></p:metadata>
+            <defs>
+                <filter height="1.2558399" y="-0.12792" width="1.06396" x="-0.03198" p:name="imageShading" id="a31b85aac87742089091071e04bc80d6">
+                    <feGaussianBlur stdDeviation="1.3325" in="SourceAlpha"/>
+                </filter>
+                <g p:name="container" id="1141b463357443c8ba286c9a0a9188bc">
+                    <rect style="fill: rgb(255, 255, 255); stroke: rgb(0, 0, 0); stroke-opacity: 1; stroke-width: 0pt; fill-opacity: 0;" p:name="bgRect" id="92516668d94541b89027a414c7a8598d" width="181" height="69" transform="translate(0)"/>
+                    <g p:name="imageContainer" id="f683a886ffd44446a00987107589268a" transform="scale(1.03429, 1.04545)">
+                        <image x="0" y="0" p:name="image" id="e70376f43f0c4482bf9bb2594b64746f" xlink:href="../../../../../../C:/Users/Solosus/Desktop/hbyanshi/images/ico_23_0.png" xmlns:xlink="http://www.w3.org/1999/xlink" width="175" height="66"/>
+                    </g>
+                </g>
+            </defs>
+            <use xlink:href="#1141b463357443c8ba286c9a0a9188bc" xmlns:xlink="http://www.w3.org/1999/xlink" transform="translate(1, 1)" p:filter="url(#a31b85aac87742089091071e04bc80d6)" style="opacity: 0.6; visibility: hidden;" p:name="bgCopy" id="1d4d434d5f6a402f89bc8b490c109285"/>
+            <use xlink:href="#1141b463357443c8ba286c9a0a9188bc" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </g><g xmlns="http://www.w3.org/2000/svg" p:type="Shape" xmlns:p="http://www.evolus.vn/Namespace/Pencil" p:def="Evolus.Common:Bitmap" id="70acd5894f99431e995a111635a3b3da" transform="matrix(1, 0, 0, 1, 320, 251)"><p:metadata><p:property name="box"><![CDATA[181,69]]></p:property><p:property name="imageData"><![CDATA[175,66,../../../../../../C:/Users/Solosus/Desktop/hbyanshi/images/ico_24_0.png]]></p:property><p:property name="withBlur"><![CDATA[false]]></p:property><p:property name="fillColor"><![CDATA[#FFFFFF00]]></p:property><p:property name="strokeColor"><![CDATA[#000000FF]]></p:property><p:property name="strokeStyle"><![CDATA[0|]]></p:property></p:metadata>
+            <defs>
+                <filter height="1.2558399" y="-0.12792" width="1.06396" x="-0.03198" p:name="imageShading" id="b6509352cbd74312a02f107f4b805efb">
+                    <feGaussianBlur stdDeviation="1.3325" in="SourceAlpha"/>
+                </filter>
+                <g p:name="container" id="9a70eaaa21964b15a2a8e9b407303dcd">
+                    <rect style="fill: rgb(255, 255, 255); stroke: rgb(0, 0, 0); stroke-opacity: 1; stroke-width: 0pt; fill-opacity: 0;" p:name="bgRect" id="7758b6b339804d00a75fce354f7bf8d6" width="181" height="69" transform="translate(0)"/>
+                    <g p:name="imageContainer" id="da966e07561b4e7bb94db4e9f90dd4a5" transform="scale(1.03429, 1.04545)">
+                        <image x="0" y="0" p:name="image" id="45d970cd72c84b439369713dc66700ee" xlink:href="../../../../../../C:/Users/Solosus/Desktop/hbyanshi/images/ico_24_0.png" xmlns:xlink="http://www.w3.org/1999/xlink" width="175" height="66"/>
+                    </g>
+                </g>
+            </defs>
+            <use xlink:href="#9a70eaaa21964b15a2a8e9b407303dcd" xmlns:xlink="http://www.w3.org/1999/xlink" transform="translate(1, 1)" p:filter="url(#b6509352cbd74312a02f107f4b805efb)" style="opacity: 0.6; visibility: hidden;" p:name="bgCopy" id="7e90f4b3fc134d06a1d968ba648d7093"/>
+            <use xlink:href="#9a70eaaa21964b15a2a8e9b407303dcd" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </g><g xmlns="http://www.w3.org/2000/svg" p:type="Shape" xmlns:p="http://www.evolus.vn/Namespace/Pencil" p:def="Evolus.Common:Bitmap" id="db1709046a8f46c1b7e7cbcc2759752b" transform="matrix(1, 0, 0, 1, 67, 17)"><p:metadata><p:property name="box"><![CDATA[151,31]]></p:property><p:property name="imageData"><![CDATA[159,32,../../../../../../C:/Users/Solosus/Desktop/hbyanshi/images/title_1.png]]></p:property><p:property name="withBlur"><![CDATA[false]]></p:property><p:property name="fillColor"><![CDATA[#FFFFFF00]]></p:property><p:property name="strokeColor"><![CDATA[#000000FF]]></p:property><p:property name="strokeStyle"><![CDATA[0|]]></p:property></p:metadata>
+            <defs>
+                <filter height="1.2558399" y="-0.12792" width="1.06396" x="-0.03198" p:name="imageShading" id="33d0077324334119b1687f55774a3c50">
+                    <feGaussianBlur stdDeviation="1.3325" in="SourceAlpha"/>
+                </filter>
+                <g p:name="container" id="430d3469292e4bcf8bc0fb0cc6204a06">
+                    <rect style="fill: rgb(255, 255, 255); stroke: rgb(0, 0, 0); stroke-opacity: 1; stroke-width: 0pt; fill-opacity: 0;" p:name="bgRect" id="2ca39d516f194a6cbe9c3488d7b00dc5" width="151" height="31" transform="translate(0)"/>
+                    <g p:name="imageContainer" id="9a1ec2f8d9d64cb3964a8abd903a5d70" transform="scale(0.949686, 0.96875)">
+                        <image x="0" y="0" p:name="image" id="b96d4c93292e4ef1958d17cc65c647ed" xlink:href="../../../../../../C:/Users/Solosus/Desktop/hbyanshi/images/title_1.png" xmlns:xlink="http://www.w3.org/1999/xlink" width="159" height="32"/>
+                    </g>
+                </g>
+            </defs>
+            <use xlink:href="#430d3469292e4bcf8bc0fb0cc6204a06" xmlns:xlink="http://www.w3.org/1999/xlink" transform="translate(1, 1)" p:filter="url(#33d0077324334119b1687f55774a3c50)" style="opacity: 0.6; visibility: hidden;" p:name="bgCopy" id="dd9f2722d92c47598e0b57c678565199"/>
+            <use xlink:href="#430d3469292e4bcf8bc0fb0cc6204a06" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </g><g xmlns="http://www.w3.org/2000/svg" p:type="Shape" xmlns:p="http://www.evolus.vn/Namespace/Pencil" p:def="Evolus.Common:Bitmap" id="b55c11a167e84c33868388a0c4047ac2" transform="matrix(1, 0, 0, 1, 275, 14)"><p:metadata><p:property name="box"><![CDATA[168,34]]></p:property><p:property name="imageData"><![CDATA[159,32,../../../../../../C:/Users/Solosus/Desktop/hbyanshi/images/title_2.png]]></p:property><p:property name="withBlur"><![CDATA[false]]></p:property><p:property name="fillColor"><![CDATA[#FFFFFF00]]></p:property><p:property name="strokeColor"><![CDATA[#000000FF]]></p:property><p:property name="strokeStyle"><![CDATA[0|]]></p:property></p:metadata>
+            <defs>
+                <filter height="1.2558399" y="-0.12792" width="1.06396" x="-0.03198" p:name="imageShading" id="46139821d6e5461e87c3e06283a5941c">
+                    <feGaussianBlur stdDeviation="1.3325" in="SourceAlpha"/>
+                </filter>
+                <g p:name="container" id="17758cdfc9f5482e95541900f1664d53">
+                    <rect style="fill: rgb(255, 255, 255); stroke: rgb(0, 0, 0); stroke-opacity: 1; stroke-width: 0pt; fill-opacity: 0;" p:name="bgRect" id="e52e5e19c27b4a5bafd2fd51eb388d68" width="168" height="34" transform="translate(0)"/>
+                    <g p:name="imageContainer" id="28edd776d7e04c14b12a793cf79211d7" transform="scale(1.0566, 1.0625)">
+                        <image x="0" y="0" p:name="image" id="edee8840ee7447899061bb5aa6541604" xlink:href="../../../../../../C:/Users/Solosus/Desktop/hbyanshi/images/title_2.png" xmlns:xlink="http://www.w3.org/1999/xlink" width="159" height="32"/>
+                    </g>
+                </g>
+            </defs>
+            <use xlink:href="#17758cdfc9f5482e95541900f1664d53" xmlns:xlink="http://www.w3.org/1999/xlink" transform="translate(1, 1)" p:filter="url(#46139821d6e5461e87c3e06283a5941c)" style="opacity: 0.6; visibility: hidden;" p:name="bgCopy" id="57afdc85d0c543d383280a8f8dc7f2a8"/>
+            <use xlink:href="#17758cdfc9f5482e95541900f1664d53" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </g><g xmlns="http://www.w3.org/2000/svg" p:type="Shape" xmlns:p="http://www.evolus.vn/Namespace/Pencil" p:def="Evolus.Common:Bitmap" id="a44deed52bbf4f148a1695a03c58bc39" transform="matrix(1, 0, 0, 1, 585, 66)"><p:metadata><p:property name="box"><![CDATA[180,69]]></p:property><p:property name="imageData"><![CDATA[175,66,../../../../../../C:/Users/Solosus/Desktop/hbyanshi/images/ico_26_0.png]]></p:property><p:property name="withBlur"><![CDATA[false]]></p:property><p:property name="fillColor"><![CDATA[#FFFFFF00]]></p:property><p:property name="strokeColor"><![CDATA[#000000FF]]></p:property><p:property name="strokeStyle"><![CDATA[0|]]></p:property></p:metadata>
+            <defs>
+                <filter height="1.2558399" y="-0.12792" width="1.06396" x="-0.03198" p:name="imageShading" id="77a731e6ef4f456c807ee9bccc95192a">
+                    <feGaussianBlur stdDeviation="1.3325" in="SourceAlpha"/>
+                </filter>
+                <g p:name="container" id="e947156832e44590be96b5d09a006c27">
+                    <rect style="fill: rgb(255, 255, 255); stroke: rgb(0, 0, 0); stroke-opacity: 1; stroke-width: 0pt; fill-opacity: 0;" p:name="bgRect" id="3f75f35aa73a4c289a993fbad2d04d5f" width="180" height="69" transform="translate(0)"/>
+                    <g p:name="imageContainer" id="9d7fe9a94a194932aa7ac1539b723980" transform="scale(1.02857, 1.04545)">
+                        <image x="0" y="0" p:name="image" id="06787b70a4a44752b9e0c12e7b93a8c7" xlink:href="../../../../../../C:/Users/Solosus/Desktop/hbyanshi/images/ico_26_0.png" xmlns:xlink="http://www.w3.org/1999/xlink" width="175" height="66"/>
+                    </g>
+                </g>
+            </defs>
+            <use xlink:href="#e947156832e44590be96b5d09a006c27" xmlns:xlink="http://www.w3.org/1999/xlink" transform="translate(1, 1)" p:filter="url(#77a731e6ef4f456c807ee9bccc95192a)" style="opacity: 0.6; visibility: hidden;" p:name="bgCopy" id="15d64d8642b541448fca7376d4ba4f2d"/>
+            <use xlink:href="#e947156832e44590be96b5d09a006c27" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </g><g xmlns="http://www.w3.org/2000/svg" p:type="Shape" xmlns:p="http://www.evolus.vn/Namespace/Pencil" p:def="Evolus.Common:Bitmap" id="55d82a3c06f2499ea072c18325794393" transform="matrix(1, 0, 0, 1, 549, 17)"><p:metadata><p:property name="box"><![CDATA[168,34]]></p:property><p:property name="imageData"><![CDATA[159,32,../../../../../../C:/Users/Solosus/Desktop/hbyanshi/images/title_2.png]]></p:property><p:property name="withBlur"><![CDATA[false]]></p:property><p:property name="fillColor"><![CDATA[#FFFFFF00]]></p:property><p:property name="strokeColor"><![CDATA[#000000FF]]></p:property><p:property name="strokeStyle"><![CDATA[0|]]></p:property></p:metadata>
+            <defs>
+                <filter height="1.2558399" y="-0.12792" width="1.06396" x="-0.03198" p:name="imageShading" id="2e1888d42a54460482e5e566517e507a">
+                    <feGaussianBlur stdDeviation="1.3325" in="SourceAlpha"/>
+                </filter>
+                <g p:name="container" id="f0946308be2549f2ba766b013bbeb296">
+                    <rect style="fill: rgb(255, 255, 255); stroke: rgb(0, 0, 0); stroke-opacity: 1; stroke-width: 0pt; fill-opacity: 0;" p:name="bgRect" id="c7d70af4642a473484e4bca9505f3dce" width="168" height="34" transform="translate(0)"/>
+                    <g p:name="imageContainer" id="6b459060dd974703b6b7bdfcf672f1ba" transform="scale(1.0566, 1.0625)">
+                        <image x="0" y="0" p:name="image" id="8b3f9dd610de4b3a988bd0eacc8c1d60" xlink:href="../../../../../../C:/Users/Solosus/Desktop/hbyanshi/images/title_2.png" xmlns:xlink="http://www.w3.org/1999/xlink" width="159" height="32"/>
+                    </g>
+                </g>
+            </defs>
+            <use xlink:href="#f0946308be2549f2ba766b013bbeb296" xmlns:xlink="http://www.w3.org/1999/xlink" transform="translate(1, 1)" p:filter="url(#2e1888d42a54460482e5e566517e507a)" style="opacity: 0.6; visibility: hidden;" p:name="bgCopy" id="f086e10dbbf44652adead39b7a245f79"/>
+            <use xlink:href="#f0946308be2549f2ba766b013bbeb296" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </g><g xmlns="http://www.w3.org/2000/svg" p:type="Shape" xmlns:p="http://www.evolus.vn/Namespace/Pencil" p:def="Evolus.Common:Bitmap" id="7879fe557f0d4897aea35ca4a936a844" transform="matrix(1, 0, 0, 1, 585, 156)"><p:metadata><p:property name="box"><![CDATA[180,69]]></p:property><p:property name="imageData"><![CDATA[175,66,../../../../../../C:/Users/Solosus/Desktop/hbyanshi/images/ico_26_0.png]]></p:property><p:property name="withBlur"><![CDATA[false]]></p:property><p:property name="fillColor"><![CDATA[#FFFFFF00]]></p:property><p:property name="strokeColor"><![CDATA[#000000FF]]></p:property><p:property name="strokeStyle"><![CDATA[0|]]></p:property></p:metadata>
+            <defs>
+                <filter height="1.2558399" y="-0.12792" width="1.06396" x="-0.03198" p:name="imageShading" id="110e2918c24e45798ff64e280b18e8d2">
+                    <feGaussianBlur stdDeviation="1.3325" in="SourceAlpha"/>
+                </filter>
+                <g p:name="container" id="d7788e7ed7d14526b34937b4d01beeaf">
+                    <rect style="fill: rgb(255, 255, 255); stroke: rgb(0, 0, 0); stroke-opacity: 1; stroke-width: 0pt; fill-opacity: 0;" p:name="bgRect" id="66f7844ee89749ec85ab3985c28e3611" width="180" height="69" transform="translate(0)"/>
+                    <g p:name="imageContainer" id="5cf4fa9b90744b66a13b789a782c5a72" transform="scale(1.02857, 1.04545)">
+                        <image x="0" y="0" p:name="image" id="53b14b2c4bf242de91e24dc3c530cc18" xlink:href="../../../../../../C:/Users/Solosus/Desktop/hbyanshi/images/ico_26_0.png" xmlns:xlink="http://www.w3.org/1999/xlink" width="175" height="66"/>
+                    </g>
+                </g>
+            </defs>
+            <use xlink:href="#d7788e7ed7d14526b34937b4d01beeaf" xmlns:xlink="http://www.w3.org/1999/xlink" transform="translate(1, 1)" p:filter="url(#110e2918c24e45798ff64e280b18e8d2)" style="opacity: 0.6; visibility: hidden;" p:name="bgCopy" id="4fb43ec4495342169f5c705f651d555d"/>
+            <use xlink:href="#d7788e7ed7d14526b34937b4d01beeaf" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </g><g xmlns="http://www.w3.org/2000/svg" p:type="Shape" xmlns:p="http://www.evolus.vn/Namespace/Pencil" p:def="Evolus.Common:Bitmap" id="27d2454bdc2d460db9a4a10ebc3e2f57" transform="matrix(1, 0, 0, 1, 541, 112)"><p:metadata><p:property name="box"><![CDATA[7,66]]></p:property><p:property name="imageData"><![CDATA[7,66,../../../../../../C:/Users/Solosus/Desktop/hbyanshi/images/arror.png]]></p:property><p:property name="withBlur"><![CDATA[false]]></p:property><p:property name="fillColor"><![CDATA[#FFFFFF00]]></p:property><p:property name="strokeColor"><![CDATA[#000000FF]]></p:property><p:property name="strokeStyle"><![CDATA[0|]]></p:property></p:metadata>
+            <defs>
+                <filter height="1.2558399" y="-0.12792" width="1.06396" x="-0.03198" p:name="imageShading" id="cf31fcf38aa74502a89d808cc70a9c14">
+                    <feGaussianBlur stdDeviation="1.3325" in="SourceAlpha"/>
+                </filter>
+                <g p:name="container" id="940a911cdfa443a5b26ad8d12a0634c9">
+                    <rect style="fill: rgb(255, 255, 255); stroke: rgb(0, 0, 0); stroke-opacity: 1; stroke-width: 0pt; fill-opacity: 0;" p:name="bgRect" id="06dd998ccc8c4ef48991f94f4402e24b" width="7" height="66" transform="translate(0)"/>
+                    <g p:name="imageContainer" id="ca97b17ede464d8daa755623f2e808f9" transform="scale(1)">
+                        <image x="0" y="0" p:name="image" id="71f5fd92c7de4dbe907f03c6bf9b7c77" xlink:href="../../../../../../C:/Users/Solosus/Desktop/hbyanshi/images/arror.png" xmlns:xlink="http://www.w3.org/1999/xlink" width="7" height="66"/>
+                    </g>
+                </g>
+            </defs>
+            <use xlink:href="#940a911cdfa443a5b26ad8d12a0634c9" xmlns:xlink="http://www.w3.org/1999/xlink" transform="translate(1, 1)" p:filter="url(#cf31fcf38aa74502a89d808cc70a9c14)" style="opacity: 0.6; visibility: hidden;" p:name="bgCopy" id="9aab8efebb3a4573a0bbb6d1fcf383bd"/>
+            <use xlink:href="#940a911cdfa443a5b26ad8d12a0634c9" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </g><g xmlns="http://www.w3.org/2000/svg" p:type="Shape" xmlns:p="http://www.evolus.vn/Namespace/Pencil" p:def="Evolus.Common:Bitmap" id="3cc497c3e1be45f48746f2838daf3d16" transform="matrix(1, 0, 0, 1, 541, 199)"><p:metadata><p:property name="box"><![CDATA[7,66]]></p:property><p:property name="imageData"><![CDATA[7,66,../../../../../../C:/Users/Solosus/Desktop/hbyanshi/images/arror.png]]></p:property><p:property name="withBlur"><![CDATA[false]]></p:property><p:property name="fillColor"><![CDATA[#FFFFFF00]]></p:property><p:property name="strokeColor"><![CDATA[#000000FF]]></p:property><p:property name="strokeStyle"><![CDATA[0|]]></p:property></p:metadata>
+            <defs>
+                <filter height="1.2558399" y="-0.12792" width="1.06396" x="-0.03198" p:name="imageShading" id="41f2586439414b62a00e20ab7fa6364d">
+                    <feGaussianBlur stdDeviation="1.3325" in="SourceAlpha"/>
+                </filter>
+                <g p:name="container" id="5b02d4358f5d4107beffdea4a5e72ffe">
+                    <rect style="fill: rgb(255, 255, 255); stroke: rgb(0, 0, 0); stroke-opacity: 1; stroke-width: 0pt; fill-opacity: 0;" p:name="bgRect" id="cdd3a72f11e04d919af9d3a54b55aae1" width="7" height="66" transform="translate(0)"/>
+                    <g p:name="imageContainer" id="5187f07233ff45d4adf9aabc7199ccfa" transform="scale(1)">
+                        <image x="0" y="0" p:name="image" id="acd60315e09e4ffd957c63802f42ebf6" xlink:href="../../../../../../C:/Users/Solosus/Desktop/hbyanshi/images/arror.png" xmlns:xlink="http://www.w3.org/1999/xlink" width="7" height="66"/>
+                    </g>
+                </g>
+            </defs>
+            <use xlink:href="#5b02d4358f5d4107beffdea4a5e72ffe" xmlns:xlink="http://www.w3.org/1999/xlink" transform="translate(1, 1)" p:filter="url(#41f2586439414b62a00e20ab7fa6364d)" style="opacity: 0.6; visibility: hidden;" p:name="bgCopy" id="5357683ca92449a39b54fbce0d4a2611"/>
+            <use xlink:href="#5b02d4358f5d4107beffdea4a5e72ffe" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </g><g xmlns="http://www.w3.org/2000/svg" p:type="Shape" xmlns:p="http://www.evolus.vn/Namespace/Pencil" p:def="Evolus.Common:Bitmap" id="5c2a895856fa4338b5978736d65135bb" transform="matrix(1, 0, 0, 1, 541, 283)"><p:metadata><p:property name="box"><![CDATA[7,66]]></p:property><p:property name="imageData"><![CDATA[7,66,../../../../../../C:/Users/Solosus/Desktop/hbyanshi/images/arror.png]]></p:property><p:property name="withBlur"><![CDATA[false]]></p:property><p:property name="fillColor"><![CDATA[#FFFFFF00]]></p:property><p:property name="strokeColor"><![CDATA[#000000FF]]></p:property><p:property name="strokeStyle"><![CDATA[0|]]></p:property></p:metadata>
+            <defs>
+                <filter height="1.2558399" y="-0.12792" width="1.06396" x="-0.03198" p:name="imageShading" id="47d467aafce7417cad50a4cd02524c46">
+                    <feGaussianBlur stdDeviation="1.3325" in="SourceAlpha"/>
+                </filter>
+                <g p:name="container" id="3075597013244f5fae2a8c5601df8caa">
+                    <rect style="fill: rgb(255, 255, 255); stroke: rgb(0, 0, 0); stroke-opacity: 1; stroke-width: 0pt; fill-opacity: 0;" p:name="bgRect" id="6ac624708791444aac1db50fff295b8f" width="7" height="66" transform="translate(0)"/>
+                    <g p:name="imageContainer" id="e4bb15506c1a4106b16fe9288999c25a" transform="scale(1)">
+                        <image x="0" y="0" p:name="image" id="5da4ad1747bf4a62a2f03c2061757253" xlink:href="../../../../../../C:/Users/Solosus/Desktop/hbyanshi/images/arror.png" xmlns:xlink="http://www.w3.org/1999/xlink" width="7" height="66"/>
+                    </g>
+                </g>
+            </defs>
+            <use xlink:href="#3075597013244f5fae2a8c5601df8caa" xmlns:xlink="http://www.w3.org/1999/xlink" transform="translate(1, 1)" p:filter="url(#47d467aafce7417cad50a4cd02524c46)" style="opacity: 0.6; visibility: hidden;" p:name="bgCopy" id="42375c3cd9f84d6abc7d6a3fcd8ec147"/>
+            <use xlink:href="#3075597013244f5fae2a8c5601df8caa" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </g><g xmlns="http://www.w3.org/2000/svg" p:type="Shape" xmlns:p="http://www.evolus.vn/Namespace/Pencil" p:def="Evolus.Common:Bitmap" id="0423917bbd1c48c683f42b4ef3c2ac5e" transform="matrix(1, 0, 0, 1, 153, 138)"><p:metadata><p:property name="box"><![CDATA[26,15]]></p:property><p:property name="imageData"><![CDATA[26,15,../../../../../../C:/Users/Solosus/Desktop/hbyanshi/images/arrod3.png]]></p:property><p:property name="withBlur"><![CDATA[false]]></p:property><p:property name="fillColor"><![CDATA[#FFFFFF00]]></p:property><p:property name="strokeColor"><![CDATA[#000000FF]]></p:property><p:property name="strokeStyle"><![CDATA[0|]]></p:property></p:metadata>
+            <defs>
+                <filter height="1.2558399" y="-0.12792" width="1.06396" x="-0.03198" p:name="imageShading" id="ed511aee4e1f49c9a12a195d6e260f40">
+                    <feGaussianBlur stdDeviation="1.3325" in="SourceAlpha"/>
+                </filter>
+                <g p:name="container" id="6eab9dc741fe4858a6ae4f0ce2b07a22">
+                    <rect style="fill: rgb(255, 255, 255); stroke: rgb(0, 0, 0); stroke-opacity: 1; stroke-width: 0pt; fill-opacity: 0;" p:name="bgRect" id="b450e2833e344e5b8d6541f2746f7f53" width="26" height="15" transform="translate(0)"/>
+                    <g p:name="imageContainer" id="5496615b514e4a12b6e9bd4aa3a8f687" transform="scale(1)">
+                        <image x="0" y="0" p:name="image" id="33989a84874049dba80b0a1c9d210393" xlink:href="../../../../../../C:/Users/Solosus/Desktop/hbyanshi/images/arrod3.png" xmlns:xlink="http://www.w3.org/1999/xlink" width="26" height="15"/>
+                    </g>
+                </g>
+            </defs>
+            <use xlink:href="#6eab9dc741fe4858a6ae4f0ce2b07a22" xmlns:xlink="http://www.w3.org/1999/xlink" transform="translate(1, 1)" p:filter="url(#ed511aee4e1f49c9a12a195d6e260f40)" style="opacity: 0.6; visibility: hidden;" p:name="bgCopy" id="7da4ed1c6cd0483fb736223172b0d331"/>
+            <use xlink:href="#6eab9dc741fe4858a6ae4f0ce2b07a22" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </g><g xmlns="http://www.w3.org/2000/svg" p:type="Shape" xmlns:p="http://www.evolus.vn/Namespace/Pencil" p:def="Evolus.Common:Bitmap" id="fc82acbcd3de4474a521dbc6d1ea55d9" transform="matrix(1, 0, 0, 1, 397, 138)"><p:metadata><p:property name="box"><![CDATA[26,15]]></p:property><p:property name="imageData"><![CDATA[26,15,../../../../../../C:/Users/Solosus/Desktop/hbyanshi/images/arrod3.png]]></p:property><p:property name="withBlur"><![CDATA[false]]></p:property><p:property name="fillColor"><![CDATA[#FFFFFF00]]></p:property><p:property name="strokeColor"><![CDATA[#000000FF]]></p:property><p:property name="strokeStyle"><![CDATA[0|]]></p:property></p:metadata>
+            <defs>
+                <filter height="1.2558399" y="-0.12792" width="1.06396" x="-0.03198" p:name="imageShading" id="c2f777bf2ab04805beec51b04afd176c">
+                    <feGaussianBlur stdDeviation="1.3325" in="SourceAlpha"/>
+                </filter>
+                <g p:name="container" id="923f3ff11d724ae5b75de0f25c6785d3">
+                    <rect style="fill: rgb(255, 255, 255); stroke: rgb(0, 0, 0); stroke-opacity: 1; stroke-width: 0pt; fill-opacity: 0;" p:name="bgRect" id="0dace50156ae4f63b3ea514a34deaea0" width="26" height="15" transform="translate(0)"/>
+                    <g p:name="imageContainer" id="abc1a45fc64d406686c6fd4341495945" transform="scale(1)">
+                        <image x="0" y="0" p:name="image" id="062e7483c1f7429fbe6dcc37ad5b5ca3" xlink:href="../../../../../../C:/Users/Solosus/Desktop/hbyanshi/images/arrod3.png" xmlns:xlink="http://www.w3.org/1999/xlink" width="26" height="15"/>
+                    </g>
+                </g>
+            </defs>
+            <use xlink:href="#923f3ff11d724ae5b75de0f25c6785d3" xmlns:xlink="http://www.w3.org/1999/xlink" transform="translate(1, 1)" p:filter="url(#c2f777bf2ab04805beec51b04afd176c)" style="opacity: 0.6; visibility: hidden;" p:name="bgCopy" id="666a2ec870694dd4a272c910e551989d"/>
+            <use xlink:href="#923f3ff11d724ae5b75de0f25c6785d3" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </g><g xmlns="http://www.w3.org/2000/svg" p:type="Shape" xmlns:p="http://www.evolus.vn/Namespace/Pencil" p:def="Evolus.Common:Bitmap" id="386adc0a30fb4bd68d53c8154068ec1d" transform="matrix(1, 0, 0, 1, 397, 235)"><p:metadata><p:property name="box"><![CDATA[26,15]]></p:property><p:property name="imageData"><![CDATA[26,15,../../../../../../C:/Users/Solosus/Desktop/hbyanshi/images/arrod3.png]]></p:property><p:property name="withBlur"><![CDATA[false]]></p:property><p:property name="fillColor"><![CDATA[#FFFFFF00]]></p:property><p:property name="strokeColor"><![CDATA[#000000FF]]></p:property><p:property name="strokeStyle"><![CDATA[0|]]></p:property></p:metadata>
+            <defs>
+                <filter height="1.2558399" y="-0.12792" width="1.06396" x="-0.03198" p:name="imageShading" id="92d389299c0a4c68bccfbf7156beeb44">
+                    <feGaussianBlur stdDeviation="1.3325" in="SourceAlpha"/>
+                </filter>
+                <g p:name="container" id="648dc22d2366491a81b9de8c3f42654d">
+                    <rect style="fill: rgb(255, 255, 255); stroke: rgb(0, 0, 0); stroke-opacity: 1; stroke-width: 0pt; fill-opacity: 0;" p:name="bgRect" id="95e9ee4f59bb4891b769a0e2fedceb84" width="26" height="15" transform="translate(0)"/>
+                    <g p:name="imageContainer" id="93ce2cd65e3d44adaeff57374f1eaae5" transform="scale(1)">
+                        <image x="0" y="0" p:name="image" id="239c4a8786b4488a810bc197fd938fe5" xlink:href="../../../../../../C:/Users/Solosus/Desktop/hbyanshi/images/arrod3.png" xmlns:xlink="http://www.w3.org/1999/xlink" width="26" height="15"/>
+                    </g>
+                </g>
+            </defs>
+            <use xlink:href="#648dc22d2366491a81b9de8c3f42654d" xmlns:xlink="http://www.w3.org/1999/xlink" transform="translate(1, 1)" p:filter="url(#92d389299c0a4c68bccfbf7156beeb44)" style="opacity: 0.6; visibility: hidden;" p:name="bgCopy" id="694f1db6fd8d4f3e9444790708e4a89d"/>
+            <use xlink:href="#648dc22d2366491a81b9de8c3f42654d" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </g><g xmlns="http://www.w3.org/2000/svg" p:type="Shape" xmlns:p="http://www.evolus.vn/Namespace/Pencil" p:def="Evolus.Common:Bitmap" id="52d28b1209f84742b50c64fd36f5b97e" transform="matrix(1, 0, 0, 1, 161, 322)"><p:metadata><p:property name="box"><![CDATA[26,15]]></p:property><p:property name="imageData"><![CDATA[26,15,../../../../../../C:/Users/Solosus/Desktop/hbyanshi/images/arrod3.png]]></p:property><p:property name="withBlur"><![CDATA[false]]></p:property><p:property name="fillColor"><![CDATA[#FFFFFF00]]></p:property><p:property name="strokeColor"><![CDATA[#000000FF]]></p:property><p:property name="strokeStyle"><![CDATA[0|]]></p:property></p:metadata>
+            <defs>
+                <filter height="1.2558399" y="-0.12792" width="1.06396" x="-0.03198" p:name="imageShading" id="d8d4462777d4438db5a5dccdbb0881d4">
+                    <feGaussianBlur stdDeviation="1.3325" in="SourceAlpha"/>
+                </filter>
+                <g p:name="container" id="2681a4d515314e2593e7a38fbd210279">
+                    <rect style="fill: rgb(255, 255, 255); stroke: rgb(0, 0, 0); stroke-opacity: 1; stroke-width: 0pt; fill-opacity: 0;" p:name="bgRect" id="c06cd0d81ccc41d0bc08d358ea71ca8a" width="26" height="15" transform="translate(0)"/>
+                    <g p:name="imageContainer" id="7c98d40ba3ac423a8f89607e894b9153" transform="scale(1)">
+                        <image x="0" y="0" p:name="image" id="c34455d2f4174d18aa1020aba9371220" xlink:href="../../../../../../C:/Users/Solosus/Desktop/hbyanshi/images/arrod3.png" xmlns:xlink="http://www.w3.org/1999/xlink" width="26" height="15"/>
+                    </g>
+                </g>
+            </defs>
+            <use xlink:href="#2681a4d515314e2593e7a38fbd210279" xmlns:xlink="http://www.w3.org/1999/xlink" transform="translate(1, 1)" p:filter="url(#d8d4462777d4438db5a5dccdbb0881d4)" style="opacity: 0.6; visibility: hidden;" p:name="bgCopy" id="e799b7a3b6aa4e0faf05f062cffdae10"/>
+            <use xlink:href="#2681a4d515314e2593e7a38fbd210279" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </g><g xmlns="http://www.w3.org/2000/svg" p:type="Shape" xmlns:p="http://www.evolus.vn/Namespace/Pencil" p:def="Evolus.Common:Bitmap" id="82a7c650dd934404b594decce29c2111" transform="matrix(1, 0, 0, 1, 161, 235)"><p:metadata><p:property name="box"><![CDATA[26,15]]></p:property><p:property name="imageData"><![CDATA[26,15,../../../../../../C:/Users/Solosus/Desktop/hbyanshi/images/arrod3.png]]></p:property><p:property name="withBlur"><![CDATA[false]]></p:property><p:property name="fillColor"><![CDATA[#FFFFFF00]]></p:property><p:property name="strokeColor"><![CDATA[#000000FF]]></p:property><p:property name="strokeStyle"><![CDATA[0|]]></p:property></p:metadata>
+            <defs>
+                <filter height="1.2558399" y="-0.12792" width="1.06396" x="-0.03198" p:name="imageShading" id="795dfa54614b4c9eb8ab372c1a2f23d2">
+                    <feGaussianBlur stdDeviation="1.3325" in="SourceAlpha"/>
+                </filter>
+                <g p:name="container" id="3053aea6f4684450b39b1c73b468e6e9">
+                    <rect style="fill: rgb(255, 255, 255); stroke: rgb(0, 0, 0); stroke-opacity: 1; stroke-width: 0pt; fill-opacity: 0;" p:name="bgRect" id="b65e32daf4a3421c8747e6ea75dfa542" width="26" height="15" transform="translate(0)"/>
+                    <g p:name="imageContainer" id="e96371614a434622a7fd62b822d470f8" transform="scale(1)">
+                        <image x="0" y="0" p:name="image" id="edd62f7d32c44e14a6aca590847d9e0b" xlink:href="../../../../../../C:/Users/Solosus/Desktop/hbyanshi/images/arrod3.png" xmlns:xlink="http://www.w3.org/1999/xlink" width="26" height="15"/>
+                    </g>
+                </g>
+            </defs>
+            <use xlink:href="#3053aea6f4684450b39b1c73b468e6e9" xmlns:xlink="http://www.w3.org/1999/xlink" transform="translate(1, 1)" p:filter="url(#795dfa54614b4c9eb8ab372c1a2f23d2)" style="opacity: 0.6; visibility: hidden;" p:name="bgCopy" id="605a80026c04437891bcd75bb460d358"/>
+            <use xlink:href="#3053aea6f4684450b39b1c73b468e6e9" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </g><g xmlns="http://www.w3.org/2000/svg" p:type="Shape" xmlns:p="http://www.evolus.vn/Namespace/Pencil" p:def="Evolus.Common:Bitmap" id="fb9d6f982afb416eaccd9a619f394de0" transform="matrix(1, 0, 0, 1, 397, 424)"><p:metadata><p:property name="box"><![CDATA[26,15]]></p:property><p:property name="imageData"><![CDATA[26,15,../../../../../../C:/Users/Solosus/Desktop/hbyanshi/images/arrod3.png]]></p:property><p:property name="withBlur"><![CDATA[false]]></p:property><p:property name="fillColor"><![CDATA[#FFFFFF00]]></p:property><p:property name="strokeColor"><![CDATA[#000000FF]]></p:property><p:property name="strokeStyle"><![CDATA[0|]]></p:property></p:metadata>
+            <defs>
+                <filter height="1.2558399" y="-0.12792" width="1.06396" x="-0.03198" p:name="imageShading" id="ffb835aa990b4dc4bf20447c032dbb7e">
+                    <feGaussianBlur stdDeviation="1.3325" in="SourceAlpha"/>
+                </filter>
+                <g p:name="container" id="b6df766a267e4654aa389cdeb20400cf">
+                    <rect style="fill: rgb(255, 255, 255); stroke: rgb(0, 0, 0); stroke-opacity: 1; stroke-width: 0pt; fill-opacity: 0;" p:name="bgRect" id="ab6a698b50bb4c8cb879b5cdf4630daa" width="26" height="15" transform="translate(0)"/>
+                    <g p:name="imageContainer" id="40f7e5aef4a341d2a6caf1359580ae79" transform="scale(1)">
+                        <image x="0" y="0" p:name="image" id="cc2dbd40a9d14e8aae1b353198b2d052" xlink:href="../../../../../../C:/Users/Solosus/Desktop/hbyanshi/images/arrod3.png" xmlns:xlink="http://www.w3.org/1999/xlink" width="26" height="15"/>
+                    </g>
+                </g>
+            </defs>
+            <use xlink:href="#b6df766a267e4654aa389cdeb20400cf" xmlns:xlink="http://www.w3.org/1999/xlink" transform="translate(1, 1)" p:filter="url(#ffb835aa990b4dc4bf20447c032dbb7e)" style="opacity: 0.6; visibility: hidden;" p:name="bgCopy" id="2aa78ccfe56b42b6b5b455710cd7267a"/>
+            <use xlink:href="#b6df766a267e4654aa389cdeb20400cf" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </g><g xmlns="http://www.w3.org/2000/svg" p:type="Shape" xmlns:p="http://www.evolus.vn/Namespace/Pencil" p:def="Evolus.Common:Bitmap" id="6c6be4037ed44a3a8cad39c344268c5f" transform="matrix(1, 0, 0, 1, 397, 324)"><p:metadata><p:property name="box"><![CDATA[26,15]]></p:property><p:property name="imageData"><![CDATA[26,15,../../../../../../C:/Users/Solosus/Desktop/hbyanshi/images/arrod3.png]]></p:property><p:property name="withBlur"><![CDATA[false]]></p:property><p:property name="fillColor"><![CDATA[#FFFFFF00]]></p:property><p:property name="strokeColor"><![CDATA[#000000FF]]></p:property><p:property name="strokeStyle"><![CDATA[0|]]></p:property></p:metadata>
+            <defs>
+                <filter height="1.2558399" y="-0.12792" width="1.06396" x="-0.03198" p:name="imageShading" id="dedb8a7bc49949a590c6206e5d697f44">
+                    <feGaussianBlur stdDeviation="1.3325" in="SourceAlpha"/>
+                </filter>
+                <g p:name="container" id="9aa8587bb65a47e0bc6ef3624dac4c0d">
+                    <rect style="fill: rgb(255, 255, 255); stroke: rgb(0, 0, 0); stroke-opacity: 1; stroke-width: 0pt; fill-opacity: 0;" p:name="bgRect" id="43207b6a5db142b1aa96e95a838ee2f6" width="26" height="15" transform="translate(0)"/>
+                    <g p:name="imageContainer" id="acb324330ce74999bccb0edc391221a1" transform="scale(1)">
+                        <image x="0" y="0" p:name="image" id="b1ba913cca0d40919a73495fd571983c" xlink:href="../../../../../../C:/Users/Solosus/Desktop/hbyanshi/images/arrod3.png" xmlns:xlink="http://www.w3.org/1999/xlink" width="26" height="15"/>
+                    </g>
+                </g>
+            </defs>
+            <use xlink:href="#9aa8587bb65a47e0bc6ef3624dac4c0d" xmlns:xlink="http://www.w3.org/1999/xlink" transform="translate(1, 1)" p:filter="url(#dedb8a7bc49949a590c6206e5d697f44)" style="opacity: 0.6; visibility: hidden;" p:name="bgCopy" id="bcc9cb54958d4da9a1bed6241e9ec0d2"/>
+            <use xlink:href="#9aa8587bb65a47e0bc6ef3624dac4c0d" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </g></Content></Page><Page><Properties><Property name="name">div</Property><Property name="id">1304928629830_9960</Property><Property name="width">1024</Property><Property name="height">768</Property><Property name="dimBackground">false</Property><Property name="backgroundColor">#FFFFFFFF</Property><Property name="background">transparent</Property></Properties><Content/></Page></Pages></Document>
