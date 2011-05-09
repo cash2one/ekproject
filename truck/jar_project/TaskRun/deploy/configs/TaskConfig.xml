@@ -2,7 +2,7 @@
 <TasksConfig>
 	<global></global>
 	<tasks>
-		<task id="" name="TestTask1" startTimeAt="10:10" period="10" periodType="sec">
+		<task id="" name="TestTask1" startTimeAt="10:10" period="15" periodType="sec">
 			com.elam.util.task.sample.TestTask
        </task>
 	</tasks>
