@@ -1,0 +1,3142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5"
+         xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+  <display-name>Welcome to JBoss</display-name>
+   <description>The standard web descriptor for the html adaptor</description>
+   <welcome-file-list>  
+	  <welcome-file>index.html</welcome-file>  
+	  <welcome-file>index.htm</welcome-file>  
+	  <welcome-file>index.jsp</welcome-file>  
+	  <welcome-file>default.html</welcome-file>  
+	  <welcome-file>default.htm</welcome-file>  
+	  <welcome-file>default.jsp</welcome-file>  
+	</welcome-file-list>   
+
+   <description>The standard web descriptor for the html adaptor</description>
+
+  <!--过虑器（测试）
+  <filter>
+     <filter-name>xxtfilter</filter-name>
+     <filter-class>qt.test.LogFilter</filter-class>
+     </filter>
+   <filter-mapping>
+     <filter-name>xxtfilter</filter-name>
+     <url-pattern>/*</url-pattern>
+   </filter-mapping>
+  过虑器（测试）-->
+  
+  <!--<error-page> 
+        <error-code>404</error-code> 
+        <location>/gdhtm/not_found.htm</location> 
+  </error-page>-->
+  
+  <!--OA监听在线人数start-->
+  <listener>
+    <listener-class>cn.qtone.xxt.oa.OnlineCounter</listener-class>
+  </listener>
+  <!--OA监听在线人数end-->
+<!-- 校园建站开始 -->
+	<!-- 校园建站新闻管理 -->
+	<servlet>
+		<servlet-name>schwebNewsServlet</servlet-name>
+		<servlet-class>cn.qtone.xxt.schweb.news.servlet.NewsServlet</servlet-class>
+	</servlet>
+	<!-- 校园建站图片管理 -->
+	<servlet>
+		<servlet-name>schwebPhotoServlet</servlet-name>
+		<servlet-class>cn.qtone.xxt.schweb.photo.servlet.PhotoServlet</servlet-class>
+	</servlet>
+	<!-- 校园建站个性化管理 -->
+	<servlet>
+		<servlet-name>schwebSchoolSetServlet</servlet-name>
+		<servlet-class>cn.qtone.xxt.schweb.set.servlet.SchoolSetServlet</servlet-class>
+	</servlet>
+<!-- 校园建站结束-->
+  <!-- 更新密码 -->
+   <servlet>
+    <servlet-name>teacherupdatepsw</servlet-name>
+    <servlet-class>cn.qtone.xxt.base.login.TeacherUpdatePswServlet</servlet-class>
+  </servlet>
+ <!--new AJAX-->
+  <servlet>
+	 <servlet-name>newAjaxServlet</servlet-name>
+	 <servlet-class>cn.qtone.xxt.base.ajax.AjaxServlet</servlet-class>
+  </servlet>
+  <!-- chenqian-->
+   <servlet>
+	<servlet-name>ClassNoticeServlet</servlet-name>
+	<servlet-class>cn.qtone.xxt.jzdx.classnotice.servlet.ClassNoticeServlet</servlet-class>
+	</servlet>
+	
+<!-- 20080311 chenqian -->
+<!-- 20080403 -->
+<servlet>
+		<servlet-name>adminconfirmsms</servlet-name>
+		<servlet-class>
+			cn.qtone.xxt.admin.jzdx.adminconfirmsms.servlet.AdminConfirmSMSServlet
+		</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>oaconfirmsms</servlet-name>
+		<servlet-class>
+			cn.qtone.xxt.admin.jzdx.oaconfirmsms.servlet.OACofirmSMSServlet
+		</servlet-class>
+</servlet>
+<!--20080403 -->
+<!-- 20080430    nwq blocklistfilter and OA imput -->
+<servlet>
+    <servlet-name>linkmanimport</servlet-name>
+    <servlet-class>cn.qtone.xxt.oa.linkmanimport.servlet.LinkmanImportServlet</servlet-class>
+  </servlet>
+<!-- 20080430 -->
+<!-- 2008-04-02 admin send sms logs -->
+<servlet>
+		<servlet-name>adminsmslogs</servlet-name>
+		<servlet-class>
+			cn.qtone.xxt.admin.jzdx.adminsmslogs.servlet.AdminSMSLogsServlet
+		</servlet-class>
+</servlet> 
+<!-- 2008-04-02 amdin send sms logs -->
+  
+  <!-- 业务管理 -->  
+  
+  
+  
+  <servlet>
+      <servlet-name>importsendServlet</servlet-name>
+      <servlet-class>cn.qtone.xxt.jzdx.importsend.servlet.ImpSendServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+      <servlet-name>importsendServlet</servlet-name>
+      <url-pattern>/jzdx/importsend.do</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+      <servlet-name>uploadlistTranServlet</servlet-name>
+      <servlet-class>cn.qtone.xxt.admin.transaction.uploadlist.servlet.UploadListServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+      <servlet-name>uploadlistTranServlet</servlet-name>
+      <url-pattern>/uploadlist_tran.do</url-pattern>
+  </servlet-mapping>
+  
+  
+  <servlet>
+      <servlet-name>qqdhuserinfoServlet</servlet-name>
+      <servlet-class>cn.qtone.xxt.jzdx.fps.phonequery.servlet.UserInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+      <servlet-name>qqdhuserinfoServlet</servlet-name>
+      <url-pattern>/jzdx/qqdhuserinfo.do</url-pattern>
+  </servlet-mapping>
+  
+  
+   <servlet>
+      <servlet-name>coststatqryServlet</servlet-name>
+      <servlet-class>cn.qtone.xxt.admin.transaction.coststat.servlet.CostStatServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+      <servlet-name>coststatqryServlet</servlet-name>
+      <url-pattern>/coststatqry.do</url-pattern>
+  </servlet-mapping>
+  
+  
+  <servlet>
+     <servlet-name>bookbntranpagServlet</servlet-name>
+     <servlet-class>cn.qtone.xxt.admin.transaction.tranfuntoADC.bookbntranpackage.servlet.bookTranPagServlet</servlet-class>
+  </servlet>
+    <servlet-mapping>
+    <servlet-name>bookbntranpagServlet</servlet-name>
+    <url-pattern>/bookbntranpag.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+     <servlet-name>booktranpagServlet</servlet-name>
+     <servlet-class>cn.qtone.xxt.admin.transaction.tranfuntoADC.booktranpackage.servlet.bookTranPagServlet</servlet-class>
+  </servlet>
+  
+  <servlet>
+    <servlet-name>BookSerServlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.admin.transaction.bookservice.servlet.BookSerServlet</servlet-class>
+  </servlet>
+  
+  <servlet>
+    <servlet-name>TranListServlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.admin.transaction.transactionlist.servlet.TranListServlet</servlet-class>
+  </servlet>
+  
+  <servlet>
+    <servlet-name>TranStaServlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.admin.transaction.statistic.servlet.TranStaServlet</servlet-class>
+  </servlet>
+  
+  <servlet>
+    <servlet-name>BookLogServlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.admin.transaction.booklog.servlet.BookLogServlet</servlet-class>
+  </servlet>
+  <servlet>
+	<servlet-name>setchargephone</servlet-name>
+		<servlet-class>cn.qtone.xxt.admin.transaction.setchargephone.servlet.SetChargePhoneServlet</servlet-class>
+   </servlet>
+<!-- 开通申请 -->
+<servlet>
+    <servlet-name>ywsl</servlet-name>
+    <servlet-class>cn.qtone.xxt.mh.ywsl.YWSLServlet</servlet-class>
+</servlet>
+<servlet>
+    <servlet-name>ktapply</servlet-name>
+    <servlet-class>cn.qtone.xxt.admin.transaction.ktapply.servlet.KTApplyServlet</servlet-class>
+</servlet>
+  <!-- 业务管理 -->
+  <!--其他start-->
+  <servlet>
+    <servlet-name>helpdoc</servlet-name>
+    <servlet-class>cn.qtone.xxt.base.share.HelpDocServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>ajax</servlet-name>
+    <servlet-class>cn.qtone.xxt.base.share.AjaxServlet</servlet-class>
+  </servlet>
+  <!--其他end-->
+  <!--框架配置信息start-->
+  <servlet>
+    <servlet-name>ConfigServlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.config.ConfigServlet</servlet-class>
+    <init-param>
+      <param-name>config_path</param-name>
+      <param-value>/conf/conf.properties</param-value>
+    </init-param>
+    <init-param>
+      <param-name>log4j</param-name>
+      <param-value>/conf/log.properties</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet>
+    <servlet-name>ConfigLoginServlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.config.ConfigLoginServlet</servlet-class>
+    <init-param>
+      <param-name>config_path</param-name>
+      <param-value>/conf/manager.properties</param-value>
+    </init-param>
+  </servlet>
+  <servlet>
+    <servlet-name>funmanage</servlet-name>
+    <servlet-class>cn.qtone.xxt.admin.purview.functionmanage.servlet.FunManageServlet</servlet-class>
+  </servlet>
+   <servlet>
+    <servlet-name>typefunmanage</servlet-name>
+    <servlet-class>cn.qtone.xxt.admin.purview.typefunmanage.servlet.TypeFunManageServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>ConfigManageServlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.config.configmanage.servlet.ConfigManageServlet</servlet-class>
+  </servlet>
+  <!--框架配置信息end-->
+  <!--登录、框架页面输出start-->
+  <servlet>
+    <servlet-name>loginservlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.base.login.LoginServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>logoutservlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.base.login.LogoutServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>validateservlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.base.utiltity.ValidateServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>index</servlet-name>
+    <servlet-class>cn.qtone.xxt.base.login.Index</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>admintop</servlet-name>
+    <servlet-class>cn.qtone.xxt.base.login.admintop.servlet.AdminTopServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>adminbanner</servlet-name>
+    <servlet-class>cn.qtone.xxt.base.login.adminbanner.servlet.AdminBannerServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>adminleft</servlet-name>
+    <servlet-class>cn.qtone.xxt.base.login.adminleft.servlet.AdminLeftServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>adminline</servlet-name>
+    <servlet-class>cn.qtone.xxt.base.login.adminline.servlet.AdminLineServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>adminmain</servlet-name>
+    <servlet-class>cn.qtone.xxt.base.login.adminmain.servlet.AdminMainServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>adminbottom</servlet-name>
+    <servlet-class>cn.qtone.xxt.base.login.adminbottom.servlet.AdminBottomServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>top</servlet-name>
+    <servlet-class>cn.qtone.xxt.base.login.top.servlet.TopServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>banner</servlet-name>
+    <servlet-class>cn.qtone.xxt.base.login.banner.servlet.BannerServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>left</servlet-name>
+    <servlet-class>cn.qtone.xxt.base.login.left.servlet.LeftServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>line</servlet-name>
+    <servlet-class>cn.qtone.xxt.base.login.line.servlet.LineServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>main</servlet-name>
+    <servlet-class>cn.qtone.xxt.base.login.main.servlet.MainServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>bottom</servlet-name>
+    <servlet-class>cn.qtone.xxt.base.login.bottom.servlet.BottomServlet</servlet-class>
+  </servlet>
+   <!--登陆中显示通知SERVLET add by ywt 06/09/15 -->
+  <servlet>
+   <servlet-name>NoticeServlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.base.utiltity.NoticeServlet</servlet-class>
+  </servlet>
+   <!--登录、框架页面输出end-->
+    <!--门户网站、后台门户内容管理start-->
+  <servlet>
+    <servlet-name>contentcheckservlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.mh.admin.content_check.ContentCheckServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>NewsIssueServlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.mh.admin.news_issue.NewsIssueServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>genearchservlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.mh.genearch_channel.GenearchServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>integrationservlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.mh.integration_channel.IntegrationServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>studentsservlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.mh.students_channel.StudentsServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>teachersservlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.mh.teachers_channel.TeachersServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>editorservlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.mh.admin.EditorServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>mhserverservlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.mh.admin.server.MHServerServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>getpsw</servlet-name>
+    <servlet-class>cn.qtone.xxt.base.login.GetPswServlet</servlet-class>
+ </servlet>
+ <servlet>
+    <servlet-name>Outhtml</servlet-name>
+    <servlet-class>cn.qtone.xxt.mh.admin.OutPageServlet</servlet-class>
+</servlet>
+   <!--门户网站、后台门户内容管理end-->
+  <servlet>
+    <servlet-name>updatepswservlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.base.login.updatePswServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>tipmain</servlet-name>
+    <servlet-class>cn.qtone.xxt.base.login.main.servlet.TipMainServlet</servlet-class>
+  </servlet>
+ <!--OA教育start-->
+  <servlet>
+    <servlet-name>deptservlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.oa.department.servlet.DeptServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>caltableservlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.oa.calendar.table.servlet.CalTableServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>calaffairservlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.oa.calendar.affair.servlet.CalAffairServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>manmgservlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.oa.address.linkmanManager.servlet.ManMgServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>searmanservlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.oa.address.searchLinkman.servlet.SearManServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>personsetservlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.oa.personset.servlet.PersonSetServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>oafirstpageservlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.oa.firstpage.servlet.OAFirstPageServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>loadlinkmanservlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.oa.LoadLinkman.servlet.LoadLinkmanServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>sendmailservlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.oa.mail.sendMail.servlet.SendMailServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>sendboxservlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.oa.mail.sendBox.servlet.SendBoxServlet</servlet-class>
+  </servlet>
+<servlet>
+    <servlet-name>NoticeManageServlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.oa.notice.noticemanage.servlet.NoticeManageServlet</servlet-class>
+  </servlet>
+<servlet>
+    <servlet-name>SearchNoticeServlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.oa.notice.searchnotice.servlet.SearchNoticeServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>receiveboxservlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.oa.mail.receiveBox.servlet.ReceiveBoxServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>havesendboxservlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.oa.mail.haveSendedBox.servlet.HaveSendBoxServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>searchmailservlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.oa.mail.SearchMail.servlet.SearchMailServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>docgroupservlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.oa.document.docGroup.servlet.DocGroupServlet</servlet-class>
+  </servlet>
+ <servlet>
+    <servlet-name>MyReceiveShareServlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.oa.document.myReceiveShare.servlet.MyReceiveShareServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>MyShareServlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.oa.document.myShareDoc.servlet.MyShareServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>SearchDocServet</servlet-name>
+    <servlet-class>cn.qtone.xxt.oa.document.SearchDoc.servlet.SearchDocServet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>sendsmsservlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.oa.sms.SendSms.servlet.SendSmsServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>receivedsmsservlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.oa.sms.receivedSms.servlet.ReceivedSmsServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>havesendsmsservlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.oa.sms.haveSendSms.servlet.HaveSendSmsServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>searchsmsservlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.oa.sms.SearchSms.servlet.SearchSmsServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>searchworkservlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.oa.workflow.SearchWork.servlet.SearchWorkServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>workmanageservlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.oa.workflow.WorkManage.servlet.WorkManageServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>usedreportstatservlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.admin.oa.usedReportStat.servlet.UsedReportStatServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>userstatservlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.oa.UserStat.servlet.UserStatServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>codeinfoservlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.oa.otherinfo.codeInfo.servlet.CodeInfoServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>RegulationsviewServlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.oa.regulations.regulationsview.servlet.RegulationsviewServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>RegulationspostServlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.oa.regulations.regulationspost.servlet.RegulationspostServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>StaffwordServlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.oa.activities.staffword.servlet.StaffwordServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>PhotomanageServlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.oa.activities.photomanage.servlet.PhotomanageServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>PhotoServlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.oa.activities.photo.servlet.PhotoServlet</servlet-class>
+  </servlet>
+ <!--OA教育end-->
+  <!--成绩start-->
+  <servlet>
+<servlet-name>ExamManageServlet</servlet-name>
+  <servlet-class>cn.qtone.xxt.exam.examanage.servlet.ExamManageServlet</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>ExamInputServlet</servlet-name>
+  <servlet-class>cn.qtone.xxt.exam.examinput.servlet.ExamInputServlet</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>ScoreQryServlet</servlet-name>
+  <servlet-class>cn.qtone.xxt.exam.examquery.servlet.ScoreQryServlet</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>ScoreStat1Servlet</servlet-name>
+  <servlet-class>cn.qtone.xxt.exam.examstat1.servlet.ScoreStat1Servlet</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>ScoreStat2Servlet</servlet-name>
+  <servlet-class>cn.qtone.xxt.exam.examstat2.servlet.ScoreStat2Servlet</servlet-class>
+ </servlet>
+  <servlet>
+  <servlet-name>ScoreStat3Servlet</servlet-name>
+  <servlet-class>cn.qtone.xxt.exam.examstat3.servlet.ScoreStat3Servlet</servlet-class>
+ </servlet>
+  <servlet>
+  <servlet-name>ScoreStat4Servlet</servlet-name>
+  <servlet-class>cn.qtone.xxt.exam.examstat4.servlet.ScoreStat4Servlet</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>ScoreStat5Servlet</servlet-name>
+  <servlet-class>cn.qtone.xxt.exam.examstat5.servlet.ScoreStat5Servlet</servlet-class>
+ </servlet>
+  <servlet>
+  <servlet-name>ScoreStat5IMServlet</servlet-name>
+  <servlet-class>cn.qtone.xxt.exam.examstat5.servlet.ScoreStat5IMServlet</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>StudentManageServlet</servlet-name>
+  <servlet-class>cn.qtone.xxt.edu.studentmanage.servlet.StudentManageServlet</servlet-class>
+ </servlet>
+  <!--成绩end-->
+ <!--权限start-->
+ <servlet>
+    <servlet-name>areamanage</servlet-name>
+    <servlet-class>cn.qtone.xxt.admin.purview.areamanage.servlet.AreaManageServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>rolemanage</servlet-name>
+    <servlet-class>cn.qtone.xxt.admin.purview.rolemanage.servlet.RoleManageServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>purviewmanage</servlet-name>
+    <servlet-class>cn.qtone.xxt.admin.purview.purviewmanage.servlet.PurviewManageServlet</servlet-class>
+  </servlet>
+  <!--同一个大的觉得设置相同的权限 add by ywt 2006/9/19 -->
+  <servlet>
+    <servlet-name>setallpurview</servlet-name>
+    <servlet-class>cn.qtone.xxt.admin.purview.setallpurview.servlet.PurviewManageServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>usermanage</servlet-name>
+    <servlet-class>cn.qtone.xxt.admin.purview.usermanage.servlet.UserManageServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>simanage</servlet-name>
+    <servlet-class>cn.qtone.xxt.admin.purview.simanage.servlet.SIManageServlet</servlet-class>
+  </servlet>
+  <!--权限end-->
+  <!--家长短信箱start-->
+  <!-- 在后台添加上行短信管理功能 2008-10-21 START -->
+  <servlet>
+		<servlet-name>SxManageServlet</servlet-name>
+		<servlet-class>cn.qtone.xxt.admin.jzdx.sxmanange.servlet.SxManageServlet</servlet-class>
+  </servlet>
+   <!-- 在后台添加上行短信管理功能 2008-10-21 START -->
+  <servlet>
+    <servlet-name>/jzdx/warmtip</servlet-name>
+    <servlet-class>cn.qtone.xxt.jzdx.WarmTipServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>/jzdx/parentcommunicate/sendmessage</servlet-name>
+    <servlet-class>cn.qtone.xxt.jzdx.parentcommunicate.sendmessage.servlet.SendMessageServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>/jzdx/parentcommunicate/sentmessage</servlet-name>
+    <servlet-class>cn.qtone.xxt.jzdx.parentcommunicate.sentmessage.servlet.SentMessageServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>/jzdx/parentcommunicate/receivemessage</servlet-name>
+    <servlet-class>cn.qtone.xxt.jzdx.parentcommunicate.receivemessage.servlet.ReceiveMessageServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>RevertMessage</servlet-name>
+    <servlet-class>cn.qtone.xxt.process.jzdx.messagemanage.RevertMessage</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>ConfirmSms</servlet-name>
+    <servlet-class>cn.qtone.xxt.jzdx.confirmsms.servlet.ConfirmSmsServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>SendAll</servlet-name>
+    <servlet-class>cn.qtone.xxt.jzdx.sendall.servlet.SendAllServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>CommentTree</servlet-name>
+    <servlet-class>cn.qtone.xxt.jzdx.commenttree.servlet.CommentTreeServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>CommentList</servlet-name>
+    <servlet-class>cn.qtone.xxt.jzdx.commentlist.servlet.CommentListServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>CheckSentServlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.jzdx.stucommunicate.checksentmessage.servlet.CheckSentServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>SendMessageSIServlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.jzdx.seronline.sendmessage.servlet.SendMessageSIServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>CheckMessageServlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.jzdx.stucommunicate.checkmessage.servlet.CheckMessageServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>SendMessageServlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.jzdx.stucommunicate.sendmessage.servlet.SendMessageServlet</servlet-class>
+  </servlet>
+   <servlet>
+    <servlet-name>CheckMessageSIServlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.jzdx.seronline.checkmessage.servlet.CheckMessageSIServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>CheckSentSIServlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.jzdx.seronline.checksent.servlet.CheckSentSIServlet</servlet-class>
+  </servlet>
+   <servlet>
+    <servlet-name>SchoolListServlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.jzdx.schoollist.servlet.SchoolListServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>RecStatServlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.jzdx.recstatic.servlet.RecStatServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>CommentServlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.jzdx.comment.servlet.CommentServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>aCommentServlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.admin.jzdx.comment.servlet.CommentServlet</servlet-class>
+  </servlet>
+   <servlet>
+    <servlet-name>TeaCommunicateServlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.admin.jzdx.teachercommunicate.servlet.TeaCommunicateServlet</servlet-class>
+  </servlet>
+    <servlet>
+    <servlet-name>StuInfoServlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.admin.jzdx.stuinformation.servlet.StuInfoServlet</servlet-class>
+  </servlet>
+    <servlet>
+    <servlet-name>TeaServletServlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.admin.jzdx.teacherinfor.servlet.TeaServletServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>ParentCommunicateServlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.admin.jzdx.parentcommunicate.servlet.ParentCommunicateServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>BookbyeachServlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.admin.transaction.bookservice2.servlet.BookbyeachServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>userrange</servlet-name>
+    <servlet-class>cn.qtone.xxt.jzdx.UserRangeServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>admintipmain</servlet-name>
+    <servlet-class>cn.qtone.xxt.base.login.adminmain.servlet.AdminTipMainServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>InputPhoneSendSmsServlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.admin.jzdx.inputphonesendsms.servlet.InputPhoneSendSmsServlet</servlet-class>
+  </servlet>
+  <!--家长短信箱end-->
+  <!--家长、学生-->
+  <!-- 在家长频道添加菜谱显示 2008-10-15 START -->
+  <servlet>
+		<servlet-name>ParentRecipe</servlet-name>
+		<servlet-class>
+			cn.qtone.xxt.parent.recipe.RecipeDisplayerServlet
+		</servlet-class>
+	</servlet>
+  <!-- 在家长频道添加菜谱显示 2008-10-15  END  -->
+  <servlet>
+    <servlet-name>parentactive</servlet-name>
+    <servlet-class>cn.qtone.xxt.parent.ParentActive</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>childactive</servlet-name>
+    <servlet-class>cn.qtone.xxt.student.ChildActive</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>parentlogin</servlet-name>
+    <servlet-class>cn.qtone.xxt.parent.ParentLogin</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>parentall</servlet-name>
+    <servlet-class>cn.qtone.xxt.parent.ParentAll</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>parentleft</servlet-name>
+    <servlet-class>cn.qtone.xxt.parent.ParentLeft</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>parenttop</servlet-name>
+    <servlet-class>cn.qtone.xxt.parent.ParentTop</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>parentend</servlet-name>
+    <servlet-class>cn.qtone.xxt.parent.ParentEnd</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>parentuse</servlet-name>
+    <servlet-class>cn.qtone.xxt.parent.ParentUse</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>childuse</servlet-name>
+    <servlet-class>cn.qtone.xxt.student.ChildUse</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>childtop</servlet-name>
+    <servlet-class>cn.qtone.xxt.student.ChildTop</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>childleft</servlet-name>
+    <servlet-class>cn.qtone.xxt.student.ChildLeft</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>childend</servlet-name>
+    <servlet-class>cn.qtone.xxt.student.ChildEnd</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>childlogin</servlet-name>
+    <servlet-class>cn.qtone.xxt.student.ChildLogin</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>childall</servlet-name>
+    <servlet-class>cn.qtone.xxt.student.ChildAll</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>parentvalidate</servlet-name>
+    <servlet-class>cn.qtone.xxt.parent.Validate</servlet-class>
+  </servlet>
+ <servlet>
+    <servlet-name>childvalidate</servlet-name>
+    <servlet-class>cn.qtone.xxt.student.Validate</servlet-class>
+  </servlet>
+  <!--家长、学生-->
+  <!--亲情电话-->
+	<servlet>
+		<servlet-name>teaPhoneCallServlet</servlet-name>
+		<servlet-class>cn.qtone.xxt.admin.fps.teaphonecall.servlet.teaPhoneCallServlet</servlet-class>
+	</servlet>
+   <servlet>
+   <servlet-name>PhoneServlet</servlet-name>
+   <servlet-class>cn.qtone.xxt.admin.fps.phonemanage.servlet.PhoneServlet</servlet-class>
+  </servlet>
+   <servlet>
+   <servlet-name>PhoneState</servlet-name>
+   <servlet-class>cn.qtone.xxt.admin.fps.phonemanage.servlet.PhonestateServlet</servlet-class>
+ </servlet>
+ <servlet>
+   <servlet-name>IpportServlet</servlet-name>
+   <servlet-class>cn.qtone.xxt.admin.fps.phonemanage.servlet.IpportServlet</servlet-class>
+ </servlet>
+  <servlet>
+   <servlet-name>WarntimeServlet</servlet-name>
+   <servlet-class>cn.qtone.xxt.admin.fps.phonemanage.servlet.WarntimeServlet</servlet-class>
+ </servlet>
+ <servlet>
+   <servlet-name>SmstjServlet</servlet-name>
+   <servlet-class>cn.qtone.xxt.admin.fps.sms.servlet.SmstjServlet</servlet-class>
+ </servlet>
+  <servlet>
+   <servlet-name>SmssearchServlet</servlet-name>
+   <servlet-class>cn.qtone.xxt.admin.fps.sms.servlet.SmssearchServlet</servlet-class>
+ </servlet>
+   <servlet>
+   <servlet-name>smsbaseservlet</servlet-name>
+   <servlet-class>cn.qtone.xxt.admin.fps.sms.servlet.SmsbaseServlet</servlet-class>
+ </servlet>
+ <servlet>
+    <servlet-name>CallManageServlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.admin.fps.callmanage.servlet.CallManageServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>CallAnalyseServlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.admin.fps.callmanage.servlet.CallAnalyseServlet</servlet-class>
+  </servlet>
+  
+  <servlet>
+	<servlet-name>qqdhuserinfo</servlet-name>
+	<servlet-class>cn.qtone.xxt.admin.fps.phonequery.servlet.UserInfoServlet</servlet-class>
+  </servlet>
+  <!--亲情电话-->
+  <!--电子留言版-->
+  <servlet>
+    <servlet-name>SchoolsmsServlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.elecBoard.sendmes.servlet.SchoolsmsServlet</servlet-class>
+  </servlet>
+  <servlet>
+  <servlet-name>SchoolsendServlet</servlet-name>
+  <servlet-class>cn.qtone.xxt.admin.elecBoard.sendmes.servlet.SchoolsendServlet</servlet-class>
+ </servlet>
+<servlet>
+    <servlet-name>SchoolSendsmsServlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.elecBoard.sendmes.servlet.SendsmsServlet</servlet-class>
+  </servlet>
+  <servlet>
+  <servlet-name>SendsmsServlet</servlet-name>
+  <servlet-class>cn.qtone.xxt.admin.elecBoard.sendmes.servlet.SendsmsServlet</servlet-class>
+ </servlet>
+  <servlet>
+  <servlet-name>LedsearchServlet</servlet-name>
+  <servlet-class>cn.qtone.xxt.admin.elecBoard.smssearch.servlet.LedsearchServlet</servlet-class>
+ </servlet>
+   <servlet>
+  <servlet-name>LeddylistServlet</servlet-name>
+  <servlet-class>cn.qtone.xxt.admin.elecBoard.smsman.servlet.LeddylistServlet</servlet-class>
+ </servlet>
+   <servlet>
+  <servlet-name>LedtypeServlet</servlet-name>
+  <servlet-class>cn.qtone.xxt.admin.elecBoard.smsman.servlet.LedtypeServlet</servlet-class>
+ </servlet>
+  <servlet>
+    <servlet-name>SchoolLedsearchServlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.elecBoard.smssearch.servlet.LedsearchServlet</servlet-class>
+  </servlet>
+ <servlet>
+  <servlet-name>SchoolLeddylistServlet</servlet-name>
+  <servlet-class>cn.qtone.xxt.elecBoard.smsman.servlet.LeddylistServlet</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>SchoolLedtypeServlet</servlet-name>
+  <servlet-class>cn.qtone.xxt.elecBoard.smsman.servlet.LedtypeServlet</servlet-class>
+ </servlet>
+ <servlet>
+   <servlet-name>DisplaysmsServlet</servlet-name>
+   <servlet-class>cn.qtone.xxt.admin.elecBoard.displaysms.servlet.DisplaysmsServlet</servlet-class>
+ </servlet>
+ <servlet>
+   <servlet-name>SchoolDisplaysmsServlet</servlet-name>
+   <servlet-class>cn.qtone.xxt.elecBoard.displaysms.servlet.DisplaysmsServlet</servlet-class>
+ </servlet>
+ <servlet>
+   <servlet-name>OutXmlLed</servlet-name>
+   <servlet-class>cn.qtone.xxt.admin.elecBoard.OutXMLLed</servlet-class>
+</servlet>
+  <!--电子留言版-->
+<!--统计报表start-->
+     <servlet>
+    <servlet-name>unionstat</servlet-name>
+    <servlet-class>cn.qtone.xxt.admin.report.zhtj.servlet.unionStat</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>schoollist</servlet-name>
+    <servlet-class>cn.qtone.xxt.admin.report.schoollist.servlet.SchoolList</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>XxreportServlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.admin.report.xxreport.servlet.XxreportServlet</servlet-class>
+ </servlet>
+  <servlet>
+    <servlet-name>YdreportServlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.admin.report.ydreport.servlet.YdreportServlet</servlet-class>
+ </servlet>
+ <servlet>
+   <servlet-name>RemsgreportServlet</servlet-name>
+   <servlet-class>cn.qtone.xxt.admin.report.remsgreport.servlet.RemsgreportServlet</servlet-class>
+ </servlet>
+  <servlet>
+   <servlet-name>JsreportServlet</servlet-name>
+   <servlet-class>cn.qtone.xxt.admin.report.jsreport.servlet.JsreportServlet</servlet-class>
+ </servlet>
+ <servlet>
+   <servlet-name>xyreport</servlet-name>
+<servlet-class>cn.qtone.xxt.admin.report.xyreport.servlet.XyreportServlet</servlet-class>
+ </servlet>
+<!--统计报表end-->
+<!--考勤start-->
+  <servlet>
+    <servlet-name>attstat</servlet-name>
+    <servlet-class>cn.qtone.xxt.admin.attendance.kqtj.servlet.attStat</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>usermanager</servlet-name>
+    <servlet-class>cn.qtone.xxt.admin.attendance.zdzhgl.servlet.UserManager</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>callmsg</servlet-name>
+    <servlet-class>cn.qtone.xxt.kq.callmsg.servelt.CallMsg</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>attset</servlet-name>
+    <servlet-class>cn.qtone.xxt.kq.attset.servlet.AttSet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>classatt</servlet-name>
+    <servlet-class>cn.qtone.xxt.kq.classatt.servlet.ClassAtt</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>schoolatt</servlet-name>
+    <servlet-class>cn.qtone.xxt.kq.schoolatt.servlet.SchoolAtt</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>Topwarn</servlet-name>
+    <servlet-class>cn.qtone.xxt.kq.Topwarn</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>MachSet</servlet-name>
+    <servlet-class>cn.qtone.xxt.kq.kqjset.servlet.MachSet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>KQSendSms</servlet-name>
+    <servlet-class>cn.qtone.xxt.kq.sendsms.servlet.KQSendSms</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>AdminKQSmsQurry</servlet-name>
+    <servlet-class>cn.qtone.xxt.admin.attendance.attsmsquery.servlet.AttSmsQueryServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>KQSmsQurry</servlet-name>
+    <servlet-class>cn.qtone.xxt.kq.attsmsquery.servlet.AttSmsQueryServlet</servlet-class>
+  </servlet>
+<!--考勤end-->
+ <!--学籍start-->
+  <servlet>
+     <servlet-name>adminadjustclass</servlet-name>
+     <servlet-class>cn.qtone.xxt.edu.adminadjustclass.servlet.AdjustClassServlet</servlet-class>
+  </servlet>
+  <servlet>
+   	 <servlet-name>schoolfamily</servlet-name>
+   	 <servlet-class>cn.qtone.xxt.edu.schoolfamily.servlet.FamilyServlet</servlet-class>
+  </servlet>
+  <servlet>
+   	 <servlet-name>adminschoolmanage</servlet-name>
+   	 <servlet-class>cn.qtone.xxt.edu.schoolmanage.servlet.AdminSchoolManageServlet</servlet-class>
+  </servlet>
+ <servlet>
+    <servlet-name>familyServlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.edu.family.servlet.FamilyServlet</servlet-class>
+ </servlet>
+ <servlet>
+    <servlet-name>schoolmanage</servlet-name>
+    <servlet-class>cn.qtone.xxt.edu.schoolmanage.servlet.SchoolManageServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>termset</servlet-name>
+    <servlet-class>cn.qtone.xxt.edu.termset.servlet.TermSetServlet</servlet-class>
+  </servlet>
+    <servlet>
+    <servlet-name>classmanage</servlet-name>
+    <servlet-class>cn.qtone.xxt.edu.classmanage.servlet.ClassManageServlet</servlet-class>
+  </servlet>
+    <servlet>
+    <servlet-name>adjustclass</servlet-name>
+    <servlet-class>cn.qtone.xxt.edu.adjustclass.servlet.AdjustClassServlet</servlet-class>
+  </servlet>
+    <servlet>
+    <servlet-name>zhuanxue</servlet-name>
+    <servlet-class>cn.qtone.xxt.edu.zhuanxue.servlet.TransferServlet</servlet-class>
+  </servlet>
+    <servlet>
+    <servlet-name>xiuxue</servlet-name>
+    <servlet-class>cn.qtone.xxt.edu.xiuxue.servlet.XiuXueServlet</servlet-class>
+  </servlet>
+    <servlet>
+    <servlet-name>fuxue</servlet-name>
+    <servlet-class>cn.qtone.xxt.edu.fuxue.servlet.FuXueServlet</servlet-class>
+  </servlet>
+    <servlet>
+    <servlet-name>tuixue</servlet-name>
+    <servlet-class>cn.qtone.xxt.edu.tuixue.servlet.TuiXueServlet</servlet-class>
+  </servlet>
+<servlet>
+    <servlet-name>change</servlet-name>
+    <servlet-class>cn.qtone.xxt.edu.change.servlet.StuChangeQryServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>photomanage</servlet-name>
+    <servlet-class>cn.qtone.xxt.edu.photomanage.servlet.PhotoManageServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>studata</servlet-name>
+    <servlet-class>cn.qtone.xxt.edu.studata.servlet.StuDataServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>teacherdata</servlet-name>
+    <servlet-class>cn.qtone.xxt.edu.teacherdata.servlet.TeacherDataServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>graduate</servlet-name>
+    <servlet-class>cn.qtone.xxt.edu.graduate.servlet.GraduateServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>stuqry</servlet-name>
+    <servlet-class>cn.qtone.xxt.edu.stuqry.servlet.StuQryServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>teaqry</servlet-name>
+    <servlet-class>cn.qtone.xxt.edu.teaqry.servlet.TeaQryServlet</servlet-class>
+  </servlet>
+  <servlet>
+  <servlet-name>TeacherManageServlet</servlet-name>
+  <servlet-class>cn.qtone.xxt.edu.teachermanage.servlet.TeacherManageServlet</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>SubjectServlet</servlet-name>
+  <servlet-class>cn.qtone.xxt.edu.subjectmanage.servlet.SubjectServlet</servlet-class>
+ </servlet>
+  <servlet>
+    <servlet-name>managerset</servlet-name>
+    <servlet-class>cn.qtone.xxt.edu.managerset.servlet.ManagerSetServlet</servlet-class>
+  </servlet> 
+    <!-- zhanglinming100810 -->
+  <servlet>
+  	<servlet-name>classSubjectServlet</servlet-name>
+  	<servlet-class>cn.qtone.xxt.edu.lesson.classsubject.servlet.ClassSubjectServlet</servlet-class>
+  </servlet>
+ <!--学籍end-->
+  
+ 
+  
+ <servlet>
+    <servlet-name>noticemanage</servlet-name>
+    <servlet-class>cn.qtone.xxt.admin.jzdx.noticemanage.servlet.NoticeManageServlet</servlet-class>
+  </servlet>
+  
+  <servlet>
+    <servlet-name>queryaccounts</servlet-name>
+    <servlet-class>cn.qtone.xxt.edu.accounts.servlet.AccountsServlet</servlet-class>
+  </servlet>
+  
+<!-- ywt -->
+<servlet>
+   <servlet-name>ScheduleServlet</servlet-name>
+   <servlet-class>cn.qtone.xxt.oa.schedule.servlet.ScheduleServlet</servlet-class>
+</servlet>
+ <servlet>
+    <servlet-name>stu_main</servlet-name>
+    <servlet-class>cn.qtone.xxt.base.login.main.servlet.Stu_TipMainServlet</servlet-class>
+  </servlet>
+  
+  <servlet>
+    <servlet-name>parent_main</servlet-name>
+    <servlet-class>cn.qtone.xxt.base.login.main.servlet.Parent_TipMainServlet</servlet-class>
+  </servlet>
+<!-- ywt 070620 -->
+<!-- lzm -->
+<servlet>
+   <servlet-name>parentinteraction</servlet-name>
+   <servlet-class>cn.qtone.xxt.admin.jzdx.parentinteraction.send.servlet.SendServlet</servlet-class>
+</servlet>
+<servlet>
+   <servlet-name>siinteractionsend</servlet-name>
+   <servlet-class>cn.qtone.xxt.parent.siinteraction.send.SendServlet</servlet-class>
+</servlet>
+<!-- lzm 070620 -->
+<!-- cq -->
+<servlet>
+   <servlet-name>schoollinkman</servlet-name>
+    <servlet-class>cn.qtone.xxt.edu.schoollist.servlet.PublicListServlet</servlet-class>
+</servlet>
+<!-- cq 070703 -->
+<!-- nwq -->
+<!-- 前台在线作业 -->
+<servlet>
+  <servlet-name>ExamOnlineServlet</servlet-name>
+  <servlet-class>cn.qtone.xxt.exam.examonline.servlet.ExamOnlineServlet</servlet-class>
+ </servlet>
+<!-- 学生.在线作业 -->
+<servlet>
+  <servlet-name>StuExamOnlineServlet</servlet-name>
+  <servlet-class>cn.qtone.xxt.student.examonline.ExamOnlineServlet</servlet-class>
+ </servlet>
+<!-- 奖罚记录 -->
+<servlet>
+    <servlet-name>BehaveServlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.edu.behave.servlet.BehaveServlet</servlet-class>
+  </servlet>
+<!--德育考核考评细则-->
+<servlet>
+    <servlet-name>BehaveStdServlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.edu.behaveStd.servlet.BehaveStdServlet</servlet-class>
+</servlet>
+<!-- 前台学期考评 -->
+  <servlet>
+    <servlet-name>BehaveStuServlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.edu.behaveStu.servlet.BehaveStuServlet</servlet-class>
+  </servlet>
+<!-- 家长家期考评 -->
+<servlet>
+    <servlet-name>ParentBehaveServlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.parent.behave.BehaveParentServlet</servlet-class>
+</servlet>
+ <!--OA教育start-->
+<servlet>
+    <servlet-name>InitCent</servlet-name>
+    <servlet-class>cn.qtone.xxt.oa.InitCent</servlet-class>
+  </servlet>
+ <!--OA教育end-->
+ <servlet>
+	<servlet-name>NewFuncNoticeServlet</servlet-name>
+	<servlet-class>cn.qtone.xxt.mh.admin.notice.servlet.NoticeServlet</servlet-class>
+</servlet>
+<!--快捷发送-->
+<servlet>
+     <servlet-name>QuickSendServlet</servlet-name>
+     <servlet-class>cn.qtone.xxt.jzdx.quicksend.servlet.QuickSendServlet</servlet-class>
+  </servlet>
+<servlet>
+		<servlet-name>/jzdx/parentcommunicate/receivesms</servlet-name>
+		<servlet-class>cn.qtone.xxt.jzdx.parentcommunicate.receivesms.servlet.ReceiveSmsServlet</servlet-class>
+	</servlet>
+ <servlet>
+    <servlet-name>QuerySmsCountServlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.jzdx.querysmscount.servlet.QuerySmsCountServlet</servlet-class>
+  </servlet>
+<!-- 前台 导入发送短信 2010-03-08	START -->
+	<servlet>
+		<servlet-name>InputSendServlet</servlet-name>
+		<servlet-class>cn.qtone.xxt.jzdx.inputsend.servlet.inputSendServlet</servlet-class>
+	</servlet>
+<servlet>
+		<servlet-name>Notebook</servlet-name>
+		<servlet-class>cn.qtone.xxt.exam.notebook.NotebookManagementServlet</servlet-class>
+	</servlet>
+<servlet>
+    <servlet-name>BlackListManageServlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.edu.blacklistmanage.servlet.BlackListManageServlet</servlet-class>
+  </servlet>
+  <servlet>
+   <servlet-name>BookCheckServlet</servlet-name>
+   <servlet-class>cn.qtone.xxt.admin.transaction.bookcheck.servlet.BookCheckServlet</servlet-class>
+</servlet>
+<!-- 教师角色管理 -->
+<servlet>
+  <servlet-name>TeaFunManageServlet</servlet-name>
+  <servlet-class>cn.qtone.xxt.admin.purview.teafunmanage.servlet.TeaFunManageServlet</servlet-class>
+</servlet>
+<!-- 教师角色管理 -->
+<!-- 同步学 -->
+ <servlet>
+    <servlet-name>synLearnLogin</servlet-name>
+    <servlet-class>cn.qtone.xxt.synlearn.loginInter.synLearnLogin</servlet-class>
+ </servlet>
+  <servlet>
+    <servlet-name>YwComplaintServlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.admin.transaction.complaint.servlet.YwComplaintServlet</servlet-class>
+  </servlet>
+<servlet>
+    <servlet-name>fulllesson</servlet-name>
+    <servlet-class>cn.qtone.xxt.edu.lesson.fulllesson.servlet.LessonServlet</servlet-class>
+  </servlet>
+<!-- start 投票活动管理-->
+<servlet>
+	<servlet-name>VoteItemServlet</servlet-name>
+	<servlet-class>cn.qtone.xxt.jzdx.vote.servlet.VoteItemServlet</servlet-class>
+</servlet>
+ <servlet>
+    <description>FCKEditor 文件上传</description>
+    <servlet-name>FCKFileUploadServlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.base.fckeditor.FCKFileUploadServlet</servlet-class>
+    	<init-param>
+			<param-name>baseDir</param-name>
+			<param-value>/upfile/fckeditor_img/</param-value>
+		</init-param>
+		<init-param>
+			<param-name>debug</param-name>
+			<param-value>false</param-value>
+		</init-param>
+		<init-param>
+			<param-name>enabled</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<init-param>
+			<param-name>AllowedExtensionsFile</param-name>
+			<param-value></param-value>
+		</init-param>
+		<init-param>
+			<param-name>DeniedExtensionsFile</param-name>
+			<param-value>
+				php|php3|php5|phtml|asp|aspx|ascx|jsp|cfm|cfc|pl|bat|exe|dll|reg|cgi
+			</param-value>
+		</init-param>
+		<init-param>
+			<param-name>AllowedExtensionsImage</param-name>
+			<param-value>jpg|gif|jpeg|png|bmp</param-value>
+		</init-param>
+		<init-param>
+			<param-name>DeniedExtensionsImage</param-name>
+			<param-value></param-value>
+		</init-param>
+		<init-param>
+			<param-name>AllowedExtensionsFlash</param-name>
+			<param-value>swf|fla</param-value>
+		</init-param>
+		<init-param>
+			<param-name>DeniedExtensionsFlash</param-name>
+			<param-value></param-value>
+		</init-param>
+		<load-on-startup>3</load-on-startup>
+  </servlet>
+ <!-- start  班级空间  -->
+	  <servlet>
+	  	  <description>班级栏目管理</description>
+	      <servlet-name>ClaspaceSubjectServlet</servlet-name>
+	      <servlet-class>cn.qtone.xxt.claspace.subject.servlet.ClaspaceSubjectServlet</servlet-class>
+	  </servlet>
+	   <servlet>
+  	  	  <description>班级相册管理</description>
+	      <servlet-name>ClaspaceAlbumServlet</servlet-name>
+	      <servlet-class>cn.qtone.xxt.claspace.album.servlet.ClaspaceAlbumServlet</servlet-class>
+	  </servlet>
+	   <servlet>
+  	  	  <description>班级相册-照片管理</description>
+	      <servlet-name>ClaspacePhotoServlet</servlet-name>
+	      <servlet-class>cn.qtone.xxt.claspace.photo.servlet.ClaspacePhotoServlet</servlet-class>
+	  </servlet>
+  <servlet>
+  	      <description>班级空间信息设置</description>
+	      <servlet-name>ClaspaceBaseinfoServlet</servlet-name>
+	      <servlet-class>cn.qtone.xxt.claspace.baseinfo.servlet.ClaspaceBaseinfoServlet</servlet-class>
+	  </servlet>
+	   <!-- start  班级空间门户  -->
+  	  <servlet>
+	 	  <description>班级空间用户登录</description>
+	      <servlet-name>ClaspaceUserLoginServlet</servlet-name>
+	      <servlet-class>cn.qtone.xxt.claspace.menhu.servlet.ClaspaceUserLoginServlet</servlet-class>
+	  </servlet>
+	    <servlet>
+	 	  <description>班级相册</description>
+	      <servlet-name>ClaspaceMenhuServlet</servlet-name>
+	      <servlet-class>cn.qtone.xxt.claspace.menhu.servlet.ClaspaceMenhuServlet</servlet-class>
+	  </servlet>
+	  <!-- start 地区门个性化设置 -->
+	  <servlet>
+	      <servlet-name>AreaSetServlet</servlet-name>
+	      <servlet-class>cn.qtone.xxt.mh.admin.areaset.servlet.AreaSetServlet</servlet-class>
+	  </servlet>
+<servlet>
+    <servlet-name>teacherexpect</servlet-name>
+    <servlet-class>cn.qtone.xxt.edu.lesson.teacherexpect.servlet.TeacherExpectServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>classcurriculum</servlet-name>
+    <servlet-class>cn.qtone.xxt.edu.lesson.classcurriculum.servlet.ClassCurriculumServlet</servlet-class>
+  </servlet>
+   <servlet>
+    <servlet-name>subjectexpect</servlet-name>
+    <servlet-class>cn.qtone.xxt.edu.lesson.subjectexpect.servlet.SubjectExpectServlet</servlet-class>
+  </servlet>
+    <servlet>
+    <servlet-name>teachercurriculum</servlet-name>
+    <servlet-class>cn.qtone.xxt.edu.lesson.teachercurriculum.servlet.TeacherCurriculumServlet</servlet-class>
+  </servlet>
+<servlet>
+  	<servlet-name>performance</servlet-name>
+  	<servlet-class>cn.qtone.xxt.oa.performance.servlet.PerforServlet</servlet-class>
+  </servlet>
+ <servlet>
+    <servlet-name>coursemanage</servlet-name>
+    <servlet-class>cn.qtone.xxt.edu.coursemanage.servlet.CourseManageServlet</servlet-class>
+  </servlet>
+  <!--blog start servlet-->
+<servlet>
+<servlet-name>blogArticle</servlet-name>
+<servlet-class>
+cn.qtone.xxt.blog.servlet.ArticleServlet
+</servlet-class>
+</servlet>
+<servlet>
+<servlet-name>blogHomePage</servlet-name>
+<servlet-class>
+cn.qtone.xxt.blog.servlet.UserServlet
+</servlet-class>
+</servlet>
+<servlet>
+<servlet-name>GuestBookServlet</servlet-name>
+<servlet-class>
+cn.qtone.xxt.blog.servlet.GuestBookServlet
+</servlet-class>
+</servlet>
+<servlet>
+<servlet-name>ReplyLogServlet</servlet-name>
+<servlet-class>
+cn.qtone.xxt.blog.servlet.ReplyLogServlet
+</servlet-class>
+</servlet>
+<servlet>
+<servlet-name>BlogPhotosServlet</servlet-name>
+<servlet-class>
+cn.qtone.xxt.blog.servlet.PhotosServlet
+</servlet-class>
+</servlet>
+<servlet>
+<servlet-name>friendManage</servlet-name>
+<servlet-class>
+cn.qtone.xxt.blog.servlet.FriendServlet
+</servlet-class>
+</servlet>
+<servlet>
+<servlet-name>blogIndex</servlet-name>
+<servlet-class>
+cn.qtone.xxt.blog.servlet.BlogServlet
+</servlet-class>
+</servlet>
+<servlet>
+<servlet-name>SchoolServlet</servlet-name>
+<servlet-class>
+cn.qtone.xxt.blog.servlet.SchoolServlet
+</servlet-class>
+</servlet>
+<servlet>
+<servlet-name>LoginServlet</servlet-name>
+<servlet-class>
+cn.qtone.xxt.blog.servlet.LoginServlet
+</servlet-class>
+</servlet>
+<servlet>
+<servlet-name>LogoutServlet</servlet-name>
+<servlet-class>
+cn.qtone.xxt.blog.servlet.LogoutServlet
+</servlet-class>
+</servlet>
+<servlet>
+<servlet-name>AfficheServlet</servlet-name>
+<servlet-class>
+cn.qtone.xxt.blog.servlet.AfficheServlet
+</servlet-class>
+</servlet>
+<servlet>
+<servlet-name>Connector</servlet-name>
+<servlet-class>
+cn.qtone.xxt.blog.servlet.ConnectorServlet
+</servlet-class>
+<load-on-startup>1</load-on-startup>
+</servlet>
+<!--blog end servlet-->
+<!--bbs start servlet-->
+<servlet>
+<servlet-name>bbs</servlet-name>
+<servlet-class>
+cn.qtone.xxt.bbs.servlet.BBSServlet
+</servlet-class>
+</servlet>
+<!--bbs end servlet-->
+<!--CKEditor start servlet-->
+    <servlet>
+        <servlet-name>CKEditorUploader</servlet-name>
+        <servlet-class>cn.qtone.xxt.base.ckeditor.CKEditorUploader</servlet-class>
+        <init-param>
+            <param-name>baseDir</param-name>
+            <param-value>/UserFiles/</param-value>
+        </init-param>
+        <init-param>
+            <param-name>debug</param-name>
+            <param-value>false</param-value>
+        </init-param>
+        <init-param>
+            <param-name>enabled</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <init-param>
+            <param-name>AllowedExtensionsFile</param-name>
+            <param-value></param-value>
+        </init-param>
+        <init-param>
+            <param-name>DeniedExtensionsFile</param-name>
+            <param-value>
+                html|htm|php|php2|php3|php4|php5|phtml|pwml|inc|asp|aspx|ascx|jsp|cfm|cfc|pl|bat|exe|com|dll|vbs|js|reg|cgi|htaccess|asis|ftl
+            </param-value>
+        </init-param>
+        <init-param>
+            <param-name>AllowedExtensionsImage</param-name>
+            <param-value>jpg|gif|jpeg|png|bmp</param-value>
+        </init-param>
+        <init-param>
+            <param-name>DeniedExtensionsImage</param-name>
+            <param-value></param-value>
+        </init-param>
+        <init-param>
+            <param-name>AllowedExtensionsFlash</param-name>
+            <param-value>swf|fla</param-value>
+        </init-param>
+        <init-param>
+            <param-name>DeniedExtensionsFlash</param-name>
+            <param-value></param-value>
+        </init-param>
+        <load-on-startup>0</load-on-startup>
+    </servlet>
+<!--CKEditor end servlet-->
+  <!--门户后台新闻管理 start servlet -->
+    <servlet>
+         <servlet-name>news</servlet-name>
+         <servlet-class>cn.qtone.xxt.admin.mh.news.servlet.NewsServlet</servlet-class>
+     </servlet>
+   <!--门户后台新闻管理 end servlet--> 
+<!--pk start servlet -->
+   <servlet>
+   <servlet-name>/lesson/schoolinfo</servlet-name>
+   <servlet-class>cn.qtone.xxt.edu.lesson.schoolinfo.servlet.SchoolInfoServlet</servlet-class>
+</servlet>
+<servlet>
+   <servlet-name>/lesson/kejieinfo</servlet-name>
+   <servlet-class>cn.qtone.xxt.edu.lesson.kejieinfo.servlet.KejieInfoServlet</servlet-class>
+</servlet>
+<servlet>
+   <servlet-name>/lesson/paike</servlet-name>
+   <servlet-class>cn.qtone.xxt.edu.lesson.paike.servlet.PaikeServlet</servlet-class>
+</servlet>
+
+<!--pk end servlet -->
+<servlet>
+	<servlet-name>AreaOperationServlet</servlet-name>
+	<servlet-class>cn.qtone.xxt.mh.admin.areaoperation.servlet.AreaOperationServlet</servlet-class>
+</servlet>
+<!-- spring MVC dispatcher servlet configure -->
+	<servlet>
+		<servlet-name>dispatcherServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+<!--blog start mapping-->
+<servlet-mapping>
+<servlet-name>blogArticle</servlet-name>
+<url-pattern>/blog/article.do</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+<servlet-name>blogHomePage</servlet-name>
+<url-pattern>/blog/index.do</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+<servlet-name>GuestBookServlet</servlet-name>
+<url-pattern>/blog/GuestBook.do</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+<servlet-name>ReplyLogServlet</servlet-name>
+<url-pattern>/blog/ReplyLog.do</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+<servlet-name>BlogPhotosServlet</servlet-name>
+<url-pattern>/blog/photos.do</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+<servlet-name>friendManage</servlet-name>
+<url-pattern>/blog/friend.do</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+<servlet-name>blogIndex</servlet-name>
+<url-pattern>/blog/blog.do</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+<servlet-name>SchoolServlet</servlet-name>
+<url-pattern>/blog/School.do</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+<servlet-name>LoginServlet</servlet-name>
+<url-pattern>/Blog/Login.do</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+<servlet-name>LogoutServlet</servlet-name>
+<url-pattern>/blog/Logout.do</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+<servlet-name>AfficheServlet</servlet-name>
+<url-pattern>/blog/affiche.do</url-pattern>
+</servlet-mapping>
+<!--blog end mapping-->
+<!--blog start mapping-->
+<servlet-mapping>
+<servlet-name>bbs</servlet-name>
+<url-pattern>/bbs.do</url-pattern>
+</servlet-mapping>
+<!--blog end mapping-->
+<!--CKEditor start mapping-->
+ <servlet-mapping>
+        <servlet-name>CKEditorUploader</servlet-name>
+        <url-pattern>/ckeditoruploader.do</url-pattern>
+    </servlet-mapping>
+<!--CKEditor end mapping-->
+  <!--门户后台新闻管理 start mapping -->
+<servlet-mapping>
+         <servlet-name>news</servlet-name>
+         <url-pattern>/news.do</url-pattern>
+     </servlet-mapping>
+  <!--门户后台新闻管理 end mapping -->
+  <!--pk start mapping -->
+<servlet-mapping>
+   <servlet-name>/lesson/schoolinfo</servlet-name>
+   <url-pattern>/school/edu/lesson/schoolinfo.do</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+   <servlet-name>/lesson/kejieinfo</servlet-name>
+   <url-pattern>/school/edu/lesson/kejieinfo.do</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+   <servlet-name>/lesson/paike</servlet-name>
+   <url-pattern>/school/edu/lesson/paike.do</url-pattern>
+</servlet-mapping>
+
+  <!--pk end mapping -->
+  <servlet-mapping>
+	<servlet-name>AreaOperationServlet</servlet-name>
+	<url-pattern>/areaoperation.do</url-pattern>
+</servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>coursemanage</servlet-name>
+    <url-pattern>/coursemanage.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>performance</servlet-name>
+  	<url-pattern>/performance.do</url-pattern>
+  </servlet-mapping>
+ <servlet-mapping>
+    <servlet-name>teacherexpect</servlet-name>
+    <url-pattern>/teacherexpect.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>classcurriculum</servlet-name>
+    <url-pattern>/classcurriculum.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>subjectexpect</servlet-name>
+    <url-pattern>/subjectexpect.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>teachercurriculum</servlet-name>
+    <url-pattern>/teachercurriculum.do</url-pattern>
+  </servlet-mapping>
+	  <servlet-mapping>
+	      <servlet-name>AreaSetServlet</servlet-name>
+	      <url-pattern>/areasetting.do</url-pattern>
+	  </servlet-mapping>
+	  <servlet-mapping>
+	      <servlet-name>ClaspaceMenhuServlet</servlet-name>
+	      <url-pattern>/claspace.do</url-pattern>
+	  </servlet-mapping>
+	  <servlet-mapping>
+	      <servlet-name>ClaspaceUserLoginServlet</servlet-name>
+	      <url-pattern>/claspaceLoginCheck.do</url-pattern>
+	  </servlet-mapping>
+	  <servlet-mapping>
+	      <servlet-name>ClaspaceBaseinfoServlet</servlet-name>
+	      <url-pattern>/claspace/infosetting.do</url-pattern>
+	  </servlet-mapping>
+	  <servlet-mapping>
+	      <servlet-name>ClaspacePhotoServlet</servlet-name>
+	      <url-pattern>/claspace/album/photomanage.do</url-pattern>
+	  </servlet-mapping>
+  	  
+	  <servlet-mapping>
+	      <servlet-name>ClaspaceAlbumServlet</servlet-name>
+	      <url-pattern>/claspace/albummanage.do</url-pattern>
+	  </servlet-mapping>
+	  <servlet-mapping>
+	      <servlet-name>ClaspaceSubjectServlet</servlet-name>
+	      <url-pattern>/claspace/subject/manage.do</url-pattern>
+	  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>FCKFileUploadServlet</servlet-name>
+    <url-pattern>/fckeditor/upload.do</url-pattern>
+  </servlet-mapping>
+<servlet-mapping>
+	<servlet-name>VoteItemServlet</servlet-name>
+	<url-pattern>/jzdx/voteitem.do</url-pattern>
+</servlet-mapping>
+ <servlet-mapping>
+    <servlet-name>fulllesson</servlet-name>
+    <url-pattern>/school/edu/lesson/fulllesson.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>YwComplaintServlet</servlet-name>
+    <url-pattern>/YwComplaintServlet.do</url-pattern>
+  </servlet-mapping>
+ <!-- 同步学 -->
+ <servlet-mapping>
+    <servlet-name>synLearnLogin</servlet-name>
+    <url-pattern>/synlearn.do</url-pattern>
+ </servlet-mapping>
+  <servlet>
+    <servlet-name>/jzdx/mms/sendmms</servlet-name>
+    <servlet-class>cn.qtone.xxt.jzdx.mms.sendmms.servlet.SendMmsServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>/jzdx/mms/taskquery</servlet-name>
+    <servlet-class>cn.qtone.xxt.jzdx.mms.taskquery.servlet.TaskQueryServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>/jzdx/mms/mmslog</servlet-name>
+    <servlet-class>cn.qtone.xxt.jzdx.mms.mmslog.servlet.MmsLogServlet</servlet-class>
+  </servlet>
+<servlet>
+		<servlet-name>InitServlet</servlet-name>
+		<servlet-class>
+			cn.qtone.xxt.jzdx.mms.common.InitServlet
+		</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+  <servlet-mapping>
+    <servlet-name>/jzdx/mms/sendmms</servlet-name>
+    <url-pattern>/jzdx/mms/sendmms.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>/jzdx/mms/taskquery</servlet-name>
+    <url-pattern>/jzdx/mms/taskquery.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>/jzdx/mms/mmslog</servlet-name>
+    <url-pattern>/jzdx/mms/mmslog.do</url-pattern>
+  </servlet-mapping>
+  
+<!-- 教师角色管理 -->
+<servlet-mapping>
+  <servlet-name>TeaFunManageServlet</servlet-name>
+  <url-pattern>/teafunmanage.do</url-pattern>
+</servlet-mapping>
+<!-- 教师角色管理 -->
+<servlet-mapping>
+   <servlet-name>BookCheckServlet</servlet-name>
+   <url-pattern>/bookcheck.do</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+    <servlet-name>BlackListManageServlet</servlet-name>
+    <url-pattern>/blacklistmanage.do</url-pattern>
+  </servlet-mapping>
+<servlet-mapping>
+		<servlet-name>Notebook</servlet-name>
+		<url-pattern>/notebook.do</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>InputSendServlet</servlet-name>
+		<url-pattern>/jzdx/inputsend.do</url-pattern>
+	</servlet-mapping>
+<!--发送短信数统计-->
+	<servlet-mapping>
+    <servlet-name>QuerySmsCountServlet</servlet-name>
+    <url-pattern>/jzdx/querysmscount.do</url-pattern>
+  </servlet-mapping>
+<servlet-mapping>
+		<servlet-name>/jzdx/parentcommunicate/receivesms</servlet-name>
+		<url-pattern>/jzdx/parentcommunicate/receivesms.do</url-pattern>
+	</servlet-mapping>
+ <!--快捷发送-->
+  <servlet-mapping>
+    <servlet-name>QuickSendServlet</servlet-name>
+    <url-pattern>/qtjzdxquicksend.do</url-pattern>
+  </servlet-mapping>
+  <!--new ajax-->
+  <servlet-mapping>
+	  <servlet-name>newAjaxServlet</servlet-name>
+	  <url-pattern>/newAjax.do</url-pattern>
+  </servlet-mapping>
+ <!--OA教育start-->
+<servlet-mapping>
+    <servlet-name>InitCent</servlet-name>
+    <url-pattern>/initcent.do</url-pattern>
+  </servlet-mapping>
+<!--OA教育end-->
+ <servlet>
+   <servlet-name>propertyset</servlet-name>
+   <servlet-class>cn.qtone.xxt.admin.jzdx.propertyset.servlet.PropertySetServlet</servlet-class>
+ </servlet>
+<!--070807 特殊考勤-->
+<servlet>
+    <servlet-name>SpecActivity</servlet-name>
+    <servlet-class>cn.qtone.xxt.kq.specialactivity.servlet.SpecActivityServlet</servlet-class>
+</servlet>
+<!--070807 特殊考勤-->
+<!--add 070809-->
+<servlet>
+   <servlet-name>uploadlist</servlet-name>
+    <servlet-class>cn.qtone.xxt.edu.uploadlist.servlet.UploadListServlet</servlet-class>
+  </servlet>
+      <servlet>
+   <servlet-name>qtuploadlist</servlet-name>
+    <servlet-class>cn.qtone.xxt.edu.qtuploadlist.servlet.UploadListServlet</servlet-class>
+  </servlet>
+ <!--add 070809-->
+ 
+ <servlet-mapping>
+    <servlet-name>ajax</servlet-name>
+    <url-pattern>/ajax.do</url-pattern>
+  </servlet-mapping>
+<!--0815 潮州需求 -->
+<servlet>
+	<servlet-name>teacheratt</servlet-name>
+	<servlet-class>cn.qtone.xxt.kq.teacheratt.servlet.TeacherAtt</servlet-class>
+</servlet>	
+<servlet>
+    <servlet-name>iccardquery</servlet-name>
+    <servlet-class>cn.qtone.xxt.admin.attendance.iccard.servlet.ICCardServlet</servlet-class>
+</servlet>
+<!--0815 潮州需求 -->
+<!--0825 揭阳需求 -->
+<!--教师系统 -->
+<servlet>
+    <servlet-name>teachersys</servlet-name>
+    <servlet-class>cn.qtone.xxt.admin.purview.teachersys.servlet.TeacherSysServlet</servlet-class>
+  </servlet>
+<!--教师系统 -->
+<!--操作日志 -->
+<servlet>
+    <servlet-name>opquery</servlet-name>
+    <servlet-class>cn.qtone.xxt.admin.purview.opquery.servlet.OpQueryServlet</servlet-class>
+  </servlet>
+<!--操作日志 -->
+<!--学生同名查询 -->
+<servlet>
+    <servlet-name>stutmqry</servlet-name>
+    <servlet-class>cn.qtone.xxt.edu.stutmqry.servlet.StuTmQryServlet</servlet-class>
+  </servlet>
+<!--学生同名查询 -->
+<!--新生导入确认 -->
+<servlet>
+    <servlet-name>stuimport</servlet-name>
+    <servlet-class>cn.qtone.xxt.edu.stuimport.servlet.StuImportServlet</servlet-class>
+  </servlet>
+<!--新生导入确认 -->
+<!--070904SI个人设置start-->
+<servlet>
+    <servlet-name>personSet</servlet-name>
+    <servlet-class>cn.qtone.xxt.admin.purview.personset.personSetServlet</servlet-class>
+  </servlet>
+<!--070904SI个人设置end-->
+<!--070912毕业生处理start-->
+<servlet>
+    <servlet-name>businessDeal</servlet-name>
+    <servlet-class>cn.qtone.xxt.edu.gradbusinessdeal.servlet.BusinessDealServlet</servlet-class>
+  </servlet>
+<!--070912毕业生处理end-->
+<!--070912设置课程表start-->
+<servlet>
+	<servlet-name>courseschedule</servlet-name>
+	<servlet-class>cn.qtone.xxt.edu.courseschedule.servlet.CourseScheduleServlet</servlet-class>
+ </servlet>
+<!--070912设置课程表end-->
+<!--071110前台用户日志start-->
+<servlet>
+    <servlet-name>teaopquery</servlet-name>
+    <servlet-class>cn.qtone.xxt.admin.purview.teaopquery.servlet.TeaOpQueryServlet</servlet-class>
+  </servlet>
+<!--071110前台用户日志end-->
+<!-- 20071110 admin.moniter -->
+<servlet>
+		<servlet-name>adminmonitoring</servlet-name>
+		<servlet-class>
+			cn.qtone.xxt.admin.jzdx.adminmonitor.servlet.MonitoringServlet
+		</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>admintaskquery</servlet-name>
+		<servlet-class>
+			cn.qtone.xxt.admin.jzdx.admintaskquery.servlet.TaskQueryServlet
+		</servlet-class>
+	</servlet>
+<!-- end 20071110 -->
+<!--071112教师发出信息查询start-->
+<servlet>
+    <servlet-name>teasendsmsqry</servlet-name>
+		<servlet-class>cn.qtone.xxt.admin.jzdx.smsqryteasend.servlet.SmsQryTeaSendServlet</servlet-class>
+  </servlet>
+<!--071112教师发出信息查询end-->
+<!--071112教师收到信息查询start-->
+<servlet>
+    <servlet-name>tearecsmsqry</servlet-name>
+		<servlet-class>cn.qtone.xxt.admin.jzdx.smsqrytearec.servlet.SmsQryTeaRecServlet</servlet-class>
+  </servlet>
+<!--071112教师收到信息查询end-->
+<!--071114查询不雅短信start-->
+<servlet>
+	<servlet-name>inelegantsms</servlet-name>
+	<servlet-class>
+			cn.qtone.xxt.admin.jzdx.inelegantsms.servlet.IntSmsServlet
+	</servlet-class>
+	</servlet>
+<!--071114查询不雅短信end-->
+<!--菜谱功能 start-->
+	<servlet>
+		<servlet-name>RecipeServlet</servlet-name>
+		<servlet-class>cn.qtone.xxt.edu.recipe.servlet.RecipeServlet</servlet-class>
+	</servlet>
+<!--菜谱功能 end-->
+ <!--前台短信明细-->
+	<servlet>
+		<servlet-name>SmsDetailServlet</servlet-name>
+		<servlet-class>cn.qtone.xxt.admin.jzdx.smsdetail.servlet.SmsDetailServlet</servlet-class>
+	</servlet>
+  <!-- 打卡记录导出 2008-04-23 -->
+  <servlet>
+    <servlet-name>DownRecord</servlet-name>
+    <servlet-class>cn.qtone.xxt.kq.downrecord.servlet.DownRecordServlet</servlet-class>
+  </servlet>
+ <!-- 打卡记录导出 2008-04-23 -->
+ 
+ <!-- ADC学校管理 2008-05-31 -->
+ <servlet>
+    <servlet-name>SchoolManageADCServlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.edu.schoolmanageadc.servlet.SchoolManageServletADC</servlet-class>
+  </servlet>
+ <!-- ADC学校管理 2008-05-31 -->
+ <!-- CSA 客服系统 -->
+	<servlet>
+		<servlet-name>CSALoginServlet</servlet-name>
+		<servlet-class>cn.qtone.xxt.csa.login.servlet.CsaLoginServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>CsaCancelOrderServlet</servlet-name>
+		<servlet-class>cn.qtone.xxt.csa.cancelorder.servlet.CsaCencelOrderServlet</servlet-class>
+	</servlet>
+        <servlet>
+		<servlet-name>consultation</servlet-name>
+		<servlet-class>cn.qtone.xxt.csa.consultation.servlet.CsaConsultationServlet</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>acceptance</servlet-name>
+		<servlet-class>cn.qtone.xxt.csa.acceptance.servlet.CsaAcceptanceServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>blacklist</servlet-name>
+		<servlet-class>cn.qtone.xxt.csa.blacklist.servlet.CsaBlackListServlet</servlet-class>
+	</servlet>
+<!-- CSA 客服系统  -->
+<!-- 权限模块csa审核，帐号 -->
+	<servlet>
+		<servlet-name>complaint</servlet-name>
+		<servlet-class>cn.qtone.xxt.admin.purview.csa.complaint.servlet.ComplaintServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>CsaUserServlet</servlet-name>
+		<servlet-class>cn.qtone.xxt.admin.purview.csa.user.servlet.CsaUserServlet</servlet-class>
+    </servlet>
+<!-- 权限模块csa审核，帐号  -->
+<!-- 教师历史短信查询 2009-12-09	START -->
+	<servlet>
+		<servlet-name>TeaSmsHistoryServlet</servlet-name>
+		<servlet-class>cn.qtone.xxt.admin.jzdx.teasmshistory.servlet.TeaSmsHistoryServlet</servlet-class>
+	</servlet>
+<!---营销方案统计表-->
+	<servlet>
+		<servlet-name>TranPackageStatServlet</servlet-name>
+		<servlet-class>cn.qtone.xxt.admin.report.tranpackagestat.servlet.TranPackageStatServlet</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>usereportServlet</servlet-name>
+		<servlet-class>cn.qtone.xxt.admin.report.usereport.servlet.UseReportServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+	    <servlet-name>usereportServlet</servlet-name>
+	    <url-pattern>/report/usereport.do</url-pattern>
+   </servlet-mapping>
+	
+<!-- 正向数据同步 -->
+  <servlet>
+    <servlet-name>SyncServlet</servlet-name>
+    <servlet-class>cn.qtone.xxt.admin.transaction.sync.servlet.SyncServlet</servlet-class>
+  </servlet>
+<!-- 正向数据同步 -->
+  <servlet-mapping>
+    <servlet-name>SyncServlet</servlet-name>
+    <url-pattern>/sync.do</url-pattern>
+  </servlet-mapping>
+<!---营销方案统计表-->
+	<servlet-mapping>
+		<servlet-name>TranPackageStatServlet</servlet-name>
+		<url-pattern>/report/tranpackagestat.do</url-pattern>
+	</servlet-mapping>	
+	<servlet-mapping>
+		<servlet-name>TeaSmsHistoryServlet</servlet-name>
+		<url-pattern>/admin_teasmshis.do</url-pattern>
+	</servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>teacherupdatepsw</servlet-name>
+    <url-pattern>/teacherupdatepsw.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    	<servlet-name>ClassNoticeServlet</servlet-name>
+    	<url-pattern>/classnotice.do</url-pattern>
+	</servlet-mapping>
+<servlet-mapping>
+		<servlet-name>adminconfirmsms</servlet-name>
+		<url-pattern>/adminconfirmsms.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>oaconfirmsms</servlet-name>
+		<url-pattern>/oaconfirmsms.do</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+    <servlet-name>linkmanimport</servlet-name>
+    <url-pattern>/linkmanimport.do</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+<servlet-name>adminsmslogs</servlet-name>
+		<url-pattern>/adminsmslogs.do</url-pattern>
+</servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>helpdoc</servlet-name>
+    <url-pattern>/helpdoc.do</url-pattern>
+  </servlet-mapping>
+  <!--框架配置信息start-->
+  <servlet-mapping>
+    <servlet-name>ConfigServlet</servlet-name>
+    <url-pattern>/config.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ConfigManageServlet</servlet-name>
+    <url-pattern>/configmanage.do</url-pattern>
+  </servlet-mapping>
+   <servlet-mapping>
+    <servlet-name>ConfigLoginServlet</servlet-name>
+    <url-pattern>/managelogin.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>funmanage</servlet-name>
+    <url-pattern>/funmanage.do</url-pattern>
+  </servlet-mapping>
+    <servlet-mapping>
+    <servlet-name>typefunmanage</servlet-name>
+    <url-pattern>/typefunmanage.do</url-pattern>
+  </servlet-mapping>
+  <!--框架配置信息end-->
+   <!--登录、框架页面输出start-->
+  <servlet-mapping>
+    <servlet-name>loginservlet</servlet-name>
+    <url-pattern>/login.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>logoutservlet</servlet-name>
+    <url-pattern>/logout.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>validateservlet</servlet-name>
+    <url-pattern>/validate</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>index</servlet-name>
+    <url-pattern>/index</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>admintop</servlet-name>
+    <url-pattern>/admintop</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>adminbanner</servlet-name>
+    <url-pattern>/adminbanner</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>adminleft</servlet-name>
+    <url-pattern>/adminleft</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>adminline</servlet-name>
+    <url-pattern>/adminline</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>adminmain</servlet-name>
+    <url-pattern>/adminmain</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>adminbottom</servlet-name>
+    <url-pattern>/adminbottom</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>top</servlet-name>
+    <url-pattern>/top</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>banner</servlet-name>
+    <url-pattern>/banner</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>left</servlet-name>
+    <url-pattern>/left</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>line</servlet-name>
+    <url-pattern>/line</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>main</servlet-name>
+    <url-pattern>/main</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>bottom</servlet-name>
+    <url-pattern>/bottom</url-pattern>
+  </servlet-mapping>
+   <!--SI登陆中显示通知SERVLET add by ywt 06/09/15 -->
+    <servlet-mapping>
+    <servlet-name>NoticeServlet</servlet-name>
+    <url-pattern>/notice.do</url-pattern>
+  </servlet-mapping>
+  <!--登录、框架页面输出end-->
+  <!--门户网站、后台门户内容管理start-->
+  <servlet-mapping>
+    <servlet-name>contentcheckservlet</servlet-name>
+    <url-pattern>/contentcheck.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>NewsIssueServlet</servlet-name>
+    <url-pattern>/newsissue.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>genearchservlet</servlet-name>
+    <url-pattern>/genearch.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>integrationservlet</servlet-name>
+    <url-pattern>/integration.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>studentsservlet</servlet-name>
+    <url-pattern>/students.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>teachersservlet</servlet-name>
+    <url-pattern>/teachers.do</url-pattern>
+  </servlet-mapping>
+    <servlet-mapping>
+    <servlet-name>mhserverservlet</servlet-name>
+    <url-pattern>/mhserver.do</url-pattern>
+  </servlet-mapping>
+   <servlet-mapping>
+    <servlet-name>editorservlet</servlet-name>
+    <url-pattern>/editor.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>getpsw</servlet-name>
+    <url-pattern>/getpsw.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Outhtml</servlet-name>
+    <url-pattern>/outhtmlabcxxt123.do</url-pattern>
+</servlet-mapping>
+  <!--门户网站、后台门户内容管理end-->
+  <servlet-mapping>
+    <servlet-name>updatepswservlet</servlet-name>
+    <url-pattern>/updatepsw.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>tipmain</servlet-name>
+    <url-pattern>/tipmain.do</url-pattern>
+  </servlet-mapping>
+  <!--OA教育start-->
+  <servlet-mapping>
+    <servlet-name>deptservlet</servlet-name>
+    <url-pattern>/dept.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>caltableservlet</servlet-name>
+    <url-pattern>/caltable.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>calaffairservlet</servlet-name>
+    <url-pattern>/calaffair.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>manmgservlet</servlet-name>
+    <url-pattern>/manmg.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>searmanservlet</servlet-name>
+    <url-pattern>/searman.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>personsetservlet</servlet-name>
+    <url-pattern>/personset.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>oafirstpageservlet</servlet-name>
+    <url-pattern>/oafirstpage.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>loadlinkmanservlet</servlet-name>
+    <url-pattern>/loadlinkman.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>sendmailservlet</servlet-name>
+    <url-pattern>/sendmail.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>sendboxservlet</servlet-name>
+    <url-pattern>/sendbox.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>receiveboxservlet</servlet-name>
+    <url-pattern>/receivebox.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>havesendboxservlet</servlet-name>
+    <url-pattern>/havesendbox.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>searchmailservlet</servlet-name>
+    <url-pattern>/searchmail.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>docgroupservlet</servlet-name>
+    <url-pattern>/docgroup.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>sendsmsservlet</servlet-name>
+    <url-pattern>/oasendsms.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>receivedsmsservlet</servlet-name>
+    <url-pattern>/oareceivedsms.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>havesendsmsservlet</servlet-name>
+    <url-pattern>/havesendsms.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>searchsmsservlet</servlet-name>
+    <url-pattern>/searchsms.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>searchworkservlet</servlet-name>
+    <url-pattern>/searchwork.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>workmanageservlet</servlet-name>
+    <url-pattern>/workmanage.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>userstatservlet</servlet-name>
+    <url-pattern>/oauserstat.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>codeinfoservlet</servlet-name>
+    <url-pattern>/oacodeinfo.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>usedreportstatservlet</servlet-name>
+    <url-pattern>/oausedreport.do</url-pattern>
+  </servlet-mapping>
+<servlet-mapping>
+    <servlet-name>NoticeManageServlet</servlet-name>
+    <url-pattern>/noticemanage.do</url-pattern>
+  </servlet-mapping>
+<servlet-mapping>
+    <servlet-name>SearchNoticeServlet</servlet-name>
+    <url-pattern>/searchnotice.do</url-pattern>
+  </servlet-mapping>
+<servlet-mapping>
+ <servlet-name>MyShareServlet</servlet-name>
+ <url-pattern>/mysharedoc.do</url-pattern>
+ </servlet-mapping>
+<servlet-mapping>
+ <servlet-name>MyReceiveShareServlet</servlet-name>
+ <url-pattern>/myrecshare.do</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+ <servlet-name>SearchDocServet</servlet-name>
+ <url-pattern>/searchedoc.do</url-pattern>
+ </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>RegulationsviewServlet</servlet-name>
+    <url-pattern>/regulationsview.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>RegulationspostServlet</servlet-name>
+    <url-pattern>/regulationspost.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>StaffwordServlet</servlet-name>
+    <url-pattern>/staffservlet.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>PhotomanageServlet</servlet-name>
+    <url-pattern>/oaphotomanage.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>PhotoServlet</servlet-name>
+    <url-pattern>/photoservlet.do</url-pattern>
+  </servlet-mapping>
+  <!--OA教育end-->
+  <!--成绩start-->
+   <servlet-mapping>
+    <servlet-name>ExamManageServlet</servlet-name>
+    <url-pattern>/examanage.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ExamInputServlet</servlet-name>
+    <url-pattern>/examinput.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ScoreQryServlet</servlet-name>
+    <url-pattern>/examsearch.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ScoreStat1Servlet</servlet-name>
+    <url-pattern>/scorestat1.do</url-pattern>
+  </servlet-mapping>
+   <servlet-mapping>
+    <servlet-name>ScoreStat2Servlet</servlet-name>
+    <url-pattern>/scorestat2.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ScoreStat3Servlet</servlet-name>
+    <url-pattern>/scorestat3.do</url-pattern>
+  </servlet-mapping>
+   <servlet-mapping>
+    <servlet-name>ScoreStat4Servlet</servlet-name>
+    <url-pattern>/scorestat4.do</url-pattern>
+  </servlet-mapping>
+   <servlet-mapping>
+    <servlet-name>ScoreStat5Servlet</servlet-name>
+    <url-pattern>/scorestat5.do</url-pattern>
+  </servlet-mapping>
+   <servlet-mapping>
+    <servlet-name>ScoreStat5IMServlet</servlet-name>
+    <url-pattern>/scoreImgStat.do</url-pattern>
+  </servlet-mapping>
+   <servlet-mapping>
+    <servlet-name>StudentManageServlet</servlet-name>
+    <url-pattern>/studentmanage.do</url-pattern>
+  </servlet-mapping>
+  <!--成绩end-->
+  <!--权限start-->
+  <servlet-mapping>
+    <servlet-name>areamanage</servlet-name>
+    <url-pattern>/areamanage.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>rolemanage</servlet-name>
+    <url-pattern>/rolemanage.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>purviewmanage</servlet-name>
+    <url-pattern>/purviewmanage.do</url-pattern>
+  </servlet-mapping>
+  <!--设置大类的权限 add by ywt 2006/9/19 -->
+    <servlet-mapping>
+    <servlet-name>setallpurview</servlet-name>
+    <url-pattern>/setallpurview.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>usermanage</servlet-name>
+    <url-pattern>/usermanage.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>simanage</servlet-name>
+    <url-pattern>/simanage.do</url-pattern>
+  </servlet-mapping>
+  <!--权限end-->
+   <!--家长短信箱start-->
+    <!-- 在后台添加上行短信管理功能 2008-10-21  END  -->
+    <servlet-mapping>
+	  <servlet-name>SxManageServlet</servlet-name>
+	  <url-pattern>/sxSms.do</url-pattern>
+    </servlet-mapping>
+	<!-- 在后台添加上行短信管理功能 2008-10-21  END  -->
+   <servlet-mapping>
+    <servlet-name>/jzdx/warmtip</servlet-name>
+    <url-pattern>/jzdx/warmtip.do</url-pattern>
+  </servlet-mapping>
+<servlet-mapping>
+    <servlet-name>/jzdx/parentcommunicate/sendmessage</servlet-name>
+    <url-pattern>/jzdx/parentcommunicate/sendmessage.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>/jzdx/parentcommunicate/sentmessage</servlet-name>
+    <url-pattern>/jzdx/parentcommunicate/sentmessage.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>/jzdx/parentcommunicate/receivemessage</servlet-name>
+    <url-pattern>/jzdx/parentcommunicate/receivemessage.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>RevertMessage</servlet-name>
+    <url-pattern>/jzdx/revert.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ConfirmSms</servlet-name>
+    <url-pattern>/jzdx/confirmsms.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SendAll</servlet-name>
+    <url-pattern>/jzdx/sendall.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CommentTree</servlet-name>
+    <url-pattern>/jzdx/commenttree.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CommentList</servlet-name>
+    <url-pattern>/jzdx/commentlist.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CheckSentServlet</servlet-name>
+    <url-pattern>/jzdx/stucommunicate/checksent.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SendMessageSIServlet</servlet-name>
+    <url-pattern>/jzdx/seronline.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CheckMessageServlet</servlet-name>
+    <url-pattern>/jzdx/stucommunicate/checkmessage.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SendMessageServlet</servlet-name>
+    <url-pattern>/jzdx/stucommunicate.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CheckMessageSIServlet</servlet-name>
+    <url-pattern>/jzdx/seronline/checkmessage.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CheckSentSIServlet</servlet-name>
+    <url-pattern>/jzdx/seronline/checksent.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SchoolListServlet</servlet-name>
+    <url-pattern>/jzdx/schoollist.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>RecStatServlet</servlet-name>
+    <url-pattern>/jzdx/recstat.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CommentServlet</servlet-name>
+    <url-pattern>/jzdx/comment.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>aCommentServlet</servlet-name>
+    <url-pattern>/admin/comment.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>TeaCommunicateServlet</servlet-name>
+    <url-pattern>/jzdx/teacommunicate.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>StuInfoServlet</servlet-name>
+    <url-pattern>/jzdx/stuinfo.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>TeaServletServlet</servlet-name>
+    <url-pattern>/jzdx/teainfo.do</url-pattern>
+  </servlet-mapping>
+ <servlet-mapping>
+    <servlet-name>BookbyeachServlet</servlet-name>
+    <url-pattern>/bookser2.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ParentCommunicateServlet</servlet-name>
+    <url-pattern>/parentcomm.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>userrange</servlet-name>
+    <url-pattern>/userrange</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>admintipmain</servlet-name>
+    <url-pattern>/admintipmain.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>InputPhoneSendSmsServlet</servlet-name>
+    <url-pattern>/inputphonesendsms.do</url-pattern>
+  </servlet-mapping>
+  <!--家长短信箱end-->
+  <!--家长、学生-->
+  	<!-- 在家长频道添加菜谱显示 2008-10-15 START -->
+  <servlet-mapping>
+	 <servlet-name>ParentRecipe</servlet-name>
+	 <url-pattern>/parent/recipe.do</url-pattern>
+  </servlet-mapping>
+  <!-- 在家长频道添加菜谱显示 2008-10-15  END  -->
+  <servlet-mapping>
+    <servlet-name>childvalidate</servlet-name>
+    <url-pattern>/childVal.do</url-pattern>
+  </servlet-mapping>
+ <servlet-mapping>
+    <servlet-name>parentvalidate</servlet-name>
+    <url-pattern>/parentVal.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>parentactive</servlet-name>
+    <url-pattern>/parentAct.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>childactive</servlet-name>
+    <url-pattern>/childAct.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>parentlogin</servlet-name>
+    <url-pattern>/parentLog.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>parentall</servlet-name>
+    <url-pattern>/parentAll.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>parentleft</servlet-name>
+    <url-pattern>/parentLeft.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>parenttop</servlet-name>
+    <url-pattern>/parentTop.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>parentend</servlet-name>
+    <url-pattern>/parentEnd.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>parentuse</servlet-name>
+    <url-pattern>/parentUse.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>childuse</servlet-name>
+    <url-pattern>/childUse.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>childtop</servlet-name>
+    <url-pattern>/childTop.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>childleft</servlet-name>
+    <url-pattern>/childLeft.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>childend</servlet-name>
+    <url-pattern>/childEnd.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>childlogin</servlet-name>
+    <url-pattern>/childLog.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>childall</servlet-name>
+    <url-pattern>/childAll.do</url-pattern>
+  </servlet-mapping>
+  <!--家长、学生-->
+  <!--前台短信明细-->
+	<servlet-mapping>
+		<servlet-name>SmsDetailServlet</servlet-name>
+		<url-pattern>/jzdxsmsdetail.do</url-pattern>
+	</servlet-mapping>
+  <!--亲情电话-->
+  <servlet-mapping>
+		<servlet-name>teaPhoneCallServlet</servlet-name>
+		<url-pattern>/teaphonecall.do</url-pattern>
+	</servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>PhoneServlet</servlet-name>
+    <url-pattern>/PhoneServlet</url-pattern>
+  </servlet-mapping>
+    <servlet-mapping>
+    <servlet-name>PhoneState</servlet-name>
+    <url-pattern>/phonestate</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>IpportServlet</servlet-name>
+    <url-pattern>/IpportServlet</url-pattern>
+  </servlet-mapping>
+    <servlet-mapping>
+    <servlet-name>WarntimeServlet</servlet-name>
+    <url-pattern>/WarntimeServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SmstjServlet</servlet-name>
+    <url-pattern>/smstjservlet</url-pattern>
+  </servlet-mapping>
+    <servlet-mapping>
+    <servlet-name>SmssearchServlet</servlet-name>
+    <url-pattern>/smssearchservlet</url-pattern>
+  </servlet-mapping>
+ <servlet-mapping>
+    <servlet-name>smsbaseservlet</servlet-name>
+    <url-pattern>/smsbaseservlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CallManageServlet</servlet-name>
+    <url-pattern>/callmanage.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CallAnalyseServlet</servlet-name>
+    <url-pattern>/callanalyse.do</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>qqdhuserinfo</servlet-name>
+    <url-pattern>/qqdhuserinfo</url-pattern>
+  </servlet-mapping>
+  <!--亲情电话-->
+  <!--电子留言版-->
+  <servlet-mapping>
+    <servlet-name>SchoolsmsServlet</servlet-name>
+    <url-pattern>/SchoolsmsServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SchoolsendServlet</servlet-name>
+    <url-pattern>/SchoolsendServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SchoolSendsmsServlet</servlet-name>
+    <url-pattern>/SchoolSendsmsServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SchoolLedsearchServlet</servlet-name>
+    <url-pattern>/SchoolLedsearchServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SchoolLedtypeServlet</servlet-name>
+    <url-pattern>/SchoolLedtypeServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SchoolLeddylistServlet</servlet-name>
+    <url-pattern>/SchoolLeddylistServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SendsmsServlet</servlet-name>
+    <url-pattern>/SendsmsServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name> LedsearchServlet</servlet-name>
+    <url-pattern>/LedsearchServlet</url-pattern>
+  </servlet-mapping>
+    <servlet-mapping>
+    <servlet-name> LedtypeServlet</servlet-name>
+    <url-pattern>/LedtypeServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>LeddylistServlet</servlet-name>
+    <url-pattern>/LeddylistServlet</url-pattern>
+  </servlet-mapping>
+   <servlet-mapping>
+    <servlet-name>DisplaysmsServlet</servlet-name>
+    <url-pattern>/DisplaysmsServlet</url-pattern>
+  </servlet-mapping>
+ <servlet-mapping>
+    <servlet-name>SchoolDisplaysmsServlet</servlet-name>
+    <url-pattern>/SchoolDisplaysmsServlet</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+    <servlet-name>OutXmlLed</servlet-name>
+    <url-pattern>/outxmlled.do</url-pattern>
+</servlet-mapping>
+  <!--电子留言版-->
+  <!--统计报表end-->
+   <servlet-mapping>
+    <servlet-name>unionstat</servlet-name>
+    <url-pattern>/unionstat</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>schoollist</servlet-name>
+    <url-pattern>/schoollist</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>XxreportServlet</servlet-name>
+    <url-pattern>/XxreportServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>YdreportServlet</servlet-name>
+    <url-pattern>/YdreportServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>RemsgreportServlet</servlet-name>
+    <url-pattern>/RemsgreportServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>JsreportServlet</servlet-name>
+    <url-pattern>/JsreportServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>xyreport</servlet-name>
+    <url-pattern>/xyReport.do</url-pattern>
+ </servlet-mapping>
+  <!--统计报表end-->
+  <!--考勤start-->
+  <servlet-mapping>
+    <servlet-name>attstat</servlet-name>
+    <url-pattern>/attstat</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>usermanager</servlet-name>
+    <url-pattern>/usermanager</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>callmsg</servlet-name>
+    <url-pattern>/callmsg</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>attset</servlet-name>
+    <url-pattern>/attset</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>classatt</servlet-name>
+    <url-pattern>/classatt</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>schoolatt</servlet-name>
+    <url-pattern>/schoolatt</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Topwarn</servlet-name>
+    <url-pattern>/topwarn</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>MachSet</servlet-name>
+    <url-pattern>/machset</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>KQSendSms</servlet-name>
+    <url-pattern>/kqsendsms</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>KQSmsQurry</servlet-name>
+    <url-pattern>/attsmsquery.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AdminKQSmsQurry</servlet-name>
+    <url-pattern>/adminattsmsquery.do</url-pattern>
+  </servlet-mapping>
+  <!--考勤end-->
+  <!--学籍start-->
+  <servlet-mapping>
+     <servlet-name>adminadjustclass</servlet-name>
+     <url-pattern>/adminadjustclass.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+	<servlet-name>schoolfamily</servlet-name>
+	<url-pattern>/schoolfamily.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+	<servlet-name>adminschoolmanage</servlet-name>
+	<url-pattern>/adminschoolmanage.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>familyServlet</servlet-name>
+    <url-pattern>/family.do</url-pattern>
+  </servlet-mapping>  
+  <servlet-mapping>
+    <servlet-name>schoolmanage</servlet-name>
+    <url-pattern>/schoolmanage.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>termset</servlet-name>
+    <url-pattern>/termset.do</url-pattern>
+  </servlet-mapping>
+ <servlet-mapping>
+    <servlet-name>classmanage</servlet-name>
+    <url-pattern>/classmanage.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>adjustclass</servlet-name>
+    <url-pattern>/adjustclass.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>zhuanxue</servlet-name>
+    <url-pattern>/zhuanxue.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>xiuxue</servlet-name>
+    <url-pattern>/xiuxue.do</url-pattern>
+  </servlet-mapping>
+    <servlet-mapping>
+    <servlet-name>fuxue</servlet-name>
+    <url-pattern>/fuxue.do</url-pattern>
+  </servlet-mapping>
+      <servlet-mapping>
+    <servlet-name>tuixue</servlet-name>
+    <url-pattern>/tuixue.do</url-pattern>
+  </servlet-mapping>
+   <servlet-mapping>
+    <servlet-name>change</servlet-name>
+    <url-pattern>/change.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>photomanage</servlet-name>
+    <url-pattern>/photomanage.do</url-pattern>
+  </servlet-mapping>
+    <servlet-mapping>
+    <servlet-name>studata</servlet-name>
+    <url-pattern>/studata.do</url-pattern>
+  </servlet-mapping>
+   <servlet-mapping>
+    <servlet-name>teacherdata</servlet-name>
+    <url-pattern>/teacherdata.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>graduate</servlet-name>
+    <url-pattern>/graduate.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>stuqry</servlet-name>
+    <url-pattern>/stuqry.do</url-pattern>
+  </servlet-mapping>
+ <servlet-mapping>
+    <servlet-name>teaqry</servlet-name>
+    <url-pattern>/teaqry.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>TeacherManageServlet</servlet-name>
+    <url-pattern>/teachermanage.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SubjectServlet</servlet-name>
+    <url-pattern>/subjectmanage.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>managerset</servlet-name>
+    <url-pattern>/managerset.do</url-pattern>
+  </servlet-mapping> 
+   <!-- zhanglianming 100810 -->
+  <servlet-mapping>
+  	<servlet-name>classSubjectServlet</servlet-name>
+  	<url-pattern>/lesson/classSubject.do</url-pattern>
+  </servlet-mapping>
+  <!--学籍end-->
+  <!--业务管理start-->
+  <servlet-mapping>
+    <servlet-name>BookSerServlet</servlet-name>
+    <url-pattern>/bookservice.do</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>TranListServlet</servlet-name>
+    <url-pattern>/tranlist.do</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>TranStaServlet</servlet-name>
+    <url-pattern>/transtat.do</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>BookLogServlet</servlet-name>
+    <url-pattern>/book_log.do</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>booktranpagServlet</servlet-name>
+    <url-pattern>/booktranpag.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+	<servlet-name>setchargephone</servlet-name>
+	<url-pattern>/setchargephone.do</url-pattern>
+   </servlet-mapping>
+   <!-- 开通申请 -->
+<servlet-mapping>
+    <servlet-name>ktapply</servlet-name>
+    <url-pattern>/tran/apply.do</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+    <servlet-name>ywsl</servlet-name>
+    <url-pattern>/ywsl.do</url-pattern>
+</servlet-mapping>
+  <!--业务管理end-->
+  
+ <servlet-mapping>
+    <servlet-name>noticemanage</servlet-name>
+    <url-pattern>/jzdxnoticemanage.do</url-pattern>
+  </servlet-mapping>
+ <servlet-mapping>
+    <servlet-name>queryaccounts</servlet-name>
+    <url-pattern>/queryaccounts.do</url-pattern>
+ </servlet-mapping>
+ <servlet>
+  <servlet-name>admin_confirmsms</servlet-name>
+  <servlet-class>cn.qtone.xxt.admin.jzdx.confirmsms.servlet.ConfirmSmsServlet</servlet-class>
+  </servlet>
+<servlet-mapping>
+    <servlet-name> admin_confirmsms</servlet-name>
+    <url-pattern>/admin/jzdx/confirmsms.do</url-pattern>
+</servlet-mapping>
+<servlet>
+    <servlet-name>publiclist</servlet-name>
+    <servlet-class>cn.qtone.xxt.oa.address.publicList.servlet.PublicListServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>publiclist</servlet-name>
+    <url-pattern>/publiclist.do</url-pattern>
+  </servlet-mapping>
+<!-- yhl -->
+<servlet>
+  <servlet-name>monitoring</servlet-name>
+  <servlet-class>cn.qtone.xxt.jzdx.monitor.monitoring.servlet.MonitoringServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+  <servlet-name>monitoring</servlet-name>
+  <url-pattern>/jzdx/monitor/monitoring.do</url-pattern>
+</servlet-mapping>
+<servlet>
+   <servlet-name>taskquery</servlet-name>
+   <servlet-class>cn.qtone.xxt.jzdx.monitor.taskquery.servlet.TaskQueryServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+   <servlet-name>taskquery</servlet-name>
+   <url-pattern>/jzdx/monitor/taskquery.do</url-pattern>
+</servlet-mapping>
+<servlet>
+   <servlet-name>urgentmsg</servlet-name>
+   <servlet-class>cn.qtone.xxt.jzdx.urgentmessage.servlet.UrgentMsgServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+   <servlet-name> urgentmsg</servlet-name>
+   <url-pattern>/jzdx/urgentmsg.do</url-pattern>
+</servlet-mapping>
+<servlet>
+   <servlet-name>immsend</servlet-name>
+   <servlet-class>cn.qtone.xxt.jzdx.immediatesend.servlet.ImsendServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+   <servlet-name>immsend</servlet-name>
+   <url-pattern>/jzdx/immsend.do</url-pattern>
+</servlet-mapping>
+<!-- yhl 070620 -->
+<servlet-mapping>
+   <servlet-name>ScheduleServlet</servlet-name>
+   <url-pattern>/schedule.do</url-pattern>
+</servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>stu_main</servlet-name>
+    <url-pattern>/stu_main.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>parent_main</servlet-name>
+    <url-pattern>/parent_main.do</url-pattern>
+  </servlet-mapping>
+<servlet-mapping>
+   <servlet-name>parentinteraction</servlet-name>
+   <url-pattern>/parentinteraction.do</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+   <servlet-name>siinteractionsend</servlet-name>
+   <url-pattern>/siinteractionsend.do</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+   <servlet-name>schoollinkman</servlet-name>
+   <url-pattern>/schoollinkman.do</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+    <servlet-name>ExamOnlineServlet</servlet-name>
+    <url-pattern>/examonline.do</url-pattern>
+  </servlet-mapping>
+   <servlet-mapping>
+    <servlet-name>StuExamOnlineServlet</servlet-name>
+    <url-pattern>/stuexamonline.do</url-pattern>
+  </servlet-mapping>
+	<servlet-mapping>
+    <servlet-name>BehaveServlet</servlet-name>
+    <url-pattern>/behaveservlet.do</url-pattern>
+  </servlet-mapping>
+<servlet-mapping>
+    <servlet-name>BehaveStdServlet</servlet-name>
+<url-pattern>/behavestdservlet.do</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+    <servlet-name>BehaveStuServlet</servlet-name>
+    <url-pattern>/behavestuservlet.do</url-pattern>
+  </servlet-mapping>
+<servlet-mapping>
+    <servlet-name>ParentBehaveServlet</servlet-name>
+<url-pattern>/parent/behavestuservlet.do</url-pattern>
+</servlet-mapping>
+ <servlet-mapping>
+   <servlet-name>propertyset</servlet-name>
+   <url-pattern>/admin/propertyset.do</url-pattern>
+ </servlet-mapping>
+<servlet-mapping>
+    <servlet-name>SpecActivity</servlet-name>
+    <url-pattern>/specialactivity.do</url-pattern>
+</servlet-mapping>
+   <servlet-mapping>
+    <servlet-name>uploadlist</servlet-name>
+    <url-pattern>/uploadlist.do</url-pattern>
+  </servlet-mapping>  
+   <servlet-mapping>
+    <servlet-name>qtuploadlist</servlet-name>
+    <url-pattern>/qtuploadlist.do</url-pattern>
+  </servlet-mapping>
+<servlet-mapping>
+	<servlet-name>teacheratt</servlet-name>
+	<url-pattern>/teacheratt.do</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+    <servlet-name>iccardquery</servlet-name>
+    <url-pattern>/iccardquery</url-pattern>
+</servlet-mapping>
+ <servlet-mapping>
+    <servlet-name>teachersys</servlet-name>
+    <url-pattern>/teachersys.do</url-pattern>
+  </servlet-mapping> 
+ <servlet-mapping>
+    <servlet-name>opquery</servlet-name>
+    <url-pattern>/admin/opquery.do</url-pattern>
+  </servlet-mapping> 
+<servlet-mapping>
+    <servlet-name>stutmqry</servlet-name>
+    <url-pattern>/stutmqry.do</url-pattern>
+  </servlet-mapping>
+<servlet-mapping>
+    <servlet-name>stuimport</servlet-name>
+    <url-pattern>/stuimport.do</url-pattern>
+  </servlet-mapping>
+<servlet-mapping>
+    <servlet-name>personSet</servlet-name>
+    <url-pattern>/adminpersonset</url-pattern>
+  </servlet-mapping>
+<servlet-mapping>
+    <servlet-name>businessDeal</servlet-name>
+    <url-pattern>/businessDeal.do</url-pattern>
+ </servlet-mapping>
+<servlet-mapping>
+	<servlet-name>courseschedule</servlet-name>
+	<url-pattern>/courseschedule.do</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+    <servlet-name>teaopquery</servlet-name>
+    <url-pattern>/teaopquery.do</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+		<servlet-name>adminmonitoring</servlet-name>
+		<url-pattern>/admin/jzdx/adminmonitoring.do</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>admintaskquery</servlet-name>
+		<url-pattern>/admin/jzdx/admintaskquery.do</url-pattern>
+	</servlet-mapping>
+<servlet-mapping>
+    <servlet-name>teasendsmsqry</servlet-name>
+    <url-pattern>/teasendsmsqry.do</url-pattern>
+  </servlet-mapping>
+<servlet-mapping>
+    <servlet-name>tearecsmsqry</servlet-name>
+    <url-pattern>/tearecsmsqry.do</url-pattern>
+  </servlet-mapping>
+<servlet-mapping>
+	<servlet-name>inelegantsms</servlet-name>
+	<url-pattern>/admin/jzdx/inelegantsms.do</url-pattern>
+</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>RecipeServlet</servlet-name>
+		<url-pattern>/recipe.do</url-pattern>
+	</servlet-mapping>
+ <servlet-mapping>
+    <servlet-name>DownRecord</servlet-name>
+    <url-pattern>/downrecord.do</url-pattern>
+  </servlet-mapping>
+   <servlet-mapping>
+    <servlet-name>SchoolManageADCServlet</servlet-name>
+    <url-pattern>/schoolmanageadc.do</url-pattern>
+  </servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>CSALoginServlet</servlet-name>
+		<url-pattern>/csa/login.do</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>CsaCancelOrderServlet</servlet-name>
+		<url-pattern>/csa/cancelorder.do</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>consultation</servlet-name>
+		<url-pattern>/csa/consultation.do</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>acceptance</servlet-name>
+		<url-pattern>/csa/acceptance.do</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>blacklist</servlet-name>
+		<url-pattern>/csa/blacklist.do</url-pattern>
+    </servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>complaint</servlet-name>
+		<url-pattern>/complaint.do</url-pattern>
+	</servlet-mapping>
+    <servlet-mapping>
+		<servlet-name>CsaUserServlet</servlet-name>
+		<url-pattern>/csauser.do</url-pattern>
+    </servlet-mapping>
+ <servlet-mapping>
+	<servlet-name>NewFuncNoticeServlet</servlet-name>
+	<url-pattern>/new_func_notice.do</url-pattern>
+</servlet-mapping>
+<!--教师积分 开始-->
+<servlet>
+   <servlet-name>AdminAmassLogonServlet</servlet-name>
+   <servlet-class>cn.qtone.xxt.admin.amass.logon.servlet.AmassLogonServlet</servlet-class>
+</servlet>
+<servlet>
+   <servlet-name>AdminAmassConsumeServlet</servlet-name>
+   <servlet-class>cn.qtone.xxt.admin.amass.consume.servlet.ConsumeServlet</servlet-class>
+</servlet>
+<servlet>
+   <servlet-name>CentSearchServlet</servlet-name>
+   <servlet-class>cn.qtone.xxt.admin.amass.centsearch.servlet.CentSearchServlet</servlet-class>
+</servlet>
+<servlet>
+   <servlet-name>ProductServlet</servlet-name>
+   <servlet-class>cn.qtone.xxt.admin.amass.product.servlet.ProductServlet</servlet-class>
+</servlet>
+<servlet>
+   <servlet-name>FeedBackServlet</servlet-name>
+   <servlet-class>cn.qtone.xxt.admin.amass.feedback.servlet.FeedBackServlet</servlet-class>
+</servlet>
+<servlet>
+<servlet-name>AmassConfigServlet</servlet-name>
+   <servlet-class>cn.qtone.xxt.admin.amass.config.servlet.ConfigServlet</servlet-class>
+</servlet>
+<servlet>
+<servlet-name>AmassLogonServlet</servlet-name>
+   <servlet-class>cn.qtone.xxt.amass.logon.servlet.AmassLogonServlet</servlet-class>
+</servlet>
+<servlet>
+   <servlet-name>FamassConsumeServlet</servlet-name>
+   <servlet-class>cn.qtone.xxt.amass.consume.servlet.ConsumeServlet</servlet-class>
+</servlet>
+<servlet>
+  <servlet-name>AmassCentDetail</servlet-name> 
+  <servlet-class>cn.qtone.xxt.admin.amass.centdetail.sevlet.CentDetailServlet</servlet-class> 
+  </servlet>
+  
+  <servlet>
+   <servlet-name>LeaderServlet</servlet-name>
+   <servlet-class>cn.qtone.xxt.admin.amass.leader.servlet.LeaderServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+   <servlet-name>AdminAmassLogonServlet</servlet-name>
+   <url-pattern>/amasslogon.do</url-pattern>
+</servlet-mapping> 
+<servlet-mapping>
+   <servlet-name>AdminAmassConsumeServlet</servlet-name>
+   <url-pattern>/amassconsume.do</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+   <servlet-name>CentSearchServlet</servlet-name>
+   <url-pattern>/amasscent.do</url-pattern>
+</servlet-mapping> 
+<servlet-mapping>
+   <servlet-name>ProductServlet</servlet-name>
+   <url-pattern>/amassproduct.do</url-pattern>
+</servlet-mapping> 
+<servlet-mapping>
+   <servlet-name>FeedBackServlet</servlet-name>
+   <url-pattern>/amassfeedback.do</url-pattern>
+</servlet-mapping> 
+<servlet-mapping>
+<servlet-name>AmassConfigServlet</servlet-name>
+   <url-pattern>/amassconfig.do</url-pattern>
+</servlet-mapping> 
+<servlet-mapping>
+<servlet-name>AmassLogonServlet</servlet-name>
+   <url-pattern>/famasslogon.do</url-pattern>
+</servlet-mapping> 
+<servlet-mapping>
+<servlet-name>FamassConsumeServlet</servlet-name>
+   <url-pattern>/famassconsume.do</url-pattern>
+</servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>AmassCentDetail</servlet-name> 
+  <url-pattern>/amasscentdetail.do</url-pattern> 
+  </servlet-mapping>
+  <servlet-mapping>
+   <servlet-name>LeaderServlet</servlet-name>
+   <url-pattern>/amassleader.do</url-pattern>
+</servlet-mapping> 
+<!--教师积分 结束-->
+<!-- 校园建站开始 -->
+<servlet-mapping>
+		<servlet-name>schwebNewsServlet</servlet-name>
+		<url-pattern>/schwebNews.do</url-pattern>
+</servlet-mapping> 
+<servlet-mapping>
+		<servlet-name>schwebPhotoServlet</servlet-name>
+		<url-pattern>/schwebPhoto.do</url-pattern>
+</servlet-mapping> 
+<servlet-mapping>
+		<servlet-name>schwebSchoolSetServlet</servlet-name>
+		<url-pattern>/schwebSet.do</url-pattern>
+</servlet-mapping> 
+<servlet-mapping>
+		<servlet-name>dispatcherServlet</servlet-name>
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
+<!-- 校园建站结束-->
+
+<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath*:/spring/ApplicationContext.xml</param-value>
+	</context-param>
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<!-- Character Encoding filter -->
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>
+			org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>GBK</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>*.do</url-pattern>
+	</filter-mapping>
+
+<!--session超时设置(30分钟)-->
+<session-config>
+  <session-timeout>30</session-timeout>
+</session-config>
+<!--session超时设置-->
+<security-constraint>
+  <web-resource-collection>
+    <web-resource-name>conf</web-resource-name>
+    <url-pattern>/conf/*</url-pattern>
+    <http-method>get</http-method>
+    <http-method>post</http-method>
+  </web-resource-collection>
+  <auth-constraint>
+    <role-name>admin</role-name>
+  </auth-constraint>
+</security-constraint>
+<mime-mapping>
+  <extension>wsdl</extension>
+  <mime-type>text/xml</mime-type>
+</mime-mapping>
+<mime-mapping>
+  <extension>xsd</extension>
+  <mime-type>text/xml</mime-type>
+</mime-mapping>
+ <error-page> 
+        <error-code>500</error-code> 
+        <location>/gdhtm/error_page.htm</location> 
+  </error-page>
+</web-app>
