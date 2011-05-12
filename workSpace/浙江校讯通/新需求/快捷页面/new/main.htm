@@ -1,0 +1,313 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>校讯通家校互动平台</title>
+<style type="text/css">
+<!--
+body,td,th {
+	font-size: 12px;
+	color: #000000;
+}
+body {
+	background-color: #ffffff;
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+}
+a:link {
+	color: #000000;
+	text-decoration: none;
+}
+a:visited {
+	text-decoration: none;
+	color: #000000;
+}
+.fontblue {
+	font-size: 12px;
+	color: #000099;
+}
+.fontred {
+	font-size: 12px;
+	color: #FF6600;
+}
+a:hover {
+	text-decoration: underline;
+	color: #003399;
+}
+a:active {
+	text-decoration: none;
+	color: #000000;
+}
+-->
+</style>
+<link href="/school/css/oa.css" rel="stylesheet" type="text/css">
+<link href="/kjitem/kjCSS.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+<!--
+.style1 {color: #FF0000}
+.linebg {	font-size: 12px;
+	line-height: 14px;
+	background-image: url(/school/images/nimages/linebg.gif);
+	background-repeat: repeat-x;
+}
+.time {	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #FF3300;
+	font-weight: bold;
+	line-height: 14px;
+}
+-->
+</style>
+<script language="javascript">
+var posX='+';
+  var posY='+';
+  var xC=0;//x方向移动了几次
+  var yC=0;//y方向移动了几次
+
+  function initAd() {
+   document.getElementById('AdLayer').style.posTop = 0;//设置onLoad事件激发以后，广告层相对于固定后的y方向位置
+   document.getElementById('AdLayer').style.visibility = 'visible'//设置层为可见
+   MoveLayer('AdLayer');//调用函数MoveLayer()
+  }
+
+ function MoveLayer(layerName) {
+   var originX=parseInt(eval("document.getElementById('" + layerName + "').style.posTop"));
+   var originY=parseInt(eval("document.getElementById('" + layerName + "').style.posLeft"));
+   var rand=parseInt(Math.random()*100);
+   if(originX+600>window.screen.width){
+     posX='-';
+   }else if(originX<0){
+     posX='+';
+   }
+   if(originY>window.screen.height){
+     posY='-';
+
+   }else if(originY<0){
+     posY='+';
+   }
+   originX=eval(originX+posX+1);//浮动广告层固定于浏览器的x方向位置 x方向变化
+   originY=eval(originY+posY+1);//浮动广告层固定于浏览器的y方向位置 y方向变化
+   eval("document.getElementById('" + layerName + "').style.posTop =originX");
+   eval("document.getElementById('" + layerName + "').style.posLeft=originY");//移动广告层
+   //HideorShow(document.all("AdLayer"));
+   setTimeout("MoveLayer('"+layerName+"');", 20);//设置20毫秒后再调用函数MoveLayer()
+ }
+
+function MM_preloadImages() { //v3.0
+  var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
+    var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
+    if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+}
+function MM_swapImgRestore() { //v3.0
+  var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+}
+function MM_findObj(n, d) { //v4.01
+  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
+  if(!x && d.getElementById) x=d.getElementById(n); return x;
+}
+
+function MM_swapImage() { //v3.0
+  var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
+   if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
+}
+</script>
+</head>
+
+<body onLoad="MM_preloadImages('images/btns_o_11.png','images/btns_o_12.png','images/btns_o_13.png','images/btns_o_21.png','images/btns_o_22.png','images/btns_o_23.png','images/btns_o_24.png','images/btns_o_31.png','images/btns_o_32.png','images/btns_o_33.png')"><!--setCookies('{userId}'); onLoad="initAd();"-->
+<table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td height="39"><table width="100%" border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td width="968" height="39" background="/school/images/images_30.gif" class="font5">&nbsp;[ <span class="fontred">{schoolname}</span> ][ <span class="fontred">{rolename}</span> ]用户[ <span class="fontred">{username}</span> ]　您好！今天是<span class="font5">
+
+        <script language="JavaScript">
+ <!---
+    today=new Date();
+    function initArray()
+      {   this.length=initArray.arguments.length
+          for(var i=0;i<this.length;i++)
+          this[i+1]=initArray.arguments[i]
+     }
+	 function view(ID){
+ window.open('searchnotice.do?action=lookcontent&type=2&id='+ID,'','scrollbars=no,width=400,height=300,top=50,left=300')
+  }
+   var d=new initArray("<font color=red>星期日","星期一","星期二","星期三","星期四","星期五","星期六");
+     document.write("",today.getYear(),"年",today.getMonth()+1,"月","",today.getDate(),"日 ",d[today.getDay()+1]);
+   //--> </script></span></td>
+        <td width="11" align="right" background="/school/images/images_30.gif"><img src="/school/images/images_35.gif" width="11" height="39" alt=""></td>
+      </tr>
+    </table></td>
+  </tr>
+  <tr>
+    <td valign="middle"><table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+      <tr valign="middle">
+        <td height="100%" align="center" valign="middle"><div class="tScroll01">
+          <table width="100%" height="100%" border="0" cellpadding="6" cellspacing="4">
+            <tr>
+              <td width="501" height="100%" align="left" valign="top"><table border="0" align="center" cellpadding="5" cellspacing="1" bgcolor="#83BDFF" id="t1">
+                <tr>
+                  <td align="left" valign="middle" bgcolor="#E5F2FF" class="font5">常用功能快捷通道</td>
+                </tr>
+                <tr bgcolor="#FFFFFF">
+                  <td align="left" valign="middle" bgcolor="#FFFFFF" class="font5"><table border="0" cellpadding="4" cellspacing="0">
+                    <tr>
+                      <td height="4" colspan="3" align="center"></td>
+                    </tr>
+                    <tr>
+                      <td colspan="3" align="left"><img src="images/title_01.png" width="86" height="32"></td>
+                      </tr>
+                    <tr>
+                      <td align="center"><a href="#" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image1','','images/btns_o_11.png',1)"><img src="images/btns_n_11.png" alt="#" name="Image1" width="155" height="53" border="0"></a></td>
+                      <td align="center"><a href="#" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image2','','images/btns_o_12.png',1)"><img src="images/btns_n_12.png" alt="#" name="Image2" width="155" height="53" border="0"></a></td>
+                      <td align="center"><a href="#" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image3','','images/btns_o_13.png',1)"><img src="images/btns_n_13.png" alt="#" name="Image3" width="155" height="53" border="0"></a></td>
+                      </tr>
+                    <tr>
+                      <td height="4" colspan="3" align="center"></td>
+                    </tr>
+                  </table>
+                    <table border="0" cellpadding="4" cellspacing="0">
+                      <tr>
+                        <td height="4" colspan="3" align="center"></td>
+                      </tr>
+                      <tr>
+                        <td colspan="3" align="left"><img src="images/title_02.png" width="86" height="32"></td>
+                      </tr>
+                      <tr>
+                        <td align="center"><a href="#" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image4','','images/btns_o_21.png',1)"><img src="images/btns_n_21.png" alt="#" name="Image4" width="155" height="53" border="0"></a></td>
+                        <td align="center"><a href="#" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image5','','images/btns_o_22.png',1)"><img src="images/btns_n_22.png" alt="#" name="Image5" width="155" height="53" border="0"></a></td>
+                        <td align="center"><a href="#" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image6','','images/btns_o_23.png',1)"><img src="images/btns_n_23.png" alt="#" name="Image6" width="155" height="53" border="0"></a></td>
+                        </tr>
+                      <tr>
+                        <td align="center"><a href="#" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image7','','images/btns_o_24.png',1)"><img src="images/btns_n_24.png" alt="#" name="Image7" width="155" height="53" border="0"></a></td>
+                        <td align="center">&nbsp;</td>
+                        <td align="center">&nbsp;</td>
+                        </tr>
+                      <tr>
+                        <td height="4" colspan="3" align="center"></td>
+                      </tr>
+                    </table>
+                    <table border="0" align="left" cellpadding="4" cellspacing="0">
+                      <tr>
+                        <td height="4" colspan="3" align="center"></td>
+                      </tr>
+                      <tr>
+                        <td colspan="3" align="left"><img src="images/title_03.png" width="86" height="32"></td>
+                      </tr>
+                      <tr>
+                        <td align="center"><a href="#" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image8','','images/btns_o_31.png',1)"><img src="images/btns_n_31.png" alt="#" name="Image8" width="155" height="53" border="0"></a></td>
+                        <td align="center"><a href="#" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image9','','images/btns_o_32.png',1)"><img src="images/btns_n_32.png" alt="#" name="Image9" width="155" height="53" border="0"></a></td>
+                        <td align="center"><a href="#" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image10','','images/btns_o_33.png',1)"><img src="images/btns_n_33.png" alt="#" name="Image10" width="155" height="53" border="0"></a></td>
+                      </tr>
+                      <tr>
+                        <td height="4" colspan="3" align="center"></td>
+                      </tr>
+                    </table></td>
+                </tr>
+              </table>
+                </td>
+              <td height="100%" valign="top"><table width="100%" border="0" align="center" cellpadding="5" cellspacing="1" bgcolor="#83BDFF" id="t1">
+                <tr>
+                  <td align="left" valign="middle" bgcolor="#E5F2FF" class="font5">公告通知</td>
+                </tr>
+                <tr bgcolor="#FFFFFF">
+                  <td align="left" valign="middle" bgcolor="#FFFFFF" class="font5"><table width="98%" border="0" align="center" cellpadding="4" cellspacing="1">
+                    <tr>
+                      <td width="21%" align="center" bgcolor="#BCE7FB">公告类别</td>
+                      <td width="40%" align="center" bgcolor="#BCE7FB">标题</td>
+                      <td width="21%" align="center" bgcolor="#BCE7FB">发布者</td>
+                      <td width="18%" align="center" bgcolor="#BCE7FB">发布时间</td>
+                    </tr>
+                    {List}
+  <tr style="display:{noticehidden}">
+    <td align="center" class="linebg" title="点击进入更多学校公告"><!--<a href="/searchnotice.do?action=noticelist"><font color="#6666FF">学校公告</font></a>!-->
+      学校公告 </td>
+    <td align="left" class="linebg"><a href="javascript:view({id});">{title}</a><img src="/school/images/oa/new77.gif" width="28" height="11" align="absmiddle" style="visibility:{isnew} "></td>
+    <td align="center" class="linebg">{sendername}</td>
+    <td align="center" class="time linebg">{sdate}</td>
+  </tr>
+                    {List}
+                    {List2}
+  <tr  style="display:{noticehidden}">
+    <td align="center" class="linebg" title="点击进入更多SI公告"><!--<a href="/searchnotice.do?action=sinotice"><font color='#9900CC'>SI公告</font></a>!-->
+      SI公告 </td>
+    <td align="left" class="linebg"><a href="javascript:view1({id});">{title}</a><img src="/school/images/oa/new77.gif" width="28" height="11" align="absmiddle" style="visibility:{isnew} "></td>
+    <td align="center" class="linebg">{sendername}</td>
+    <td align="center" class="time linebg">{sdate}</td>
+  </tr>
+                    {List2}
+                    {List3}
+  <tr  style="display:{noticehidden}">
+    <td align="center" class="linebg" title="点击进入更多SI公告"><!--<a href="/searchnotice.do?action=noticelist"><font color='red'>表扬公告</font></a>-->
+      表扬公告 </td>
+    <td align="left" class="linebg"><a href="javascript:view2({id});">{title}</a><img src="/school/images/oa/new77.gif" width="28" height="11" align="absmiddle" style="visibility:{isnew} "></td>
+    <td align="center" class="linebg">{sendername}</td>
+    <td align="center" class="time linebg">{sdate}</td>
+  </tr>
+                    {List3}
+                  </table></td>
+                </tr>
+              </table>
+                </td>
+            </tr>
+          </table>
+          </div></td>
+        <td width="4" background="/school/images/images_48.gif"></td>
+      </tr>
+
+    </table></td>
+  </tr>
+</table>
+
+</body>
+
+<!--add by 070406-->
+<script language="javascript">
+function closeWin()
+{
+ // document.getElementById('AdLayer').style.display = 'none';//设置层为不可见
+  window.open ('/getsmsrank.do')
+}
+</script>
+<!--end-->
+
+<script language="javascript">
+function lookinfo(itype){
+  if(itype==0){
+     location.href='/caltable.do?action=tableList';
+  }
+  else if(itype==1){
+    location.href='/calaffair.do?action=affairList';
+  }
+}
+   function reply(ReplyId,ReplyName,ID){
+
+var URL="/oasendsms.do?action=replysmsform&id="+ID+"&replyid="+ReplyId+"&replyname="+ReplyName;
+ var myleft=(screen.availWidth-500)/2; window.open(URL,"","height=240,width=400,status=1,toolbar=no,menubar=no,location=no,scrollbars=no,top=150,left="+myleft+",resizable=no");
+  }
+
+function view(ID){
+ window.open('searchnotice.do?action=lookcontent&type=2&id='+ID,'','scrollbars=no,width=500,height=300,top=50,left=300')
+  }
+
+  function view1(ID){
+ window.open('searchnotice.do?action=sisinglenotice&notice_id='+ID,'','scrollbars=no,width=500,height=300,top=50,left=300')
+  }
+
+  function view2(ID){
+window.open('searchnotice.do?action=praisecontent&id='+ID,'','scrollbars=no,width=500,height=300,top=50,left=300')
+  }
+  function setCookies(userId){
+  	try{
+		document.cookie=userId;
+	}catch(e){}
+}
+</script>
+
+
+
+
+</html>
