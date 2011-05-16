@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<employees>
+	<employee>
+		<sn>192334</sn>
+		<name> 李四 </name>
+		<sex> 男 </sex>
+		<dateOfBirth>1966-6-29</dateOfBirth>
+		<dept> 研发 </dept>
+		<onboard>1997-1-20</onboard>
+		<reportMgr>182322</reportMgr>
+	</employee>
+	<employee>
+		<sn>19636</sn>
+		<name> 王梅 </name>
+		<sex> 女 </sex>
+		<dateOfBirth>1980-6-21</dateOfBirth>
+		<dept> 人力资源 </dept>
+		<onboard>2003-12-22</onboard>
+		<reportMgr>191323</reportMgr>
+	</employee>
+</employees>
