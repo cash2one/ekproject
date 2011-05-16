@@ -10,7 +10,9 @@
 		<script type="text/javascript">
 		    dojo.require("dijit.dijit");
 		    dojo.require("elam._base.Controller");
-		    dojo.require("dojox.data.XmlStore");		
+		    dojo.require("dojo.data.ItemFileReadStore");
+		    dojo.require("dojox.data.XmlStore");
+		    dojo.require("elam.data.DataStore");		
 		</script>
 			 
 		<script type="text/javascript">
@@ -40,17 +42,20 @@
        var _req = new elam._base.Controller();
        _req.print('测试打印');
        
-
       
-       
-       
+       //json
+       var employeeStore = new dojo.data.ItemFileReadStore({
+             url: "/data/jsonlist.jsp" 
+       });
+
 	   //XML       
-	   var employeeStore = new dojox.data.XmlStore ({
+	   var employeeStore = new dojox.data.XmlStore({
  			url: "/data/test.xml" 
        });       
         
-     // 数据加载完毕，渲染表格或者更新
-	   var itemsLoaded = function(items, request){
+        
+       // 数据加载完毕，渲染表格或者更新
+	   var itemsLoaded = function(items,request){
 			 var myTable = dojo.byId("myTable");
 			 if (myTable != null) {
 				 if (myTable.firstChild) 
@@ -64,9 +69,9 @@
 				 if (items && items[0]) {
 					 var attributes = employeeStore.getAttributes(items[0]);
 					 dojo.forEach(attributes, function(attr){
-					 var th = dojo.doc.createElement("th");
-					 tableHeader.appendChild(th);
-					 th.appendChild(dojo.doc.createTextNode(attr));
+						 var th = dojo.doc.createElement("th");
+						 tableHeader.appendChild(th);
+						 th.appendChild(dojo.doc.createTextNode(attr));
 					 });
 				 }
 				 // 渲染表体
@@ -77,21 +82,25 @@
 					 tableBody.appendChild(row);
 					 var attributes = employeeStore.getAttributes(item);
 					 dojo.forEach(attributes, function(attribute){
-					 var td = dojo.doc.createElement("td");
-					 row.appendChild(td);
-					 td.appendChild(dojo.doc.createTextNode(
-					 employeeStore.getValue(item, attribute))) ;
+						 var td = dojo.doc.createElement("td");
+						 row.appendChild(td);
+						 td.appendChild(dojo.doc.createTextNode(
+						 employeeStore.getValue(item, attribute))) ;
 					 });
 				 });
 			 }
 	 };
 
 		// 定义 request 对象
-		var request=null;
+     var request=null;
 		// 通过 fetch 方法获取数据
-		request = employeeStore.fetch({
+	 request = employeeStore.fetch({
 		    onComplete: itemsLoaded
-		});
+	 });
+		       
+		       
+     var test = new elam.data.DataStore('/data/jsonlist.jsp','myTestTable',0);       
+	 
 		       
     </script>
 	</head>
@@ -139,6 +148,7 @@
 		 </table>
           
          <table id="myTable">
+         <table id="myTestTable">
          
          
          </table>			
