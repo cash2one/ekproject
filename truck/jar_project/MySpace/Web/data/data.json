@@ -1,0 +1,11 @@
+{
+  identifier: 'name',
+  items:[{name: 'Adobo', aisle: 'Mexican' },
+		{ name: 'Balsamic vinegar', aisle: 'Condiments' },
+		{ name: 'Basil', aisle: 'Spices' },
+		{ name: 'Bay leaf', aisle: 'Spices' },
+		{ name: 'Beef Bouillon Granules', aisle: 'Soup' },
+		{ name: 'Vinegar', aisle: 'Condiments' },
+		{ name: 'White cooking wine', aisle: 'Condiments' },
+		{ name: 'Worcestershire Sauce', aisle: 'Condiments' }] 
+}  
