@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="MySpace"
+  id="myeclipse.1285683043593"
+  context-root="/MySpace"
+  j2ee-spec="1.4"
+  archive="MySpace.war">
+  <attributes>
+    <attribute name="webrootdir" value="Web" />
+  </attributes>
+</project-module>
+

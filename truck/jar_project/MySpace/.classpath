@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="Web/WEB-INF/lib/commons-fileupload-1.2.2.jar"/>
+	<classpathentry kind="lib" path="Web/WEB-INF/lib/commons-io-2.0.1.jar"/>
+	<classpathentry kind="lib" path="Web/WEB-INF/lib/DataControlUtil_beta_1.0.1.jar"/>
+	<classpathentry kind="lib" path="Web/WEB-INF/lib/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="Web/WEB-INF/lib/EImportUtil_beta_1.0.1.jar"/>
+	<classpathentry kind="lib" path="Web/WEB-INF/lib/jaxen-1.1-beta-6.jar"/>
+	<classpathentry kind="lib" path="Web/WEB-INF/lib/jstl.jar"/>
+	<classpathentry kind="lib" path="Web/WEB-INF/lib/mail.jar"/>
+	<classpathentry kind="lib" path="Web/WEB-INF/lib/mysql-connector-java-3.0.14-production-bin.jar"/>
+	<classpathentry kind="lib" path="Web/WEB-INF/lib/ojdbc14.jar"/>
+	<classpathentry kind="lib" path="Web/WEB-INF/lib/poi-3.7-20101029.jar"/>
+	<classpathentry kind="lib" path="Web/WEB-INF/lib/poi-ooxml-3.7-20101029.jar"/>
+	<classpathentry kind="lib" path="Web/WEB-INF/lib/poi-ooxml-schemas-3.7-20101029.jar"/>
+	<classpathentry kind="lib" path="Web/WEB-INF/lib/poi-scratchpad-3.7-20101029.jar"/>
+	<classpathentry kind="lib" path="Web/WEB-INF/lib/standard.jar"/>
+	<classpathentry kind="lib" path="Web/WEB-INF/lib/struts.jar"/>
+	<classpathentry kind="lib" path="Web/WEB-INF/lib/xmlbeans-2.3.0.jar"/>
+	<classpathentry kind="lib" path="Web/WEB-INF/lib/servlet-api.jar"/>
+	<classpathentry kind="output" path="Web/WEB-INF/classes"/>
+</classpath>

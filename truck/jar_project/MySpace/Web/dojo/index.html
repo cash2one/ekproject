@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>Tutorial: Hello Dojo!</title>
+    <meta charset="utf-8">
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    
+    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+    <script src="/js/dojo/dojo.js"></script>
+    <script>
+        // New: Require in the dojo.fx module
+		dojo.require("dojo.fx");
+        
+        djConfig={
+            isDebug:true
+            ///parseOnLoad:true
+        };
+ 
+		// Remember, dojo.ready waits for both the DOM and all dependencies
+		dojo.ready(function(){
+		    // The piece we had before - change our innerHTML
+		    dojo.byId("greeting").innerHTML += ", from " + dojo.version;
+		    
+		    // Now, slide the greeting
+		    dojo.fx.slideTo({
+		        top: 100,
+		        left: 200,
+		        node: dojo.byId("greeting")
+		    }).play();
+		});
+		
+		
+		
+		//上下文		
+		var globalContextVariable = "foo";
+		
+		function accessGlobalContext() {
+		    // This will successfully output "foo"...
+		    console.log(this.globalContextVariable);
+		};
+		
+		var myHash = {
+		    enclosedVariable : "bar",
+		    enclosedFunction : function() {
+		                           // Display global context variable...
+		                           console.log(this.globalContextVariable);
+		
+		                           // Display enclosed context variable...
+		                           console.log(this.enclosedVariable);
+		                       }
+		};
+		
+		
+		console.log("Calling accessGlobalContext()...");
+		accessGlobalContext();
+		
+		console.log("Calling myHash.enclosedFunction()...");
+		myHash.enclosedFunction();
+		
+		console.log("Switch the context using dojo.hitch...");
+		var switchContext = dojo.hitch(this, myHash.enclosedFunction);
+		switchContext();
+		
+    </script>
+  </head>
+  
+  <body>
+          <h1 id="greeting">Hello</h1>
+  </body>
+</html>

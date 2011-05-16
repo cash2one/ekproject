@@ -1,0 +1,65 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>Javascript MVC</title>
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    
+    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+    <script src="/js/dojo/dojo.js"></script>
+    <script src="/js/dojo/dijit.js"></script>
+    <script src="/js/wrapper/Controller.js"></script>
+    <script src="/js/wrapper/Model.js"></script>
+    <script src="/js/wrapper/View.js"></script>
+    <script type="text/javascript">
+       djConfig={
+            isDebug:true
+            ///parseOnLoad:true
+        };
+        
+       // 
+       dojo.subscribe('time',function(data){
+            console.debug('更新time数据:'+data);
+            dojo.byId('time').value=data;
+       });
+       
+       dojo.subscribe('val',function(data){
+            console.debug('更新value数据:'+data);
+            ///alert('最新Value的直:'+data);
+             dojo.byId('val').value=data;
+       });
+       
+       dojo.subscribe('list',function(data){
+            console.debug('更新list数据:'+data);
+            ///alert('接收到服务器的list：'+data);
+            dojo.byId('list').innerHTML=data;
+       });
+       
+    </script>
+  </head>
+  
+  <body>
+  <table width="100%">
+     <tr><td width="350px;">value:<input type="text" id="val" value="" ></label></td></tr>
+     <tr><td width="350px;">Time:<input type="text" id="time" value="" ></label></td></tr>
+     <tr><td width="350px;"><div id="list"></div></td></td></tr>
+  </table>
+
+  <input type="button" 
+  onclick="taas._base.Controller.remoteUpdate ('http://localhost/data/test.jsp',
+   ['val'],{'action':'querybyuserid'});"
+   value="获取数值"/>
+   
+   <input type="button" 
+   onclick="taas._base.Controller.remoteUpdate ('http://localhost/data/test.jsp',
+   ['time'],{'action':'querybyuserid'});"
+   value="更新时间"/>
+   
+     <input type="button" 
+  onclick="taas._base.Controller.remoteUpdate ('http://localhost/data/test.jsp',
+   ['time','val','list'],{'action':'querybyuserid'});"
+   value="获取最新数据"/>
+  </body>
+</html>
