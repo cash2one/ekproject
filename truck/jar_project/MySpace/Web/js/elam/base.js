@@ -8,3 +8,7 @@
  
  //dojo.data
  dojo.require("dojox.data.XmlStore");
+ 
+ 
+ //my Framework
+ dojo.require("elam.data.DataStore");
