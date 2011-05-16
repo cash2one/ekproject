@@ -1,12 +1,12 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 	<head>
-		<title>Javascript MVC</title>
-
+		<title>DOJO MVC</title>
 		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 		<meta http-equiv="description" content="this is my page">
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 		<script src="/js/dojo/dojo.js"></script>
+		<script src="/js/elam/base.js"></script>
 		<script type="text/javascript">
 		    dojo.require("dijit.dijit");
 		    dojo.require("elam._base.Controller");
@@ -37,71 +37,12 @@
             ///alert('接收到服务器的list：'+data);
             dojo.byId('list').innerHTML=data;
        });
-       
-       
-       var _req = new elam._base.Controller();
-       _req.print('测试打印');
-       
       
-       //json
-       var employeeStore = new dojo.data.ItemFileReadStore({
-             url: "/data/jsonlist.jsp" 
-       });
-
-	   //XML       
-	   var employeeStore = new dojox.data.XmlStore({
- 			url: "/data/test.xml" 
-       });       
-        
-        
-       // 数据加载完毕，渲染表格或者更新
-	   var itemsLoaded = function(items,request){
-			 var myTable = dojo.byId("myTable");
-			 if (myTable != null) {
-				 if (myTable.firstChild) 
-					 myTable.removeChild(myTable.firstChild);
-				 
-				 var tableBody = dojo.doc.createElement("tbody");
-				 myTable.appendChild(tableBody); 
-										// 创建表头
-				 var tableHeader = dojo.doc.createElement("tr");
-				 tableBody.appendChild(tableHeader);
-				 if (items && items[0]) {
-					 var attributes = employeeStore.getAttributes(items[0]);
-					 dojo.forEach(attributes, function(attr){
-						 var th = dojo.doc.createElement("th");
-						 tableHeader.appendChild(th);
-						 th.appendChild(dojo.doc.createTextNode(attr));
-					 });
-				 }
-				 // 渲染表体
-				 var row = null;
-				 dojo.forEach(items, function(item){
-					 // 渲染每一行
-					 row = dojo.doc.createElement("tr");
-					 tableBody.appendChild(row);
-					 var attributes = employeeStore.getAttributes(item);
-					 dojo.forEach(attributes, function(attribute){
-						 var td = dojo.doc.createElement("td");
-						 row.appendChild(td);
-						 td.appendChild(dojo.doc.createTextNode(
-						 employeeStore.getValue(item, attribute))) ;
-					 });
-				 });
-			 }
-	 };
-
-		// 定义 request 对象
-     var request=null;
-		// 通过 fetch 方法获取数据
-	 request = employeeStore.fetch({
-		    onComplete: itemsLoaded
-	 });
-		       
-		       
-     var test = new elam.data.DataStore('/data/jsonlist.jsp','myTestTable',0);       
-	 
-		       
+       /// var test = new elam.data.DataStore('/data/data.json','myTestTable',0);       
+       //showTableDataStore('/data/data.json','myTestTable');
+       
+       //showTableDataStore('/data/test.xml','test_1','xml');          
+       
     </script>
 	</head>
 
@@ -149,8 +90,10 @@
           
          <table id="myTable">
          <table id="myTestTable">
-         
-         
+         <table id="test_1">
+          <input type="button" value="myTable" onclick="showTableDataStore('/data/test.xml','myTable','xml');"/>
+          <input type="button" value="myTestTable" onclick="showTableDataStore('/data/data.json','myTestTable');"/>
+          <input type="button" value="test_1" onclick="showTableDataStore('/data/jsonlist.jsp','test_1');"/>
          </table>			
 	</body>
 </html>
