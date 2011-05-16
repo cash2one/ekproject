@@ -1,23 +1,25 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-  <head>
-    <title>Javascript MVC</title>
-	
-    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-    <meta http-equiv="description" content="this is my page">
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    
-    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
-    <script src="/js/dojo/dojo.js"></script>
-    <script src="/js/dojo/dijit.js"></script>
-    <script src="/js/wrapper/Controller.js"></script>
-    <script src="/js/wrapper/Model.js"></script>
-    <script src="/js/wrapper/View.js"></script>
-    <script type="text/javascript">
-       djConfig={
-            isDebug:true
-            ///parseOnLoad:true
-        };
+	<head>
+		<title>Javascript MVC</title>
+
+		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+		<meta http-equiv="description" content="this is my page">
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		
+		<script src="/js/dojo/dojo.js"></script>
+		
+		<script type="text/javascript">
+		    dojo.require("dijit.dijit");
+		    dojo.require("elam._base.Controller");
+		</script>	 
+			 
+		<script type="text/javascript">
+       
+	       djConfig={
+	            isDebug:true
+	            ///parseOnLoad:true
+	        };
         
        // 
        dojo.subscribe('time',function(data){
@@ -37,29 +39,111 @@
             dojo.byId('list').innerHTML=data;
        });
        
-    </script>
-  </head>
-  
-  <body>
-  <table width="100%">
-     <tr><td width="350px;">value:<input type="text" id="val" value="" ></label></td></tr>
-     <tr><td width="350px;">Time:<input type="text" id="time" value="" ></label></td></tr>
-     <tr><td width="350px;"><div id="list"></div></td></td></tr>
-  </table>
+       
+       var _req = new elam._base.Controller();
+       _req.print('测试打印');
+       
 
-  <input type="button" 
-  onclick="taas._base.Controller.remoteUpdate ('http://localhost/data/test.jsp',
-   ['val'],{'action':'querybyuserid'});"
-   value="获取数值"/>
-   
-   <input type="button" 
-   onclick="taas._base.Controller.remoteUpdate ('http://localhost/data/test.jsp',
-   ['time'],{'action':'querybyuserid'});"
-   value="更新时间"/>
-   
-     <input type="button" 
-  onclick="taas._base.Controller.remoteUpdate ('http://localhost/data/test.jsp',
-   ['time','val','list'],{'action':'querybyuserid'});"
-   value="获取最新数据"/>
-  </body>
+       dojo.require("dojox.data.XmlStore");		
+       
+       
+	   //XML       
+	   var employeeStore = new dojox.data.XmlStore ({
+ 			url: "/data/test.xml" 
+       });       
+        
+     // 数据加载完毕，渲染表格或者更新
+	   var itemsLoaded = function(items, request){
+			 var myTable = dojo.byId("myTable");
+			 if (myTable != null) {
+				 if (myTable.firstChild) 
+					 myTable.removeChild(myTable.firstChild);
+				 
+				 var tableBody = dojo.doc.createElement("tbody");
+				 myTable.appendChild(tableBody); 
+										// 创建表头
+				 var tableHeader = dojo.doc.createElement("tr");
+				 tableBody.appendChild(tableHeader);
+				 if (items && items[0]) {
+					 var attributes = employeeStore.getAttributes(items[0]);
+					 dojo.forEach(attributes, function(attr){
+					 var th = dojo.doc.createElement("th");
+					 tableHeader.appendChild(th);
+					 th.appendChild(dojo.doc.createTextNode(attr));
+					 });
+				 }
+				 // 渲染表体
+				 var row = null;
+				 dojo.forEach(items, function(item){
+					 // 渲染每一行
+					 row = dojo.doc.createElement("tr");
+					 tableBody.appendChild(row);
+					 var attributes = employeeStore.getAttributes(item);
+					 dojo.forEach(attributes, function(attribute){
+					 var td = dojo.doc.createElement("td");
+					 row.appendChild(td);
+					 td.appendChild(dojo.doc.createTextNode(
+					 employeeStore.getValue(item, attribute))) ;
+					 });
+				 });
+			 }
+	 };
+
+		// 定义 request 对象
+		var request=null;
+		// 通过 fetch 方法获取数据
+		request = employeeStore.fetch({
+		    onComplete: itemsLoaded
+		});
+		       
+    </script>
+	</head>
+
+	<body>
+		<table width="100%">
+			<tr>
+				<td width="350px;">
+					value:
+					<input type="text" id="val" value="">
+					</label>
+				</td>
+			</tr>
+			<tr>
+				<td width="350px;">
+					Time:
+					<input type="text" id="time" value="">
+					</label>
+				</td>
+			</tr>
+			<tr>
+				<td width="350px;">
+					<div id="list"></div>
+				</td>
+				</td>
+			</tr>
+			<tr>
+			<td>
+				<input type="button"
+					onclick="elam._base.Controller.remoteUpdate ('http://localhost/data/test.jsp',
+		   ['val'],{'action':'querybyuserid'});"
+					value="获取数值" />
+		
+				<input type="button"
+					onclick="elam._base.Controller.remoteUpdate ('http://localhost/data/test.jsp',
+		   ['time'],{'action':'querybyuserid'});"
+					value="更新时间" />
+		
+				<input type="button"
+					onclick="elam._base.Controller.remoteUpdate ('http://localhost/data/test.jsp',
+		   ['time','val','list'],{'action':'querybyuserid'});"
+					value="获取最新数据" />
+			</td>
+			</tr>
+		 </table>
+          
+         <table id="myTable">
+         
+         
+         </table>			
+	</body>
 </html>
