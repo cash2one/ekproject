@@ -3,8 +3,8 @@
 			   xmlns:s="library://ns.adobe.com/flex/spark" 
 			   xmlns:mx="library://ns.adobe.com/flex/mx" 
 			   xmlns:local="*" 
-			   minWidth="200" 
-			   minHeight="180" initialize="{initApp()}">
+			   minWidth="150" 
+			   minHeight="150" initialize="{initApp()}">
 	<fx:Declarations>
 		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
 
@@ -15,29 +15,59 @@
 		<![CDATA[
 			
 			import flash.external.*;
+			import mx.core.UIComponent;
 			
-			public function taction(type:String):void{
-			    trace(type);
-				if(type=='blink')
-				   character.blink();
-				else if(type=='left')
-				   character.lookLeft();
-				else
-				   character.lookUp();
+			public function action(type:String):void{
+				if(type=='open')
+				   show();
+				else if(type=='close')
+				   close();
+			}
+			
+			
+			public function close():void{
+				var len:uint = ui.numChildren;  
+				while(len>0) {  
+					ui.removeChildAt(0);
+				}
 				
+				hbox.removeAllChildren();
 			}
 			
-		
+			
 			public function initApp():void {
-				ExternalInterface.addCallback("testAction",taction);
+				ExternalInterface.addCallback("testAction",action);
 			}
+			
+			
+			private var wc:QQjump;//动画
+			private var ui:UIComponent = new UIComponent();
+			
+			private function show():void
+			{
+				close();
+				hbox.addChild(ui);
+				wc = new QQjump();
+				ui.addChild(wc);
+				wc.x = 0;
+				wc.y = 0;
+				wc.addEventListener(Event.ENTER_FRAME,wcHandler);
+			}
+			private function wcHandler(evt:Event):void
+			{
+				if(wc.currentFrame == wc.totalFrames){
+					wc.removeEventListener(Event.ENTER_FRAME,wcHandler);
+					//处理其它事情
+				}
+			}
+			
+			
 			
 		]]>
 	</fx:Script>
 	
-	<mx:VBox paddingLeft="50">
-		<mx:HBox paddingTop="50">
-			<local:Character id="character" x="100" y="100" width="150" height="120"/>
+	<mx:VBox width="142" height="126" paddingLeft="5">
+		<mx:HBox id="hbox" paddingTop="5">
 		</mx:HBox>
 	</mx:VBox>
 	
