@@ -66,6 +66,15 @@ function fDragging(obj, e){
 </head>
 <body>
 
+
+<SCRIPT language='JavaScript' charset='utf-8'>
+				function callApp(type) {
+					WebAgent.testAction(type);
+				}
+ </SCRIPT>
+ <button onclick="callApp('open')" value="open">open</button>
+ <button onclick="callApp('close')" value="close">close</button>
+
 <div id="flashContent" 
      style=" border:1px dashed blue; width: 130px;height: 130px; text-align:center; cursor:move; position:absolute; left:200px; top: 250px;" 
      onmousedown="fDragging(this, event);"> 
