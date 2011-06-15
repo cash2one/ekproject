@@ -3,8 +3,9 @@
 			   xmlns:s="library://ns.adobe.com/flex/spark" 
 			   xmlns:mx="library://ns.adobe.com/flex/mx" 
 			   xmlns:local="*" 
-			   minWidth="150" 
-			   minHeight="150" initialize="{initApp()}">
+			   minWidth="300" 
+			   minHeight="300" initialize="{initApp()}"
+			   backgroundAlpha="0"  >
 	<fx:Declarations>
 		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
 
@@ -14,60 +15,149 @@
 	<fx:Script>
 		<![CDATA[
 			
+			
 			import flash.external.*;
 			import mx.core.UIComponent;
+		    import mx.controls.Alert;
 			
+			
+			private var qq:MovieClip;//动画
+			private var ui:UIComponent = new UIComponent();
+			private var isActive:Boolean = false;
+			
+			
+			
+			/*
+			  定义外部接口，供JS调用
+			 * */
 			public function action(type:String):void{
-				if(type=='open')
-				   show();
-				else if(type=='close')
+				if(type=='open'&&!isActive)
+				   open();
+				else if(type=='close'&&isActive)
 				   close();
+				else if(type=='face'&&isActive)
+				   face1();
+			}
+			
+
+			
+			/*
+			  程序初始化入口
+			 * */
+			public function initApp():void {
+				ExternalInterface.addCallback("testAction",action);
+				
+				createUserMenus();
 			}
 			
 			
+			
+			//打开控件
+			private function open():void{
+				isActive =true; 
+				clearStage();
+				qqHBox.addChild(ui);
+				qq = new QQOpen();
+				ui.addChild(qq);
+				qq.x = 0;
+				qq.y = 0;
+				qq.addEventListener(Event.ENTER_FRAME,mcHandler);
+				
+			}
+			
+			
+			
+			//退出控件
 			public function close():void{
+				isActive =false;
+				clearStage();
+				qqHBox.addChild(ui);
+				qq = new QQJump();
+				ui.addChild(qq);
+				qq.x = 0;
+				qq.y = 0;
+				qq.addEventListener(Event.ENTER_FRAME,mcHandler);
+			}
+			
+			
+			
+			//控件表情
+			public function face1():void{
+				clearStage();
+				qqHBox.addChild(ui);
+				qq = new QQface1();
+				ui.addChild(qq);
+				qq.x = 0;
+				qq.y = 0;
+				qq.addEventListener(Event.ENTER_FRAME,mcHandler);
+			}
+			
+			
+			
+			//控件舞台
+		    public function clearStage():void{
+				msgLabel.text="";
+				qqHBox.removeAllChildren();
 				var len:uint = ui.numChildren;  
 				while(len>0) {  
 					ui.removeChildAt(0);
+					len--;
 				}
+				qq = null;
 				
-				hbox.removeAllChildren();
 			}
+				
+	
 			
 			
-			public function initApp():void {
-				ExternalInterface.addCallback("testAction",action);
-			}
-			
-			
-			private var wc:QQjump;//动画
-			private var ui:UIComponent = new UIComponent();
-			
-			private function show():void
+			//事件
+			private function mcHandler(evt:Event):void
 			{
-				close();
-				hbox.addChild(ui);
-				wc = new QQjump();
-				ui.addChild(wc);
-				wc.x = 0;
-				wc.y = 0;
-				wc.addEventListener(Event.ENTER_FRAME,wcHandler);
-			}
-			private function wcHandler(evt:Event):void
-			{
-				if(wc.currentFrame == wc.totalFrames){
-					wc.removeEventListener(Event.ENTER_FRAME,wcHandler);
+				if(qq.currentFrame == qq.totalFrames){
+					qq.removeEventListener(Event.ENTER_FRAME,mcHandler);
 					//处理其它事情
+					msgLabel.text= qq instanceof QQOpen?"来了,来了！":(qq instanceof QQJump?"你看不到我，嘻嘻":"");
+					qq.stop();
+					
 				}
 			}
 			
+			
+			
+			//创建用户右键菜单
+			private function createUserMenus():void{  
+				
+				var menu:ContextMenu=new ContextMenu();//创建右键菜单  
+				menu.hideBuiltInItems();//隐藏内置菜单  
+				
+				var renameMenuItem:ContextMenuItem=new ContextMenuItem("测试");  
+				menu.customItems.push(renameMenuItem);  
+				renameMenuItem.addEventListener(ContextMenuEvent.MENU_ITEM_SELECT,menuUserHandler);  
+				
+				this.contextMenu = menu;
+				qqHBox.contextMenu=menu;  
+				
+				//Remove ContextMenu from all SystemManager Menu items and PopUp
+				MovieClip(systemManager).contextMenu = this.contextMenu.clone();
+				
+			}  
+			
+			
+		    //右键菜单对应的事件
+			private function menuUserHandler(evt:ContextMenuEvent):void{  
+				trace("Test");  
+			}  
 			
 			
 		]]>
 	</fx:Script>
 	
-	<mx:VBox width="142" height="126" paddingLeft="5">
-		<mx:HBox id="hbox" paddingTop="5">
+	<mx:VBox width="148" height="135" paddingLeft="5">
+		 
+	    <mx:Label id="msgLabel"></mx:Label>
+		 
+		<mx:HBox id="qqHBox" paddingTop="5" width="120" height="94">
+			
 		</mx:HBox>
 	</mx:VBox>
 	
