@@ -7,6 +7,7 @@
 			   minHeight="300" initialize="{initApp()}" creationComplete="{callWrapper('open');complete();}"
 			   backgroundAlpha="0" skinClass="skin.PluginSkin"
 			   >
+	<fx:Style source="WebAgent.css"/>
 	<fx:Declarations>
 		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
 
@@ -27,6 +28,9 @@
 			
 			private var qq:MovieClip;//动画
 			private var ui:UIComponent = new UIComponent();
+			
+			private var txt:MovieClip;//动画
+			private var txtUI:UIComponent = new UIComponent();
 			private var isActive:Boolean = false;
 			
 			
@@ -54,7 +58,7 @@
 			定义外部接口，供JS调用
 			* */
 			public function lookup(type:String):void{
-				tempResultStr=type+"：这功能我....";
+				tempResultStr=type+"：这功能你居然不清楚，其实我....";
 				lookupFace();	
 			}
 			
@@ -126,10 +130,18 @@
 			public function lookupFace():void{
 				clearStage();
 				qqHBox.addChild(ui);
-				qq = new QQSearch();
+				qq = new QQLookup2();
 				ui.addChild(qq);
 				qq.x = 0;
 				qq.y = 0;
+				
+				
+				vBox.addChild(txtUI);
+				txt = new FontT();
+				txtUI.addChild(txt);
+				txt.x = 0;
+				txt.y = 0;
+				
 				qq.addEventListener(Event.ENTER_FRAME,mcHandler);
 			}
 			
@@ -158,7 +170,7 @@
 					//处理其它事情
 					if((qq instanceof QQOpen)||(qq instanceof QQClose)){
 					   msgLabel.text= qq instanceof QQOpen?"校讯通助手":(qq instanceof QQJump?"看不到我，嘻嘻":"");
-					}else if(qq instanceof QQSearch){
+					}else if(qq instanceof QQLookup2){
 						msgLabel.text=tempResultStr;
 					}
 					qq.stop();
@@ -195,12 +207,9 @@
 		]]>
 	</fx:Script>
 	
-	<mx:VBox width="148" height="135" paddingLeft="5" backgroundAlpha="0">
-		 
-	    <mx:Label id="msgLabel"></mx:Label>
-		 
-		<mx:HBox id="qqHBox" paddingTop="5" width="120" height="94" backgroundAlpha="0">
-			
+	<mx:VBox id="vBox" width="148" height="117" paddingLeft="5" backgroundAlpha="0">
+		<s:RichText horizontalCenter="-7" top="8" width="124" height="24" id="msgLabel" color="#F14119" backgroundAlpha="0.0" chromeColor="#15E9DD"/>
+		<mx:HBox id="qqHBox" paddingTop="5" width="127" height="59" backgroundAlpha="0" y="72">
 		</mx:HBox>
 	</mx:VBox>
 	
