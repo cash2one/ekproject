@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="../css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript">	document.execCommand("BackgroundImageCache", false, true);</script>
+<script language="javascript">
+	function qiehuan(num){
+		for(var id = 0;id<=9;id++)
+		{
+			if(id==num)
+			{
+				document.getElementById("qh_con"+id).style.display="block";
+				document.getElementById("mynav"+id).className="nav_on";
+			}
+			else
+			{
+				document.getElementById("qh_con"+id).style.display="none";
+				document.getElementById("mynav"+id).className="";
+			}
+		}
+	}
+</script> 
+
+</head>
+
+<body>
+	<div id="top" class="clearfix">
+		<span><a href="#">校讯通首页</a><a href="#">同步学</a><a href="#">帮助中心</a><a href="#">我要建议</a></span>您好，李老师！<a href="#">[退出]</a>
+	</div>
+	<div id="menu_in">
+		<div id="menu">
+			<ul id="nav">
+				<li class="time">今天是： 2011年1月19日星期三</li>
+				<li><a class="nav_on" id="mynav0" onmouseover=javascript:qiehuan(0) href="#"><span>我的校讯通</span></a></li>
+				<li><a href="#" onmouseover="javascript:qiehuan(1)" id="mynav1" class="nav_off"><span>短信互动</span></a></li>
+				<li><a href="#" onmouseover="javascript:qiehuan(2)" id="mynav2" class="nav_off"><span>教务管理</span></a></li>
+				<li><a href="#" onmouseover="javascript:qiehuan(3)" id="mynav3" class="nav_off"><span>考勤管理</span></a></li>
+				<li><a href="#" onmouseover="javascript:qiehuan(4)" id="mynav4" class="nav_off"><span>教学办公</span></a></li>
+				<li><a href="#" onmouseover="javascript:qiehuan(5)" id="mynav5" class="nav_off"><span>帮助中心</span></a></li>
+			</ul>
+			<div id="menu_con">
+				<div id="qh_con0" style="display:block;">
+					<ul>
+					  <li><a href="#"><span>栏目名称1</span></a></li><li class="menu_line2"></li>
+					  <li><a href="#"><span>栏目名称2</span></a></li><li class="menu_line2"></li>
+					  <li><a href="#"><span>栏目名称3</span></a></li>
+					</ul>
+				</div> 
+				<div id="qh_con1" style="display:none;">
+					<ul>
+					  <li><a href="#"><span>栏目名称4</span></a></li><li class="menu_line2"></li>
+					  <li><a href="#"><span>栏目名称5</span></a></li><li class="menu_line2"></li>
+					  <li><a href="#"><span>栏目名称6</span></a></li>
+					</ul>
+				</div> 
+				<div id="qh_con2" style="display:none;">
+					<ul>
+					  <li><a href="#"><span>栏目名称7</span></a></li><li class="menu_line2"></li>
+					  <li><a href="#"><span>栏目名称8</span></a></li><li class="menu_line2"></li>
+					  <li><a href="#"><span>栏目名称9</span></a></li>
+					</ul>
+				</div> 
+				<div id="qh_con3" style="display:none;">
+					<ul>
+					  <li><a href="#"><span>栏目名称10</span></a></li><li class="menu_line2"></li>
+					  <li><a href="#"><span>栏目名称11</span></a></li><li class="menu_line2"></li>
+					  <li><a href="#"><span>栏目名称12</span></a></li>
+					</ul>
+				</div> 
+				<div id="qh_con4" style="display:none;">
+					<ul>
+					  <li><a href="#"><span>栏目名称13</span></a></li><li class="menu_line2"></li>
+					  <li><a href="#"><span>栏目名称14</span></a></li><li class="menu_line2"></li>
+					  <li><a href="#"><span>栏目名称15</span></a></li>
+					</ul>
+				</div>
+				<div id="qh_con5" style="display:none;">
+					<ul>
+					  <li><a href="#"><span>栏目名称16</span></a></li><li class="menu_line2"></li>
+					  <li><a href="#"><span>栏目名称17</span></a></li><li class="menu_line2"></li>
+					  <li><a href="#"><span>栏目名称18</span></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="main" class="clearfix">
+		<div id="newscontent">
+			<h6 class="subh6"><a href="#" class="more"><<返回上一页</a>关于校讯通安全中心密保系统升级恢复的通知(20101020)</h6>
+			<span class="time">时间：2011-6-10 21:10:08 </span>
+			<div class="newstext">
+				<p>尊敬的用户：</p>
+				<p>为了保障广大教师用户的帐号安全，校讯通安全中心对密保系统进行了一次升级维护，目前已升级成功。密保的设置功能均已恢复，您可以重新尝试进行设置密保的相关操作。</p>
+				<p> 感谢您的支持与关注！</p>
+				<p class="right"><strong>浙江校讯通 安全中心<br />2010-10-20</strong></p>
+				<span class="close"><a href="#">[关闭]</a>　　<a href="#">[打印]</a></span>
+			</div>
+		</div>
+	</div>
+	<div id="footer">Copyright © 2010 中国移动通信集团浙江有限公司版权所有</div>
+</body>
+</html>

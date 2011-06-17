@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="../css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript">	document.execCommand("BackgroundImageCache", false, true);</script>
+<script language="javascript">
+	function qiehuan(num){
+		for(var id = 0;id<=9;id++)
+		{
+			if(id==num)
+			{
+				document.getElementById("qh_con"+id).style.display="block";
+				document.getElementById("mynav"+id).className="nav_on";
+			}
+			else
+			{
+				document.getElementById("qh_con"+id).style.display="none";
+				document.getElementById("mynav"+id).className="";
+			}
+		}
+	}
+</script> 
+
+</head>
+
+<body>
+	<div id="top" class="clearfix">
+		<span><a href="#">校讯通首页</a><a href="#">同步学</a><a href="#">帮助中心</a><a href="#">我要建议</a></span>您好，李老师！<a href="#">[退出]</a>
+	</div>
+	<div id="menu_in">
+		<div id="menu">
+			<ul id="nav">
+				<li class="time">今天是： 2011年1月19日星期三</li>
+				<li><a class="nav_on" id="mynav0" onmouseover=javascript:qiehuan(0) href="#"><span>我的校讯通</span></a></li>
+				<li><a href="#" onmouseover="javascript:qiehuan(1)" id="mynav1" class="nav_off"><span>短信互动</span></a></li>
+				<li><a href="#" onmouseover="javascript:qiehuan(2)" id="mynav2" class="nav_off"><span>教务管理</span></a></li>
+				<li><a href="#" onmouseover="javascript:qiehuan(3)" id="mynav3" class="nav_off"><span>考勤管理</span></a></li>
+				<li><a href="#" onmouseover="javascript:qiehuan(4)" id="mynav4" class="nav_off"><span>教学办公</span></a></li>
+				<li><a href="#" onmouseover="javascript:qiehuan(5)" id="mynav5" class="nav_off"><span>帮助中心</span></a></li>
+			</ul>
+			<div id="menu_con">
+				<div id="qh_con0" style="display:block;">
+					<ul>
+					  <li><a href="#"><span>栏目名称1</span></a></li><li class="menu_line2"></li>
+					  <li><a href="#"><span>栏目名称2</span></a></li><li class="menu_line2"></li>
+					  <li><a href="#"><span>栏目名称3</span></a></li>
+					</ul>
+				</div> 
+				<div id="qh_con1" style="display:none;">
+					<ul>
+					  <li><a href="#"><span>栏目名称4</span></a></li><li class="menu_line2"></li>
+					  <li><a href="#"><span>栏目名称5</span></a></li><li class="menu_line2"></li>
+					  <li><a href="#"><span>栏目名称6</span></a></li>
+					</ul>
+				</div> 
+				<div id="qh_con2" style="display:none;">
+					<ul>
+					  <li><a href="#"><span>栏目名称7</span></a></li><li class="menu_line2"></li>
+					  <li><a href="#"><span>栏目名称8</span></a></li><li class="menu_line2"></li>
+					  <li><a href="#"><span>栏目名称9</span></a></li>
+					</ul>
+				</div> 
+				<div id="qh_con3" style="display:none;">
+					<ul>
+					  <li><a href="#"><span>栏目名称10</span></a></li><li class="menu_line2"></li>
+					  <li><a href="#"><span>栏目名称11</span></a></li><li class="menu_line2"></li>
+					  <li><a href="#"><span>栏目名称12</span></a></li>
+					</ul>
+				</div> 
+				<div id="qh_con4" style="display:none;">
+					<ul>
+					  <li><a href="#"><span>栏目名称13</span></a></li><li class="menu_line2"></li>
+					  <li><a href="#"><span>栏目名称14</span></a></li><li class="menu_line2"></li>
+					  <li><a href="#"><span>栏目名称15</span></a></li>
+					</ul>
+				</div>
+				<div id="qh_con5" style="display:none;">
+					<ul>
+					  <li><a href="#"><span>栏目名称16</span></a></li><li class="menu_line2"></li>
+					  <li><a href="#"><span>栏目名称17</span></a></li><li class="menu_line2"></li>
+					  <li><a href="#"><span>栏目名称18</span></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="main" class="clearfix">
+		<div id="mymms">
+			<h6 class="subh6"><a href="#" class="more"><<返回上一页</a>我的留言</h6>
+			<div class="falsetab">
+				<a href="#">写留言</a><a href="#">收件箱</a><a href="#">客服留言</a><a href="#">家长留言</a><a href="#" class="current">同事留言</a>
+			</div>
+			<form method="post" action="" class="search">
+				选择：<select id="">
+					<option value="" selected="selected">未读</option>
+					<option value=""></option>
+				</select><a href="#">标记未读</a><a href="#">标记已读</a><a href="#">删除</a>内容关键字：<input type="text" name="" id="" size="" /><input type="submit" value="查询" />
+			</form>
+			<h6>共5封</h6>
+			<table width="100%" border="0" cellspacing="1" class="style2">
+				<tbody>
+					<tr>
+						<td><input type="checkbox" id="" /></td>
+						<td><img src="../images/mail.png" alt="" /></td>
+						<td>张小三【帐号:zhang333】</td>
+						<td style="padding-left:10px;text-align:left;"><em>物理课件能发我一份吗？</em>李老师，您好，你的物理课件能发我一份吗，我下周上课急需，谢谢！……</td>
+						<td><a href="#">回复</a></td>
+						<td><a href="#"><img src="../images/del2.png" alt="" /></a></td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" id="" /></td>
+						<td><img src="../images/mail.png" alt="" /></td>
+						<td>李明祥【手机:13636566565】</td>
+						<td style="padding-left:10px;text-align:left;"><em>给李明祥请假</em>李老师，您好，我是李明祥的爸爸，他今天身体不舒服，请假半天，谢谢……</td>
+						<td><a href="#">回复</a></td>
+						<td><a href="#"><img src="../images/del2.png" alt="" /></a></td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="page"><span class="disabled"> <  Prev</span><span class="current">1</span><a href="#?page=2">2</a><a href="#?page=3">3</a><a href="#?page=4">4</a><a href="#?page=5">5</a><a href="#?page=6">6</a><a href="#?page=7">7</a>...<a href="#?page=199">199</a><a href="#?page=200">200</a><a href="#?page=2">Next  > </a></div>
+		</div>
+	</div>
+	<div id="footer">Copyright © 2010 中国移动通信集团浙江有限公司版权所有</div>
+</body>
+</html>

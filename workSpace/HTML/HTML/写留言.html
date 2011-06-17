@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="../css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript">	document.execCommand("BackgroundImageCache", false, true);</script>
+<script language="javascript">
+	function qiehuan(num){
+		for(var id = 0;id<=9;id++)
+		{
+			if(id==num)
+			{
+				document.getElementById("qh_con"+id).style.display="block";
+				document.getElementById("mynav"+id).className="nav_on";
+			}
+			else
+			{
+				document.getElementById("qh_con"+id).style.display="none";
+				document.getElementById("mynav"+id).className="";
+			}
+		}
+	}
+</script> 
+
+</head>
+
+<body>
+	<div id="top" class="clearfix">
+		<span><a href="#">校讯通首页</a><a href="#">同步学</a><a href="#">帮助中心</a><a href="#">我要建议</a></span>您好，李老师！<a href="#">[退出]</a>
+	</div>
+	<div id="menu_in">
+		<div id="menu">
+			<ul id="nav">
+				<li class="time">今天是： 2011年1月19日星期三</li>
+				<li><a class="nav_on" id="mynav0" onmouseover=javascript:qiehuan(0) href="#"><span>我的校讯通</span></a></li>
+				<li><a href="#" onmouseover="javascript:qiehuan(1)" id="mynav1" class="nav_off"><span>短信互动</span></a></li>
+				<li><a href="#" onmouseover="javascript:qiehuan(2)" id="mynav2" class="nav_off"><span>教务管理</span></a></li>
+				<li><a href="#" onmouseover="javascript:qiehuan(3)" id="mynav3" class="nav_off"><span>考勤管理</span></a></li>
+				<li><a href="#" onmouseover="javascript:qiehuan(4)" id="mynav4" class="nav_off"><span>教学办公</span></a></li>
+				<li><a href="#" onmouseover="javascript:qiehuan(5)" id="mynav5" class="nav_off"><span>帮助中心</span></a></li>
+			</ul>
+			<div id="menu_con">
+				<div id="qh_con0" style="display:block;">
+					<ul>
+					  <li><a href="#"><span>栏目名称1</span></a></li><li class="menu_line2"></li>
+					  <li><a href="#"><span>栏目名称2</span></a></li><li class="menu_line2"></li>
+					  <li><a href="#"><span>栏目名称3</span></a></li>
+					</ul>
+				</div> 
+				<div id="qh_con1" style="display:none;">
+					<ul>
+					  <li><a href="#"><span>栏目名称4</span></a></li><li class="menu_line2"></li>
+					  <li><a href="#"><span>栏目名称5</span></a></li><li class="menu_line2"></li>
+					  <li><a href="#"><span>栏目名称6</span></a></li>
+					</ul>
+				</div> 
+				<div id="qh_con2" style="display:none;">
+					<ul>
+					  <li><a href="#"><span>栏目名称7</span></a></li><li class="menu_line2"></li>
+					  <li><a href="#"><span>栏目名称8</span></a></li><li class="menu_line2"></li>
+					  <li><a href="#"><span>栏目名称9</span></a></li>
+					</ul>
+				</div> 
+				<div id="qh_con3" style="display:none;">
+					<ul>
+					  <li><a href="#"><span>栏目名称10</span></a></li><li class="menu_line2"></li>
+					  <li><a href="#"><span>栏目名称11</span></a></li><li class="menu_line2"></li>
+					  <li><a href="#"><span>栏目名称12</span></a></li>
+					</ul>
+				</div> 
+				<div id="qh_con4" style="display:none;">
+					<ul>
+					  <li><a href="#"><span>栏目名称13</span></a></li><li class="menu_line2"></li>
+					  <li><a href="#"><span>栏目名称14</span></a></li><li class="menu_line2"></li>
+					  <li><a href="#"><span>栏目名称15</span></a></li>
+					</ul>
+				</div>
+				<div id="qh_con5" style="display:none;">
+					<ul>
+					  <li><a href="#"><span>栏目名称16</span></a></li><li class="menu_line2"></li>
+					  <li><a href="#"><span>栏目名称17</span></a></li><li class="menu_line2"></li>
+					  <li><a href="#"><span>栏目名称18</span></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="main" class="clearfix">
+		<div id="mymms">
+			<h6 class="subh6"><a href="#" class="more"><<返回上一页</a>我的留言</h6>
+			<div class="falsetab">
+				<a href="#" class="current">写留言</a><a href="#">收件箱</a><a href="#">客服留言</a><a href="#">家长留言</a><a href="#">同事留言</a>
+			</div>
+			<div id="fb" class="clearfix">
+				<form method="post" action="">
+					<label><em>收件人：</em><input type="text" name="" id="" size="" class="txt" /></label>
+					<label><em>主题：</em><input type="text" name="" id="" size="" class="txt" /></label>
+					<label style="border:none;"><em>留言内容：</em><textarea id="" rows="" cols=""></textarea><br /><em></em><a href="#">添加附件</a><button class="submit">发送</button></label>
+				</form>
+				<dl>
+					<form method="post" action="">
+						<input type="text" name="" id="" size="" /><input type="submit" value="搜索" />
+					</form>
+					<dt>最近联系人</dt>
+					<dd>于展鹏</dd>
+					<dd>林晓峰</dd>
+					<dt>我的联系人</dt>
+					<dd>于展鹏</dd>
+					<dd>林晓峰</dd>
+					<dt>我的同事</dt>
+					<dd>于展鹏</dd>
+					<dd>林晓峰</dd>
+				</dl>
+			</div>
+		</div>
+	</div>
+	<div id="footer">Copyright © 2010 中国移动通信集团浙江有限公司版权所有</div>
+</body>
+</html>

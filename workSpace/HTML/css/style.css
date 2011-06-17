@@ -1,0 +1,209 @@
+/******************公用部分******************/
+*{margin:0;padding:0;font-family:Tahoma;}
+body{background:#FFF url(../images/bg_rx.png) repeat-x;}
+li{list-style-type:none;}
+a:link{color:#1e50a2;text-decoration:none;}
+a:visited{color:#1e50a2;text-decoration:none;}
+a:hover{color:#C40000;text-decoration:underline;}
+a:active{color:#F00;text-decoration:underline;}
+a img{border:0;}
+img{vertical-align:middle;}
+em,i{font-style:normal;}
+input,select,textarea{font-size:12px;vertical-align:middle;}
+html>/**/body .clearfix{overflow:hidden;}
+.clearfix{zoom:1;}
+.clearfix:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
+.r{color:#C40000;}
+.g{color:#2a8312;}
+.f{color:#666;}
+.left{text-align:left;}
+.textcenter{text-align:center;}
+.right{text-align:right;}
+.more{float:right;font-size:12px;font-weight:normal}
+.subh6{height:28px;line-height:28px;margin:0 0 20px 0;font-size:14px;font-weight:bold;border-bottom:1px solid #a5c6de;color:#C40000;}
+.submit{display:block;width:100px;height:28px;line-height:28px;margin:0 auto;font-size:14px;font-weight:bold;border:1px solid #a5c6de;background:#d8f1fd;}
+.submit1{display:block;width:84px;height:24px;line-height:24px;margin:10px 0 0 0;font-size:12px;font-weight:bold;border:none;background:url(../images/85.gif) no-repeat;}
+
+/******************顶部菜单******************/
+#top{width:960px;height:33px;line-height:33px;margin:0 auto;font-size:12px;color:#FFF;}
+#top a{color:#FF0;margin:0 2px;}
+#top span{display:block;float:right;height:33px;line-height:33px;}
+#top span a{margin:0 0 0 8px;padding:0 0 0 8px;color:#FFF;}
+
+/*主导航菜单*/
+#menu_in{padding:114px 0 0 0;background:url(../images/banner.jpg) no-repeat center top;}
+#menu{width:960px;margin:0 auto;padding:0 0 24px 0;background:url(../images/menu.png) no-repeat right bottom;}
+#nav li.time{width:354px;line-height:37px;font-size:12px;}
+#nav li{float:left;height:37px;}
+#nav li a{float:left;display:block;width:101px;height:37px;}
+#nav li a span{display:block;width:101px;height:37px;line-height:37px;font-size:14px;text-align:center;}
+#nav li .nav_on span{display:block;width:101px;color:#FFF;font-weight:bold;background:url(../images/bg_all.png) no-repeat 0 -30px;}
+/*子栏目*/
+#menu_con{padding:0 0 0 354px;clear:both;}
+#menu_con li{float:left;height:24px;}
+#menu_con li a{display:block;margin:0 10px;line-height:24px;font-size:12px;}
+
+/******************首页左中右结构******************/
+#main{width:938px;margin:0 auto;padding:10px;border:1px solid #bddef4;background:#dfeff8;border-top:1px solid #a0d1f2;}
+#main_left{float:left;width:150px;margin:0 10px 0 0;padding:10px;}
+#main_middle{float:left;width:516px;margin:10px 0;padding:10px;border:1px solid #a5c6de;background:#FFF;}
+#main_right{float:right;width:200px;}
+
+/******************左边******************/
+#user{margin:0 0 20px 0;font-size:12px;}
+#user dt img{display:block;width:140px;margin:0 auto 5px auto;padding:4px;border:1px solid #a5c6de;background:#FFF;}
+#user dd{line-height:24px;padding:0 0 0 2px;}
+#user dd em{font-weight:bold;color:#C40000;}
+.onlineservice{display:block;padding:0 0 0 2px;font-size:14px;}
+
+/******************中间******************/
+#main_middle h6{height:24px;line-height:24px;font-size:12px;font-weight:bold;border-bottom:1px solid #a5c6de;}
+.welcome{padding:0 20px;line-height:22px;font-size:12px;color:#666;}
+.look{line-height:28px;margin:20px 0;padding:10px;font-size:12px;border:1px solid #a5c6de;background:#d8f1fd;}
+.look a{display:inline-block;margin:0 10px;}
+.look a em{color:#C40000;}
+.look a.nolook,.look a.nolook em{color:#888;}
+.new,.helper{font-size:12px;border:1px solid #a5c6de;}
+.new legend,.helper legend{height:24px;line-height:24px;margin:0 10px;padding:0 10px;font-weight:bold;}
+.new p,.helper p{line-height:22px;padding:5px 20px;font-size:12px;color:#666;}
+.new span{display:block;line-height:22px;margin:0 20px 10px 20px;padding:10px 0;border-bottom:1px dashed #a5c6de;}
+.new img{display:block;float:left;margin:0 10px 0 0;}
+.new span em{display:block;}
+.new label{float:right;color:#999;}
+.helper{margin:10px 0 0 0 ;}
+.helper p{padding:5px 8px;}
+.helper p a{display:block;float:left;width:83px;text-align:center;}
+.helper p a img{width:60px;}
+
+/******************右边******************/
+#main_right h6{height:24px;line-height:24px;margin:10px 10px 10px 0;font-size:12px;font-weight:bold;border-bottom:1px solid #a5c6de;}
+#main_right ul li{height:26px;line-height:26px;padding:0 10px 0 8px;font-size:12px;overflow:hidden;background:url(../images/bg_all.png) no-repeat -957px -397px;}
+#main_right ul.mms li{padding:0 10px 0 0;background:none;}
+#main_right ol li{height:26px;line-height:26px;padding:0 10px 0 0;list-style-type:decimal;list-style-position:inside;font-size:12px;overflow:hidden;}
+/******************底部******************/
+#footer{width:960px;margin:0 auto;padding:8px;line-height:180%;text-align:center;color:#000;font-size:12px;color:#039;}
+
+
+/************************************修改头像************************************/
+#edituser{width:600px;height:600px;padding:20px;background:#FFF;}
+#edituser h6{height:28px;line-height:28px;font-size:14px;font-weight:bold;border-bottom:1px solid #a5c6de;}
+#edituser dt{height:24px;line-height:24px;margin:20px 0 0 0;font-size:14px;font-weight:bold;}
+#edituser dd{line-height:20px;margin:0 0 10px 0;font-size:12px;color:#666;}
+#edituser form{padding:10px;border:1px solid #a5c6de;}
+#edituser form img{display:block;margin:0 0 10px 0;}
+#edituser form a{font-size:12px;}
+
+/************************************个人设置************************************/
+#editself,#newme,#newslist,#newscontent,#jianyi,#mymms{padding:10px;}
+.falsetab{padding:0 0 0 10px;border-bottom:1px solid #a5c6de;}
+.falsetab a{display:inline-block;height:26px;line-height:26px;margin:0 0 -1px -1px;padding:0 20px;text-align:center;font-size:12px;color:#000;border:1px solid #a5c6de;background:#d8f1fd;}
+.falsetab a.current{color:#BA2636;font-weight:bold;border:1px solid #a5c6de;border-bottom:1px solid #FFF;background:#FFF;}
+#editself form{padding:40px 40px 20px 40px;border:1px solid #a5c6de;border-top:none;background:#FFF;}
+#editself form label{display:block;line-height:28px;margin:0 0 20px 0;padding:0 0 5px 0;font-size:12px;border-bottom:1px solid #d1e9fb;}
+#editself form label em{display:inline-block;width:100px;font-weight:bold;color:#999;}
+#editself form input.txt{width:200px;height:18px;line-height:18px;padding:3px;border:1px solid #a5c6de;}
+
+/************************************新手任务************************************/
+#newme dt{height:24px;line-height:24px;font-size:14px;font-weight:bold;}
+#newme dd{line-height:20px;font-size:12px;color:#666;}
+#newme dl.step{margin:20px 0 0 0;padding:10px 20px;border:1px solid #a5c6de;background:#FFF;}
+#newme dl.step img{display:block;float:left;margin:4px 20px 10px 0;}
+#newme dl.step dt{font-size:12px;color:#1e50a2;}
+
+/************************************通知公告************************************/
+#newslist ul{padding:10px 20px;border:1px solid #a5c6de;background:#FFF;}
+#newslist ul li{height:30px;line-height:30px;padding:0 10px 0 8px;font-size:12px;overflow:hidden;border-bottom:1px solid #d1e9fb;background:url(../images/bg_all.png) no-repeat -957px -395px;}
+#newslist ul li span{float:right;font-size:11px;color:#999;}
+#newslist form{margin:0 0 10px 0;text-align:right;}
+#newslist form input.txt{width:200px;height:16px;line-height:16px;padding:3px;border:1px solid #a5c6de;}
+#newslist form input.submit2{width:50px;height:24px;line-height:20px;margin:0 0 0 10px;font-size:12px;color:#FFF;font-weight:bold;border:none;background:url(../images/13.gif) no-repeat;}
+.page{height:20px;line-height:20px;padding:20px 0 0 0;font-size:11px;text-align:left;clear:both;overflow:hidden;}
+.page a{	float:none;margin:2px;padding:1px 5px;border:1px solid #369;color:#000;text-decoration:none;}
+.page a:hover{color:#FFF;	border:1px solid #369;background:#369;}
+.page a:active{color:#FFF;border:#999 1px solid;}
+.page .current{margin:2px;padding:2px 6px;color:#fff;border:#369 1px solid;background:#369;}
+.page .disabled{margin:2px;padding:2px 6px;color:#999;border:1px solid #369;}
+
+/************************************通知公告内页************************************/
+#newscontent h6{margin:0 0 10px 0;text-align:center;}
+#newscontent span.time{display:block;padding:0 84px 20px 0;font-size:12px;text-align:center;color:#666;}
+.newstext{padding:40px;border:1px solid #a5c6de;background:#FFF;}
+.newstext p{line-height:24px;margin:0 0 12px 0;font-size:14px;color:#333;}
+.newstext span.close{display:block;text-align:center;font-size:12px;}
+
+/************************************系统功能更改提醒************************************/
+.system1{float:left;width:635px;}
+.system2{float:right;width:180px;}
+.system2 h6{height:24px;line-height:24px;margin:0 0 10px 0;font-size:12px;font-weight:bold;border-bottom:1px solid #a5c6de;}
+
+/************************************建议************************************/
+#jianyi form{margin:0 0 20px 0;padding:20px 40px 0 40px;border:1px solid #a5c6de;background:#FFF;}
+#jianyi form label{display:block;line-height:28px;margin:0 0 20px 0;padding:0 0 5px 0;font-size:12px;border-bottom:1px solid #d1e9fb;}
+#jianyi form label em{display:inline-block;width:100px;font-weight:bold;text-align:right;color:#999;}
+#jianyi form input.txt{width:200px;height:18px;line-height:18px;padding:3px;border:1px solid #a5c6de;}
+#jianyi form textarea{width:600px;height:150px;margin:0 0 10px 0;}
+.fk{padding:40px 20px;font-size:12px;border:1px solid #a5c6de;border-top:none;background:#FFF;}
+.fk dl{margin:0 0 20px 0;padding:10px 20px;border:1px solid #a5c6de;background:#d8f1fd;}
+.fk dt{padding:10px 0;font-weight:bold;}
+.fk dt span{float:right;font-weight:normal;color:#2a8312;}
+.fk dt em{display:inline-block;margin:0 0 0 10px;font-size:11px;color:#999;font-weight:normal;}
+
+/************************************我的积分首页************************************/
+#main_right2{float:left;width:706px;margin:10px 0 0 0;padding:20px;border:1px solid #a5c6de;background:#FFF;}
+.jfad{display:block;width:706px;margin:20px 0;}
+#main_right2 h6{height:28px;line-height:28px;font-size:14px;font-weight:bold;border-bottom:1px solid #a5c6de;}
+table.style{margin-bottom:18px;background:#d8dfea;font-size:12px;}
+table.style caption{text-align:left;padding:10px 0;}
+table.style caption a{margin:0 5px;}
+table.style td{padding:6px 3px;}
+table.style thead th{padding:5px;background:#d8f1fd;color:#000;}
+table.style tbody td,table.style tfoot td{background:#FFF;}
+table.style thead th,table.style tbody td{text-align:center;}
+
+/************************************我的积分************************************/
+.myjf{padding:20px 0;font-size:12px;}
+.myjf a{margin:0 20px 0 0;}
+.myjf a.current{color:#C40000;}
+
+/************************************积分兑换************************************/
+.jfdh{margin:20px 0;padding:20px;border:1px solid #a5c6de;background:#d8f1fd;}
+.jfdh p{line-height:22px;font-size:12px;}
+.jfdh p em{color:#C40000;}
+
+/************************************兑换说明************************************/
+.dhgz{padding:0 20px 20px 20px;font-size:12px;}
+.dhgz dt{margin:20px 0 5px 0;font-weight:bold;}
+.dhgz dd{line-height:22px;color:#666;border-bottom:1px solid #d1e9fb;}
+
+/************************************我的留言************************************/
+#mymms{}
+#mymms .search{margin:20px 0;padding:15px 20px;font-size:12px;border:1px solid #a5c6de;background:#FFF;}
+#mymms .search a{margin:0 20px 0 0;}
+#mymms .search select,#mymms .search input{margin:0 20px 0 0;}
+#mymms h6{height:28px;line-height:28px;margin:0 0 10px 0;font-size:14px;font-weight:bold;border-bottom:1px solid #a5c6de;}
+table.style2{background:#d8dfea;font-size:12px;}
+table.style2 caption{text-align:left;padding:10px 0;}
+table.style2 caption a{margin:0 5px;}
+table.style2 td{line-height:22px;padding:6px 3px;text-align:center;background:#FFF;}
+table.style2 td em{display:block;font-weight:bold;}
+
+/************************************写留言************************************/
+#fb{margin:20px 0;padding:20px 40px 0 40px;border:1px solid #a5c6de;background:#FFF;}
+#fb form{float:left;width:600px;}
+#fb form label{display:block;line-height:28px;margin:0 0 20px 0;padding:0 0 5px 0;font-size:12px;}
+#fb form label em{display:inline-block;width:70px;font-weight:bold;text-align:right;color:#999;}
+#fb form input.txt{width:200px;height:18px;line-height:18px;padding:3px;border:1px solid #a5c6de;}
+#fb form textarea{width:500px;height:150px;margin:0 0 10px 0;}
+#fb dl{float:right;width:160px;padding:0 20px 10px 20px;font-size:12px;border:1px solid #a5c6de;background:#d8f1fd;}
+#fb dl dt{margin:20px 0 5px 0;font-weight:bold;}
+#fb dl dd{line-height:22px;color:#666;}
+#fb dl form{padding:10px 0;font-size:12px;}
+
+
+
+
+
+
+
+
+

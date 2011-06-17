@@ -1,0 +1,186 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="../css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript">	document.execCommand("BackgroundImageCache", false, true);</script>
+<script language="javascript">
+	function qiehuan(num){
+		for(var id = 0;id<=9;id++)
+		{
+			if(id==num)
+			{
+				document.getElementById("qh_con"+id).style.display="block";
+				document.getElementById("mynav"+id).className="nav_on";
+			}
+			else
+			{
+				document.getElementById("qh_con"+id).style.display="none";
+				document.getElementById("mynav"+id).className="";
+			}
+		}
+	}
+</script> 
+
+</head>
+
+<body>
+	<div id="top" class="clearfix">
+		<span><a href="#">校讯通首页</a><a href="#">同步学</a><a href="#">帮助中心</a><a href="#">我要建议</a></span>您好，李老师！<a href="#">[退出]</a>
+	</div>
+	<div id="menu_in">
+		<div id="menu">
+			<ul id="nav">
+				<li class="time">今天是： 2011年1月19日星期三</li>
+				<li><a class="nav_on" id="mynav0" onmouseover=javascript:qiehuan(0) href="#"><span>我的校讯通</span></a></li>
+				<li><a href="#" onmouseover="javascript:qiehuan(1)" id="mynav1" class="nav_off"><span>短信互动</span></a></li>
+				<li><a href="#" onmouseover="javascript:qiehuan(2)" id="mynav2" class="nav_off"><span>教务管理</span></a></li>
+				<li><a href="#" onmouseover="javascript:qiehuan(3)" id="mynav3" class="nav_off"><span>考勤管理</span></a></li>
+				<li><a href="#" onmouseover="javascript:qiehuan(4)" id="mynav4" class="nav_off"><span>教学办公</span></a></li>
+				<li><a href="#" onmouseover="javascript:qiehuan(5)" id="mynav5" class="nav_off"><span>帮助中心</span></a></li>
+			</ul>
+			<div id="menu_con">
+				<div id="qh_con0" style="display:block;">
+					<ul>
+					  <li><a href="#"><span>栏目名称1</span></a></li><li class="menu_line2"></li>
+					  <li><a href="#"><span>栏目名称2</span></a></li><li class="menu_line2"></li>
+					  <li><a href="#"><span>栏目名称3</span></a></li>
+					</ul>
+				</div> 
+				<div id="qh_con1" style="display:none;">
+					<ul>
+					  <li><a href="#"><span>栏目名称4</span></a></li><li class="menu_line2"></li>
+					  <li><a href="#"><span>栏目名称5</span></a></li><li class="menu_line2"></li>
+					  <li><a href="#"><span>栏目名称6</span></a></li>
+					</ul>
+				</div> 
+				<div id="qh_con2" style="display:none;">
+					<ul>
+					  <li><a href="#"><span>栏目名称7</span></a></li><li class="menu_line2"></li>
+					  <li><a href="#"><span>栏目名称8</span></a></li><li class="menu_line2"></li>
+					  <li><a href="#"><span>栏目名称9</span></a></li>
+					</ul>
+				</div> 
+				<div id="qh_con3" style="display:none;">
+					<ul>
+					  <li><a href="#"><span>栏目名称10</span></a></li><li class="menu_line2"></li>
+					  <li><a href="#"><span>栏目名称11</span></a></li><li class="menu_line2"></li>
+					  <li><a href="#"><span>栏目名称12</span></a></li>
+					</ul>
+				</div> 
+				<div id="qh_con4" style="display:none;">
+					<ul>
+					  <li><a href="#"><span>栏目名称13</span></a></li><li class="menu_line2"></li>
+					  <li><a href="#"><span>栏目名称14</span></a></li><li class="menu_line2"></li>
+					  <li><a href="#"><span>栏目名称15</span></a></li>
+					</ul>
+				</div>
+				<div id="qh_con5" style="display:none;">
+					<ul>
+					  <li><a href="#"><span>栏目名称16</span></a></li><li class="menu_line2"></li>
+					  <li><a href="#"><span>栏目名称17</span></a></li><li class="menu_line2"></li>
+					  <li><a href="#"><span>栏目名称18</span></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="main" class="clearfix">
+		<div id="main_left">
+			<dl id="user" class="clearfix">
+				<dt><img src="../images/user.jpg" alt="" /></dt>
+				<dd><em>张小燕</em>　老师<br /><a href="#">修改头像</a>　<a href="#">个人设置</a><br />我的积分：50<br />我的留言：36<br />公告通知：12</dd>
+				<dd>我短信代码：589985566</dd>
+			</dl>
+			<a href="#" class="onlineservice">在线客服>></a>
+			 <div style="text-align:right;">
+			   <button onclick="lookUp('open')" value="lookup"> ++ </button>
+	           <button onclick="callApp('open')" value="open"> + </button>
+               <button onclick="callApp('close')" value="close"> - </button>
+            </div>
+			<div id="flashContent">
+              <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="100%" height="100%" id="WebAgent" onreadystatechange="alert('ok')">
+                <param name="movie" value="WebAgent.swf" />
+				<param name="wmode" value="transparent">
+                <param name="quality" value="high" />
+                <param name="allowScriptAccess" value="sameDomain" />
+                <param name="allowFullScreen" value="true" />
+                <!--[if !IE]>-->
+                <object type="application/x-shockwave-flash" data="WebAgent.swf" width="100%" height="100%">
+                    <param name="quality" value="high" />
+					<param name="wmode" value="transparent">
+                    <param name="allowScriptAccess" value="sameDomain" />
+                    <param name="allowFullScreen" value="true" />
+                <!--<![endif]-->
+                <!--[if gte IE 6]>-->
+                    <p> 
+                        Either scripts and active content are not permitted to run or Adobe Flash Player version
+                        10.2.0 or greater is not installed.
+                    </p>
+                <!--<![endif]-->
+                    <a href="http://www.adobe.com/go/getflashplayer">
+                        <img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash Player" />
+                    </a>
+                <!--[if !IE]>-->
+                </object>
+                <!--<![endif]-->
+            </object>
+           </div>
+		</div>
+		<div id="main_middle">
+			<p class="welcome">您好，杭州市第一小学  张小燕 (zhangxiaoyan)老师  欢迎您回来！<br />上一次登录时间：2011-6-8 21:20:48</p>
+			<div class="look">
+				<a href="#">待查看家长留言<em>(2)</em></a><a href="#">待查看SI留言<em>(5)</em></a><a href="#">待查看同事短信<em>(7)</em></a><a href="#">待查看定时短信<em>(6)</em></a><a href="#">待查看邮件<em>(6)</em></a><a href="#" class="nolook">待确认短信<em>(0)</em></a>
+			</div>
+			<fieldset class="new">
+				<legend>新手任务</legend>
+				<p>通过校讯通新手指引，您能快速的学会如何使用校讯通，选择您感兴趣的部分来学习，方便简单！</p>
+				<span class="clearfix"><label><a href="#">马上开始任务>></a></label><img src="../images/n1ok.png" alt="" />完善个人信息<em class="r">[未完成]</em></span>
+				<span class="clearfix"><label>完成于 2011-5-18 15:38</label><img src="../images/n2.png" alt="" />上传头像展示个性<em class="g">[已完成]</em></span>
+				<span class="clearfix"><label><a href="#">马上开始任务>></a></label><img src="../images/n3ok.png" alt="" />个性化帐号及密码提升帐号安全<em class="r">[未完成]</em></span>
+			</fieldset>
+			<fieldset class="helper">
+				<legend>我的办公助手</legend>
+				<p class="clearfix"><a href="#"><img src="../images/h1.png" alt="" /><br />发送短信</a><a href="#"><img src="../images/h2.png" alt="" /><br />发送成绩</a><a href="#"><img src="../images/h3.png" alt="" /><br />考勤查询</a><a href="#"><img src="../images/h4.png" alt="" /><br />管理学生档案</a><a href="#"><img src="../images/h5.png" alt="" /><br />家长留言</a><a href="#"><img src="../images/h6.png" alt="" /><br />当日考勤</a></p>
+			</fieldset>
+		</div>
+		<div id="main_right">
+			<h6><a href="#" class="more">更多...</a>通知公告</h6>
+			<ul>
+				<li><a href="#">关于召开消防安全知识讲座的通知</a></li>
+				<li><a href="#">关于做好“中秋”、“国庆”节期间校园安全稳定的通知</a></li>
+				<li><a href="#">关于做好强降雨天气应对工作的紧急通知</a></li>
+				<li><a href="#">关于召开消防安全知识讲座的通知</a></li>
+				<li><a href="#">关于做好“中秋”、“国庆”节期间校园安全稳定的通知</a></li>
+				<li><a href="#">关于做好强降雨天气应对工作的紧急通知</a></li>
+			</ul>
+			<h6>发送短信提醒</h6>
+			<ul class="mms">
+				<li class="g">您今天发送短信(10)条</li>
+				<li class="f">昨天发送(12)条</li>
+				<li class="r">月度发送量(365)条 </li>
+				<li class="right">继续努力哦！</li>
+			</ul>
+			<h6><a href="#" class="more">更多...</a>系统功能更改提醒</h6>
+			<ol>
+				<li><a href="#">优化了短信发送功能</a></li>
+				<li><a href="#">个人资料增加了账户管理资料，管理账户更便捷</a></li>
+				<li><a href="#">学生档案查询添加了快速编辑功能</a></li>
+			</ol>
+		</div>
+	</div>
+	<div id="footer">Copyright © 2010 中国移动通信集团浙江有限公司版权所有</div>
+</body>
+<script type="text/javascript" src="../js/webAgent.js"></script>
+<SCRIPT language='JavaScript' charset='utf-8'>
+	function callApp(type) {
+		WebAgent.testAction(type);
+    }
+
+    function lookUp(functionFlag) {
+		WebAgent.lookUp(functionFlag);
+    }
+
+</SCRIPT>
+</html>

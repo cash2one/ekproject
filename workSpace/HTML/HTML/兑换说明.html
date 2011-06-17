@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="../css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript">	document.execCommand("BackgroundImageCache", false, true);</script>
+<script language="javascript">
+	function qiehuan(num){
+		for(var id = 0;id<=9;id++)
+		{
+			if(id==num)
+			{
+				document.getElementById("qh_con"+id).style.display="block";
+				document.getElementById("mynav"+id).className="nav_on";
+			}
+			else
+			{
+				document.getElementById("qh_con"+id).style.display="none";
+				document.getElementById("mynav"+id).className="";
+			}
+		}
+	}
+</script> 
+
+</head>
+
+<body>
+	<div id="top" class="clearfix">
+		<span><a href="#">校讯通首页</a><a href="#">同步学</a><a href="#">帮助中心</a><a href="#">我要建议</a></span>您好，李老师！<a href="#">[退出]</a>
+	</div>
+	<div id="menu_in">
+		<div id="menu">
+			<ul id="nav">
+				<li class="time">今天是： 2011年1月19日星期三</li>
+				<li><a class="nav_on" id="mynav0" onmouseover=javascript:qiehuan(0) href="#"><span>我的校讯通</span></a></li>
+				<li><a href="#" onmouseover="javascript:qiehuan(1)" id="mynav1" class="nav_off"><span>短信互动</span></a></li>
+				<li><a href="#" onmouseover="javascript:qiehuan(2)" id="mynav2" class="nav_off"><span>教务管理</span></a></li>
+				<li><a href="#" onmouseover="javascript:qiehuan(3)" id="mynav3" class="nav_off"><span>考勤管理</span></a></li>
+				<li><a href="#" onmouseover="javascript:qiehuan(4)" id="mynav4" class="nav_off"><span>教学办公</span></a></li>
+				<li><a href="#" onmouseover="javascript:qiehuan(5)" id="mynav5" class="nav_off"><span>帮助中心</span></a></li>
+			</ul>
+			<div id="menu_con">
+				<div id="qh_con0" style="display:block;">
+					<ul>
+					  <li><a href="#"><span>栏目名称1</span></a></li><li class="menu_line2"></li>
+					  <li><a href="#"><span>栏目名称2</span></a></li><li class="menu_line2"></li>
+					  <li><a href="#"><span>栏目名称3</span></a></li>
+					</ul>
+				</div> 
+				<div id="qh_con1" style="display:none;">
+					<ul>
+					  <li><a href="#"><span>栏目名称4</span></a></li><li class="menu_line2"></li>
+					  <li><a href="#"><span>栏目名称5</span></a></li><li class="menu_line2"></li>
+					  <li><a href="#"><span>栏目名称6</span></a></li>
+					</ul>
+				</div> 
+				<div id="qh_con2" style="display:none;">
+					<ul>
+					  <li><a href="#"><span>栏目名称7</span></a></li><li class="menu_line2"></li>
+					  <li><a href="#"><span>栏目名称8</span></a></li><li class="menu_line2"></li>
+					  <li><a href="#"><span>栏目名称9</span></a></li>
+					</ul>
+				</div> 
+				<div id="qh_con3" style="display:none;">
+					<ul>
+					  <li><a href="#"><span>栏目名称10</span></a></li><li class="menu_line2"></li>
+					  <li><a href="#"><span>栏目名称11</span></a></li><li class="menu_line2"></li>
+					  <li><a href="#"><span>栏目名称12</span></a></li>
+					</ul>
+				</div> 
+				<div id="qh_con4" style="display:none;">
+					<ul>
+					  <li><a href="#"><span>栏目名称13</span></a></li><li class="menu_line2"></li>
+					  <li><a href="#"><span>栏目名称14</span></a></li><li class="menu_line2"></li>
+					  <li><a href="#"><span>栏目名称15</span></a></li>
+					</ul>
+				</div>
+				<div id="qh_con5" style="display:none;">
+					<ul>
+					  <li><a href="#"><span>栏目名称16</span></a></li><li class="menu_line2"></li>
+					  <li><a href="#"><span>栏目名称17</span></a></li><li class="menu_line2"></li>
+					  <li><a href="#"><span>栏目名称18</span></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="main" class="clearfix">
+		<div id="main_left">
+			<dl id="user" class="clearfix">
+				<dt><img src="../images/user.jpg" alt="" /></dt>
+				<dd><em>张小燕</em>　老师<br /><a href="#">修改头像</a>　<a href="#">个人设置</a><br />我的积分：50<br />我的留言：36<br />公告通知：12</dd>
+				<dd>我短信代码：589985566</dd>
+			</dl>
+			<a href="#" class="onlineservice">积分规则>></a>
+		</div>
+		<div id="main_right2">
+			<div class="falsetab">
+				<a href="#">首页</a><a href="#">我的积分</a><a href="#" class="current">积分兑换</a><a href="#">兑换说明</a>
+			</div>
+			<div class="jfdh">
+				<p>如果帐号和密码不能登录，可到校讯通前台获取密码或致电客服热线:10086</p>
+				<p><em>温州地区教师请注意，积分兑换的时间是每月20日-30日；次月15日前，兑换的话费将直接充入您的手机账户，并下发短信提醒告知！</em></p> 
+			</div>
+			<h6>兑换规则</h6>
+			<dl class="dhgz">
+				<dt>积分生成规则</dt>
+				<dd>角色积分</dd>
+				<dt>普通教师</dt>
+				<dd>每发一次积一分；每天积分上限10分</dd>
+				<dt>班主任积分</dt>
+				<dd>每发一次，积一分；每天积分上限15分</dd> 
+				<dt>学校管理员积分</dt> 
+				<dd>每发一次积一分，加上当天所有教师的积分总和的10%，每天积分上限20分；<br />注意发送一次与发送一条短信的区别，如果一次群发100个学生，只算一次积分；<br />如果这个学校没有一个计费用户，那么所有用户不累计积分；积分每日累计，每月不清零</dd>
+			</dl>
+		</div>
+	</div>
+	<div id="footer">Copyright © 2010 中国移动通信集团浙江有限公司版权所有</div>
+</body>
+</html>
