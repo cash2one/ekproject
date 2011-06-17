@@ -4,21 +4,25 @@
 			   xmlns:mx="library://ns.adobe.com/flex/mx" 
 			   xmlns:local="*" 
 			   minWidth="300" 
-			   minHeight="300" initialize="{initApp()}"
-			   backgroundAlpha="0"  >
+			   minHeight="300" initialize="{initApp()}" creationComplete="{callWrapper('open');complete();}"
+			   backgroundAlpha="0" skinClass="skin.PluginSkin"
+			   >
 	<fx:Declarations>
 		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
 
-	
-		
+
 	</fx:Declarations>
 	<fx:Script>
 		<![CDATA[
-			
-			
+		
 			import flash.external.*;
+			
+			import mx.controls.Alert;
 			import mx.core.UIComponent;
-		    import mx.controls.Alert;
+			
+			import skin.PluginSkin;
+			
+			import mx.managers.SystemManager;
 			
 			
 			private var qq:MovieClip;//动画
@@ -26,6 +30,11 @@
 			private var isActive:Boolean = false;
 			
 			
+			private var tempResultStr:String="";
+			
+			private function complete():void{
+				
+			}
 			
 			/*
 			  定义外部接口，供JS调用
@@ -37,19 +46,40 @@
 				   close();
 				else if(type=='face'&&isActive)
 				   face1();
+				
 			}
 			
-
+			
+			/*
+			定义外部接口，供JS调用
+			* */
+			public function lookup(type:String):void{
+				tempResultStr=type+"：这功能我....";
+				lookupFace();	
+			}
+			
+			
 			
 			/*
 			  程序初始化入口
 			 * */
 			public function initApp():void {
 				ExternalInterface.addCallback("testAction",action);
-				
+				ExternalInterface.addCallback("lookUp",lookup);
 				createUserMenus();
 			}
 			
+			
+			/*
+			   调用 javascript 方法 
+			*/
+			public function callWrapper(type:String):void {
+				var f:String = "callApp";
+				
+				//加载开始动画
+				var m:String = ExternalInterface.call(f,type); 
+				trace("callWrapper:"+type);
+			}
 			
 			
 			//打开控件
@@ -62,7 +92,6 @@
 				qq.x = 0;
 				qq.y = 0;
 				qq.addEventListener(Event.ENTER_FRAME,mcHandler);
-				
 			}
 			
 			
@@ -93,8 +122,20 @@
 			}
 			
 			
+			//查找表情
+			public function lookupFace():void{
+				clearStage();
+				qqHBox.addChild(ui);
+				qq = new QQSearch();
+				ui.addChild(qq);
+				qq.x = 0;
+				qq.y = 0;
+				qq.addEventListener(Event.ENTER_FRAME,mcHandler);
+			}
 			
-			//控件舞台
+			
+			
+			//控件舞台，清理当前的表情，准备加入新的
 		    public function clearStage():void{
 				msgLabel.text="";
 				qqHBox.removeAllChildren();
@@ -107,18 +148,20 @@
 				
 			}
 				
-	
+
 			
 			
 			//事件
-			private function mcHandler(evt:Event):void
-			{
+			private function mcHandler(evt:Event):void{
 				if(qq.currentFrame == qq.totalFrames){
 					qq.removeEventListener(Event.ENTER_FRAME,mcHandler);
 					//处理其它事情
-					msgLabel.text= qq instanceof QQOpen?"来了,来了！":(qq instanceof QQJump?"你看不到我，嘻嘻":"");
+					if((qq instanceof QQOpen)||(qq instanceof QQClose)){
+					   msgLabel.text= qq instanceof QQOpen?"校讯通助手":(qq instanceof QQJump?"看不到我，嘻嘻":"");
+					}else if(qq instanceof QQSearch){
+						msgLabel.text=tempResultStr;
+					}
 					qq.stop();
-					
 				}
 			}
 			
@@ -130,9 +173,9 @@
 				var menu:ContextMenu=new ContextMenu();//创建右键菜单  
 				menu.hideBuiltInItems();//隐藏内置菜单  
 				
-				var renameMenuItem:ContextMenuItem=new ContextMenuItem("测试");  
+				var renameMenuItem:ContextMenuItem=new ContextMenuItem("升级....");  
 				menu.customItems.push(renameMenuItem);  
-				renameMenuItem.addEventListener(ContextMenuEvent.MENU_ITEM_SELECT,menuUserHandler);  
+				renameMenuItem.addEventListener(ContextMenuEvent.MENU_ITEM_SELECT,menuFaceHandler);  
 				
 				this.contextMenu = menu;
 				qqHBox.contextMenu=menu;  
@@ -144,19 +187,19 @@
 			
 			
 		    //右键菜单对应的事件
-			private function menuUserHandler(evt:ContextMenuEvent):void{  
-				trace("Test");  
+			private function menuFaceHandler(evt:ContextMenuEvent):void{  
+				face1(); 
 			}  
 			
 			
 		]]>
 	</fx:Script>
 	
-	<mx:VBox width="148" height="135" paddingLeft="5">
+	<mx:VBox width="148" height="135" paddingLeft="5" backgroundAlpha="0">
 		 
 	    <mx:Label id="msgLabel"></mx:Label>
 		 
-		<mx:HBox id="qqHBox" paddingTop="5" width="120" height="94">
+		<mx:HBox id="qqHBox" paddingTop="5" width="120" height="94" backgroundAlpha="0">
 			
 		</mx:HBox>
 	</mx:VBox>
