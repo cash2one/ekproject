@@ -1,1 +1,1 @@
-http://code.google.com/p/flexwebos/source/checkout
+https://flexwebos.googlecode.com/svn/trunk/SuperTools
