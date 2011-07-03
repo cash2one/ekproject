@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="CodeGenerator"
+  id="myeclipse.1309651489984"
+  context-root="/CodeGenerator"
+  j2ee-spec="5.0"
+  archive="CodeGenerator.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+
