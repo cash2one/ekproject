@@ -69,7 +69,7 @@ public class JoinItem {
 	public void pfield(){
 		 NodeUtil.pfields(items);
 		 for(JoinItem join:joinItems){
-    		 NodeUtil.pfields(join.getItems());
+    		 join.pfield();
     	}
 	}
 	

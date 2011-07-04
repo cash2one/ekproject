@@ -22,21 +22,21 @@ public class Templater {
 	
 	public  static void main(String...arg){
 		Document doc = XmlHandler.loadXML("src/qtone/generator/demo.xml");
-		
 		Templater t = new Templater(doc);
-	    t.p();
-	    
+	    t.printAttuributes();
 	}
 	
-    public void p(){
+	
+    public void printAttuributes(){
     	System.out.println("主表属性-------");
     	NodeUtil.pfields(items);
     	System.out.println("从表属性-------");
     	for(JoinItem join:joinItems){
     		 join.pfield();
     	}
-    	
     }
+    
+    
     
 }
 
@@ -66,6 +66,7 @@ class NodeUtil{
 	public static List<FieldItem> createItems(Element _root){
          List<FieldItem> items = new ArrayList<FieldItem>();
          List<Element> itemSet = _root.selectNodes(itemName);
+         debug("createItems->getPath():"+_root.getPath()+" :size():"+itemSet.size());
          FieldItem field = null;
          if(itemSet!=null){
         	 for(Element node:itemSet){
@@ -91,6 +92,7 @@ class NodeUtil{
 	public static List<JoinItem> createJoinItems(Element _root){
 		List<JoinItem> joinItems = new ArrayList<JoinItem>();
         List<Element> joinSet = _root.selectNodes(joinName);
+        debug("createJoinItems->getPath():"+_root.getPath()+" :size():"+joinSet.size());
         JoinItem join = null;
         if(joinSet!=null){
        	 for(Element node:joinSet){
@@ -103,6 +105,11 @@ class NodeUtil{
        	 }
         }
 		 return joinItems;
+	}
+	
+	
+	private static void debug(String arg){
+		System.out.println(arg);
 	}
 	
 

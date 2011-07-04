@@ -16,14 +16,18 @@
 	       <joinOneItem table="XJ_CLASS" joinType="LEFT"  primaryTableKey="CLASS_ID" joinTableKey="ID">
 	             <item name="classId" type="long" sourceType="Decimal" isReadonly="true" sourceField="ID" descript="班级ID"/>
 	             <item name="className" type="String" sourceType="VARCHAR" isReadonly="true" sourceField="CLASS_NAME" descript="班级名称"/>
-	                <joinOneItem table="XJ_SCHOOL" joinType="LEFT"  primaryTableKey="SCHOOL_ID" joinTableKey="ID">
-	             		<item name="3schoolId" type="long" sourceType="Decimal" isReadonly="true" sourceField="ID" descript="学校ID"/>
-	            	    <item name="3schoolName" type="String" sourceType="VARCHAR" isReadonly="true" sourceField="SCHOOL_NAME" descript="学校名称"/>
-	      		   </joinOneItem>
+	             <joinOneItem table="XJ_SCHOOL" joinType="LEFT"  primaryTableKey="SCHOOL_ID" joinTableKey="ID">
+	             		<item name="classId33" type="long" sourceType="Decimal" isReadonly="true" sourceField="ID" descript="学校ID"/>
+	             		<item name="className33" type="String" sourceType="VARCHAR" isReadonly="true" sourceField="SCHOOL_NAME" descript="学校名称"/>
+	             </joinOneItem>
 	       </joinOneItem>
 	       <joinOneItem table="XJ_SCHOOL" joinType="LEFT"  primaryTableKey="SCHOOL_ID" joinTableKey="ID">
 	             <item name="schoolId" type="long" sourceType="Decimal" isReadonly="true" sourceField="ID" descript="学校ID"/>
 	             <item name="schoolName" type="String" sourceType="VARCHAR" isReadonly="true" sourceField="SCHOOL_NAME" descript="学校名称"/>
+	             <joinOneItem table="XJ_SCHOOL" joinType="LEFT"  primaryTableKey="SCHOOL_ID" joinTableKey="ID">
+	             		<item name="schoolId33" type="long" sourceType="Decimal" isReadonly="true" sourceField="ID" descript="学校ID"/>
+	             		<item name="schoolName333" type="String" sourceType="VARCHAR" isReadonly="true" sourceField="SCHOOL_NAME" descript="学校名称"/>
+	             </joinOneItem>
 	       </joinOneItem>
        </joinOneItem>
    </items>
