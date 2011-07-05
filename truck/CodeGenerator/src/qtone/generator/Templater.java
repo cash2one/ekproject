@@ -14,30 +14,53 @@ public class Templater {
 
 	private List<JoinItem> joinItems = null;
 
+	public List<FieldItem> getItems() {
+		return items;
+	}
+
 	public Templater(Document _doc){
 		Element _root = XmlHandler.getElement(_doc, "items");
-		this.items = NodeUtil.createItems(_root);
+		this.items = NodeUtil.createItems(_root,_root.attributeValue("tableAlias"));
 		this.joinItems = NodeUtil.createJoinItems(_root);
 	}
 	
-	public  static void main(String...arg){
+	public static void main(String...arg){
 		Document doc = XmlHandler.loadXML("src/qtone/generator/demo.xml");
 		Templater t = new Templater(doc);
-	    t.printAttuributes();
+//	    t.printAttuributes();
+		
+		System.out.println("从表信息-------");
+		List<JoinItem> joins = NodeUtil.getJoinTables(t.joinItems);
+		for(JoinItem join:joins){
+			System.out.println(" "+join.getJoinTableKey()+"  "+join.getTable()+" "+join.getAlias());
+    	}
+		
+		System.out.println("从表属性-------");
+		List<FieldItem> subFields = NodeUtil.getAllFieldsOfJoinTables(t.joinItems);
+		for(FieldItem item :subFields ){
+			System.out.println(item.getName()+" "+item.getSourceField()+"  "+item.getDescript()+" "+item.getTableAlias());
+		}
 	}
 	
 	
-    public void printAttuributes(){
-    	System.out.println("主表属性-------");
-    	NodeUtil.pfields(items);
-    	System.out.println("从表属性-------");
-    	for(JoinItem join:joinItems){
-    		 join.pfield();
-    	}
-    }
-    
-    
-    
+	/**
+	 * 返回连所有接字段
+	 * @return
+	 */
+	public List<FieldItem> getJoinFields(){
+		return NodeUtil.getAllFieldsOfJoinTables(joinItems);
+	}
+	
+	
+	/**
+	 * 返回连所有接的表
+	 * @return
+	 */
+	public List<JoinItem> getJoinTables(){
+		return NodeUtil.getJoinTables(joinItems);
+	}
+ 
+	
 }
 
 /**
@@ -51,19 +74,67 @@ class NodeUtil{
 	
 	private static String joinName="joinOneItem";
 	
-	
     public static void pfields(List<FieldItem> items){
 	     for(FieldItem item:items){
 	    	  System.out.println(item.getName()+" "+item.getType());
 	     }
 	}	
 
+    
+    
+    /**
+     * 
+     * 返回所有表连接的字段属性信息。
+     * @param joinItems
+     * @return
+     */
+    public static List<FieldItem> getAllFieldsOfJoinTables(List <JoinItem> joinItems){
+    	List<FieldItem> temp = new ArrayList<FieldItem>();
+//    	debug("dsfsdf");
+    	for(JoinItem join:joinItems){
+            if(join.getItems()!=null){
+                for(FieldItem de:join.getItems()){
+            	    temp.add(de);
+                }
+                if(join.getJoinItems()!=null){
+                    for(FieldItem de:getAllFieldsOfJoinTables(join.getJoinItems())){
+                 	      temp.add(de);
+                    }
+                } 
+            }    		
+    	}
+    	return temp;
+    }
+    
+    
+    
+    
+    /**
+     * 返回所有表连接对象
+     * @param joinItems
+     * @return
+     */
+    public static List<JoinItem> getJoinTables(List <JoinItem> joinItems){
+    	List<JoinItem> temp = new ArrayList<JoinItem>();
+//    	debug("dsfsdf");
+    	for(JoinItem join:joinItems){
+    		debug(" "+join.getJoinTableKey()+"  "+join.getTable());
+    		temp.add(join);
+            if(join.getJoinItems()!=null){
+              for(JoinItem de:getJoinTables(join.getJoinItems())){
+            	  temp.add(de);
+              }
+            }    		
+    	}
+    	return temp;
+    }
+    
 	
 	/**
 	 * 生成Item 节点信息
 	 * @return
 	 */
-	public static List<FieldItem> createItems(Element _root){
+	public static List<FieldItem> createItems(Element _root,String tableAlias){
          List<FieldItem> items = new ArrayList<FieldItem>();
          List<Element> itemSet = _root.selectNodes(itemName);
          debug("createItems->getPath():"+_root.getPath()+" :size():"+itemSet.size());
@@ -71,6 +142,7 @@ class NodeUtil{
          if(itemSet!=null){
         	 for(Element node:itemSet){
         		 field = new FieldItem();
+        		 field.setTableAlias(tableAlias);
         		 field.setDescript(node.attributeValue("descript"));
         		 field.setIsReadonly((node.attributeValue("isReadonly")!=null&&"true".equals(node.attributeValue("isReadonly")))?true:false);
         		 field.setName(node.attributeValue("name"));
@@ -109,7 +181,7 @@ class NodeUtil{
 	
 	
 	private static void debug(String arg){
-		System.out.println(arg);
+//		System.out.println(arg);
 	}
 	
 

@@ -15,6 +15,15 @@ public class FieldItem {
 	boolean isReadonly = false;
 	String sourceField = "ID";
 	String descript = "Ö÷¼üid";
+	String tableAlias = "";
+	
+	public String getTableAlias() {
+		return tableAlias;
+	}
+
+	public void setTableAlias(String tableAlias) {
+		this.tableAlias = tableAlias;
+	}
 
 	public String getName() {
 		return name;

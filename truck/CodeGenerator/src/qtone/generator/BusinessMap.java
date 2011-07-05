@@ -31,6 +31,8 @@ public class BusinessMap {
     String demo;
     
     
+    private Templater templator = null;
+    
     public String getVersion() {
 		return version;
 	}
@@ -147,13 +149,18 @@ public class BusinessMap {
 	String bussinessMapCfg ="";
     private Document _doc = null;
     
-	public BusinessMap(String bussinessMapCfg){
-		this.bussinessMapCfg = bussinessMapCfg;
-		_doc = XmlHandler.loadXML("configs/sysCfg.xml");
+    
+    
+	public BusinessMap(String bussinessMapCfgPath){
+		bussinessMapCfg = bussinessMapCfgPath==null?"src/qtone/generator/demo.xml":bussinessMapCfgPath;
+		_doc = XmlHandler.loadXML(bussinessMapCfg);
 		reBuilderMap( );
 	}
 	
 	
+	/**
+	 * 从配置文件加载信息
+	 */
 	void reBuilderMap( ){
 		Element _root =  _doc.getRootElement();
 		this.setNamespace(_root.attributeValue("namespace"));
@@ -169,11 +176,58 @@ public class BusinessMap {
 		this.setVersion(XmlHandler.getElement(_doc,"descript/version").getText());
 		this.setAuthor(XmlHandler.getElement(_doc,"descript/author").getText());
 		this.setDemo(XmlHandler.getElement(_doc,"descript/memo").getText());
+		templator = new Templater(_doc);
+	}
 	
-		List <Element> itemsElement =  XmlHandler.getElements(_doc, "items/item");
+	
+	/**
+	 * 得到主要的字段信息
+	 * @return
+	 */
+	public List<FieldItem> getMainFields(){
+		return this.templator.getItems();
+	}
+	
+	/**
+	 * 返回连所有接字段
+	 * @return
+	 */
+	public List<FieldItem> getJoinFields(){
+		return this.templator.getJoinFields();
+	}
+	
+	/**
+	 * 返回连所有接的表
+	 * @return
+	 */
+	public List<JoinItem> getJoinTable(){
+		return this.templator.getJoinTables();
+	}
+	
+	public static void main(String...arg){
+		BusinessMap map = new BusinessMap(null);
+		System.out.println("主表属性-------");
+		List<FieldItem> fields = map.getMainFields();
+		for(FieldItem item :fields ){
+			System.out.println(item.getName()+" "+item.getSourceField()+"  "+item.getDescript()+" "+item.getTableAlias());
+		}
 		
+		
+		System.out.println("从表属性-------");
+		fields = map.getJoinFields();
+		for(FieldItem item :fields ){
+			System.out.println(item.getName()+" "+item.getSourceField()+"  "+item.getDescript()+" "+item.getTableAlias());
+		}
+		
+		System.out.println("从表信息-------");
+		List<JoinItem> joins = map.getJoinTable();
+		for(JoinItem join:joins){
+			System.out.println(" "+join.getJoinTableKey()+"  "+join.getTable()+" "+join.getAlias());
+    	}
 		
 	}
+	
+	
 	
 	
 	

@@ -11,6 +11,7 @@ public class JoinItem {
 	String joinType="LEFT";
 	String primaryTableKey="STU_SEQUENCE";
 	String joinTableKey="STU_SEQUENCE";
+	String alias = ""; 
 	
     private List<FieldItem> items = null;
 	
@@ -18,11 +19,22 @@ public class JoinItem {
 	
     
 	public JoinItem(Element _root){
-	    this.items = NodeUtil.createItems(_root);	
+	    this.items = NodeUtil.createItems(_root,_root.attributeValue("tableAlias"));	
+	    this.setAlias(_root.attributeValue("tableAlias"));
 		this.joinItems = NodeUtil.createJoinItems(_root);
 	}
 	
 	
+	public String getAlias() {
+		return alias;
+	}
+
+
+	public void setAlias(String alias) {
+		this.alias = alias;
+	}
+
+
 	public String getTable() {
 		return table;
 	}
@@ -55,23 +67,13 @@ public class JoinItem {
 		this.joinTableKey = joinTableKey;
 	}
 
-
 	public List<FieldItem> getItems() {
 		return items;
 	}
-
-
+	
 	public List<JoinItem> getJoinItems() {
 		return joinItems;
 	}
-	
-	
-	public void pfield(){
-		 NodeUtil.pfields(items);
-		 for(JoinItem join:joinItems){
-    		 join.pfield();
-    	}
-	}
-	
+ 
 	
 }
