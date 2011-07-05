@@ -10,23 +10,34 @@ import cn.elam.util.file.xml.XmlHandler;
 
 public class Templater {
 
-	private List<FieldItem> items=null;
+	private List<FieldItem> items=null; //对应的主表字段
 
-	private List<JoinItem> joinItems = null;
+	private List<JoinItem> joinItems = null;  //从表信息
 
+    private FieldItem primaryKeyItem = null; //主键信息
+	
 	public List<FieldItem> getItems() {
 		return items;
 	}
 
-	public Templater(Document _doc){
+	public Templater(Document _doc,String primaryKeyName){
 		Element _root = XmlHandler.getElement(_doc, "items");
 		this.items = NodeUtil.createItems(_root,_root.attributeValue("tableAlias"));
 		this.joinItems = NodeUtil.createJoinItems(_root);
+		
+		//找出主键
+		for(FieldItem field :this.items){
+		    if(field.getName().toLowerCase().equals(primaryKeyName)){
+		    	this.primaryKeyItem = field;
+		    	break;
+		    }
+		}
+		
 	}
 	
 	public static void main(String...arg){
 		Document doc = XmlHandler.loadXML("src/qtone/generator/demo.xml");
-		Templater t = new Templater(doc);
+		Templater t = new Templater(doc,"id");
 //	    t.printAttuributes();
 		
 		System.out.println("从表信息-------");
@@ -59,7 +70,16 @@ public class Templater {
 	public List<JoinItem> getJoinTables(){
 		return NodeUtil.getJoinTables(joinItems);
 	}
+
+	/**
+	 * 主键信息
+	 * @return
+	 */
+	public FieldItem getPrimaryKeyItem() {
+		return primaryKeyItem;
+	}
  
+	
 	
 }
 

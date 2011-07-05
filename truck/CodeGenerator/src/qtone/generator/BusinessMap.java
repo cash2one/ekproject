@@ -14,7 +14,6 @@ import cn.elam.util.file.xml.XmlHandler;
  *
  */
 public class BusinessMap {
-
 	String namespace="edu";  
 	String clazz="Student";
 	String businessNamespace="business";
@@ -25,10 +24,11 @@ public class BusinessMap {
     String sequence="${areaAbb}_xj_student_seq";
     String primaryKey="id";
 	
+    boolean isAreaDeal =false; //分表处理
     
     String version;
     String author;
-    String demo;
+    String description;
     
     
     private Templater templator = null;
@@ -49,12 +49,14 @@ public class BusinessMap {
 		this.author = author;
 	}
 
-	public String getDemo() {
-		return demo;
+	 
+
+	public String getDescription() {
+		return description;
 	}
 
-	private void setDemo(String demo) {
-		this.demo = demo;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public String getNamespace() {
@@ -146,6 +148,15 @@ public class BusinessMap {
 	}
 
 
+	public boolean isAreaDeal() {
+		return isAreaDeal;
+	}
+
+	public void setAreaDeal(boolean isAreaDeal) {
+		this.isAreaDeal = isAreaDeal;
+	}
+
+
 	String bussinessMapCfg ="";
     private Document _doc = null;
     
@@ -165,18 +176,19 @@ public class BusinessMap {
 		Element _root =  _doc.getRootElement();
 		this.setNamespace(_root.attributeValue("namespace"));
 	    this.setBusinessNamespace(_root.attributeValue("businessNamespace"));
-		this.setClazz(_root.attributeValue(""));
+		this.setClazz(_root.attributeValue("class"));
 		this.setDaoNamespace(_root.attributeValue("daoNamespace"));
 		this.setEntityNamespace(_root.attributeValue("entityNamespace"));
 		this.setMapperNamespace(_root.attributeValue("mapperNamespace"));
 		this.setTable(_root.attributeValue("table"));
 		this.setPrimaryKey(_root.attributeValue("primaryKey"));
 		this.setSequence(_root.attributeValue("sequence"));
+		this.setAreaDeal(_root.attributeValue("isAreaDeal")!=null&&"true".equals(_root.attributeValue("isAreaDeal").toLowerCase())?true:false);
 		
 		this.setVersion(XmlHandler.getElement(_doc,"descript/version").getText());
 		this.setAuthor(XmlHandler.getElement(_doc,"descript/author").getText());
-		this.setDemo(XmlHandler.getElement(_doc,"descript/memo").getText());
-		templator = new Templater(_doc);
+		this.setDescription(XmlHandler.getElement(_doc,"descript/memo").getText());
+		templator = new Templater(_doc,this.getPrimaryKey());
 	}
 	
 	
@@ -195,6 +207,17 @@ public class BusinessMap {
 	public List<FieldItem> getJoinFields(){
 		return this.templator.getJoinFields();
 	}
+	
+	
+	/**
+	 * 获取主键详细信息
+	 * @return
+	 */
+	public FieldItem getPrimaryKeyItem(){
+		return this.templator.getPrimaryKeyItem();
+	}
+	
+	
 	
 	/**
 	 * 返回连所有接的表

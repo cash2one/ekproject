@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <businessMap namespace="edu" class="Student"  businessNamespace="business" 
              daoNamespace="dao" entityNamespace="entity" mapperNamespace="mapper"
-             table="${areaAbb}_XJ_STUDENT" tableAlias="stu" sequence="${areaAbb}_xj_student_seq" primaryKey="id">
+             table="${areaAbb}_XJ_STUDENT" tableAlias="stu" sequence="${areaAbb}_xj_student_seq" primaryKey="id" isAreaDeal="true">
   <descript>
        <version>1.0</version>
        <author>xxt</author>
