@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <businessMap namespace="edu" class="Student"  businessNamespace="business" 
              daoNamespace="dao" entityNamespace="entity" mapperNamespace="mapper"
-             table="${areaAbb}_XJ_STUDENT" tableAlias="stu" sequence="${areaAbb}_xj_student_seq" primaryKey="id" isAreaDeal="true">
+             table="${areaAbb}_XJ_STUDENT" tableAlias="stu" sequence="${areaAbb}_xj_student_seq" primaryKey="id" isAreaDeal="false">
   <descript>
        <version>1.0</version>
        <author>xxt</author>
-       <memo>StudentEntity</memo>
+       <memo>学生信息</memo>
   </descript>
   <items>
        <item name="id" type="long" sourceType="Decimal" isReadonly="false" sourceField="ID" descript="主键id"/>

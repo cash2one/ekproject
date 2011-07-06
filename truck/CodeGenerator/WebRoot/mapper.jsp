@@ -12,12 +12,17 @@
 	String basePackageName = "qtone.xxt.";
 	String packageName = basePackageName+map.getDaoNamespace()+"."+map.getMapperNamespace()+"."+map.getNamespace();
   
-	//如果是该表是分表的就该在接口方法中加上对应的参数
-	String areaDeal=map.isAreaDeal()?"@Param(\"areaAbb\")String areaAbb":"";
+	
+	//如果是该表是分表的就该在接口方法(新增、更新、删除方法，查询方法默认要保留)中加上对应的参数
+	String areaAbbParamStr = "@Param(\"areaAbb\")String areaAbb";
+	String areaAbbDealComment="* @param areaAbb    地区缩写（分表前缀名:如 “CS”）";
+	String isAppendAreaDeal=map.isAreaDeal()?areaAbbParamStr+",":"";
+	String appendAreaDealcomment=map.isAreaDeal()?areaAbbDealComment:"";
+	
 	
 	List<FieldItem> mainFields = map.getMainFields();
     List<FieldItem> subFields = map.getJoinFields();
-	
+    
 %>
 package <%=packageName%>;
 
@@ -31,7 +36,7 @@ import <%=basePackageName+map.getDaoNamespace()+"."+map.getMapperNamespace()%>.O
 
 /**
  *
- * @description <%=map.getDescription()%> Mapper （持久化接口类）
+ * @description <%=map.getDescription()%> 对应的Mapper（持久化接口类）
  * @version <%=map.getVersion()%>
  * @author <%=map.getAuthor()%>  
  * @CreateTime <%=new Date().toString()%>
@@ -40,19 +45,24 @@ import <%=basePackageName+map.getDaoNamespace()+"."+map.getMapperNamespace()%>.O
 @Component("<%=StringHelper.toLowerCase(entityName)%>Mapper")
 public interface <%=entityName%>Mapper extends MyBatisMapper {
 
+    
+        //自动生成的方法
+	    //************************************************************************************************************************
+
 	/**
 	 * 根据主键查询对应的记录
+	 <%=areaAbbDealComment%>
 	 * @param <%=map.getPrimaryKeyItem().getName()%>  记录对应的主键
-	 * @return
+	 * @return <%=entityName%>Entry
 	 */
-	public <%=entityName%>Entry findOne(<%=areaDeal%>,@Param("<%=map.getPrimaryKeyItem().getName()%>")<%=map.getPrimaryKeyItem().getType()%> <%=map.getPrimaryKeyItem().getName()%>);
+	public <%=entityName%>Entry findOne(<%=areaAbbParamStr%>,@Param("<%=map.getPrimaryKeyItem().getName()%>")<%=map.getPrimaryKeyItem().getType()%> <%=map.getPrimaryKeyItem().getName()%>);
 	
 	
 	 /**
 	   * 列表查询
 	   * @param startRow   开始记录的行数
 	   * @param pageSize   设置每页显示的记录数
-	   <%=map.isAreaDeal()?"* @param areaAbb    地区缩写（分表前缀名）":"" %>
+	   <%=areaAbbDealComment%>
      <%String conParamsStr="";
    for(FieldItem field:mainFields){%>
 	   * @param <%out.print(field.getName()+"   //"+field.getDescript());
@@ -66,13 +76,13 @@ public interface <%=entityName%>Mapper extends MyBatisMapper {
 	   * @param orderList  //控制排序
 	   * @return List<<%=entityName%>Entry>
 	   */
-	public List<<%=entityName%>Entry> qeury<%=entityName%>s(@Param("startRow")int startRow, @Param("pageSize")int pageSize,<%=areaDeal%>,
+	public List<<%=entityName%>Entry> qeury<%=entityName%>s(@Param("startRow")int startRow, @Param("pageSize")int pageSize,<%=areaAbbParamStr%>,
 				<%=conParamsStr%>,@Param("orderList")List<OrderItem>orderList);
 
 
 	/**
 	 * 列表的记录总数统计
-	   <%=map.isAreaDeal()?"* @param areaAbb    地区缩写（分表前缀名）":"" %>
+	   <%=appendAreaDealcomment%>
      <%conParamsStr="";
    for(FieldItem field:mainFields){%>
 	   * @param <%out.print(field.getName()+"   //"+field.getDescript());
@@ -85,35 +95,38 @@ public interface <%=entityName%>Mapper extends MyBatisMapper {
 	     conParamsStr = conParamsStr.substring(1);%>
 	   * @return 列表的记录数
 	   */
-	public int qeury<%=entityName%>sRecordCount(<%=areaDeal%>,<%=conParamsStr%>);
+	public int qeury<%=entityName%>sRecordCount(<%=areaAbbParamStr%>,<%=conParamsStr%>);
 	
 	
 	/**
 	 * 新增记录
-	 * @param <%=entityName%>
+	 <%=appendAreaDealcomment%>
+	 * @param <%=StringHelper.fistChartLowerCase(entityName)%>
 	 * @return
 	 */
-	public int insert<%=entityName%>(<%=entityName%>Entry <%=StringHelper.toLowerCase(entityName)%>);
+	public int insert<%=entityName%>(<%=isAppendAreaDeal%> <%=entityName%>Entry <%=StringHelper.toLowerCase(entityName)%>);
 	
 	
 	/**
 	 * 更新记录 
-	 * @param <%=entityName%>
+	 <%=appendAreaDealcomment%>
+	 * @param <%=StringHelper.fistChartLowerCase(entityName)%>
 	 * @return
 	 */
-	public int update<%=entityName%>(<%=entityName%>Entry <%=StringHelper.toLowerCase(entityName)%>);
+	public int update<%=entityName%>(<%=isAppendAreaDeal%> <%=entityName%>Entry <%=StringHelper.toLowerCase(entityName)%>);
 	
 	
 	/**
 	 * 删除记录
-	 * @param id
+	 <%=appendAreaDealcomment%>
+	 * @param <%=map.getPrimaryKeyItem().getName()%>s  记录对应的主键
 	 * @return
 	 */
-	public int delete<%=entityName%>(<%=areaDeal%>,@Param("id") long id);
+	public int delete<%=entityName%>(<%=isAppendAreaDeal%> @Param("<%=map.getPrimaryKeyItem().getName()%>s") String[] <%=map.getPrimaryKeyItem().getName()%>s);
 	
 	
 	
-	//以下方法（代码）是手动添加的
+	//自定义方法
 	//************************************************************************************************************************
 	
 	

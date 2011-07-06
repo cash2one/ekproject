@@ -16,4 +16,13 @@ public class StringHelper {
 		return str.replaceFirst(str.substring(0, 1),str.substring(0, 1).toUpperCase()); 
 	}
 	
+	
+	/**
+	 * µ¥´ÊÊ××ÖÄ¸Ğ¡Ğ´
+	 * @param str
+	 * @return
+	 */
+	public static String fistChartLowerCase(String str){
+		return str.replaceFirst(str.substring(0, 1),str.substring(0, 1).toLowerCase()); 
+	}
 }

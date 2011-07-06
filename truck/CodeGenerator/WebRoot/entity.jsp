@@ -15,7 +15,7 @@ package <%=packageName%>;
 import java.io.Serializable;
 
 /**
- * @description <%=map.getDescription()%>
+ * @description <%=map.getDescription()%> 对应的实体
  * @version <%=map.getVersion()%>
  * @author <%=map.getAuthor()%>  
  * @CreateTime <%=new Date().toString()%>
@@ -37,7 +37,7 @@ public class <%=entityName%>Entry implements Serializable {
 	
 	}
     <% 
-        String conParamsStr=map.isAreaDeal()?",String areaAbb":"";
+        String conParamsStr="";
         for(FieldItem field:mainFields)
           conParamsStr+=","+field.getType()+" "+field.getName();
         for(FieldItem field:subFields)
@@ -53,9 +53,7 @@ public class <%=entityName%>Entry implements Serializable {
        <% //输出从表的字段属性
        for(FieldItem field:subFields){%> 
             this.<%out.print(field.getName()+"="+field.getName()+";");}%>
-       
-            //是否须设置分表处理
-            <%=map.isAreaDeal()?"this.areaAbb = areaAbb;":"" %>          
+              
 	}
 	
 	<% //生成对应的getting 和 setting 方法

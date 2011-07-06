@@ -22,7 +22,7 @@ public class Templater {
 
 	public Templater(Document _doc,String primaryKeyName){
 		Element _root = XmlHandler.getElement(_doc, "items");
-		this.items = NodeUtil.createItems(_root,_root.attributeValue("tableAlias"));
+		this.items = NodeUtil.createItems(_root,_doc.getRootElement().attributeValue("tableAlias"));
 		this.joinItems = NodeUtil.createJoinItems(_root);
 		
 		//ÕÒ³öÖ÷¼ü
