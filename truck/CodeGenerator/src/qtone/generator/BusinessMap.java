@@ -21,9 +21,12 @@ public class BusinessMap {
 	String entityNamespace="entity";
 	String mapperNamespace="mapper";
     String table="${areaAbb}_XJ_STUDENT";
+    String tableAlias = "";
     String sequence="${areaAbb}_xj_student_seq";
     String primaryKey="id";
 	
+    
+    
     boolean isAreaDeal =false; //分表处理
     
     String version;
@@ -128,6 +131,14 @@ public class BusinessMap {
 	}
 
 
+	public String getTableAlias() {
+		return tableAlias;
+	}
+
+	private void setTableAlias(String tableAlias) {
+		this.tableAlias = tableAlias;
+	}
+
 	public String getSequence() {
 		return sequence;
 	}
@@ -184,6 +195,7 @@ public class BusinessMap {
 		this.setPrimaryKey(_root.attributeValue("primaryKey"));
 		this.setSequence(_root.attributeValue("sequence"));
 		this.setAreaDeal(_root.attributeValue("isAreaDeal")!=null&&"true".equals(_root.attributeValue("isAreaDeal").toLowerCase())?true:false);
+		this.setTableAlias(_root.attributeValue("tableAlias"));
 		
 		this.setVersion(XmlHandler.getElement(_doc,"descript/version").getText());
 		this.setAuthor(XmlHandler.getElement(_doc,"descript/author").getText());
@@ -226,6 +238,17 @@ public class BusinessMap {
 	public List<JoinItem> getJoinTable(){
 		return this.templator.getJoinTables();
 	}
+	
+	
+	
+	/**
+	 * 返回直接与主表连接的表对象
+	 * @return
+	 */
+	public List<JoinItem> getTopJoinTable(){
+		return this.templator.getJoinItems();
+	}
+	
 	
 	public static void main(String...arg){
 		BusinessMap map = new BusinessMap(null);

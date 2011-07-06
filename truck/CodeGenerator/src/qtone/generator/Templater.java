@@ -70,6 +70,11 @@ public class Templater {
 	public List<JoinItem> getJoinTables(){
 		return NodeUtil.getJoinTables(joinItems);
 	}
+	
+	
+	public List<JoinItem> getJoinItems() {
+		return joinItems;
+	}
 
 	/**
 	 * Ö÷¼üĞÅÏ¢

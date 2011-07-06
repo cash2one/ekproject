@@ -9,6 +9,14 @@
 	BusinessMap map = new BusinessMap(cfgPath);
 	String entityName=map.getClazz();
 	
+	
+	String basePackageName = "qtone.xxt.";
+	String packageName = basePackageName+map.getDaoNamespace()+"."+map.getEntityNamespace()+"."+map.getNamespace()+".";
+	String entryName = packageName+StringHelper.fistChartUpperCase(entityName+"Entry");
+	String isDefineEntityName = !map.isAreaDeal()?("resultType=\""+entryName)+"\"":"";
+	
+	String moduleName=StringHelper.fistChartUpperCase(entityName);
+	
 	entityName=StringHelper.fistChartLowerCase(entityName);
 	
 	//主表属性
@@ -36,6 +44,10 @@
 		allFieldStr+=","+(StringHelper.toLowerCase(item.getTableAlias())+"."+StringHelper.toLowerCase(item.getSourceField())+" as "+StringHelper.fistChartLowerCase(item.getName()));
 	}
 	allFieldStr=allFieldStr.substring(1);
+	
+	
+	List<JoinItem> joins = map.getJoinTable();
+	
 %>
 
 
@@ -49,7 +61,7 @@
   <!-- 以下配置是系统自动生成的 -->
 
   <!-- 显示的记录对应的列-->
-  <sql id="studentColumns" >
+  <sql id="<%=moduleName%>Columns" >
 		    <%=allFieldStr%>
   </sql>
   
@@ -59,15 +71,16 @@
        <where><% String items[] = null,insertFieldStr="",valuesStr="";
                for(String key:mainFieldSet.keySet()){
             	  items = mainFieldSet.get(key);%>
-            	  <%out.print(XmlCreator.appendWhereOptions(key,items[0],items[1],items[3]));  
+            	  <%out.print(SqlXmlCreator.appendWhereOptions(key,items[0],items[1],items[3]));  
             	    insertFieldStr+=","+items[1];
- 	        	    valuesStr+=",#{"+entityName+"."+items[2]+"}";
+ 	        	      valuesStr+=",#{"+entityName+"."+items[2]+"}";
                }
                for(String key:subFieldSet.keySet()){
              	  items = subFieldSet.get(key);%>         
-                  <%out.print(XmlCreator.appendWhereOptions(key,items[0],items[1],items[3]));}%> 
+                  <%out.print(SqlXmlCreator.appendWhereOptions(key,items[0],items[1],items[3]));}%> 
         </where> 
   </sql>
+
 
 
   <!-- 列表查询对应的排序选项  -->
@@ -77,7 +90,7 @@
 				<foreach collection="orderList" item="order" open=""  separator="," close="" >
 				   <choose><%for(String key:mainFieldSet.keySet()){
 				    	   items =  mainFieldSet.get(key);%> 
-				       <%out.print(XmlCreator.appendOrderOptions(key,items[0],items[1]));}%>
+				       <%out.print(SqlXmlCreator.appendOrderOptions(key,items[0],items[1]));}%>
 				       <when test="order.columnName=='schoolId'"> sch.id ${order.type} </when>
 				  </choose>
 			 </foreach>
@@ -86,18 +99,16 @@
   </sql>
 
  
+ 
   <!-- 列表查询对应的表关系SQL  -->
   <sql id="querySqlMain">
-			  ${areaAbb}_XJ_STUDENT stu 
-			  LEFT JOIN ${areaAbb}_XJ_STU_CLASS sc  on stu.stu_sequence = sc.stu_sequence
-			  LEFT JOIN XJ_CLASS clas  on sc.class_id = clas.id
-			  LEFT JOIN XJ_SCHOOL sch  on sch.id = sc.school_id
+			  <% out.print(SqlXmlCreator.wrapperMainQuerySql(map.getTable(),map.getTableAlias(),map.getTopJoinTable())); %>
 			  <include refid="queryOptions"/>
   </sql>
   
  
    <!-- 根据ID查询记录 -->
-   <select id="findOne" resultType="qtone.xxt.dao.entity.edu.StudentEntry">
+   <select id="findOne" resultType="<%=entryName%>">
 	     SELECT  <include refid="studentColumns"/>              
 		    FROM <include refid="querySqlMain"/>
 			where <%=primaryKey.getTableAlias()%>.<%=primaryKey.getName()%>=<%="#{"+primaryKey.getName()+"}"%>
@@ -105,16 +116,16 @@
 
 
    <!-- 返回记录总数的语句 -->
-   <select id="qeuryStudentsRecordCount" resultType="int">
+   <select id="qeury<%=moduleName%>sRecordCount" resultType="int">
         SELECT count(*) num  FROM  <include refid="querySqlMain"/> 
    </select>
    
    
     <!-- 分页查询对应的记录 -->
-   <select id="qeuryStudents" resultType="qtone.xxt.dao.entity.edu.StudentEntry">
+   <select id="qeury<%=moduleName%>s" resultType="<%=entryName%>">
       SELECT * FROM (  
 	        SELECT A.*,ROWNUM RN FROM (
-	               SELECT <include refid="studentColumns"/>   
+	               SELECT <include refid="<%=moduleName%>Columns"/>   
 		           FROM <include refid="querySqlMain"/>
 		           <include refid="orderControl"/>
 		    ) A WHERE ROWNUM &lt;=<%="${startRow}+${pageSize}"%> ) 
@@ -123,7 +134,7 @@
 
 
    <!-- 新增记录 -->
-   <insert id="insertStudent" useGeneratedKeys="false" keyProperty="id">
+   <insert id="insert<%=moduleName%>" useGeneratedKeys="false" >
        <selectKey resultType="long" order="AFTER" keyProperty="<%=entityName%>.<%=primaryKey.getName()%>">
 	       SELECT <%=map.getSequence()%>.currval FROM  DUAL
 	   </selectKey>
@@ -132,18 +143,20 @@
    </insert>
    
    
+   
    <!-- 更新记录 -->       
-   <update id="updateStudent">
+   <update id="update<%=moduleName%>" >
            UPDATE <%=map.getTable()%> 
            <SET><% for(String[] infos:mainFieldSet.values()){%>
-                <%out.print(infos[1]+"=#{"+entityName+"."+infos[2]+"},");}%>
-	       </SET>
+                <%  out.print(infos[1]+"=#{"+entityName+"."+infos[2]+"},");   }%>
+	   </SET>
 	       WHERE <%=primaryKey.getName()%> = <%="#{"+entityName%>.<%=primaryKey.getName()+"}"%>
    </update> 
  
- 
+
+
    <!-- 删除记录 -->
-   <delete id="deleteStudent">
+   <delete id="delete<%=moduleName%>">
           DELETE FROM <%=map.getTable()%>
           WHERE <%=primaryKey.getName()%> in 
           <foreach collection="<%=primaryKey.getName()+"s"%>" item="<%=primaryKey.getName()%>" open="("  separator="," close=")" >
@@ -154,16 +167,17 @@
    
    <!-- 以下是自定义的配置信息 -->
    
-         
-         
+   
+   
+   
+
 </mapper>
 
 
 <%!
-
-    public static class XmlCreator{
+    public static class SqlXmlCreator{
 	
-	
+	//答应where条件
 	public static String appendWhereOptions(String name,String tableAlias,String sourceField,String dataType){
 		if("string".equals(dataType.toLowerCase()))
 			return "<if test=\""+name+"!=null\"> AND "+tableAlias+"."+sourceField+" like #{"+name+"}</if>";
@@ -175,6 +189,25 @@
 	public static String appendOrderOptions(String name,String tableAlias,String sourceField){
 	    return "<when test=\"order.columnName=='"+name+"'\"> "+tableAlias+"."+sourceField+" ${order.type} </when>";
 	}
+	
+	
+	public static String wrapperMainQuerySql(String mainTable,String mainTableAlias,List<JoinItem> joinTables){
+		String sql = mainTable+"  "+mainTableAlias;
+		sql+=wrapperLeftJoinSql(mainTableAlias,joinTables);
+		return sql.toString();
+	}
+	
+	
+	public static String wrapperLeftJoinSql(String tableAlias,List<JoinItem> joinTables){
+		String sql ="";
+		if(joinTables!=null)
+		for(JoinItem join:joinTables){
+			sql+= " LEFT JOIN "+join.getTable()+" "+join.getAlias()+" ON "+ tableAlias+"."+join.getPrimaryTableKey()+" = " +join.getAlias()+"."+join.getJoinTableKey();
+		    sql+= wrapperLeftJoinSql(join.getAlias(),join.getJoinItems());
+		}
+		return sql.toString();
+	}
+	
 	
 }
 
