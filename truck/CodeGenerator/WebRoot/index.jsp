@@ -44,9 +44,9 @@
 			      for(File fileName:cfgFiles){ if(fileName.getName().indexOf(".xml")<0) continue;%>
 			      <tr>
 			         <td><font color="blue"><%out.print(fileName.getName());%></font><td>
-			         <td><a href="/entity.jsp?cfg=<%out.print(fileName.getName());%>">View Entity</a></td>
-			         <td><a href="/mapper.jsp?cfg=<%out.print(fileName.getName());%>">View Mapper</a></td>
-			         <td><a href="/mapperXml.jsp?cfg=<%out.print(fileName.getName());%>">View Mapper_XML</a></td>
+			         <td><a href="/codeTemplators/entity.jsp?cfg=<%out.print(fileName.getName());%>">View Entity</a></td>
+			         <td><a href="/codeTemplators/mapper.jsp?cfg=<%out.print(fileName.getName());%>">View Mapper</a></td>
+			         <td><a href="/codeTemplators/mapperXml.jsp?cfg=<%out.print(fileName.getName());%>">View Mapper_XML</a></td>
 			      <tr>
 			      <%}%>
 			</tbody>
