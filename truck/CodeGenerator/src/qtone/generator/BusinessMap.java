@@ -14,6 +14,7 @@ import cn.elam.util.file.xml.XmlHandler;
  *
  */
 public class BusinessMap {
+	
 	String namespace="edu";  
 	String clazz="Student";
 	String businessNamespace="business";
@@ -24,7 +25,7 @@ public class BusinessMap {
     String tableAlias = "";
     String sequence="${areaAbb}_xj_student_seq";
     String primaryKey="id";
-	
+	String name;
     
     
     boolean isAreaDeal =false; //分表处理
@@ -36,7 +37,15 @@ public class BusinessMap {
     
     private Templater templator = null;
     
-    public String getVersion() {
+    private void setName(String name) {
+		this.name = name;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getVersion() {
 		return version;
 	}
 
@@ -196,7 +205,7 @@ public class BusinessMap {
 		this.setSequence(_root.attributeValue("sequence"));
 		this.setAreaDeal(_root.attributeValue("isAreaDeal")!=null&&"true".equals(_root.attributeValue("isAreaDeal").toLowerCase())?true:false);
 		this.setTableAlias(_root.attributeValue("tableAlias"));
-		
+		this.setName(this.getClazz()+"Info");
 		this.setVersion(XmlHandler.getElement(_doc,"descript/version").getText());
 		this.setAuthor(XmlHandler.getElement(_doc,"descript/author").getText());
 		this.setDescription(XmlHandler.getElement(_doc,"descript/memo").getText());
