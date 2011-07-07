@@ -5,13 +5,15 @@
 <%
     String path = request.getContextPath();
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-	String cfgPath = request.getRealPath("/")+"demo.xml";
+	System.out.println(request.getParameter("cfg"));
+	String cfgPath = request.getRealPath("/")+"templates/"+request.getParameter("cfg");
 	BusinessMap map = new BusinessMap(cfgPath);
 	String entityName=map.getClazz();
 	
 	
 	String basePackageName = "qtone.xxt.";
 	String packageName = basePackageName+map.getDaoNamespace()+"."+map.getEntityNamespace()+"."+map.getNamespace()+".";
+	String mapperName=basePackageName+map.getDaoNamespace()+"."+map.getMapperNamespace()+"."+map.getNamespace()+"."+StringHelper.fistChartUpperCase(entityName+"Mapper");
 	String entryName = packageName+StringHelper.fistChartUpperCase(entityName+"Entry");
 	String isDefineEntityName = !map.isAreaDeal()?("resultType=\""+entryName)+"\"":"";
 	
@@ -55,7 +57,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="qtone.xxt.dao.mapper.edu.StudentMapper">
+<mapper namespace="<%=mapperName%>">
    <cache />
 
   <!-- 以下配置是系统自动生成的 -->
@@ -91,7 +93,6 @@
 				   <choose><%for(String key:mainFieldSet.keySet()){
 				    	   items =  mainFieldSet.get(key);%> 
 				       <%out.print(SqlXmlCreator.appendOrderOptions(key,items[0],items[1]));}%>
-				       <when test="order.columnName=='schoolId'"> sch.id ${order.type} </when>
 				  </choose>
 			 </foreach>
 		 </trim>

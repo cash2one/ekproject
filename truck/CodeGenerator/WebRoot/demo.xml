@@ -1,33 +1,54 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<businessMap namespace="edu" class="Student"  businessNamespace="business" 
-             daoNamespace="dao" entityNamespace="entity" mapperNamespace="mapper"
-             table="CS_XJ_STUDENT" tableAlias="stu" sequence="${areaAbb}_xj_student_seq" primaryKey="id" isAreaDeal="true">
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<businessMap namespace="edu" class="Student" primaryKey="id" daoNamespace="dao" 
+businessNamespace="busin" sequence="CS_XJ_STUDENT_SEQ" entityNamespace="entity" 
+mapperNamespace="mapper" table="CS_XJ_STUDENT" tableAlias="stu" isAreaDeal="true">
   <descript>
-       <version>1.0</version>
-       <author>xxt</author>
-       <memo>学生信息</memo>
+    <version>v1</version>
+    <author>syh</author>
+    <memo>描述信息</memo>
   </descript>
   <items>
-       <item name="id" type="long" sourceType="Decimal" isReadonly="false" sourceField="ID" descript="主键id"/>
-       <item name="stuSequence" type="String" sourceType="VARCHAR" isReadonly="false" sourceField="STU_SEQUENCE" descript="学籍号"/>
-       <item name="name" type="String" sourceType="VARCHAR" isReadonly="false" sourceField="NAME" descript="学生名称"/>
-       <item name="icNo" type="String" sourceType="VARCHAR" isReadonly="false" sourceField="IC_NO" descript="学号"/>
-       <joinOneItem table="CS_XJ_FAMILY" tableAlias="family" joinType="LEFT"  primaryTableKey="STU_SEQUENCE" joinTableKey="STU_SEQUENCE">
-                <item name="famName" type="String" sourceType="VARCHAR" isReadonly="true" sourceField="name" descript="家长名称"/>
-	            <item name="phone" type="String" sourceType="VARCHAR" isReadonly="true" sourceField="phone" descript="联系电话"/>
-       </joinOneItem>
-       <joinOneItem table="CS_XJ_STU_CLASS" tableAlias="xsc" joinType="LEFT"  primaryTableKey="STU_SEQUENCE" joinTableKey="STU_SEQUENCE">
-	       <joinOneItem table="XJ_CLASS" tableAlias="class" joinType="LEFT"  primaryTableKey="CLASS_ID" joinTableKey="ID">
-	             <item name="classId" type="long" sourceType="Decimal" isReadonly="true" sourceField="ID" descript="班级ID"/>
-	             <item name="className" type="String" sourceType="VARCHAR" isReadonly="true" sourceField="CLASS_NAME" descript="班级名称"/>
-	       </joinOneItem>
-	       <joinOneItem table="XJ_SCHOOL" tableAlias="school" joinType="LEFT"  primaryTableKey="SCHOOL_ID" joinTableKey="ID">
-	             <item name="schoolId" type="long" sourceType="Decimal" isReadonly="true" sourceField="ID" descript="学校ID"/>
-	             <item name="schoolName" type="String" sourceType="VARCHAR" isReadonly="true" sourceField="SCHOOL_NAME" descript="学校名称"/>
-	             <joinOneItem table="TOWN" tableAlias="town" joinType="LEFT"  primaryTableKey="TOWN_ID" joinTableKey="ID">
-		             <item name="townName" type="String" sourceType="VARCHAR" isReadonly="true" sourceField="NAME" descript="镇区"/>
-	             </joinOneItem>
-	       </joinOneItem>
-       </joinOneItem>
-   </items>
+    <item name="id" type="long" sourcetype="long" isReadonly="False" sourceField="ID" descript="主表字段:ID" />
+    <item name="stuSequence" type="String" sourceType="String" isReadonly="False" sourceField="STU_SEQUENCE" descript="主表字段:STU_SEQUENCE" />
+    <joinOneItem table="CS_XJ_STU_CLASS" joinType="left" tableAlias="xsc" primaryTableKey="STU_SEQUENCE" joinTableKey="STU_SEQUENCE">
+      <item name="schoolId" type="long" sourcetype="long" isReadonly="True" sourceField="SCHOOL_ID" descript="从表字段:SCHOOL_ID" />
+      <joinOneItem table="XJ_SCHOOL" joinType="left" tableAlias="sch" primaryTableKey="SCHOOL_ID" joinTableKey="ID">
+        <item name="schoolName" type="String" sourceType="String" isReadonly="True" sourceField="SCHOOL_NAME" descript="从表字段:SCHOOL_NAME" />
+      </joinOneItem>
+      <item name="classId" type="long" sourcetype="long" isReadonly="True" sourceField="CLASS_ID" descript="从表字段:CLASS_ID" />
+      <joinOneItem table="XJ_CLASS" joinType="left" tableAlias="clas" primaryTableKey="CLASS_ID" joinTableKey="ID">
+        <item name="className1" type="String" sourceType="String" isReadonly="True" sourceField="CLASS_NAME" descript="从表字段:CLASS_NAME" />
+      </joinOneItem>
+    </joinOneItem>
+    <item name="stuNo" type="String" sourceType="String" isReadonly="False" sourceField="STU_NO" descript="主表字段:STU_NO" />
+    <item name="name" type="String" sourceType="String" isReadonly="False" sourceField="NAME" descript="主表字段:NAME" />
+    <item name="sex" type="long" sourcetype="long" isReadonly="False" sourceField="SEX" descript="主表字段:SEX" />
+    <item name="birthday" type="DateTime" sourceType="DateTime" isReadonly="False" sourceField="BIRTHDAY" descript="主表字段:BIRTHDAY" />
+    <item name="address" type="String" sourceType="String" isReadonly="False" sourceField="ADDRESS" descript="主表字段:ADDRESS" />
+    <item name="origin" type="String" sourceType="String" isReadonly="False" sourceField="ORIGIN" descript="主表字段:ORIGIN" />
+    <item name="nation" type="long" sourcetype="long" isReadonly="False" sourceField="NATION" descript="主表字段:NATION" />
+    <item name="originAddr" type="String" sourceType="String" isReadonly="False" sourceField="ORIGIN_ADDR" descript="主表字段:ORIGIN_ADDR" />
+    <item name="bloodType" type="long" sourcetype="long" isReadonly="False" sourceField="BLOOD_TYPE" descript="主表字段:BLOOD_TYPE" />
+    <item name="politics" type="long" sourcetype="long" isReadonly="False" sourceField="POLITICS" descript="主表字段:POLITICS" />
+    <item name="icNo" type="String" sourceType="String" isReadonly="False" sourceField="IC_NO" descript="主表字段:IC_NO" />
+    <item name="homePhone" type="String" sourceType="String" isReadonly="False" sourceField="HOME_PHONE" descript="主表字段:HOME_PHONE" />
+    <item name="goodAt" type="String" sourceType="String" isReadonly="False" sourceField="GOOD_AT" descript="主表字段:GOOD_AT" />
+    <item name="identyNo" type="String" sourceType="String" isReadonly="False" sourceField="IDENTY_NO" descript="主表字段:IDENTY_NO" />
+    <item name="homeMacau" type="long" sourcetype="long" isReadonly="False" sourceField="HOME_MACAU" descript="主表字段:HOME_MACAU" />
+    <item name="bornAddress" type="String" sourceType="String" isReadonly="False" sourceField="BORN_ADDRESS" descript="主表字段:BORN_ADDRESS" />
+    <item name="health" type="String" sourceType="String" isReadonly="False" sourceField="HEALTH" descript="主表字段:HEALTH" />
+    <item name="icStatus" type="long" sourcetype="long" isReadonly="False" sourceField="IC_STATUS" descript="主表字段:IC_STATUS" />
+    <item name="inSchoolDate" type="DateTime" sourceType="DateTime" isReadonly="False" sourceField="IN_SCHOOL_DATE" descript="主表字段:IN_SCHOOL_DATE" />
+    <item name="exchangeId" type="String" sourceType="String" isReadonly="False" sourceField="EXCHANGE_ID" descript="主表字段:EXCHANGE_ID" />
+    <item name="createTime" type="DateTime" sourceType="DateTime" isReadonly="False" sourceField="CREATE_TIME" descript="主表字段:CREATE_TIME" />
+    <item name="callTime" type="long" sourcetype="long" isReadonly="False" sourceField="CALL_TIME" descript="主表字段:CALL_TIME" />
+    <item name="stuType" type="long" sourcetype="long" isReadonly="False" sourceField="STU_TYPE" descript="主表字段:STU_TYPE" />
+    <item name="seatNumber" type="long" sourcetype="long" isReadonly="False" sourceField="SEAT_NUMBER" descript="主表字段:SEAT_NUMBER" />
+    <item name="cardNo" type="String" sourceType="String" isReadonly="False" sourceField="CARD_NO" descript="主表字段:CARD_NO" />
+    <item name="icNo2" type="String" sourceType="String" isReadonly="False" sourceField="IC_NO_2" descript="主表字段:IC_NO_2" />
+    <item name="lastUpdateTimestamp" type="DateTime" sourceType="DateTime" isReadonly="False" sourceField="LAST_UPDATE_TIMESTAMP" descript="主表字段:LAST_UPDATE_TIMESTAMP" />
+    <item name="sxUserid" type="String" sourceType="String" isReadonly="False" sourceField="SX_USERID" descript="主表字段:SX_USERID" />
+    <item name="sxPsw" type="String" sourceType="String" isReadonly="False" sourceField="SX_PSW" descript="主表字段:SX_PSW" />
+    <item name="comments" type="String" sourceType="String" isReadonly="False" sourceField="COMMENTS" descript="主表字段:COMMENTS" />
+  </items>
 </businessMap>

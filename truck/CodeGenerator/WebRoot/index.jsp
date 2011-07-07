@@ -1,26 +1,61 @@
-<%@ page language="java" import="java.util.*" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" import="java.util.*" pageEncoding="GB2312"%>
+<%@ page import="java.io.*"%>
 <%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-  <head>
-    <base href="<%=basePath%>">
-    
-    <title>My JSP 'index.jsp' starting page</title>
-	<meta http-equiv="pragma" content="no-cache">
-	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">    
-	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-	<meta http-equiv="description" content="This is my page">
-	<!--
+	<head>
+		<base href="<%=basePath%>">
+
+		<title>配置文件</title>
+		<meta http-equiv="pragma" content="no-cache">
+		<meta http-equiv="cache-control" content="no-cache">
+		<meta http-equiv="expires" content="0">
+		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+		<meta http-equiv="description" content="This is my page">
+		<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-  </head>
-  
-  <body>
-    This is my JSP page. <br>
-  </body>
+	</head>
+
+	<body>
+		<table width="60%" border="0" cellspacing="0">
+			<thead>
+				<tr>
+					<th>
+						文件名
+					</th>
+					<th colspan="3">
+						操作
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+			      <%
+			      String cfgPathDir = request.getRealPath("/")+"templates";
+			      File file = new File(cfgPathDir);
+			      File[] cfgFiles = file.listFiles();
+			      if(cfgFiles!=null)
+			      for(File fileName:cfgFiles){ if(fileName.getName().indexOf(".xml")<0) continue;%>
+			      <tr>
+			         <td><font color="blue"><%out.print(fileName.getName());%></font><td>
+			         <td><a href="/entity.jsp?cfg=<%out.print(fileName.getName());%>">View Entity</a></td>
+			         <td><a href="/mapper.jsp?cfg=<%out.print(fileName.getName());%>">View Mapper</a></td>
+			         <td><a href="/mapperXml.jsp?cfg=<%out.print(fileName.getName());%>">View Mapper_XML</a></td>
+			      <tr>
+			      <%}%>
+			</tbody>
+			<tfoot>
+				<tr>
+					<td colspan="2">
+					</td>
+				</tr>
+				<tfoot>
+		</table>
+	</body>
 </html>

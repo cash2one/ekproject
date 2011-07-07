@@ -4,7 +4,7 @@
 <%
     String path = request.getContextPath();
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-	String cfgPath = request.getRealPath("/")+"demo.xml";
+	String cfgPath = request.getRealPath("/")+"templates/"+request.getParameter("cfg");
 	BusinessMap map = new BusinessMap(cfgPath);
 	String entityName=map.getClazz();
 	
@@ -64,7 +64,7 @@ public interface <%=entityName%>Mapper extends MyBatisMapper {
 	   * @param pageSize   设置每页显示的记录数
 	   <%=areaAbbDealComment%>
      <%String conParamsStr="";
-   for(FieldItem field:mainFields){%>
+   for(FieldItem field:mainFields){ if(field.getName().equals(map.getPrimaryKeyItem().getName())) continue; %>
 	   * @param <%out.print(field.getName()+"   //"+field.getDescript());
 	       conParamsStr+=",@Param(\""+field.getName()+"\")"+field.getType()+" "+field.getName();
 	  }
