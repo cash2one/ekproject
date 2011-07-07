@@ -42,7 +42,7 @@ import <%=basePackageName+map.getDaoNamespace()+"."+map.getMapperNamespace()%>.O
  * @CreateTime <%=new Date().toString()%>
  *
  */
-@Component("<%=StringHelper.toLowerCase(entityName)%>Mapper")
+@Component("<%=StringHelper.fistChartLowerCase(entityName)%>Mapper")
 public interface <%=entityName%>Mapper extends MyBatisMapper {
 
     

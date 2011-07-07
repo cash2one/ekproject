@@ -57,7 +57,7 @@ import <%=mapperPackageName+"."+map.getClazz()%>Mapper;
  * @CreateTime <%=new Date().toString()%>
  *
  */
-@Service("<%=StringHelper.toLowerCase(map.getName())%>")
+@Service("<%=StringHelper.fistChartLowerCase(map.getName())%>")
 public class <%=map.getName()%> extends BaseBusiness {
     
     //ÀΩ”– Ù–‘
