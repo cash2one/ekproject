@@ -169,7 +169,7 @@ class NodeUtil{
         		 field = new FieldItem();
         		 field.setTableAlias(tableAlias);
         		 field.setDescript(node.attributeValue("descript"));
-        		 field.setIsReadonly((node.attributeValue("isReadonly")!=null&&"true".equals(node.attributeValue("isReadonly")))?true:false);
+        		 field.setIsReadonly((node.attributeValue("isReadonly")!=null&&"true".equals(node.attributeValue("isReadonly").toLowerCase()))?true:false);
         		 field.setName(node.attributeValue("name"));
         		 field.setSourceField(node.attributeValue("sourceField"));
         		 field.setSourceType(node.attributeValue("sourceType"));
