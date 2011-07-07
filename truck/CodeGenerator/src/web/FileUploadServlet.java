@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import qtone.generator.util.BaseCfg;
 import cn.elamzs.common.base.files.FileUploadHandle;
 import cn.elamzs.common.base.files.FileUploadService;
 
@@ -61,7 +62,7 @@ public class FileUploadServlet extends HttpServlet {
 		}
 		resp.setContentType("text/html");
 		PrintWriter out = resp.getWriter();
-		out.write("<script>window.location.href='/code/index.jsp'</script>");
+		out.write("<script>window.location.href='/"+(!BaseCfg.APP_CONTEXT.equals("")?"/"+BaseCfg.APP_CONTEXT:"")+"/index.jsp'</script>");
 		out.close();
 	}
 
