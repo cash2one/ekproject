@@ -16,18 +16,11 @@ import cn.elam.util.file.xml.XmlHandler;
  */
 public class BaseCfg {
 
-	public static String DB_POOL_NAME = "zjxxt";
-	public static String COMPLAINT_CREATE_USERID = "1";
+	public static String APP_CONTEXT = "code";
 
 	static {
 		
-		Document doc = XmlHandler.loadXML("configs/sysCfg.xml");
-		Element element = XmlHandler.getElement(doc, "APP_DEBUG");
+		
 	}
-   
-	public void test(){
-		Document doc = XmlHandler.loadXML("configs/sysCfg.xml");
-		Element element = XmlHandler.getElement(doc, "APP_DEBUG");
-	}
-
+     
 }

@@ -22,12 +22,17 @@ import cn.elamzs.common.base.files.FileUploadService;
  */
 public class FileUploadServlet extends HttpServlet {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+
+
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 	
 		try {
-			    
-			    
 		        //建立文件上传服务接口，绑定对应的响应事件	    
 				FileUploadService srv = new FileUploadService(new FileUploadHandle(){
 		
@@ -35,28 +40,28 @@ public class FileUploadServlet extends HttpServlet {
 							String newFlile) {
 						// TODO Auto-generated method stub
 						try {
-							System.out.println(oldFile);
-						 
+							System.out.println("服务器接受到新的文件："+oldFile);
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
 					}
 					
-				}, "d:/eiweb/upfile",10,10);
-				
-				
+				}, req.getRealPath("/")+"templates/",10,10){
+					
+					//文件名
+				    public  String fileNamingRule(String oldFileName){
+					    	return oldFileName;
+					} 	 
+					
+				};
 			   //开始处理文件上传过程	
 			   srv.uploadFile(req);
-			   
-			   
-			   
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 		resp.setContentType("text/html");
 		PrintWriter out = resp.getWriter();
-		out.write("<script>window.location.href='listTask'</script>");
+		out.write("<script>window.location.href='/code/index.jsp'</script>");
 		out.close();
 	}
 
