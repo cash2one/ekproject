@@ -1,5 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="GB2312"%>
-<%@ page import="java.io.*"%>
+<%@ page import="java.io.*,qtone.generator.util.*"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -44,17 +44,16 @@
 			      for(File fileName:cfgFiles){ if(fileName.getName().indexOf(".xml")<0) continue;%>
 			      <tr>
 			         <td><font color="blue"><%out.print(fileName.getName());%></font><td>
-			         <td><a href="codeTemplators/entity.jsp?cfg=<%out.print(fileName.getName());%>">View Entity</a></td>
-			         <td><a href="codeTemplators/mapper.jsp?cfg=<%out.print(fileName.getName());%>">View Mapper</a></td>
-			         <td><a href="codeTemplators/mapperXml.jsp?cfg=<%out.print(fileName.getName());%>">View Mapper_XML</a></td>
-			         <td><a href="codeTemplators/business.jsp?cfg=<%out.print(fileName.getName());%>">View Bussiness</a></td>
+			         <td><a href="<%=!BaseCfg.APP_CONTEXT.equals("")?"/"+BaseCfg.APP_CONTEXT:""%>/codeTemplators/entity.jsp?cfg=<%out.print(fileName.getName());%>">View Entity</a></td>
+			         <td><a href="<%=!BaseCfg.APP_CONTEXT.equals("")?"/"+BaseCfg.APP_CONTEXT:""%>/codeTemplators/mapper.jsp?cfg=<%out.print(fileName.getName());%>">View Mapper</a></td>
+			         <td><a href="<%=!BaseCfg.APP_CONTEXT.equals("")?"/"+BaseCfg.APP_CONTEXT:""%>/codeTemplators/mapperXml.jsp?cfg=<%out.print(fileName.getName());%>">View Mapper_XML</a></td>
+			         <td><a href="<%=!BaseCfg.APP_CONTEXT.equals("")?"/"+BaseCfg.APP_CONTEXT:""%>/codeTemplators/business.jsp?cfg=<%out.print(fileName.getName());%>">View Bussiness</a></td>
 			      <tr>
 			      <%}%>
 			</tbody>
 			<tfoot>
 				<tr>
-					<td colspan="2">
-					</td>
+					<td colspan="2"><A href="<%=!BaseCfg.APP_CONTEXT.equals("")?"/"+BaseCfg.APP_CONTEXT:""%>/upload.jsp">上传配置文件</A></td>
 				</tr>
 				<tfoot>
 		</table>
