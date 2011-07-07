@@ -71,23 +71,23 @@ public class <%=map.getName()%> extends BaseBusiness {
           private <%out.print(field.getType()+"  "+field.getName()+"; //"+field.getDescript());}%>
           
 	
-     //Spring自动注入相应的数据访问层对象
-	 //*****************************************************************************************************************
+      //Spring自动注入相应的数据访问层对象
+	  //*****************************************************************************************************************
 	 @Autowired
 	 private <%=mapperObjName%> <%=StringHelper.fistChartLowerCase(mapperObjName)%>;
 	 
 	 //构造函数
-	//*****************************************************************************************************************
+	 //*****************************************************************************************************************
 	
-    /**
+     /**
      * 默认构造函数
      */
-	public <%=map.getName()%>() {
-
-	}
+	 public <%=map.getName()%>() {
+	
+	 }
 	
  
-   /**带参数（主表）的构造函数
+    /**带参数（主表）的构造函数
      <%String conParamsStr="";
    for(FieldItem field:mainFields){%>
 	   * @param <%out.print(field.getName()+"   //"+field.getDescript());
@@ -248,6 +248,7 @@ public class <%=map.getName()%> extends BaseBusiness {
 	       conParamsStr+=",@SearchParameter(name =\""+field.getName()+"\")"+field.getType()+" "+field.getName();
 	       tempStr+=","+field.getName();
 	     }
+         funcParamsStr=funcParamsStr.substring(1);
          tempStr=tempStr.substring(1);;
 	     conParamsStr = conParamsStr.substring(1);%>
 	   * @param orderList  //控制排序
@@ -270,7 +271,20 @@ public class <%=map.getName()%> extends BaseBusiness {
 	}
 				
 			
-	
+	 /**
+     * 根据主键（<%=map.getPrimaryKeyItem().getName()%>）返回单条记录
+     * @param <%=map.getPrimaryKeyItem().getName()%>
+     * @return 
+     */
+	@Transactional
+	public <%=map.getName()%> findOne(<%=map.getPrimaryKeyItem().getType()+" "+map.getPrimaryKeyItem().getName()%>){
+		 <%=map.getName()%>  valueObj = null;
+		 <%=entryObjName%> entry = <%=StringHelper.fistChartLowerCase(mapperObjName)%>.findOne(<%=map.isAreaDeal()?"this.getAbb(),":""%><%=StringHelper.fistChartLowerCase(entryObjName)%>);
+		if (entry != null){
+			valueObj = new <%=map.getName()%>(<%=funcParamsStr%>);
+		}
+		return valueObj;
+	}
 	
 	//自定义方法
 	//*****************************************************************************************************************
