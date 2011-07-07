@@ -67,18 +67,18 @@ public interface <%=entityName%>Mapper extends MyBatisMapper {
      for(FieldItem field:mainFields){ if(field.getName().equals(map.getPrimaryKeyItem().getName())) continue;
           if(field.getType().toLowerCase().indexOf("date")>=0||field.getType().toLowerCase().indexOf("time")>=0){
 	    	 conParamsStr+=",@Param(\""+field.getName()+"1\")"+field.getType()+" "+field.getName()+"1"+",@Param(\""+field.getName()+"2\")"+field.getType()+" "+field.getName()+"2";%>
-	   * @param <% out.println(field.getName()+"1   //"+field.getDescript()+" 开始时间");out.print("           * @param "+field.getName()+"2   //"+field.getDescript()+" 结束时间");
+	   * @param <% out.println(field.getName()+"1   "+field.getDescript()+" （大于或等于开始时间）");out.print("           * @param "+field.getName()+"2   "+field.getDescript()+" （小于或等于结束时间）");
 	      }else{%>
-	   * @param <%  out.print(field.getName()+"   //"+field.getDescript());  
+	   * @param <%  out.print(field.getName()+"   "+field.getDescript());  
 	       	 conParamsStr+=",@Param(\""+field.getName()+"\")"+field.getType()+" "+field.getName();
 	      }
 	  }
      for(FieldItem field:subFields){
 	     if(field.getType().toLowerCase().indexOf("date")>=0||field.getType().toLowerCase().indexOf("time")>=0){
 	    	  conParamsStr+=",@Param(\""+field.getName()+"1\")"+field.getType()+" "+field.getName()+"1"+",@Param(\""+field.getName()+"2\")"+field.getType()+" "+field.getName()+"2";%>
-	   * @param <% out.println(field.getName()+"1   //"+field.getDescript()+" 开始时间");out.print("           * @param "+field.getName()+"2   //"+field.getDescript()+" 结束时间");
+	   * @param <% out.println(field.getName()+"1   "+field.getDescript()+" （大于或等于开始时间）");out.print("           * @param "+field.getName()+"2   "+field.getDescript()+" （小于或等于结束时间）");
 	        }else{%>
-	   * @param <%  out.print(field.getName()+"   //"+field.getDescript());  
+	   * @param <%  out.print(field.getName()+"   "+field.getDescript());  
 	          conParamsStr+=",@Param(\""+field.getName()+"\")"+field.getType()+" "+field.getName();
 	       }
 	     }
@@ -97,18 +97,18 @@ public interface <%=entityName%>Mapper extends MyBatisMapper {
 for(FieldItem field:mainFields){ if(field.getName().equals(map.getPrimaryKeyItem().getName())) continue;
     if(field.getType().toLowerCase().indexOf("date")>=0||field.getType().toLowerCase().indexOf("time")>=0){
   	 conParamsStr+=",@Param(\""+field.getName()+"1\")"+field.getType()+" "+field.getName()+"1"+",@Param(\""+field.getName()+"2\")"+field.getType()+" "+field.getName()+"2";%>
- 	 * @param <% out.println(field.getName()+"1   //"+field.getDescript()+" 开始时间");out.print("         * @param "+field.getName()+"2   //"+field.getDescript()+" 结束时间");
+ 	 * @param <% out.println(field.getName()+"1   "+field.getDescript()+"  （大于或等于开始时间）");out.print("         * @param "+field.getName()+"2   "+field.getDescript()+" （小于或等于结束时间）");
     }else{%>
- 	 * @param <%  out.print(field.getName()+"   //"+field.getDescript());  
+ 	 * @param <%  out.print(field.getName()+"   "+field.getDescript());  
      	 conParamsStr+=",@Param(\""+field.getName()+"\")"+field.getType()+" "+field.getName();
     }
 }
  for(FieldItem field:subFields){
    if(field.getType().toLowerCase().indexOf("date")>=0||field.getType().toLowerCase().indexOf("time")>=0){
   	  conParamsStr+=",@Param(\""+field.getName()+"1\")"+field.getType()+" "+field.getName()+"1"+",@Param(\""+field.getName()+"2\")"+field.getType()+" "+field.getName()+"2";%>
-	 * @param <% out.println(field.getName()+"1   //"+field.getDescript()+" 开始时间");out.print("         * @param "+field.getName()+"2   //"+field.getDescript()+" 结束时间");
+	 * @param <% out.println(field.getName()+"1   "+field.getDescript()+"  （大于或等于开始时间）");out.print("         * @param "+field.getName()+"2   "+field.getDescript()+" （小于或等于结束时间）");
       }else{%>
- 	 * @param <%  out.print(field.getName()+"   //"+field.getDescript());  
+ 	 * @param <%  out.print(field.getName()+"   "+field.getDescript());  
         conParamsStr+=",@Param(\""+field.getName()+"\")"+field.getType()+" "+field.getName();
      }
     }conParamsStr = conParamsStr.substring(1);%>
@@ -123,7 +123,7 @@ for(FieldItem field:mainFields){ if(field.getName().equals(map.getPrimaryKeyItem
 	 * @param <%=StringHelper.fistChartLowerCase(entityName)%>
 	 * @return
 	 */
-	public int insert<%=entityName%>(<%=isAppendAreaDeal%> <%=entityName%>Entry <%=StringHelper.toLowerCase(entityName)%>);
+	public int insert<%=entityName%>(<%=isAppendAreaDeal%> @Param("<%=StringHelper.fistChartLowerCase(entityName)%>")<%=entityName%>Entry <%=StringHelper.fistChartLowerCase(entityName)%>);
 	
 	
 	/**
@@ -132,7 +132,7 @@ for(FieldItem field:mainFields){ if(field.getName().equals(map.getPrimaryKeyItem
 	 * @param <%=StringHelper.fistChartLowerCase(entityName)%>
 	 * @return
 	 */
-	public int update<%=entityName%>(<%=isAppendAreaDeal%> <%=entityName%>Entry <%=StringHelper.toLowerCase(entityName)%>);
+	public int update<%=entityName%>(<%=isAppendAreaDeal%> @Param("<%=StringHelper.fistChartLowerCase(entityName)%>") <%=entityName%>Entry <%=StringHelper.fistChartLowerCase(entityName)%>);
 	
 	
 	/**

@@ -62,20 +62,18 @@ public class <%=map.getName()%> extends BaseBusiness {
     
     //私有属性
 	//*****************************************************************************************************************
-	<% //输出主要的字段属性
-       for(FieldItem field:mainFields){
-%> 
+	<%for(FieldItem field:mainFields){//输出主要的字段属性%> 
          private <%out.print(field.getType()+"  "+field.getName()+"; //"+field.getDescript());}%>
     
-    <% //输出从表的字段属性
-       for(FieldItem field:subFields){%> 
-          private <%out.print(field.getType()+"  "+field.getName()+"; //"+field.getDescript());}%>
+    <% for(FieldItem field:subFields){ //输出从表的字段属性 %> 
+         private <%out.print(field.getType()+"  "+field.getName()+"; //"+field.getDescript());}%>
           
 	
-      //Spring自动注入相应的数据访问层对象
-	  //*****************************************************************************************************************
-	 @Autowired
-	 private <%=mapperObjName%> <%=StringHelper.fistChartLowerCase(mapperObjName)%>;
+     //Spring自动注入相应的数据访问层对象
+	 //*****************************************************************************************************************
+	  
+	  @Autowired
+	  private <%=mapperObjName%> <%=StringHelper.fistChartLowerCase(mapperObjName)%>;
 	 
 	 //构造函数
 	 //*****************************************************************************************************************
@@ -91,15 +89,14 @@ public class <%=map.getName()%> extends BaseBusiness {
     /**带参数（主表）的构造函数
      <%String conParamsStr="";
    for(FieldItem field:mainFields){%>
-	   * @param <%out.print(field.getName()+"   //"+field.getDescript());
+	   * @param <%out.print(field.getName()+"   "+field.getDescript());
 	       conParamsStr+=","+field.getType()+" "+field.getName();
 	  }
         conParamsStr=conParamsStr.substring(1);
 	  %>
 	*/
 	public <%=map.getName()%>(<%=conParamsStr%>) {
-		   <% //输出主要的字段属性
-	       for(FieldItem field:mainFields){%> 
+		   <%for(FieldItem field:mainFields){ //输出主要的字段属性%> 
 	            this.<%out.print(field.getName()+"="+field.getName()+";");}%>
 	}
    
@@ -109,21 +106,19 @@ public class <%=map.getName()%> extends BaseBusiness {
 	/**带参数（全部）的构造函数
      <%conParamsStr="";
    for(FieldItem field:mainFields){%>
-	   * @param <%out.print(field.getName()+"   //"+field.getDescript());
+	   * @param <%out.print(field.getName()+"   "+field.getDescript());
 	       conParamsStr+=","+field.getType()+" "+field.getName();
 	  }
    for(FieldItem field:subFields){%>
-	   * @param <%out.print(field.getName()+"   //"+field.getDescript());
+	   * @param <%out.print(field.getName()+"   "+field.getDescript());
 	       conParamsStr+=","+field.getType()+" "+field.getName();
 	     }
 	     conParamsStr = conParamsStr.substring(1);%>
 	*/
 	public <%=map.getName()%>(<%=conParamsStr%>) {
-		   <% //输出主要的字段属性
-	       for(FieldItem field:mainFields){%> 
+		   <%for(FieldItem field:mainFields){ //输出主要的字段属性%> 
 	            this.<%out.print(field.getName()+"="+field.getName()+";");}%>
-	       <% //输出从表的字段属性
-	       for(FieldItem field:subFields){%> 
+	       <%for(FieldItem field:subFields){ //输出从表的字段属性%> 
 	            this.<%out.print(field.getName()+"="+field.getName()+";");}%>
 	}
 	
@@ -131,23 +126,27 @@ public class <%=map.getName()%> extends BaseBusiness {
 	//属性对应的get 和 set 方法
 	//*****************************************************************************************************************
 	
-    <% //生成对应的getting 和 setting 方法
-     for(FieldItem field:mainFields){%> 
-         //* @param <%=field.getName()+" //"+field.getDescript()%>
+    <%for(FieldItem field:mainFields){ //生成对应的getting 和 setting 方法%> 
+         //* @param <%=field.getName()+" "+field.getDescript()%>
          public void set<%out.print(StringHelper.fistChartUpperCase(field.getName())+"("+field.getType()+" "+field.getName()+"){");%>
 	        this.<%out.print(field.getName()+"="+field.getName()+";");%>    
          }
          
-         //* @return <%=field.getName()+" //"+field.getDescript()%>
-         public <%=field.getType() %> get<%out.print(StringHelper.fistChartUpperCase(field.getName())+"(  ){ ");%>
+         //* @return <%=field.getName()+" "+field.getDescript()%>
+         public <%=field.getType() %> get<%out.print(StringHelper.fistChartUpperCase(field.getName())+"( ){ ");%>
 	        return this.<%out.print(field.getName()+";");%>    
          }
     <%}%>
     
-     <% //生成从表的getting 方法
-     for(FieldItem field:subFields){%>          
-         //* @return <%=field.getName()+" //"+field.getDescript()%>
-         public <%=field.getType() %> get<%out.print(StringHelper.fistChartUpperCase(field.getName())+"(  ){ ");%>
+     <%for(FieldItem field:subFields){ //生成从表的getting 方法%>          
+         
+         //* @param <%=field.getName()+" "+field.getDescript()%>
+         private void set<%out.print(StringHelper.fistChartUpperCase(field.getName())+"("+field.getType()+" "+field.getName()+"){");%>
+	        this.<%out.print(field.getName()+"="+field.getName()+";");%>    
+         }
+        
+         //* @return <%=field.getName()+" "+field.getDescript()%>
+         public <%=field.getType() %> get<%out.print(StringHelper.fistChartUpperCase(field.getName())+"( ){ ");%>
 	        return this.<%out.print(field.getName()+";");%>    
          }
     <%}%>
@@ -210,6 +209,26 @@ public class <%=map.getName()%> extends BaseBusiness {
 
 	
 	
+    /**
+     * 根据主键（<%=map.getPrimaryKeyItem().getName()%>）返回单条记录
+     * @param <%=map.getPrimaryKeyItem().getName()%>
+     * @return 
+     */
+	@Transactional
+	public void findOne(<%=map.getPrimaryKeyItem().getType()+" "+map.getPrimaryKeyItem().getName()%>){
+		<%=entryObjName%> entry = <%=StringHelper.fistChartLowerCase(mapperObjName)%>.findOne(this.getAbb(),<%=map.getPrimaryKeyItem().getName()%>);
+		if (entry != null){<% //赋值
+	     for(FieldItem field:mainFields){%>
+	           this.set<%out.print(StringHelper.fistChartUpperCase(field.getName())+"(entry.get"+StringHelper.fistChartUpperCase(field.getName())+"());");
+	     }
+         for(FieldItem field:subFields){%>
+                   this.set<%out.print(StringHelper.fistChartUpperCase(field.getName())+"(entry.get"+StringHelper.fistChartUpperCase(field.getName())+"());");}%>
+		}  
+	}
+	
+	
+	
+	
 	/**
 	 * 修改
 	 */
@@ -238,35 +257,47 @@ public class <%=map.getName()%> extends BaseBusiness {
 	   * 查询
 	   * @param startRow   开始记录的行数
 	   * @param pageSize   设置每页显示的记录数
-	   <%=areaAbbDealComment%>
      <%conParamsStr="";tempStr="";String funcParamsStr="";
    for(FieldItem field:mainFields){ funcParamsStr+=",entry.get"+StringHelper.fistChartUpperCase(field.getName())+"()";if(field.getName().equals(map.getPrimaryKeyItem().getName())) continue; %>
-	   * @param <%
-	       out.print(field.getName()+"   //"+field.getDescript());
-	       tempStr+=","+field.getName();
-	       conParamsStr+=",@SearchParameter(name =\""+field.getName()+"\")"+field.getType()+" "+field.getName();
+	   <%
+	       if(field.getType().toLowerCase().indexOf("date")>=0||field.getType().toLowerCase().indexOf("time")>=0){
+	    	  out.println("* @param   "+field.getName()+"1   "+field.getDescript()+" （大于或等于开始时间）");
+	    	  out.print("           * @param   "+field.getName()+"2   "+field.getDescript()+" （小于或等于结束时间）");
+		      tempStr+=","+field.getName()+"1,"+field.getName()+"2";
+		      conParamsStr+=",@SearchParameter(name =\""+field.getName()+"1\")"+field.getType()+" "+field.getName()+"1,@SearchParameter(name =\""+field.getName()+"2\")"+field.getType()+" "+field.getName()+"2";
+	       }else{
+	          out.print("* @param   "+field.getName()+"   "+field.getDescript());
+	          tempStr+=","+field.getName();
+	          conParamsStr+=",@SearchParameter(name =\""+field.getName()+"\")"+field.getType()+" "+field.getName();}
 	 
-    }
+   }//end for
    for(FieldItem field:subFields){ funcParamsStr+=",entry.get"+StringHelper.fistChartUpperCase(field.getName())+"()";%>
-	   * @param <%out.print(field.getName()+"   //"+field.getDescript());
-	       conParamsStr+=",@SearchParameter(name =\""+field.getName()+"\")"+field.getType()+" "+field.getName();
-	       tempStr+=","+field.getName();
-	     }
+	   <%
+	      if(field.getType().toLowerCase().indexOf("date")>=0||field.getType().toLowerCase().indexOf("time")>=0){
+	    	  out.println("* @param   "+field.getName()+"1   "+field.getDescript()+" （大于或等于开始时间）");
+	    	  out.print("            * @param   "+field.getName()+"2   "+field.getDescript()+" （小于或等于结束时间）");
+		      tempStr+=","+field.getName()+"1,"+field.getName()+"2";
+		      conParamsStr+=",@SearchParameter(name =\""+field.getName()+"1\")"+field.getType()+" "+field.getName()+"1,@SearchParameter(name =\""+field.getName()+"2\")"+field.getType()+" "+field.getName()+"2";
+	      }else{ 
+	          out.print("* @param   "+field.getName()+"   "+field.getDescript());
+	          conParamsStr+=",@SearchParameter(name =\""+field.getName()+"\")"+field.getType()+" "+field.getName();
+	          tempStr+=","+field.getName();}
+	     }//end for
          funcParamsStr=funcParamsStr.substring(1);
          tempStr=tempStr.substring(1);;
 	     conParamsStr = conParamsStr.substring(1);%>
 	   * @param orderList  //控制排序
 	   * @return List<<%=map.getName()%>>
 	   */
-	@SeacherFun(nameAlias="<%=entityName%>List")
+	@SeacherFun(nameAlias="<%=map.getName()%>Seacher")
 	@Transactional
-	public List<<%=map.getName()%>> qeury<%=entityName%>s(@SearchParameter(defaultValue = "1",name = "startRow")int startRow, @SearchParameter(defaultValue = "20",name = "pageSize")int pageSize,<%=areaAbbParamStr%>,
-				<%=""%> <%=conParamsStr%>,
+	public List<<%=map.getName()%>> qeury<%=entityName%>s(@SearchParameter(defaultValue = "1",name = "startRow")int startRow, @SearchParameter(defaultValue = "20",name = "pageSize")int pageSize,
+				<%=conParamsStr%>,
 				@SearchParameter(name="orderList")List<OrderItem>orderList){
 		   //实例化List对象		
 		   List<<%=map.getName()%>> list = new ArrayList<<%=map.getName()%>>();
 		   //查询结果实体
-		   List<<%=entryObjName%>> entryList = <%=StringHelper.fistChartLowerCase(mapperObjName)%>.qeury<%=map.getClazz()%>s(startRow,pageSize,areaAbb,<%=tempStr%>,orderList);
+		   List<<%=entryObjName%>> entryList = <%=StringHelper.fistChartLowerCase(mapperObjName)%>.qeury<%=map.getClazz()%>s(startRow,pageSize,this.getAbb(),<%=tempStr%>,orderList);
 	       if (entryList != null)
 		   for (<%=entryObjName%> entry : entryList) {
 				list.add(new <%=map.getName()%>(<%=funcParamsStr%>));
@@ -275,27 +306,12 @@ public class <%=map.getName()%> extends BaseBusiness {
 	}
 				
 			
-	 /**
-     * 根据主键（<%=map.getPrimaryKeyItem().getName()%>）返回单条记录
-     * @param <%=map.getPrimaryKeyItem().getName()%>
-     * @return 
-     */
-	@Transactional
-	public <%=map.getName()%> findOne(<%=map.getPrimaryKeyItem().getType()+" "+map.getPrimaryKeyItem().getName()%>){
-		 <%=map.getName()%>  valueObj = null;
-		 <%=entryObjName%> entry = <%=StringHelper.fistChartLowerCase(mapperObjName)%>.findOne(this.getAbb(),<%=map.getPrimaryKeyItem().getName()%>);
-		if (entry != null){
-			valueObj = new <%=map.getName()%>(<%=funcParamsStr%>);
-		}
-		return valueObj;
-	}
-	
+
 	
 	
 	
 	//自定义方法
 	//*****************************************************************************************************************
-	
 	
 	
 }

@@ -89,8 +89,11 @@
        <if test="orderList!=null">
 		  <trim prefix="ORDER BY" prefixOverrides=",">
 				<foreach collection="orderList" item="order" open=""  separator="," close="" >
-				   <choose><%for(String key:mainFieldSet.keySet()){
+				   <choose><%for(String key:mainFieldSet.keySet()){ //主表的排序条件
 				    	   items =  mainFieldSet.get(key);%> 
+				       <%out.print(SqlXmlCreator.appendOrderOptions(key,items[0],items[1]));} 
+				       for(String key:subFieldSet.keySet()){  //从表的排序条件  
+				           items =  subFieldSet.get(key);%>   
 				       <%out.print(SqlXmlCreator.appendOrderOptions(key,items[0],items[1]));}%>
 				  </choose>
 			 </foreach>
@@ -128,7 +131,7 @@
 	               SELECT <include refid="<%=moduleName%>Columns"/>   
 		           FROM <include refid="querySqlMain"/>
 		           <include refid="orderControl"/>
-		    ) A WHERE ROWNUM &lt;=<%="${startRow}+${pageSize}"%> ) 
+		    ) A WHERE ROWNUM &lt;=<%="${startRow}+${pageSize}-1"%> ) 
 		 WHERE RN &gt;=<%="#{startRow}"%>
    </select>
 
@@ -192,7 +195,7 @@
 	    return "<when test=\"order.columnName=='"+name+"'\"> "+tableAlias+"."+sourceField+" ${order.type} </when>";
 	}
 	
-	
+	//SQL 组装
 	public static String wrapperMainQuerySql(String mainTable,String mainTableAlias,List<JoinItem> joinTables){
 		String sql = mainTable+"  "+mainTableAlias;
 		sql+=wrapperLeftJoinSql(mainTableAlias,joinTables);
@@ -200,11 +203,14 @@
 	}
 	
 	
+	//进行表连接
 	public static String wrapperLeftJoinSql(String tableAlias,List<JoinItem> joinTables){
 		String sql ="";
+		String joinType="";
 		if(joinTables!=null)
 		for(JoinItem join:joinTables){
-			sql+= " LEFT JOIN "+join.getTable()+" "+join.getAlias()+" ON "+ tableAlias+"."+join.getPrimaryTableKey()+" = " +join.getAlias()+"."+join.getJoinTableKey();
+			joinType=join.getJoinType().equals("left")?" LEFT JOIN ":(join.getJoinType().equals("rigth")?" RIGHT JOIN ":" JOIN ");
+			sql+= joinType + join.getTable()+" "+join.getAlias()+" ON "+ tableAlias+"."+join.getPrimaryTableKey()+" = " +join.getAlias()+"."+join.getJoinTableKey();
 		    sql+= wrapperLeftJoinSql(join.getAlias(),join.getJoinItems());
 		}
 		return sql.toString();
