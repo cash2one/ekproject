@@ -26,7 +26,7 @@
 %>
 package <%=packageName%>;
 
-import java.util.List;
+import java.util.*;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 

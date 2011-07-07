@@ -13,6 +13,7 @@
 package <%=packageName%>;
 
 import java.io.Serializable;
+import java.util.*;
 
 /**
  * @description <%=map.getDescription()%> 对应的实体
