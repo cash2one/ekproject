@@ -92,8 +92,9 @@ public class <%=map.getName()%> extends BaseBusiness {
    for(FieldItem field:mainFields){%>
 	   * @param <%out.print(field.getName()+"   //"+field.getDescript());
 	       conParamsStr+=","+field.getType()+" "+field.getName();
-	  }%>
- 
+	  }
+        conParamsStr=conParamsStr.substring(1);
+	  %>
 	*/
 	public <%=map.getName()%>(<%=conParamsStr%>) {
 		   <% //输出主要的字段属性
@@ -131,12 +132,12 @@ public class <%=map.getName()%> extends BaseBusiness {
 	
     <% //生成对应的getting 和 setting 方法
      for(FieldItem field:mainFields){%> 
-         * @param <%=field.getName()+" //"+field.getDescript()%>
+         //* @param <%=field.getName()+" //"+field.getDescript()%>
          public void set<%out.print(StringHelper.fistChartUpperCase(field.getName())+"("+field.getType()+" "+field.getName()+"){");%>
 	        this.<%out.print(field.getName()+"="+field.getName()+";");%>    
          }
          
-         * @return <%=field.getName()+" //"+field.getDescript()%>
+         //* @return <%=field.getName()+" //"+field.getDescript()%>
          public <%=field.getType() %> get<%out.print(StringHelper.fistChartUpperCase(field.getName())+"(  ){ ");%>
 	        return this.<%out.print(field.getName()+";");%>    
          }
@@ -144,7 +145,7 @@ public class <%=map.getName()%> extends BaseBusiness {
     
      <% //生成从表的getting 方法
      for(FieldItem field:subFields){%>          
-         * @return <%=field.getName()+" //"+field.getDescript()%>
+         //* @return <%=field.getName()+" //"+field.getDescript()%>
          public <%=field.getType() %> get<%out.print(StringHelper.fistChartUpperCase(field.getName())+"(  ){ ");%>
 	        return this.<%out.print(field.getName()+";");%>    
          }
@@ -239,10 +240,12 @@ public class <%=map.getName()%> extends BaseBusiness {
 	   <%=areaAbbDealComment%>
      <%conParamsStr="";tempStr="";String funcParamsStr="";
    for(FieldItem field:mainFields){ funcParamsStr+=",entry.get"+StringHelper.fistChartUpperCase(field.getName())+"()";if(field.getName().equals(map.getPrimaryKeyItem().getName())) continue; %>
-	   * @param <%out.print(field.getName()+"   //"+field.getDescript());
+	   * @param <%
+	       out.print(field.getName()+"   //"+field.getDescript());
 	       tempStr+=","+field.getName();
 	       conParamsStr+=",@SearchParameter(name =\""+field.getName()+"\")"+field.getType()+" "+field.getName();
-	  }
+	 
+    }
    for(FieldItem field:subFields){ funcParamsStr+=",entry.get"+StringHelper.fistChartUpperCase(field.getName())+"()";%>
 	   * @param <%out.print(field.getName()+"   //"+field.getDescript());
 	       conParamsStr+=",@SearchParameter(name =\""+field.getName()+"\")"+field.getType()+" "+field.getName();
@@ -279,7 +282,7 @@ public class <%=map.getName()%> extends BaseBusiness {
 	@Transactional
 	public <%=map.getName()%> findOne(<%=map.getPrimaryKeyItem().getType()+" "+map.getPrimaryKeyItem().getName()%>){
 		 <%=map.getName()%>  valueObj = null;
-		 <%=entryObjName%> entry = <%=StringHelper.fistChartLowerCase(mapperObjName)%>.findOne(<%=map.isAreaDeal()?"this.getAbb(),":""%><%=StringHelper.fistChartLowerCase(entryObjName)%>);
+		 <%=entryObjName%> entry = <%=StringHelper.fistChartLowerCase(mapperObjName)%>.findOne(this.getAbb(),<%=map.getPrimaryKeyItem().getName()%>);
 		if (entry != null){
 			valueObj = new <%=map.getName()%>(<%=funcParamsStr%>);
 		}

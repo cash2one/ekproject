@@ -64,13 +64,23 @@ public interface <%=entityName%>Mapper extends MyBatisMapper {
 	   * @param pageSize   设置每页显示的记录数
 	   <%=areaAbbDealComment%>
      <%String conParamsStr="";
-   for(FieldItem field:mainFields){ if(field.getName().equals(map.getPrimaryKeyItem().getName())) continue; %>
-	   * @param <%out.print(field.getName()+"   //"+field.getDescript());
-	       conParamsStr+=",@Param(\""+field.getName()+"\")"+field.getType()+" "+field.getName();
+     for(FieldItem field:mainFields){ if(field.getName().equals(map.getPrimaryKeyItem().getName())) continue;
+          if(field.getType().toLowerCase().indexOf("date")>=0||field.getType().toLowerCase().indexOf("time")>=0){
+	    	 conParamsStr+=",@Param(\""+field.getName()+"1\")"+field.getType()+" "+field.getName()+"1"+",@Param(\""+field.getName()+"2\")"+field.getType()+" "+field.getName()+"2";%>
+	   * @param <% out.println(field.getName()+"1   //"+field.getDescript()+" 开始时间");out.print("           * @param "+field.getName()+"2   //"+field.getDescript()+" 结束时间");
+	      }else{%>
+	   * @param <%  out.print(field.getName()+"   //"+field.getDescript());  
+	       	 conParamsStr+=",@Param(\""+field.getName()+"\")"+field.getType()+" "+field.getName();
+	      }
 	  }
-   for(FieldItem field:subFields){%>
-	   * @param <%out.print(field.getName()+"   //"+field.getDescript());
-	       conParamsStr+=",@Param(\""+field.getName()+"\")"+field.getType()+" "+field.getName();
+     for(FieldItem field:subFields){
+	     if(field.getType().toLowerCase().indexOf("date")>=0||field.getType().toLowerCase().indexOf("time")>=0){
+	    	  conParamsStr+=",@Param(\""+field.getName()+"1\")"+field.getType()+" "+field.getName()+"1"+",@Param(\""+field.getName()+"2\")"+field.getType()+" "+field.getName()+"2";%>
+	   * @param <% out.println(field.getName()+"1   //"+field.getDescript()+" 开始时间");out.print("           * @param "+field.getName()+"2   //"+field.getDescript()+" 结束时间");
+	        }else{%>
+	   * @param <%  out.print(field.getName()+"   //"+field.getDescript());  
+	          conParamsStr+=",@Param(\""+field.getName()+"\")"+field.getType()+" "+field.getName();
+	       }
 	     }
 	     conParamsStr = conParamsStr.substring(1);%>
 	   * @param orderList  //控制排序
@@ -82,19 +92,28 @@ public interface <%=entityName%>Mapper extends MyBatisMapper {
 
 	/**
 	 * 列表的记录总数统计
-	   <%=appendAreaDealcomment%>
-     <%conParamsStr="";
-   for(FieldItem field:mainFields){%>
-	   * @param <%out.print(field.getName()+"   //"+field.getDescript());
-	       conParamsStr+=",@Param(\""+field.getName()+"\")"+field.getType()+" "+field.getName();
-	  }
-   for(FieldItem field:subFields){%>
-	   * @param <%out.print(field.getName()+"   //"+field.getDescript());
-	       conParamsStr+=",@Param(\""+field.getName()+"\")"+field.getType()+" "+field.getName();
-	     }
-	     conParamsStr = conParamsStr.substring(1);%>
-	   * @return 列表的记录数
-	   */
+       <%=appendAreaDealcomment%>
+<%conParamsStr="";
+for(FieldItem field:mainFields){ if(field.getName().equals(map.getPrimaryKeyItem().getName())) continue;
+    if(field.getType().toLowerCase().indexOf("date")>=0||field.getType().toLowerCase().indexOf("time")>=0){
+  	 conParamsStr+=",@Param(\""+field.getName()+"1\")"+field.getType()+" "+field.getName()+"1"+",@Param(\""+field.getName()+"2\")"+field.getType()+" "+field.getName()+"2";%>
+ 	 * @param <% out.println(field.getName()+"1   //"+field.getDescript()+" 开始时间");out.print("         * @param "+field.getName()+"2   //"+field.getDescript()+" 结束时间");
+    }else{%>
+ 	 * @param <%  out.print(field.getName()+"   //"+field.getDescript());  
+     	 conParamsStr+=",@Param(\""+field.getName()+"\")"+field.getType()+" "+field.getName();
+    }
+}
+ for(FieldItem field:subFields){
+   if(field.getType().toLowerCase().indexOf("date")>=0||field.getType().toLowerCase().indexOf("time")>=0){
+  	  conParamsStr+=",@Param(\""+field.getName()+"1\")"+field.getType()+" "+field.getName()+"1"+",@Param(\""+field.getName()+"2\")"+field.getType()+" "+field.getName()+"2";%>
+	 * @param <% out.println(field.getName()+"1   //"+field.getDescript()+" 开始时间");out.print("         * @param "+field.getName()+"2   //"+field.getDescript()+" 结束时间");
+      }else{%>
+ 	 * @param <%  out.print(field.getName()+"   //"+field.getDescript());  
+        conParamsStr+=",@Param(\""+field.getName()+"\")"+field.getType()+" "+field.getName();
+     }
+    }conParamsStr = conParamsStr.substring(1);%>
+	 * @return 列表的记录数
+	 */
 	public int qeury<%=entityName%>sRecordCount(<%=areaAbbParamStr%>,<%=conParamsStr%>);
 	
 	

@@ -38,7 +38,7 @@ public class <%=entityName%>Entry implements Serializable {
 	  }
 	
 	 
-       //带参数的构造函数
+     /**带参数的构造函数
     <% String conParamsStr="";
         for(FieldItem field:mainFields){%>
  	* @param <%out.print(field.getName()+"   //"+field.getDescript());
@@ -48,7 +48,7 @@ public class <%=entityName%>Entry implements Serializable {
   	* @param <%out.print(field.getName()+"   //"+field.getDescript());
           conParamsStr+=","+field.getType()+" "+field.getName();}
         conParamsStr = conParamsStr.substring(1);
-    %>
+    %>*/
 	 public <%=entityName%>Entry(<%=conParamsStr%>){
        <% //输出主要的字段属性
        for(FieldItem field:mainFields){%> 
@@ -61,12 +61,12 @@ public class <%=entityName%>Entry implements Serializable {
 	
 	<% //生成对应的getting 和 setting 方法
      for(FieldItem field:mainFields){%> 
-         * @param <%=field.getName()+" //"+field.getDescript()%>
+         //* @param <%=field.getName()+" //"+field.getDescript()%>
          public void set<%out.print(StringHelper.fistChartUpperCase(field.getName())+"("+field.getType()+" "+field.getName()+"){");%>
 	        this.<%out.print(field.getName()+"="+field.getName()+";");%>    
          }
          
-         * @return <%=field.getName()+" //"+field.getDescript()%>
+         //* @return <%=field.getName()+" //"+field.getDescript()%>
          public <%=field.getType() %> get<%out.print(StringHelper.fistChartUpperCase(field.getName())+"(  ){ ");%>
 	        return this.<%out.print(field.getName()+";");%>    
          }
@@ -74,12 +74,12 @@ public class <%=entityName%>Entry implements Serializable {
     
      <% //生成从表的getting 和 setting 方法
      for(FieldItem field:subFields){%> 
-         * @param <%=field.getName()+" //"+field.getDescript()%>
+         //* @param <%=field.getName()+" //"+field.getDescript()%>
          public void set<%out.print(StringHelper.fistChartUpperCase(field.getName())+"("+field.getType()+" "+field.getName()+"){");%>
 	       this.<%out.print(field.getName()+"="+field.getName()+";");%>    
          }
          
-         * @return <%=field.getName()+" //"+field.getDescript()%>
+         //* @return <%=field.getName()+" //"+field.getDescript()%>
          public <%=field.getType() %> get<%out.print(StringHelper.fistChartUpperCase(field.getName())+"(  ){ ");%>
 	        return this.<%out.print(field.getName()+";");%>    
          }
