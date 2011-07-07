@@ -1,7 +1,9 @@
 package qtone.generator;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.dom4j.Document;
 import org.dom4j.Element;
@@ -99,13 +101,43 @@ class NodeUtil{
 	
 	private static String joinName="joinOneItem";
 	
+	public static Map<String,String> dataTypeSet = new HashMap<String,String>();
+	
+	static{
+			//java 基本类型
+			dataTypeSet.put("long", "long");
+	        dataTypeSet.put("int","int");
+	        dataTypeSet.put("date","Date");
+	        dataTypeSet.put("datetime","Date");
+	        dataTypeSet.put("string","String");
+	       
+	        //数据库 映射到 java 基本类型
+			dataTypeSet.put("decimal", "long");
+	        dataTypeSet.put("VARCHAR","String");
+	        dataTypeSet.put("VARCHAR2","String");
+	        dataTypeSet.put("date","Date");
+	        dataTypeSet.put("datetime","Date");
+	}
+	
+	/**
+	 * 数据库类型 转义
+	 * @param cfgType
+	 * @return
+	 */
+	public static String toJavaDataType(String cfgType){
+		if(cfgType!=null&&dataTypeSet.containsKey(cfgType.toLowerCase())){
+			return dataTypeSet.get(cfgType.toLowerCase());
+		}else
+			return "String";
+	}
+	
+	
     public static void pfields(List<FieldItem> items){
 	     for(FieldItem item:items){
 	    	  System.out.println(item.getName()+" "+item.getType());
 	     }
 	}	
 
-    
     
     /**
      * 
@@ -173,7 +205,7 @@ class NodeUtil{
         		 field.setName(node.attributeValue("name"));
         		 field.setSourceField(node.attributeValue("sourceField"));
         		 field.setSourceType(node.attributeValue("sourceType"));
-        		 field.setType(node.attributeValue("type"));
+        		 field.setType(toJavaDataType(node.attributeValue("type")));
         		 items.add(field);
         	 }
          }
@@ -195,7 +227,7 @@ class NodeUtil{
        	 for(Element node:joinSet){
        		join = new JoinItem(node);
        		join.setJoinTableKey(node.attributeValue("joinTableKey"));
-       		join.setJoinType(node.attributeValue("joinType"));
+       		join.setJoinType(node.attributeValue("joinType").toLowerCase());
        		join.setPrimaryTableKey(node.attributeValue("primaryTableKey"));
        		join.setTable(node.attributeValue("table"));
        		joinItems.add(join);
