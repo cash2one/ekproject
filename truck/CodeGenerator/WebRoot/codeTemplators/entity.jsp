@@ -32,21 +32,24 @@ public class <%=entityName%>Entry implements Serializable {
        for(FieldItem field:subFields){%> 
           private <%out.print(field.getType()+"  "+field.getName()+"; //"+field.getDescript());}%>
      
-    //默认空构造函数
-	public <%=entityName%>Entry(){
+        //默认空构造函数
+	  public <%=entityName%>Entry(){
 	
-	}
-    <% 
-        String conParamsStr="";
-        for(FieldItem field:mainFields)
-          conParamsStr+=","+field.getType()+" "+field.getName();
-        for(FieldItem field:subFields)
-          conParamsStr+=","+field.getType()+" "+field.getName();
+	  }
+	
+	 
+       //带参数的构造函数
+    <% String conParamsStr="";
+        for(FieldItem field:mainFields){%>
+ 	* @param <%out.print(field.getName()+"   //"+field.getDescript());
+          conParamsStr+=","+field.getType()+" "+field.getName();}
+          
+        for(FieldItem field:subFields){%>
+  	* @param <%out.print(field.getName()+"   //"+field.getDescript());
+          conParamsStr+=","+field.getType()+" "+field.getName();}
         conParamsStr = conParamsStr.substring(1);
     %>
-    
-    //带参数的构造函数
-	public <%=entityName%>Entry(<%=conParamsStr%>){
+	 public <%=entityName%>Entry(<%=conParamsStr%>){
        <% //输出主要的字段属性
        for(FieldItem field:mainFields){%> 
             this.<%out.print(field.getName()+"="+field.getName()+";");}%>
@@ -58,15 +61,27 @@ public class <%=entityName%>Entry implements Serializable {
 	
 	<% //生成对应的getting 和 setting 方法
      for(FieldItem field:mainFields){%> 
+         * @param <%=field.getName()+" //"+field.getDescript()%>
          public void set<%out.print(StringHelper.fistChartUpperCase(field.getName())+"("+field.getType()+" "+field.getName()+"){");%>
 	        this.<%out.print(field.getName()+"="+field.getName()+";");%>    
+         }
+         
+         * @return <%=field.getName()+" //"+field.getDescript()%>
+         public <%=field.getType() %> get<%out.print(StringHelper.fistChartUpperCase(field.getName())+"(  ){ ");%>
+	        return this.<%out.print(field.getName()+";");%>    
          }
     <%}%>
     
      <% //生成从表的getting 和 setting 方法
      for(FieldItem field:subFields){%> 
+         * @param <%=field.getName()+" //"+field.getDescript()%>
          public void set<%out.print(StringHelper.fistChartUpperCase(field.getName())+"("+field.getType()+" "+field.getName()+"){");%>
 	       this.<%out.print(field.getName()+"="+field.getName()+";");%>    
+         }
+         
+         * @return <%=field.getName()+" //"+field.getDescript()%>
+         public <%=field.getType() %> get<%out.print(StringHelper.fistChartUpperCase(field.getName())+"(  ){ ");%>
+	        return this.<%out.print(field.getName()+";");%>    
          }
     <%}%>
 
