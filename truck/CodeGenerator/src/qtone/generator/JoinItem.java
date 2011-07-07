@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.dom4j.Element;
 
+import qtone.generator.util.NodeUtil;
+
 public class JoinItem {
 
 	String table="${areaAbb}_XJ_STU_CLASS"; 
