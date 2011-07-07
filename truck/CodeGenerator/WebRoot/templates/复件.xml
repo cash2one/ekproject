@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<businessMap namespace="edu" class="TestStudent"  businessNamespace="business" 
+             daoNamespace="dao" entityNamespace="entity" mapperNamespace="mapper"
+             table="${areaAbb}_XJ_STUDENT" tableAlias="stu" sequence="${areaAbb}_xj_student_seq" primaryKey="id" isAreaDeal="true">
+  <descript>
+       <version>1.0</version>
+       <author>xxt</author>
+       <memo>学生信息</memo>
+  </descript>
+  <items>
+       <item name="id" type="long" sourceType="Decimal" isReadonly="false" sourceField="ID" descript="主键id"/>
+       <item name="name" type="String" sourceType="VARCHAR" isReadonly="false" sourceField="name" descript="学生名称"/>
+       <item name="icNo" type="String" sourceType="VARCHAR" isReadonly="false" sourceField="IC_NO" descript="学号"/>
+       <item name="createTime" type="Date" sourceType="DateTime" isReadonly="false" sourceField="CREATE_TIME" descript="创建时间"/>
+       <joinOneItem table="${areaAbb}_XJ_FAMILY" tableAlias="fam" joinType="LEFT"  primaryTableKey="STU_SEQUENCE" joinTableKey="STU_SEQUENCE">
+                <item name="famName" type="String" sourceType="VARCHAR" isReadonly="true" sourceField="name" descript="家长名称"/>
+	            <item name="phone" type="String" sourceType="VARCHAR" isReadonly="true" sourceField="phone" descript="联系电话"/>
+       </joinOneItem>
+       <joinOneItem table="${areaAbb}_XJ_STU_CLASS" tableAlias="xsc" joinType="LEFT"  primaryTableKey="STU_SEQUENCE" joinTableKey="STU_SEQUENCE">
+                <joinOneItem table="XJ_CLASS" tableAlias="clas" joinType="LEFT"  primaryTableKey="CLASS_ID" joinTableKey="ID">
+                    <item name="className" type="String" sourceType="VARCHAR" isReadonly="true" sourceField="CLASS_NAME" descript="班级名称"/>
+                    <item name="classId" type="long" sourceType="VARCHAR" isReadonly="true" sourceField="ID" descript="班级ID"/>
+                </joinOneItem>
+                <joinOneItem table="XJ_SCHOOL" tableAlias="sch" joinType="LEFT"  primaryTableKey="SCHOOL_ID" joinTableKey="ID">
+                    <item name="schoolName" type="String" sourceType="VARCHAR" isReadonly="true" sourceField="SCHOOL_NAME" descript="学校名称"/>
+                    <item name="schoolId" type="long" sourceType="VARCHAR" isReadonly="true" sourceField="ID" descript="学校ID"/>
+                </joinOneItem>
+       </joinOneItem>
+   </items>
+</businessMap>
