@@ -4,7 +4,7 @@
 <%
     String path = request.getContextPath();
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-	String cfgPath = request.getRealPath("/")+"templates/"+request.getParameter("cfg");
+	String cfgPath = BaseCfg.CFG_PATH+"/templates/"+request.getParameter("cfg");
 	BusinessMap map = new BusinessMap(cfgPath);
 	String entityName=map.getClazz();
 	

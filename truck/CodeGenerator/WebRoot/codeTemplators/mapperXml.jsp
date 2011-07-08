@@ -1,11 +1,11 @@
-<%@ page language="java" import="java.util.*" pageEncoding="GB2312"%>
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ page import="qtone.generator.*" %>
 <%@ page import="qtone.generator.util.*" %>
-
 <%
     String path = request.getContextPath();
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-	String cfgPath = request.getRealPath("/")+"templates/"+request.getParameter("cfg");
+	System.out.println(" xml "+request.getParameter("cfg"));
+	String cfgPath = BaseCfg.CFG_PATH+"/templates/"+request.getParameter("cfg");
 	BusinessMap map = new BusinessMap(cfgPath);
 	String entityName=map.getClazz();
 	
@@ -20,9 +20,9 @@
 	
 	entityName=StringHelper.fistChartLowerCase(entityName);
 	
-	//Ö÷±íÊôĞÔ
+	//ä¸»è¡¨å±æ€§
 	List<FieldItem> mainFields = map.getMainFields();
-    //´Ó±íÊôĞÔ
+    //ä»è¡¨å±æ€§
 	List<FieldItem> subFields = map.getJoinFields();
     
     FieldItem primaryKey = map.getPrimaryKeyItem();
@@ -31,7 +31,7 @@
 	Map<String,String[]> mainFieldSet = new HashMap<String,String[]>();
 	for(FieldItem item:mainFields){
 		
-		//±í±ğÃûĞÅÏ¢¡¢±í×Ö¶Î¡¢ÊµÌåÊôĞÔÃû
+		//è¡¨åˆ«åä¿¡æ¯ã€è¡¨å­—æ®µã€å®ä½“å±æ€§å
 		if(item.getName()!=map.getPrimaryKeyItem().getName()) 
 		    mainFieldSet.put(item.getName(),new String[]{StringHelper.toLowerCase(item.getTableAlias()),StringHelper.toLowerCase(item.getSourceField()),StringHelper.fistChartLowerCase(item.getName()),item.getType()});
 		 
@@ -40,7 +40,7 @@
 	
 	Map<String,String[]> subFieldSet = new HashMap<String,String[]>();
 	for(FieldItem item:subFields){
-		//±í±ğÃûĞÅÏ¢¡¢±í×Ö¶Î¡¢ÊµÌåÊôĞÔÃû
+		//è¡¨åˆ«åä¿¡æ¯ã€è¡¨å­—æ®µã€å®ä½“å±æ€§å
 		subFieldSet.put(item.getName(),new String[]{StringHelper.toLowerCase(item.getTableAlias()),StringHelper.toLowerCase(item.getSourceField()),StringHelper.fistChartLowerCase(item.getName()),item.getType()});
 		allFieldStr+=","+(StringHelper.toLowerCase(item.getTableAlias())+"."+StringHelper.toLowerCase(item.getSourceField())+" as "+StringHelper.fistChartLowerCase(item.getName()));
 	}
@@ -59,15 +59,15 @@
 <mapper namespace="<%=mapperName%>">
    <cache />
 
-  <!-- ÒÔÏÂÅäÖÃÊÇÏµÍ³×Ô¶¯Éú³ÉµÄ -->
+  <!-- ä»¥ä¸‹é…ç½®æ˜¯ç³»ç»Ÿè‡ªåŠ¨ç”Ÿæˆçš„ -->
 
-  <!-- ÏÔÊ¾µÄ¼ÇÂ¼¶ÔÓ¦µÄÁĞ-->
+  <!-- æ˜¾ç¤ºçš„è®°å½•å¯¹åº”çš„åˆ—-->
   <sql id="<%=moduleName%>Columns" >
 		    <%=allFieldStr%>
   </sql>
   
   
-  <!-- ÁĞ±í¶ÔÓ¦µÄ²éÑ¯Ìõ¼ş×éºÏ  -->
+  <!-- åˆ—è¡¨å¯¹åº”çš„æŸ¥è¯¢æ¡ä»¶ç»„åˆ  -->
   <sql id="queryOptions">
        <where><% String items[] = null,insertFieldStr="",valuesStr="";
                for(String key:mainFieldSet.keySet()){
@@ -84,15 +84,15 @@
 
 
 
-  <!-- ÁĞ±í²éÑ¯¶ÔÓ¦µÄÅÅĞòÑ¡Ïî  -->
+  <!-- åˆ—è¡¨æŸ¥è¯¢å¯¹åº”çš„æ’åºé€‰é¡¹  -->
   <sql id="orderControl">
        <if test="orderList!=null">
 		  <trim prefix="ORDER BY" prefixOverrides=",">
 				<foreach collection="orderList" item="order" open=""  separator="," close="" >
-				   <choose><%for(String key:mainFieldSet.keySet()){ //Ö÷±íµÄÅÅĞòÌõ¼ş
+				   <choose><%for(String key:mainFieldSet.keySet()){ //ä¸»è¡¨çš„æ’åºæ¡ä»¶
 				    	   items =  mainFieldSet.get(key);%> 
 				       <%out.print(SqlXmlCreator.appendOrderOptions(key,items[0],items[1]));} 
-				       for(String key:subFieldSet.keySet()){  //´Ó±íµÄÅÅĞòÌõ¼ş  
+				       for(String key:subFieldSet.keySet()){  //ä»è¡¨çš„æ’åºæ¡ä»¶  
 				           items =  subFieldSet.get(key);%>   
 				       <%out.print(SqlXmlCreator.appendOrderOptions(key,items[0],items[1]));}%>
 				  </choose>
@@ -103,14 +103,14 @@
 
  
  
-  <!-- ÁĞ±í²éÑ¯¶ÔÓ¦µÄ±í¹ØÏµSQL  -->
+  <!-- åˆ—è¡¨æŸ¥è¯¢å¯¹åº”çš„è¡¨å…³ç³»SQL  -->
   <sql id="querySqlMain">
 			  <% out.print(SqlXmlCreator.wrapperMainQuerySql(map.getTable(),map.getTableAlias(),map.getTopJoinTable())); %>
 			  <include refid="queryOptions"/>
   </sql>
   
  
-   <!-- ¸ù¾İID²éÑ¯¼ÇÂ¼ -->
+   <!-- æ ¹æ®IDæŸ¥è¯¢è®°å½• -->
    <select id="findOne" resultType="<%=entryName%>">
 	     SELECT  <include refid="<%=moduleName%>Columns"/>              
 		    FROM <include refid="querySqlMain"/>
@@ -118,13 +118,13 @@
    </select>
 
 
-   <!-- ·µ»Ø¼ÇÂ¼×ÜÊıµÄÓï¾ä -->
+   <!-- è¿”å›è®°å½•æ€»æ•°çš„è¯­å¥ -->
    <select id="qeury<%=moduleName%>sRecordCount" resultType="int">
         SELECT count(*) num  FROM  <include refid="querySqlMain"/> 
    </select>
    
    
-    <!-- ·ÖÒ³²éÑ¯¶ÔÓ¦µÄ¼ÇÂ¼ -->
+    <!-- åˆ†é¡µæŸ¥è¯¢å¯¹åº”çš„è®°å½• -->
    <select id="qeury<%=moduleName%>s" resultType="<%=entryName%>">
       SELECT * FROM (  
 	        SELECT A.*,ROWNUM RN FROM (
@@ -136,7 +136,7 @@
    </select>
 
 
-   <!-- ĞÂÔö¼ÇÂ¼ -->
+   <!-- æ–°å¢è®°å½• -->
    <insert id="insert<%=moduleName%>" useGeneratedKeys="false" >
        <selectKey resultType="long" order="AFTER" keyProperty="<%=entityName%>.<%=primaryKey.getName()%>">
 	       SELECT <%=map.getSequence()%>.currval FROM  DUAL
@@ -147,7 +147,7 @@
    
    
    
-   <!-- ¸üĞÂ¼ÇÂ¼ -->       
+   <!-- æ›´æ–°è®°å½• -->       
    <update id="update<%=moduleName%>" >
            UPDATE <%=map.getTable()%> 
            <set><% for(String[] infos:mainFieldSet.values()){%>
@@ -158,7 +158,7 @@
  
 
 
-   <!-- É¾³ı¼ÇÂ¼ -->
+   <!-- åˆ é™¤è®°å½• -->
    <delete id="delete<%=moduleName%>">
           DELETE FROM <%=map.getTable()%>
           WHERE <%=primaryKey.getName()%> in 
@@ -168,7 +168,7 @@
    </delete>
    
    
-   <!-- ÒÔÏÂÊÇ×Ô¶¨ÒåµÄÅäÖÃĞÅÏ¢ -->
+   <!-- ä»¥ä¸‹æ˜¯è‡ªå®šä¹‰çš„é…ç½®ä¿¡æ¯ -->
    
    
    
@@ -180,13 +180,13 @@
 <%!
     public static class SqlXmlCreator{
 	
-	//´ğÓ¦whereÌõ¼ş
+	//ç­”åº”whereæ¡ä»¶
 	public static String appendWhereOptions(String name,String tableAlias,String sourceField,String dataType){
 		if("string".equals(dataType.toLowerCase()))
 			return "<if test=\""+name+"!=null\"> AND "+tableAlias+"."+sourceField+" like #{"+name+"}</if>";
 		else if("long".equals(dataType.toLowerCase())||"int".equals(dataType.toLowerCase()))
 			return "<if test=\""+name+">0\"> AND "+tableAlias+"."+sourceField+" = #{"+name+"}</if>";
-		else if(dataType.toLowerCase().indexOf("date")>=0||dataType.toLowerCase().indexOf("time")>=0) //Ê±¼äÌõ¼şµÄ´¦Àí
+		else if(dataType.toLowerCase().indexOf("date")>=0||dataType.toLowerCase().indexOf("time")>=0) //æ—¶é—´æ¡ä»¶çš„å¤„ç†
 			return "<if test=\""+name+"1!=null\"> AND "+tableAlias+"."+sourceField+" &gt; #{"+name+"1}</if><if test=\""+name+"2!=null\"> AND "+tableAlias+"."+sourceField+" &lt; #{"+name+"2}</if>";
 		return "";		
 	}
@@ -195,7 +195,7 @@
 	    return "<when test=\"order.columnName=='"+name+"'\"> "+tableAlias+"."+sourceField+" ${order.type} </when>";
 	}
 	
-	//SQL ×é×°
+	//SQL ç»„è£…
 	public static String wrapperMainQuerySql(String mainTable,String mainTableAlias,List<JoinItem> joinTables){
 		String sql = mainTable+"  "+mainTableAlias;
 		sql+=wrapperLeftJoinSql(mainTableAlias,joinTables);
@@ -203,7 +203,7 @@
 	}
 	
 	
-	//½øĞĞ±íÁ¬½Ó
+	//è¿›è¡Œè¡¨è¿æ¥
 	public static String wrapperLeftJoinSql(String tableAlias,List<JoinItem> joinTables){
 		String sql ="";
 		String joinType="";
