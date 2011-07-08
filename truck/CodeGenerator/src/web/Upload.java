@@ -63,7 +63,7 @@ public class Upload extends HttpServlet {
 		PrintWriter out = resp.getWriter();
 		// out.write("<script>window.location.href='/"+(!BaseCfg.APP_CONTEXT.equals("")?"/"+BaseCfg.APP_CONTEXT:"")+"/index.jsp'</script>");
 		StringBuffer urls = new StringBuffer();
-		String ip = "http://192.168.4.39:80/";
+		String ip = BaseCfg.WWW;
 		for (String fileCfg : recFiles) {
 			urls.append(ip).append(
 					""
