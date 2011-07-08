@@ -6,7 +6,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.nio.charset.CharsetEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,27 +37,27 @@ public class Upload extends HttpServlet {
 			throws ServletException, IOException {
 
 		BufferedReader br = new BufferedReader(new InputStreamReader(
-				(ServletInputStream) request.getInputStream()));
+				(ServletInputStream) request.getInputStream(),"utf-8"));
 		String line = null;
-	
 		String fileName = System.currentTimeMillis()+".xml";
 		
 		String dirPath=BaseCfg.CFG_PATH+"/templates/";
 		File file = new File(dirPath+fileName);
 		file.createNewFile();
 		
+		OutputStreamWriter p =new OutputStreamWriter(new FileOutputStream(file),"utf-8");
 		StringBuilder cfgContent = new StringBuilder();
 		while ((line = br.readLine()) != null) {
 			cfgContent.append(line);
-			
+			System.out.println(line);
+			 p.write(line);
 		}
-		OutputStream outPut = new FileOutputStream(file,true); 
-		outPut.write(cfgContent.toString().getBytes());
-		outPut.close();
-		
+		 p.flush();
+		 p.close();
 		
 		final List<String> recFiles = new ArrayList<String>();
 		recFiles.add(fileName); 
+		
 		
 		resp.setContentType("text/html");
 		PrintWriter out = resp.getWriter();
