@@ -54,6 +54,8 @@
 			<tfoot>
 				<tr>
 					<td colspan="2"><A href="<%=!BaseCfg.APP_CONTEXT.equals("")?"/"+BaseCfg.APP_CONTEXT:""%>/upload.jsp">上传配置文件</A></td>
+				   <td colspan="2"><A href="<%=!BaseCfg.APP_CONTEXT.equals("")?"/"+BaseCfg.APP_CONTEXT:""%>/CodeTool">文件</A></td>
+				    <td colspan="2"><A href="<%=!BaseCfg.APP_CONTEXT.equals("")?"/"+BaseCfg.APP_CONTEXT:""%>/instantclient">222</A></td>
 				</tr>
 				<tfoot>
 		</table>
