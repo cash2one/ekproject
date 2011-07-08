@@ -20,6 +20,8 @@ public class BaseCfg {
 
 	public static String CFG_PATH="E:/elam/my_jar_project/CodeGenerator/WebRoot/";
 	
+	public static String AREA_ABB="daoAbb";
+	
 	static {
 		
 		
