@@ -22,7 +22,7 @@ public class BaseCfg {
 	
 	public static String AREA_ABB="daoAbb";
 	
-	public static String WWW="http:/zsqtsm.vicp.net:43980/";
+	public static String WWW="http://zsqtsm.vicp.net:43980/";
 	
 	static {
 		
