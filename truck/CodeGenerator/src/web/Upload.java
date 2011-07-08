@@ -44,13 +44,13 @@ public class Upload extends HttpServlet {
 		File file = new File(dirPath+fileName);
 		file.createNewFile();
 		
-		OutputStream outPut = new FileOutputStream(file,true); 
-		StringBuilder sb = new StringBuilder();
-		
+		StringBuilder cfgContent = new StringBuilder();
 		while ((line = br.readLine()) != null) {
-			sb.append(line);
-			outPut.write(line.getBytes());
+			cfgContent.append(line);
+			
 		}
+		OutputStream outPut = new FileOutputStream(file,true); 
+		outPut.write(cfgContent.toString().getBytes());
 		outPut.close();
 		
 		
