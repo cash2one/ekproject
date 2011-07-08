@@ -15,8 +15,8 @@
   
 	
 	//如果是该表是分表的就该在接口方法(新增、更新、删除方法，查询方法默认要保留)中加上对应的参数
-	String areaAbbParamStr = "@Param(\"areaAbb\")String areaAbb";
-	String areaAbbDealComment="* @param areaAbb    地区缩写（分表前缀名:如 “CS”）";
+	String areaAbbParamStr = "@Param(\""+BaseCfg.AREA_ABB+"\")String "+BaseCfg.AREA_ABB;
+	String areaAbbDealComment="* @param "+BaseCfg.AREA_ABB+"    地区缩写（分表前缀名:如 “CS”）";
 	String isAppendAreaDeal=map.isAreaDeal()?areaAbbParamStr+",":"";
 	String appendAreaDealcomment=map.isAreaDeal()?areaAbbDealComment:"";
 	

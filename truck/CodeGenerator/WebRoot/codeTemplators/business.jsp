@@ -19,8 +19,8 @@
 	String entryObjName =  StringHelper.fistChartUpperCase(entityName)+"Entry";
 	
 	//如果是该表是分表的就该在接口方法(新增、更新、删除方法，查询方法默认要保留)中加上对应的参数
-	String areaAbbParamStr = "@SearchParameter(name =\"areaAbb\")String areaAbb";
-	String areaAbbDealComment="* @param areaAbb    地区缩写（分表前缀名:如 “CS”）";
+	String areaAbbParamStr = "@SearchParameter(name =\""+BaseCfg.AREA_ABB+"\")String "+BaseCfg.AREA_ABB;
+	String areaAbbDealComment="* @param "+BaseCfg.AREA_ABB+"    地区缩写（分表前缀名:如 “CS”）";
 	String isAppendAreaDeal=map.isAreaDeal()?areaAbbParamStr+",":"";
 	String appendAreaDealcomment=map.isAreaDeal()?areaAbbDealComment:"";
 	
@@ -204,7 +204,7 @@ public class <%=map.getName()%> extends BaseBusiness {
 		   <%for(FieldItem field:mainFields){ tempStr=StringHelper.fistChartUpperCase(field.getName());%> 
 	       <%out.print(StringHelper.fistChartLowerCase(entryObjName)+".set"+tempStr+"(this.get"+tempStr+"());");}%>
 	    
-	       <%=StringHelper.fistChartLowerCase(mapperObjName)%>.insert<%=map.getClazz()%>(<%=map.isAreaDeal()?"this.getAbb(),":""%><%=StringHelper.fistChartLowerCase(entryObjName)%>);
+	       <%=StringHelper.fistChartLowerCase(mapperObjName)%>.insert<%=map.getClazz()%>(<%=map.isAreaDeal()?"this.getDaoAbb(),":""%><%=StringHelper.fistChartLowerCase(entryObjName)%>);
 	}
 
 	
@@ -216,7 +216,7 @@ public class <%=map.getName()%> extends BaseBusiness {
      */
 	@Transactional
 	public void findOne(<%=map.getPrimaryKeyItem().getType()+" "+map.getPrimaryKeyItem().getName()%>){
-		<%=entryObjName%> entry = <%=StringHelper.fistChartLowerCase(mapperObjName)%>.findOne(this.getAbb(),<%=map.getPrimaryKeyItem().getName()%>);
+		<%=entryObjName%> entry = <%=StringHelper.fistChartLowerCase(mapperObjName)%>.findOne(this.getDaoAbb(),<%=map.getPrimaryKeyItem().getName()%>);
 		if (entry != null){<% //赋值
 	     for(FieldItem field:mainFields){%>
 	           this.set<%out.print(StringHelper.fistChartUpperCase(field.getName())+"(entry.get"+StringHelper.fistChartUpperCase(field.getName())+"());");
@@ -239,7 +239,7 @@ public class <%=map.getName()%> extends BaseBusiness {
 	    <%for(FieldItem field:mainFields){ tempStr=StringHelper.fistChartUpperCase(field.getName());%> 
 	        <%out.print(StringHelper.fistChartLowerCase(entryObjName)+".set"+tempStr+"(this.get"+tempStr+"());");}%>
 	        
-		<%=StringHelper.fistChartLowerCase(mapperObjName)%>.update<%=map.getClazz()%>(<%=map.isAreaDeal()?"this.getAbb(),":""%><%=StringHelper.fistChartLowerCase(entryObjName)%>);
+		<%=StringHelper.fistChartLowerCase(mapperObjName)%>.update<%=map.getClazz()%>(<%=map.isAreaDeal()?"this.getDaoAbb(),":""%><%=StringHelper.fistChartLowerCase(entryObjName)%>);
 	}
 
 	
@@ -249,7 +249,7 @@ public class <%=map.getName()%> extends BaseBusiness {
 	@Override
 	protected void onDelete(String ids[]) {
 		// TODO Auto-generated method stub
-		<%=StringHelper.fistChartLowerCase(mapperObjName)%>.delete<%=map.getClazz()%>(<%=map.isAreaDeal()?"this.getAbb(),":""%>ids);
+		<%=StringHelper.fistChartLowerCase(mapperObjName)%>.delete<%=map.getClazz()%>(<%=map.isAreaDeal()?"this.getDaoAbb(),":""%>ids);
 	}
 
 	
@@ -297,7 +297,7 @@ public class <%=map.getName()%> extends BaseBusiness {
 		   //实例化List对象		
 		   List<<%=map.getName()%>> list = new ArrayList<<%=map.getName()%>>();
 		   //查询结果实体
-		   List<<%=entryObjName%>> entryList = <%=StringHelper.fistChartLowerCase(mapperObjName)%>.qeury<%=map.getClazz()%>s(startRow,pageSize,this.getAbb(),<%=tempStr%>,orderList);
+		   List<<%=entryObjName%>> entryList = <%=StringHelper.fistChartLowerCase(mapperObjName)%>.qeury<%=map.getClazz()%>s(startRow,pageSize,this.getDaoAbb(),<%=tempStr%>,orderList);
 	       if (entryList != null)
 		   for (<%=entryObjName%> entry : entryList) {
 				list.add(new <%=map.getName()%>(<%=funcParamsStr%>));
