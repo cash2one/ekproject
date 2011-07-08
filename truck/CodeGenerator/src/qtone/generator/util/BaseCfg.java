@@ -18,6 +18,8 @@ public class BaseCfg {
 
 	public static String APP_CONTEXT = "code";
 
+	public static String CFG_PATH="E:/elam/my_jar_project/CodeGenerator/WebRoot/";
+	
 	static {
 		
 		
