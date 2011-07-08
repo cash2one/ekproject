@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="GB2312"%>
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ page import="qtone.generator.*" %>
 <%@ page import="qtone.generator.util.*" %>
 <%
@@ -16,30 +16,30 @@ import java.io.Serializable;
 import java.util.*;
 
 /**
- * @description <%=map.getDescription()%> ¶ÔÓ¦µÄÊµÌå
+ * @description <%=map.getDescription()%> å¯¹åº”çš„å®ä½“
  * @version <%=map.getVersion()%>
  * @author <%=map.getAuthor()%>  
  * @CreateTime <%=new Date().toString()%>
  */
 public class <%=entityName%>Entry implements Serializable {
    
-    <% //Êä³öÖ÷ÒªµÄ×Ö¶ÎÊôĞÔ
+    <% //è¾“å‡ºä¸»è¦çš„å­—æ®µå±æ€§
        List<FieldItem> mainFields = map.getMainFields();
        for(FieldItem field:mainFields){%> 
          private <%out.print(field.getType()+"  "+field.getName()+"; //"+field.getDescript());}%>
     
-    <% //Êä³ö´Ó±íµÄ×Ö¶ÎÊôĞÔ
+    <% //è¾“å‡ºä»è¡¨çš„å­—æ®µå±æ€§
        List<FieldItem> subFields = map.getJoinFields();
        for(FieldItem field:subFields){%> 
           private <%out.print(field.getType()+"  "+field.getName()+"; //"+field.getDescript());}%>
      
-        //Ä¬ÈÏ¿Õ¹¹Ôìº¯Êı
+        //é»˜è®¤ç©ºæ„é€ å‡½æ•°
 	  public <%=entityName%>Entry(){
 	
 	  }
 	
 	 
-     /**´ø²ÎÊıµÄ¹¹Ôìº¯Êı
+     /**å¸¦å‚æ•°çš„æ„é€ å‡½æ•°
     <% String conParamsStr="";
         for(FieldItem field:mainFields){%>
  	* @param <%out.print(field.getName()+"   //"+field.getDescript());
@@ -51,16 +51,16 @@ public class <%=entityName%>Entry implements Serializable {
         conParamsStr = conParamsStr.substring(1);
     %>*/
 	 public <%=entityName%>Entry(<%=conParamsStr%>){
-       <% //Êä³öÖ÷ÒªµÄ×Ö¶ÎÊôĞÔ
+       <% //è¾“å‡ºä¸»è¦çš„å­—æ®µå±æ€§
        for(FieldItem field:mainFields){%> 
             this.<%out.print(field.getName()+"="+field.getName()+";");}%>
-       <% //Êä³ö´Ó±íµÄ×Ö¶ÎÊôĞÔ
+       <% //è¾“å‡ºä»è¡¨çš„å­—æ®µå±æ€§
        for(FieldItem field:subFields){%> 
             this.<%out.print(field.getName()+"="+field.getName()+";");}%>
               
 	}
 	
-	<% //Éú³É¶ÔÓ¦µÄgetting ºÍ setting ·½·¨
+	<% //ç”Ÿæˆå¯¹åº”çš„getting å’Œ setting æ–¹æ³•
      for(FieldItem field:mainFields){%> 
          //* @param <%=field.getName()+" //"+field.getDescript()%>
          public void set<%out.print(StringHelper.fistChartUpperCase(field.getName())+"("+field.getType()+" "+field.getName()+"){");%>
@@ -73,7 +73,7 @@ public class <%=entityName%>Entry implements Serializable {
          }
     <%}%>
     
-     <% //Éú³É´Ó±íµÄgetting ºÍ setting ·½·¨
+     <% //ç”Ÿæˆä»è¡¨çš„getting å’Œ setting æ–¹æ³•
      for(FieldItem field:subFields){%> 
          //* @param <%=field.getName()+" //"+field.getDescript()%>
          public void set<%out.print(StringHelper.fistChartUpperCase(field.getName())+"("+field.getType()+" "+field.getName()+"){");%>

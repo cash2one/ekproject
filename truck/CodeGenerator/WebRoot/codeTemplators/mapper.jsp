@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="GB2312"%>
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ page import="qtone.generator.*" %>
 <%@ page import="qtone.generator.util.*" %>
 <%
@@ -14,9 +14,9 @@
 	String packageName = basePackageName+map.getDaoNamespace()+"."+map.getMapperNamespace()+"."+map.getNamespace();
   
 	
-	//Èç¹ûÊÇ¸Ã±íÊÇ·Ö±íµÄ¾Í¸ÃÔÚ½Ó¿Ú·½·¨(ĞÂÔö¡¢¸üĞÂ¡¢É¾³ı·½·¨£¬²éÑ¯·½·¨Ä¬ÈÏÒª±£Áô)ÖĞ¼ÓÉÏ¶ÔÓ¦µÄ²ÎÊı
+	//å¦‚æœæ˜¯è¯¥è¡¨æ˜¯åˆ†è¡¨çš„å°±è¯¥åœ¨æ¥å£æ–¹æ³•(æ–°å¢ã€æ›´æ–°ã€åˆ é™¤æ–¹æ³•ï¼ŒæŸ¥è¯¢æ–¹æ³•é»˜è®¤è¦ä¿ç•™)ä¸­åŠ ä¸Šå¯¹åº”çš„å‚æ•°
 	String areaAbbParamStr = "@Param(\"areaAbb\")String areaAbb";
-	String areaAbbDealComment="* @param areaAbb    µØÇøËõĞ´£¨·Ö±íÇ°×ºÃû:Èç ¡°CS¡±£©";
+	String areaAbbDealComment="* @param areaAbb    åœ°åŒºç¼©å†™ï¼ˆåˆ†è¡¨å‰ç¼€å:å¦‚ â€œCSâ€ï¼‰";
 	String isAppendAreaDeal=map.isAreaDeal()?areaAbbParamStr+",":"";
 	String appendAreaDealcomment=map.isAreaDeal()?areaAbbDealComment:"";
 	
@@ -37,7 +37,7 @@ import <%=basePackageName+map.getDaoNamespace()+"."+map.getMapperNamespace()%>.O
 
 /**
  *
- * @description <%=map.getDescription()%> ¶ÔÓ¦µÄMapper£¨³Ö¾Ã»¯½Ó¿ÚÀà£©
+ * @description <%=map.getDescription()%> å¯¹åº”çš„Mapperï¼ˆæŒä¹…åŒ–æ¥å£ç±»ï¼‰
  * @version <%=map.getVersion()%>
  * @author <%=map.getAuthor()%>  
  * @CreateTime <%=new Date().toString()%>
@@ -47,28 +47,28 @@ import <%=basePackageName+map.getDaoNamespace()+"."+map.getMapperNamespace()%>.O
 public interface <%=entityName%>Mapper extends MyBatisMapper {
 
     
-        //×Ô¶¯Éú³ÉµÄ·½·¨
+        //è‡ªåŠ¨ç”Ÿæˆçš„æ–¹æ³•
 	    //************************************************************************************************************************
 
 	/**
-	 * ¸ù¾İÖ÷¼ü²éÑ¯¶ÔÓ¦µÄ¼ÇÂ¼
+	 * æ ¹æ®ä¸»é”®æŸ¥è¯¢å¯¹åº”çš„è®°å½•
 	 <%=areaAbbDealComment%>
-	 * @param <%=map.getPrimaryKeyItem().getName()%>  ¼ÇÂ¼¶ÔÓ¦µÄÖ÷¼ü
+	 * @param <%=map.getPrimaryKeyItem().getName()%>  è®°å½•å¯¹åº”çš„ä¸»é”®
 	 * @return <%=entityName%>Entry
 	 */
 	public <%=entityName%>Entry findOne(<%=areaAbbParamStr%>,@Param("<%=map.getPrimaryKeyItem().getName()%>")<%=map.getPrimaryKeyItem().getType()%> <%=map.getPrimaryKeyItem().getName()%>);
 	
 	
 	 /**
-	   * ÁĞ±í²éÑ¯
-	   * @param startRow   ¿ªÊ¼¼ÇÂ¼µÄĞĞÊı
-	   * @param pageSize   ÉèÖÃÃ¿Ò³ÏÔÊ¾µÄ¼ÇÂ¼Êı
+	   * åˆ—è¡¨æŸ¥è¯¢
+	   * @param startRow   å¼€å§‹è®°å½•çš„è¡Œæ•°
+	   * @param pageSize   è®¾ç½®æ¯é¡µæ˜¾ç¤ºçš„è®°å½•æ•°
 	   <%=areaAbbDealComment%>
      <%String conParamsStr="";
      for(FieldItem field:mainFields){ if(field.getName().equals(map.getPrimaryKeyItem().getName())) continue;
           if(field.getType().toLowerCase().indexOf("date")>=0||field.getType().toLowerCase().indexOf("time")>=0){
 	    	 conParamsStr+=",@Param(\""+field.getName()+"1\")"+field.getType()+" "+field.getName()+"1"+",@Param(\""+field.getName()+"2\")"+field.getType()+" "+field.getName()+"2";%>
-	   * @param <% out.println(field.getName()+"1   "+field.getDescript()+" £¨´óÓÚ»òµÈÓÚ¿ªÊ¼Ê±¼ä£©");out.print("           * @param "+field.getName()+"2   "+field.getDescript()+" £¨Ğ¡ÓÚ»òµÈÓÚ½áÊøÊ±¼ä£©");
+	   * @param <% out.println(field.getName()+"1   "+field.getDescript()+" ï¼ˆå¤§äºæˆ–ç­‰äºå¼€å§‹æ—¶é—´ï¼‰");out.print("           * @param "+field.getName()+"2   "+field.getDescript()+" ï¼ˆå°äºæˆ–ç­‰äºç»“æŸæ—¶é—´ï¼‰");
 	      }else{%>
 	   * @param <%  out.print(field.getName()+"   "+field.getDescript());  
 	       	 conParamsStr+=",@Param(\""+field.getName()+"\")"+field.getType()+" "+field.getName();
@@ -77,14 +77,14 @@ public interface <%=entityName%>Mapper extends MyBatisMapper {
      for(FieldItem field:subFields){
 	     if(field.getType().toLowerCase().indexOf("date")>=0||field.getType().toLowerCase().indexOf("time")>=0){
 	    	  conParamsStr+=",@Param(\""+field.getName()+"1\")"+field.getType()+" "+field.getName()+"1"+",@Param(\""+field.getName()+"2\")"+field.getType()+" "+field.getName()+"2";%>
-	   * @param <% out.println(field.getName()+"1   "+field.getDescript()+" £¨´óÓÚ»òµÈÓÚ¿ªÊ¼Ê±¼ä£©");out.print("           * @param "+field.getName()+"2   "+field.getDescript()+" £¨Ğ¡ÓÚ»òµÈÓÚ½áÊøÊ±¼ä£©");
+	   * @param <% out.println(field.getName()+"1   "+field.getDescript()+" ï¼ˆå¤§äºæˆ–ç­‰äºå¼€å§‹æ—¶é—´ï¼‰");out.print("           * @param "+field.getName()+"2   "+field.getDescript()+" ï¼ˆå°äºæˆ–ç­‰äºç»“æŸæ—¶é—´ï¼‰");
 	        }else{%>
 	   * @param <%  out.print(field.getName()+"   "+field.getDescript());  
 	          conParamsStr+=",@Param(\""+field.getName()+"\")"+field.getType()+" "+field.getName();
 	       }
 	     }
 	     conParamsStr = conParamsStr.substring(1);%>
-	   * @param orderList  //¿ØÖÆÅÅĞò
+	   * @param orderList  //æ§åˆ¶æ’åº
 	   * @return List<<%=entityName%>Entry>
 	   */
 	public List<<%=entityName%>Entry> qeury<%=entityName%>s(@Param("startRow")int startRow, @Param("pageSize")int pageSize,<%=areaAbbParamStr%>,
@@ -92,13 +92,13 @@ public interface <%=entityName%>Mapper extends MyBatisMapper {
 
 
 	/**
-	 * ÁĞ±íµÄ¼ÇÂ¼×ÜÊıÍ³¼Æ
+	 * åˆ—è¡¨çš„è®°å½•æ€»æ•°ç»Ÿè®¡
        <%=appendAreaDealcomment%>
 <%conParamsStr="";
 for(FieldItem field:mainFields){ if(field.getName().equals(map.getPrimaryKeyItem().getName())) continue;
     if(field.getType().toLowerCase().indexOf("date")>=0||field.getType().toLowerCase().indexOf("time")>=0){
   	 conParamsStr+=",@Param(\""+field.getName()+"1\")"+field.getType()+" "+field.getName()+"1"+",@Param(\""+field.getName()+"2\")"+field.getType()+" "+field.getName()+"2";%>
- 	 * @param <% out.println(field.getName()+"1   "+field.getDescript()+"  £¨´óÓÚ»òµÈÓÚ¿ªÊ¼Ê±¼ä£©");out.print("         * @param "+field.getName()+"2   "+field.getDescript()+" £¨Ğ¡ÓÚ»òµÈÓÚ½áÊøÊ±¼ä£©");
+ 	 * @param <% out.println(field.getName()+"1   "+field.getDescript()+"  ï¼ˆå¤§äºæˆ–ç­‰äºå¼€å§‹æ—¶é—´ï¼‰");out.print("         * @param "+field.getName()+"2   "+field.getDescript()+" ï¼ˆå°äºæˆ–ç­‰äºç»“æŸæ—¶é—´ï¼‰");
     }else{%>
  	 * @param <%  out.print(field.getName()+"   "+field.getDescript());  
      	 conParamsStr+=",@Param(\""+field.getName()+"\")"+field.getType()+" "+field.getName();
@@ -107,19 +107,19 @@ for(FieldItem field:mainFields){ if(field.getName().equals(map.getPrimaryKeyItem
  for(FieldItem field:subFields){
    if(field.getType().toLowerCase().indexOf("date")>=0||field.getType().toLowerCase().indexOf("time")>=0){
   	  conParamsStr+=",@Param(\""+field.getName()+"1\")"+field.getType()+" "+field.getName()+"1"+",@Param(\""+field.getName()+"2\")"+field.getType()+" "+field.getName()+"2";%>
-	 * @param <% out.println(field.getName()+"1   "+field.getDescript()+"  £¨´óÓÚ»òµÈÓÚ¿ªÊ¼Ê±¼ä£©");out.print("         * @param "+field.getName()+"2   "+field.getDescript()+" £¨Ğ¡ÓÚ»òµÈÓÚ½áÊøÊ±¼ä£©");
+	 * @param <% out.println(field.getName()+"1   "+field.getDescript()+"  ï¼ˆå¤§äºæˆ–ç­‰äºå¼€å§‹æ—¶é—´ï¼‰");out.print("         * @param "+field.getName()+"2   "+field.getDescript()+" ï¼ˆå°äºæˆ–ç­‰äºç»“æŸæ—¶é—´ï¼‰");
       }else{%>
  	 * @param <%  out.print(field.getName()+"   "+field.getDescript());  
         conParamsStr+=",@Param(\""+field.getName()+"\")"+field.getType()+" "+field.getName();
      }
     }conParamsStr = conParamsStr.substring(1);%>
-	 * @return ÁĞ±íµÄ¼ÇÂ¼Êı
+	 * @return åˆ—è¡¨çš„è®°å½•æ•°
 	 */
 	public int qeury<%=entityName%>sRecordCount(<%=areaAbbParamStr%>,<%=conParamsStr%>);
 	
 	
 	/**
-	 * ĞÂÔö¼ÇÂ¼
+	 * æ–°å¢è®°å½•
 	 <%=appendAreaDealcomment%>
 	 * @param <%=StringHelper.fistChartLowerCase(entityName)%>
 	 * @return
@@ -128,7 +128,7 @@ for(FieldItem field:mainFields){ if(field.getName().equals(map.getPrimaryKeyItem
 	
 	
 	/**
-	 * ¸üĞÂ¼ÇÂ¼ 
+	 * æ›´æ–°è®°å½• 
 	 <%=appendAreaDealcomment%>
 	 * @param <%=StringHelper.fistChartLowerCase(entityName)%>
 	 * @return
@@ -137,16 +137,16 @@ for(FieldItem field:mainFields){ if(field.getName().equals(map.getPrimaryKeyItem
 	
 	
 	/**
-	 * É¾³ı¼ÇÂ¼
+	 * åˆ é™¤è®°å½•
 	 <%=appendAreaDealcomment%>
-	 * @param <%=map.getPrimaryKeyItem().getName()%>s  ¼ÇÂ¼¶ÔÓ¦µÄÖ÷¼ü
+	 * @param <%=map.getPrimaryKeyItem().getName()%>s  è®°å½•å¯¹åº”çš„ä¸»é”®
 	 * @return
 	 */
 	public int delete<%=entityName%>(<%=isAppendAreaDeal%> @Param("<%=map.getPrimaryKeyItem().getName()%>s") String[] <%=map.getPrimaryKeyItem().getName()%>s);
 	
 	
 	
-	//×Ô¶¨Òå·½·¨
+	//è‡ªå®šä¹‰æ–¹æ³•
 	//************************************************************************************************************************
 	
 	

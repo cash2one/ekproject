@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="GB2312"%>
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ page import="qtone.generator.*" %>
 <%@ page import="qtone.generator.util.*" %>
 <%
@@ -18,9 +18,9 @@
 	String mapperObjName = StringHelper.fistChartUpperCase(entityName)+"Mapper";
 	String entryObjName =  StringHelper.fistChartUpperCase(entityName)+"Entry";
 	
-	//Èç¹ûÊÇ¸Ã±íÊÇ·Ö±íµÄ¾Í¸ÃÔÚ½Ó¿Ú·½·¨(ĞÂÔö¡¢¸üĞÂ¡¢É¾³ı·½·¨£¬²éÑ¯·½·¨Ä¬ÈÏÒª±£Áô)ÖĞ¼ÓÉÏ¶ÔÓ¦µÄ²ÎÊı
+	//å¦‚æœæ˜¯è¯¥è¡¨æ˜¯åˆ†è¡¨çš„å°±è¯¥åœ¨æ¥å£æ–¹æ³•(æ–°å¢ã€æ›´æ–°ã€åˆ é™¤æ–¹æ³•ï¼ŒæŸ¥è¯¢æ–¹æ³•é»˜è®¤è¦ä¿ç•™)ä¸­åŠ ä¸Šå¯¹åº”çš„å‚æ•°
 	String areaAbbParamStr = "@SearchParameter(name =\"areaAbb\")String areaAbb";
-	String areaAbbDealComment="* @param areaAbb    µØÇøËõĞ´£¨·Ö±íÇ°×ºÃû:Èç ¡°CS¡±£©";
+	String areaAbbDealComment="* @param areaAbb    åœ°åŒºç¼©å†™ï¼ˆåˆ†è¡¨å‰ç¼€å:å¦‚ â€œCSâ€ï¼‰";
 	String isAppendAreaDeal=map.isAreaDeal()?areaAbbParamStr+",":"";
 	String appendAreaDealcomment=map.isAreaDeal()?areaAbbDealComment:"";
 	
@@ -51,7 +51,7 @@ import <%=mapperPackageName+"."+map.getClazz()%>Mapper;
 
 /**
  *
- * @description <%=map.getDescription()%> ¶ÔÓ¦µÄ£¨ÒµÎñÂß¼­Àà£©
+ * @description <%=map.getDescription()%> å¯¹åº”çš„ï¼ˆä¸šåŠ¡é€»è¾‘ç±»ï¼‰
  * @version <%=map.getVersion()%>
  * @author <%=map.getAuthor()%>  
  * @CreateTime <%=new Date().toString()%>
@@ -60,33 +60,33 @@ import <%=mapperPackageName+"."+map.getClazz()%>Mapper;
 @Service("<%=StringHelper.fistChartLowerCase(map.getName())%>")
 public class <%=map.getName()%> extends BaseBusiness {
     
-    //Ë½ÓĞÊôĞÔ
+    //ç§æœ‰å±æ€§
 	//*****************************************************************************************************************
-	<%for(FieldItem field:mainFields){//Êä³öÖ÷ÒªµÄ×Ö¶ÎÊôĞÔ%> 
+	<%for(FieldItem field:mainFields){//è¾“å‡ºä¸»è¦çš„å­—æ®µå±æ€§%> 
          private <%out.print(field.getType()+"  "+field.getName()+"; //"+field.getDescript());}%>
     
-    <% for(FieldItem field:subFields){ //Êä³ö´Ó±íµÄ×Ö¶ÎÊôĞÔ %> 
+    <% for(FieldItem field:subFields){ //è¾“å‡ºä»è¡¨çš„å­—æ®µå±æ€§ %> 
          private <%out.print(field.getType()+"  "+field.getName()+"; //"+field.getDescript());}%>
           
 	
-     //Spring×Ô¶¯×¢ÈëÏàÓ¦µÄÊı¾İ·ÃÎÊ²ã¶ÔÏó
+     //Springè‡ªåŠ¨æ³¨å…¥ç›¸åº”çš„æ•°æ®è®¿é—®å±‚å¯¹è±¡
 	 //*****************************************************************************************************************
 	  
 	  @Autowired
 	  private <%=mapperObjName%> <%=StringHelper.fistChartLowerCase(mapperObjName)%>;
 	 
-	 //¹¹Ôìº¯Êı
+	 //æ„é€ å‡½æ•°
 	 //*****************************************************************************************************************
 	
      /**
-     * Ä¬ÈÏ¹¹Ôìº¯Êı
+     * é»˜è®¤æ„é€ å‡½æ•°
      */
 	 public <%=map.getName()%>() {
 	
 	 }
 	
  
-    /**´ø²ÎÊı£¨Ö÷±í£©µÄ¹¹Ôìº¯Êı
+    /**å¸¦å‚æ•°ï¼ˆä¸»è¡¨ï¼‰çš„æ„é€ å‡½æ•°
      <%String conParamsStr="";
    for(FieldItem field:mainFields){%>
 	   * @param <%out.print(field.getName()+"   "+field.getDescript());
@@ -96,14 +96,14 @@ public class <%=map.getName()%> extends BaseBusiness {
 	  %>
 	*/
 	public <%=map.getName()%>(<%=conParamsStr%>) {
-		   <%for(FieldItem field:mainFields){ //Êä³öÖ÷ÒªµÄ×Ö¶ÎÊôĞÔ%> 
+		   <%for(FieldItem field:mainFields){ //è¾“å‡ºä¸»è¦çš„å­—æ®µå±æ€§%> 
 	            this.<%out.print(field.getName()+"="+field.getName()+";");}%>
 	}
    
  
 	
 	
-	/**´ø²ÎÊı£¨È«²¿£©µÄ¹¹Ôìº¯Êı
+	/**å¸¦å‚æ•°ï¼ˆå…¨éƒ¨ï¼‰çš„æ„é€ å‡½æ•°
      <%conParamsStr="";
    for(FieldItem field:mainFields){%>
 	   * @param <%out.print(field.getName()+"   "+field.getDescript());
@@ -116,17 +116,17 @@ public class <%=map.getName()%> extends BaseBusiness {
 	     conParamsStr = conParamsStr.substring(1);%>
 	*/
 	public <%=map.getName()%>(<%=conParamsStr%>) {
-		   <%for(FieldItem field:mainFields){ //Êä³öÖ÷ÒªµÄ×Ö¶ÎÊôĞÔ%> 
+		   <%for(FieldItem field:mainFields){ //è¾“å‡ºä¸»è¦çš„å­—æ®µå±æ€§%> 
 	            this.<%out.print(field.getName()+"="+field.getName()+";");}%>
-	       <%for(FieldItem field:subFields){ //Êä³ö´Ó±íµÄ×Ö¶ÎÊôĞÔ%> 
+	       <%for(FieldItem field:subFields){ //è¾“å‡ºä»è¡¨çš„å­—æ®µå±æ€§%> 
 	            this.<%out.print(field.getName()+"="+field.getName()+";");}%>
 	}
 	
 	
-	//ÊôĞÔ¶ÔÓ¦µÄget ºÍ set ·½·¨
+	//å±æ€§å¯¹åº”çš„get å’Œ set æ–¹æ³•
 	//*****************************************************************************************************************
 	
-    <%for(FieldItem field:mainFields){ //Éú³É¶ÔÓ¦µÄgetting ºÍ setting ·½·¨%> 
+    <%for(FieldItem field:mainFields){ //ç”Ÿæˆå¯¹åº”çš„getting å’Œ setting æ–¹æ³•%> 
          //* @param <%=field.getName()+" "+field.getDescript()%>
          public void set<%out.print(StringHelper.fistChartUpperCase(field.getName())+"("+field.getType()+" "+field.getName()+"){");%>
 	        this.<%out.print(field.getName()+"="+field.getName()+";");%>    
@@ -138,7 +138,7 @@ public class <%=map.getName()%> extends BaseBusiness {
          }
     <%}%>
     
-     <%for(FieldItem field:subFields){ //Éú³É´Ó±íµÄgetting ·½·¨%>          
+     <%for(FieldItem field:subFields){ //ç”Ÿæˆä»è¡¨çš„getting æ–¹æ³•%>          
          
          //* @param <%=field.getName()+" "+field.getDescript()%>
          private void set<%out.print(StringHelper.fistChartUpperCase(field.getName())+"("+field.getType()+" "+field.getName()+"){");%>
@@ -152,11 +152,11 @@ public class <%=map.getName()%> extends BaseBusiness {
     <%}%>
     
     
-    //×ÓÀà±ØĞëÒªÊµÏÖ¸¸ÀàµÄ³éÏó·½·¨£¨Ä£¿é£©¡£
+    //å­ç±»å¿…é¡»è¦å®ç°çˆ¶ç±»çš„æŠ½è±¡æ–¹æ³•ï¼ˆæ¨¡å—ï¼‰ã€‚
 	//******************************************************************************************************************************
 	
 	/**
-	 * ÉèÖÃÒµÎñÂß¼­Ãû³Æ
+	 * è®¾ç½®ä¸šåŠ¡é€»è¾‘åç§°
 	 */
 	@Override
 	public String getBusinessName(){
@@ -166,7 +166,7 @@ public class <%=map.getName()%> extends BaseBusiness {
 
 
 	/**
-	 * ÉèÖÃÒµÎñÂß¼­¹¦ÄÜ±êÊ¶ ¶ÔÓ¦Êı¾İ±íµÄ¹¦ÄÜ±êÊ¶
+	 * è®¾ç½®ä¸šåŠ¡é€»è¾‘åŠŸèƒ½æ ‡è¯† å¯¹åº”æ•°æ®è¡¨çš„åŠŸèƒ½æ ‡è¯†
 	 */
 	@Override
 	public String getFunctionFlag() {
@@ -175,7 +175,7 @@ public class <%=map.getName()%> extends BaseBusiness {
 	}
 
 	/**
-	 * ÉèÖÃ»ñÈ¡Ä£¿éÃû³Æ
+	 * è®¾ç½®è·å–æ¨¡å—åç§°
 	 */
 	@Override
 	public String getModel() {
@@ -190,12 +190,12 @@ public class <%=map.getName()%> extends BaseBusiness {
 	
 	
 	
-	//ÊµÏÖ¶ÔÓ¦¾ßÌåµÄÒµÎñ¹¦ÄÜ
+	//å®ç°å¯¹åº”å…·ä½“çš„ä¸šåŠ¡åŠŸèƒ½
 	//*****************************************************************************************************************
 	
 	
 	/**
-	 * ĞÂÔö
+	 * æ–°å¢
 	 */
 	@Override
 	protected void onAdd() {
@@ -210,14 +210,14 @@ public class <%=map.getName()%> extends BaseBusiness {
 	
 	
     /**
-     * ¸ù¾İÖ÷¼ü£¨<%=map.getPrimaryKeyItem().getName()%>£©·µ»Øµ¥Ìõ¼ÇÂ¼
+     * æ ¹æ®ä¸»é”®ï¼ˆ<%=map.getPrimaryKeyItem().getName()%>ï¼‰è¿”å›å•æ¡è®°å½•
      * @param <%=map.getPrimaryKeyItem().getName()%>
      * @return 
      */
 	@Transactional
 	public void findOne(<%=map.getPrimaryKeyItem().getType()+" "+map.getPrimaryKeyItem().getName()%>){
 		<%=entryObjName%> entry = <%=StringHelper.fistChartLowerCase(mapperObjName)%>.findOne(this.getAbb(),<%=map.getPrimaryKeyItem().getName()%>);
-		if (entry != null){<% //¸³Öµ
+		if (entry != null){<% //èµ‹å€¼
 	     for(FieldItem field:mainFields){%>
 	           this.set<%out.print(StringHelper.fistChartUpperCase(field.getName())+"(entry.get"+StringHelper.fistChartUpperCase(field.getName())+"());");
 	     }
@@ -230,7 +230,7 @@ public class <%=map.getName()%> extends BaseBusiness {
 	
 	
 	/**
-	 * ĞŞ¸Ä
+	 * ä¿®æ”¹
 	 */
 	@Override
 	protected void onModify() {
@@ -244,7 +244,7 @@ public class <%=map.getName()%> extends BaseBusiness {
 
 	
 	/**
-	 * É¾³ı
+	 * åˆ é™¤
 	 */
 	@Override
 	protected void onDelete(String ids[]) {
@@ -254,15 +254,15 @@ public class <%=map.getName()%> extends BaseBusiness {
 
 	
 	  /**
-	   * ²éÑ¯
-	   * @param startRow   ¿ªÊ¼¼ÇÂ¼µÄĞĞÊı
-	   * @param pageSize   ÉèÖÃÃ¿Ò³ÏÔÊ¾µÄ¼ÇÂ¼Êı
+	   * æŸ¥è¯¢
+	   * @param startRow   å¼€å§‹è®°å½•çš„è¡Œæ•°
+	   * @param pageSize   è®¾ç½®æ¯é¡µæ˜¾ç¤ºçš„è®°å½•æ•°
      <%conParamsStr="";tempStr="";String funcParamsStr="";
    for(FieldItem field:mainFields){ funcParamsStr+=",entry.get"+StringHelper.fistChartUpperCase(field.getName())+"()";if(field.getName().equals(map.getPrimaryKeyItem().getName())) continue; %>
 	   <%
 	       if(field.getType().toLowerCase().indexOf("date")>=0||field.getType().toLowerCase().indexOf("time")>=0){
-	    	  out.println("* @param   "+field.getName()+"1   "+field.getDescript()+" £¨´óÓÚ»òµÈÓÚ¿ªÊ¼Ê±¼ä£©");
-	    	  out.print("           * @param   "+field.getName()+"2   "+field.getDescript()+" £¨Ğ¡ÓÚ»òµÈÓÚ½áÊøÊ±¼ä£©");
+	    	  out.println("* @param   "+field.getName()+"1   "+field.getDescript()+" ï¼ˆå¤§äºæˆ–ç­‰äºå¼€å§‹æ—¶é—´ï¼‰");
+	    	  out.print("           * @param   "+field.getName()+"2   "+field.getDescript()+" ï¼ˆå°äºæˆ–ç­‰äºç»“æŸæ—¶é—´ï¼‰");
 		      tempStr+=","+field.getName()+"1,"+field.getName()+"2";
 		      conParamsStr+=",@SearchParameter(name =\""+field.getName()+"1\")"+field.getType()+" "+field.getName()+"1,@SearchParameter(name =\""+field.getName()+"2\")"+field.getType()+" "+field.getName()+"2";
 	       }else{
@@ -274,8 +274,8 @@ public class <%=map.getName()%> extends BaseBusiness {
    for(FieldItem field:subFields){ funcParamsStr+=",entry.get"+StringHelper.fistChartUpperCase(field.getName())+"()";%>
 	   <%
 	      if(field.getType().toLowerCase().indexOf("date")>=0||field.getType().toLowerCase().indexOf("time")>=0){
-	    	  out.println("* @param   "+field.getName()+"1   "+field.getDescript()+" £¨´óÓÚ»òµÈÓÚ¿ªÊ¼Ê±¼ä£©");
-	    	  out.print("            * @param   "+field.getName()+"2   "+field.getDescript()+" £¨Ğ¡ÓÚ»òµÈÓÚ½áÊøÊ±¼ä£©");
+	    	  out.println("* @param   "+field.getName()+"1   "+field.getDescript()+" ï¼ˆå¤§äºæˆ–ç­‰äºå¼€å§‹æ—¶é—´ï¼‰");
+	    	  out.print("            * @param   "+field.getName()+"2   "+field.getDescript()+" ï¼ˆå°äºæˆ–ç­‰äºç»“æŸæ—¶é—´ï¼‰");
 		      tempStr+=","+field.getName()+"1,"+field.getName()+"2";
 		      conParamsStr+=",@SearchParameter(name =\""+field.getName()+"1\")"+field.getType()+" "+field.getName()+"1,@SearchParameter(name =\""+field.getName()+"2\")"+field.getType()+" "+field.getName()+"2";
 	      }else{ 
@@ -286,7 +286,7 @@ public class <%=map.getName()%> extends BaseBusiness {
          funcParamsStr=funcParamsStr.substring(1);
          tempStr=tempStr.substring(1);;
 	     conParamsStr = conParamsStr.substring(1);%>
-	   * @param orderList  //¿ØÖÆÅÅĞò
+	   * @param orderList  //æ§åˆ¶æ’åº
 	   * @return List<<%=map.getName()%>>
 	   */
 	@SeacherFun(nameAlias="<%=map.getName()%>Seacher")
@@ -294,9 +294,9 @@ public class <%=map.getName()%> extends BaseBusiness {
 	public List<<%=map.getName()%>> qeury<%=entityName%>s(@SearchParameter(defaultValue = "1",name = "startRow")int startRow, @SearchParameter(defaultValue = "20",name = "pageSize")int pageSize,
 				<%=conParamsStr%>,
 				@SearchParameter(name="orderList")List<OrderItem>orderList){
-		   //ÊµÀı»¯List¶ÔÏó		
+		   //å®ä¾‹åŒ–Listå¯¹è±¡		
 		   List<<%=map.getName()%>> list = new ArrayList<<%=map.getName()%>>();
-		   //²éÑ¯½á¹ûÊµÌå
+		   //æŸ¥è¯¢ç»“æœå®ä½“
 		   List<<%=entryObjName%>> entryList = <%=StringHelper.fistChartLowerCase(mapperObjName)%>.qeury<%=map.getClazz()%>s(startRow,pageSize,this.getAbb(),<%=tempStr%>,orderList);
 	       if (entryList != null)
 		   for (<%=entryObjName%> entry : entryList) {
@@ -310,7 +310,7 @@ public class <%=map.getName()%> extends BaseBusiness {
 	
 	
 	
-	//×Ô¶¨Òå·½·¨
+	//è‡ªå®šä¹‰æ–¹æ³•
 	//*****************************************************************************************************************
 	
 	
