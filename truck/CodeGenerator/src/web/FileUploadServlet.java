@@ -1,8 +1,13 @@
 package web;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
+import java.io.Reader;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -32,7 +37,13 @@ public class FileUploadServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-	
+	    InputStream in =  req.getInputStream();
+	    System.out.println(in.read());
+	    
+		
+		String dirPath=BaseCfg.CFG_PATH;
+		System.out.println(dirPath);
+	    final List<String> recFiles = new ArrayList<String>();
 		try {
 		        //建立文件上传服务接口，绑定对应的响应事件	    
 				FileUploadService srv = new FileUploadService(new FileUploadHandle(){
@@ -41,16 +52,21 @@ public class FileUploadServlet extends HttpServlet {
 							String newFlile) {
 						// TODO Auto-generated method stub
 						try {
-							System.out.println("服务器接受到新的文件："+oldFile);
+							System.out.println("服务器接受到新的文件："+newFlile);
+							recFiles.add(newFlile);
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
 					}
 					
-				}, req.getRealPath("/")+"templates/",10,10){
+				}, dirPath+"/templates/",10,10){
 					
 					//文件名
 				    public  String fileNamingRule(String oldFileName){
+				    	    if(oldFileName.indexOf("\\")>0||oldFileName.indexOf("/")>0){
+				    	    	oldFileName = oldFileName.replace("\\", "/");
+				    	    	oldFileName = oldFileName.substring(oldFileName.lastIndexOf("/")+1);
+				    	    }
 					    	return oldFileName;
 					} 	 
 					
@@ -62,7 +78,16 @@ public class FileUploadServlet extends HttpServlet {
 		}
 		resp.setContentType("text/html");
 		PrintWriter out = resp.getWriter();
-		out.write("<script>window.location.href='/"+(!BaseCfg.APP_CONTEXT.equals("")?"/"+BaseCfg.APP_CONTEXT:"")+"/index.jsp'</script>");
+//		out.write("<script>window.location.href='/"+(!BaseCfg.APP_CONTEXT.equals("")?"/"+BaseCfg.APP_CONTEXT:"")+"/index.jsp'</script>");
+		StringBuffer urls = new StringBuffer();
+		String ip="http://192.168.4.39:80/";
+		for(String file:recFiles){
+			urls.append(ip).append(""+(!BaseCfg.APP_CONTEXT.equals("")?"/"+BaseCfg.APP_CONTEXT:"")+"/codeTemplators/entity.jsp?cfg=").append(file);
+			urls.append(";").append(ip).append((!BaseCfg.APP_CONTEXT.equals("")?"/"+BaseCfg.APP_CONTEXT:"")+"/codeTemplators/mapper.jsp?cfg=").append(file);
+			urls.append(";").append(ip).append((!BaseCfg.APP_CONTEXT.equals("")?"/"+BaseCfg.APP_CONTEXT:"")+"/codeTemplators/mapperXml.jsp?cfg=").append(file);
+			urls.append(";").append(ip).append((!BaseCfg.APP_CONTEXT.equals("")?"/"+BaseCfg.APP_CONTEXT:"")+"/codeTemplators/business.jsp?cfg=").append(file);
+		}
+		out.write(urls.toString());
 		out.close();
 	}
 
