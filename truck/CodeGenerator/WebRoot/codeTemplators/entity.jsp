@@ -38,7 +38,7 @@ public class <%=entityName%>Entry implements Serializable {
 	
 	  }
 	
-	 
+	<%if(false){%>
      /**带参数的构造函数
     <% String conParamsStr="";
         for(FieldItem field:mainFields){%>
@@ -59,6 +59,8 @@ public class <%=entityName%>Entry implements Serializable {
             this.<%out.print(field.getName()+"="+field.getName()+";");}%>
               
 	}
+	<%}%>
+	
 	
 	<% //生成对应的getting 和 setting 方法
      for(FieldItem field:mainFields){%> 

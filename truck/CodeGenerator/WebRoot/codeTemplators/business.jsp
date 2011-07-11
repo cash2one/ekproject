@@ -60,13 +60,9 @@ import <%=mapperPackageName+"."+map.getClazz()%>Mapper;
 @Service("<%=StringHelper.fistChartLowerCase(map.getName())%>")
 public class <%=map.getName()%> extends BaseBusiness {
     
-    //私有属性
-	//*****************************************************************************************************************
-	<%for(FieldItem field:mainFields){//输出主要的字段属性%> 
-         private <%out.print(field.getType()+"  "+field.getName()+"; //"+field.getDescript());}%>
-    
-    <% for(FieldItem field:subFields){ //输出从表的字段属性 %> 
-         private <%out.print(field.getType()+"  "+field.getName()+"; //"+field.getDescript());}%>
+      //实体属性
+	  //*****************************************************************************************************************
+	  private <%=entryObjName%> <%=StringHelper.fistChartLowerCase(entryObjName)%>;
           
 	
      //Spring自动注入相应的数据访问层对象
@@ -82,44 +78,15 @@ public class <%=map.getName()%> extends BaseBusiness {
      * 默认构造函数
      */
 	 public <%=map.getName()%>() {
-	
+	     <%=StringHelper.fistChartLowerCase(entryObjName)%> = new <%=entryObjName%>();
 	 }
 	
- 
-    /**带参数（主表）的构造函数
-     <%String conParamsStr="";
-   for(FieldItem field:mainFields){%>
-	   * @param <%out.print(field.getName()+"   "+field.getDescript());
-	       conParamsStr+=","+field.getType()+" "+field.getName();
-	  }
-        conParamsStr=conParamsStr.substring(1);
-	  %>
-	*/
-	public <%=map.getName()%>(<%=conParamsStr%>) {
-		   <%for(FieldItem field:mainFields){ //输出主要的字段属性%> 
-	            this.<%out.print(field.getName()+"="+field.getName()+";");}%>
-	}
-   
- 
-	<% if(subFields!=null&&subFields.size()>0){ %>
-	/**带参数（全部）的构造函数
-     <%conParamsStr="";
-   for(FieldItem field:mainFields){%>
-	   * @param <%out.print(field.getName()+"   "+field.getDescript());
-	       conParamsStr+=","+field.getType()+" "+field.getName();
-	  }
-   for(FieldItem field:subFields){%>
-	   * @param <%out.print(field.getName()+"   "+field.getDescript());
-	       conParamsStr+=","+field.getType()+" "+field.getName();
-	     }
-	     conParamsStr = conParamsStr.substring(1);%>
-	*/
-	public <%=map.getName()%>(<%=conParamsStr%>) {
-		   <%for(FieldItem field:mainFields){ //输出主要的字段属性%> 
-	            this.<%out.print(field.getName()+"="+field.getName()+";");}%>
-	       <%for(FieldItem field:subFields){ //输出从表的字段属性%> 
-	            this.<%out.print(field.getName()+"="+field.getName()+";");}%>
-	}<%}//End IF%>
+     /**
+     * 默认构造函数
+     */
+	 public <%=map.getName()%>(<%=entryObjName%> entry) {
+	      this.<%=StringHelper.fistChartLowerCase(entryObjName)%> = entry;
+	 }
 	
 	
 	//属性对应的get 和 set 方法
@@ -129,14 +96,14 @@ public class <%=map.getName()%> extends BaseBusiness {
         /**
          * @param <%=field.getName()+" "+field.getDescript()%>
          */
-         public void set<%out.print(StringHelper.fistChartUpperCase(field.getName())+"("+field.getType()+" "+field.getName()+"){");%>
-	        this.<%out.print(field.getName()+"="+field.getName()+";");%>    
+         public void set<%=StringHelper.fistChartUpperCase(field.getName())+"("+field.getType()+" "+field.getName()+"){"%>
+	        this.<%=StringHelper.fistChartLowerCase(entryObjName)%>.set<%=StringHelper.fistChartUpperCase(field.getName())+"("+field.getName()+");" %>     
          }
         /**
          * @return <%=field.getName()+" "+field.getDescript()%>
          */
-         public <%=field.getType() %> get<%out.print(StringHelper.fistChartUpperCase(field.getName())+"( ){ ");%>
-	        return this.<%out.print(field.getName()+";");%>    
+         public <%=field.getType() %> get<%=StringHelper.fistChartUpperCase(field.getName())+"( ){ "%>
+	        return this.<%=StringHelper.fistChartLowerCase(entryObjName)%>.get<%=StringHelper.fistChartUpperCase(field.getName())+"( );" %>   
          }
     <%}%>
     
@@ -145,14 +112,14 @@ public class <%=map.getName()%> extends BaseBusiness {
          * @param <%=field.getName()+" "+field.getDescript()%>
          */
          private void set<%out.print(StringHelper.fistChartUpperCase(field.getName())+"("+field.getType()+" "+field.getName()+"){");%>
-	        this.<%out.print(field.getName()+"="+field.getName()+";");%>    
+	        this.<%=StringHelper.fistChartLowerCase(entryObjName)%>.set<%=StringHelper.fistChartUpperCase(field.getName())+"("+field.getName()+");" %>
          }
          
         /**
           * @return <%=field.getName()+" "+field.getDescript()%>
          */
          public <%=field.getType() %> get<%out.print(StringHelper.fistChartUpperCase(field.getName())+"( ){ ");%>
-	        return this.<%out.print(field.getName()+";");%>    
+	        return this.<%=StringHelper.fistChartLowerCase(entryObjName)%>.get<%=StringHelper.fistChartUpperCase(field.getName())+"( );" %>     
          }
     <%}%>
     
@@ -265,7 +232,7 @@ public class <%=map.getName()%> extends BaseBusiness {
 	   * 查询
 	   * @param startRow   开始记录的行数
 	   * @param pageSize   设置每页显示的记录数
-     <%conParamsStr="";tempStr="";String funcParamsStr="";
+     <%String conParamsStr="";tempStr="";String funcParamsStr="";
    for(FieldItem field:mainFields){ funcParamsStr+=",entry.get"+StringHelper.fistChartUpperCase(field.getName())+"()";if(field.getName().equals(map.getPrimaryKeyItem()!=null?map.getPrimaryKeyItem().getName():null)) continue; %>
 	   <%
 	       if(field.getType().toLowerCase().indexOf("date")>=0||field.getType().toLowerCase().indexOf("time")>=0){
@@ -314,7 +281,7 @@ public class <%=map.getName()%> extends BaseBusiness {
 		   List<<%=entryObjName%>> entryList = <%=StringHelper.fistChartLowerCase(mapperObjName)%>.qeury<%=map.getClazz()%>s(startRow,pageSize,this.getDaoAbb(),<%=tempStr%>,orderList);
 	       if (entryList != null){
 			  for (<%=entryObjName%> entry : entryList) {
-				   list.add(new <%=map.getName()%>(<%=funcParamsStr%>));
+				   list.add(new <%=map.getName()%>(entry));
 				   entry = null;
 			  }
 			  entryList = null;
