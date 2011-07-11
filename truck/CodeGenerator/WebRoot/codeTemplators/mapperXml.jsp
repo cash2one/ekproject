@@ -107,7 +107,6 @@
   <!-- 列表查询对应的表关系SQL  -->
   <sql id="querySqlMain">
 			  <% out.print(SqlXmlCreator.wrapperMainQuerySql(map.getTable(),map.getTableAlias(),map.getTopJoinTable())); %>
-			  <include refid="queryOptions"/>
   </sql>
 
   
@@ -133,6 +132,7 @@
 	        SELECT A.*,ROWNUM RN FROM (
 	               SELECT <include refid="<%=moduleName%>Columns"/>   
 		           FROM <include refid="querySqlMain"/>
+		           <include refid="queryOptions"/>
 		           <include refid="orderControl"/>
 		    ) A WHERE ROWNUM &lt;=<%="${startRow}+${pageSize}-1"%> ) 
 		 WHERE RN &gt;=<%="#{startRow}"%>
