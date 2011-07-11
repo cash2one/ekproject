@@ -23,7 +23,7 @@ public class BusinessMap {
 	String mapperNamespace="mapper";
     String table="${areaAbb}_XJ_STUDENT";
     String tableAlias = "";
-    String sequence="${areaAbb}_xj_student_seq";
+    String sequence="";
     String primaryKey="id";
 	String name;
     
