@@ -317,7 +317,6 @@ public class <%=map.getName()%> extends BaseBusiness {
 				   list.add(new <%=map.getName()%>(<%=funcParamsStr%>));
 				   entry = null;
 			  }
-			  entryList.clear();
 			  entryList = null;
 		   }
 		return list;
