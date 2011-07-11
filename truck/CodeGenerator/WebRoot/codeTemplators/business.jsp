@@ -138,13 +138,16 @@ public class <%=map.getName()%> extends BaseBusiness {
     <%}%>
     
      <%for(FieldItem field:subFields){ //生成从表的getting 方法%>          
-         
-         //* @param <%=field.getName()+" "+field.getDescript()%>
+        /**
+         * @param <%=field.getName()+" "+field.getDescript()%>
+         */
          private void set<%out.print(StringHelper.fistChartUpperCase(field.getName())+"("+field.getType()+" "+field.getName()+"){");%>
 	        this.<%out.print(field.getName()+"="+field.getName()+";");%>    
          }
-        
-         //* @return <%=field.getName()+" "+field.getDescript()%>
+         
+        /**
+          * @return <%=field.getName()+" "+field.getDescript()%>
+         */
          public <%=field.getType() %> get<%out.print(StringHelper.fistChartUpperCase(field.getName())+"( ){ ");%>
 	        return this.<%out.print(field.getName()+";");%>    
          }
