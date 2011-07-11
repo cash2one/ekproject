@@ -5,11 +5,10 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
-import java.nio.charset.CharsetEncoder;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -35,7 +34,9 @@ public class Upload extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse resp)
 			throws ServletException, IOException {
-
+        
+		System.out.println("有新的文件被上传到服务器中："+new Date().toLocaleString());
+		
 		BufferedReader br = new BufferedReader(new InputStreamReader(
 				(ServletInputStream) request.getInputStream(),"utf-8"));
 		String line = null;
@@ -48,8 +49,8 @@ public class Upload extends HttpServlet {
 		OutputStreamWriter p =new OutputStreamWriter(new FileOutputStream(file),"utf-8");
 		StringBuilder cfgContent = new StringBuilder();
 		while ((line = br.readLine()) != null) {
-			cfgContent.append(line);
-			System.out.println(line);
+			 cfgContent.append(line);
+//			 System.out.println(line);
 			 p.write(line);
 		}
 		 p.flush();
@@ -58,10 +59,8 @@ public class Upload extends HttpServlet {
 		final List<String> recFiles = new ArrayList<String>();
 		recFiles.add(fileName); 
 		
-		
 		resp.setContentType("text/html");
 		PrintWriter out = resp.getWriter();
-		// out.write("<script>window.location.href='/"+(!BaseCfg.APP_CONTEXT.equals("")?"/"+BaseCfg.APP_CONTEXT:"")+"/index.jsp'</script>");
 		StringBuffer urls = new StringBuffer();
 		String ip = BaseCfg.WWW;
 		for (String fileCfg : recFiles) {
