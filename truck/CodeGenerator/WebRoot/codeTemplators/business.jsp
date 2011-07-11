@@ -126,12 +126,15 @@ public class <%=map.getName()%> extends BaseBusiness {
 	//*****************************************************************************************************************
 	
     <%for(FieldItem field:mainFields){ //生成对应的getting 和 setting 方法%> 
-         //* @param <%=field.getName()+" "+field.getDescript()%>
+        /**
+         * @param <%=field.getName()+" "+field.getDescript()%>
+         */
          public void set<%out.print(StringHelper.fistChartUpperCase(field.getName())+"("+field.getType()+" "+field.getName()+"){");%>
 	        this.<%out.print(field.getName()+"="+field.getName()+";");%>    
          }
-         
-         //* @return <%=field.getName()+" "+field.getDescript()%>
+        /**
+         * @return <%=field.getName()+" "+field.getDescript()%>
+         */
          public <%=field.getType() %> get<%out.print(StringHelper.fistChartUpperCase(field.getName())+"( ){ ");%>
 	        return this.<%out.print(field.getName()+";");%>    
          }
@@ -274,7 +277,7 @@ public class <%=map.getName()%> extends BaseBusiness {
 	          out.print("* @param   "+field.getName()+"   "+field.getDescript());
 	          tempStr+=","+field.getName();
 	          if("long".equals(field.getType().toLowerCase())||"int".equals(field.getType().toLowerCase()))
-	        	conParamsStr+=",@SearchParameter(name =\""+field.getName()+"\" defaultValue=\"-1\" )"+field.getType()+" "+field.getName();
+	        	conParamsStr+=",@SearchParameter(name =\""+field.getName()+"\", defaultValue=\"-1\" )"+field.getType()+" "+field.getName();
 	        	  else
 	            conParamsStr+=",@SearchParameter(name =\""+field.getName()+"\")"+field.getType()+" "+field.getName();}
 	 
@@ -289,7 +292,7 @@ public class <%=map.getName()%> extends BaseBusiness {
 	      }else{ 
 	          out.print("* @param   "+field.getName()+"   "+field.getDescript());
 	          if("long".equals(field.getType().toLowerCase())||"int".equals(field.getType().toLowerCase()))
-		          conParamsStr+=",@SearchParameter(name =\""+field.getName()+"\" defaultValue=\"-1\" )"+field.getType()+" "+field.getName();
+		          conParamsStr+=",@SearchParameter(name =\""+field.getName()+"\", defaultValue=\"-1\" )"+field.getType()+" "+field.getName();
 		      else
 	              conParamsStr+=",@SearchParameter(name =\""+field.getName()+"\")"+field.getType()+" "+field.getName();
 	          tempStr+=","+field.getName();}
