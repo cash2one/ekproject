@@ -4,7 +4,6 @@
 <%
     String path = request.getContextPath();
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-	System.out.println(" mapper "+request.getParameter("cfg"));
 	String cfgPath = BaseCfg.CFG_PATH+"/templates/"+request.getParameter("cfg");
 	BusinessMap map = new BusinessMap(cfgPath);
 	String entityName=map.getClazz();
@@ -47,9 +46,10 @@ import <%=basePackageName+map.getDaoNamespace()+"."+map.getMapperNamespace()%>.O
 public interface <%=entityName%>Mapper extends MyBatisMapper {
 
     
-        //自动生成的方法
-	    //************************************************************************************************************************
-
+     //自动生成的方法
+	 //************************************************************************************************************************
+    
+   <% if(map.getPrimaryKeyItem()!=null){//有主键才可以有此方法 %>
 	/**
 	 * 根据主键查询对应的记录
 	 <%=areaAbbDealComment%>
@@ -57,7 +57,7 @@ public interface <%=entityName%>Mapper extends MyBatisMapper {
 	 * @return <%=entityName%>Entry
 	 */
 	public <%=entityName%>Entry findOne(<%=areaAbbParamStr%>,@Param("<%=map.getPrimaryKeyItem().getName()%>")<%=map.getPrimaryKeyItem().getType()%> <%=map.getPrimaryKeyItem().getName()%>);
-	
+	<% } %>
 	
 	 /**
 	   * 列表查询
@@ -65,7 +65,7 @@ public interface <%=entityName%>Mapper extends MyBatisMapper {
 	   * @param pageSize   设置每页显示的记录数
 	   <%=areaAbbDealComment%>
      <%String conParamsStr="";
-     for(FieldItem field:mainFields){ if(field.getName().equals(map.getPrimaryKeyItem().getName())) continue;
+     for(FieldItem field:mainFields){ if(field.getName().equals(map.getPrimaryKeyItem()!=null?map.getPrimaryKeyItem().getName():null)) continue;
           if(field.getType().toLowerCase().indexOf("date")>=0||field.getType().toLowerCase().indexOf("time")>=0){
 	    	 conParamsStr+=",@Param(\""+field.getName()+"1\")"+field.getType()+" "+field.getName()+"1"+",@Param(\""+field.getName()+"2\")"+field.getType()+" "+field.getName()+"2";%>
 	   * @param <% out.println(field.getName()+"1   "+field.getDescript()+" （大于或等于开始时间）");out.print("           * @param "+field.getName()+"2   "+field.getDescript()+" （小于或等于结束时间）");
@@ -95,7 +95,7 @@ public interface <%=entityName%>Mapper extends MyBatisMapper {
 	 * 列表的记录总数统计
        <%=appendAreaDealcomment%>
 <%conParamsStr="";
-for(FieldItem field:mainFields){ if(field.getName().equals(map.getPrimaryKeyItem().getName())) continue;
+for(FieldItem field:mainFields){ if(field.getName().equals(map.getPrimaryKeyItem()!=null?map.getPrimaryKeyItem().getName():null)) continue;
     if(field.getType().toLowerCase().indexOf("date")>=0||field.getType().toLowerCase().indexOf("time")>=0){
   	 conParamsStr+=",@Param(\""+field.getName()+"1\")"+field.getType()+" "+field.getName()+"1"+",@Param(\""+field.getName()+"2\")"+field.getType()+" "+field.getName()+"2";%>
  	 * @param <% out.println(field.getName()+"1   "+field.getDescript()+"  （大于或等于开始时间）");out.print("         * @param "+field.getName()+"2   "+field.getDescript()+" （小于或等于结束时间）");
@@ -127,6 +127,7 @@ for(FieldItem field:mainFields){ if(field.getName().equals(map.getPrimaryKeyItem
 	public int insert<%=entityName%>(<%=isAppendAreaDeal%> @Param("<%=StringHelper.fistChartLowerCase(entityName)%>")<%=entityName%>Entry <%=StringHelper.fistChartLowerCase(entityName)%>);
 	
 	
+	<% if(map.getPrimaryKeyItem()!=null){//有主键才可以有此方法 %>
 	/**
 	 * 更新记录 
 	 <%=appendAreaDealcomment%>
@@ -134,8 +135,9 @@ for(FieldItem field:mainFields){ if(field.getName().equals(map.getPrimaryKeyItem
 	 * @return
 	 */
 	public int update<%=entityName%>(<%=isAppendAreaDeal%> @Param("<%=StringHelper.fistChartLowerCase(entityName)%>") <%=entityName%>Entry <%=StringHelper.fistChartLowerCase(entityName)%>);
+    <%}%>
 	
-	
+	<% if(map.getPrimaryKeyItem()!=null){//有主键才可以有此方法 %>
 	/**
 	 * 删除记录
 	 <%=appendAreaDealcomment%>
@@ -143,7 +145,7 @@ for(FieldItem field:mainFields){ if(field.getName().equals(map.getPrimaryKeyItem
 	 * @return
 	 */
 	public int delete<%=entityName%>(<%=isAppendAreaDeal%> @Param("<%=map.getPrimaryKeyItem().getName()%>s") String[] <%=map.getPrimaryKeyItem().getName()%>s);
-	
+	<%}%>
 	
 	
 	//自定义方法

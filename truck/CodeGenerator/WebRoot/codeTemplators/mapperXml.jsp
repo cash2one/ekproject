@@ -4,7 +4,6 @@
 <%
     String path = request.getContextPath();
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-	System.out.println(" xml "+request.getParameter("cfg"));
 	String cfgPath = BaseCfg.CFG_PATH+"/templates/"+request.getParameter("cfg");
 	BusinessMap map = new BusinessMap(cfgPath);
 	String entityName=map.getClazz();
@@ -28,11 +27,13 @@
     FieldItem primaryKey = map.getPrimaryKeyItem();
     
     String allFieldStr =""; 
+    String keyCloumnValue = map.getPrimaryKeyItem()!=null?"#{"+entityName+"."+map.getPrimaryKeyItem().getName()+"}":"";
+    
 	Map<String,String[]> mainFieldSet = new HashMap<String,String[]>();
 	for(FieldItem item:mainFields){
 		
 		//表别名信息、表字段、实体属性名
-		if(item.getName()!=map.getPrimaryKeyItem().getName()) 
+		if(map.getPrimaryKeyItem()==null||item.getName()!=map.getPrimaryKeyItem().getName()) 
 		    mainFieldSet.put(item.getName(),new String[]{StringHelper.toLowerCase(item.getTableAlias()),StringHelper.toLowerCase(item.getSourceField()),StringHelper.fistChartLowerCase(item.getName()),item.getType()});
 		 
 		allFieldStr+=","+(StringHelper.toLowerCase(item.getTableAlias())+"."+StringHelper.toLowerCase(item.getSourceField())+" as "+StringHelper.fistChartLowerCase(item.getName()));
@@ -108,14 +109,16 @@
 			  <% out.print(SqlXmlCreator.wrapperMainQuerySql(map.getTable(),map.getTableAlias(),map.getTopJoinTable())); %>
 			  <include refid="queryOptions"/>
   </sql>
+
   
- 
+   <% if(map.getPrimaryKeyItem()!=null){//有主键才可以有此方法 %>
    <!-- 根据ID查询记录 -->
    <select id="findOne" resultType="<%=entryName%>">
 	     SELECT  <include refid="<%=moduleName%>Columns"/>              
 		    FROM <include refid="querySqlMain"/>
 			where <%=primaryKey.getTableAlias()%>.<%=primaryKey.getName()%>=<%="#{"+primaryKey.getName()+"}"%>
    </select>
+   <%}//END IF%>
 
 
    <!-- 返回记录总数的语句 -->
@@ -138,15 +141,20 @@
 
    <!-- 新增记录 -->
    <insert id="insert<%=moduleName%>" useGeneratedKeys="false" >
+       <% if(map.getPrimaryKeyItem()!=null&&map.getSequence()!=null&&!"".equals(map.getSequence())){//已设置序列到主键上 %>
        <selectKey resultType="long" order="AFTER" keyProperty="<%=entityName%>.<%=primaryKey.getName()%>">
 	       SELECT <%=map.getSequence()%>.currval FROM  DUAL
 	   </selectKey>
              INSERT INTO <%=map.getTable()%> (<%=insertFieldStr.substring(1)%>)
-             VALUES(<%=valuesStr.substring(1)%>) 
+             VALUES(<%=valuesStr.substring(1)%>)
+       <%}else{//没设置序列%>   
+             INSERT INTO <%=map.getTable()%> (<%=map.getPrimaryKeyItem()!=null?(map.getPrimaryKeyItem().getName()+","+insertFieldStr.substring(1)):insertFieldStr.substring(1)%>)
+             VALUES(<%=map.getPrimaryKeyItem()!=null?(keyCloumnValue+","+valuesStr.substring(1)):valuesStr.substring(1)%>)
+       <%}//END ELSE%>     
    </insert>
    
    
-   
+   <% if(map.getPrimaryKeyItem()!=null){//有主键才可以有此方法 %>
    <!-- 更新记录 -->       
    <update id="update<%=moduleName%>" >
            UPDATE <%=map.getTable()%> 
@@ -155,9 +163,9 @@
 	   </set>
 	       WHERE <%=primaryKey.getName()%> = <%="#{"+entityName%>.<%=primaryKey.getName()+"}"%>
    </update> 
- 
+   <%}//END IF%>
 
-
+   <% if(map.getPrimaryKeyItem()!=null){//有主键才可以有此方法 %>
    <!-- 删除记录 -->
    <delete id="delete<%=moduleName%>">
           DELETE FROM <%=map.getTable()%>
@@ -166,7 +174,7 @@
                 <%="#{"+primaryKey.getName()+"}"%>
           </foreach>
    </delete>
-   
+  <%}//END IF%>
    
    <!-- 以下是自定义的配置信息 -->
    
