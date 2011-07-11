@@ -270,7 +270,10 @@ public class <%=map.getName()%> extends BaseBusiness {
 	       }else{
 	          out.print("* @param   "+field.getName()+"   "+field.getDescript());
 	          tempStr+=","+field.getName();
-	          conParamsStr+=",@SearchParameter(name =\""+field.getName()+"\")"+field.getType()+" "+field.getName();}
+	          if("long".equals(field.getType().toLowerCase())||"int".equals(field.getType().toLowerCase()))
+	        	conParamsStr+=",@SearchParameter(name =\""+field.getName()+"\" defaultValue=\"-1\" )"+field.getType()+" "+field.getName();
+	        	  else
+	            conParamsStr+=",@SearchParameter(name =\""+field.getName()+"\")"+field.getType()+" "+field.getName();}
 	 
    }//end for
    for(FieldItem field:subFields){ funcParamsStr+=",entry.get"+StringHelper.fistChartUpperCase(field.getName())+"()";%>
@@ -282,7 +285,10 @@ public class <%=map.getName()%> extends BaseBusiness {
 		      conParamsStr+=",@SearchParameter(name =\""+field.getName()+"1\")"+field.getType()+" "+field.getName()+"1,@SearchParameter(name =\""+field.getName()+"2\")"+field.getType()+" "+field.getName()+"2";
 	      }else{ 
 	          out.print("* @param   "+field.getName()+"   "+field.getDescript());
-	          conParamsStr+=",@SearchParameter(name =\""+field.getName()+"\")"+field.getType()+" "+field.getName();
+	          if("long".equals(field.getType().toLowerCase())||"int".equals(field.getType().toLowerCase()))
+		          conParamsStr+=",@SearchParameter(name =\""+field.getName()+"\" defaultValue=\"-1\" )"+field.getType()+" "+field.getName();
+		      else
+	              conParamsStr+=",@SearchParameter(name =\""+field.getName()+"\")"+field.getType()+" "+field.getName();
 	          tempStr+=","+field.getName();}
 	     }//end for
          funcParamsStr=funcParamsStr.substring(1);

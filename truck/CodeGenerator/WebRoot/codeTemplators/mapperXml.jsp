@@ -193,7 +193,7 @@
 		if("string".equals(dataType.toLowerCase()))
 			return "<if test=\""+name+"!=null\"> AND "+tableAlias+"."+sourceField+" like #{"+name+"}</if>";
 		else if("long".equals(dataType.toLowerCase())||"int".equals(dataType.toLowerCase()))
-			return "<if test=\""+name+">0\"> AND "+tableAlias+"."+sourceField+" = #{"+name+"}</if>";
+			return "<if test=\""+name+">=0\"> AND "+tableAlias+"."+sourceField+" = #{"+name+"}</if>";
 		else if(dataType.toLowerCase().indexOf("date")>=0||dataType.toLowerCase().indexOf("time")>=0) //时间条件的处理
 			return "<if test=\""+name+"1!=null\"> AND "+tableAlias+"."+sourceField+" &gt; #{"+name+"1}</if><if test=\""+name+"2!=null\"> AND "+tableAlias+"."+sourceField+" &lt; #{"+name+"2}</if>";
 		return "";		
