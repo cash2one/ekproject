@@ -13,7 +13,7 @@
 			<h1>
 				配置文件上传
 			</h1>
-			<form name="/upload" method="POST" action="<%=!BaseCfg.APP_CONTEXT.equals("")?"/"+BaseCfg.APP_CONTEXT:""%>/upload"
+			<form name="/pageUpload" method="POST" action="<%=!BaseCfg.APP_CONTEXT.equals("")?"/"+BaseCfg.APP_CONTEXT:""%>/pageUpload"
 				ENCTYPE="multipart/form-data">
 				<table border="1" width="450" cellpadding="4" cellspacing="2"
 					bordercolor="#9BD7FF">

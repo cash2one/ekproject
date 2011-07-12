@@ -43,7 +43,7 @@
 			      if(cfgFiles!=null)
 			      for(File fileName:cfgFiles){ if(fileName.getName().indexOf(".xml")<0) continue;%>
 			      <tr>
-			         <td><font color="blue"><%out.print(fileName.getName());%></font><td>
+			         <td><a href="<%=(!BaseCfg.APP_CONTEXT.equals("")?"/"+BaseCfg.APP_CONTEXT:"")+"/templates/"+fileName.getName()+"\""%>"><%=fileName.getName() %></a><td>
 			         <td><a href="<%=!BaseCfg.APP_CONTEXT.equals("")?"/"+BaseCfg.APP_CONTEXT:""%>/codeTemplators/entity.jsp?cfg=<%out.print(fileName.getName());%>">View Entity</a></td>
 			         <td><a href="<%=!BaseCfg.APP_CONTEXT.equals("")?"/"+BaseCfg.APP_CONTEXT:""%>/codeTemplators/mapper.jsp?cfg=<%out.print(fileName.getName());%>">View Mapper</a></td>
 			         <td><a href="<%=!BaseCfg.APP_CONTEXT.equals("")?"/"+BaseCfg.APP_CONTEXT:""%>/codeTemplators/mapperXml.jsp?cfg=<%out.print(fileName.getName());%>">View Mapper_XML</a></td>
@@ -53,9 +53,7 @@
 			</tbody>
 			<tfoot>
 				<tr>
-					<td colspan="2"><A href="<%=!BaseCfg.APP_CONTEXT.equals("")?"/"+BaseCfg.APP_CONTEXT:""%>/upload.jsp">上传配置文件</A></td>
-				   <td colspan="2"><A href="<%=!BaseCfg.APP_CONTEXT.equals("")?"/"+BaseCfg.APP_CONTEXT:""%>/CodeTool">文件</A></td>
-				    <td colspan="2"><A href="<%=!BaseCfg.APP_CONTEXT.equals("")?"/"+BaseCfg.APP_CONTEXT:""%>/instantclient">222</A></td>
+					<!-- td colspan="2"><A href="<%=!BaseCfg.APP_CONTEXT.equals("")?"/"+BaseCfg.APP_CONTEXT:""%>/upload.jsp">上传配置文件</A></td -->
 				</tr>
 				<tfoot>
 		</table>
