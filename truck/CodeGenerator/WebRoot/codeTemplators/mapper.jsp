@@ -56,7 +56,7 @@ public interface <%=entityName%>Mapper extends MyBatisMapper {
 	 * @param <%=map.getPrimaryKeyItem().getName()%>  记录对应的主键
 	 * @return <%=entityName%>Entry
 	 */
-	public <%=entityName%>Entry findOne(<%=areaAbbParamStr%>,@Param("<%=map.getPrimaryKeyItem().getName()%>")<%=map.getPrimaryKeyItem().getType()%> <%=map.getPrimaryKeyItem().getName()%>);
+	public <%=entityName%>Entry findOne(<%=areaAbbParamStr%>,@Param("<%=map.getPrimaryKeyItem().getName()%>")long <%=map.getPrimaryKeyItem().getName()%>);
 	<% } %>
 	
 	 /**
@@ -144,7 +144,7 @@ for(FieldItem field:mainFields){ if(field.getName().equals(map.getPrimaryKeyItem
 	 * @param <%=map.getPrimaryKeyItem().getName()%>s  记录对应的主键
 	 * @return
 	 */
-	public int delete<%=entityName%>(<%=isAppendAreaDeal%> @Param("<%=map.getPrimaryKeyItem().getName()%>s") String[] <%=map.getPrimaryKeyItem().getName()%>s);
+	public int delete<%=entityName%>(<%=isAppendAreaDeal%> @Param("<%=map.getPrimaryKeyItem().getName()%>s") long[] <%=map.getPrimaryKeyItem().getName()%>s);
 	<%}%>
 	
 	

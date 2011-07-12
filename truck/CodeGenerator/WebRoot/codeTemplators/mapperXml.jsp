@@ -122,7 +122,8 @@
 
    <!-- 返回记录总数的语句 -->
    <select id="qeury<%=moduleName%>sRecordCount" resultType="int">
-        SELECT count(*) num  FROM  <include refid="querySqlMain"/> 
+        SELECT count(*) num  FROM  <include refid="querySqlMain"/>
+        <include refid="queryOptions"/> 
    </select>
    
    
@@ -164,6 +165,7 @@
 	       WHERE <%=primaryKey.getName()%> = <%="#{"+entityName%>.<%=primaryKey.getName()+"}"%>
    </update> 
    <%}//END IF%>
+
 
    <% if(map.getPrimaryKeyItem()!=null){//有主键才可以有此方法 %>
    <!-- 删除记录 -->

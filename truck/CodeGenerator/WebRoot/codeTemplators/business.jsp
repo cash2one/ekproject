@@ -28,6 +28,8 @@
 	List<FieldItem> mainFields = map.getMainFields();
     List<FieldItem> subFields = map.getJoinFields();
     
+    String mapperImport=mapperObjName+" "+StringHelper.fistChartLowerCase(mapperObjName)+"= SpringUtil.getSpringBean("+mapperObjName+".class,\""+StringHelper.fistChartLowerCase(mapperObjName)+"\");";
+    
     String tempStr="";
 %>
 package <%=businessPackageName%>;
@@ -41,6 +43,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import <%=basePackageName+map.getBusinessNamespace()%>.SpringUtil;
+import <%=basePackageName+map.getBusinessNamespace()%>.exceptions.BusinessException;
 import <%=basePackageName+map.getBusinessNamespace()%>.annotation.SeacherFun;
 import <%=basePackageName+map.getBusinessNamespace()%>.annotation.SearchParameter;
 import <%=basePackageName+map.getBusinessNamespace()%>.base.BaseBusiness;
@@ -64,12 +68,6 @@ public class <%=map.getName()%> extends BaseBusiness {
 	  //*****************************************************************************************************************
 	  private <%=entryObjName%> <%=StringHelper.fistChartLowerCase(entryObjName)%>;
           
-	
-     //Spring自动注入相应的数据访问层对象
-	 //*****************************************************************************************************************
-	  
-	  @Autowired
-	  private <%=mapperObjName%> <%=StringHelper.fistChartLowerCase(mapperObjName)%>;
 	 
 	 //构造函数
 	 //*****************************************************************************************************************
@@ -170,12 +168,12 @@ public class <%=map.getName()%> extends BaseBusiness {
 	 * 新增
 	 */
 	@Override
-	protected void onAdd() {
+	protected void onAdd() throws BusinessException {
 		// TODO Auto-generated method stub
 	       <%=entryObjName%> <%=StringHelper.fistChartLowerCase(entryObjName)%> = new <%=entryObjName%>();
 		   <%for(FieldItem field:mainFields){ tempStr=StringHelper.fistChartUpperCase(field.getName());%> 
 	       <%out.print(StringHelper.fistChartLowerCase(entryObjName)+".set"+tempStr+"(this.get"+tempStr+"());");}%>
-	    
+	       <%=mapperImport%>
 	       <%=StringHelper.fistChartLowerCase(mapperObjName)%>.insert<%=map.getClazz()%>(<%=map.isAreaDeal()?"this.getDaoAbb(),":""%><%=StringHelper.fistChartLowerCase(entryObjName)%>);
 	       <%=StringHelper.fistChartLowerCase(entryObjName)%> = null;
 	}
@@ -185,10 +183,10 @@ public class <%=map.getName()%> extends BaseBusiness {
     /**
      * 根据主键（<%=map.getPrimaryKeyItem().getName()%>）返回单条记录
      * @param <%=map.getPrimaryKeyItem().getName()%>
-     * @return 
+     * @return  <%=map.getName()%>
      */
-	@Transactional
-	public void findOne(<%=map.getPrimaryKeyItem().getType()+" "+map.getPrimaryKeyItem().getName()%>){
+	public <%=map.getName()%> findOne(<%="long  "+map.getPrimaryKeyItem().getName()%>)  throws BusinessException {
+	    <%=mapperImport%>
 		<%=entryObjName%> entry = <%=StringHelper.fistChartLowerCase(mapperObjName)%>.findOne(this.getDaoAbb(),<%=map.getPrimaryKeyItem().getName()%>);
 		if (entry != null){<% //赋值
 	     for(FieldItem field:mainFields){%>
@@ -197,7 +195,8 @@ public class <%=map.getName()%> extends BaseBusiness {
          for(FieldItem field:subFields){%>
                    this.set<%out.print(StringHelper.fistChartUpperCase(field.getName())+"(entry.get"+StringHelper.fistChartUpperCase(field.getName())+"());");}%>
 		}
-		entry = null;  
+		entry = null;
+		return this;  
 	}
 	 <%}//END IF%>
 	
@@ -207,12 +206,12 @@ public class <%=map.getName()%> extends BaseBusiness {
 	 * 修改
 	 */
 	@Override
-	protected void onModify() {
+	protected void onModify() throws BusinessException {
 		// TODO Auto-generated method stub
 		<%=entryObjName%> <%=StringHelper.fistChartLowerCase(entryObjName)%> = new <%=entryObjName%>();
 	    <%for(FieldItem field:mainFields){ tempStr=StringHelper.fistChartUpperCase(field.getName());%> 
 	        <%out.print(StringHelper.fistChartLowerCase(entryObjName)+".set"+tempStr+"(this.get"+tempStr+"());");}%>
-	        
+	    <%=mapperImport%>
 		<%=StringHelper.fistChartLowerCase(mapperObjName)%>.update<%=map.getClazz()%>(<%=map.isAreaDeal()?"this.getDaoAbb(),":""%><%=StringHelper.fistChartLowerCase(entryObjName)%>);
 	    <%=StringHelper.fistChartLowerCase(entryObjName)%> = null;
 	}
@@ -222,8 +221,9 @@ public class <%=map.getName()%> extends BaseBusiness {
 	 * 删除
 	 */
 	@Override
-	protected void onDelete(String ids[]) {
+	protected void onDelete(long ids[]) throws BusinessException {
 		// TODO Auto-generated method stub
+		<%=mapperImport%>
 		<%=StringHelper.fistChartLowerCase(mapperObjName)%>.delete<%=map.getClazz()%>(<%=map.isAreaDeal()?"this.getDaoAbb(),":""%>ids);
 	}
 
@@ -271,13 +271,13 @@ public class <%=map.getName()%> extends BaseBusiness {
 	   * @return List<<%=map.getName()%>>
 	   */
 	@SeacherFun(nameAlias="<%=map.getName()%>Seacher")
-	@Transactional
 	public List<<%=map.getName()%>> qeury<%=entityName%>s(@SearchParameter(defaultValue = "1",name = "startRow")int startRow, @SearchParameter(defaultValue = "20",name = "pageSize")int pageSize,
 				<%=conParamsStr%>,
-				@SearchParameter(name="orderList")List<OrderItem>orderList){
+				@SearchParameter(name="orderList")List<OrderItem>orderList) throws BusinessException{
 		   //实例化List对象		
 		   List<<%=map.getName()%>> list = new ArrayList<<%=map.getName()%>>();
 		   //查询结果实体
+		   <%=mapperImport%>
 		   List<<%=entryObjName%>> entryList = <%=StringHelper.fistChartLowerCase(mapperObjName)%>.qeury<%=map.getClazz()%>s(startRow,pageSize,this.getDaoAbb(),<%=tempStr%>,orderList);
 	       if (entryList != null){
 			  for (<%=entryObjName%> entry : entryList) {
