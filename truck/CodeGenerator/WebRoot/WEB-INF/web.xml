@@ -5,12 +5,12 @@
 	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
 	<servlet>
-		<servlet-name>uploadee</servlet-name>
+		<servlet-name>uploadPage</servlet-name>
 		<servlet-class>web.FileUploadServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>uploadee</servlet-name>
-		<url-pattern>/uploadee</url-pattern>
+		<servlet-name>uploadPage</servlet-name>
+		<url-pattern>/pageUpload</url-pattern>
 	</servlet-mapping>
 	
 	<servlet>
