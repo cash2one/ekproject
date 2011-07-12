@@ -43,6 +43,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import org.apache.log4j.Logger;
 import <%=basePackageName+map.getBusinessNamespace()%>.SpringUtil;
 import <%=basePackageName+map.getBusinessNamespace()%>.exceptions.BusinessException;
 import <%=basePackageName+map.getBusinessNamespace()%>.annotation.SeacherFun;
@@ -63,6 +64,9 @@ import <%=mapperPackageName+"."+map.getClazz()%>Mapper;
  */
 @Service("<%=StringHelper.fistChartLowerCase(map.getName())%>")
 public class <%=map.getName()%> extends BaseBusiness {
+    
+      //日志服务对象
+      static Logger logger = Logger.getLogger(<%=map.getName()%>.class);
     
       //实体属性
 	  //*****************************************************************************************************************
@@ -94,7 +98,7 @@ public class <%=map.getName()%> extends BaseBusiness {
         /**
          * @param <%=field.getName()+" "+field.getDescript()%>
          */
-         public void set<%=StringHelper.fistChartUpperCase(field.getName())+"("+field.getType()+" "+field.getName()+"){"%>
+         <%=field.getIsReadonly()?"private":"public" %> void set<%=StringHelper.fistChartUpperCase(field.getName())+"("+field.getType()+" "+field.getName()+"){"%>
 	        this.<%=StringHelper.fistChartLowerCase(entryObjName)%>.set<%=StringHelper.fistChartUpperCase(field.getName())+"("+field.getName()+");" %>     
          }
         /**

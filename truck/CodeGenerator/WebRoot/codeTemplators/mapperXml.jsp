@@ -32,17 +32,17 @@
 	Map<String,String[]> mainFieldSet = new HashMap<String,String[]>();
 	for(FieldItem item:mainFields){
 		
-		//表别名信息、表字段、实体属性名
+		//表别名信息、表字段、实体属性名、数据类型、是否只读
 		if(map.getPrimaryKeyItem()==null||item.getName()!=map.getPrimaryKeyItem().getName()) 
-		    mainFieldSet.put(item.getName(),new String[]{StringHelper.toLowerCase(item.getTableAlias()),StringHelper.toLowerCase(item.getSourceField()),StringHelper.fistChartLowerCase(item.getName()),item.getType()});
+		    mainFieldSet.put(item.getName(),new String[]{StringHelper.toLowerCase(item.getTableAlias()),StringHelper.toLowerCase(item.getSourceField()),StringHelper.fistChartLowerCase(item.getName()),item.getType(),item.getIsReadonly()?"true":"false"});
 		 
 		allFieldStr+=","+(StringHelper.toLowerCase(item.getTableAlias())+"."+StringHelper.toLowerCase(item.getSourceField())+" as "+StringHelper.fistChartLowerCase(item.getName()));
 	}
 	
 	Map<String,String[]> subFieldSet = new HashMap<String,String[]>();
 	for(FieldItem item:subFields){
-		//表别名信息、表字段、实体属性名
-		subFieldSet.put(item.getName(),new String[]{StringHelper.toLowerCase(item.getTableAlias()),StringHelper.toLowerCase(item.getSourceField()),StringHelper.fistChartLowerCase(item.getName()),item.getType()});
+		//表别名信息、表字段、实体属性名、数据类型、是否只读
+		subFieldSet.put(item.getName(),new String[]{StringHelper.toLowerCase(item.getTableAlias()),StringHelper.toLowerCase(item.getSourceField()),StringHelper.fistChartLowerCase(item.getName()),item.getType(),item.getIsReadonly()?"true":"false"});
 		allFieldStr+=","+(StringHelper.toLowerCase(item.getTableAlias())+"."+StringHelper.toLowerCase(item.getSourceField())+" as "+StringHelper.fistChartLowerCase(item.getName()));
 	}
 	allFieldStr=allFieldStr.substring(1);
@@ -160,7 +160,7 @@
    <update id="update<%=moduleName%>" >
            UPDATE <%=map.getTable()%> 
            <set><% for(String[] infos:mainFieldSet.values()){%>
-                <%  out.print(infos[1]+"=#{"+entityName+"."+infos[2]+"},");   }%>
+                <%  if("false".equals(infos[4])) out.print(infos[1]+"=#{"+entityName+"."+infos[2]+"},");   }%>
 	   </set>
 	       WHERE <%=primaryKey.getName()%> = <%="#{"+entityName%>.<%=primaryKey.getName()+"}"%>
    </update> 
