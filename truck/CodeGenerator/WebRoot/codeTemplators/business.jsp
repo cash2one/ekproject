@@ -135,7 +135,7 @@ public class <%=map.getName()%> extends BaseBusiness {
 	@Override
 	public String getBusinessName(){
 	   // TODO Auto-generated method stub
-		return "";
+		 
 	}
 
 
@@ -145,7 +145,7 @@ public class <%=map.getName()%> extends BaseBusiness {
 	@Override
 	public String getFunctionFlag() {
 		// TODO Auto-generated method stub
-		return "";
+		 
 	}
 
 	/**
@@ -154,7 +154,7 @@ public class <%=map.getName()%> extends BaseBusiness {
 	@Override
 	public String getModel() {
 		// TODO Auto-generated method stub
-		return "";
+		 
 	}
 
 	@Override
