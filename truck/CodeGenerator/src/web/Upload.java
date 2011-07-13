@@ -7,9 +7,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletInputStream;
@@ -40,11 +42,17 @@ public class Upload extends HttpServlet {
 		BufferedReader br = new BufferedReader(new InputStreamReader(
 				(ServletInputStream) request.getInputStream(),"utf-8"));
 		String line = null;
-		String fileName = System.currentTimeMillis()+".xml";
 		
+		String fileName =request.getHeader("FileName");
 		String dirPath=BaseCfg.CFG_PATH+"/templates/";
 		File file = new File(dirPath+fileName);
-		file.createNewFile();
+		if(file.exists()){
+		   String dateStr = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
+		   fileName =  fileName.substring(0,fileName.lastIndexOf(".xml"))+dateStr+new Random().nextInt(999)+".xml";
+		   file =  new File(dirPath+fileName);
+		   file.createNewFile();
+		}else
+		   file.createNewFile();
 		
 		OutputStreamWriter p =new OutputStreamWriter(new FileOutputStream(file),"utf-8");
 		StringBuilder cfgContent = new StringBuilder();
