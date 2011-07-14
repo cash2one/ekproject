@@ -1,0 +1,46 @@
+/**
+	 * 事务控制代码
+	 * @throws Exception
+	 */
+	public void onAddByManualTransactionalProc() throws Exception {
+		// TODO Auto-generated method stub
+	    DefaultTransactionDefinition def = new DefaultTransactionDefinition();
+	    def.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
+	    DataSourceTransactionManager txManager = (DataSourceTransactionManager) SpringUtil.getSpringBean("transactionManager");
+	    TransactionStatus status = txManager.getTransaction(def);
+	    try{
+	    	 
+	    	 TsXjStudentEntry tsXjStudentEntry = new TsXjStudentEntry();
+		     tsXjStudentEntry.setId(this.getId()); 
+		     tsXjStudentEntry.setStuSequence(this.getStuSequence()); 
+		     tsXjStudentEntry.setStuNo(this.getStuNo()); 
+		     tsXjStudentEntry.setName(this.getName()); 
+		     tsXjStudentEntry.setSex(this.getSex());
+		     
+	    	 TsXjStudentMapper tsXjStudentMapper = (TsXjStudentMapper) SpringUtil.getSpringBean("tsXjStudentMapper");
+	    	 tsXjStudentMapper.deleteTsXjStudent(this.getDaoAbb(), new String[]{"622210"});
+	    	 System.out.println("删除成功");
+	    	 
+	    	 tsXjStudentMapper.insertTsXjStudent(this.getDaoAbb(),tsXjStudentEntry);
+	    	 System.out.println("新增成功"+tsXjStudentEntry.getId());
+	    	 
+	    	 tsXjStudentMapper = null;
+	    	 
+	    	 CsXjStudentInfo csXjStudentInfo =  (CsXjStudentInfo) SpringUtil.getSpringBean("csXjStudentInfo");
+	    	 csXjStudentInfo.setDaoAbb("cs");
+	    	 csXjStudentInfo.setName("csXjStudentInfoName");
+	    	 csXjStudentInfo.setSex(1);
+	    	 csXjStudentInfo.setStuNo(this.getStuNo());
+	    	 csXjStudentInfo.setStuSequence("csXjStudentInfoSeq");
+	    	 csXjStudentInfo.add();
+	    	 System.out.println("csXjStudentInfo新增成功");
+	    	 csXjStudentInfo = null;
+	    }catch(Exception ex){
+	    	txManager.rollback(status);
+	    	throw ex;
+	    } 
+	    txManager.commit(status);
+	    txManager = null;
+	    def = null;
+	    
+	}
