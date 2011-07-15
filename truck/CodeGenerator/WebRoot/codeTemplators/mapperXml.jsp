@@ -50,6 +50,8 @@
 	
 	List<JoinItem> joins = map.getJoinTable();
 	
+	System.out.println(SqlXmlCreator.columnTran(entityName+".","string"));
+	String temp="";
 %>
 
 
@@ -75,7 +77,8 @@
             	  items = mainFieldSet.get(key);%>
             	  <%out.print(SqlXmlCreator.appendWhereOptions(key,items[0],items[1],items[3]));  
             	    insertFieldStr+=","+items[1];
- 	        	      valuesStr+=",#{"+entityName+"."+items[2]+"}";
+ 	        	     // valuesStr+=",#{"+entityName+"."+items[2]+"}";
+            	    valuesStr+=",#{"+SqlXmlCreator.columnTran(entityName+"."+items[2],items[3])+"}";
                }
                for(String key:subFieldSet.keySet()){
              	  items = subFieldSet.get(key);%>         
@@ -160,7 +163,7 @@
    <update id="update<%=moduleName%>" >
            UPDATE <%=map.getTable()%> 
            <set><% for(String[] infos:mainFieldSet.values()){%>
-                <%  if("false".equals(infos[4])) out.print(infos[1]+"=#{"+entityName+"."+infos[2]+"},");   }%>
+                <%  if("false".equals(infos[4])){ out.print(infos[1]+"=#{"+ SqlXmlCreator.columnTran(entityName+"."+infos[2],infos[3])+"},");  }}%>
 	   </set>
 	       WHERE <%=primaryKey.getName()%> = <%="#{"+entityName%>.<%=primaryKey.getName()+"}"%>
    </update> 
@@ -224,6 +227,18 @@
 		    sql+= wrapperLeftJoinSql(join.getAlias(),join.getJoinItems());
 		}
 		return sql.toString();
+	}
+	
+	public static String columnTran(String columnName,String javaTypeName){
+        String cfg ="";
+        if(javaTypeName.toLowerCase().equals("string"))
+        	return columnName+",jdbcType=VARCHAR";
+        else if(javaTypeName.toLowerCase().equals("date"))
+        	return columnName+",jdbcType=DATE";
+        else if(javaTypeName.toLowerCase().equals("long")||javaTypeName.toLowerCase().equals("int"))
+            return columnName+",jdbcType=NUMERIC";
+        else 
+        	return columnName;
 	}
 	
 	

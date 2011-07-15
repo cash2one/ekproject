@@ -174,12 +174,14 @@ public class <%=map.getName()%> extends BaseBusiness {
 	@Override
 	protected void onAdd() throws BusinessException {
 		// TODO Auto-generated method stub
+	       <%if(false){ %>
 	       <%=entryObjName%> <%=StringHelper.fistChartLowerCase(entryObjName)%> = new <%=entryObjName%>();
 		   <%for(FieldItem field:mainFields){ tempStr=StringHelper.fistChartUpperCase(field.getName());%> 
 	       <%out.print(StringHelper.fistChartLowerCase(entryObjName)+".set"+tempStr+"(this.get"+tempStr+"());");}%>
+	       <%}%>
 	       <%=mapperImport%>
-	       <%=StringHelper.fistChartLowerCase(mapperObjName)%>.insert<%=map.getClazz()%>(<%=map.isAreaDeal()?"this.getDaoAbb(),":""%><%=StringHelper.fistChartLowerCase(entryObjName)%>);
-	       <%=StringHelper.fistChartLowerCase(entryObjName)%> = null;
+	       <%=StringHelper.fistChartLowerCase(mapperObjName)%>.insert<%=map.getClazz()%>(<%=map.isAreaDeal()?"this.getDaoAbb(),":""%><%="this."+StringHelper.fistChartLowerCase(entryObjName)%>);
+	       <%=(true)?"":StringHelper.fistChartLowerCase(entryObjName)+"= null;"%> 
 	}
 
 	
@@ -212,12 +214,14 @@ public class <%=map.getName()%> extends BaseBusiness {
 	@Override
 	protected void onModify() throws BusinessException {
 		// TODO Auto-generated method stub
+		<%if(false){ %>
 		<%=entryObjName%> <%=StringHelper.fistChartLowerCase(entryObjName)%> = new <%=entryObjName%>();
 	    <%for(FieldItem field:mainFields){ tempStr=StringHelper.fistChartUpperCase(field.getName());%> 
 	        <%out.print(StringHelper.fistChartLowerCase(entryObjName)+".set"+tempStr+"(this.get"+tempStr+"());");}%>
+	    <%}%>
 	    <%=mapperImport%>
-		<%=StringHelper.fistChartLowerCase(mapperObjName)%>.update<%=map.getClazz()%>(<%=map.isAreaDeal()?"this.getDaoAbb(),":""%><%=StringHelper.fistChartLowerCase(entryObjName)%>);
-	    <%=StringHelper.fistChartLowerCase(entryObjName)%> = null;
+		<%=StringHelper.fistChartLowerCase(mapperObjName)%>.update<%=map.getClazz()%>(<%=map.isAreaDeal()?"this.getDaoAbb(),":""%><%="this."+StringHelper.fistChartLowerCase(entryObjName)%>);
+	    <%=(true)?"":StringHelper.fistChartLowerCase(entryObjName)+"= null;"%> 
 	}
 
 	
