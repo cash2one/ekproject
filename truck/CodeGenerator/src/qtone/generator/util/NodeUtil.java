@@ -126,6 +126,7 @@ public class NodeUtil{
         		 field.setSourceField(node.attributeValue("sourceField"));
         		 field.setSourceType(node.attributeValue("sourceType"));
         		 field.setType(toJavaDataType(node.attributeValue("type")));
+        		 field.setAllowedNull((node.attributeValue("allowedNull")!=null&&"false".equals(node.attributeValue("allowedNull").toLowerCase()))?"false":"true");
         		 items.add(field);
         	 }
          }

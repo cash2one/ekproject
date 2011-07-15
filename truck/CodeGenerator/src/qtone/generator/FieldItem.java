@@ -16,6 +16,7 @@ public class FieldItem {
 	String sourceField = "ID";
 	String descript = "Ö÷¼üid";
 	String tableAlias = "";
+	String allowedNull = "false";
 	
 	public String getTableAlias() {
 		return tableAlias;
@@ -71,6 +72,14 @@ public class FieldItem {
 
 	public void setDescript(String descript) {
 		this.descript = descript;
+	}
+
+	public String getAllowedNull() {
+		return allowedNull;
+	}
+
+	public void setAllowedNull(String allowedNull) {
+		this.allowedNull = allowedNull;
 	}
 
 }
