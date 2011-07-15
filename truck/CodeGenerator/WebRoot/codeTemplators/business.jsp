@@ -158,7 +158,7 @@ public class <%=map.getName()%> extends BaseBusiness {
 	}
 
 	@Override
-	public void filterContent() throws Exception {
+	public void filterContent() throws BusinessException {
 		// TODO Auto-generated method stub
 	}
 	
