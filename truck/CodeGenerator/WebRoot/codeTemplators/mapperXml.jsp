@@ -32,17 +32,17 @@
 	Map<String,String[]> mainFieldSet = new HashMap<String,String[]>();
 	for(FieldItem item:mainFields){
 		
-		//表别名信息、表字段、实体属性名、数据类型、是否只读
+		//表别名信息、表字段、实体属性名、数据类型、是否只读,数据库是否可以为空
 		if(map.getPrimaryKeyItem()==null||item.getName()!=map.getPrimaryKeyItem().getName()) 
-		    mainFieldSet.put(item.getName(),new String[]{StringHelper.toLowerCase(item.getTableAlias()),StringHelper.toLowerCase(item.getSourceField()),StringHelper.fistChartLowerCase(item.getName()),item.getType(),item.getIsReadonly()?"true":"false"});
+		    mainFieldSet.put(item.getName(),new String[]{StringHelper.toLowerCase(item.getTableAlias()),StringHelper.toLowerCase(item.getSourceField()),StringHelper.fistChartLowerCase(item.getName()),item.getType(),item.getIsReadonly()?"true":"false",item.getAllowedNull()});
 		 
 		allFieldStr+=","+(StringHelper.toLowerCase(item.getTableAlias())+"."+StringHelper.toLowerCase(item.getSourceField())+" as "+StringHelper.fistChartLowerCase(item.getName()));
 	}
 	
 	Map<String,String[]> subFieldSet = new HashMap<String,String[]>();
 	for(FieldItem item:subFields){
-		//表别名信息、表字段、实体属性名、数据类型、是否只读
-		subFieldSet.put(item.getName(),new String[]{StringHelper.toLowerCase(item.getTableAlias()),StringHelper.toLowerCase(item.getSourceField()),StringHelper.fistChartLowerCase(item.getName()),item.getType(),item.getIsReadonly()?"true":"false"});
+		//表别名信息、表字段、实体属性名、数据类型、是否只读 
+		subFieldSet.put(item.getName(),new String[]{StringHelper.toLowerCase(item.getTableAlias()),StringHelper.toLowerCase(item.getSourceField()),StringHelper.fistChartLowerCase(item.getName()),item.getType(),item.getIsReadonly()?"true":"false",item.getAllowedNull()});
 		allFieldStr+=","+(StringHelper.toLowerCase(item.getTableAlias())+"."+StringHelper.toLowerCase(item.getSourceField())+" as "+StringHelper.fistChartLowerCase(item.getName()));
 	}
 	allFieldStr=allFieldStr.substring(1);
@@ -50,7 +50,7 @@
 	
 	List<JoinItem> joins = map.getJoinTable();
 	
-	System.out.println(SqlXmlCreator.columnTran(entityName+".","string"));
+ 
 	String temp="";
 %>
 
@@ -78,7 +78,7 @@
             	  <%out.print(SqlXmlCreator.appendWhereOptions(key,items[0],items[1],items[3]));  
             	    insertFieldStr+=","+items[1];
  	        	     // valuesStr+=",#{"+entityName+"."+items[2]+"}";
-            	    valuesStr+=",#{"+SqlXmlCreator.columnTran(entityName+"."+items[2],items[3])+"}";
+            	    valuesStr+=",#{"+SqlXmlCreator.columnTran(entityName+"."+items[2],items[3],items[5])+"}";
                }
                for(String key:subFieldSet.keySet()){
              	  items = subFieldSet.get(key);%>         
@@ -163,7 +163,7 @@
    <update id="update<%=moduleName%>" >
            UPDATE <%=map.getTable()%> 
            <set><% for(String[] infos:mainFieldSet.values()){%>
-                <%  if("false".equals(infos[4])){ out.print(infos[1]+"=#{"+ SqlXmlCreator.columnTran(entityName+"."+infos[2],infos[3])+"},");  }}%>
+                <%  if("false".equals(infos[4])){ out.print(infos[1]+"=#{"+ SqlXmlCreator.columnTran(entityName+"."+infos[2],infos[3],infos[5])+"},");  }}%>
 	   </set>
 	       WHERE <%=primaryKey.getName()%> = <%="#{"+entityName%>.<%=primaryKey.getName()+"}"%>
    </update> 
@@ -228,8 +228,12 @@
 		}
 		return sql.toString();
 	}
+
 	
-	public static String columnTran(String columnName,String javaTypeName){
+	//表字段 是否允许为空的设置
+	public static String columnTran(String columnName,String javaTypeName,String isAllowedNull){
+		if("false".equals(isAllowedNull))
+			return columnName; 
         String cfg ="";
         if(javaTypeName.toLowerCase().equals("string"))
         	return columnName+",jdbcType=VARCHAR";
