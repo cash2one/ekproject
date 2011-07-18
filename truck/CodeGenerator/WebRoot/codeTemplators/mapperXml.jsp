@@ -118,7 +118,7 @@
    <select id="findOne" resultType="<%=entryName%>">
 	     SELECT  <include refid="<%=moduleName%>Columns"/>              
 		    FROM <include refid="querySqlMain"/>
-			where <%=primaryKey.getTableAlias()%>.<%=primaryKey.getName()%>=<%="#{"+primaryKey.getName()+"}"%>
+			where <%=primaryKey.getTableAlias()%>.<%=primaryKey.getSourceField()%>=<%="#{"+primaryKey.getName()+"}"%>
    </select>
    <%}//END IF%>
 
@@ -165,7 +165,7 @@
            <set><% for(String[] infos:mainFieldSet.values()){%>
                 <%  if("false".equals(infos[4])){ out.print(infos[1]+"=#{"+ SqlXmlCreator.columnTran(entityName+"."+infos[2],infos[3],infos[5])+"},");  }}%>
 	   </set>
-	       WHERE <%=primaryKey.getName()%> = <%="#{"+entityName%>.<%=primaryKey.getName()+"}"%>
+	       WHERE <%=primaryKey.getSourceField()%> = <%="#{"+entityName%>.<%=primaryKey.getName()+"}"%>
    </update> 
    <%}//END IF%>
 
@@ -174,7 +174,7 @@
    <!-- 删除记录 -->
    <delete id="delete<%=moduleName%>">
           DELETE FROM <%=map.getTable()%>
-          WHERE <%=primaryKey.getName()%> in 
+          WHERE <%=primaryKey.getSourceField()%> in 
           <foreach collection="<%=primaryKey.getName()+"s"%>" item="<%=primaryKey.getName()%>" open="("  separator="," close=")" >
                 <%="#{"+primaryKey.getName()+"}"%>
           </foreach>
