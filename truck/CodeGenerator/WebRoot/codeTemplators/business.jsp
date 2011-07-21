@@ -286,6 +286,7 @@ public class <%=map.getName()%> extends BaseBusiness {
 		   List<<%=map.getName()%>> list = new ArrayList<<%=map.getName()%>>();
 		   //查询结果实体
 		   <%=mapperImport%>
+		   this.setQeuryRecordTotalNum(<%=StringHelper.fistChartLowerCase(mapperObjName)%>.qeury<%=map.getClazz()%>sRecordCount(this.getDaoAbb(),<%=tempStr%>));
 		   List<<%=entryObjName%>> entryList = <%=StringHelper.fistChartLowerCase(mapperObjName)%>.qeury<%=map.getClazz()%>s(startRow,pageSize,this.getDaoAbb(),<%=tempStr%>,orderList);
 	       if (entryList != null){
 			  for (<%=entryObjName%> entry : entryList) {
