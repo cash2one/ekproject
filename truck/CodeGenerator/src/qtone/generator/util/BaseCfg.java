@@ -24,7 +24,7 @@ public class BaseCfg {
 	
 	public static String WWW="http://zsqtsm.vicp.net:43980/";
 	
-	public static String WWW_LOCALHOST="http://localhost/";
+	public static String WWW_LOCALHOST="http://192.168.4.39/";
 	
 	static {
 		
