@@ -24,18 +24,25 @@
 	</head>
 
 	<body>
-		<table width="60%" border="0" cellspacing="0">
-			<thead>
-				<tr>
-					<th>
-						文件名
+		<table width="80%" border="1px" cellspacing="0">
+				<tr align="center">
+					<th colspan="1" align="left">
+					     模版配置文件名
 					</th>
-					<th colspan="3">
-						操作
+					<th colspan="1">
+					      实体
+					</th>
+					<th colspan="2">
+					      持久化接口
+					</th>
+					<th colspan="1">
+					     业务对象
+					</th>
+					<th colspan="1">
+					     页面列表Model
 					</th>
 				</tr>
-			</thead>
-			<tbody>
+			     
 			      <%
 			      String cfgPathDir = request.getRealPath("/")+"templates";
 			      File file = new File(cfgPathDir);
@@ -43,19 +50,14 @@
 			      if(cfgFiles!=null)
 			      for(File fileName:cfgFiles){ if(fileName.getName().indexOf(".xml")<0) continue;%>
 			      <tr>
-			         <td><a href="<%=(!BaseCfg.APP_CONTEXT.equals("")?"/"+BaseCfg.APP_CONTEXT:"")+"/templates/"+fileName.getName()+"\""%>"><%=fileName.getName() %></a><td>
+			         <td><a href="<%=(!BaseCfg.APP_CONTEXT.equals("")?"/"+BaseCfg.APP_CONTEXT:"")+"/templates/"+fileName.getName()+"\""%>"><%=fileName.getName() %></a></td>
 			         <td><a href="<%=!BaseCfg.APP_CONTEXT.equals("")?"/"+BaseCfg.APP_CONTEXT:""%>/codeTemplators/entity.jsp?cfg=<%out.print(fileName.getName());%>">View Entity</a></td>
 			         <td><a href="<%=!BaseCfg.APP_CONTEXT.equals("")?"/"+BaseCfg.APP_CONTEXT:""%>/codeTemplators/mapper.jsp?cfg=<%out.print(fileName.getName());%>">View Mapper</a></td>
 			         <td><a href="<%=!BaseCfg.APP_CONTEXT.equals("")?"/"+BaseCfg.APP_CONTEXT:""%>/codeTemplators/mapperXml.jsp?cfg=<%out.print(fileName.getName());%>">View Mapper_XML</a></td>
 			         <td><a href="<%=!BaseCfg.APP_CONTEXT.equals("")?"/"+BaseCfg.APP_CONTEXT:""%>/codeTemplators/business.jsp?cfg=<%out.print(fileName.getName());%>">View Bussiness</a></td>
-			      <tr>
+			         <td><a href="<%=!BaseCfg.APP_CONTEXT.equals("")?"/"+BaseCfg.APP_CONTEXT:""%>/codeTemplators/listPage.jsp?cfg=<%out.print(fileName.getName());%>">View PageModel</a></td>
+			      </tr>
 			      <%}%>
-			</tbody>
-			<tfoot>
-				<tr>
-					<!-- td colspan="2"><A href="<%=!BaseCfg.APP_CONTEXT.equals("")?"/"+BaseCfg.APP_CONTEXT:""%>/upload.jsp">上传配置文件</A></td -->
-				</tr>
-				<tfoot>
 		</table>
 	</body>
 </html>
