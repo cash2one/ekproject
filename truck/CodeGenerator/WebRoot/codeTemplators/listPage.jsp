@@ -40,5 +40,11 @@
         </tr>
        #end
     </tbody>
+     <tfoot>
+		<tr>
+		   <td colspan="5">
+		      $page.roll
+		   </td>
+		</tr>
+	<tfoot>
     </table>
-<div class="mpage"> <span class="mpage_nav">$page.roll</span></div>
