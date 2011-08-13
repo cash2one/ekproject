@@ -38,10 +38,8 @@ import java.util.*;
 import java.util.List;
 
 
-import org.apache.ibatis.annotations.Param;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+
 
 import org.apache.log4j.Logger;
 import <%=basePackageName+map.getBusinessNamespace()%>.SpringUtil;
@@ -202,9 +200,10 @@ public class <%=map.getName()%> extends BaseBusiness {
                    this.set<%out.print(StringHelper.fistChartUpperCase(field.getName())+"(entry.get"+StringHelper.fistChartUpperCase(field.getName())+"());");}%>
 		}
 		  entry = null;
-		  return this;          
-       }else
-           return new <%=map.getName()%>();  
+       }else{
+           this.<%=StringHelper.fistChartLowerCase(entryObjName)%> = new <%=entryObjName%>();
+       }
+       return this;  
 	}
 	 <%}//END IF%>
 	
