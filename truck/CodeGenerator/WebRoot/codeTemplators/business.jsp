@@ -198,8 +198,9 @@ public class <%=map.getName()%> extends BaseBusiness {
 	     }
          for(FieldItem field:subFields){%>
                    this.set<%out.print(StringHelper.fistChartUpperCase(field.getName())+"(entry.get"+StringHelper.fistChartUpperCase(field.getName())+"());");}%>
-		}
+		 
 		  entry = null;
+
        }else{
            this.<%=StringHelper.fistChartLowerCase(entryObjName)%> = new <%=entryObjName%>();
        }
