@@ -60,7 +60,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="<%=mapperName%>">
-   <cache />
 
   <!-- 以下配置是系统自动生成的 -->
 
