@@ -98,6 +98,7 @@
 				       for(String key:subFieldSet.keySet()){  //从表的排序条件  
 				           items =  subFieldSet.get(key);%>   
 				       <%out.print(SqlXmlCreator.appendOrderOptions(key,items[0],items[1]));}%>
+				       <when test="order.columnName=='<%=primaryKey.getName()%>'"> <%=primaryKey.getTableAlias()+"."+primaryKey.getName()+"  ${order.type}"%>  </when> 
 				  </choose>
 			 </foreach>
 		 </trim>
