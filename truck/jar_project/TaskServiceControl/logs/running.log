@@ -1,0 +1,677 @@
+ 2011-08-26 15:41:26,750  INFO  - 任务[管理器]运行信息：执行管理器中的任务！   2011-8-26 15:41:26
+ 2011-08-26 15:41:26,750  INFO  - 任务[管理器]运行信息：守护线程【TaskOverTimeChecker】，执行结束并退出！   2011-8-26 15:41:26
+ 2011-08-26 15:41:26,906  INFO  - 任务[管理器]运行信息：正创建任务对象[TestTask1]   2011-8-26 15:41:26
+ 2011-08-26 15:41:55,078  INFO  - 任务[管理器]运行信息：执行管理器中的任务！   2011-8-26 15:41:55
+ 2011-08-26 15:41:55,078  INFO  - 任务[管理器]运行信息：守护线程【TaskOverTimeChecker】，执行结束并退出！   2011-8-26 15:41:55
+ 2011-08-26 15:41:55,171  INFO  - 任务[管理器]运行信息：正创建任务对象[TestTask1]   2011-8-26 15:41:55
+ 2011-08-26 15:42:10,812  INFO  - 任务[管理器]运行信息：执行管理器中的任务！   2011-8-26 15:42:10
+ 2011-08-26 15:42:10,812  INFO  - 任务[管理器]运行信息：守护线程【TaskOverTimeChecker】，执行结束并退出！   2011-8-26 15:42:10
+ 2011-08-26 15:42:10,890  INFO  - 任务[管理器]运行信息：正创建任务对象[TestTask1]   2011-8-26 15:42:10
+ 2011-08-26 15:42:10,890  INFO  - 任务[TestTask1]运行信息：任务初始化加载。   2011-8-26 15:42:10
+ 2011-08-26 15:42:10,921  INFO  - 任务[TestTask1]运行信息： initialize....   2011-8-26 15:42:10
+ 2011-08-26 15:42:10,921  INFO  - 任务[TestTask1]运行信息：已完成任务加载并进入任务管理器中。   2011-8-26 15:42:10
+ 2011-08-26 15:42:20,921  INFO  - 任务[TestTask1]运行信息：开始执行任务。   2011-8-26 15:42:20
+ 2011-08-26 15:51:09,875  INFO  - 任务[管理器]运行信息：守护线程【TaskOverTimeChecker】，执行结束并退出！   2011-8-26 15:51:09
+ 2011-08-26 15:51:09,875  INFO  - 任务[管理器]运行信息：执行管理器中的任务！   2011-8-26 15:51:09
+ 2011-08-26 15:51:09,968  INFO  - 任务[管理器]运行信息：正创建任务对象[TestTask1]   2011-8-26 15:51:09
+ 2011-08-26 15:51:09,984  INFO  - 任务[TestTask1]运行信息：任务初始化加载。   2011-8-26 15:51:09
+ 2011-08-26 15:51:09,984  INFO  - 任务[TestTask1]运行信息： initialize....   2011-8-26 15:51:09
+ 2011-08-26 15:51:09,984  INFO  - 任务[TestTask1]运行信息：已完成任务加载并进入任务管理器中。   2011-8-26 15:51:09
+ 2011-08-26 15:51:19,984  INFO  - 任务[TestTask1]运行信息：开始执行任务。   2011-8-26 15:51:19
+ 2011-08-26 15:51:20,000  ERROR - 任务[TestTask1]运行信息：发生异常   2011-8-26 15:51:20
+ 2011-08-26 15:51:20,015  ERROR - java.lang.NullPointerException
+	at cn.elam.util.testcase.taskService.TestTask.task(TestTask.java:36)
+	at cn.elam.util.task.BaseTask$1.run(BaseTask.java:69)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:441)
+	at java.util.concurrent.FutureTask$Sync.innerRunAndReset(FutureTask.java:317)
+	at java.util.concurrent.FutureTask.runAndReset(FutureTask.java:150)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$101(ScheduledThreadPoolExecutor.java:98)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.runPeriodic(ScheduledThreadPoolExecutor.java:181)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:205)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(ThreadPoolExecutor.java:885)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:907)
+	at java.lang.Thread.run(Thread.java:619)
+
+ 2011-08-26 15:51:20,015  INFO  - 任务[TestTask1]运行信息： execute TestTask....   2011-8-26 15:51:20
+ 2011-08-26 15:51:20,015  INFO  - 任务[TestTask1]运行信息：退出任务,本次总耗时:0s。   2011-8-26 15:51:20
+ 2011-08-26 15:51:29,890  INFO  - 任务[管理器]运行信息：状态信息：任务已被执行【1】次，其中执行时发生异常有【0】次，重启次数【0】次，上一次执行耗时为【0】秒，时间戳为【Fri Aug 26 15:51:19 GMT 2011】，当前超时设置为【20】秒。   2011-8-26 15:51:29
+ 2011-08-26 15:51:29,890  INFO  - 任务[管理器]运行信息：守护线程【TaskOverTimeChecker】，执行结束并退出！   2011-8-26 15:51:29
+ 2011-08-26 15:51:29,984  INFO  - 任务[TestTask1]运行信息：开始执行任务。   2011-8-26 15:51:29
+ 2011-08-26 15:51:29,984  ERROR - 任务[TestTask1]运行信息：发生异常   2011-8-26 15:51:29
+ 2011-08-26 15:51:29,984  ERROR - java.lang.NullPointerException
+	at cn.elam.util.testcase.taskService.TestTask.task(TestTask.java:36)
+	at cn.elam.util.task.BaseTask$1.run(BaseTask.java:69)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:441)
+	at java.util.concurrent.FutureTask$Sync.innerRunAndReset(FutureTask.java:317)
+	at java.util.concurrent.FutureTask.runAndReset(FutureTask.java:150)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$101(ScheduledThreadPoolExecutor.java:98)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.runPeriodic(ScheduledThreadPoolExecutor.java:181)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:205)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(ThreadPoolExecutor.java:885)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:907)
+	at java.lang.Thread.run(Thread.java:619)
+
+ 2011-08-26 15:51:29,984  INFO  - 任务[TestTask1]运行信息： execute TestTask....   2011-8-26 15:51:29
+ 2011-08-26 15:51:29,984  INFO  - 任务[TestTask1]运行信息：退出任务,本次总耗时:0s。   2011-8-26 15:51:29
+ 2011-08-26 15:57:38,421  INFO  - 任务[管理器]运行信息：执行管理器中的任务！   2011-8-26 15:57:38
+ 2011-08-26 15:57:38,421  INFO  - 任务[管理器]运行信息：守护线程【TaskOverTimeChecker】，执行结束并退出！   2011-8-26 15:57:38
+ 2011-08-26 15:57:38,500  INFO  - 任务[管理器]运行信息：正创建任务对象[TestTask1]   2011-8-26 15:57:38
+ 2011-08-26 15:57:38,515  INFO  - 任务[TestTask1]运行信息：任务初始化加载。   2011-8-26 15:57:38
+ 2011-08-26 15:57:38,515  INFO  - 任务[TestTask1]运行信息： initialize....   2011-8-26 15:57:38
+ 2011-08-26 15:57:38,515  INFO  - 任务[TestTask1]运行信息：已完成任务加载并进入任务管理器中。   2011-8-26 15:57:38
+ 2011-08-26 15:57:48,515  INFO  - 任务[TestTask1]运行信息：开始执行任务。   2011-8-26 15:57:48
+ 2011-08-26 15:57:48,515  ERROR - 任务[TestTask1]运行信息：发生异常   2011-8-26 15:57:48
+ 2011-08-26 15:57:48,515  ERROR - java.lang.NullPointerException
+	at cn.elam.util.testcase.taskService.TestTask.task(TestTask.java:36)
+	at cn.elam.util.task.BaseTask$1.run(BaseTask.java:69)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:441)
+	at java.util.concurrent.FutureTask$Sync.innerRunAndReset(FutureTask.java:317)
+	at java.util.concurrent.FutureTask.runAndReset(FutureTask.java:150)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$101(ScheduledThreadPoolExecutor.java:98)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.runPeriodic(ScheduledThreadPoolExecutor.java:181)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:205)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(ThreadPoolExecutor.java:885)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:907)
+	at java.lang.Thread.run(Thread.java:619)
+
+ 2011-08-26 15:57:48,531  INFO  - 任务[TestTask1]运行信息： execute TestTask....   2011-8-26 15:57:48
+ 2011-08-26 15:57:48,531  INFO  - 任务[TestTask1]运行信息：退出任务,本次总耗时:0s。   2011-8-26 15:57:48
+ 2011-08-26 16:00:36,484  INFO  - 任务[管理器]运行信息：执行管理器中的任务！   2011-8-26 16:00:36
+ 2011-08-26 16:00:36,484  INFO  - 任务[管理器]运行信息：守护线程【TaskOverTimeChecker】，执行结束并退出！   2011-8-26 16:00:36
+ 2011-08-26 16:00:36,562  INFO  - 任务[管理器]运行信息：正创建任务对象[TestTask1]   2011-8-26 16:00:36
+ 2011-08-26 16:00:36,562  INFO  - 任务[TestTask1]运行信息：任务初始化加载。   2011-8-26 16:00:36
+ 2011-08-26 16:00:36,562  INFO  - 任务[TestTask1]运行信息： initialize....   2011-8-26 16:00:36
+ 2011-08-26 16:00:36,562  INFO  - 任务[TestTask1]运行信息：已完成任务加载并进入任务管理器中。   2011-8-26 16:00:36
+ 2011-08-26 16:00:46,562  INFO  - 任务[TestTask1]运行信息：开始执行任务。   2011-8-26 16:00:46
+ 2011-08-26 16:00:46,578  ERROR - 任务[TestTask1]运行信息：发生异常   2011-8-26 16:00:46
+ 2011-08-26 16:00:46,578  ERROR - java.lang.NullPointerException
+	at cn.elam.util.testcase.taskService.TestTask.task(TestTask.java:36)
+	at cn.elam.util.task.BaseTask$1.run(BaseTask.java:69)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:441)
+	at java.util.concurrent.FutureTask$Sync.innerRunAndReset(FutureTask.java:317)
+	at java.util.concurrent.FutureTask.runAndReset(FutureTask.java:150)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$101(ScheduledThreadPoolExecutor.java:98)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.runPeriodic(ScheduledThreadPoolExecutor.java:181)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:205)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(ThreadPoolExecutor.java:885)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:907)
+	at java.lang.Thread.run(Thread.java:619)
+
+ 2011-08-26 16:00:46,578  INFO  - 任务[TestTask1]运行信息： execute TestTask....   2011-8-26 16:00:46
+ 2011-08-26 16:00:46,578  INFO  - 任务[TestTask1]运行信息：退出任务,本次总耗时:0s。   2011-8-26 16:00:46
+ 2011-08-26 16:00:56,484  INFO  - 任务[管理器]运行信息：状态信息：任务已被执行【1】次，其中执行时发生异常有【0】次，重启次数【0】次，上一次执行耗时为【0】秒，时间戳为【Fri Aug 26 16:00:46 GMT 2011】，当前超时设置为【20】秒。   2011-8-26 16:00:56
+ 2011-08-26 16:00:56,484  INFO  - 任务[管理器]运行信息：守护线程【TaskOverTimeChecker】，执行结束并退出！   2011-8-26 16:00:56
+ 2011-08-26 16:00:56,562  INFO  - 任务[TestTask1]运行信息：开始执行任务。   2011-8-26 16:00:56
+ 2011-08-26 16:00:56,562  ERROR - 任务[TestTask1]运行信息：发生异常   2011-8-26 16:00:56
+ 2011-08-26 16:00:56,562  ERROR - java.lang.NullPointerException
+	at cn.elam.util.testcase.taskService.TestTask.task(TestTask.java:36)
+	at cn.elam.util.task.BaseTask$1.run(BaseTask.java:69)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:441)
+	at java.util.concurrent.FutureTask$Sync.innerRunAndReset(FutureTask.java:317)
+	at java.util.concurrent.FutureTask.runAndReset(FutureTask.java:150)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$101(ScheduledThreadPoolExecutor.java:98)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.runPeriodic(ScheduledThreadPoolExecutor.java:181)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:205)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(ThreadPoolExecutor.java:885)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:907)
+	at java.lang.Thread.run(Thread.java:619)
+
+ 2011-08-26 16:00:56,578  INFO  - 任务[TestTask1]运行信息： execute TestTask....   2011-8-26 16:00:56
+ 2011-08-26 16:00:56,578  INFO  - 任务[TestTask1]运行信息：退出任务,本次总耗时:0s。   2011-8-26 16:00:56
+ 2011-08-26 16:01:06,562  INFO  - 任务[TestTask1]运行信息：开始执行任务。   2011-8-26 16:01:06
+ 2011-08-26 16:01:06,562  ERROR - 任务[TestTask1]运行信息：发生异常   2011-8-26 16:01:06
+ 2011-08-26 16:01:06,562  ERROR - java.lang.NullPointerException
+	at cn.elam.util.testcase.taskService.TestTask.task(TestTask.java:36)
+	at cn.elam.util.task.BaseTask$1.run(BaseTask.java:69)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:441)
+	at java.util.concurrent.FutureTask$Sync.innerRunAndReset(FutureTask.java:317)
+	at java.util.concurrent.FutureTask.runAndReset(FutureTask.java:150)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$101(ScheduledThreadPoolExecutor.java:98)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.runPeriodic(ScheduledThreadPoolExecutor.java:181)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:205)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(ThreadPoolExecutor.java:885)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:907)
+	at java.lang.Thread.run(Thread.java:619)
+
+ 2011-08-26 16:01:06,562  INFO  - 任务[TestTask1]运行信息： execute TestTask....   2011-8-26 16:01:06
+ 2011-08-26 16:01:06,562  INFO  - 任务[TestTask1]运行信息：退出任务,本次总耗时:0s。   2011-8-26 16:01:06
+ 2011-08-26 16:08:49,140  INFO  - 任务[管理器]运行信息：执行管理器中的任务！   2011-8-26 16:08:49
+ 2011-08-26 16:08:49,140  INFO  - 任务[管理器]运行信息：守护线程【TaskOverTimeChecker】，执行结束并退出！   2011-8-26 16:08:49
+ 2011-08-26 16:08:49,218  INFO  - 任务[管理器]运行信息：正创建任务对象[TestTask1]   2011-8-26 16:08:49
+ 2011-08-26 16:08:49,234  INFO  - 任务[TestTask1]运行信息：任务初始化加载。   2011-8-26 16:08:49
+ 2011-08-26 16:08:49,234  INFO  - 任务[TestTask1]运行信息： initialize....   2011-8-26 16:08:49
+ 2011-08-26 16:08:49,234  INFO  - 任务[TestTask1]运行信息：已完成任务加载并进入任务管理器中。   2011-8-26 16:08:49
+ 2011-08-26 16:08:59,234  INFO  - 任务[TestTask1]运行信息：开始执行任务。   2011-8-26 16:08:59
+ 2011-08-26 16:08:59,609  ERROR - 任务[TestTask1]运行信息：发生异常   2011-8-26 16:08:59
+ 2011-08-26 16:08:59,609  ERROR - org.apache.ibatis.exceptions.PersistenceException: 
+### Error opening session.  Cause: org.apache.ibatis.datasource.DataSourceException: Error setting driver on UnpooledDataSource. Cause: java.lang.ClassNotFoundException: Cannot find class: oracle.jdbc.driver.OracleDriver
+### Cause: org.apache.ibatis.datasource.DataSourceException: Error setting driver on UnpooledDataSource. Cause: java.lang.ClassNotFoundException: Cannot find class: oracle.jdbc.driver.OracleDriver
+	at org.apache.ibatis.exceptions.ExceptionFactory.wrapException(ExceptionFactory.java:8)
+	at org.apache.ibatis.session.defaults.DefaultSqlSessionFactory.openSessionFromDataSource(DefaultSqlSessionFactory.java:83)
+	at org.apache.ibatis.session.defaults.DefaultSqlSessionFactory.openSession(DefaultSqlSessionFactory.java:32)
+	at cn.elam.util.persistence.mybatis.MyBatisSeesionFactory.createSession(MyBatisSeesionFactory.java:61)
+	at cn.elam.util.testcase.taskService.TestTask.task(TestTask.java:35)
+	at cn.elam.util.task.BaseTask$1.run(BaseTask.java:69)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:441)
+	at java.util.concurrent.FutureTask$Sync.innerRunAndReset(FutureTask.java:317)
+	at java.util.concurrent.FutureTask.runAndReset(FutureTask.java:150)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$101(ScheduledThreadPoolExecutor.java:98)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.runPeriodic(ScheduledThreadPoolExecutor.java:181)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:205)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(ThreadPoolExecutor.java:885)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:907)
+	at java.lang.Thread.run(Thread.java:619)
+Caused by: org.apache.ibatis.datasource.DataSourceException: Error setting driver on UnpooledDataSource. Cause: java.lang.ClassNotFoundException: Cannot find class: oracle.jdbc.driver.OracleDriver
+	at org.apache.ibatis.datasource.unpooled.UnpooledDataSource.initializeDriver(UnpooledDataSource.java:179)
+	at org.apache.ibatis.datasource.unpooled.UnpooledDataSource.getConnection(UnpooledDataSource.java:57)
+	at org.apache.ibatis.datasource.pooled.PooledDataSource.popConnection(PooledDataSource.java:349)
+	at org.apache.ibatis.datasource.pooled.PooledDataSource.getConnection(PooledDataSource.java:55)
+	at org.apache.ibatis.session.defaults.DefaultSqlSessionFactory.openSessionFromDataSource(DefaultSqlSessionFactory.java:73)
+	... 13 more
+Caused by: java.lang.ClassNotFoundException: Cannot find class: oracle.jdbc.driver.OracleDriver
+	at org.apache.ibatis.io.ClassLoaderWrapper.classForName(ClassLoaderWrapper.java:173)
+	at org.apache.ibatis.io.ClassLoaderWrapper.classForName(ClassLoaderWrapper.java:72)
+	at org.apache.ibatis.io.Resources.classForName(Resources.java:235)
+	at org.apache.ibatis.datasource.unpooled.UnpooledDataSource.initializeDriver(UnpooledDataSource.java:175)
+	... 17 more
+
+ 2011-08-26 16:08:59,609  INFO  - 任务[TestTask1]运行信息： execute TestTask....   2011-8-26 16:08:59
+ 2011-08-26 16:08:59,609  INFO  - 任务[TestTask1]运行信息：退出任务,本次总耗时:0s。   2011-8-26 16:08:59
+ 2011-08-26 16:09:09,140  INFO  - 任务[管理器]运行信息：状态信息：任务已被执行【1】次，其中执行时发生异常有【0】次，重启次数【0】次，上一次执行耗时为【0】秒，时间戳为【Fri Aug 26 16:08:59 GMT 2011】，当前超时设置为【20】秒。   2011-8-26 16:09:09
+ 2011-08-26 16:09:09,140  INFO  - 任务[管理器]运行信息：守护线程【TaskOverTimeChecker】，执行结束并退出！   2011-8-26 16:09:09
+ 2011-08-26 16:09:09,234  INFO  - 任务[TestTask1]运行信息：开始执行任务。   2011-8-26 16:09:09
+ 2011-08-26 16:09:09,265  ERROR - 任务[TestTask1]运行信息：发生异常   2011-8-26 16:09:09
+ 2011-08-26 16:09:09,265  ERROR - org.apache.ibatis.exceptions.PersistenceException: 
+### Error opening session.  Cause: java.sql.SQLException: No suitable driver found for jdbc:oracle:thin:@61.142.114.252:1522:orcl
+### Cause: java.sql.SQLException: No suitable driver found for jdbc:oracle:thin:@61.142.114.252:1522:orcl
+	at org.apache.ibatis.exceptions.ExceptionFactory.wrapException(ExceptionFactory.java:8)
+	at org.apache.ibatis.session.defaults.DefaultSqlSessionFactory.openSessionFromDataSource(DefaultSqlSessionFactory.java:83)
+	at org.apache.ibatis.session.defaults.DefaultSqlSessionFactory.openSession(DefaultSqlSessionFactory.java:32)
+	at cn.elam.util.persistence.mybatis.MyBatisSeesionFactory.createSession(MyBatisSeesionFactory.java:61)
+	at cn.elam.util.testcase.taskService.TestTask.task(TestTask.java:35)
+	at cn.elam.util.task.BaseTask$1.run(BaseTask.java:69)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:441)
+	at java.util.concurrent.FutureTask$Sync.innerRunAndReset(FutureTask.java:317)
+	at java.util.concurrent.FutureTask.runAndReset(FutureTask.java:150)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$101(ScheduledThreadPoolExecutor.java:98)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.runPeriodic(ScheduledThreadPoolExecutor.java:181)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:205)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(ThreadPoolExecutor.java:885)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:907)
+	at java.lang.Thread.run(Thread.java:619)
+Caused by: java.sql.SQLException: No suitable driver found for jdbc:oracle:thin:@61.142.114.252:1522:orcl
+	at java.sql.DriverManager.getConnection(DriverManager.java:602)
+	at java.sql.DriverManager.getConnection(DriverManager.java:185)
+	at org.apache.ibatis.datasource.unpooled.UnpooledDataSource.getConnection(UnpooledDataSource.java:64)
+	at org.apache.ibatis.datasource.pooled.PooledDataSource.popConnection(PooledDataSource.java:349)
+	at org.apache.ibatis.datasource.pooled.PooledDataSource.getConnection(PooledDataSource.java:55)
+	at org.apache.ibatis.session.defaults.DefaultSqlSessionFactory.openSessionFromDataSource(DefaultSqlSessionFactory.java:73)
+	... 13 more
+
+ 2011-08-26 16:09:09,265  INFO  - 任务[TestTask1]运行信息： execute TestTask....   2011-8-26 16:09:09
+ 2011-08-26 16:09:09,265  INFO  - 任务[TestTask1]运行信息：退出任务,本次总耗时:0s。   2011-8-26 16:09:09
+ 2011-08-26 16:10:23,031  INFO  - 任务[管理器]运行信息：执行管理器中的任务！   2011-8-26 16:10:22
+ 2011-08-26 16:10:23,031  INFO  - 任务[管理器]运行信息：守护线程【TaskOverTimeChecker】，执行结束并退出！   2011-8-26 16:10:22
+ 2011-08-26 16:10:23,125  INFO  - 任务[管理器]运行信息：正创建任务对象[TestTask1]   2011-8-26 16:10:23
+ 2011-08-26 16:10:23,125  INFO  - 任务[TestTask1]运行信息：任务初始化加载。   2011-8-26 16:10:23
+ 2011-08-26 16:10:23,125  INFO  - 任务[TestTask1]运行信息： initialize....   2011-8-26 16:10:23
+ 2011-08-26 16:10:23,125  INFO  - 任务[TestTask1]运行信息：已完成任务加载并进入任务管理器中。   2011-8-26 16:10:23
+ 2011-08-26 16:10:33,125  INFO  - 任务[TestTask1]运行信息：开始执行任务。   2011-8-26 16:10:33
+ 2011-08-26 16:10:33,937  ERROR - 任务[TestTask1]运行信息：发生异常   2011-8-26 16:10:33
+ 2011-08-26 16:10:33,937  ERROR - org.apache.ibatis.exceptions.PersistenceException: 
+### Error opening session.  Cause: java.sql.SQLException: ORA-01017: invalid username/password; logon denied
+
+### Cause: java.sql.SQLException: ORA-01017: invalid username/password; logon denied
+
+	at org.apache.ibatis.exceptions.ExceptionFactory.wrapException(ExceptionFactory.java:8)
+	at org.apache.ibatis.session.defaults.DefaultSqlSessionFactory.openSessionFromDataSource(DefaultSqlSessionFactory.java:83)
+	at org.apache.ibatis.session.defaults.DefaultSqlSessionFactory.openSession(DefaultSqlSessionFactory.java:32)
+	at cn.elam.util.persistence.mybatis.MyBatisSeesionFactory.createSession(MyBatisSeesionFactory.java:61)
+	at cn.elam.util.testcase.taskService.TestTask.task(TestTask.java:35)
+	at cn.elam.util.task.BaseTask$1.run(BaseTask.java:69)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:441)
+	at java.util.concurrent.FutureTask$Sync.innerRunAndReset(FutureTask.java:317)
+	at java.util.concurrent.FutureTask.runAndReset(FutureTask.java:150)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$101(ScheduledThreadPoolExecutor.java:98)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.runPeriodic(ScheduledThreadPoolExecutor.java:181)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:205)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(ThreadPoolExecutor.java:885)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:907)
+	at java.lang.Thread.run(Thread.java:619)
+Caused by: java.sql.SQLException: ORA-01017: invalid username/password; logon denied
+
+	at oracle.jdbc.driver.DatabaseError.throwSqlException(DatabaseError.java:112)
+	at oracle.jdbc.driver.T4CTTIoer.processError(T4CTTIoer.java:331)
+	at oracle.jdbc.driver.T4CTTIoer.processError(T4CTTIoer.java:283)
+	at oracle.jdbc.driver.T4CTTIoer.processError(T4CTTIoer.java:278)
+	at oracle.jdbc.driver.T4CTTIoauthenticate.receiveOauth(T4CTTIoauthenticate.java:791)
+	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:362)
+	at oracle.jdbc.driver.PhysicalConnection.<init>(PhysicalConnection.java:439)
+	at oracle.jdbc.driver.T4CConnection.<init>(T4CConnection.java:165)
+	at oracle.jdbc.driver.T4CDriverExtension.getConnection(T4CDriverExtension.java:35)
+	at oracle.jdbc.driver.OracleDriver.connect(OracleDriver.java:801)
+	at java.sql.DriverManager.getConnection(DriverManager.java:582)
+	at java.sql.DriverManager.getConnection(DriverManager.java:185)
+	at org.apache.ibatis.datasource.unpooled.UnpooledDataSource.getConnection(UnpooledDataSource.java:64)
+	at org.apache.ibatis.datasource.pooled.PooledDataSource.popConnection(PooledDataSource.java:349)
+	at org.apache.ibatis.datasource.pooled.PooledDataSource.getConnection(PooledDataSource.java:55)
+	at org.apache.ibatis.session.defaults.DefaultSqlSessionFactory.openSessionFromDataSource(DefaultSqlSessionFactory.java:73)
+	... 13 more
+
+ 2011-08-26 16:10:33,937  INFO  - 任务[TestTask1]运行信息： execute TestTask....   2011-8-26 16:10:33
+ 2011-08-26 16:10:33,937  INFO  - 任务[TestTask1]运行信息：退出任务,本次总耗时:0s。   2011-8-26 16:10:33
+ 2011-08-26 16:10:43,031  INFO  - 任务[管理器]运行信息：状态信息：任务已被执行【1】次，其中执行时发生异常有【0】次，重启次数【0】次，上一次执行耗时为【0】秒，时间戳为【Fri Aug 26 16:10:33 GMT 2011】，当前超时设置为【20】秒。   2011-8-26 16:10:43
+ 2011-08-26 16:10:43,031  INFO  - 任务[管理器]运行信息：守护线程【TaskOverTimeChecker】，执行结束并退出！   2011-8-26 16:10:43
+ 2011-08-26 16:10:43,125  INFO  - 任务[TestTask1]运行信息：开始执行任务。   2011-8-26 16:10:43
+ 2011-08-26 16:10:43,453  ERROR - 任务[TestTask1]运行信息：发生异常   2011-8-26 16:10:43
+ 2011-08-26 16:10:43,453  ERROR - org.apache.ibatis.exceptions.PersistenceException: 
+### Error opening session.  Cause: java.sql.SQLException: ORA-01017: invalid username/password; logon denied
+
+### Cause: java.sql.SQLException: ORA-01017: invalid username/password; logon denied
+
+	at org.apache.ibatis.exceptions.ExceptionFactory.wrapException(ExceptionFactory.java:8)
+	at org.apache.ibatis.session.defaults.DefaultSqlSessionFactory.openSessionFromDataSource(DefaultSqlSessionFactory.java:83)
+	at org.apache.ibatis.session.defaults.DefaultSqlSessionFactory.openSession(DefaultSqlSessionFactory.java:32)
+	at cn.elam.util.persistence.mybatis.MyBatisSeesionFactory.createSession(MyBatisSeesionFactory.java:61)
+	at cn.elam.util.testcase.taskService.TestTask.task(TestTask.java:35)
+	at cn.elam.util.task.BaseTask$1.run(BaseTask.java:69)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:441)
+	at java.util.concurrent.FutureTask$Sync.innerRunAndReset(FutureTask.java:317)
+	at java.util.concurrent.FutureTask.runAndReset(FutureTask.java:150)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$101(ScheduledThreadPoolExecutor.java:98)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.runPeriodic(ScheduledThreadPoolExecutor.java:181)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:205)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(ThreadPoolExecutor.java:885)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:907)
+	at java.lang.Thread.run(Thread.java:619)
+Caused by: java.sql.SQLException: ORA-01017: invalid username/password; logon denied
+
+	at oracle.jdbc.driver.DatabaseError.throwSqlException(DatabaseError.java:112)
+	at oracle.jdbc.driver.T4CTTIoer.processError(T4CTTIoer.java:331)
+	at oracle.jdbc.driver.T4CTTIoer.processError(T4CTTIoer.java:283)
+	at oracle.jdbc.driver.T4CTTIoer.processError(T4CTTIoer.java:278)
+	at oracle.jdbc.driver.T4CTTIoauthenticate.receiveOauth(T4CTTIoauthenticate.java:791)
+	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:362)
+	at oracle.jdbc.driver.PhysicalConnection.<init>(PhysicalConnection.java:439)
+	at oracle.jdbc.driver.T4CConnection.<init>(T4CConnection.java:165)
+	at oracle.jdbc.driver.T4CDriverExtension.getConnection(T4CDriverExtension.java:35)
+	at oracle.jdbc.driver.OracleDriver.connect(OracleDriver.java:801)
+	at java.sql.DriverManager.getConnection(DriverManager.java:582)
+	at java.sql.DriverManager.getConnection(DriverManager.java:185)
+	at org.apache.ibatis.datasource.unpooled.UnpooledDataSource.getConnection(UnpooledDataSource.java:64)
+	at org.apache.ibatis.datasource.pooled.PooledDataSource.popConnection(PooledDataSource.java:349)
+	at org.apache.ibatis.datasource.pooled.PooledDataSource.getConnection(PooledDataSource.java:55)
+	at org.apache.ibatis.session.defaults.DefaultSqlSessionFactory.openSessionFromDataSource(DefaultSqlSessionFactory.java:73)
+	... 13 more
+
+ 2011-08-26 16:10:43,453  INFO  - 任务[TestTask1]运行信息： execute TestTask....   2011-8-26 16:10:43
+ 2011-08-26 16:10:43,453  INFO  - 任务[TestTask1]运行信息：退出任务,本次总耗时:0s。   2011-8-26 16:10:43
+ 2011-08-26 16:10:53,125  INFO  - 任务[TestTask1]运行信息：开始执行任务。   2011-8-26 16:10:53
+ 2011-08-26 16:10:53,453  ERROR - 任务[TestTask1]运行信息：发生异常   2011-8-26 16:10:53
+ 2011-08-26 16:10:53,453  ERROR - org.apache.ibatis.exceptions.PersistenceException: 
+### Error opening session.  Cause: java.sql.SQLException: ORA-01017: invalid username/password; logon denied
+
+### Cause: java.sql.SQLException: ORA-01017: invalid username/password; logon denied
+
+	at org.apache.ibatis.exceptions.ExceptionFactory.wrapException(ExceptionFactory.java:8)
+	at org.apache.ibatis.session.defaults.DefaultSqlSessionFactory.openSessionFromDataSource(DefaultSqlSessionFactory.java:83)
+	at org.apache.ibatis.session.defaults.DefaultSqlSessionFactory.openSession(DefaultSqlSessionFactory.java:32)
+	at cn.elam.util.persistence.mybatis.MyBatisSeesionFactory.createSession(MyBatisSeesionFactory.java:61)
+	at cn.elam.util.testcase.taskService.TestTask.task(TestTask.java:35)
+	at cn.elam.util.task.BaseTask$1.run(BaseTask.java:69)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:441)
+	at java.util.concurrent.FutureTask$Sync.innerRunAndReset(FutureTask.java:317)
+	at java.util.concurrent.FutureTask.runAndReset(FutureTask.java:150)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$101(ScheduledThreadPoolExecutor.java:98)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.runPeriodic(ScheduledThreadPoolExecutor.java:181)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:205)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(ThreadPoolExecutor.java:885)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:907)
+	at java.lang.Thread.run(Thread.java:619)
+Caused by: java.sql.SQLException: ORA-01017: invalid username/password; logon denied
+
+	at oracle.jdbc.driver.DatabaseError.throwSqlException(DatabaseError.java:112)
+	at oracle.jdbc.driver.T4CTTIoer.processError(T4CTTIoer.java:331)
+	at oracle.jdbc.driver.T4CTTIoer.processError(T4CTTIoer.java:283)
+	at oracle.jdbc.driver.T4CTTIoer.processError(T4CTTIoer.java:278)
+	at oracle.jdbc.driver.T4CTTIoauthenticate.receiveOauth(T4CTTIoauthenticate.java:791)
+	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:362)
+	at oracle.jdbc.driver.PhysicalConnection.<init>(PhysicalConnection.java:439)
+	at oracle.jdbc.driver.T4CConnection.<init>(T4CConnection.java:165)
+	at oracle.jdbc.driver.T4CDriverExtension.getConnection(T4CDriverExtension.java:35)
+	at oracle.jdbc.driver.OracleDriver.connect(OracleDriver.java:801)
+	at java.sql.DriverManager.getConnection(DriverManager.java:582)
+	at java.sql.DriverManager.getConnection(DriverManager.java:185)
+	at org.apache.ibatis.datasource.unpooled.UnpooledDataSource.getConnection(UnpooledDataSource.java:64)
+	at org.apache.ibatis.datasource.pooled.PooledDataSource.popConnection(PooledDataSource.java:349)
+	at org.apache.ibatis.datasource.pooled.PooledDataSource.getConnection(PooledDataSource.java:55)
+	at org.apache.ibatis.session.defaults.DefaultSqlSessionFactory.openSessionFromDataSource(DefaultSqlSessionFactory.java:73)
+	... 13 more
+
+ 2011-08-26 16:10:53,453  INFO  - 任务[TestTask1]运行信息： execute TestTask....   2011-8-26 16:10:53
+ 2011-08-26 16:10:53,453  INFO  - 任务[TestTask1]运行信息：退出任务,本次总耗时:0s。   2011-8-26 16:10:53
+ 2011-08-26 16:11:24,343  INFO  - 任务[管理器]运行信息：执行管理器中的任务！   2011-8-26 16:11:24
+ 2011-08-26 16:11:24,343  INFO  - 任务[管理器]运行信息：守护线程【TaskOverTimeChecker】，执行结束并退出！   2011-8-26 16:11:24
+ 2011-08-26 16:11:24,421  INFO  - 任务[管理器]运行信息：正创建任务对象[TestTask1]   2011-8-26 16:11:24
+ 2011-08-26 16:11:24,421  INFO  - 任务[TestTask1]运行信息：任务初始化加载。   2011-8-26 16:11:24
+ 2011-08-26 16:11:24,421  INFO  - 任务[TestTask1]运行信息： initialize....   2011-8-26 16:11:24
+ 2011-08-26 16:11:24,437  INFO  - 任务[TestTask1]运行信息：已完成任务加载并进入任务管理器中。   2011-8-26 16:11:24
+ 2011-08-26 16:11:34,421  INFO  - 任务[TestTask1]运行信息：开始执行任务。   2011-8-26 16:11:34
+ 2011-08-26 16:11:38,125  INFO  - 任务[TestTask1]运行信息：故意耗时3秒。   2011-8-26 16:11:38
+ 2011-08-26 16:11:38,125  INFO  - 任务[TestTask1]运行信息： execute TestTask....   2011-8-26 16:11:38
+ 2011-08-26 16:11:38,125  INFO  - 任务[TestTask1]运行信息：退出任务,本次总耗时:3s。   2011-8-26 16:11:38
+ 2011-08-26 16:11:44,343  INFO  - 任务[管理器]运行信息：状态信息：任务已被执行【1】次，其中执行时发生异常有【0】次，重启次数【0】次，上一次执行耗时为【3】秒，时间戳为【Fri Aug 26 16:11:34 GMT 2011】，当前超时设置为【20】秒。   2011-8-26 16:11:44
+ 2011-08-26 16:11:44,343  INFO  - 任务[管理器]运行信息：守护线程【TaskOverTimeChecker】，执行结束并退出！   2011-8-26 16:11:44
+ 2011-08-26 16:11:44,437  INFO  - 任务[TestTask1]运行信息：开始执行任务。   2011-8-26 16:11:44
+ 2011-08-26 16:11:44,468  INFO  - 任务[TestTask1]运行信息：故意耗时0秒。   2011-8-26 16:11:44
+ 2011-08-26 16:11:44,468  INFO  - 任务[TestTask1]运行信息： execute TestTask....   2011-8-26 16:11:44
+ 2011-08-26 16:11:44,468  INFO  - 任务[TestTask1]运行信息：退出任务,本次总耗时:0s。   2011-8-26 16:11:44
+ 2011-08-26 16:11:54,421  INFO  - 任务[TestTask1]运行信息：开始执行任务。   2011-8-26 16:11:54
+ 2011-08-26 16:12:25,062  INFO  - 任务[管理器]运行信息：执行管理器中的任务！   2011-8-26 16:12:24
+ 2011-08-26 16:12:25,062  INFO  - 任务[管理器]运行信息：守护线程【TaskOverTimeChecker】，执行结束并退出！   2011-8-26 16:12:24
+ 2011-08-26 16:12:25,156  INFO  - 任务[管理器]运行信息：正创建任务对象[TestTask1]   2011-8-26 16:12:25
+ 2011-08-26 16:12:25,156  INFO  - 任务[TestTask1]运行信息：任务初始化加载。   2011-8-26 16:12:25
+ 2011-08-26 16:12:25,156  INFO  - 任务[TestTask1]运行信息： initialize....   2011-8-26 16:12:25
+ 2011-08-26 16:12:25,156  INFO  - 任务[TestTask1]运行信息：已完成任务加载并进入任务管理器中。   2011-8-26 16:12:25
+ 2011-08-26 16:12:35,156  INFO  - 任务[TestTask1]运行信息：开始执行任务。   2011-8-26 16:12:35
+ 2011-08-26 16:12:45,062  INFO  - 任务[管理器]运行信息：状态信息：任务已被执行【1】次，其中执行时发生异常有【0】次，重启次数【0】次，上一次执行耗时为【0】秒，时间戳为【Fri Aug 26 16:12:35 GMT 2011】，当前超时设置为【20】秒。   2011-8-26 16:12:45
+ 2011-08-26 16:12:45,062  INFO  - 任务[管理器]运行信息：守护线程【TaskOverTimeChecker】，执行结束并退出！   2011-8-26 16:12:45
+ 2011-08-26 16:12:59,750  INFO  - 任务[TestTask1]运行信息：故意耗时24秒。   2011-8-26 16:12:59
+ 2011-08-26 16:12:59,750  INFO  - 任务[TestTask1]运行信息： execute TestTask....   2011-8-26 16:12:59
+ 2011-08-26 16:12:59,750  INFO  - 任务[TestTask1]运行信息：退出任务,本次总耗时:24s。   2011-8-26 16:12:59
+ 2011-08-26 16:12:59,750  INFO  - 任务[TestTask1]运行信息：开始执行任务。   2011-8-26 16:12:59
+ 2011-08-26 16:13:05,062  INFO  - 任务[管理器]运行信息：状态信息：任务已被执行【2】次，其中执行时发生异常有【0】次，重启次数【0】次，上一次执行耗时为【24】秒，时间戳为【Fri Aug 26 16:12:59 GMT 2011】，当前超时设置为【20】秒。   2011-8-26 16:13:05
+ 2011-08-26 16:13:05,062  INFO  - 任务[管理器]运行信息：守护线程【TaskOverTimeChecker】，执行结束并退出！   2011-8-26 16:13:05
+ 2011-08-26 16:13:23,781  INFO  - 任务[TestTask1]运行信息：故意耗时24秒。   2011-8-26 16:13:23
+ 2011-08-26 16:13:23,781  INFO  - 任务[TestTask1]运行信息： execute TestTask....   2011-8-26 16:13:23
+ 2011-08-26 16:13:23,781  INFO  - 任务[TestTask1]运行信息：退出任务,本次总耗时:24s。   2011-8-26 16:13:23
+ 2011-08-26 16:13:23,781  INFO  - 任务[TestTask1]运行信息：开始执行任务。   2011-8-26 16:13:23
+ 2011-08-26 16:13:25,062  INFO  - 任务[管理器]运行信息：状态信息：任务已被执行【3】次，其中执行时发生异常有【0】次，重启次数【0】次，上一次执行耗时为【24】秒，时间戳为【Fri Aug 26 16:13:23 GMT 2011】，当前超时设置为【20】秒。   2011-8-26 16:13:25
+ 2011-08-26 16:13:25,062  INFO  - 任务[管理器]运行信息：守护线程【TaskOverTimeChecker】，执行结束并退出！   2011-8-26 16:13:25
+ 2011-08-26 16:13:32,812  INFO  - 任务[TestTask1]运行信息：故意耗时9秒。   2011-8-26 16:13:32
+ 2011-08-26 16:13:32,812  INFO  - 任务[TestTask1]运行信息： execute TestTask....   2011-8-26 16:13:32
+ 2011-08-26 16:13:32,812  INFO  - 任务[TestTask1]运行信息：退出任务,本次总耗时:9s。   2011-8-26 16:13:32
+ 2011-08-26 16:13:32,812  INFO  - 任务[TestTask1]运行信息：开始执行任务。   2011-8-26 16:13:32
+ 2011-08-26 16:13:45,062  INFO  - 任务[管理器]运行信息：发现任务执行超时：状态信息：任务已被执行【4】次，其中执行时发生异常有【0】次，重启次数【0】次，上一次执行耗时为【9】秒，时间戳为【Fri Aug 26 16:13:32 GMT 2011】，当前超时设置为【20】秒。   2011-8-26 16:13:45
+ 2011-08-26 16:13:45,062  INFO  - 任务[TestTask1]运行信息：任务重新加载中......   2011-8-26 16:13:45
+ 2011-08-26 16:13:45,078  INFO  - 任务[TestTask1]运行信息： release....   2011-8-26 16:13:45
+ 2011-08-26 16:13:45,078  INFO  - 任务[TestTask1]运行信息：任务已被中断！   2011-8-26 16:13:45
+ 2011-08-26 16:13:45,078  INFO  - 任务[TestTask1]运行信息： initialize....   2011-8-26 16:13:45
+ 2011-08-26 16:13:45,078  INFO  - 任务[TestTask1]运行信息：已完成任务加载并进入任务管理器中。   2011-8-26 16:13:45
+ 2011-08-26 16:13:45,078  INFO  - 任务[管理器]运行信息：守护线程【TaskOverTimeChecker】，执行结束并退出！   2011-8-26 16:13:45
+ 2011-08-26 16:13:55,078  INFO  - 任务[TestTask1]运行信息：开始执行任务。   2011-8-26 16:13:55
+ 2011-08-26 16:13:58,109  INFO  - 任务[TestTask1]运行信息：故意耗时3秒。   2011-8-26 16:13:58
+ 2011-08-26 16:13:58,109  INFO  - 任务[TestTask1]运行信息： execute TestTask....   2011-8-26 16:13:58
+ 2011-08-26 16:13:58,109  INFO  - 任务[TestTask1]运行信息：退出任务,本次总耗时:3s。   2011-8-26 16:13:58
+ 2011-08-26 16:13:59,843  INFO  - 任务[TestTask1]运行信息：故意耗时27秒。   2011-8-26 16:13:59
+ 2011-08-26 16:13:59,843  INFO  - 任务[TestTask1]运行信息： execute TestTask....   2011-8-26 16:13:59
+ 2011-08-26 16:13:59,843  INFO  - 任务[TestTask1]运行信息：退出任务,本次总耗时:4s。   2011-8-26 16:13:59
+ 2011-08-26 16:14:05,078  INFO  - 任务[TestTask1]运行信息：开始执行任务。   2011-8-26 16:14:05
+ 2011-08-26 16:14:05,078  INFO  - 任务[管理器]运行信息：状态信息：任务已被执行【6】次，其中执行时发生异常有【0】次，重启次数【1】次，上一次执行耗时为【4】秒，时间戳为【Fri Aug 26 16:14:05 GMT 2011】，当前超时设置为【20】秒。   2011-8-26 16:14:05
+ 2011-08-26 16:14:05,078  INFO  - 任务[管理器]运行信息：守护线程【TaskOverTimeChecker】，执行结束并退出！   2011-8-26 16:14:05
+ 2011-08-26 16:14:15,062  INFO  - 任务[TestTask1]运行信息：任务已被中断！   2011-8-26 16:14:15
+ 2011-08-26 16:14:15,062  ERROR - 任务[TestTask1]运行信息：发生异常   2011-8-26 16:14:15
+ 2011-08-26 16:14:15,062  INFO  - 任务[TestTask1]运行信息： release....   2011-8-26 16:14:15
+ 2011-08-26 16:14:15,078  ERROR - java.lang.InterruptedException: sleep interrupted
+	at java.lang.Thread.sleep(Native Method)
+	at cn.elam.util.testcase.taskService.TestTask.task(TestTask.java:44)
+	at cn.elam.util.task.BaseTask$1.run(BaseTask.java:69)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:441)
+	at java.util.concurrent.FutureTask$Sync.innerRunAndReset(FutureTask.java:317)
+	at java.util.concurrent.FutureTask.runAndReset(FutureTask.java:150)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$101(ScheduledThreadPoolExecutor.java:98)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.runPeriodic(ScheduledThreadPoolExecutor.java:181)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:205)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(ThreadPoolExecutor.java:885)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:907)
+	at java.lang.Thread.run(Thread.java:619)
+
+ 2011-08-26 16:14:15,078  INFO  - 任务[TestTask1]运行信息： execute TestTask....   2011-8-26 16:14:15
+ 2011-08-26 16:14:15,078  INFO  - 任务[TestTask1]运行信息：退出任务,本次总耗时:10s。   2011-8-26 16:14:15
+ 2011-08-26 16:14:25,078  INFO  - 任务[管理器]运行信息：发现任务执行超时：状态信息：任务已被执行【6】次，其中执行时发生异常有【0】次，重启次数【1】次，上一次执行耗时为【10】秒，时间戳为【Fri Aug 26 16:14:05 GMT 2011】，当前超时设置为【20】秒。   2011-8-26 16:14:25
+ 2011-08-26 16:14:25,078  INFO  - 任务[TestTask1]运行信息：任务重新加载中......   2011-8-26 16:14:25
+ 2011-08-26 16:14:25,078  INFO  - 任务[TestTask1]运行信息： release....   2011-8-26 16:14:25
+ 2011-08-26 16:14:25,078  INFO  - 任务[TestTask1]运行信息：任务已被中断！   2011-8-26 16:14:25
+ 2011-08-26 16:14:25,078  INFO  - 任务[TestTask1]运行信息： initialize....   2011-8-26 16:14:25
+ 2011-08-26 16:14:25,078  INFO  - 任务[TestTask1]运行信息：已完成任务加载并进入任务管理器中。   2011-8-26 16:14:25
+ 2011-08-26 16:14:25,078  INFO  - 任务[管理器]运行信息：守护线程【TaskOverTimeChecker】，执行结束并退出！   2011-8-26 16:14:25
+ 2011-08-26 16:14:35,078  INFO  - 任务[TestTask1]运行信息：开始执行任务。   2011-8-26 16:14:35
+ 2011-08-26 16:14:45,078  INFO  - 任务[管理器]运行信息：状态信息：任务已被执行【7】次，其中执行时发生异常有【0】次，重启次数【2】次，上一次执行耗时为【10】秒，时间戳为【Fri Aug 26 16:14:35 GMT 2011】，当前超时设置为【20】秒。   2011-8-26 16:14:45
+ 2011-08-26 16:14:45,078  INFO  - 任务[管理器]运行信息：守护线程【TaskOverTimeChecker】，执行结束并退出！   2011-8-26 16:14:45
+ 2011-08-26 16:14:47,109  INFO  - 任务[TestTask1]运行信息：故意耗时12秒。   2011-8-26 16:14:47
+ 2011-08-26 16:14:47,109  INFO  - 任务[TestTask1]运行信息： execute TestTask....   2011-8-26 16:14:47
+ 2011-08-26 16:14:47,109  INFO  - 任务[TestTask1]运行信息：退出任务,本次总耗时:12s。   2011-8-26 16:14:47
+ 2011-08-26 16:14:47,109  INFO  - 任务[TestTask1]运行信息：开始执行任务。   2011-8-26 16:14:47
+ 2011-08-26 16:14:47,140  INFO  - 任务[TestTask1]运行信息：故意耗时0秒。   2011-8-26 16:14:47
+ 2011-08-26 16:14:47,140  INFO  - 任务[TestTask1]运行信息： execute TestTask....   2011-8-26 16:14:47
+ 2011-08-26 16:14:47,140  INFO  - 任务[TestTask1]运行信息：退出任务,本次总耗时:0s。   2011-8-26 16:14:47
+ 2011-08-26 16:14:55,078  INFO  - 任务[TestTask1]运行信息：任务已被中断！   2011-8-26 16:14:55
+ 2011-08-26 16:14:55,078  INFO  - 任务[TestTask1]运行信息： release....   2011-8-26 16:14:55
+ 2011-08-26 16:15:05,078  INFO  - 任务[管理器]运行信息：发现任务执行超时：状态信息：任务已被执行【8】次，其中执行时发生异常有【0】次，重启次数【2】次，上一次执行耗时为【0】秒，时间戳为【Fri Aug 26 16:14:47 GMT 2011】，当前超时设置为【20】秒。   2011-8-26 16:15:05
+ 2011-08-26 16:15:05,078  INFO  - 任务[TestTask1]运行信息：任务重新加载中......   2011-8-26 16:15:05
+ 2011-08-26 16:15:05,078  INFO  - 任务[TestTask1]运行信息： release....   2011-8-26 16:15:05
+ 2011-08-26 16:15:05,078  INFO  - 任务[TestTask1]运行信息：任务已被中断！   2011-8-26 16:15:05
+ 2011-08-26 16:15:05,078  INFO  - 任务[TestTask1]运行信息： initialize....   2011-8-26 16:15:05
+ 2011-08-26 16:15:05,078  INFO  - 任务[TestTask1]运行信息：已完成任务加载并进入任务管理器中。   2011-8-26 16:15:05
+ 2011-08-26 16:15:05,078  INFO  - 任务[管理器]运行信息：守护线程【TaskOverTimeChecker】，执行结束并退出！   2011-8-26 16:15:05
+ 2011-08-26 16:15:15,078  INFO  - 任务[TestTask1]运行信息：开始执行任务。   2011-8-26 16:15:15
+ 2011-08-26 16:15:25,078  INFO  - 任务[管理器]运行信息：状态信息：任务已被执行【9】次，其中执行时发生异常有【0】次，重启次数【3】次，上一次执行耗时为【0】秒，时间戳为【Fri Aug 26 16:15:15 GMT 2011】，当前超时设置为【20】秒。   2011-8-26 16:15:25
+ 2011-08-26 16:15:25,078  INFO  - 任务[管理器]运行信息：守护线程【TaskOverTimeChecker】，执行结束并退出！   2011-8-26 16:15:25
+ 2011-08-26 16:15:35,078  INFO  - 任务[TestTask1]运行信息：任务已被中断！   2011-8-26 16:15:35
+ 2011-08-26 16:15:35,078  ERROR - 任务[TestTask1]运行信息：发生异常   2011-8-26 16:15:35
+ 2011-08-26 16:15:35,078  INFO  - 任务[TestTask1]运行信息： release....   2011-8-26 16:15:35
+ 2011-08-26 16:15:35,078  ERROR - java.lang.InterruptedException: sleep interrupted
+	at java.lang.Thread.sleep(Native Method)
+	at cn.elam.util.testcase.taskService.TestTask.task(TestTask.java:44)
+	at cn.elam.util.task.BaseTask$1.run(BaseTask.java:69)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:441)
+	at java.util.concurrent.FutureTask$Sync.innerRunAndReset(FutureTask.java:317)
+	at java.util.concurrent.FutureTask.runAndReset(FutureTask.java:150)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$101(ScheduledThreadPoolExecutor.java:98)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.runPeriodic(ScheduledThreadPoolExecutor.java:181)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:205)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(ThreadPoolExecutor.java:885)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:907)
+	at java.lang.Thread.run(Thread.java:619)
+
+ 2011-08-26 16:15:35,078  INFO  - 任务[TestTask1]运行信息： execute TestTask....   2011-8-26 16:15:35
+ 2011-08-26 16:15:35,078  INFO  - 任务[TestTask1]运行信息：退出任务,本次总耗时:20s。   2011-8-26 16:15:35
+ 2011-08-26 16:15:45,078  INFO  - 任务[管理器]运行信息：发现任务执行超时：状态信息：任务已被执行【9】次，其中执行时发生异常有【0】次，重启次数【3】次，上一次执行耗时为【20】秒，时间戳为【Fri Aug 26 16:15:15 GMT 2011】，当前超时设置为【20】秒。   2011-8-26 16:15:45
+ 2011-08-26 16:15:45,078  INFO  - 任务[TestTask1]运行信息：任务重新加载中......   2011-8-26 16:15:45
+ 2011-08-26 16:15:45,078  INFO  - 任务[TestTask1]运行信息： release....   2011-8-26 16:15:45
+ 2011-08-26 16:15:45,078  INFO  - 任务[TestTask1]运行信息：任务已被中断！   2011-8-26 16:15:45
+ 2011-08-26 16:15:45,078  INFO  - 任务[TestTask1]运行信息： initialize....   2011-8-26 16:15:45
+ 2011-08-26 16:15:45,078  INFO  - 任务[TestTask1]运行信息：已完成任务加载并进入任务管理器中。   2011-8-26 16:15:45
+ 2011-08-26 16:15:45,078  INFO  - 任务[管理器]运行信息：守护线程【TaskOverTimeChecker】，执行结束并退出！   2011-8-26 16:15:45
+ 2011-08-26 16:15:55,078  INFO  - 任务[TestTask1]运行信息：开始执行任务。   2011-8-26 16:15:55
+ 2011-08-26 16:16:05,078  INFO  - 任务[管理器]运行信息：状态信息：任务已被执行【10】次，其中执行时发生异常有【0】次，重启次数【4】次，上一次执行耗时为【20】秒，时间戳为【Fri Aug 26 16:15:55 GMT 2011】，当前超时设置为【20】秒。   2011-8-26 16:16:05
+ 2011-08-26 16:16:05,078  INFO  - 任务[管理器]运行信息：守护线程【TaskOverTimeChecker】，执行结束并退出！   2011-8-26 16:16:05
+ 2011-08-26 16:16:15,078  INFO  - 任务[TestTask1]运行信息：任务已被中断！   2011-8-26 16:16:15
+ 2011-08-26 16:16:15,078  ERROR - 任务[TestTask1]运行信息：发生异常   2011-8-26 16:16:15
+ 2011-08-26 16:16:15,078  INFO  - 任务[TestTask1]运行信息： release....   2011-8-26 16:16:15
+ 2011-08-26 16:16:15,078  ERROR - java.lang.InterruptedException: sleep interrupted
+	at java.lang.Thread.sleep(Native Method)
+	at cn.elam.util.testcase.taskService.TestTask.task(TestTask.java:44)
+	at cn.elam.util.task.BaseTask$1.run(BaseTask.java:69)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:441)
+	at java.util.concurrent.FutureTask$Sync.innerRunAndReset(FutureTask.java:317)
+	at java.util.concurrent.FutureTask.runAndReset(FutureTask.java:150)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$101(ScheduledThreadPoolExecutor.java:98)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.runPeriodic(ScheduledThreadPoolExecutor.java:181)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:205)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(ThreadPoolExecutor.java:885)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:907)
+	at java.lang.Thread.run(Thread.java:619)
+
+ 2011-08-26 16:16:15,078  INFO  - 任务[TestTask1]运行信息： execute TestTask....   2011-8-26 16:16:15
+ 2011-08-26 16:16:15,078  INFO  - 任务[TestTask1]运行信息：退出任务,本次总耗时:20s。   2011-8-26 16:16:15
+ 2011-08-26 16:16:25,078  INFO  - 任务[管理器]运行信息：发现任务执行超时：状态信息：任务已被执行【10】次，其中执行时发生异常有【0】次，重启次数【4】次，上一次执行耗时为【20】秒，时间戳为【Fri Aug 26 16:15:55 GMT 2011】，当前超时设置为【20】秒。   2011-8-26 16:16:25
+ 2011-08-26 16:16:25,078  INFO  - 任务[TestTask1]运行信息：任务重新加载中......   2011-8-26 16:16:25
+ 2011-08-26 16:16:25,078  INFO  - 任务[TestTask1]运行信息： release....   2011-8-26 16:16:25
+ 2011-08-26 16:16:25,078  INFO  - 任务[TestTask1]运行信息：任务已被中断！   2011-8-26 16:16:25
+ 2011-08-26 16:16:25,078  INFO  - 任务[TestTask1]运行信息： initialize....   2011-8-26 16:16:25
+ 2011-08-26 16:16:25,078  INFO  - 任务[TestTask1]运行信息：已完成任务加载并进入任务管理器中。   2011-8-26 16:16:25
+ 2011-08-26 16:16:25,078  INFO  - 任务[管理器]运行信息：守护线程【TaskOverTimeChecker】，执行结束并退出！   2011-8-26 16:16:25
+ 2011-08-26 16:16:35,078  INFO  - 任务[TestTask1]运行信息：开始执行任务。   2011-8-26 16:16:35
+ 2011-08-26 16:30:07,156  INFO  - 任务[管理器]运行信息：执行管理器中的任务！   2011-8-26 16:30:07
+ 2011-08-26 16:30:07,156  INFO  - 任务[管理器]运行信息：守护线程【TaskOverTimeChecker】，执行结束并退出！   2011-8-26 16:30:07
+ 2011-08-26 16:30:07,250  INFO  - 任务[管理器]运行信息：正创建任务对象[TestTask1]   2011-8-26 16:30:07
+ 2011-08-26 16:30:07,265  INFO  - 任务[TestTask1]运行信息：任务初始化加载。   2011-8-26 16:30:07
+ 2011-08-26 16:30:07,265  INFO  - 任务[TestTask1]运行信息： initialize....   2011-8-26 16:30:07
+ 2011-08-26 16:30:07,265  INFO  - 任务[TestTask1]运行信息：已完成任务加载并进入任务管理器中。   2011-8-26 16:30:07
+ 2011-08-26 16:30:17,265  INFO  - 任务[TestTask1]运行信息：开始执行任务。   2011-8-26 16:30:17
+ 2011-08-26 16:30:27,187  INFO  - 任务[管理器]运行信息：状态信息：任务已被执行【1】次，其中执行时发生异常有【0】次，重启次数【0】次，上一次执行耗时为【0】秒，时间戳为【Fri Aug 26 16:30:17 GMT 2011】，当前超时设置为【20】秒。   2011-8-26 16:30:27
+ 2011-08-26 16:30:27,187  INFO  - 任务[管理器]运行信息：守护线程【TaskOverTimeChecker】，执行结束并退出！   2011-8-26 16:30:27
+ 2011-08-26 16:35:33,078  INFO  - 任务[管理器]运行信息：执行管理器中的任务！   2011-8-26 16:35:32
+ 2011-08-26 16:35:33,078  INFO  - 任务[管理器]运行信息：守护线程【TaskOverTimeChecker】，执行结束并退出！   2011-8-26 16:35:32
+ 2011-08-26 16:35:33,171  INFO  - 任务[管理器]运行信息：正创建任务对象[TestTask1]   2011-8-26 16:35:33
+ 2011-08-26 16:35:33,187  INFO  - 任务[TestTask1]运行信息：任务初始化加载。   2011-8-26 16:35:33
+ 2011-08-26 16:35:33,187  INFO  - 任务[TestTask1]运行信息： initialize....   2011-8-26 16:35:33
+ 2011-08-26 16:35:33,187  INFO  - 任务[TestTask1]运行信息：已完成任务加载并进入任务管理器中。   2011-8-26 16:35:33
+ 2011-08-26 16:35:43,187  INFO  - 任务[TestTask1]运行信息：开始执行任务。   2011-8-26 16:35:43
+ 2011-08-26 16:35:53,078  INFO  - 任务[管理器]运行信息：状态信息：任务已被执行【1】次，其中执行时发生异常有【0】次，重启次数【0】次，上一次执行耗时为【0】秒，时间戳为【Fri Aug 26 16:35:43 GMT 2011】，当前超时设置为【20】秒。   2011-8-26 16:35:53
+ 2011-08-26 16:35:53,078  INFO  - 任务[管理器]运行信息：守护线程【TaskOverTimeChecker】，执行结束并退出！   2011-8-26 16:35:53
+ 2011-08-26 16:35:59,015  ERROR - 任务[TestTask1]运行信息：发生异常   2011-8-26 16:35:59
+ 2011-08-26 16:35:59,015  ERROR - org.apache.ibatis.exceptions.PersistenceException: 
+### Error opening session.  Cause: java.sql.SQLException: ORA-01017: invalid username/password; logon denied
+
+### Cause: java.sql.SQLException: ORA-01017: invalid username/password; logon denied
+
+	at org.apache.ibatis.exceptions.ExceptionFactory.wrapException(ExceptionFactory.java:8)
+	at org.apache.ibatis.session.defaults.DefaultSqlSessionFactory.openSessionFromDataSource(DefaultSqlSessionFactory.java:83)
+	at org.apache.ibatis.session.defaults.DefaultSqlSessionFactory.openSession(DefaultSqlSessionFactory.java:32)
+	at cn.elam.util.persistence.mybatis.MyBatisSeesionFactory.createSession(MyBatisSeesionFactory.java:67)
+	at cn.elam.util.testcase.taskService.TestTask.task(TestTask.java:35)
+	at cn.elam.util.task.BaseTask$1.run(BaseTask.java:69)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:441)
+	at java.util.concurrent.FutureTask$Sync.innerRunAndReset(FutureTask.java:317)
+	at java.util.concurrent.FutureTask.runAndReset(FutureTask.java:150)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$101(ScheduledThreadPoolExecutor.java:98)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.runPeriodic(ScheduledThreadPoolExecutor.java:181)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:205)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(ThreadPoolExecutor.java:885)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:907)
+	at java.lang.Thread.run(Thread.java:619)
+Caused by: java.sql.SQLException: ORA-01017: invalid username/password; logon denied
+
+	at oracle.jdbc.driver.DatabaseError.throwSqlException(DatabaseError.java:112)
+	at oracle.jdbc.driver.T4CTTIoer.processError(T4CTTIoer.java:331)
+	at oracle.jdbc.driver.T4CTTIoer.processError(T4CTTIoer.java:283)
+	at oracle.jdbc.driver.T4CTTIoer.processError(T4CTTIoer.java:278)
+	at oracle.jdbc.driver.T4CTTIoauthenticate.receiveOauth(T4CTTIoauthenticate.java:791)
+	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:362)
+	at oracle.jdbc.driver.PhysicalConnection.<init>(PhysicalConnection.java:439)
+	at oracle.jdbc.driver.T4CConnection.<init>(T4CConnection.java:165)
+	at oracle.jdbc.driver.T4CDriverExtension.getConnection(T4CDriverExtension.java:35)
+	at oracle.jdbc.driver.OracleDriver.connect(OracleDriver.java:801)
+	at java.sql.DriverManager.getConnection(DriverManager.java:582)
+	at java.sql.DriverManager.getConnection(DriverManager.java:185)
+	at org.apache.ibatis.datasource.unpooled.UnpooledDataSource.getConnection(UnpooledDataSource.java:64)
+	at org.apache.ibatis.datasource.pooled.PooledDataSource.popConnection(PooledDataSource.java:349)
+	at org.apache.ibatis.datasource.pooled.PooledDataSource.getConnection(PooledDataSource.java:55)
+	at org.apache.ibatis.session.defaults.DefaultSqlSessionFactory.openSessionFromDataSource(DefaultSqlSessionFactory.java:73)
+	... 13 more
+
+ 2011-08-26 16:35:59,015  INFO  - 任务[TestTask1]运行信息： execute TestTask....   2011-8-26 16:35:59
+ 2011-08-26 16:35:59,015  INFO  - 任务[TestTask1]运行信息：退出任务,本次总耗时:15s。   2011-8-26 16:35:59
+ 2011-08-26 16:35:59,015  INFO  - 任务[TestTask1]运行信息：开始执行任务。   2011-8-26 16:35:59
+ 2011-08-26 16:35:59,359  ERROR - 任务[TestTask1]运行信息：发生异常   2011-8-26 16:35:59
+ 2011-08-26 16:35:59,359  ERROR - org.apache.ibatis.exceptions.PersistenceException: 
+### Error opening session.  Cause: java.sql.SQLException: ORA-01017: invalid username/password; logon denied
+
+### Cause: java.sql.SQLException: ORA-01017: invalid username/password; logon denied
+
+	at org.apache.ibatis.exceptions.ExceptionFactory.wrapException(ExceptionFactory.java:8)
+	at org.apache.ibatis.session.defaults.DefaultSqlSessionFactory.openSessionFromDataSource(DefaultSqlSessionFactory.java:83)
+	at org.apache.ibatis.session.defaults.DefaultSqlSessionFactory.openSession(DefaultSqlSessionFactory.java:32)
+	at cn.elam.util.persistence.mybatis.MyBatisSeesionFactory.createSession(MyBatisSeesionFactory.java:67)
+	at cn.elam.util.testcase.taskService.TestTask.task(TestTask.java:35)
+	at cn.elam.util.task.BaseTask$1.run(BaseTask.java:69)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:441)
+	at java.util.concurrent.FutureTask$Sync.innerRunAndReset(FutureTask.java:317)
+	at java.util.concurrent.FutureTask.runAndReset(FutureTask.java:150)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$101(ScheduledThreadPoolExecutor.java:98)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.runPeriodic(ScheduledThreadPoolExecutor.java:181)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:205)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(ThreadPoolExecutor.java:885)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:907)
+	at java.lang.Thread.run(Thread.java:619)
+Caused by: java.sql.SQLException: ORA-01017: invalid username/password; logon denied
+
+	at oracle.jdbc.driver.DatabaseError.throwSqlException(DatabaseError.java:112)
+	at oracle.jdbc.driver.T4CTTIoer.processError(T4CTTIoer.java:331)
+	at oracle.jdbc.driver.T4CTTIoer.processError(T4CTTIoer.java:283)
+	at oracle.jdbc.driver.T4CTTIoer.processError(T4CTTIoer.java:278)
+	at oracle.jdbc.driver.T4CTTIoauthenticate.receiveOauth(T4CTTIoauthenticate.java:791)
+	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:362)
+	at oracle.jdbc.driver.PhysicalConnection.<init>(PhysicalConnection.java:439)
+	at oracle.jdbc.driver.T4CConnection.<init>(T4CConnection.java:165)
+	at oracle.jdbc.driver.T4CDriverExtension.getConnection(T4CDriverExtension.java:35)
+	at oracle.jdbc.driver.OracleDriver.connect(OracleDriver.java:801)
+	at java.sql.DriverManager.getConnection(DriverManager.java:582)
+	at java.sql.DriverManager.getConnection(DriverManager.java:185)
+	at org.apache.ibatis.datasource.unpooled.UnpooledDataSource.getConnection(UnpooledDataSource.java:64)
+	at org.apache.ibatis.datasource.pooled.PooledDataSource.popConnection(PooledDataSource.java:349)
+	at org.apache.ibatis.datasource.pooled.PooledDataSource.getConnection(PooledDataSource.java:55)
+	at org.apache.ibatis.session.defaults.DefaultSqlSessionFactory.openSessionFromDataSource(DefaultSqlSessionFactory.java:73)
+	... 13 more
+
+ 2011-08-26 16:35:59,359  INFO  - 任务[TestTask1]运行信息： execute TestTask....   2011-8-26 16:35:59
+ 2011-08-26 16:35:59,359  INFO  - 任务[TestTask1]运行信息：退出任务,本次总耗时:0s。   2011-8-26 16:35:59
+ 2011-08-26 16:36:03,187  INFO  - 任务[TestTask1]运行信息：开始执行任务。   2011-8-26 16:36:03
+ 2011-08-26 16:36:03,515  ERROR - 任务[TestTask1]运行信息：发生异常   2011-8-26 16:36:03
+ 2011-08-26 16:36:03,515  ERROR - org.apache.ibatis.exceptions.PersistenceException: 
+### Error opening session.  Cause: java.sql.SQLException: ORA-01017: invalid username/password; logon denied
+
+### Cause: java.sql.SQLException: ORA-01017: invalid username/password; logon denied
+
+	at org.apache.ibatis.exceptions.ExceptionFactory.wrapException(ExceptionFactory.java:8)
+	at org.apache.ibatis.session.defaults.DefaultSqlSessionFactory.openSessionFromDataSource(DefaultSqlSessionFactory.java:83)
+	at org.apache.ibatis.session.defaults.DefaultSqlSessionFactory.openSession(DefaultSqlSessionFactory.java:32)
+	at cn.elam.util.persistence.mybatis.MyBatisSeesionFactory.createSession(MyBatisSeesionFactory.java:67)
+	at cn.elam.util.testcase.taskService.TestTask.task(TestTask.java:35)
+	at cn.elam.util.task.BaseTask$1.run(BaseTask.java:69)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:441)
+	at java.util.concurrent.FutureTask$Sync.innerRunAndReset(FutureTask.java:317)
+	at java.util.concurrent.FutureTask.runAndReset(FutureTask.java:150)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$101(ScheduledThreadPoolExecutor.java:98)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.runPeriodic(ScheduledThreadPoolExecutor.java:181)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:205)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(ThreadPoolExecutor.java:885)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:907)
+	at java.lang.Thread.run(Thread.java:619)
+Caused by: java.sql.SQLException: ORA-01017: invalid username/password; logon denied
+
+	at oracle.jdbc.driver.DatabaseError.throwSqlException(DatabaseError.java:112)
+	at oracle.jdbc.driver.T4CTTIoer.processError(T4CTTIoer.java:331)
+	at oracle.jdbc.driver.T4CTTIoer.processError(T4CTTIoer.java:283)
+	at oracle.jdbc.driver.T4CTTIoer.processError(T4CTTIoer.java:278)
+	at oracle.jdbc.driver.T4CTTIoauthenticate.receiveOauth(T4CTTIoauthenticate.java:791)
+	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:362)
+	at oracle.jdbc.driver.PhysicalConnection.<init>(PhysicalConnection.java:439)
+	at oracle.jdbc.driver.T4CConnection.<init>(T4CConnection.java:165)
+	at oracle.jdbc.driver.T4CDriverExtension.getConnection(T4CDriverExtension.java:35)
+	at oracle.jdbc.driver.OracleDriver.connect(OracleDriver.java:801)
+	at java.sql.DriverManager.getConnection(DriverManager.java:582)
+	at java.sql.DriverManager.getConnection(DriverManager.java:185)
+	at org.apache.ibatis.datasource.unpooled.UnpooledDataSource.getConnection(UnpooledDataSource.java:64)
+	at org.apache.ibatis.datasource.pooled.PooledDataSource.popConnection(PooledDataSource.java:349)
+	at org.apache.ibatis.datasource.pooled.PooledDataSource.getConnection(PooledDataSource.java:55)
+	at org.apache.ibatis.session.defaults.DefaultSqlSessionFactory.openSessionFromDataSource(DefaultSqlSessionFactory.java:73)
+	... 13 more
+
+ 2011-08-26 16:36:03,515  INFO  - 任务[TestTask1]运行信息： execute TestTask....   2011-8-26 16:36:03
+ 2011-08-26 16:36:03,515  INFO  - 任务[TestTask1]运行信息：退出任务,本次总耗时:0s。   2011-8-26 16:36:03
+ 2011-08-26 16:36:46,109  INFO  - 任务[管理器]运行信息：执行管理器中的任务！   2011-8-26 16:36:46
+ 2011-08-26 16:36:46,109  INFO  - 任务[管理器]运行信息：守护线程【TaskOverTimeChecker】，执行结束并退出！   2011-8-26 16:36:46
+ 2011-08-26 16:36:46,187  INFO  - 任务[管理器]运行信息：正创建任务对象[TestTask1]   2011-8-26 16:36:46
+ 2011-08-26 16:36:46,203  INFO  - 任务[TestTask1]运行信息：任务初始化加载。   2011-8-26 16:36:46
+ 2011-08-26 16:36:46,203  INFO  - 任务[TestTask1]运行信息： initialize....   2011-8-26 16:36:46
+ 2011-08-26 16:36:46,203  INFO  - 任务[TestTask1]运行信息：已完成任务加载并进入任务管理器中。   2011-8-26 16:36:46
+ 2011-08-26 16:36:56,203  INFO  - 任务[TestTask1]运行信息：开始执行任务。   2011-8-26 16:36:56
+ 2011-08-26 16:37:06,109  INFO  - 任务[管理器]运行信息：状态信息：任务已被执行【1】次，其中执行时发生异常有【0】次，重启次数【0】次，上一次执行耗时为【0】秒，时间戳为【Fri Aug 26 16:36:56 GMT 2011】，当前超时设置为【20】秒。   2011-8-26 16:37:06
+ 2011-08-26 16:37:06,109  INFO  - 任务[管理器]运行信息：守护线程【TaskOverTimeChecker】，执行结束并退出！   2011-8-26 16:37:06
+ 2011-08-26 16:37:06,578  INFO  - 任务[TestTask1]运行信息：故意耗时9秒。   2011-8-26 16:37:06
+ 2011-08-26 16:37:06,578  INFO  - 任务[TestTask1]运行信息： execute TestTask....   2011-8-26 16:37:06
+ 2011-08-26 16:37:06,578  INFO  - 任务[TestTask1]运行信息：退出任务,本次总耗时:10s。   2011-8-26 16:37:06
+ 2011-08-26 16:37:06,578  INFO  - 任务[TestTask1]运行信息：开始执行任务。   2011-8-26 16:37:06

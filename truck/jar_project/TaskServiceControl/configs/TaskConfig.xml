@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TasksConfig>
+	<global></global>
+	<tasks>
+		<task id="" name="TestTask1" startTimeAt="10:10" period="10" periodType="sec">
+			cn.elam.util.testcase.taskService.TestTask
+       </task>
+	</tasks>
+</TasksConfig>
+
+

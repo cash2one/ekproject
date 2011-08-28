@@ -1,0 +1,18 @@
+#Fri Aug 26 15:17:24 GMT 2011
+eclipse.preferences.version=1
+encoding//src/cn/elam/util/task/BaseTask.java=UTF-8
+encoding//src/cn/elam/util/task/FileWatchdog.java=UTF-8
+encoding//src/cn/elam/util/task/LoggerService.java=UTF-8
+encoding//src/cn/elam/util/task/Task.java=UTF-8
+encoding//src/cn/elam/util/task/TaskItem.java=UTF-8
+encoding//src/cn/elam/util/task/TaskLog.java=UTF-8
+encoding//src/cn/elam/util/task/TaskManager.java=UTF-8
+encoding//src/cn/elam/util/task/TaskStatus.java=UTF-8
+encoding//src/cn/elam/util/task/TasksContainer.java=UTF-8
+encoding//src/cn/elam/util/task/bean/BeanUtil.java=UTF-8
+encoding//src/cn/elam/util/task/inter/TaskLogger.java=UTF-8
+encoding//src/cn/elam/util/testcase/taskService/TestMain.java=UTF-8
+encoding//src/cn/elam/util/testcase/taskService/TestTask.java=UTF-8
+encoding//src/com/elam/util/task/FileWatchdog.java=UTF-8
+encoding//src/com/elam/util/task/bean/BeanUtil.java=UTF-8
+encoding/<project>=UTF-8
