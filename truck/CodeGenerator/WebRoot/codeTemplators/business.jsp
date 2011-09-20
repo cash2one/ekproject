@@ -39,6 +39,7 @@ import java.util.List;
 
 
 import org.springframework.stereotype.Service;
+import org.springframework.context.annotation.Scope;
 
 
 import org.apache.log4j.Logger;
@@ -60,6 +61,7 @@ import <%=mapperPackageName+"."+map.getClazz()%>Mapper;
  * @CreateTime <%=new Date().toString()%>
  *
  */
+@Scope("prototype") 
 @Service("<%=StringHelper.fistChartLowerCase(map.getName())%>")
 public class <%=map.getName()%> extends BaseBusiness {
     
