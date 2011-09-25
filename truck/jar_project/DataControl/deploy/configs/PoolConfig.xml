@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<poolConfig>
+   <enable default="xxt">xxt</enable>
+   <pools>
+       <xxt driver="oracle.jdbc.driver.OracleDriver" connectionPoolSize="10" minConnectionPoolSize="2" dataSourceName="xxt" >
+           <url>jdbc:oracle:thin:@61.142.114.252:1522:orcl</url>
+           <user>zjxxt</user>
+           <pwd>zj23XXT</pwd>
+           <Properties>
+                <Param name="c3p0.maxIdleTime">3</Param>
+           </Properties>
+       </xxt>
+   </pools>
+</poolConfig>
+
+
