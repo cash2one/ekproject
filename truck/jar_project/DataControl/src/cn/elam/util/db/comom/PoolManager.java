@@ -43,12 +43,21 @@ class PoolManager {
 
 	}
 
+	/**
+	 * 
+	 * 方法：返回数据池实例
+	 * 
+	 * @return
+	 *  
+	 *    Add By Ethan Lam  At 2011-9-25
+	 */
 	public static PoolManager getPoolManager() {
 		if (poolInstance == null)
 			poolInstance = new PoolManager();
 		return poolInstance;
 	}
 
+	
 	/**
 	 * 获取对应的数据源
 	 * 
@@ -110,6 +119,8 @@ class PoolManager {
 								.attributeValue("minConnectionPoolSize"));
 				db.setMinPoolSize(min);
 				db.setMaxPoolSize(max);
+				db.setInitialPoolSize(min);
+				
 				
 			    Element propertiesEles = XmlHandler.getElement(doc, "pools/" + pool+"/Properties");
 			    List<Element> params = propertiesEles.selectNodes("Param");
@@ -121,8 +132,9 @@ class PoolManager {
 						System.out.println("【PoolConfig-"+pool+"】-setProperties: "+param.attributeValue("name")+" = "+param.getTextTrim());
 						p.setProperty(param.attributeValue("name"), param.getTextTrim());
 					}
-//					db.setProperties(p);
+				  	
 				}
+			    
 			    
 			} catch (Exception e) {
 				e.printStackTrace();

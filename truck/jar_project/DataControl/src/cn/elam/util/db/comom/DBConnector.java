@@ -29,6 +29,7 @@ public class DBConnector {
 		return dbpool.getConnection();
 	}
 
+
 	
 	public static void report(String poolName) throws Exception{
 		ComboPooledDataSource dbpool = PoolManager.getPoolManager().getDBPool(poolName);
