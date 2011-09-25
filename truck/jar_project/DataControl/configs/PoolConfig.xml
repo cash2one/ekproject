@@ -2,10 +2,12 @@
 <poolConfig>
    <enable default="xxt">xxt</enable>
    <pools>
-       <xxt driver="oracle.jdbc.driver.OracleDriver" connectionPoolSize="10" minConnectionPoolSize="2" >
-           <url>jdbc:oracle:thin:@61.142.114.252:1521:orcl</url>
+       <xxt driver="oracle.jdbc.driver.OracleDriver" connectionPoolSize="3" minConnectionPoolSize="1">
+           <url>jdbc:oracle:thin:@61.142.114.252:1522:orcl</url>
            <user>zjxxt</user>
-           <pwd>zjxxt2010$%^</pwd>
+           <pwd>zj23XXT</pwd>
+           <CheckoutTimeout>30000</CheckoutTimeout><!-- 当连接池用完时客户端调用getConnection()后等待获取新连接的时间  -->
+           <AcquireRetryAttempts>2</AcquireRetryAttempts><!-- 定义在从数据库获取新连接失败后重复尝试获取的次数  -->
        </xxt>
    </pools>
 </poolConfig>
