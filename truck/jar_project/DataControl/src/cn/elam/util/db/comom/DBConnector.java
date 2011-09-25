@@ -26,7 +26,7 @@ public class DBConnector {
 	public static Connection getConnection(String poolName)
 			throws DaoException, SQLException {
 		ComboPooledDataSource dbpool = PoolManager.getPoolManager().getDBPool(poolName);
-		getDbPoolStatus(dbpool);
+		getDbPoolStatus(poolName,dbpool);
 		return dbpool.getConnection();
 	}
 
@@ -39,7 +39,7 @@ public class DBConnector {
      *  
      *    Add By Ethan Lam  At 2011-9-25
      */
-	public static String getDbPoolStatus(ComboPooledDataSource pds){
+	public static String getDbPoolStatus(String poolName,ComboPooledDataSource pds){
 		StringBuffer msg = new StringBuffer();
 		try {
 			msg.append(" num_connections: "+ pds.getNumConnections());
@@ -47,6 +47,7 @@ public class DBConnector {
 			msg.append(" NumFailedCheckinsDefaultUser: "+ pds.getNumFailedCheckinsDefaultUser());
 			msg.append(" num_busy_connections: " + pds.getNumBusyConnectionsDefaultUser());
 			msg.append(" num_idle_connections: " + pds.getNumIdleConnectionsDefaultUser());
+			System.out.println("DBPool【"+poolName+"】 Current_Status: "+msg);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
