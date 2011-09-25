@@ -39,7 +39,7 @@ public class DBConnector {
      *  
      *    Add By Ethan Lam  At 2011-9-25
      */
-	public static String getDbPoolStatus(String poolName,ComboPooledDataSource pds){
+	 static String getDbPoolStatus(String poolName,ComboPooledDataSource pds){
 		StringBuffer msg = new StringBuffer();
 		try {
 			msg.append(" num_connections: "+ pds.getNumConnections());
@@ -56,6 +56,26 @@ public class DBConnector {
 	}
 	
 	
+	/**
+	 * 
+	 * 方法：方法：获取当前数据池状态
+	 * 
+	 * @param poolName
+	 * @return
+	 *  
+	 *    Add By Ethan Lam  At 2011-9-25
+	 */
+	public static String getDbPoolStatusByPoolName(String poolName){
+			try {
+				ComboPooledDataSource dbpool = PoolManager.getPoolManager().getDBPool(poolName);
+				return getDbPoolStatus(poolName,dbpool);
+			} catch (DaoException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return "【DBConnector】:NO DBPool Report Status.....please Check PoolName is or not named by  "+poolName;
+			}
+			
+    }
  
 	
 	
