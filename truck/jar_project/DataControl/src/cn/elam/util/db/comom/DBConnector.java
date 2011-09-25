@@ -26,21 +26,32 @@ public class DBConnector {
 	public static Connection getConnection(String poolName)
 			throws DaoException, SQLException {
 		ComboPooledDataSource dbpool = PoolManager.getPoolManager().getDBPool(poolName);
-		try {
-			report(dbpool);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		getDbPoolStatus(dbpool);
 		return dbpool.getConnection();
 	}
 
-
-	public static void report(ComboPooledDataSource pds) throws Exception{
-		System.out.println("num_connections: "+ pds.getNumConnections());
-		System.out.println("NumConnectionsDefaultUser: "+ pds.getNumConnectionsDefaultUser());
-		System.out.println("NumFailedCheckinsDefaultUser: "+ pds.getNumFailedCheckinsDefaultUser());
-		System.out.println("num_busy_connections: " + pds.getNumBusyConnectionsDefaultUser());
-		System.out.println("num_idle_connections: " + pds.getNumIdleConnectionsDefaultUser());
+    /**
+     * 
+     * 方法：获取当前数据池状态
+     * 
+     * @param pds
+     * @throws Exception
+     *  
+     *    Add By Ethan Lam  At 2011-9-25
+     */
+	public static String getDbPoolStatus(ComboPooledDataSource pds){
+		StringBuffer msg = new StringBuffer();
+		try {
+			msg.append(" num_connections: "+ pds.getNumConnections());
+			msg.append(" NumConnectionsDefaultUser: "+ pds.getNumConnectionsDefaultUser());
+			msg.append(" NumFailedCheckinsDefaultUser: "+ pds.getNumFailedCheckinsDefaultUser());
+			msg.append(" num_busy_connections: " + pds.getNumBusyConnectionsDefaultUser());
+			msg.append(" num_idle_connections: " + pds.getNumIdleConnectionsDefaultUser());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		String m = msg.toString();
+		return m;
 	}
 	
 	
