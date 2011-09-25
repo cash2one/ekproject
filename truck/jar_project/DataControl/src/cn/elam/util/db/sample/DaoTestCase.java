@@ -22,8 +22,27 @@ public class DaoTestCase {
 
 	public static void main(String... args) throws Exception {
        
-	    querySample();
+	    querySample(1);
 		
+	    querySample(2);
+	    
+	    querySample(3);
+	    
+	    querySample(4);
+	    
+	    querySample(5);
+	    
+	    querySample(6);
+	    
+	    querySample(7);
+	    
+	    querySample(8);
+	    
+	    querySample(9);
+	    
+	    querySample(10);
+	    
+	    querySample(11);
 		//持久化	
 //		persistSample();
 	}
@@ -55,7 +74,8 @@ public class DaoTestCase {
 	
 	
 	//查询接口测试
-	public static void querySample() throws Exception{
+	public static void querySample(int times) throws Exception{
+		System.out.println("querySample....["+times+"]");
  		StringBuffer sql =new StringBuffer("select * from area ");
 		
  		List<AreaModel> list = new QueryWrapperDao<AreaModel>("xxt").list(new QueryAction<AreaModel>(){

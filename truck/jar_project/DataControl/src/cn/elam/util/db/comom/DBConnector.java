@@ -2,9 +2,9 @@ package cn.elam.util.db.comom;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.Map;
 
-import javax.sql.ConnectionPoolDataSource;
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import com.mchange.v2.c3p0.PooledDataSource;
@@ -26,33 +26,25 @@ public class DBConnector {
 	public static Connection getConnection(String poolName)
 			throws DaoException, SQLException {
 		ComboPooledDataSource dbpool = PoolManager.getPoolManager().getDBPool(poolName);
+		try {
+			report(dbpool);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return dbpool.getConnection();
 	}
 
 
-	
-	public static void report(String poolName) throws Exception{
-		ComboPooledDataSource dbpool = PoolManager.getPoolManager().getDBPool(poolName);
-		ConnectionPoolDataSource ds = dbpool.getConnectionPoolDataSource();
-		PooledDataSource pds = (PooledDataSource) ds; 
-		System.err.println("num_connections: " + pds.getNumConnectionsDefaultUser());   
-		System.err.println("num_busy_connections: " + pds.getNumBusyConnectionsDefaultUser()); System.err.println("num_idle_connections: " + pds.getNumIdleConnectionsDefaultUser()); System.err.println(); 
+	public static void report(ComboPooledDataSource pds) throws Exception{
+		System.out.println("num_connections: "+ pds.getNumConnections());
+		System.out.println("NumConnectionsDefaultUser: "+ pds.getNumConnectionsDefaultUser());
+		System.out.println("NumFailedCheckinsDefaultUser: "+ pds.getNumFailedCheckinsDefaultUser());
+		System.out.println("num_busy_connections: " + pds.getNumBusyConnectionsDefaultUser());
+		System.out.println("num_idle_connections: " + pds.getNumIdleConnectionsDefaultUser());
 	}
 	
 	
-	/**
-	 * 
-	 * 方法：
-	 * 
-	 * @return
-	 *  
-	 *    Add By Ethan Lam  At 2011-9-24
-	 */
-	public static Map<String,Object> dbStatus(){
-	      Map<String,Object> d = null;
-	      return d;
-		
-	}
+ 
 	
 	
 }

@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
-import javax.sql.DataSource;
+import javax.naming.InitialContext;
 
 import org.dom4j.Document;
 import org.dom4j.Element;
@@ -103,7 +103,7 @@ class PoolManager {
 			db = new ComboPooledDataSource();
 			try {
 				
-				db.setDataSourceName(poolObject.attributeValue("dataSourceName"));
+				db.setDataSourceName("java:comp/env/jdbc/"+pool);
 				db.setDriverClass(poolObject.attributeValue("driver"));
 				db.setJdbcUrl(poolObject.selectSingleNode("url").getText().trim());
 				db.setPassword(poolObject.selectSingleNode("pwd").getText().trim());
@@ -113,28 +113,43 @@ class PoolManager {
 						.attributeValue("connectionPoolSize")) ? 20 : Trans
 						.StringToInt(poolObject
 								.attributeValue("connectionPoolSize"));
+				
 				int min = Checker.isNull(poolObject
 						.attributeValue("minConnectionPoolSize")) ? 10 : Trans
 						.StringToInt(poolObject
 								.attributeValue("minConnectionPoolSize"));
+				
+				int checkoutTimeout = Checker.isNull(poolObject
+						.attributeValue("CheckoutTimeout")) ? 30000 : Trans
+								.StringToInt(poolObject
+										.attributeValue("CheckoutTimeout"));
+				
+				int acquireRetryAttempts = Checker.isNull(poolObject
+						.attributeValue("AcquireRetryAttempts")) ? 2 : Trans
+								.StringToInt(poolObject
+										.attributeValue("AcquireRetryAttempts"));
+				
 				db.setMinPoolSize(min);
 				db.setMaxPoolSize(max);
 				db.setInitialPoolSize(min);
 				
+				db.setCheckoutTimeout(checkoutTimeout);//当连接池用完时客户端调用getConnection()后等待获取新连接的时间
+				db.setIdleConnectionTestPeriod(60);//隔多少秒检查所有连接池中的空闲连接
+				db.setAcquireRetryAttempts(acquireRetryAttempts);//定义在从数据库获取新连接失败后重复尝试获取的次数
+				db.setAcquireRetryDelay(1000);//两次连接中间隔时间，单位毫秒，默认为1000
 				
-			    Element propertiesEles = XmlHandler.getElement(doc, "pools/" + pool+"/Properties");
-			    List<Element> params = propertiesEles.selectNodes("Param");
-			    if(params!=null&&params.size()>0){
-				    Properties p = new Properties();
-					for(Element param:params){
-						if(Checker.isNull(param.attributeValue("name"))||Checker.isNull(param.getTextTrim()))
-							continue;
-						System.out.println("【PoolConfig-"+pool+"】-setProperties: "+param.attributeValue("name")+" = "+param.getTextTrim());
-						p.setProperty(param.attributeValue("name"), param.getTextTrim());
-					}
-				  	
-				}
-			    
+//			    Element propertiesEles = XmlHandler.getElement(doc, "pools/" + pool+"/Properties");
+//			    List<Element> params = propertiesEles.selectNodes("Param");
+//			    if(params!=null&&params.size()>0){
+//				    Properties properties = new Properties();
+//					for(Element param:params){
+//						if(Checker.isNull(param.attributeValue("name"))||Checker.isNull(param.getTextTrim()))
+//							continue;
+//						System.out.println("【PoolConfig-"+pool+"】-setProperties: "+param.attributeValue("name")+" = "+param.getTextTrim());
+//						properties.setProperty(param.attributeValue("name"), param.getTextTrim());
+//					}
+//				  	db.setProperties(properties);
+//				}
 			    
 			} catch (Exception e) {
 				e.printStackTrace();
