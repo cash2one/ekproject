@@ -126,6 +126,8 @@ public class ChooseDialog extends Dialog {
 	 * 抽取目标文件
 	 */
 	protected void processBusi() {
+		if(this.text.getText()==null||srcDir==null)
+			return;
 		actionBtn.setText("提取中....");
 		actionBtn.setEnabled(false);
 		System.out.println("run processBusi.."+srcDir);
@@ -152,18 +154,30 @@ public class ChooseDialog extends Dialog {
 	   String srcFileName = null;
 	   String destFileName = null;
 	   for(String targetFile:filesPath){
+		   
 		   if("".equals(targetFile.trim()))
 			   continue;
+		   
+		   targetFile = changeFilePathOrName(targetFile);
 		   srcFileName=root+"/"+targetFile;
 		   destFileName = outPutDir +"/"+targetFile; 
 		   destFileName = destFileName.replace("\\", "/");
-		   if(CopyFileUtil.copyFile(srcFileName, destFileName, true))
-		     resultText.append(""+srcFileName+" 提取成功。\r\n");
-		   else
-			 resultText.append(""+srcFileName+" 提取失败。\r\n");
+		   System.out.println("src: "+srcFileName);
+		   System.out.println("dst: "+destFileName);
+//		   if(CopyFileUtil.copyFile(srcFileName, destFileName, true))
+//		     resultText.append(""+srcFileName+" 提取成功。\r\n");
+//		   else
+//			 resultText.append(""+srcFileName+" 提取失败。\r\n");
 	   }
 	}
 	
+	String changeFilePathOrName(String src){
+		if(src.indexOf(".java")>=0)
+		    src = src.replace(".java", ".class");
+		if(src.indexOf("src/")>=0)
+			src = src.replace(src.substring(0,src.indexOf("src/")), "/WEB-INF/classes/");
+		return src;
+	}
 
 	public void setSrcPath(String dir) {
 		this.srcDir = dir;
