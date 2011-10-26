@@ -137,7 +137,6 @@ public class ChooseDialog extends Dialog {
 		String[] filesPath  = this.text.getText().split("\r\n");
 		this.resultText.setText("1、将要拷贝"+length+"个文件....\r\n");
 		doAction(this.srcDir,filesPath);
-		this.resultText.append("文件已经拷贝完成！");
 		actionBtn.setText("执行提取");
 		actionBtn.setEnabled(true);
 	}
@@ -153,6 +152,8 @@ public class ChooseDialog extends Dialog {
 	   String  outPutDir =  root.substring(0, root.lastIndexOf("/"))+"/output";
 	   String srcFileName = null;
 	   String destFileName = null;
+	   int s = 0;
+	   int f = 0;
 	   for(String targetFile:filesPath){
 		   
 		   if("".equals(targetFile.trim()))
@@ -164,18 +165,23 @@ public class ChooseDialog extends Dialog {
 		   destFileName = destFileName.replace("\\", "/");
 		   System.out.println("src: "+srcFileName);
 		   System.out.println("dst: "+destFileName);
-//		   if(CopyFileUtil.copyFile(srcFileName, destFileName, true))
-//		     resultText.append(""+srcFileName+" 提取成功。\r\n");
-//		   else
-//			 resultText.append(""+srcFileName+" 提取失败。\r\n");
+		   if(CopyFileUtil.copyFile(srcFileName, destFileName, true)){
+		     resultText.append(""+srcFileName+" 提取成功。\r\n");
+		     s++;
+		   } 
+		   else{
+			 resultText.append(""+srcFileName+" 提取失败。\r\n");
+			 f++;
+		   }
 	   }
+	   this.resultText.append("文件已经拷贝完成！成功提取:"+s+"；提取失败："+f);
 	}
 	
 	String changeFilePathOrName(String src){
 		if(src.indexOf(".java")>=0)
 		    src = src.replace(".java", ".class");
 		if(src.indexOf("src/")>=0)
-			src = src.replace(src.substring(0,src.indexOf("src/")), "/WEB-INF/classes/");
+			src = src.replace(src.substring(0,src.indexOf("src/")+4), "WEB-INF/classes/");
 		return src;
 	}
 
