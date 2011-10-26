@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         id="application"
+         point="org.eclipse.core.runtime.applications">
+      <application>
+         <run
+               class="fetchfilesv1.Application">
+         </run>
+      </application>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            name="RCP Perspective"
+            class="fetchfilesv1.Perspective"
+            id="FetchFilesV1.perspective">
+      </perspective>
+   </extension>
+   
+   
+   <extension
+         point="org.eclipse.ui.actionSets">
+      <actionSet
+            label="Sample Action Set"
+            visible="true"
+            id="getFile.actionSet">
+         <menu
+               label="部&amp;署"
+               id="sampleMenu">
+            <separator
+                  name="sampleGroup">
+            </separator>
+         </menu>
+         <action
+               label="&amp;文件提取"
+               icon="icons/sample.gif"
+               class="getfile.actions.GetFileAction"
+               tooltip="文件抽取"
+               menubarPath="sampleMenu/sampleGroup"
+               toolbarPath="sampleGroup"
+               id="getfile.actions.GetFileAction">
+         </action>
+      </actionSet>
+   </extension>
+   <extension
+         id="product"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="FetchFilesV1.application"
+            name="fetchfilesv1">
+         <property
+               name="appName"
+               value="fetchfilesv1">
+         </property>
+      </product>
+   </extension>
+   
+  
+
+</plugin>
