@@ -2,6 +2,7 @@ package getfile.actions;
 
 import getfile.ui.ChooseDialog;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
@@ -43,18 +44,24 @@ public class GetFileAction implements IWorkbenchWindowActionDelegate {
 		String srcdir = dirDig.open();
 		
 		try {
+			    File f = new File("."); 
+			    String absolutePath = f.getAbsolutePath();
 			    Properties properties = new Properties();
 				properties.load(GetFileAction.class.getResourceAsStream("/config.properties"));
-				if(srcdir!=null&&"".equals(srcdir)){
+				if(srcdir==null||"".equals(srcdir)){
 					//保存到配置文件中
 				    srcdir = properties.getProperty("root", "");		
 				}else{
+					String cfgPath ="config.properties";
+					f = new File(cfgPath); 
+				    absolutePath = f.getAbsolutePath();
 					properties.setProperty("root", srcdir);
-					properties.store(new FileOutputStream("config.properties"), "config.properties");
+					properties.store(new FileOutputStream(cfgPath), "config.properties");
 				}
+				 System.out.println("当前的路径设置为："+srcdir);
 			} catch (IOException e) {
 				e.printStackTrace();
-		}
+	    	}
 		
 		ChooseDialog dig = new ChooseDialog(window.getShell());
 		dig.setSrcPath(srcdir);
