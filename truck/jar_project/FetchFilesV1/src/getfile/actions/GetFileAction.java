@@ -2,13 +2,17 @@ package getfile.actions;
 
 import getfile.ui.ChooseDialog;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Properties;
+
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.DirectoryDialog;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.IWorkbenchWindowActionDelegate;
-import org.eclipse.jface.dialogs.MessageDialog;
+
 
 /**
  * Our sample action implements workbench action delegate. The action proxy will
@@ -37,7 +41,21 @@ public class GetFileAction implements IWorkbenchWindowActionDelegate {
 
 		org.eclipse.swt.widgets.DirectoryDialog dirDig = new DirectoryDialog(this.window.getShell(), SWT.CLOSE);
 		String srcdir = dirDig.open();
-
+		
+		try {
+			    Properties properties = new Properties();
+				properties.load(GetFileAction.class.getResourceAsStream("/config.properties"));
+				if(srcdir!=null&&"".equals(srcdir)){
+					//保存到配置文件中
+				    srcdir = properties.getProperty("root", "");		
+				}else{
+					properties.setProperty("root", srcdir);
+					properties.store(new FileOutputStream("config.properties"), "config.properties");
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+		}
+		
 		ChooseDialog dig = new ChooseDialog(window.getShell());
 		dig.setSrcPath(srcdir);
 		dig.open();
