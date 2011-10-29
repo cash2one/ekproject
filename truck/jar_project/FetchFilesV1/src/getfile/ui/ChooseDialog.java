@@ -9,6 +9,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import org.eclipse.swt.SWT;
@@ -290,11 +292,12 @@ public class ChooseDialog extends Dialog {
 	   String destFileName = null;
 	   int s = 0;
 	   int f = 0;
-	   for(String targetFile:filesPath){
-		  
+	   
+	   List<String> tfilesPath =  difFiles(filesPath);
+	   
+	   for(String targetFile:tfilesPath){
 		   if("".equals(targetFile.trim()))
 			   continue;
-		   
 		   targetFile = changeFilePathOrName(targetFile);
 		   srcFileName=root+"/"+targetFile;
 		   destFileName = outPutDir +"/"+targetFile; 
@@ -308,7 +311,9 @@ public class ChooseDialog extends Dialog {
 			 f++;
 		   }
 	   }
-	   this.resultText.append("文件已经拷贝完成！成功提取:"+s+"；提取失败："+f);
+	   this.resultText.append("文件已经拷贝完成！成功提取:"+s+"；提取失败："+f+"，共输入"+this.allFileNum+"个文件，其中有"+this.sameFileNum+"个重复。");
+	   this.allFileNum = 0;
+	   this.sameFileNum = 0;
 	}
 	
 	String changeFilePathOrName(String src){
@@ -318,7 +323,33 @@ public class ChooseDialog extends Dialog {
 			src = src.replace(src.substring(0,src.indexOf("src/")+4), "WEB-INF/classes/");
 		return src;
 	}
-
+	
+	
+	int sameFileNum = 0;
+	int allFileNum = 0;
+	
+	/**
+	 * 
+	 * 方法：去重
+	 * 
+	 * @param files
+	 * @return
+	 *  
+	 *    Add By Ethan Lam  At 2011-10-29
+	 */
+	List<String> difFiles(String[] files){
+	    List<String> fileArry = new ArrayList<String>();
+		for(String file:files){
+			if(file==null||"".equals(file.trim()))
+			   continue;
+			allFileNum++;
+			if(!fileArry.contains(file))
+				fileArry.add(file);
+			else
+				sameFileNum++;
+	    }
+		return fileArry;
+	}
 	
 	/**
 	 * 
