@@ -325,9 +325,10 @@ public class ChooseDialog extends Dialog {
 	void saveSetting(String key,String value){
 		try {
 		    Properties properties = new Properties();
-			properties.load(GetFileAction.class.getResourceAsStream("/config.properties"));
+		    FileOutputStream fos = new FileOutputStream("config.properties"); 
 			properties.setProperty(key,value==null?"":value);
-//			properties.store(new FileOutputStream(cfgPath), "config.properties");
+     		properties.store(fos, "config.properties");
+     		fos.close();
 		} catch (IOException e) {
 			e.printStackTrace();
     	}
