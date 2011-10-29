@@ -40,31 +40,8 @@ public class GetFileAction implements IWorkbenchWindowActionDelegate {
 	 */
 	public void run(IAction action) {
 
-		org.eclipse.swt.widgets.DirectoryDialog dirDig = new DirectoryDialog(this.window.getShell(), SWT.CLOSE);
-		String srcdir = dirDig.open();
-		
-		try {
-			    File f = new File("."); 
-			    String absolutePath = f.getAbsolutePath();
-			    Properties properties = new Properties();
-				properties.load(GetFileAction.class.getResourceAsStream("/config.properties"));
-				if(srcdir==null||"".equals(srcdir)){
-					//保存到配置文件中
-				    srcdir = properties.getProperty("root", "");		
-				}else{
-					String cfgPath ="config.properties";
-					f = new File(cfgPath); 
-				    absolutePath = f.getAbsolutePath();
-					properties.setProperty("root", srcdir);
-					properties.store(new FileOutputStream(cfgPath), "config.properties");
-				}
-				 System.out.println("当前的路径设置为："+srcdir);
-			} catch (IOException e) {
-				e.printStackTrace();
-	    	}
 		
 		ChooseDialog dig = new ChooseDialog(window.getShell());
-		dig.setSrcPath(srcdir);
 		dig.open();
 
 //		MessageDialog.openInformation(window.getShell(), "选择根路径：", srcdir);
