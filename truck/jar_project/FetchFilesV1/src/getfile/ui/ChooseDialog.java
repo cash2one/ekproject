@@ -6,6 +6,7 @@ import getfile.actions.GetFileAction;
 import getfile.util.CopyFileUtil;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
@@ -53,11 +54,12 @@ public class ChooseDialog extends Dialog {
 	private String rootPath;
 	private String outputPath;
 	private String outputDir;
-	
+	private String outputFile;
 	
 	static String ROOT_DIR="ROOT_DIR";
 	static String OUTPUT_DIR="OUTPUT_DIR";
 	static String OUTPUT_FILENAME="OUTPUT_FILENAME";
+	
 	
 	public String open() {
 		
@@ -82,7 +84,8 @@ public class ChooseDialog extends Dialog {
 		rootPathTxt.setLayoutData(fd_rootPathTxt);
 		rootPathTxt.setText(this.getSetting(ChooseDialog.ROOT_DIR));
 	    this.rootPath = this.getSetting(ChooseDialog.ROOT_DIR);
-		
+	    this.outputDir = "".equals(this.getSetting(ChooseDialog.OUTPUT_DIR))?(rootPath.length()>0?rootPath.substring(0,rootPath.lastIndexOf("/")):""):this.getSetting(ChooseDialog.OUTPUT_DIR);
+	    
 		text = new Text(shell, SWT.BORDER | SWT.WRAP | SWT.V_SCROLL | SWT.MULTI);
 		FormData fd_text = new FormData();
 		fd_text.left = new FormAttachment(lblNewLabel, 0, SWT.LEFT);
@@ -163,6 +166,7 @@ public class ChooseDialog extends Dialog {
 				if(outputPathTxt!=null)
 				  outputPathTxt.setText(outputT);
 				outputPath = outputT;
+				outputFile = ("".equals(outputFileTxt.getText())?"output":outputFileTxt.getText());
 				saveSetting(ChooseDialog.OUTPUT_DIR,outputDir);
 				saveSetting(ChooseDialog.OUTPUT_FILENAME,("".equals(outputFileTxt.getText())?"output":outputFileTxt.getText()));
 			}
@@ -222,6 +226,8 @@ public class ChooseDialog extends Dialog {
 		fd_outputPathTxt.left = new FormAttachment(label_2, 32);
 		fd_outputPathTxt.right = new FormAttachment(100, -92);
 		outputPathTxt.setLayoutData(fd_outputPathTxt);
+		System.out.println("cfg: OUTPUT_DIR -> "+this.getSetting(ChooseDialog.OUTPUT_DIR));
+		System.out.println("cfg: OUTPUT_FILENAME->"+this.getSetting(ChooseDialog.OUTPUT_FILENAME));
 		String tempPath = this.getSetting(ChooseDialog.OUTPUT_DIR)+"/"+(this.getSetting(ChooseDialog.OUTPUT_FILENAME)==""?"output":this.getSetting(ChooseDialog.OUTPUT_FILENAME));
 		outputPathTxt.setText(tempPath);
 		this.outputPath = tempPath;
@@ -324,15 +330,29 @@ public class ChooseDialog extends Dialog {
 	 */
 	void saveSetting(String key,String value){
 		try {
+			File file = cfgFile();
 		    Properties properties = new Properties();
-		    FileOutputStream fos = new FileOutputStream("config.properties"); 
-			properties.setProperty(key,value==null?"":value);
+		    FileOutputStream fos = new FileOutputStream(file); 
+		    properties.setProperty(ChooseDialog.OUTPUT_DIR,this.outputDir==null?"":this.outputDir);
+		    properties.setProperty(ChooseDialog.OUTPUT_FILENAME,("".equals(outputFile)?"output":outputFile));
+		    properties.setProperty(ChooseDialog.ROOT_DIR,this.rootPath==null?"":this.rootPath);
+		    properties.setProperty(key,value==null?"":value);
      		properties.store(fos, "config.properties");
      		fos.close();
 		} catch (IOException e) {
 			e.printStackTrace();
     	}
 	}
+	
+   
+	File cfgFile() throws IOException{
+		 File file = new File("config.properties");
+		 if(!file.exists()){
+		    file.createNewFile();
+		 }
+		 return file;
+	}
+	
 	
 	/**
 	 * 
@@ -346,8 +366,10 @@ public class ChooseDialog extends Dialog {
 	 */
 	String getSetting(String key){
 	     try {
+	    	File file = cfgFile();
 	    	Properties properties = new Properties();
-			properties.load(GetFileAction.class.getResourceAsStream("/config.properties"));
+	    	FileInputStream fin = new FileInputStream(file); 
+			properties.load(fin);
 			return properties.getProperty(key,"");
 		} catch (IOException e) {
 			e.printStackTrace();
