@@ -96,12 +96,12 @@ public class ChooseDialog extends Dialog {
 		
 		
 		resultText= new Text(shell, SWT.BORDER | SWT.WRAP | SWT.V_SCROLL | SWT.MULTI);
+		resultText.setEditable(false);
 		FormData fd_resultText = new FormData();
 		fd_resultText.right = new FormAttachment(text, 0, SWT.RIGHT);
 		fd_resultText.bottom = new FormAttachment(0, 434);
 		fd_resultText.left = new FormAttachment(0, 15);
 		resultText.setLayoutData(fd_resultText);
-		resultText.setEnabled(false);
 		
 		
 		actionBtn = new Button(shell, SWT.BORDER | SWT.MULTI | SWT.WRAP);
