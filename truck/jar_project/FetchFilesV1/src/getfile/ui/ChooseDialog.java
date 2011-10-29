@@ -226,6 +226,7 @@ public class ChooseDialog extends Dialog {
 		fd_outputPathTxt.left = new FormAttachment(label_2, 32);
 		fd_outputPathTxt.right = new FormAttachment(100, -92);
 		outputPathTxt.setLayoutData(fd_outputPathTxt);
+		System.out.println("cfg: ROOT_DIR -> "+this.getSetting(ChooseDialog.ROOT_DIR));
 		System.out.println("cfg: OUTPUT_DIR -> "+this.getSetting(ChooseDialog.OUTPUT_DIR));
 		System.out.println("cfg: OUTPUT_FILENAME->"+this.getSetting(ChooseDialog.OUTPUT_FILENAME));
 		String tempPath = this.getSetting(ChooseDialog.OUTPUT_DIR)+"/"+(this.getSetting(ChooseDialog.OUTPUT_FILENAME)==""?"output":this.getSetting(ChooseDialog.OUTPUT_FILENAME));
