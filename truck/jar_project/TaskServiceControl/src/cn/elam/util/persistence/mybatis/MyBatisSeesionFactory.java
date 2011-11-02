@@ -78,9 +78,22 @@ public class MyBatisSeesionFactory {
 	 *  
 	 *    Add By Ethan Lam  At 2011-8-26
 	 */
-	public SqlSession createSession(boolean isBatchExecutor){
+	public SqlSession createSession(boolean isBatchExecutor,boolean autoCommit){
 		if(sqlMapper!=null)
-			 return sqlMapper.openSession(ExecutorType.BATCH, isBatchExecutor);
+			 return sqlMapper.openSession(ExecutorType.BATCH,autoCommit);
+		return null;
+	}
+	
+	
+	/**
+	 * 创建session 的方式
+	 * @param executorType ExecutorType
+	 * @param autoCommit
+	 * @return
+	 */
+	public SqlSession createSession(ExecutorType executorType,boolean autoCommit){
+		if(sqlMapper!=null)
+			 return sqlMapper.openSession(executorType,autoCommit);
 		return null;
 	}
 	
