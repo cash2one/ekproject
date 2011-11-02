@@ -191,7 +191,6 @@ public class TaskManager {
 			while(true){
 				// TODO Auto-generated method stub
 				try{
-//					TaskLog.info(manageName,"守护线程【TaskOverTimeChecker】，开始执行。");
 					checkTaskRunStatus();
 					TaskLog.info(manageName,"守护线程【TaskOverTimeChecker】，执行结束并退出！");
 				    Thread.sleep(taskOverTimeCheckerSleepTime*1000);
