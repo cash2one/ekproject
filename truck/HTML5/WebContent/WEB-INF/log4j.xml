@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+
+	<appender name="STDOUT" class="org.apache.log4j.ConsoleAppender">
+		<param name="target" value="System.out" />
+		<param name="Threshold" value="info"/> 
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{ABSOLUTE} %-5p [%c] (%C:%L) - %m%n" />
+		</layout>
+	</appender>
+
+
+	<!-- SQL类日志 -->
+	<appender name="sql" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="${XXT_WEBAPP_HOME}/WEB-INF/log/sql.log" />
+		<param name="Append" value="true" />
+		<!--
+			name="DatePattern" 配置这条信息是让日志每天自动生成，名字尾部追加日期格式， 第一天生成的日志需第二天才能看到log
+
+			可以通过更改系统时间来看日志的输出
+		-->
+		<param name="DatePattern" value="'.'yyyy-MM-dd" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d  %-5p [%c] (%C:%L) - %m%n" />
+		</layout>
+	</appender>
+
+
+	<!-- 业务类日志 -->
+	<appender name="business" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="${XXT_WEBAPP_HOME}/WEB-INF/log/business.log" />
+		<param name="Append" value="true" />
+		<param name="Threshold" value="info"/> 
+		<param name="DatePattern" value="'.'yyyy-MM-dd" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value=" %d  %-5p [%c] (%C:%L) - %m%n" />
+		</layout>
+	</appender>
+	 
+
+
+   <!-- 应用日志 -->
+	<appender name="appRunning" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="${XXT_WEBAPP_HOME}/WEB-INF/log/running.log" />
+		<param name="Append" value="true" />
+		<param name="Threshold" value="debug"/> 
+		<param name="DatePattern" value="'.'yyyy-MM-dd" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value=" %d  %-5p [%c] (%C:%L) - %m%n" />
+		</layout>
+	</appender>
+	
+	
+	<!-- 带执行轨迹错误日志 -->
+	<appender name="error" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="${XXT_WEBAPP_HOME}/WEB-INF/log/error.log" />
+		<param name="Append" value="true" />
+		<param name="Threshold" value="ERROR"/> 
+		<param name="DatePattern" value="'.'yyyy-MM-dd" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value=" %d{ABSOLUTE} %-5p [%c] (%C:%L) - %m%n" />
+		</layout>
+	</appender>
+	
+	
+	<!--通过<logger></logger>的定义可以将各个包中的类日志输出到不同的日志文件中--> 
+	
+	<logger name="qtone.xxt" additivity="true">
+		<appender-ref ref="error" />
+	</logger>
+	
+	<logger name="qtone.xxt.business" additivity="true">
+		<priority value="INFO" />
+		<appender-ref ref="business"/>
+	</logger>
+
+	<logger name="org.mybatis" additivity="true">
+		<priority value="INFO" />
+		<appender-ref ref="sql" />
+	</logger>
+
+	<root>
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="appRunning"/>
+	</root>
+	
+</log4j:configuration>

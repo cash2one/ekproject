@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<project name="XXT4" default="deploy" basedir=".">  
+    <property name="webapp.name"    value="${ant.project.name}"/>  
+    <property name="catalina.home" value="D:\WebServer\apache-tomcat-6.0.29"/>
+ 
+    <!-- 前台web模块 -->
+    <property name="webUI.dir" value="D:\Workspaces\xxt2_zj\04newxxt\webApps\TeacherApp"/>    
+	<property name="webUI.pages.dir"   value="${webUI.dir}/WebContent/teacher"/>	
+
+	<!-- 发布部署  位置 -->    
+    <property name="deploy.dir" value="D:\Workspaces\xxt2_zj\04newxxt\deploy\WebContent\"/>  
+    <property name="deploy.pages.dir" value="${deploy.dir}/teacher"/>  
+    	
+    <!-- **********************************deploy   webapp********************************** -->  
+    <target name="deploy" description="Install application to servlet container" >  
+         <echo message="正在重建部署目录...."/>
+    	 <copy todir="${deploy.pages.dir}">
+    	      <fileset dir="${webUI.pages.dir}" />
+    	 </copy> 	  
+    </target>
+ 
+</project>

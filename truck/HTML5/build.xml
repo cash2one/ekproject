@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<project name="XXT4" default="deploy" basedir=".">  
+    <property name="webapp.name"    value="${ant.project.name}"/>  
+    <property name="catalina.home" value="D:\WebServer\apache-tomcat-6.0.29"/>
+ 
+    <!-- 前台web模块 -->
+    <property name="webUI.dir" value="D:\Workspaces\xxt2_zj\04newxxt\webApps\TeacherApp\"/>    
+    <property name="webUI.lib.dir"  value="${webUI.dir}/WebContent/WEB-INF/lib"/>  
+    <property name="webUI.class.dir"   value="${webUI.dir}/WebContent/WEB-INF/classes"/>
+	<property name="webUI.web.root"   value="${webUI.dir}/WebContent"/>
+	
+	
+    <!-- 业务模块   -->
+    <property name="businessApp.dir" value="D:\Workspaces\xxt2_zj\04newxxt\XxtBusinessProject\"/> 
+    <property name="businessApp.lib.dir"  value="${businessApp.dir}/lib"/>  
+    <property name="businessApp.class.dir"  value="${businessApp.dir}/bin"/>  
+
+ 
+	<!-- 发布部署  位置 -->    
+    <property name="deploy.dir" value="D:\Workspaces\xxt2_zj\04newxxt\deploy\WebContent\"/>  
+    <property name="deploy.class.dir" value="${deploy.dir}/WEB-INF/classes"/>  
+    <property name="deploy.lib.dir" value="${deploy.dir}/WEB-INF/lib"/>  
+
+	
+    <!-- **********************************clean class********************************** -->  
+    <target name="clean" description="Delete old build and dist directories">  
+        <echo message="正在清理部署目录....."/>
+        <delete dir="${deploy.dir}"/>
+    </target>  
+    
+    
+    <!-- **********************************deploy   webapp********************************** -->  
+    <target name="deploy" description="Install application to servlet container" depends="clean">  
+         <echo message="正在重建部署目录...."/>
+         <mkdir dir="${deploy.dir}"/>
+    	 <copy todir="${deploy.dir}">
+    	    <fileset dir="${webUI.web.root}" />
+    	 </copy>
+         <copy todir="${deploy.class.dir}">
+            <fileset dir="${businessApp.class.dir}" />
+         </copy>
+    </target>
+ 
+</project>
