@@ -24,6 +24,28 @@ public class Node implements Serializable{
 	
 	private Date lastVisitTime;
 
+	
+	public Node(){
+		
+	}
+	
+	/**
+	 * 
+	 * @param id
+	 * @param url
+	 * @param preUrl
+	 * @param title
+	 */
+	public Node(long id,String url,String preUrl,String title){
+	   this.id = id;
+	   this.url = url;
+	   this.preUrl = preUrl;
+	   this.title = title;
+	   this.lastVisitTime = new Date();
+	   this.updateTime = System.currentTimeMillis();
+	}
+	
+	
 	public long getId() {
 		return id;
 	}
