@@ -11,11 +11,11 @@ import java.io.Serializable;
  */
 public class Page implements Serializable{
 
-	private String 
 	
 	private String title;
 	
 	private String segment;
+	
 	
 	
 }
