@@ -12,6 +12,7 @@ import org.htmlparser.tags.LinkTag;
 import org.htmlparser.util.NodeIterator;
 import org.htmlparser.util.NodeList;
 
+import cn.elam.reptilerobot.core.inter.IParserHandler;
 import cn.elam.reptilerobot.utils.LoggerUtil;
 
 /**
@@ -21,13 +22,35 @@ import cn.elam.reptilerobot.utils.LoggerUtil;
  * @createTime 2011-11-16
  *
  */
-public class ParserHandler {
+public class ParserHandler implements IParserHandler {
 
  
+	
+	  /**
+	   * 分析页面数据
+	   * @param preUrl
+	   * @param urlConnectin
+	   * @param encode
+	   * @throws Exception
+	   */
 	  public void analyzeHTML(String preUrl,HttpURLConnection urlConnectin,String encode) throws Exception{
-		   Parser parser = new Parser(urlConnectin);
+		    Parser parser = new Parser(urlConnectin);
 	        parser.setEncoding(encode);
-	        NodeFilter filter = new AndFilter(new TagNameFilter("a"),new HasAttributeFilter("target","_blank"));
+	        dealLinkNodes(parser,preUrl);
+	        
+	  }
+	  
+	  
+	  
+	  /**
+	   * 
+	   * 处理目标 超链接节点
+	   * @param parser
+	   * @param preUrl
+	   * @throws Exception
+	   */
+	  public void dealLinkNodes(Parser parser,String preUrl) throws Exception{
+		    NodeFilter filter = new AndFilter(new TagNameFilter("a"),new HasAttributeFilter("target","_blank"));
 	        NodeList nodeList = parser.parse(filter);
 	        LoggerUtil.info("ParserHandler","爬虫得到的 <a> NodeList："+(nodeList!=null?nodeList.size():0));
 	        NodeIterator it = nodeList.elements();
@@ -40,7 +63,8 @@ public class ParserHandler {
 	            	 }
 	            }
 	        }
-	    }
+	  }
+	  
 	  
 	  
 }

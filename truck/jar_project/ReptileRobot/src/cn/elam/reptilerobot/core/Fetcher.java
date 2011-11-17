@@ -9,9 +9,10 @@ package cn.elam.reptilerobot.core;
  */
 public class Fetcher {
 
-	
-	
-	
+
+	public void downFile(){
+		
+	}
 	
 	
 	

@@ -1,14 +1,10 @@
 package cn.elam.reptilerobot.core;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLConnection;
 
 import cn.elam.reptilerobot.base.Node;
+import cn.elam.reptilerobot.core.inter.IParserHandler;
 import cn.elam.reptilerobot.utils.LoggerUtil;
 
 /**
@@ -21,7 +17,7 @@ public class Crawl extends Thread{
 
 	   private Node nextNode = null;   
      
-	   private ParserHandler parse = new ParserHandler();
+	   private IParserHandler parse = new ParserHandler();
 	   
 	   private String name;
 	   
