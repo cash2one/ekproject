@@ -10,6 +10,7 @@ import org.htmlparser.filters.HasAttributeFilter;
 import org.htmlparser.filters.TagNameFilter;
 import org.htmlparser.tags.Div;
 import org.htmlparser.tags.LinkTag;
+import org.htmlparser.tags.ParagraphTag;
 import org.htmlparser.util.NodeIterator;
 import org.htmlparser.util.NodeList;
 import org.htmlparser.util.ParserException;
@@ -87,7 +88,15 @@ public class ParserHandler implements IParserHandler {
 	        Div div = null;
 	        while(it.hasMoreNodes()){
 	        	div  = (Div)it.nextNode();
-	            LoggerUtil.info("fetchHtmlContent  ",div.toHtml());
+	        	NodeList nl = div.getChildren();
+	        	if(nl==null)
+	        		continue;
+	        	NodeIterator sub = nl.elements();
+	        	while(sub.hasMoreNodes()){
+	        		 Node t = sub.nextNode();
+	        		 if(t instanceof ParagraphTag)
+	        		    LoggerUtil.info("fetchHtmlContent  ",t.toHtml());
+	        	}
 	        }
 		  
 	  }
