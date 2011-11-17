@@ -8,7 +8,7 @@ package cn.elam.reptilerobot.utils;
 public class LoggerUtil {
 
 	public static void debug(String handler, Object... args) {
-		p(handler,args);
+//		p(handler,args);
 	}
 
 	public static void info(String handler, Object... args) {

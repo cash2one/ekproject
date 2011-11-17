@@ -1,5 +1,7 @@
 package cn.elam.reptilerobot.core.inter;
 
+import org.htmlparser.tags.LinkTag;
+
 /**
  * 过滤处理接口
  * 
@@ -8,6 +10,6 @@ package cn.elam.reptilerobot.core.inter;
  */
 public interface IFilter {
 
-	boolean isFilter();
+	boolean isLinkTagFilter(LinkTag linkTag);
 
 }

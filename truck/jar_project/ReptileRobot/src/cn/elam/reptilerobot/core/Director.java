@@ -1,6 +1,7 @@
 package cn.elam.reptilerobot.core;
 
-import cn.elam.reptilerobot.base.Node;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * 
@@ -10,25 +11,35 @@ import cn.elam.reptilerobot.base.Node;
  */
 public class Director {
 
+      ExecutorService executor = null;
 	
+      int crawlNums = 5;
+      
+      
 	  public Director(){
+		   
 		  
 	  } 
 	
-	  public void start(){
-		  
-		  
-	  }
-	
-	  
-	  public static void main(String...args){
-		  
-		  CrawlQueue.getQueueManager().newNode("新浪", "http://www.sina.com.cn", null);
-		  Crawl crawl = new Crawl("Tester");
-          crawl.start();		  
-		  
+	  /**
+	   *  
+	   * 方法：初始化爬虫线程
+	   * 
+	   *  
+	   *    Add By Ethan Lam  At 2011-11-17
+	   */
+	  public void init( ){
+		  executor = Executors.newFixedThreadPool(this.crawlNums);
+		  CrawlQueue.getQueueManager().newNode("新浪", "http://news.sina.com.cn/", null);
+		  for(int i = 1;i<=this.crawlNums;i++){
+			  executor.execute(new Crawl(""+i));
+		  }
 	  }
 	
 	 
+	  public static void main(String...args){
+		  Director director = new Director();
+		  director.init();
+	  }
 	
 }

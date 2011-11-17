@@ -30,10 +30,9 @@ public interface IParserHandler {
 	   * 分析页面数据
 	   * @param preUrl
 	   * @param urlConnectin
-	   * @param encode
 	   * @throws Exception
 	   */
-	  public void analyzeHTML(String preUrl,HttpURLConnection urlConnectin,String encode) throws Exception;
+	  public void analyzeHTML(String preUrl,HttpURLConnection urlConnectin) throws Exception;
 	  
 	  
 	  
@@ -48,7 +47,8 @@ public interface IParserHandler {
 	  
 	  
 	  
-	  public void 
+	  
+       
 	  
 	  
 	  

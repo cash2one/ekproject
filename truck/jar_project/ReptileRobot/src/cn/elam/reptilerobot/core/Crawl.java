@@ -21,7 +21,7 @@ public class Crawl extends Thread{
 	   
 	   private String name;
 	   
-	   private int sleepSec = 30;
+	   private int sleepSec = 10;
 	   
 	   /**
 	    * 
@@ -41,7 +41,7 @@ public class Crawl extends Thread{
 					   if(curUrl==null||"".equals(curUrl))
 						   continue;
 					   
-					    LoggerUtil.info("Crawl","≈¿≥ÊµΩ£∫"+curUrl);
+					    LoggerUtil.debug("Crawl°æ"+this.name+"°ø","≈¿≥ÊµΩ£∫"+curUrl);
 					    String response = "";
 					    int responseCode = 0;
 					    HttpURLConnection uRLConnection = null;
@@ -61,7 +61,7 @@ public class Crawl extends Thread{
 				            uRLConnection.setDoOutput(true);
 				            uRLConnection.setDoInput(true); 
 				            
-				            parse.analyzeHTML(curUrl,uRLConnection,"gbk");
+				            parse.analyzeHTML(curUrl,uRLConnection);
 				            
 					    } catch (Exception e) {
 						  e.printStackTrace();
