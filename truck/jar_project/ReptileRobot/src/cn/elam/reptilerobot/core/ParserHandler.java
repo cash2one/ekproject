@@ -1,5 +1,8 @@
 package cn.elam.reptilerobot.core;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 
 import org.htmlparser.Node;
@@ -39,10 +42,22 @@ public class ParserHandler implements IParserHandler {
 	   * @throws Exception
 	   */
 	  public void analyzeHTML(String preUrl,HttpURLConnection urlConnectin) throws Exception{
-		    Parser parser = new Parser(urlConnectin);
-	        parser.setEncoding("GB2312");
+		    StringBuffer inputHTML = new StringBuffer();
+		    InputStream is = urlConnectin.getInputStream();  
+            BufferedReader br = new BufferedReader(new InputStreamReader(is));  
+            String readLine = null;  
+            while((readLine =br.readLine()) != null){  
+            	inputHTML.append(readLine);  
+            }  
+            is.close();  
+            br.close();  
+            urlConnectin.disconnect();
+//            LoggerUtil.info("ParserHandler-fetchHtmlContent","爬虫得带到的 页面内容"+inputHTML);
+		    Parser parser = new Parser();
+		    parser.setInputHTML(inputHTML.toString());
 	        dealLinkNodes(parser,preUrl);
-	        fetchHtmlContent(preUrl);
+	        parser.setInputHTML(inputHTML.toString());
+	        fetchHtmlContent(parser);
 	  }
 	  
 	  
@@ -58,7 +73,7 @@ public class ParserHandler implements IParserHandler {
 		   try{
 			   NodeFilter filter = new AndFilter(new TagNameFilter("a"),new HasAttributeFilter("target","_blank"));
 		        NodeList nodeList = parser.parse(filter);
-//		        LoggerUtil.info("ParserHandler","爬虫得到的 <a> NodeList："+(nodeList!=null?nodeList.size():0));
+		        LoggerUtil.info("ParserHandler","爬虫得到的 <a> NodeList："+(nodeList!=null?nodeList.size():0));
 		        NodeIterator it = nodeList.elements();
 		        while(it.hasMoreNodes()){
 		            Node node = it.nextNode();
@@ -76,14 +91,9 @@ public class ParserHandler implements IParserHandler {
 	  
 	  
 	  
-	  public void fetchHtmlContent(String url) throws ParserException{
-		    LoggerUtil.info("ParserHandler-fetchHtmlContent","爬虫尝试获取文本"+url);
-		    Parser parser = new Parser();
-		    parser.setEncoding("GB2312");
-	        parser.setURL(url);
+	  public void fetchHtmlContent(Parser parser) throws ParserException{
 		    NodeFilter filter = new AndFilter(new TagNameFilter("div"),new HasAttributeFilter("class","blkContainerSblkCon"));
 	        NodeList nodeList = parser.parse(filter);
-	        LoggerUtil.info("ParserHandler-fetchHtmlContent","爬虫得到的 文本节点："+(nodeList!=null?nodeList.size():0));
 	        NodeIterator it = nodeList.elements();
 	        Div div = null;
 	        while(it.hasMoreNodes()){
@@ -95,7 +105,7 @@ public class ParserHandler implements IParserHandler {
 	        	while(sub.hasMoreNodes()){
 	        		 Node t = sub.nextNode();
 	        		 if(t instanceof ParagraphTag)
-	        		    LoggerUtil.info("fetchHtmlContent  ",t.toHtml());
+	        		    LoggerUtil.info("fetchHtmlContent  ",((ParagraphTag) t).getStringText());
 	        	}
 	        }
 		  
