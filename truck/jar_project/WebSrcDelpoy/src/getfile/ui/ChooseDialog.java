@@ -45,6 +45,8 @@ public class ChooseDialog extends Dialog {
 	Button actionBtn;
 	Text srcText;
 	Text outputText;
+	Button isActionDeployBtn;
+	boolean isActionDeploy = false;
 	
 	private Text rootPathTxt;
 	private Label lblNewLabel;
@@ -79,6 +81,7 @@ public class ChooseDialog extends Dialog {
 		lblNewLabel.setText("\u5DF2\u7F16\u8BD1\u7684WebRoot\u8DEF\u5F84\uFF1A");
 		
 		rootPathTxt = new Text(shell, SWT.BORDER);
+		rootPathTxt.setToolTipText("\u5DF2\u7F16\u8BD1\u6210\u529F\uFF0C\u5F85\u53D1\u5E03\u4EE3\u7801\u6E90\u6587\u4EF6\u7684\u6839\u76EE\u5F55");
 		fd_lblNewLabel.right = new FormAttachment(rootPathTxt, -16);
 		FormData fd_rootPathTxt = new FormData();
 		fd_rootPathTxt.left = new FormAttachment(0, 154);
@@ -91,6 +94,7 @@ public class ChooseDialog extends Dialog {
 	    
 	    
 		text = new Text(shell, SWT.BORDER | SWT.WRAP | SWT.V_SCROLL | SWT.MULTI);
+		text.setToolTipText("\u5728\u6B64\u7C98\u8D34\u9700\u8981\u63D0\u53D6\u7684\u6587\u4EF6\u8BE6\u7EC6\u5217\u8868\uFF1B\u6240\u6709\u88AB\u63D0\u53D6\u7684\u6587\u4EF6\u7684\u8DEF\u5F84\u9700\u76F8\u5BF9\u4E8E\u201C\u5DF2\u7F16\u8BD1\u7684webRoot\u8DEF\u5F84\u201D\uFF01");
 		FormData fd_text = new FormData();
 		fd_text.left = new FormAttachment(0, 15);
 		fd_text.right = new FormAttachment(100, -15);
@@ -98,6 +102,7 @@ public class ChooseDialog extends Dialog {
 		
 		
 		resultText= new Text(shell, SWT.BORDER | SWT.WRAP | SWT.V_SCROLL | SWT.MULTI);
+		resultText.setToolTipText("\u6587\u4EF6\u63D0\u53D6\u7ED3\u679C");
 		resultText.setEditable(false);
 		FormData fd_resultText = new FormData();
 		fd_resultText.right = new FormAttachment(text, 0, SWT.RIGHT);
@@ -161,6 +166,7 @@ public class ChooseDialog extends Dialog {
 		label.setText("\u6587\u4EF6\u63D0\u53D6\u7ED3\u679C");
 		
 		outputFileTxt = new Text(shell, SWT.BORDER);
+		outputFileTxt.setToolTipText("\u4EE5\u6B64\u76EE\u5F55\u4F5C\u4E3A\u63D0\u53D6\u51FA\u6765\u7684\u6587\u4EF6\u7684\u5B58\u653E\u5730\u5740");
 		outputFileTxt.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent arg0) {
 			        
@@ -237,6 +243,7 @@ public class ChooseDialog extends Dialog {
 		
 		serverWebRoot = getSetting(ChooseDialog.SERVER_WEB_ROOT_DIR);
 		serverWebRootTxt = new Text(shell, SWT.BORDER);
+		fd_actionBtn.top = new FormAttachment(serverWebRootTxt, 6);
 		serverWebRootTxt.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent arg0) {
 				serverWebRoot = serverWebRootTxt.getText();
@@ -261,20 +268,34 @@ public class ChooseDialog extends Dialog {
 		lblwebroot.setLayoutData(fd_lblwebroot);
 		
 		backUpItemTxt = new Text(shell, SWT.BORDER);
-		fd_actionBtn.top = new FormAttachment(backUpItemTxt, -4, SWT.TOP);
-		fd_actionBtn.left = new FormAttachment(backUpItemTxt, 6);
+		backUpItemTxt.setToolTipText("\u81EA\u5B9A\u4E49\u201C\u76EE\u5F55\u540D\u79F0\u201D\uFF0C\u4F5C\u4E3A\u5907\u4EFD\u811A\u672C\u5B58\u653E\u201C\u5907\u4EFD\u6587\u4EF6\u7684\u201D\u76EE\u6807\u76EE\u5F55\uFF01");
 		FormData fd_backUpItemTxt = new FormData();
-		fd_backUpItemTxt.top = new FormAttachment(serverWebRootTxt, 6);
+		fd_backUpItemTxt.top = new FormAttachment(serverWebRootTxt, 10);
 		fd_backUpItemTxt.left = new FormAttachment(outputFileTxt, 0, SWT.LEFT);
 		backUpItemTxt.setLayoutData(fd_backUpItemTxt);
 		
 		Label lblNewLabel_2 = new Label(shell, SWT.NONE);
 		lblNewLabel_2.setToolTipText("\u53EA\u80FD\u586B\u5199\u5B57\u6BCD\u8DDF\u6570\u5B57\u7684\u7EC4\u5408\u4F5C\u4E3A\u6587\u4EF6\u76EE\u5F55\u540D");
 		FormData fd_lblNewLabel_2 = new FormData();
+		fd_lblNewLabel_2.top = new FormAttachment(lblwebroot, 15);
 		fd_lblNewLabel_2.left = new FormAttachment(0, 15);
-		fd_lblNewLabel_2.bottom = new FormAttachment(backUpItemTxt, 0, SWT.BOTTOM);
 		lblNewLabel_2.setLayoutData(fd_lblNewLabel_2);
 		lblNewLabel_2.setText("\u5907\u4EFD\u76EE\u5F55\u540D\u79F0\uFF1A");
+		
+		isActionDeployBtn = new Button(shell, SWT.CHECK);
+		isActionDeployBtn.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				isActionDeploy = isActionDeployBtn.getSelection();
+			}
+		});
+		isActionDeployBtn.setToolTipText("\u5047\u5982\u5C06\u6B64\u9009\u9879\u52FE\u9009\u4E0A\uFF0C\u5219\u4F1A\u81EA\u52A8\u6267\u884C unzip \u547D\u4EE4\uFF0C\u5B9E\u73B0\u81EA\u52A8\u66F4\u65B0\u6216\u8986\u76D6\u76EE\u6807\u7A0B\u5E8F\u3002");
+		fd_actionBtn.left = new FormAttachment(isActionDeployBtn, 6);
+		FormData fd_isActionDeploy = new FormData();
+		fd_isActionDeploy.top = new FormAttachment(serverWebRootTxt, 11);
+		fd_isActionDeploy.right = new FormAttachment(100, -526);
+		isActionDeployBtn.setLayoutData(fd_isActionDeploy);
+		isActionDeployBtn.setText("\u81EA\u52A8\u53D1\u5E03");
 		this.outputPath = tempPath;
 		
 		actionBtn.addSelectionListener(new SelectionListener() {
@@ -309,6 +330,7 @@ public class ChooseDialog extends Dialog {
 	protected void processBusi() {
 		if(this.text.getText()==null||rootPath==null)
 			return;
+		backFilesScript.delete(0, backFilesScript.length());
 		actionBtn.setText("提取中....");
 		actionBtn.setEnabled(false);
 		System.out.println("run processBusi.."+rootPath);
@@ -503,15 +525,15 @@ public class ChooseDialog extends Dialog {
 	    //拷贝需要备份的文件到 备份目录中
 	    String deployRootPath = this.serverWebRootTxt.getText();
 	    String targetFileFullPath = (deployRootPath + filePath).replace("\\", "/");
-	    backFilesScript.append("echo \"正在备份文件:\"").append(targetFileFullPath).append(CRLF);
+	    backFilesScript.append("echo \"正在备份文件:\"").append(targetFileFullPath).append("  To:  ").append(bakDir).append(CRLF);
 	    backFilesScript.append("cp ").append(" "+targetFileFullPath).append(" "+bakDir).append(CRLF);
    }
 	
    
+   
    /**
     * 
     * 生成脚本
-    * 
     * @throws Exception
     */
    void createBackUpFileShellScript() throws Exception{
@@ -527,8 +549,8 @@ public class ChooseDialog extends Dialog {
 		  //打印必要的信息
 		  outputScript(bw,"echo '正在执行文件备份操作...'");
 		  outputScript(bw,"curdir=$(pwd)");
-		  outputScript(bw,"echo \"当前备份根路径：\"${curdir}");
-		  
+		  outputScript(bw,"echo \"当前备份操作所在的根路径：\"${curdir}");
+		
 		  //输出需要备份的文件
 		  if(!files.equals("")){
 			  String[] backFiles =  files.split(CRLF);
@@ -538,10 +560,15 @@ public class ChooseDialog extends Dialog {
 				  outputScript(bw,backFiles[line]);
 			      line ++;
 			  }
-			  bw.close();
-			  fw.close();
 		  }
-		  outputScript(bw,"echo 备份操作已经完成....");
+		  outputScript(bw,"echo '文件备份操作已经完成！'");
+		  if(isActionDeploy){
+			  outputScript(bw,"echo '将执行文件更新发布操作....'");
+			  outputScript(bw,"unzip -uo "+this.outputFile+".zip -d "+this.serverWebRootTxt.getText()+"/");
+			  outputScript(bw,"echo '已经完成文件更新发布操作！'");  
+		  }
+		  bw.close();
+		  fw.close();
    }
    
    /**
