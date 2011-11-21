@@ -56,17 +56,18 @@ public class ChooseDialog extends Dialog {
 	private String outputPath;
 	private String outputDir;
 	private String outputFile;
+	private String serverWebRoot;
 	
 	static String ROOT_DIR="ROOT_DIR";
 	static String OUTPUT_DIR="OUTPUT_DIR";
 	static String OUTPUT_FILENAME="OUTPUT_FILENAME";
-	
+	static String SERVER_WEB_ROOT_DIR="SERVER_WEB_ROOT_DIR";
 	
 	public String open() {
 		
 		Shell parent = this.getParent();
 		shell = new Shell(parent, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
-		shell.setSize(824, 572);
+		shell.setSize(824, 603);
 		shell.setText("文件提取");
 		shell.setLayout(new FormLayout());
 		
@@ -75,21 +76,23 @@ public class ChooseDialog extends Dialog {
 		fd_lblNewLabel.left = new FormAttachment(0, 15);
 		fd_lblNewLabel.top = new FormAttachment(0, 10);
 		lblNewLabel.setLayoutData(fd_lblNewLabel);
-		lblNewLabel.setText("\u5F53\u524D\u8DEF\u5F84\uFF1A");
+		lblNewLabel.setText("\u5DF2\u7F16\u8BD1\u7684WebRoot\u8DEF\u5F84\uFF1A");
 		
 		rootPathTxt = new Text(shell, SWT.BORDER);
-		fd_lblNewLabel.right = new FormAttachment(rootPathTxt, -6);
+		fd_lblNewLabel.right = new FormAttachment(rootPathTxt, -16);
 		FormData fd_rootPathTxt = new FormData();
-		fd_rootPathTxt.left = new FormAttachment(0, 85);
+		fd_rootPathTxt.left = new FormAttachment(0, 154);
 		fd_rootPathTxt.top = new FormAttachment(0, 7);
 		rootPathTxt.setLayoutData(fd_rootPathTxt);
 		rootPathTxt.setText(this.getSetting(ChooseDialog.ROOT_DIR));
 	    this.rootPath = this.getSetting(ChooseDialog.ROOT_DIR);
 	    this.outputDir = "".equals(this.getSetting(ChooseDialog.OUTPUT_DIR))?(rootPath.length()>0?rootPath.substring(0,rootPath.lastIndexOf("/")):""):this.getSetting(ChooseDialog.OUTPUT_DIR);
+	    this.serverWebRoot = this.getSetting(ChooseDialog.SERVER_WEB_ROOT_DIR);
+	    
 	    
 		text = new Text(shell, SWT.BORDER | SWT.WRAP | SWT.V_SCROLL | SWT.MULTI);
 		FormData fd_text = new FormData();
-		fd_text.left = new FormAttachment(lblNewLabel, 0, SWT.LEFT);
+		fd_text.left = new FormAttachment(0, 15);
 		fd_text.right = new FormAttachment(100, -15);
 		text.setLayoutData(fd_text);
 		
@@ -105,7 +108,6 @@ public class ChooseDialog extends Dialog {
 		
 		actionBtn = new Button(shell, SWT.BORDER | SWT.MULTI | SWT.WRAP);
 		FormData fd_actionBtn = new FormData();
-		fd_actionBtn.left = new FormAttachment(lblNewLabel, 0, SWT.LEFT);
 		actionBtn.setLayoutData(fd_actionBtn);
 		actionBtn.setText("执行提取");
 		actionBtn.setSize(new Point(50, 50));
@@ -143,18 +145,18 @@ public class ChooseDialog extends Dialog {
 		Label lblNewLabel_1 = new Label(shell, SWT.NONE);
 		fd_text.top = new FormAttachment(lblNewLabel_1, 3);
 		FormData fd_lblNewLabel_1 = new FormData();
+		fd_lblNewLabel_1.right = new FormAttachment(lblNewLabel, 29, SWT.RIGHT);
 		fd_lblNewLabel_1.top = new FormAttachment(lblNewLabel, 6);
-		fd_lblNewLabel_1.left = new FormAttachment(lblNewLabel, 0, SWT.LEFT);
-		fd_lblNewLabel_1.right = new FormAttachment(0, 91);
+		fd_lblNewLabel_1.left = new FormAttachment(0, 15);
 		lblNewLabel_1.setLayoutData(fd_lblNewLabel_1);
-		lblNewLabel_1.setText("\u7C98\u8D34\u76EE\u6807\u6587\u4EF6");
+		lblNewLabel_1.setText("\u7C98\u8D34\u9700\u8981\u62F7\u8D1D\u76EE\u6807\u6587\u4EF6");
 		
 		Label label = new Label(shell, SWT.NONE);
 		fd_text.bottom = new FormAttachment(label, -6);
 		fd_resultText.top = new FormAttachment(label, 6);
 		FormData fd_label = new FormData();
+		fd_label.left = new FormAttachment(0, 15);
 		fd_label.top = new FormAttachment(0, 220);
-		fd_label.left = new FormAttachment(lblNewLabel, 0, SWT.LEFT);
 		label.setLayoutData(fd_label);
 		label.setText("\u6587\u4EF6\u63D0\u53D6\u7ED3\u679C");
 		
@@ -182,9 +184,9 @@ public class ChooseDialog extends Dialog {
 		Label label_1 = new Label(shell, SWT.NONE);
 		fd_outputFileTxt.left = new FormAttachment(label_1);
 		FormData fd_label_1 = new FormData();
-		fd_label_1.top = new FormAttachment(outputFileTxt, 3, SWT.TOP);
-		fd_label_1.left = new FormAttachment(lblNewLabel, 0, SWT.LEFT);
+		fd_label_1.left = new FormAttachment(0, 15);
 		fd_label_1.right = new FormAttachment(100, -707);
+		fd_label_1.top = new FormAttachment(outputFileTxt, 3, SWT.TOP);
 		label_1.setLayoutData(fd_label_1);
 		label_1.setText("\u8F93\u51FA\u6587\u4EF6\u5939\u540D\u79F0\uFF1A");
 		
@@ -213,18 +215,18 @@ public class ChooseDialog extends Dialog {
 		outputBtnButton.setText("\u6D4F \u89C8");
 		
 		label_2 = new Label(shell, SWT.NONE);
-		fd_actionBtn.top = new FormAttachment(label_2, 25);
+		label_2.setToolTipText("\u6307\u5B9A\u751F\u6210\u53D1\u5E03\u66F4\u65B0\u6587\u4EF6\u7684\u6839\u8DEF\u5F84");
 		FormData fd_label_2 = new FormData();
 		fd_label_2.top = new FormAttachment(label_1, 12);
-		fd_label_2.right = new FormAttachment(lblNewLabel, 0, SWT.RIGHT);
 		label_2.setLayoutData(fd_label_2);
 		label_2.setText("\u7ED3\u679C\u4F4D\u7F6E\uFF1A");
 		
 		outputPathTxt = new Text(shell, SWT.BORDER);
+		fd_label_2.right = new FormAttachment(outputPathTxt, -32);
 		outputPathTxt.setEditable(false);
 		FormData fd_outputPathTxt = new FormData();
 		fd_outputPathTxt.top = new FormAttachment(outputBtnButton, 2);
-		fd_outputPathTxt.left = new FormAttachment(label_2, 32);
+		fd_outputPathTxt.left = new FormAttachment(0, 111);
 		fd_outputPathTxt.right = new FormAttachment(100, -92);
 		outputPathTxt.setLayoutData(fd_outputPathTxt);
 		System.out.println("cfg: ROOT_DIR -> "+this.getSetting(ChooseDialog.ROOT_DIR));
@@ -232,6 +234,47 @@ public class ChooseDialog extends Dialog {
 		System.out.println("cfg: OUTPUT_FILENAME->"+this.getSetting(ChooseDialog.OUTPUT_FILENAME));
 		String tempPath = this.getSetting(ChooseDialog.OUTPUT_DIR)+"/"+(this.getSetting(ChooseDialog.OUTPUT_FILENAME)==""?"output":this.getSetting(ChooseDialog.OUTPUT_FILENAME));
 		outputPathTxt.setText(tempPath);
+		
+		serverWebRoot = getSetting(ChooseDialog.SERVER_WEB_ROOT_DIR);
+		serverWebRootTxt = new Text(shell, SWT.BORDER);
+		serverWebRootTxt.addModifyListener(new ModifyListener() {
+			public void modifyText(ModifyEvent arg0) {
+				serverWebRoot = serverWebRootTxt.getText();
+				saveSetting(ChooseDialog.SERVER_WEB_ROOT_DIR,serverWebRoot);
+			}
+		});
+		
+		serverWebRootTxt.setToolTipText("\u586B\u5199\u7EBF\u4E0A\u7248\u672C\u7684 webRoot \u6839\u8DEF\u5F84\uFF0C\u5982 /data/zjxxt/");
+		FormData fd_serverWebRootTxt = new FormData();
+		fd_serverWebRootTxt.right = new FormAttachment(outputPathTxt, -210, SWT.RIGHT);
+		fd_serverWebRootTxt.top = new FormAttachment(outputPathTxt, 6);
+		serverWebRootTxt.setLayoutData(fd_serverWebRootTxt);
+		serverWebRootTxt.setText(serverWebRoot);
+		
+		
+		Label lblwebroot = new Label(shell, SWT.NONE);
+		fd_serverWebRootTxt.left = new FormAttachment(lblwebroot, 20);
+		lblwebroot.setText("\u7EBF\u4E0AwebRoot:");
+		FormData fd_lblwebroot = new FormData();
+		fd_lblwebroot.right = new FormAttachment(100, -727);
+		fd_lblwebroot.top = new FormAttachment(label_2, 12);
+		lblwebroot.setLayoutData(fd_lblwebroot);
+		
+		backUpItemTxt = new Text(shell, SWT.BORDER);
+		fd_actionBtn.top = new FormAttachment(backUpItemTxt, -4, SWT.TOP);
+		fd_actionBtn.left = new FormAttachment(backUpItemTxt, 6);
+		FormData fd_backUpItemTxt = new FormData();
+		fd_backUpItemTxt.top = new FormAttachment(serverWebRootTxt, 6);
+		fd_backUpItemTxt.left = new FormAttachment(outputFileTxt, 0, SWT.LEFT);
+		backUpItemTxt.setLayoutData(fd_backUpItemTxt);
+		
+		Label lblNewLabel_2 = new Label(shell, SWT.NONE);
+		lblNewLabel_2.setToolTipText("\u53EA\u80FD\u586B\u5199\u5B57\u6BCD\u8DDF\u6570\u5B57\u7684\u7EC4\u5408\u4F5C\u4E3A\u6587\u4EF6\u76EE\u5F55\u540D");
+		FormData fd_lblNewLabel_2 = new FormData();
+		fd_lblNewLabel_2.left = new FormAttachment(0, 15);
+		fd_lblNewLabel_2.bottom = new FormAttachment(backUpItemTxt, 0, SWT.BOTTOM);
+		lblNewLabel_2.setLayoutData(fd_lblNewLabel_2);
+		lblNewLabel_2.setText("\u5907\u4EFD\u76EE\u5F55\u540D\u79F0\uFF1A");
 		this.outputPath = tempPath;
 		
 		actionBtn.addSelectionListener(new SelectionListener() {
@@ -386,12 +429,14 @@ public class ChooseDialog extends Dialog {
 	 */
 	void saveSetting(String key,String value){
 		try {
+			System.out.println("test: "+key+"  "+value+"   : "+serverWebRoot );
 			File file = cfgFile();
 		    Properties properties = new Properties();
 		    FileOutputStream fos = new FileOutputStream(file); 
 		    properties.setProperty(ChooseDialog.OUTPUT_DIR,this.outputDir==null?"":this.outputDir);
 		    properties.setProperty(ChooseDialog.OUTPUT_FILENAME,("".equals(outputFile)?"output":outputFile));
 		    properties.setProperty(ChooseDialog.ROOT_DIR,this.rootPath==null?"":this.rootPath);
+		    properties.setProperty(ChooseDialog.SERVER_WEB_ROOT_DIR,serverWebRoot==null?"":serverWebRoot);
 		    properties.setProperty(key,value==null?"":value);
      		properties.store(fos, "config.properties");
      		fos.close();
@@ -434,9 +479,11 @@ public class ChooseDialog extends Dialog {
 	}
 	
 	
-   String deployRootPath = "";
+   String backUpItemName = "";//本次备份指定的文件名称，最好用数字或英文字母组成
    StringBuffer backFilesScript = new StringBuffer();
    String CRLF=" CRLF ";
+   private Text serverWebRootTxt;
+   private Text backUpItemTxt;
    
    
    
@@ -445,13 +492,19 @@ public class ChooseDialog extends Dialog {
     * @param filePath
     */
    void appendBakFileInfoToShScript(String filePath){
-	    String bakDir = "";
-	    bakDir = bakDir+"/"+filePath.replace("\\", "/");
-	    bakDir = bakDir.substring(0, bakDir.lastIndexOf("/"));
+	    backUpItemName = this.backUpItemTxt.getText();
+	    backUpItemName=("".equals(backUpItemName)||backUpItemName==null)?"backup":backUpItemName;
+	    filePath = filePath.replace("\\", "/");
+	    filePath = filePath.indexOf("/")!=0?("/"+filePath):filePath;
+	    String bakDir = "${curdir}\"/"+backUpItemName+"%FILE_PATH%\"";
+	    bakDir = bakDir.replace("%FILE_PATH%",filePath.substring(0,filePath.lastIndexOf("/")));
 	    //假如未创建目录，就先创建
 	    backFilesScript.append("mkdir -p ").append(bakDir).append(CRLF);
 	    //拷贝需要备份的文件到 备份目录中
-	    backFilesScript.append("cp ").append(" "+(deployRootPath + filePath).replace("\\", "/")).append(" "+bakDir).append(CRLF);
+	    String deployRootPath = this.serverWebRootTxt.getText();
+	    String targetFileFullPath = (deployRootPath + filePath).replace("\\", "/");
+	    backFilesScript.append("echo \"正在备份文件:\"").append(targetFileFullPath).append(CRLF);
+	    backFilesScript.append("cp ").append(" "+targetFileFullPath).append(" "+bakDir).append(CRLF);
    }
 	
    
@@ -462,7 +515,7 @@ public class ChooseDialog extends Dialog {
     * @throws Exception
     */
    void createBackUpFileShellScript() throws Exception{
-		  String fileName =  this.outputDir+"/test.sh";
+		  String fileName =  this.outputDir+"/"+outputFile+"/backupFiles.sh";
 		  File _file = new File(fileName);
 		  if(!_file.exists())
 		     _file.createNewFile();
@@ -471,20 +524,38 @@ public class ChooseDialog extends Dialog {
 		  BufferedWriter bw=new BufferedWriter(fw); 
 		  String files = backFilesScript.toString();
 		  
+		  //打印必要的信息
+		  outputScript(bw,"echo '正在执行文件备份操作...'");
+		  outputScript(bw,"curdir=$(pwd)");
+		  outputScript(bw,"echo \"当前备份根路径：\"${curdir}");
+		  
+		  //输出需要备份的文件
 		  if(!files.equals("")){
 			  String[] backFiles =  files.split(CRLF);
 			  int line = 0;
 			  while(line<backFiles.length){
 				  System.out.println(backFiles[line]);
-				  bw.write(backFiles[line]); 
-			      bw.newLine();//断行 
+				  outputScript(bw,backFiles[line]);
 			      line ++;
 			  }
 			  bw.close();
 			  fw.close();
 		  }
-		  
-		  
+		  outputScript(bw,"echo 备份操作已经完成....");
    }
-	
+   
+   /**
+    * 
+    * 方法：输出一行
+    * 
+    * @param bw
+    * @param content
+    * @throws IOException
+    *  
+    *    Add By Ethan Lam  At 2011-11-21
+    */
+   void outputScript(BufferedWriter bw,String content) throws IOException{
+	      bw.write(content); 
+	      bw.newLine();//断行
+   }
 }
