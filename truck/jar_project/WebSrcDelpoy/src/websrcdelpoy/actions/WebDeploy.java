@@ -31,10 +31,10 @@ public class WebDeploy implements IWorkbenchWindowActionDelegate {
 	 * @see IWorkbenchWindowActionDelegate#run
 	 */
 	public void run(IAction action) {
-		MessageDialog.openInformation(
-			window.getShell(),
-			"WebSrcDelpoy",
-			"ª∂”≠ ‘”√°∞WebDeploy_beta_1.0°± ");
+//		MessageDialog.openInformation(
+//			window.getShell(),
+//			"WebSrcDelpoy",
+//			"ª∂”≠ ‘”√°∞WebDeploy_beta_1.0°± ");
 		
 		ChooseDialog dig = new ChooseDialog(window.getShell());
 		dig.open();
