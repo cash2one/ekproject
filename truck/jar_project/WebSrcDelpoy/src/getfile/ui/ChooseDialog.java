@@ -2,36 +2,35 @@ package getfile.ui;
 
 //import org.eclipse.jface.dialogs.Dialog;
 
-import getfile.actions.GetFileAction;
 import getfile.util.CopyFileUtil;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.ModifyEvent;
+import org.eclipse.swt.events.ModifyListener;
+import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Point;
-import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.layout.FormAttachment;
+import org.eclipse.swt.layout.FormData;
+import org.eclipse.swt.layout.FormLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Dialog;
 import org.eclipse.swt.widgets.DirectoryDialog;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
-import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.layout.FormLayout;
-import org.eclipse.swt.layout.FormData;
-import org.eclipse.swt.layout.FormAttachment;
-import org.eclipse.swt.events.SelectionAdapter;
-import org.eclipse.swt.events.ModifyListener;
-import org.eclipse.swt.events.ModifyEvent;
 
 public class ChooseDialog extends Dialog {
 
@@ -275,6 +274,12 @@ public class ChooseDialog extends Dialog {
 		String[] filesPath  = this.text.getText().split("\r\n");
 		this.resultText.setText("1、将要拷贝"+length+"个文件....\r\n");
 		doAction(rootPath,filesPath);
+	    try {
+			createBackUpFileShellScript();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		actionBtn.setText("执行提取");
 		actionBtn.setEnabled(true);
 	}
@@ -304,6 +309,7 @@ public class ChooseDialog extends Dialog {
 		   destFileName = destFileName.replace("\\", "/");
 		   if(CopyFileUtil.copyFile(srcFileName, destFileName, true)){
 		     resultText.append(""+srcFileName+" 提取成功。\r\n");
+		     appendBakFileInfoToShScript(targetFile);
 		     s++;
 		   } 
 		   else{
@@ -321,7 +327,25 @@ public class ChooseDialog extends Dialog {
 		    src = src.replace(".java", ".class");
 		if(src.indexOf("src/")>=0)
 			src = src.replace(src.substring(0,src.indexOf("src/")+4), "WEB-INF/classes/");
+		if(isHtmPageSrc(src)){
+			//找出web 根目录,形成相对路径
+		}
 		return src;
+	}
+	
+	
+	boolean isHtmPageSrc(String src){
+	    boolean isOrNot = false;
+		if(src.indexOf(".htm")>0||src.indexOf(".htm")>0){
+			isOrNot = true;
+		}else if(src.indexOf(".htm")>0||src.indexOf(".html")>0){
+			isOrNot = true;
+		}else if(src.indexOf(".jsp")>0||src.indexOf(".js")>0||src.indexOf(".swf")>0){
+			isOrNot = true;
+		}else if(src.indexOf(".gif")>0||src.indexOf(".png")>0||src.indexOf(".jpg")>0||src.indexOf(".GIF")>0||src.indexOf(".PNG")>0||src.indexOf(".JPG")>0){
+			isOrNot = true;
+		}
+		return isOrNot;
 	}
 	
 	
@@ -409,5 +433,58 @@ public class ChooseDialog extends Dialog {
 		}
 	}
 	
+	
+   String deployRootPath = "";
+   StringBuffer backFilesScript = new StringBuffer();
+   String CRLF=" CRLF ";
+   
+   
+   
+   /**
+    * 创建文件备份脚本内容
+    * @param filePath
+    */
+   void appendBakFileInfoToShScript(String filePath){
+	    String bakDir = "";
+	    bakDir = bakDir+"/"+filePath.replace("\\", "/");
+	    bakDir = bakDir.substring(0, bakDir.lastIndexOf("/"));
+	    //假如未创建目录，就先创建
+	    backFilesScript.append("mkdir -p ").append(bakDir).append(CRLF);
+	    //拷贝需要备份的文件到 备份目录中
+	    backFilesScript.append("cp ").append(" "+(deployRootPath + filePath).replace("\\", "/")).append(" "+bakDir).append(CRLF);
+   }
+	
+   
+   /**
+    * 
+    * 生成脚本
+    * 
+    * @throws Exception
+    */
+   void createBackUpFileShellScript() throws Exception{
+		  String fileName =  this.outputDir+"/test.sh";
+		  File _file = new File(fileName);
+		  if(!_file.exists())
+		     _file.createNewFile();
+		  
+		  FileWriter fw=new FileWriter(_file);
+		  BufferedWriter bw=new BufferedWriter(fw); 
+		  String files = backFilesScript.toString();
+		  
+		  if(!files.equals("")){
+			  String[] backFiles =  files.split(CRLF);
+			  int line = 0;
+			  while(line<backFiles.length){
+				  System.out.println(backFiles[line]);
+				  bw.write(backFiles[line]); 
+			      bw.newLine();//断行 
+			      line ++;
+			  }
+			  bw.close();
+			  fw.close();
+		  }
+		  
+		  
+   }
 	
 }
