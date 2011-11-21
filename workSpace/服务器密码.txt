@@ -1,7 +1,7 @@
-root/9527%zsXX$tiger   252
+root/Wa8f)2n%a7Dmovs   252
 Nkn2j9*&qt0               67.2
 
-
+Wb2*^803Pc28
 
 
 DBXYD-TF477-46YM4-W74MH-6YDQ8
@@ -24,3 +24,15 @@ http://item.taobao.com/item.htm?id=7660594161&ad_id=&am_id=&cm_id=&pm_id=
 
 
 http://blog.csdn.net/arjick/category/655371.aspx
+
+
+
+
+awk '/action/{print $0}' access.log >tmp.log
+awk '/action/{print $0}' access.log >tmp.log
+
+
+awk '{print $1"\t"$4"\t"$9}' tmp.log > action.log 
+
+
+awk -F"[ '['\"'&''=']+" '{printf $1"\t"$2"\t";for(i=3;i<=NF;i++){if($i=="cuid" || $i=="action")printf "%s",$i"="$(i+1)"\t"};printf "\n"}' action.log > cuid_action.log
