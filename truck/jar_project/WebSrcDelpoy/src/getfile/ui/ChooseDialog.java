@@ -341,6 +341,7 @@ public class ChooseDialog extends Dialog {
 		doAction(rootPath,filesPath);
 	    try {
 			createBackUpFileShellScript();
+			createRollBackFileShellScript();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -506,7 +507,7 @@ public class ChooseDialog extends Dialog {
    String CRLF=" CRLF ";
    private Text serverWebRootTxt;
    private Text backUpItemTxt;
-   
+   StringBuffer filesRollBackScript = new StringBuffer();
    
    
    /**
@@ -527,17 +528,23 @@ public class ChooseDialog extends Dialog {
 	    String targetFileFullPath = (deployRootPath + filePath).replace("\\", "/");
 	    backFilesScript.append("echo \"正在备份文件:\"").append(targetFileFullPath).append("  To:  ").append(bakDir).append(CRLF);
 	    backFilesScript.append("cp ").append(" "+targetFileFullPath).append(" "+bakDir).append(CRLF);
+	    
+	    String bfileFullPath = bakDir+filePath.substring(filePath.lastIndexOf("/"),filePath.length()); 
+	    String rfileFullPath = targetFileFullPath.substring(0, targetFileFullPath.lastIndexOf("/"));
+	    filesRollBackScript.append("echo \"正在回滚文件:\"").append(bfileFullPath).append("  To:  ").append(rfileFullPath).append(CRLF);
+	    filesRollBackScript.append("cp ").append(bfileFullPath).append("  ").append(rfileFullPath).append(CRLF);
+        	    
    }
 	
    
    
    /**
-    * 
-    * 生成脚本
+    * 生成备份与发布 脚本
     * @throws Exception
     */
    void createBackUpFileShellScript() throws Exception{
-		  String fileName =  this.outputDir+"/"+outputFile+"/backupFiles.sh";
+	      //生成发布脚本
+		  String fileName =  this.outputDir+"/"+outputFile+"/deploy.sh";
 		  File _file = new File(fileName);
 		  if(!_file.exists())
 		     _file.createNewFile();
@@ -570,6 +577,44 @@ public class ChooseDialog extends Dialog {
 		  bw.close();
 		  fw.close();
    }
+   
+   
+   /**
+    * 
+    * 方法：创建回滚操作的脚本
+    * 
+    * @throws Exception
+    *  
+    *    Add By Ethan Lam  At 2011-11-22
+    */
+   void createRollBackFileShellScript() throws Exception{
+		  String fileName =  this.outputDir+"/"+outputFile+"/rollback.sh";
+		  File _file = new File(fileName);
+		  if(!_file.exists())
+		     _file.createNewFile();
+		  
+		  FileWriter fw=new FileWriter(_file);
+		  BufferedWriter bw=new BufferedWriter(fw); 
+		  String files = filesRollBackScript.toString();
+		  
+		  //打印必要的信息
+		  outputScript(bw,"echo '正在执行回滚操作...'");
+		  outputScript(bw,"curdir=$(pwd)");
+		  outputScript(bw,"echo \"当前回滚操作所在的根路径：\"${curdir}");
+		
+		  //输出需要备份的文件
+		  if(!files.equals("")){
+			  String[] backFiles =  files.split(CRLF);
+			  int line = 0;
+			  while(line<backFiles.length){
+				  outputScript(bw,backFiles[line]);
+			      line ++;
+			  }
+		  }
+		  outputScript(bw,"echo '文件回滚操作已经完成！'");
+		  bw.close();
+		  fw.close();
+}
    
    /**
     * 

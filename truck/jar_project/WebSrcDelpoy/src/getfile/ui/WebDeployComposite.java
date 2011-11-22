@@ -29,6 +29,7 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.swt.widgets.Group;
 
 public class WebDeployComposite  extends Composite {
 
@@ -85,6 +86,7 @@ public class WebDeployComposite  extends Composite {
 		rootPathTxt.setLayoutData(fd_rootPathTxt);
 		rootPathTxt.setText(this.getSetting(WebDeployComposite.ROOT_DIR));
 	    this.rootPath = this.getSetting(WebDeployComposite.ROOT_DIR);
+	    this.rootPath = this.rootPath.replace("\\", "/");
 	    this.outputDir = "".equals(this.getSetting(WebDeployComposite.OUTPUT_DIR))?(rootPath.length()>0?rootPath.substring(0,rootPath.lastIndexOf("/")):""):this.getSetting(WebDeployComposite.OUTPUT_DIR);
 	    this.serverWebRoot = this.getSetting(WebDeployComposite.SERVER_WEB_ROOT_DIR);
 	    
@@ -178,22 +180,24 @@ public class WebDeployComposite  extends Composite {
 		});
 		
 		FormData fd_outputFileTxt = new FormData();
-		fd_outputFileTxt.top = new FormAttachment(resultText, 6);
+		fd_outputFileTxt.top = new FormAttachment(resultText, 29);
 		outputFileTxt.setLayoutData(fd_outputFileTxt);
 		outputFileTxt.setText(this.getSetting(WebDeployComposite.OUTPUT_FILENAME)==""?"output":this.getSetting(WebDeployComposite.OUTPUT_FILENAME));
 	    
 		
 		Label label_1 = new Label(this, SWT.NONE);
-		fd_outputFileTxt.left = new FormAttachment(label_1);
+		fd_outputFileTxt.left = new FormAttachment(0, 125);
 		FormData fd_label_1 = new FormData();
-		fd_label_1.left = new FormAttachment(0, 15);
-		fd_label_1.right = new FormAttachment(100, -707);
-		fd_label_1.top = new FormAttachment(outputFileTxt, 3, SWT.TOP);
+		fd_label_1.bottom = new FormAttachment(outputFileTxt, 12);
+		fd_label_1.top = new FormAttachment(outputFileTxt, 0, SWT.TOP);
+		fd_label_1.left = new FormAttachment(lblNewLabel, 0, SWT.LEFT);
+		fd_label_1.right = new FormAttachment(outputFileTxt, -6);
 		label_1.setLayoutData(fd_label_1);
 		label_1.setText("\u8F93\u51FA\u6587\u4EF6\u5939\u540D\u79F0\uFF1A");
 		
 		Button outputBtnButton = new Button(this, SWT.NONE);
-		fd_outputFileTxt.right = new FormAttachment(100, -571);
+		fd_outputFileTxt.right = new FormAttachment(outputBtnButton, -16);
+		fd_actionBtn.right = new FormAttachment(outputBtnButton, 0, SWT.RIGHT);
 		outputBtnButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -210,26 +214,25 @@ public class WebDeployComposite  extends Composite {
 		});
 		
 		FormData fd_outputBtnButton = new FormData();
-		fd_outputBtnButton.right = new FormAttachment(outputFileTxt, 56, SWT.RIGHT);
-		fd_outputBtnButton.top = new FormAttachment(resultText, 6);
-		fd_outputBtnButton.left = new FormAttachment(0, 253);
+		fd_outputBtnButton.left = new FormAttachment(0, 315);
 		outputBtnButton.setLayoutData(fd_outputBtnButton);
 		outputBtnButton.setText("\u6D4F \u89C8");
 		
 		label_2 = new Label(this, SWT.NONE);
 		label_2.setToolTipText("\u6307\u5B9A\u751F\u6210\u53D1\u5E03\u66F4\u65B0\u6587\u4EF6\u7684\u6839\u8DEF\u5F84");
 		FormData fd_label_2 = new FormData();
-		fd_label_2.top = new FormAttachment(label_1, 12);
+		fd_label_2.left = new FormAttachment(lblNewLabel, 0, SWT.LEFT);
 		label_2.setLayoutData(fd_label_2);
 		label_2.setText("\u7ED3\u679C\u4F4D\u7F6E\uFF1A");
 		
 		outputPathTxt = new Text(this, SWT.BORDER);
-		fd_label_2.right = new FormAttachment(outputPathTxt, -32);
+		fd_outputBtnButton.bottom = new FormAttachment(outputPathTxt);
+		fd_label_2.top = new FormAttachment(0, 486);
 		outputPathTxt.setEditable(false);
 		FormData fd_outputPathTxt = new FormData();
-		fd_outputPathTxt.top = new FormAttachment(outputBtnButton, 2);
-		fd_outputPathTxt.left = new FormAttachment(0, 111);
-		fd_outputPathTxt.right = new FormAttachment(100, -92);
+		fd_outputPathTxt.top = new FormAttachment(0, 483);
+		fd_outputPathTxt.right = new FormAttachment(100, -78);
+		fd_outputPathTxt.left = new FormAttachment(label_2, 50);
 		outputPathTxt.setLayoutData(fd_outputPathTxt);
 		System.out.println("cfg: ROOT_DIR -> "+this.getSetting(WebDeployComposite.ROOT_DIR));
 		System.out.println("cfg: OUTPUT_DIR -> "+this.getSetting(WebDeployComposite.OUTPUT_DIR));
@@ -239,7 +242,6 @@ public class WebDeployComposite  extends Composite {
 		
 		serverWebRoot = getSetting(WebDeployComposite.SERVER_WEB_ROOT_DIR);
 		serverWebRootTxt = new Text(this, SWT.BORDER);
-		fd_actionBtn.top = new FormAttachment(serverWebRootTxt, 6);
 		serverWebRootTxt.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent arg0) {
 				serverWebRoot = serverWebRootTxt.getText();
@@ -249,32 +251,33 @@ public class WebDeployComposite  extends Composite {
 		
 		serverWebRootTxt.setToolTipText("\u586B\u5199\u7EBF\u4E0A\u7248\u672C\u7684 webRoot \u6839\u8DEF\u5F84\uFF0C\u5982 /data/zjxxt/");
 		FormData fd_serverWebRootTxt = new FormData();
-		fd_serverWebRootTxt.right = new FormAttachment(outputPathTxt, -210, SWT.RIGHT);
 		fd_serverWebRootTxt.top = new FormAttachment(outputPathTxt, 6);
+		fd_serverWebRootTxt.left = new FormAttachment(outputFileTxt, 0, SWT.LEFT);
+		fd_serverWebRootTxt.right = new FormAttachment(100, -322);
 		serverWebRootTxt.setLayoutData(fd_serverWebRootTxt);
 		serverWebRootTxt.setText(serverWebRoot);
 		
 		
 		Label lblwebroot = new Label(this, SWT.NONE);
-		fd_serverWebRootTxt.left = new FormAttachment(lblwebroot, 20);
 		lblwebroot.setText("\u7EBF\u4E0AwebRoot:");
 		FormData fd_lblwebroot = new FormData();
-		fd_lblwebroot.right = new FormAttachment(100, -727);
-		fd_lblwebroot.top = new FormAttachment(label_2, 12);
+		fd_lblwebroot.top = new FormAttachment(serverWebRootTxt, 3, SWT.TOP);
+		fd_lblwebroot.left = new FormAttachment(lblNewLabel, 0, SWT.LEFT);
 		lblwebroot.setLayoutData(fd_lblwebroot);
 		
 		backUpItemTxt = new Text(this, SWT.BORDER);
+		fd_actionBtn.top = new FormAttachment(backUpItemTxt, -4, SWT.TOP);
 		backUpItemTxt.setToolTipText("\u81EA\u5B9A\u4E49\u201C\u76EE\u5F55\u540D\u79F0\u201D\uFF0C\u4F5C\u4E3A\u5907\u4EFD\u811A\u672C\u5B58\u653E\u201C\u5907\u4EFD\u6587\u4EF6\u7684\u201D\u76EE\u6807\u76EE\u5F55\uFF01");
 		FormData fd_backUpItemTxt = new FormData();
-		fd_backUpItemTxt.top = new FormAttachment(serverWebRootTxt, 10);
+		fd_backUpItemTxt.top = new FormAttachment(serverWebRootTxt, 6);
 		fd_backUpItemTxt.left = new FormAttachment(outputFileTxt, 0, SWT.LEFT);
 		backUpItemTxt.setLayoutData(fd_backUpItemTxt);
 		
 		Label lblNewLabel_2 = new Label(this, SWT.NONE);
 		lblNewLabel_2.setToolTipText("\u53EA\u80FD\u586B\u5199\u5B57\u6BCD\u8DDF\u6570\u5B57\u7684\u7EC4\u5408\u4F5C\u4E3A\u6587\u4EF6\u76EE\u5F55\u540D");
 		FormData fd_lblNewLabel_2 = new FormData();
-		fd_lblNewLabel_2.top = new FormAttachment(lblwebroot, 15);
-		fd_lblNewLabel_2.left = new FormAttachment(0, 15);
+		fd_lblNewLabel_2.top = new FormAttachment(lblwebroot, 16);
+		fd_lblNewLabel_2.left = new FormAttachment(lblNewLabel, 0, SWT.LEFT);
 		lblNewLabel_2.setLayoutData(fd_lblNewLabel_2);
 		lblNewLabel_2.setText("\u5907\u4EFD\u76EE\u5F55\u540D\u79F0\uFF1A");
 		
@@ -286,10 +289,9 @@ public class WebDeployComposite  extends Composite {
 			}
 		});
 		isActionDeployBtn.setToolTipText("\u5047\u5982\u5C06\u6B64\u9009\u9879\u52FE\u9009\u4E0A\uFF0C\u5219\u4F1A\u81EA\u52A8\u6267\u884C unzip \u547D\u4EE4\uFF0C\u5B9E\u73B0\u81EA\u52A8\u66F4\u65B0\u6216\u8986\u76D6\u76EE\u6807\u7A0B\u5E8F\u3002");
-		fd_actionBtn.left = new FormAttachment(isActionDeployBtn, 6);
 		FormData fd_isActionDeploy = new FormData();
-		fd_isActionDeploy.top = new FormAttachment(serverWebRootTxt, 11);
-		fd_isActionDeploy.right = new FormAttachment(100, -526);
+		fd_isActionDeploy.top = new FormAttachment(actionBtn, 5, SWT.TOP);
+		fd_isActionDeploy.right = new FormAttachment(actionBtn, -9);
 		isActionDeployBtn.setLayoutData(fd_isActionDeploy);
 		isActionDeployBtn.setText("\u81EA\u52A8\u53D1\u5E03");
 		this.outputPath = tempPath;
@@ -337,6 +339,7 @@ public class WebDeployComposite  extends Composite {
 		doAction(rootPath,filesPath);
 	    try {
 			createBackUpFileShellScript();
+			createRollBackFileShellScript();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -502,7 +505,7 @@ public class WebDeployComposite  extends Composite {
    String CRLF=" CRLF ";
    private Text serverWebRootTxt;
    private Text backUpItemTxt;
-   
+ StringBuffer filesRollBackScript = new StringBuffer();
    
    
    /**
@@ -523,17 +526,23 @@ public class WebDeployComposite  extends Composite {
 	    String targetFileFullPath = (deployRootPath + filePath).replace("\\", "/");
 	    backFilesScript.append("echo \"正在备份文件:\"").append(targetFileFullPath).append("  To:  ").append(bakDir).append(CRLF);
 	    backFilesScript.append("cp ").append(" "+targetFileFullPath).append(" "+bakDir).append(CRLF);
+	    
+	    String bfileFullPath = bakDir+filePath.substring(filePath.lastIndexOf("/"),filePath.length()); 
+	    String rfileFullPath = targetFileFullPath.substring(0, targetFileFullPath.lastIndexOf("/"));
+	    filesRollBackScript.append("echo \"正在回滚文件:\"").append(bfileFullPath).append("  To:  ").append(rfileFullPath).append(CRLF);
+	    filesRollBackScript.append("cp ").append(bfileFullPath).append("  ").append(rfileFullPath).append(CRLF);
+        	    
    }
 	
    
    
    /**
-    * 
-    * 生成脚本
+    * 生成备份与发布 脚本
     * @throws Exception
     */
    void createBackUpFileShellScript() throws Exception{
-		  String fileName =  this.outputDir+"/"+outputFile+"/backupFiles.sh";
+	      //生成发布脚本
+		  String fileName =  this.outputDir+"/"+outputFile+"/deploy.sh";
 		  File _file = new File(fileName);
 		  if(!_file.exists())
 		     _file.createNewFile();
@@ -567,6 +576,44 @@ public class WebDeployComposite  extends Composite {
 		  fw.close();
    }
    
+   
+   /**
+    * 
+    * 方法：创建回滚操作的脚本
+    * 
+    * @throws Exception
+    *  
+    *    Add By Ethan Lam  At 2011-11-22
+    */
+   void createRollBackFileShellScript() throws Exception{
+		  String fileName =  this.outputDir+"/"+outputFile+"/rollback.sh";
+		  File _file = new File(fileName);
+		  if(!_file.exists())
+		     _file.createNewFile();
+		  
+		  FileWriter fw=new FileWriter(_file);
+		  BufferedWriter bw=new BufferedWriter(fw); 
+		  String files = filesRollBackScript.toString();
+		  
+		  //打印必要的信息
+		  outputScript(bw,"echo '正在执行回滚操作...'");
+		  outputScript(bw,"curdir=$(pwd)");
+		  outputScript(bw,"echo \"当前回滚操作所在的根路径：\"${curdir}");
+		
+		  //输出需要备份的文件
+		  if(!files.equals("")){
+			  String[] backFiles =  files.split(CRLF);
+			  int line = 0;
+			  while(line<backFiles.length){
+				  outputScript(bw,backFiles[line]);
+			      line ++;
+			  }
+		  }
+		  outputScript(bw,"echo '文件回滚操作已经完成！'");
+		  bw.close();
+		  fw.close();
+}
+   
    /**
     * 
     * 方法：输出一行
@@ -581,7 +628,4 @@ public class WebDeployComposite  extends Composite {
 	      bw.write(content); 
 	      bw.newLine();//断行
    }
-   
-   
-   
 }
