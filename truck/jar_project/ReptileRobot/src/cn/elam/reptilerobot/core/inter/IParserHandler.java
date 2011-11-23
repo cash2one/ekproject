@@ -43,7 +43,7 @@ public interface IParserHandler {
 	   * @param preUrl
 	   * @throws Exception
 	   */
-	  public void dealLinkNodes(Parser parser,String preUrl) throws Exception;
+	  public void dealLinkNodes(String htmlPageContent,String preUrl) throws Exception;
 	  
 	  
 	  

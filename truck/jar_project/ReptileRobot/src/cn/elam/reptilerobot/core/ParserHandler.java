@@ -18,6 +18,7 @@ import org.htmlparser.util.NodeIterator;
 import org.htmlparser.util.NodeList;
 import org.htmlparser.util.ParserException;
 
+import cn.elam.reptilerobot.base.Page;
 import cn.elam.reptilerobot.core.inter.IFilter;
 import cn.elam.reptilerobot.core.inter.IParserHandler;
 import cn.elam.reptilerobot.utils.LoggerUtil;
@@ -34,6 +35,7 @@ public class ParserHandler implements IParserHandler {
  
 	   IFilter filterHandler = new FilterImp();
 	
+	   
 	  /**
 	   * 分析页面数据
 	   * @param preUrl
@@ -52,12 +54,12 @@ public class ParserHandler implements IParserHandler {
             is.close();  
             br.close();  
             urlConnectin.disconnect();
-//            LoggerUtil.info("ParserHandler-fetchHtmlContent","爬虫得带到的 页面内容"+inputHTML);
-		    Parser parser = new Parser();
-		    parser.setInputHTML(inputHTML.toString());
-	        dealLinkNodes(parser,preUrl);
-	        parser.setInputHTML(inputHTML.toString());
-	        fetchHtmlContent(parser);
+            
+	        //提取新的爬虫节点
+		    dealLinkNodes(inputHTML.toString(),preUrl);
+		    
+	        //获取对应的页面内容
+	        fetchHtmlContent(inputHTML.toString(),preUrl);
 	  }
 	  
 	  
@@ -65,15 +67,17 @@ public class ParserHandler implements IParserHandler {
 	  /**
 	   * 
 	   * 处理目标 超链接节点
-	   * @param parser
+	   * @param htmlPageContent
 	   * @param preUrl
 	   * @throws Exception
 	   */
-	  public void dealLinkNodes(Parser parser,String preUrl){
+	  public void dealLinkNodes(String htmlPageContent,String preUrl){
 		   try{
+			   Parser parser = new Parser();
+			   parser.setInputHTML(htmlPageContent);
 			   NodeFilter filter = new AndFilter(new TagNameFilter("a"),new HasAttributeFilter("target","_blank"));
 		        NodeList nodeList = parser.parse(filter);
-		        LoggerUtil.info("ParserHandler","爬虫得到的 <a> NodeList："+(nodeList!=null?nodeList.size():0));
+		        LoggerUtil.info("ParserHandler","爬虫得到新的节点个数："+(nodeList!=null?nodeList.size():0));
 		        NodeIterator it = nodeList.elements();
 		        while(it.hasMoreNodes()){
 		            Node node = it.nextNode();
@@ -90,12 +94,24 @@ public class ParserHandler implements IParserHandler {
 	  }
 	  
 	  
-	  
-	  public void fetchHtmlContent(Parser parser) throws ParserException{
+	   /**
+	    * 
+	    * 方法：获取对应的页面内容
+	    * 
+	    * @param htmlPageContent
+	    * @param preUrl
+	    * @throws ParserException
+	    *  
+	    *    Add By Ethan Lam  At 2011-11-23
+	    */
+	  public void fetchHtmlContent(String htmlPageContent,String preUrl) throws ParserException{
+		    Parser parser = new Parser();
+		    parser.setInputHTML(htmlPageContent);
 		    NodeFilter filter = new AndFilter(new TagNameFilter("div"),new HasAttributeFilter("class","blkContainerSblkCon"));
 	        NodeList nodeList = parser.parse(filter);
 	        NodeIterator it = nodeList.elements();
 	        Div div = null;
+	        StringBuffer htmlContent = new StringBuffer();
 	        while(it.hasMoreNodes()){
 	        	div  = (Div)it.nextNode();
 	        	NodeList nl = div.getChildren();
@@ -104,11 +120,19 @@ public class ParserHandler implements IParserHandler {
 	        	NodeIterator sub = nl.elements();
 	        	while(sub.hasMoreNodes()){
 	        		 Node t = sub.nextNode();
-	        		 if(t instanceof ParagraphTag)
-	        		    LoggerUtil.info("fetchHtmlContent  ",((ParagraphTag) t).getStringText());
+	        		 if(t instanceof ParagraphTag){
+//	        		    LoggerUtil.info("fetchHtmlContent:",((ParagraphTag) t).getStringText());
+	        		    htmlContent.append(((ParagraphTag) t).getStringText());
+	        		 }
 	        	}
 	        }
-		  
+	        if("".equals(htmlContent.toString().trim()))
+	        	return;
+	        
+	        Page page = new Page();
+	        page.setUrl(preUrl);
+	        page.setSegment(htmlContent.toString());
+	        LoggerUtil.info(preUrl+"获取到的页面内容:",htmlContent.toString());
 	  }
 	  
 	  

@@ -38,7 +38,7 @@ public class Crawl extends Thread{
 				   nextNode=CrawlQueue.getQueueManager().nextNode();
 				   if(nextNode!=null){
 					   String curUrl = nextNode.getUrl();
-					   if(curUrl==null||"".equals(curUrl))
+					   if(curUrl==null||"".equals(curUrl)||VisitedTableManager.getManager().hasVisited(curUrl))
 						   continue;
 					   
 					    LoggerUtil.debug("Crawl°æ"+this.name+"°ø","≈¿≥ÊµΩ£∫"+curUrl);
