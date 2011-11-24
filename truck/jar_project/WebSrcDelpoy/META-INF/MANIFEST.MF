@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: WebSrcDeployRc
+Bundle-SymbolicName: WebSrcDeployRc; singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: websrcdeployrc.Activator
+Bundle-Vendor: cn.elam
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Bundle-ClassPath: lib/bzip2.jar,
+ .,
+ lib/jcraft.jar,
+ lib/ant.jar
