@@ -15,7 +15,7 @@ public class LoggerUtil {
         p(handler,args);
 	}
 
-	static void  p(String handler, Object... args){
+	public static void  p(String handler, Object... args){
 		  System.out.print(handler+" : ");
 	       for(Object par:args)
 	          System.out.print(par+" , ");

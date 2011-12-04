@@ -12,6 +12,11 @@ import java.util.Date;
  */
 public class Node implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3014191605558737540L;
+
 	private long id;
 	
 	private String url;

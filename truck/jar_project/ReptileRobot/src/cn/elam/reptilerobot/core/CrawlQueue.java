@@ -3,6 +3,8 @@ package cn.elam.reptilerobot.core;
 import java.util.LinkedList;
 
 import cn.elam.reptilerobot.base.Node;
+import cn.elam.reptilerobot.persistent.INodeService;
+import cn.elam.reptilerobot.persistent.imps.NodeServiceImp;
 
 /**
  * 爬虫队列
@@ -14,6 +16,8 @@ public class CrawlQueue {
     private static CrawlQueue crawlQueue =  new CrawlQueue();
 	
 	private LinkedList<Node> currentNodes = new LinkedList<Node>();
+	
+	INodeService nodeService = new NodeServiceImp();
 	
 	/**
 	 * 爬虫队列
@@ -49,6 +53,7 @@ public class CrawlQueue {
 		newNode.setTitle(title);
 		newNode.setPreUrl(preUrl);
 		currentNodes.offer(newNode);
+		nodeService.save(newNode);
 	}
 	
 	

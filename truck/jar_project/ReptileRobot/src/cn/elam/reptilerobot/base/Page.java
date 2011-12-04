@@ -11,12 +11,27 @@ import java.io.Serializable;
  */
 public class Page implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3448119704668745432L;
+
 	private String title;
 	
 	private String segment;
 
 	private String url;
 	
+	private long id;
+	
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
 	public String getUrl() {
 		return url;
 	}

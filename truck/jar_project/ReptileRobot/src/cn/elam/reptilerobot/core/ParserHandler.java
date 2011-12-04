@@ -21,6 +21,8 @@ import org.htmlparser.util.ParserException;
 import cn.elam.reptilerobot.base.Page;
 import cn.elam.reptilerobot.core.inter.IFilter;
 import cn.elam.reptilerobot.core.inter.IParserHandler;
+import cn.elam.reptilerobot.persistent.IPageService;
+import cn.elam.reptilerobot.persistent.imps.PageServiceImp;
 import cn.elam.reptilerobot.utils.LoggerUtil;
 
 /**
@@ -35,6 +37,7 @@ public class ParserHandler implements IParserHandler {
  
 	   IFilter filterHandler = new FilterImp();
 	
+	   IPageService pageSer = new PageServiceImp();
 	   
 	  /**
 	   * 分析页面数据
@@ -76,10 +79,10 @@ public class ParserHandler implements IParserHandler {
 			   Parser parser = new Parser();
 			   parser.setInputHTML(htmlPageContent);
 			   NodeFilter filter = new AndFilter(new TagNameFilter("a"),new HasAttributeFilter("target","_blank"));
-		        NodeList nodeList = parser.parse(filter);
-		        LoggerUtil.info("ParserHandler","爬虫得到新的节点个数："+(nodeList!=null?nodeList.size():0));
-		        NodeIterator it = nodeList.elements();
-		        while(it.hasMoreNodes()){
+		       NodeList nodeList = parser.parse(filter);
+		       LoggerUtil.info("ParserHandler","爬虫得到新的节点个数："+(nodeList!=null?nodeList.size():0));
+		       NodeIterator it = nodeList.elements();
+		       while(it.hasMoreNodes()){
 		            Node node = it.nextNode();
 		            if(node instanceof LinkTag){
 		            	 if(!filterHandler.isLinkTagFilter(((LinkTag)node))){
@@ -133,6 +136,8 @@ public class ParserHandler implements IParserHandler {
 	        page.setUrl(preUrl);
 	        page.setSegment(htmlContent.toString());
 	        LoggerUtil.info(preUrl+"获取到的页面内容:",htmlContent.toString());
+	        pageSer.save(page);
+	        
 	  }
 	  
 	  
