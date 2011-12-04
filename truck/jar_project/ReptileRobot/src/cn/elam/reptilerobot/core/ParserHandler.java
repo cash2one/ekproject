@@ -63,6 +63,7 @@ public class ParserHandler implements IParserHandler {
 		    
 	        //获取对应的页面内容
 	        fetchHtmlContent(inputHTML.toString(),preUrl);
+	        
 	  }
 	  
 	  

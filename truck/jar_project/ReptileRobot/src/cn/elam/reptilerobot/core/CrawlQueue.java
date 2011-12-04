@@ -5,9 +5,12 @@ import java.util.LinkedList;
 import cn.elam.reptilerobot.base.Node;
 import cn.elam.reptilerobot.persistent.INodeService;
 import cn.elam.reptilerobot.persistent.imps.NodeServiceImp;
+import cn.elam.reptilerobot.utils.LoggerUtil;
+
 
 /**
- * 爬虫队列
+ * 
+ * 爬虫队列 TO_DO
  * @author Ethan.Lam  2011-11-16
  *
  */
@@ -52,8 +55,14 @@ public class CrawlQueue {
 		newNode.setUrl(url);
 		newNode.setTitle(title);
 		newNode.setPreUrl(preUrl);
-		currentNodes.offer(newNode);
-		nodeService.save(newNode);
+		//未被访问过的，可以加入
+		if(!VisitedTableManager.getManager().hasVisited(newNode)){
+			LoggerUtil.p("CrawlQueue 新增 URL： ",url);
+			currentNodes.offer(newNode);
+			nodeService.save(newNode);
+		}else{
+			LoggerUtil.p("CrawlQueue 重复URL： ",url);
+		}
 	}
 	
 	

@@ -13,7 +13,7 @@ public class Director {
 
       ExecutorService executor = null;
 	
-      int crawlNums =5;
+      int crawlNums =10;
       
       
 	  public Director(){

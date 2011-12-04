@@ -10,12 +10,14 @@ public class FilterImp implements IFilter{
 	public boolean isLinkTagFilter(LinkTag linkTag) {
 		// TODO Auto-generated method stub
 		if(linkTag==null)
-			return false;
+			return true;
 		String linkUrl = linkTag.getLink().toLowerCase();
 		boolean isFilter = linkUrl.indexOf(".jpg")>=0?true:false;
 		isFilter = (!isFilter&&linkUrl.indexOf(".png")>0)?true:false;
 		isFilter = (!isFilter&&linkUrl.indexOf(".gif")>0)?true:false;
 		isFilter = (!isFilter&&linkUrl.indexOf(".flv")>0)?true:false;
+		isFilter = (!isFilter&&linkUrl.indexOf(".mp3")>0)?true:false;
+		isFilter = (!isFilter&&linkUrl.indexOf(".mpeg")>0)?true:false;
 		isFilter = (!isFilter&&linkUrl.indexOf("news")<0)?true:false; //Ö»ÅÀ blog ÐÅÏ¢
 		return isFilter;
 	}

@@ -38,7 +38,7 @@ public class Crawl extends Thread{
 				   nextNode=CrawlQueue.getQueueManager().nextNode();
 				   if(nextNode!=null){
 					   String curUrl = nextNode.getUrl();
-					   if(curUrl==null||"".equals(curUrl)||VisitedTableManager.getManager().hasVisited(curUrl))
+					   if(curUrl==null||"".equals(curUrl))
 						   continue;
 					   
 					    LoggerUtil.debug("Crawl【"+this.name+"】","爬虫到："+curUrl);
@@ -62,12 +62,11 @@ public class Crawl extends Thread{
 				            uRLConnection.setDoInput(true); 
 				            
 				            parse.analyzeHTML(curUrl,uRLConnection);
+				            uRLConnection.disconnect();
 				            
 					    } catch (Exception e) {
-						  e.printStackTrace();
 						  LoggerUtil.error("Crawl【"+this.name+"】","发生异常....",e);
 					    }finally{
-					    	uRLConnection.disconnect();
 					    	uRLConnection = null;
 					    }
 				   }else{

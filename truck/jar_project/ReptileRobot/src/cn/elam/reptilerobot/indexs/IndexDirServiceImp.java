@@ -138,29 +138,28 @@ public class IndexDirServiceImp implements IIndexService{
 	
     public static void main(String...args) throws Exception{
 		
-    	IndexDirServiceImp indexSer = new IndexDirServiceImp("d:/index");
+    	IndexDirServiceImp indexSer = new IndexDirServiceImp("d:/luncene/sina_news");
 		IPageService ps = new PageServiceImp();
 		
-//        List<Page> pages = ps.loadByPage(1, 1000);
+        List<Page> pages = ps.loadByPage(1, 2000);
         long ct = System.currentTimeMillis();
-//        String[][] docs = new String[pages.size()][];
-//        int index = 0;
-//        for(Page n:pages){
+        String[][] docs = new String[pages.size()][];
+        int index = 0;
+        for(Page n:pages){
 //	    	LoggerUtil.p("testPage->loadListByPageIds: "+index+"",n.getId(),n.getUrl(),n.getSegment());
-//	        docs[index++]=new String[]{n.getSegment(),n.getId()+""};
-//	    }
-//        
-//        Field[] fields = new Field[]{
-//        		new Field("content", "", Field.Store.YES, Field.Index.ANALYZED, Field.TermVector.WITH_POSITIONS_OFFSETS),
-//        		new Field("id", "", Field.Store.NO, Field.Index.NOT_ANALYZED, Field.TermVector.NO)
-//        }; 
+	        docs[index++]=new String[]{n.getSegment(),n.getId()+""};
+	    }
         
-//        indexSer.createIndexs(fields,docs,false);
+        Field[] fields = new Field[]{
+        		new Field("content", "", Field.Store.YES, Field.Index.ANALYZED, Field.TermVector.WITH_POSITIONS_OFFSETS),
+        		new Field("id", "", Field.Store.NO, Field.Index.NOT_ANALYZED, Field.TermVector.NO)
+        }; 
+        
+        indexSer.createIndexs(fields,docs,false);
         LoggerUtil.p("建立索引的耗时：",(System.currentTimeMillis()-ct)+"毫秒");
-		
 	
         ct = System.currentTimeMillis();
-        List<Document> rdocs = indexSer.query("content", "山东省",20);
+        List<Document> rdocs = indexSer.query("content", "交通事故",20);
         if(rdocs!=null)
         for(Document d:rdocs){
         	LoggerUtil.p("全文搜索结果:",d.get("content"));

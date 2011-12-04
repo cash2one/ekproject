@@ -15,15 +15,16 @@ public class LoggerUtil {
         p(handler,args);
 	}
 
-	public static void  p(String handler, Object... args){
-		  System.out.print(handler+" : ");
-	       for(Object par:args)
-	          System.out.print(par+" , ");
-	       System.out.println();
+	
+	public static void p(String handler, Object... args){
+		 String msg = handler+" : ";
+	     for(Object par:args)
+	    	 msg+=par+" , ";
+	     System.out.println(msg);
 	}
 	
 	public static void error(String handler, String message, Throwable t) {
-
+		 p(handler,message);
 	}
 
 }

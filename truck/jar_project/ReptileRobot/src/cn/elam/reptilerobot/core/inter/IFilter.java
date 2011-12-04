@@ -10,6 +10,15 @@ import org.htmlparser.tags.LinkTag;
  */
 public interface IFilter {
 
+	/**
+	 * 
+	 * 方法：链接过滤接口
+	 * 
+	 * @param linkTag
+	 * @return
+	 *  
+	 *    Add By Ethan Lam  At 2011-12-4
+	 */
 	boolean isLinkTagFilter(LinkTag linkTag);
 
 }
