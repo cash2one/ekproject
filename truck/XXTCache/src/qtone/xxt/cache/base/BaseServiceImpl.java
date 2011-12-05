@@ -8,6 +8,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import qtone.xxt.cache.pool.JedisPooler;
 import redis.clients.jedis.Jedis;
@@ -327,6 +328,84 @@ public abstract class BaseServiceImpl<V extends Serializable> implements
 		pool.returnResource(jedis);
 	}
 	
+	
+	
+	/**
+	 * 设置hash值
+	 * @param key
+	 * @param field
+	 * @param value
+	 */
+	public void hashSet(String key,String field,String value) {
+		Jedis jedis = pool.getResource();
+		jedis.hset(key, field, value);
+		pool.returnResource(jedis);
+	}
+	
+	
+	/**
+	 * 设置hash值
+	 * @param key
+	 * @param hash  <String,String> - <field,value>
+	 */
+	public void hashSets(String key,Map<String,String>hash) {
+		Jedis jedis = pool.getResource();
+		jedis.hmset(key, hash);
+		pool.returnResource(jedis);
+	}
+	
+	
+	/**
+	 * 返回 hash 对应 field的值 
+	 * @param key
+	 * @param field
+	 * @return
+	 */
+	public String gHashValStr(String key,String field) {
+		Jedis jedis = pool.getResource();
+		String value = jedis.hget(key, field);
+		pool.returnResource(jedis);
+		return value;
+	}
+	
+	/**
+	 * 返回 hash 
+	 * @param key
+	 * @return
+	 */
+	public Map<String,String> gHashValStrs(String key) {
+		Jedis jedis = pool.getResource();
+		Map<String,String> value = jedis.hgetAll(key);
+		pool.returnResource(jedis);
+		return value;
+	}
+	
+	/**
+	 * 返回  POP 集合中的元素
+	 * @param key
+	 * @param field
+	 * @return
+	 */
+	public String pop(String key,boolean head) {
+		Jedis jedis = pool.getResource();
+		String value = head?jedis.lpop(key):jedis.rpop(key);
+		pool.returnResource(jedis);
+		return value;
+	}
+	
+	
+	/**
+	 * 返回 POP 集合中的元素
+	 * @param key
+	 * @param field
+	 * @return
+	 */
+	public V pop(byte[] key,boolean head) {
+	    Jedis jedis = pool.getResource();
+		byte[] bytes = head?jedis.lpop(key):jedis.rpop(key);
+		pool.returnResource(jedis);
+		return this.byte2Object(bytes);
+	}
 	
 	/**
 	 * 
