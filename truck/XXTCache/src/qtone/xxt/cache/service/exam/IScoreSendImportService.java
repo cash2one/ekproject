@@ -12,7 +12,7 @@ import qtone.xxt.cache.model.exam.ImportVo;
  * @author Ethan.Lam 2011-12-5
  * 
  */
-public interface IScoreImportService {
+public interface IScoreSendImportService {
 
 	/**
 	 * 
@@ -34,6 +34,15 @@ public interface IScoreImportService {
 	
 	/**
 	 * 
+	 * 把数据加到待处理列表中，等待执行
+	 * @param generateBatchSeq
+	 * 
+	 */
+	public void addWaitDealQueue(String generateBatchSeq);
+	
+	
+	/**
+	 * 
 	 * 获取对应的导入操作对应的参数
 	 * @param generateBatchSeq
 	 * @return
@@ -45,8 +54,9 @@ public interface IScoreImportService {
 	 * 删除成绩导入的数据（临时数据）
 	 * @param generateBatchSeq
 	 */
-	public void deleteData(String generateBatchSeq);
+	public void deleteCacheData(String generateBatchSeq);
 
+	
 	/**
 	 * 返回下一个待处理的批号
 	 * @return

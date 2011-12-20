@@ -32,7 +32,7 @@ public class JedisPooler {
 	 		}
 //	 		REDIS_HOST = prop.getProperty("REDIS_HOST");
 	 		
-	 		REDIS_HOST = "localhost";
+	 		REDIS_HOST = "192.168.4.39";
 	        JedisPoolConfig config = new JedisPoolConfig();
 	        config.setMaxActive(100);
 	        config.setMaxIdle(20);

@@ -7,7 +7,7 @@ import java.util.Map;
 
 import qtone.xxt.cache.base.BaseServiceImpl;
 import qtone.xxt.cache.model.exam.ImportVo;
-import qtone.xxt.cache.service.exam.IScoreImportService;
+import qtone.xxt.cache.service.exam.IScoreSendImportService;
 
 /**
  * 
@@ -16,8 +16,8 @@ import qtone.xxt.cache.service.exam.IScoreImportService;
  * @author Ethan.Lam 2011-12-5
  * 
  */
-public class ScoreImportServiceImp extends BaseServiceImpl<ImportVo> implements
-		IScoreImportService {
+public class ScoreSendImportServiceImp extends BaseServiceImpl<ImportVo> implements
+		IScoreSendImportService {
 
 	//生成导入批号
 	private static final String GLOBAL_BATCH_SEQ = "global:nextScoreBatchSeq";
@@ -50,9 +50,8 @@ public class ScoreImportServiceImp extends BaseServiceImpl<ImportVo> implements
           String batchListKey = String.format(BATCH_LIST_KEY_FORMAT,generateBatchSeq); 
           //把带导入的成绩数据插入到对应的空间中
           for(ImportVo vo : batchDatas){
-              super.addHeadList(batchListKey,vo);        	  
+              super.addTailList(batchListKey,vo);        	  
           }
-          super.addTailList(BATCH_ID_LIST,generateBatchSeq+"");
           
           //把其他参数存储到对应hashMap上
           String hashKey = String.format(PARAMS_HASHSET,generateBatchSeq); 
@@ -61,9 +60,19 @@ public class ScoreImportServiceImp extends BaseServiceImpl<ImportVo> implements
           super.hashSet(hashKey,"areaAbb",areaAbb);
           super.hashSet(hashKey,"fileTime",fileTime);
           
-          return batchListKey;
+          return generateBatchSeq+"";
 	}
 
+	/**
+	 * 
+	 * 把数据加到待处理列表中，等待执行
+	 * @param generateBatchSeq
+	 * 
+	 */
+	public void addWaitDealQueue(String generateBatchSeq) {
+		// TODO Auto-generated method stub
+		 super.addTailList(BATCH_ID_LIST,generateBatchSeq+"");
+	}
 	
 	/**
 	 * 获取导入数据（临时数据）
@@ -71,6 +80,7 @@ public class ScoreImportServiceImp extends BaseServiceImpl<ImportVo> implements
 	 * @return
 	 */
 	public List<ImportVo> getDatas(String generateBatchSeq){
+		generateBatchSeq = String.format(BATCH_LIST_KEY_FORMAT,generateBatchSeq); 
 		long dataRows = super.getListLength(generateBatchSeq.getBytes());
 		int pageSize = 2000;
 		int totalPages = 1;
@@ -89,13 +99,12 @@ public class ScoreImportServiceImp extends BaseServiceImpl<ImportVo> implements
 	 */
 	public Map<String, Object> getParams(String generateBatchSeq) {
 		// TODO Auto-generated method stub
-	      generateBatchSeq = generateBatchSeq.substring(generateBatchSeq.lastIndexOf(":")+1, generateBatchSeq.length());
 		  String hashKey = String.format(PARAMS_HASHSET,generateBatchSeq); 
 		  Map<String,String> hash = super.gHashValStrs(hashKey);
 		  Map<String, Object> values = new HashMap<String,Object>();
 		  if(hash!=null){
-			  values.put("examId", Integer.parseInt(hash.get("examId")));
-			  values.put("classId",Integer.parseInt(hash.get("classId")));
+			  values.put("examId", Long.parseLong(hash.get("examId")));
+			  values.put("classId",Long.parseLong(hash.get("classId")));
 			  values.put("areaAbb", hash.get("areaAbb"));
 			  values.put("fileTime",hash.get("fileTime"));
 		  }
@@ -108,10 +117,11 @@ public class ScoreImportServiceImp extends BaseServiceImpl<ImportVo> implements
 	 * @param generateBatchSeq
 	 * 
 	 */
-	public void deleteData(String generateBatchSeq){
-           		
+	public void deleteCacheData(String generateBatchSeq) {
+		// TODO Auto-generated method stub
+		
 	}
-
+	
 
 	/**
 	 * 返回下一个待处理的批号
@@ -128,7 +138,15 @@ public class ScoreImportServiceImp extends BaseServiceImpl<ImportVo> implements
 	
 	
 	public static void main(String...args){
-	    IScoreImportService t = new ScoreImportServiceImp();
+	    IScoreSendImportService t = new ScoreSendImportServiceImp();
+	    String ns = t.getNextSeq();
+	    System.out.println("当前处理批号为："+ns);
+	    testget(ns);
+	    
+	}
+
+   public static void testSet(){
+	    IScoreSendImportService t = new ScoreSendImportServiceImp();
 		List<ImportVo> batchDatas = new ArrayList<ImportVo>();
 		ImportVo vo = new ImportVo();
 		vo.setResult("数据合法！");
@@ -136,24 +154,27 @@ public class ScoreImportServiceImp extends BaseServiceImpl<ImportVo> implements
 		vo.setStuName("测试学生");
 		vo.setStuSequence("111111");
 		batchDatas.add(vo);
-		String seq = t.setDatas(batchDatas, 1,1,"11","11");
-//		String seq ="scoreitem:batch:2";
-		System.out.println(seq);
-		
-		List<ImportVo> gds = t.getDatas(seq);
+		String generateBatchSeq = t.setDatas(batchDatas, 1,1,"11","11");
+		System.out.println("待处理批号为："+generateBatchSeq);
+   }
+
+    public static void testget(String generateBatchSeq){
+        IScoreSendImportService t = new ScoreSendImportServiceImp();
+		List<ImportVo> gds = t.getDatas(generateBatchSeq);
 		for(ImportVo d :gds){
 			System.out.print(d.getStuName()+" , ");
 			System.out.print(d.getStuSequence()+" , ");
 			for(String v:d.getScoreList())
 			   System.out.print(v+" , ");
-			System.out.print(d.getResult()+" ");
+			System.out.print(" "+d.getResult()+" ");
 			System.out.println();
 		}
-		Map<String,Object> params = t.getParams(seq);
+		Map<String,Object> params = t.getParams(generateBatchSeq);
+		System.out.println("对应设置的参数：");
 		for(String key :params.keySet())
-		  System.out.println("<"+key+":"+params.get(key)+">");
-		
-	}
+		  System.out.print("<"+key+":"+params.get(key)+">;");
+		System.out.println("");
+    }
 
 
 	
