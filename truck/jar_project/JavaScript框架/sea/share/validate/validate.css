@@ -1,0 +1,16 @@
+.validateMsg{
+   color:#FF0033;
+   font-weight:700;
+   font-family:"ĞÂËÎÌå";
+   font-size:10px;
+   padding-left:35px;
+   margin-top:30px;
+}
+
+.validateTip{
+	background-image:url(val.png);
+	width:220px;
+	height:44px;
+    position:absolute;
+	z-index:99;
+}
