@@ -1,3 +1,4 @@
+//validate.js
 /**
  * 
  * 验证器
@@ -5,76 +6,79 @@
  * @return
  * 
  */
+define(function(require, exports, module){
 
-function Validator() {};
-Validator.prototype = {
+	 var $ = require('../../base/jquery');
+	 var css = require('./style.css');
 
-    validate:function(){
-	    var validatorMsg = "";
-		///Debug("autoMacthValidateHandle found:"+$("input[validate]").length);
-        var allRight = true;
+	 exports.validate = function(){
+			
+			var validatorMsg = "";
+			///Debug("autoMacthValidateHandle found:"+$("input[validate]").length);
+			var allRight = true;
 
-        this.removeErrTip();//删除上次生成的验证信息
+			removeErrTip();//删除上次生成的验证信息
 
-		$("input[validate]").each(function(index){
-	    	  var validates = $(this).attr("validate");
-			  var data = $.trim($(this).val());
-			  var inputObj  = $(this)[0];
-			 
-			  $.each(validates.split(/\s/),function(index){  
-				  validate = this;
-                  if('required'==validate || data!=''){
-					  validatorMsg = validator.runInputCheckValidate(inputObj,validate,data);
-					  if($.trim(validatorMsg)!=''){
-						  Debug("validatorMsg:"+validatorMsg);
-						  validator.appendErrMsgAfterInput(inputObj,validatorMsg);
-						  allRight = false;
+			$("input[validate]").each(function(index){
+
+				  var validates = $(this).attr("validate");
+				  var data = $.trim($(this).val());
+				  var inputObj  = $(this)[0];
+				 
+				  $.each(validates.split(/\s/),function(index){  
+					  validate = this;
+					  if('required'==validate || data!=''){
+						  validatorMsg = runInputCheckValidate(inputObj,validate,data);
+						  if($.trim(validatorMsg)!=''){
+							  //Debug("validatorMsg:"+validatorMsg);
+							  appendErrMsgAfterInput(inputObj,validatorMsg);
+							  allRight = false;
+						  }
 					  }
-                  }
-			  });
+				  });
 
-			 
+				 
 
-		});
+			});
 
-		return allRight;
-    },
+			return allRight;
+	}
 
 
     /**
 	* 执行对应的验证器
 	*/
-    runInputCheckValidate:function(element,validate,data){
+    var runInputCheckValidate = function(element,validate,data){
 	   //Debug("runInputCheckValidate:"+validate);
-	    if(this.Methods[validate]){
+	    if(Methods[validate]){
 			//验证不通过的返回对应的提示信息
-		   msg = this.Methods[validate].call(this,data,element);
-		   return (msg==0&&this.Message[validate])?this.Message[validate]:(msg!=1?msg:'');
+		   msg = Methods[validate].call(this,data,element);
+		   return (msg==0&&Message[validate])?Message[validate]:(msg!=1?msg:'');
 		}
-	},
+	}
  
     
 	/**
 	* 删除所有的提示信息框 
 	*/
-    removeErrTip:function(){
+    var removeErrTip = function(){
 	    $("span[class='validateMsg']").remove();  
 	    $("div[class='validateTip']").remove();
-	},
+	}
 
 
    /**
 	* 在对应的控件后面显示对应的验证结果
 	*/
-    appendErrMsgAfterInput:function(element,msg){
+    var appendErrMsgAfterInput = function(element,msg){
       $(element).parent().after("<div class='validateTip' ><span  class='validateMsg'>"+msg+"</span></div>");	 
-	},
+	}
 
 
 	/**
 	* 具体验证器
     */
-    Methods:{
+    var Methods = {
     	
     	    /**
     	     * 不能为空
@@ -132,27 +136,28 @@ Validator.prototype = {
 				   return 0;
 		    }
 		    
-    },
+    }
 		
+
    /**
 	* 具体验证器提示信息
+	*
     */
-	Message:{
+	var Message = {
 	     required:"此处不能为空，必填信息",
          number:"非法的数字",
 	     email:"非法的邮件地址",
          phone:"非法的手机号码"
 	}
-		
 
-	
-		
-}
 
-function Debug(message){
-	   if($.browser.mozilla)
-	      console.log("[DEBUG]:"+message);
-}
 
-//生成validator类实例
-var validator = new Validator();
+});
+
+ 
+///function Debug(message){
+///	if($.browser.mozilla)
+///	    console.log("[DEBUG]:"+message);
+///}
+
+
