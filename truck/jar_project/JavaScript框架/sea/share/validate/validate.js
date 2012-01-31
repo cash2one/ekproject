@@ -1,6 +1,5 @@
-//validate.js
 /**
- * 
+ * validate.js
  * 验证器
  * Ethan Lam 2012-01-12
  * @return
@@ -9,17 +8,22 @@
 define(function(require, exports, module){
 
 	 var $ = require('../../base/jquery');
+	 var CONSOLE = require('../console');
 	 var css = require('./style.css');
 
-	 exports.validate = function(){
+
+     /*提交验证控件的值是否合法*/
+	 exports.validate = function(formId /*formId*/ ){
 			
 			var validatorMsg = "";
 			///Debug("autoMacthValidateHandle found:"+$("input[validate]").length);
 			var allRight = true;
 
 			removeErrTip();//删除上次生成的验证信息
-
-			$("input[validate]").each(function(index){
+          
+		    var formTarget = formId&&''!=formId?"#"+formId+" input[validate]":"input[validate]";
+          
+			$(formTarget).each(function(index){
 
 				  var validates = $(this).attr("validate");
 				  var data = $.trim($(this).val());
@@ -30,7 +34,7 @@ define(function(require, exports, module){
 					  if('required'==validate || data!=''){
 						  validatorMsg = runInputCheckValidate(inputObj,validate,data);
 						  if($.trim(validatorMsg)!=''){
-							  //Debug("validatorMsg:"+validatorMsg);
+							  CONSOLE.Debug("validatorMsg:"+validatorMsg);
 							  appendErrMsgAfterInput(inputObj,validatorMsg);
 							  allRight = false;
 						  }
@@ -40,6 +44,54 @@ define(function(require, exports, module){
 				 
 
 			});
+
+			return allRight;
+	}
+
+    
+	/*自动验证功能*/
+    exports.init = function(formId /*formId*/ ){
+	   
+	   var formTarget = formId&&''!=formId?"#"+formId+" input[validate]":"input[validate]";
+
+	   //为每个控件绑定对应的
+       $("[validate]").each(function(data){
+		    var inputObj = $(this)[0];
+	        $(this).change(function(){
+				 //自动绑定验证控件
+			     autoValidate(inputObj);
+			});
+	   });
+		 
+	}
+
+
+
+    /*自动验证功能*/
+    autoValidate = function(inputObj /*element Object*/ ){
+			
+			var validatorMsg = "";
+			///Debug("autoMacthValidateHandle found:"+$("input[validate]").length);
+			var allRight = true;
+
+			///removeErrTip();//删除上次生成的验证信息
+             $(inputObj).parent().parent().find(".validateMsg").remove(); 
+	         $(inputObj).parent().parent().find(".validateTip").remove();
+
+			 var validates = $(inputObj).attr("validate");
+		     var data = $.trim($(inputObj).val());
+			 	 
+		     $.each(validates.split(/\s/),function(index){  
+					  validate = this;
+					  if('required'==validate || data!=''){
+						  validatorMsg = runInputCheckValidate(inputObj,validate,data);
+						  if($.trim(validatorMsg)!=''){
+							  CONSOLE.Debug("validatorMsg:"+validatorMsg);
+							  appendErrMsgAfterInput(inputObj,validatorMsg);
+							  allRight = false;
+						  }
+					  }
+			 });
 
 			return allRight;
 	}
@@ -150,14 +202,8 @@ define(function(require, exports, module){
          phone:"非法的手机号码"
 	}
 
-
+  
 
 });
 
  
-///function Debug(message){
-///	if($.browser.mozilla)
-///	    console.log("[DEBUG]:"+message);
-///}
-
-

@@ -2,6 +2,7 @@ seajs.config({
    /// base: './base/',
     alias: {
       'jquery': '../base/jquery',
+	  'console': '../share/console',
       'validate': '../share/validate/validate'
     },
     charset: 'utf-8',
@@ -23,15 +24,18 @@ define(function(require, exports, module) {
     		 $('.tul').append('<li>'+this+'</li>');
        });
 
+        
+	    //init	 
+       	validate.init();
 
-       $("#sbBtn").click(function(){
-		    validate.validate();
+       $("#sbBtn").click(function(){    
+		    //validate.validate();
+			validate.validate("testForm");
 	   });
 
 
 	   $(document).ready(function(){
-           alert('dd');
-		  
+           alert('document ready');
 		});
 	  
     }

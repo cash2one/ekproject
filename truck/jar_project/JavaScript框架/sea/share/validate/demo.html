@@ -15,11 +15,11 @@
 	  <table>
 	     <Tr>
 		    <Td>姓名：</td>
-		    <Td><input id="t1" type="text" validate="required" minLength="5" maxLength="8"  value="fsdf"></td>
+		    <Td><input id="t1" type="text" validate="required" minLength="5" maxLength="8"  value=""></td>
 		 </tr>
 		 <Tr>
 		     <Td>年龄：</td>
-		    <Td><input id="t1" type="text" validate="number required" min="10" max="100" value="fdsf"></td>
+		    <Td><input id="t1" type="text" validate="number required" min="10" max="100" value=""></td>
 		 </tr>
 		  <Tr>
 		     <Td>email：</td>
@@ -30,22 +30,16 @@
 		    <Td><input   type="text" validate="phone" value=""></td>
 		 </tr>
 		 <Tr>
-		     <Td>号码：</td>
-		    <Td>
-			    <div class="validateTip">
-			        <span class="validateMsg">测试</span>
-				</div>
-			</td>
-		 </tr>
-		 <Tr>
 		    <Td><input id="sbBtn" type="button" value="提交"></td>
 		 </tr>
 	  </table>
 	</form> 
 
-    <script src="./base/sea-debug.js" ></script>
+    <script src="../../base/sea-debug.js" ></script>
     <script>
-        seajs.use('./module/testModule', function(module) {
+
+	    //模块的初始入口
+        seajs.use('../../module/testModule', function(module) {
 			 module.init();
         });
 
