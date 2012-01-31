@@ -19,6 +19,11 @@ define(function(require, exports, module) {
 	var validate = require('validate');
 	var CONSOLE = require('console');
      
+
+    $(document).ready(function(){
+	      CONSOLE.Debug('document ready');
+	});
+
     exports.init = function() {
    
 		   $.each(['test_1','test_2'],function(data){
@@ -35,11 +40,11 @@ define(function(require, exports, module) {
 
 
 		   CONSOLE.Debug('TestModule ready....');
-		   $(document).ready(function(){
-				CONSOLE.Debug('document ready');
-			});
+		 
 	  
     }
 
 
 });
+
+  
