@@ -240,7 +240,7 @@
         if(javaTypeName.toLowerCase().equals("string"))
         	return columnName+",jdbcType=VARCHAR";
         else if(javaTypeName.toLowerCase().equals("date"))
-        	return columnName+",jdbcType=DATE";
+        	return columnName+",jdbcType=TIMESTAMP";
         else if(javaTypeName.toLowerCase().equals("long")||javaTypeName.toLowerCase().equals("int"))
             return columnName+",jdbcType=NUMERIC";
         else 
