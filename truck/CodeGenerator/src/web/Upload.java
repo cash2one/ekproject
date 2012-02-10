@@ -71,7 +71,8 @@ public class Upload extends HttpServlet {
 		PrintWriter out = resp.getWriter();
 		StringBuffer urls = new StringBuffer();
 		System.out.println(request.getRemoteAddr());
-		String ip = request.getRemoteAddr().equals("127.0.0.1")||request.getRemoteAddr().equals("192.168.4.39")?BaseCfg.WWW_LOCALHOST:BaseCfg.WWW;
+		String ip = request.getRemoteAddr().equals("127.0.0.1")||request.getRemoteAddr().indexOf("192.168.")>=0?BaseCfg.WWW_LOCALHOST:BaseCfg.WWW;
+		
 		
 		for (String fileCfg : recFiles) {
 			urls.append(ip).append(
