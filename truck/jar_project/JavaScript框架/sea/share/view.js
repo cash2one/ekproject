@@ -29,9 +29,9 @@ define(function(require, exports, module) {
          var view = {
 				  "header": "模版技术",
 				  "items": [
-					  {"name": "百度", "link": true, "url": "www.baidu.com"},
-					  {"name": "green", "link": true, "url": "Green"},
-					  {"name": "blue", "link": true, "url": "Blue"}
+					  {"name": "百度", "link": true, "url": "http://www.baidu.com"},
+					  {"name": "新浪", "link": true, "url": "http://www.sina.com.cn"},
+					  {"name": "网易", "link": true, "url": "http://www.163.com"}
 				  ],
 				  "empty": false
 		 };
