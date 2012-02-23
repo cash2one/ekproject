@@ -1,0 +1,41 @@
+﻿<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <p class="content"></p>
+    <ul class="tul"></ul>
+
+     <form id="testForm" >
+	  <h1>View 测试</h1>
+	 </form> 
+
+	<div id="render_template">
+		   <h1>{{header}}</h1>
+			{{#bug}}
+			{{/bug}}
+			{{#items}}
+			  {{#first}}
+				<li><strong>{{name}}</strong></li>
+			  {{/first}}
+			  {{#link}}
+				<li><a href="{{name}}">{{url}}</a></li>
+			  {{/link}}
+			{{/items}}
+			{{#empty}}
+			  <p>The list is empty.</p>
+			{{/empty}}
+	</div>
+
+
+    <script src="../base/sea-debug.js" ></script>
+    <script>
+        seajs.use('./view', function(module) {
+			 module.render();
+        });
+
+    </script>
+</body>
+</html>
