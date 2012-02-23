@@ -15,16 +15,69 @@ seajs.config({
 /*测试模块*/
 define(function(require, exports, module) {
 
-	var $ = require('jquery');
 	var mustache = require('mustache');
-	var validate = require('validate');
-	var CONSOLE = require('console');
+	///var validate = require('validate');
+	//var console = require('console');
      
+
+    /* 分页属性 */
+	var pageModel={
+	     "currentPage:":1,
+         "totalPage:":0,
+	     "pageSize:":20,
+	     "allRecords:":0,
+         "items":''
+	};
+   
 
     /*View Render*/
     exports.render = function(formId/*from Id*/,url/*requestUrl*/,params/* request params*/,callBack/*回调函数*/) {
+		
+
+        $('#render_template').html(html);		
+    };
+
+
+
+    /*DataGrid Render */
+    exports.dataGrid = function(formId/*from Id*/,url/*requestUrl*/,params/* request params*/,callBack/*回调函数*/) {
+		
+    
+       //异步请求处理
+       $.ajax({
+			type: "POST",
+			url: url,
+			data: params,
+			success: function(result){
+				   // console.Debug(result);
+					if(result&&result!=''){
+						var dataView = toJSON(result);
+						pageModel.items = dataView.items;
+						pageModel.currentPage = dataView.currentPage;
+						pageModel.totalPage = dataView.totalPage;
+						pageModel.allRecords = dataView.allRecords;
+						pageModel.pageSize = dataView.pageSize;
+					}
+					if(callBack){
+						callBack(result);
+					}
+				},
+			 error: function(result){
+					//console.Debug('出现未知异常，操作失败！');
+				},
+			//dataType: type
+		});
+      	
+
+		
+    };
+
+
+
+    /*View Render*/
+    exports.templateRender = function(template/*基础模版*/,url/*requestUrl*/,params/* request params*/,callBack/*回调函数*/) {
 		 
-		 CONSOLE.Debug('[View]: Test render Function....');
+		// console.Debug('[View]: Test render Function....');
             
          var view = {
 				  "header": "模版技术",
@@ -35,14 +88,24 @@ define(function(require, exports, module) {
 				  ],
 				  "empty": false
 		 };
-				  
-        var template = $('#render_template').html();  
-        var html = mustache.to_html(template, view); 
-        $('#render_template').html(html);
-		CONSOLE.Debug(html);
-    }
+
+         var html = mustache.to_html(template, view); 
+         $('#render_template').html(html);
+    };
 
     
+	/**
+	 * 将字符串转化为JSON对象转换成js中的对象
+	 */
+	toJSON = function(/*string*/jsonString) {
+	    try {
+			//console.Debug('View JSON String:'+jsonString);
+			return eval('(' + jsonString + ')');
+		} catch (ex) {
+			return null;
+		}
+	};
+	
     
     
 

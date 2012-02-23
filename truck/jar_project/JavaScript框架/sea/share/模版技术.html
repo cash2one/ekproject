@@ -30,10 +30,11 @@
 	</div>
 
 
-    <script src="../base/sea-debug.js" ></script>
+    <script src="../base/jquery.js" ></script>
+	 <script src="../base/sea-debug.js" ></script>
     <script>
         seajs.use('./view', function(module) {
-			 module.render();
+			 module.dataGrid('formId','http://localhost:8080/?jkhj=oss','',function(data){alert(data);});
         });
 
     </script>

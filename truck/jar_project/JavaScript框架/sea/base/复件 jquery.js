@@ -1,5 +1,5 @@
 //jquery.js
-//define(function() {
+define(function() {
  
     //原jquery.js代码...
  
@@ -3266,7 +3266,6 @@
 				dataType: "html",
 				data: params,
 				complete: function(res, status){
-					alert('fdsfsdf');
 					// If successful, inject the HTML into all the matched elements
 					if ( status == "success" || status == "notmodified" )
 						// See if a selector was specified
@@ -4381,5 +4380,5 @@
 	});
 	})();
 
-	///return $.noConflict();
-//});
+	return $.noConflict();
+});
