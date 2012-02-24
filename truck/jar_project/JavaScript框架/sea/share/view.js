@@ -59,9 +59,14 @@ define(function(require, exports, module) {
 						pageModel.pageSize = dataView.pageSize;
 						pageModel.items = dataView.items;
 					    _formsPageModel.formId = pageModel; 
+
+                        var html = mustache.to_html($('#render_template').html(),dataView); 
+                        $('#render_template').html(html);
+
 					}else{
-						console("toJSON失败....",module._name);
+						console.Debug("toJSON失败....",module._name);
 					}
+					console.Debug("测试PageMode数据："+_formsPageModel.formId.items[0].a,module._name);
 					if(callBack){
 						callBack(result);
 					}
