@@ -7,7 +7,6 @@
  */
 define(function(require, exports, module){
 
-	 var $ = require('../../base/jquery');
 	 var CONSOLE = require('../console');
 	 var css = require('./style.css');
 

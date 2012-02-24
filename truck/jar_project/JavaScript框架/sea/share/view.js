@@ -16,12 +16,13 @@ seajs.config({
 define(function(require, exports, module) {
 
 	var mustache = require('mustache');
-	//var validate = require('validate');
-	//var console = require('console');
-     
+	var validate = require('validate');    
+    var console = require('console');
+	module._name = "view";
+
 
     /* 分页属性 */
-	var pageModel={
+	var PageModel={
 	     "currentPage:":1,
          "totalPage:":0,
 	     "pageSize:":20,
@@ -29,6 +30,7 @@ define(function(require, exports, module) {
          "items":''
 	};
    
+    var _formsPageModel = {};
 
     /*View Render*/
     exports.render = function(formId/*from Id*/,url/*requestUrl*/,params/* request params*/,callBack/*回调函数*/) {
@@ -47,16 +49,18 @@ define(function(require, exports, module) {
 			data: params,
 		    contentType: "text/plain",
 			success: function(result){
-				   // console.Debug(result);
+				   console.Debug("请求地址["+url+"]后返回的数据："+result,module._name);
 				   var dataView = toJSON($.trim(result));
 					if(result&&result!=''&&dataView){
+                        var pageModel = {};
 						pageModel.currentPage = dataView.currentPage;
 						pageModel.totalPage = dataView.totalPage;
 						pageModel.allRecords = dataView.allRecords;
 						pageModel.pageSize = dataView.pageSize;
 						pageModel.items = dataView.items;
+					    _formsPageModel.formId = pageModel; 
 					}else{
-						alert("toJSON失败....");
+						console("toJSON失败....",module._name);
 					}
 					if(callBack){
 						callBack(result);
@@ -64,7 +68,7 @@ define(function(require, exports, module) {
 			        },
 			 error: function(result){
 					//console.Debug('出现未知异常，操作失败！');
-					 alert("error");
+					 console.Debug("error",module._name);
 				   }
 			//dataType: type
 		});
@@ -76,8 +80,7 @@ define(function(require, exports, module) {
     /*View Render*/
     exports.templateRender = function(template/*基础模版*/,url/*requestUrl*/,params/* request params*/,callBack/*回调函数*/) {
 		 
-		// console.Debug('[View]: Test render Function....');
-            
+		 console.Debug('Test templateRender Function....',module._name);   
          var view = {
 				  "header": "模版技术",
 				  "items": [
@@ -98,7 +101,7 @@ define(function(require, exports, module) {
 	 */
 	toJSON = function(/*string*/jsonString) {
 	    try {
-			//console.Debug('View JSON String:'+jsonString);
+			console.Debug('JSON String:'+jsonString,module._name);
 			return eval('(' + jsonString + ')');
 		} catch (ex) {
 			return null;

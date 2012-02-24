@@ -8,12 +8,11 @@
  */
 define(function(require, exports, module){
 
-	 var $ = require('../base/jquery');
 	  
 	 /*火狐中可打印*/
-     exports.Debug = function (message){
+     exports.Debug = function (message,module){
  	     if($.browser.mozilla)
-  	        console.log("[DEBUG]:"+message);
+  	        console.log("[DEBUG - "+module+"]:"+message);
      }
 
 });
