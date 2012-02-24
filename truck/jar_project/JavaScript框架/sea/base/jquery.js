@@ -1,5 +1,5 @@
 //jquery.js
-//define(function() {
+define(function() {
  
     //原jquery.js代码...
  
@@ -4381,5 +4381,5 @@
 	});
 	})();
 
-	///return $.noConflict();
-//});
+	return $.noConflict();
+});
