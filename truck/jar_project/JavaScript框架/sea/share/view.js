@@ -16,7 +16,7 @@ seajs.config({
 define(function(require, exports, module) {
 
 	var mustache = require('mustache');
-	///var validate = require('validate');
+	//var validate = require('validate');
 	//var console = require('console');
      
 
@@ -33,7 +33,6 @@ define(function(require, exports, module) {
     /*View Render*/
     exports.render = function(formId/*from Id*/,url/*requestUrl*/,params/* request params*/,callBack/*回调函数*/) {
 		
-
         $('#render_template').html(html);		
     };
 
@@ -41,30 +40,34 @@ define(function(require, exports, module) {
 
     /*DataGrid Render */
     exports.dataGrid = function(formId/*from Id*/,url/*requestUrl*/,params/* request params*/,callBack/*回调函数*/) {
-		
-    
        //异步请求处理
        $.ajax({
 			type: "POST",
 			url: url,
 			data: params,
+		    contentType: "text/plain",
 			success: function(result){
 				   // console.Debug(result);
-					if(result&&result!=''){
-						var dataView = toJSON(result);
-						pageModel.items = dataView.items;
+				   var dataView = toJSON($.trim(result));
+					if(result&&result!=''&&dataView){
 						pageModel.currentPage = dataView.currentPage;
 						pageModel.totalPage = dataView.totalPage;
 						pageModel.allRecords = dataView.allRecords;
 						pageModel.pageSize = dataView.pageSize;
+						pageModel.items = dataView.items;
+					}else{
+						alert("toJSON失败....");
 					}
+					alert(pageModel.currentPage );
+					alert(pageModel.items[1].a);
 					if(callBack){
 						callBack(result);
 					}
-				},
+			        },
 			 error: function(result){
 					//console.Debug('出现未知异常，操作失败！');
-				},
+					 alert("error");
+				   }
 			//dataType: type
 		});
       	
