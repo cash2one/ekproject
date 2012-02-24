@@ -40,7 +40,7 @@ define(function(require, exports, module) {
 
     /*DataGrid Render */
     exports.dataGrid = function(formId/*from Id*/,url/*requestUrl*/,params/* request params*/,callBack/*回调函数*/) {
-       //异步请求处理
+	   //异步请求处理
        $.ajax({
 			type: "POST",
 			url: url,
@@ -58,8 +58,6 @@ define(function(require, exports, module) {
 					}else{
 						alert("toJSON失败....");
 					}
-					alert(pageModel.currentPage );
-					alert(pageModel.items[1].a);
 					if(callBack){
 						callBack(result);
 					}
@@ -71,8 +69,6 @@ define(function(require, exports, module) {
 			//dataType: type
 		});
       	
-
-		
     };
 
 
