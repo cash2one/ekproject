@@ -1,6 +1,7 @@
 seajs.config({
     alias: {
       'jquery': '../base/jquery',
+	  'base': './base',
 	  'mustache':'../base/mustache',
 	  'console': '../share/console',
       'validate': '../share/validate/validate'
@@ -14,6 +15,7 @@ seajs.config({
 
 /*测试模块*/
 define(function(require, exports, module) {
+
 
 	var mustache = require('mustache');
 	var validate = require('validate');    
@@ -29,8 +31,10 @@ define(function(require, exports, module) {
 	     "allRecords:":0,
          "items":''
 	};
+
    
     var _formsPageModel = {};
+
 
     /*View Render*/
     exports.render = function(formId/*from Id*/,url/*requestUrl*/,params/* request params*/,callBack/*回调函数*/) {
@@ -40,8 +44,25 @@ define(function(require, exports, module) {
 
 
 
+    /*初始化grid*/
+    exports.initGrid = function(formId/**/,titles/*列标题*/,columns/*列定义*/){
+	      //根据信息，生成对应的模版（列表）,模版加工操作
+		  var dataGridTemplate = "";
+         
+
+	
+	};
+
+
+
     /*DataGrid Render */
     exports.dataGrid = function(formId/*from Id*/,url/*requestUrl*/,params/* request params*/,callBack/*回调函数*/) {
+	   
+	   //提交的参数
+	   var formParamsStr = (formId&&formId!='')?base._getFormValues(formId):"";
+       url += formParamsStr;
+	   
+	  
 	   //异步请求处理
        $.ajax({
 			type: "POST",
@@ -66,9 +87,10 @@ define(function(require, exports, module) {
 					}else{
 						console.Debug("toJSON失败....",module._name);
 					}
-					console.Debug("测试PageMode数据："+_formsPageModel.formId.items[0].a,module._name);
+					console.Debug("测试PageMode数据："+_formsPageModel.formId.items[0].name,module._name);
 					if(callBack){
-						callBack(result);
+						var dataView = toJSON($.trim(result));
+						callBack(dataView);
 					}
 			        },
 			 error: function(result){
