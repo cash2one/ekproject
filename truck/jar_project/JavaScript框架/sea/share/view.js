@@ -46,12 +46,24 @@ define(function(require, exports, module) {
 
     /*初始化grid*/
     exports.initGrid = function(formId/**/,titles/*列标题*/,columns/*列定义*/){
-	      //根据信息，生成对应的模版（列表）,模版加工操作
-		  var dataGridTemplate = "";
-         
-
-	
+	        //根据信息，生成对应的模版（列表）,模版加工操作
+		    var template = "";
+			$.get("/template/dataGrid.htm",function(result){
+			    console.Debug("已经加载到数据模版..."+result,module._name);
+				template = result;
+                    
+                var view = {
+					"header": "模版技术",
+				    "columns":[{"title":"title_1","name":"tc_1"},{"title":"title_2","name":"tc_2"}]
+				};
+				var html = mustache.to_html(template, view);
+                console.Debug("模版初始化第一次处理后..."+html,module._name);
+             
+			});
 	};
+
+
+
 
 
 
@@ -118,6 +130,24 @@ define(function(require, exports, module) {
 				  "empty": false
 		 };
 
+         var html = mustache.to_html(template, view); 
+         $('#render_template').html(html);
+    };
+
+
+	exports.testTemplate = function(callBack/*回调函数*/) {
+		 
+		 console.Debug('Test testTemplate Function....',module._name);   
+         var view = {
+				  "header": "模版技术",
+				  "items": [
+					  {"name": "baidu", "link": true, "url": "http://www.baidu.com"},
+					  {"name": "sina", "link": true, "url": "http://www.sina.com.cn"},
+					  {"name": "ceshi", "link": true, "url": "http://www.163.com"}
+				  ],
+				  "empty": false
+		 };
+         var template = $('#render_template').html();
          var html = mustache.to_html(template, view); 
          $('#render_template').html(html);
     };

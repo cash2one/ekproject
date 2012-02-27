@@ -18,11 +18,14 @@
 			{{/bug}}
 			{{#items}}
 			  {{#first}}
-				<li><strong>{{name}}</strong></li>
+				<li><strong>${{name}}$</strong></li>
 			  {{/first}}
 			  {{#link}}
 				<li><a href="{{url}}">{{name}}</a></li>
 			  {{/link}}
+			  $#link$
+				<li><a href="{{url}}">${{name}}$</a></li>
+			  $/link$
 			{{/items}}
 			{{#empty}}
 			  <p>The list is empty.</p>
@@ -34,7 +37,8 @@
     <script src="../base/sea-debug.js" ></script>
 	<script>
         seajs.use('../share/view', function(module) {
-			 module.dataGrid('formId','data.html','');
+			// module.dataGrid('formId','data.html','');
+			 module.initGrid();
         });
     </script>
 	<script>

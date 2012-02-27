@@ -1,0 +1,27 @@
+﻿<div id="grid_template">
+	  <h1>{{header}}</h1>
+          <table>
+			    <tr>
+				  {{#columns}}
+				    <th>{{title}}</th>
+                  {{/columns}}
+				</tr>
+				  $$#items$$
+				   <tr>
+					  $$#first$$
+                         {{#columns}}
+						    <td><strong>{{name}}</strong></td>
+					     {{/columns}}
+					  $$/first$$
+					  $$#link$$
+						 {{#columns}}
+						    <td><a href="$$url$$">{{name}}</a></td>
+					     {{/columns}}
+					  $$/link$$
+					</tr>
+				 $$/items$$
+                 $$#empty$$
+			         <p>the data list is empty ! </p>
+				 $$/empty$$
+		</table>
+</div>
