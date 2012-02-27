@@ -46,7 +46,8 @@ define(function(require, exports, module) {
 
     /*初始化grid*/
     exports.initGrid = function(formId/**/,titles/*列标题*/,columns/*列定义*/){
-	        //根据信息，生成对应的模版（列表）,模版加工操作
+	        
+			//根据信息，生成对应的模版（列表）,模版加工操作
 		    var template = "";
 
 			$.get("../template/dataGrid.htm",function(result){
@@ -55,15 +56,21 @@ define(function(require, exports, module) {
                     
                 var view = {
 					"header": "模版技术",
-				    "columns":[{"title":"ID","name":"id"},{"title":"名字","name":"name"}]
+				    "columns":[{"title":"ID","name":"id"},
+						       {"title":"名字","name":"name"},
+						       {"title":"描述","name":"desc"},
+						       {"title":"备注","name":"remark"}
+					]
 				};
 
+                //加载grid的外观
 				var template = mustache.to_html(template, view);
-                console.Debug("模版初始化第一次处理后..."+template,module._name);
-                
+                ///console.Debug("模版初始化第一次处理后..."+template,module._name);
 				template = template.replace(/\[/g,"{{");
 	            template = template.replace(/\]/g,'}}');
-                
+               
+			    //预先把样式加载呈现，再进一步把数据加载
+                $('#render_template').html(mustache.to_html(template, view));
 				console.Debug("模版初始化第二次处理后..."+template,module._name);
 				
 				var data ={

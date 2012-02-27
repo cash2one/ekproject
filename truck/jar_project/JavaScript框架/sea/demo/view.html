@@ -13,32 +13,33 @@
 	 </form> 
 
 	<div id="render_template">
-		   <h1>{{header}}</h1>
-			{{#bug}}
-			{{/bug}}
-			{{#items}}
-			  {{#first}}
-				<li><strong>${{name}}$</strong></li>
-			  {{/first}}
-			  {{#link}}
-				<li><a href="{{url}}">{{name}}</a></li>
-			  {{/link}}
-			  $#link$
-				<li><a href="{{url}}">${{name}}$</a></li>
-			  $/link$
-			{{/items}}
-			{{#empty}}
-			  <p>The list is empty.</p>
-			{{/empty}}
+	</div>
+
+    <div id="render_template_1">
 	</div>
 
 
     <script src="../base/jquery-1.7.1.js" ></script>
     <script src="../base/sea-debug.js" ></script>
 	<script>
-        seajs.use('../share/view', function(module) {
+        seajs.use('../share/dataGrid', function(dataGrid) {
 			// module.dataGrid('formId','data.html','');
-			 module.initGrid();
+
+              
+             
+			var view = {
+					"header": "模版技术",
+				    "columns":[{"title":"ID","name":"id"},
+						       {"title":"名字","name":"name"},
+						       {"title":"描述","name":"desc"},
+						       {"title":"备注","name":"remark"}
+					]
+			 };
+
+			 dataGrid.init('render_template',view);
+			 dataGrid.init('render_template_1',view);
+
+
         });
     </script>
 	<script>
