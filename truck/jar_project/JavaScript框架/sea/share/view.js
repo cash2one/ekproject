@@ -48,17 +48,33 @@ define(function(require, exports, module) {
     exports.initGrid = function(formId/**/,titles/*列标题*/,columns/*列定义*/){
 	        //根据信息，生成对应的模版（列表）,模版加工操作
 		    var template = "";
-			$.get("/template/dataGrid.htm",function(result){
-			    console.Debug("已经加载到数据模版..."+result,module._name);
+			$.get("../template/dataGrid.htm",function(result){
+			    console.Debug("加载模版..."+result,module._name);
 				template = result;
                     
                 var view = {
 					"header": "模版技术",
-				    "columns":[{"title":"title_1","name":"tc_1"},{"title":"title_2","name":"tc_2"}]
+				    "columns":[{"title":"ID","name":"id"},{"title":"名字","name":"name"}]
 				};
-				var html = mustache.to_html(template, view);
-                console.Debug("模版初始化第一次处理后..."+html,module._name);
-             
+
+				var template = mustache.to_html(template, view);
+                console.Debug("模版初始化第一次处理后..."+template,module._name);
+               
+				template = template.replace(new RegExp(/([)/g),'{{');
+	            template = template.replace(new RegExp(/(])/g),'}}');
+                console.Debug("模版初始化第二次处理后..."+template,module._name);
+				
+				var data ={
+				     "items": [
+					  {"id": "001","name": "百度", "link": true, "url": "http://www.baidu.com"},
+					  {"id": "002","name": "新浪", "link": true, "url": "http://www.sina.com.cn"},
+					  {"id": "003","name": "网易", "link": true, "url": "http://www.163.com"}
+				     ]
+				};
+
+			    var html = mustache.to_html(template,data);
+				console.Debug("最终合并后的结果"+html,module._name);
+
 			});
 	};
 

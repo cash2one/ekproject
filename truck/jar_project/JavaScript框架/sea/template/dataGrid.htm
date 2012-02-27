@@ -6,22 +6,22 @@
 				    <th>{{title}}</th>
                   {{/columns}}
 				</tr>
-				  $$#items$$
+				  [#items]
 				   <tr>
-					  $$#first$$
+					  [#first]
                          {{#columns}}
-						    <td><strong>{{name}}</strong></td>
+						    <td><strong>[{{name}}]</strong></td>
 					     {{/columns}}
-					  $$/first$$
-					  $$#link$$
+					  [/first]
+					  [#link]
 						 {{#columns}}
-						    <td><a href="$$url$$">{{name}}</a></td>
+						    <td><a href="[url]">[{{name}}]</a></td>
 					     {{/columns}}
-					  $$/link$$
+					  [/link]
 					</tr>
-				 $$/items$$
-                 $$#empty$$
+				 [/items]
+                 [#empty]
 			         <p>the data list is empty ! </p>
-				 $$/empty$$
+				 [/empty]
 		</table>
 </div>
