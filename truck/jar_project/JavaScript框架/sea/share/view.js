@@ -48,6 +48,7 @@ define(function(require, exports, module) {
     exports.initGrid = function(formId/**/,titles/*列标题*/,columns/*列定义*/){
 	        //根据信息，生成对应的模版（列表）,模版加工操作
 		    var template = "";
+
 			$.get("../template/dataGrid.htm",function(result){
 			    console.Debug("加载模版..."+result,module._name);
 				template = result;
@@ -59,10 +60,11 @@ define(function(require, exports, module) {
 
 				var template = mustache.to_html(template, view);
                 console.Debug("模版初始化第一次处理后..."+template,module._name);
-               
-				template = template.replace(new RegExp(/([)/g),'{{');
-	            template = template.replace(new RegExp(/(])/g),'}}');
-                console.Debug("模版初始化第二次处理后..."+template,module._name);
+                
+				template = template.replace(/\[/g,"{{");
+	            template = template.replace(/\]/g,'}}');
+                
+				console.Debug("模版初始化第二次处理后..."+template,module._name);
 				
 				var data ={
 				     "items": [
@@ -73,6 +75,7 @@ define(function(require, exports, module) {
 				};
 
 			    var html = mustache.to_html(template,data);
+				$('#render_template').html(html);
 				console.Debug("最终合并后的结果"+html,module._name);
 
 			});
