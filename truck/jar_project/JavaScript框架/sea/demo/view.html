@@ -36,9 +36,15 @@
 					]
 			 };
 
-			 dataGrid.init('render_template',view);
-			 dataGrid.init('render_template_1',view);
+			 var convertorHandlers = {
+			     "name" : function(){
+				      return "convertorHandler";
+				 }
+			 }
 
+			 dataGrid.init('render_template',view,convertorHandlers);
+			/// dataGrid.init('render_template_1',view);
+             
 
         });
     </script>

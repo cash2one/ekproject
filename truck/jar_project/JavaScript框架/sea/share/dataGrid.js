@@ -38,17 +38,27 @@ define(function(require, exports, module) {
      
 
     /*初始化grid*/
-    exports.init = function(divGrid/**/,columns/*列定义*/){
+    exports.init = function(divGrid/**/,view/*列定义*/,convertors/*列转换器*/){
 	        //根据信息，生成对应的模版（列表）,模版加工操作
 		 
 		    _divGrids.divGrid = {}; //存储某个模版的信息
-            _divGrids.divGrid.view = columns;  //存储改模版的定义列
+            _divGrids.divGrid.view = view;  //存储改模版的定义列
+			_divGrids.divGrid.convertors = convertors;
+			
+			var columns = new Array()
+            $.each(view.columns,function(index){
+			    //记录已经定义的列
+                columns[index]=this.name;
+			});
+
+			_divGrids.divGrid.columns = columns;
+
 			var reqTime = "?reqTemp="+new Date().getTime();
 
 		    //加载基础模版
 			$.get("../template/dataGrid.htm"+reqTime,function(template){
 		  		
-				console.Debug("加载模版..."+template,module._name);   
+				//console.Debug("加载模版..."+template,module._name);   
 				//生成模版的外观
                 loadFace(divGrid,template);
                 //加载数据
@@ -88,13 +98,49 @@ define(function(require, exports, module) {
 							{"id": "003","name": "网易", "link": true, "url": "http://www.163.com"}
 						]
 					 };
+
+           
+           convertorHandlers(divGrid,data);
            var template = _divGrids.divGrid.gridTemplate;
 		   var html = mustache.to_html(template,data);
 		   $('#'+divGrid).html(html);
-		   console.Debug("最终合并后的结果"+html,module._name);	    
+		  // console.Debug("最终合并后的结果"+html,module._name);	    
 	};
 
-     
+
+    /*处理列转换的操作*/
+    convertorHandlers = function(divGrid,data){
+
+ 	      var convertorHandlers = _divGrids.divGrid.convertors; /*列转换器*/
+          console.Debug("convertorHandlers : "+convertorHandlers,module._name);
+		  
+		  if(!convertorHandlers||!data)
+			  return;
+		  
+		  //console.Debug(data.items.length);
+          var columns = _divGrids.divGrid.columns;
+          $.each(columns,function(index){
+				console.Debug("convertorHandlers : columns ["+this+"] -> "+ convertorHandlers[this],module._name);
+		  });
+
+ 
+		  $.each(data.items,function(outIndex){		          
+			  $.each(columns,function(inner){
+				  if(convertorHandlers[this])
+                     data.items[outIndex].this =  (convertorHandlers[this]);
+			  });
+		  });
+
+
+          //验证数据是否已经执行转换了
+		  $.each(data.items,function(index){		          
+			    $.each(this,function(data){
+			       console.Debug("列转换后 : "+this,module._name);
+			   });
+		  });
+   
+
+	};
 
     
 
