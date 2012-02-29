@@ -94,8 +94,8 @@ define(function(require, exports, module) {
 		   	var data ={
 						"items": [
 							{"id": 1,"name": "百度","index":100, "link": true, "url": "http://www.baidu.com"},
-							{"id": 2,"name": "新浪","index":200, "link": true, "url": "http://www.sina.com.cn"},
-							{"id": 3,"name": "网易","index":300,"link": true, "url": "http://www.163.com"}
+							{"id": 2,"name": "新浪","index":200, "first": true, "url": "http://www.sina.com.cn"},
+							{"id": 3,"name": "网易","index":300,"first": true, "url": "http://www.163.com"}
 						]
 					 };
 

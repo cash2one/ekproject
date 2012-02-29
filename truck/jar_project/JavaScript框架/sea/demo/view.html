@@ -32,7 +32,7 @@
 				    "columns":[{"title":"ID","name":"id"},
 						       {"title":"名字","name":"name"},
 						       {"title":"描述","name":"desc"},
-						       {"title":"备注","name":"remark"}
+						       {"title":"操作","name":"remark"}
 					]
 			 };
 
@@ -41,7 +41,7 @@
 				      return this.id+this.index;
 				 },
 				 "remark" : function(){
-				      return "("+this.id+":"+this.name+")";
+				      return this.id+this.index;
 				 }
 			 }
 
