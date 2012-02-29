@@ -93,9 +93,9 @@ define(function(require, exports, module) {
   
 		   	var data ={
 						"items": [
-							{"id": "001","name": "百度", "link": true, "url": "http://www.baidu.com"},
-							{"id": "002","name": "新浪", "link": true, "url": "http://www.sina.com.cn"},
-							{"id": "003","name": "网易", "link": true, "url": "http://www.163.com"}
+							{"id": 1,"name": "百度","index":100, "link": true, "url": "http://www.baidu.com"},
+							{"id": 2,"name": "新浪","index":200, "link": true, "url": "http://www.sina.com.cn"},
+							{"id": 3,"name": "网易","index":300,"link": true, "url": "http://www.163.com"}
 						]
 					 };
 
@@ -112,32 +112,33 @@ define(function(require, exports, module) {
     convertorHandlers = function(divGrid,data){
 
  	      var convertorHandlers = _divGrids.divGrid.convertors; /*列转换器*/
-          console.Debug("convertorHandlers : "+convertorHandlers,module._name);
 		  
 		  if(!convertorHandlers||!data)
 			  return;
 		  
 		  //console.Debug(data.items.length);
           var columns = _divGrids.divGrid.columns;
-          $.each(columns,function(index){
+		  //打印是否设置了列转换方法
+		  $.each(columns,function(index){
 				console.Debug("convertorHandlers : columns ["+this+"] -> "+ convertorHandlers[this],module._name);
 		  });
 
- 
+        
+		  //执行替换
 		  $.each(data.items,function(outIndex){		          
 			  $.each(columns,function(inner){
 				  if(convertorHandlers[this])
-                     data.items[outIndex].this =  (convertorHandlers[this]);
+                     data.items[outIndex][this] =  (convertorHandlers[this]);
 			  });
 		  });
 
 
           //验证数据是否已经执行转换了
-		  $.each(data.items,function(index){		          
-			    $.each(this,function(data){
-			       console.Debug("列转换后 : "+this,module._name);
-			   });
-		  });
+		 // $.each(data.items,function(index){		          
+		//	    $.each(this,function(data){
+	    //          console.Debug("列转换后 : "+this,module._name);
+		//	   });
+		//  });
    
 
 	};

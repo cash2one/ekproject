@@ -37,8 +37,11 @@
 			 };
 
 			 var convertorHandlers = {
-			     "name" : function(){
-				      return "convertorHandler";
+			     "desc" : function(){
+				      return this.id+this.index;
+				 },
+				 "remark" : function(){
+				      return "("+this.id+":"+this.name+")";
 				 }
 			 }
 
