@@ -83,9 +83,9 @@ define(function (require,exports,module) {
 
 		  var escapeMap = {
 			"&": "&amp;",
-			"<": "&lt;",
-			">": "&gt;",
-			'"': '&quot;',
+		//	"<": "&lt;",
+		//	">": "&gt;",
+		//	'"': '&quot;',
 			"'": '&#39;'
 		  };
 

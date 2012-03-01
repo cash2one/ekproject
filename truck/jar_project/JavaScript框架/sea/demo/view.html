@@ -22,17 +22,28 @@
     <script src="../base/jquery-1.7.1.js" ></script>
     <script src="../base/sea-debug.js" ></script>
 	<script>
+
+        function toHref(){
+		   return "<a href=\"#\" onclick=\"alert("+this.id+");return false;\">操作</a>";
+		}
+
+
+        function toButton( ){
+		   return "<input type=button onclick=\"alert('"+this.name+"');return false;\" value=\"新增\" />";
+		}
+
+
         seajs.use('../share/dataGrid', function(dataGrid) {
 			// module.dataGrid('formId','data.html','');
 
-              
              
 			var view = {
 					"header": "模版技术",
 				    "columns":[{"title":"ID","name":"id"},
 						       {"title":"名字","name":"name"},
 						       {"title":"描述","name":"desc"},
-						       {"title":"操作","name":"remark"}
+						       {"title":"超链接","name":"toHref"},
+							   {"title":"按钮","name":"toButton"}
 					]
 			 };
 
@@ -40,9 +51,8 @@
 			     "desc" : function(){
 				      return this.id+this.index;
 				 },
-				 "remark" : function(){
-				      return this.id+this.index;
-				 }
+				 "toHref" : toHref,
+				 "toButton" : toButton
 			 }
 
 			 dataGrid.init('render_template',view,convertorHandlers);
