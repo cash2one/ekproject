@@ -10,7 +10,9 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import org.eclipse.swt.SWT;
@@ -245,6 +247,9 @@ public class WebDeployComposite  extends Composite {
 		backFilesScript.delete(0, backFilesScript.length());
 		filesRollBackScript.delete(0, filesRollBackScript.length());
 
+		this.hasCheckedSet.clear();
+		this.innerClassesSet.clear();
+		
 		actionBtn.setText("提取中....");
 		actionBtn.setEnabled(false);
 		File dirFile = new File(rootPath);
@@ -290,11 +295,29 @@ public class WebDeployComposite  extends Composite {
 		     resultText.append(""+srcFileName+" 提取成功。\r\n");
 		     appendBakFileInfoToShScript(targetFile);
 		     s++;
-		   } 
-		   else{
+		   }else{
 			 resultText.append(""+srcFileName+" 提取失败。\r\n");
 			 f++;
 		   }
+		   
+		   if(targetFile.indexOf(".class")>0){
+			    //检查是否存在内涵类
+			    List<String> innerClasses = findOutHideClassesPaths(targetFile,srcFileName);
+			    if(innerClasses!=null)
+			    	for(String innerPath : innerClasses){
+			    		 srcFileName=root+"/"+innerPath;
+			  		     destFileName = outPutDir +"/"+innerPath; 
+			  		    if(CopyFileUtil.copyFile(srcFileName, destFileName, true)){
+			  		       resultText.append(""+srcFileName+" 提取成功。\r\n");
+			  		       appendBakFileInfoToShScript(innerPath);
+			  		       s++;
+			  		     }else{
+			  			 resultText.append(""+srcFileName+" 提取失败。\r\n");
+			  			 f++;
+			  		    }
+			    	}
+		   }
+		   
 	   }
 	   this.resultText.append("文件已经拷贝完成！成功提取:"+s+"；提取失败："+f+"，共输入"+this.allFileNum+"个文件，其中有"+this.sameFileNum+"个重复。");
 	   this.allFileNum = 0;
@@ -583,4 +606,92 @@ public class WebDeployComposite  extends Composite {
 	      bw.write(content); 
 	      bw.newLine();//断行
    }
+   
+   
+   /**
+    * 
+    * @param fileFullPath
+    * @return
+    */
+   Map<String,List<String>> innerClassesSet = new HashMap<String,List<String>>();
+   Map<String,Boolean> hasCheckedSet = new HashMap<String,Boolean>();
+   
+   
+   /**
+    * 检查相关的目录下是否存在内涵类
+    * @param relativeTargetFilePath  相对路径
+    * @param fileFullPath  本地文件的真实路径
+    * @return
+    */
+   List<String> findOutHideClassesPaths(String relativeTargetFilePath,String fileFullPath){
+	   String relativeDirPath = relativeTargetFilePath.replace("\\", "/");
+	   relativeDirPath = relativeDirPath.substring(0, relativeDirPath.lastIndexOf("/"));
+	   fileFullPath = fileFullPath.replace("\\","/");
+	   //判断该路径是否为目录
+	   String fileDirPath = (fileFullPath.lastIndexOf("/")+1<fileFullPath.length())?fileFullPath.substring(0, fileFullPath.lastIndexOf("/")):fileFullPath;
+       String fileName = returnFileNameFromPath(fileFullPath,true);
+       p("findOutHideClassesPaths: ",fileDirPath," - ",fileName);
+       if(hasCheckedSet.containsKey(fileDirPath)){
+    	   return innerClassesSet.get(fileName);
+       }
+       
+       //扫描该目录
+       File file = new File(fileDirPath);    	   
+	   if(!file.isDirectory())
+		   return null;
+	   
+	   File[] files = file.listFiles();
+	   String tempFileName = "";
+	   String tempHideFileName = "";
+	   for(File ct : files){
+		     //文件是目录或非内含类 则不处理
+		     if(ct.isDirectory()||ct.getName().indexOf("$")<0)
+		    	 continue;
+		     tempHideFileName = returnFileNameFromPath(ct.getName(),false);
+		     tempFileName = tempHideFileName.substring(0, tempHideFileName.indexOf("$"));
+		     p("findOutHideClassesPaths->tempFileName: ",tempFileName,"  ",tempHideFileName);
+		     if(!innerClassesSet.containsKey(tempFileName)){
+		    	 innerClassesSet.put(tempFileName, new ArrayList<String>()); 
+             }
+		     innerClassesSet.get(tempFileName).add(relativeDirPath+"/"+tempHideFileName);
+	   }
+	   hasCheckedSet.put(fileDirPath,Boolean.TRUE);
+	   return innerClassesSet.get(fileName);
+   }
+   
+   /**
+    * 从文件路径返回文件名
+    * @param fileFullPath
+    * @param clearSurfix  是否要除掉 文件后缀
+    * @return
+    */
+   String returnFileNameFromPath(String fileFullPath,boolean clearSurfix){
+	   fileFullPath = fileFullPath.replace("\\","/");
+	   String fileName = fileFullPath;
+	   if(fileFullPath.indexOf("/")>=0)
+	      fileName = fileFullPath.substring(fileFullPath.lastIndexOf("/")+1, fileFullPath.length());
+	   if(new File(fileName).isDirectory())
+		   return "";
+	   else
+	       return (clearSurfix&&fileName.indexOf(".")>0)?fileName.substring(0,fileName.lastIndexOf(".")):fileName;
+   }
+   
+   
+   void p(Object...args){
+	   for(Object arg:args)
+	      System.out.print(arg);
+	   System.out.println();	   
+   }
+   
+   
+  /**
+   * 找出相关的内涵类
+   * @param fileFullPath
+   * @return
+   */
+   List matchInnerClasses(String fileFullPath){
+	   return null;
+   }
+   
+   
 }
