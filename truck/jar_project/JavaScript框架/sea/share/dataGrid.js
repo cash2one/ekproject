@@ -38,7 +38,7 @@ define(function(require, exports, module) {
      
 
     /*初始化grid*/
-    exports.init = function(divGrid/**/,view/*列定义*/,convertors/*列转换器*/){
+    exports.config = function(formId/*formId*/,divGrid/*dataGrid 节点*/,reqDateUrl/*请求的url*/,view/*列定义*/,convertors/*列转换器*/){
 	        //根据信息，生成对应的模版（列表）,模版加工操作
 		 
 		    _divGrids.divGrid = {}; //存储某个模版的信息
@@ -62,7 +62,7 @@ define(function(require, exports, module) {
 				//生成模版的外观
                 loadFace(divGrid,template);
                 //加载数据
-                renderData(divGrid);
+                renderData(divGrid,reqDateUrl);
 
 			});
 
@@ -89,21 +89,17 @@ define(function(require, exports, module) {
 
 
     /*显示数据内容*/
-   	renderData = function(divGrid){
-  
-		   	var data ={
-						"items": [
-							{"id": 1,"name": "百度","index":100, "link": true, "url": "http://www.baidu.com"},
-							{"id": 2,"name": "新浪","index":200, "first": true, "url": "http://www.sina.com.cn"},
-							{"id": 3,"name": "网易","index":300,"first": true, "url": "http://www.163.com"}
-						]
-					 };
+   	renderData = function(divGrid,reqDateUrl){
 
-           
-           convertorHandlers(divGrid,data);
-           var template = _divGrids.divGrid.gridTemplate;
-		   var html = mustache.to_html(template,data);
-		   $('#'+divGrid).html(html);
+            var reqTime = "?reqTemp="+new Date().getTime();
+           	$.get(reqDateUrl+reqTime,function(template){
+				   data = toJSON(template);
+				   convertorHandlers(divGrid,data);
+				   var template = _divGrids.divGrid.gridTemplate;
+				   var html = mustache.to_html(template,data);
+				   $('#'+divGrid).html(html);
+			});
+
 		  // console.Debug("最终合并后的结果"+html,module._name);	    
 	};
 
