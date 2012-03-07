@@ -1,0 +1,13 @@
+h1 Welcome To  #{title}  Join chat Room Test
+
+ 
+h3 Current online Users:
+ul#users
+-for (var user in users)
+    li(class='user-'+ user) #{users[user]}
+
+
+h3 Current online Users:
+ul#users
+-each user in users
+    li(class='user-') #{user}
