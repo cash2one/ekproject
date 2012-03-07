@@ -23,12 +23,52 @@ var channel = new function(){
 	  var messages = [];
 
 	  /*当前用户管道 - 在线的 */
-	  var callBacks = [];
+	  var callbacks = [];
       
 	  /*发布消息消息*/
-	  this.appendMessage= function(nick,type,msg){
+	  this.appendMessage = function(nick,type,msg){
+
 	      console.log("User %s[%s]: %s ",nick,type,msg);
-	  }
+
+          var m = { nick: nick
+				    , type: type // "msg", "join", "part"
+				    , msg: msg
+				    , timestamp: (new Date()).getTime()
+                   };
+
+		 
+		  /*保存信息*/
+		  messages.push( m );
+
+          /*消息队列是否过长*/ 
+		  while (messages.length > MESSAGE_BACKLOG)
+            messages.shift();
+           
+
+		  /*阻塞中的队列*/
+          while (callbacks.length > 0) {
+             callbacks.shift().callback([m]);
+          }
+
+	  };
+
+
+      /*查询最新的消息*/
+	  this.query = function(since,callback){
+
+			var matching = [];
+			for (var i = 0; i < messages.length; i++) {
+			  var message = messages[i];
+			  if (message.timestamp > since)
+				matching.push(message);
+			}
+
+			if (matching.length != 0) {
+			  callback(matching);
+			} else {
+			  callbacks.push({ timestamp: new Date(), callback: callback });
+			}
+	  };
       
 
 }
@@ -66,7 +106,6 @@ exports.createSession = function(nick){
 }
 
 
-
 /*判断用户Session是否超时了，是的话直接销毁改Session*/
 setInterval(function () {
   var now = new Date();
@@ -94,7 +133,7 @@ exports.sendMessage = function(nick,msg){
 	   session.poke();
 	   channel.appendMessage(session.nick,'msg',msg);
    }else{
-       console.log("unfound User %s in onlineUserList ",sessions[i].nick);
+       console.log("UNfound User %s in onlineUserList ",sessions[i].nick);
    }
 }
 
@@ -109,3 +148,12 @@ exports.onlineUsers = function(){
 	 return users;
 }
 
+
+
+/*查询最新的留言信息*/
+exports.query = function(nick,since,callback){
+        
+      
+
+
+}

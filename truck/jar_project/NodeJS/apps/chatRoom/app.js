@@ -1,13 +1,13 @@
-
 /**
  * Module dependencies.
+ *
  */
 
 var express = require('express')
   , routes = require('./routes')
   , qs = require("querystring")
   , url = require("url")
-  , chatServer = require('./server');
+  , chatServer = require('./chat');
 
 var app = module.exports = express.createServer();
 
@@ -51,8 +51,9 @@ app.get('/join', function(req, res){
 app.get('/send', function(req, res){
     var nick = qs.parse(url.parse(req.url).query).nick;
 	var msg = qs.parse(url.parse(req.url).query).msg;
+    console.log("server listening  %s send a msg is : %s  ",nick,msg);
     chatServer.sendMessage(nick,msg);
-    res.render('index', { title: 'sendMsgSuc' });
+    res.send({ result: '1' });
 
 });
 
@@ -64,6 +65,26 @@ app.get('/users', function(req, res){
 	res.render('index', { users:users});
 });
 
+/*获取消息*/
+app.get('/msgs', function(req,res){
+
+    if (!qs.parse(url.parse(req.url).query).since) {
+       res.simpleJSON(400, { error: "Must supply since parameter" });
+       return;
+    }
+	
+	var nick = qs.parse(url.parse(req.url).query).nick;
+	
+	/*查询最新的信息记录*/
+	chatServer.query(nick,since,function(data){
+	          
+         /*等待服务返回信息列表，再向客户端发送*/
+	     res.send(data);
+	
+	});
+    		 
+
+});
 
 
 app.listen(3000);

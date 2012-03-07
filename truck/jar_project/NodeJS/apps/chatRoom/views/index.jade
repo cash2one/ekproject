@@ -7,7 +7,22 @@ ul#users
     li(class='user-'+ user) #{users[user]}
 
 
-h3 Current online Users:
-ul#users
--each user in users
-    li(class='user-') #{user}
+br
+
+h3 message_list
+div#message_list
+  ul#msglist
+   -for (var user in users)
+     li(class='user-'+ user) #{users[user]}
+
+
+h4 i want to say:
+div#msgDiv.sendMsg
+ textarea(id='msg',name='msg')
+ br
+ span#onlineUser
+   input(type="hidden",name="nick",id="nick",value="#{title}")
+   button(name='sendBtn',id='sendBtn') Say To
+   select(name="nick")
+     each user in users
+       option(value='#{user}')#{user}
