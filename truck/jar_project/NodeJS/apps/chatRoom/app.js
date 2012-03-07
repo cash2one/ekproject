@@ -32,11 +32,11 @@ app.configure('production', function(){
 
 // Routes
 
-/*Ä¬ÈÏµÄÊ×Ò³*/
+/*é»˜è®¤çš„é¦–é¡µ*/
 app.get('/', routes.index);
 
 
-/*ĞÂÓÃ»§µÇÂ¼µ½Chat·şÎñÖĞ*/
+/*æ–°ç”¨æˆ·ç™»å½•åˆ°ChatæœåŠ¡ä¸­*/
 app.get('/join', function(req, res){
     var nick = qs.parse(url.parse(req.url).query).nick;
     chatServer.createSession(nick);
@@ -47,18 +47,18 @@ app.get('/join', function(req, res){
 });
 
 
-/*ĞÂÓÃ»§µÇÂ¼µ½Chat·şÎñÖĞ*/
+/*æ–°ç”¨æˆ·ç™»å½•åˆ°ChatæœåŠ¡ä¸­*/
 app.get('/send', function(req, res){
     var nick = qs.parse(url.parse(req.url).query).nick;
 	var msg = qs.parse(url.parse(req.url).query).msg;
     console.log("server listening  %s send a msg is : %s  ",nick,msg);
     chatServer.sendMessage(nick,msg);
-    res.send({ result: '·¢ËÍ³É¹¦' });
+    res.send({ result: 'å‘é€æˆåŠŸ' });
 
 });
 
 
-/*»ñÈ¡µ±Ç°ÔÚÏßµÄÓÃ»§*/
+/*è·å–å½“å‰åœ¨çº¿çš„ç”¨æˆ·*/
 app.get('/users', function(req, res){
     var users = chatServer.onlineUsers( );
    // res.simpleJSON(200, {users:users});
@@ -66,7 +66,7 @@ app.get('/users', function(req, res){
 });
 
 
-/*»ñÈ¡ÏûÏ¢*/
+/*è·å–æ¶ˆæ¯*/
 app.get('/msgs', function(req,res){
     
     if (!qs.parse(url.parse(req.url).query).since) {
@@ -76,9 +76,9 @@ app.get('/msgs', function(req,res){
 	
 	var nick = qs.parse(url.parse(req.url).query).nick;
 	var since = qs.parse(url.parse(req.url).query).since;
-	/*²éÑ¯×îĞÂµÄĞÅÏ¢¼ÇÂ¼*/
+	/*æŸ¥è¯¢æœ€æ–°çš„ä¿¡æ¯è®°å½•*/
 	chatServer.query(nick,since,function(data){
-         /*µÈ´ı·şÎñ·µ»ØĞÅÏ¢ÁĞ±í£¬ÔÙÏò¿Í»§¶Ë·¢ËÍ*/
+         /*ç­‰å¾…æœåŠ¡è¿”å›ä¿¡æ¯åˆ—è¡¨ï¼Œå†å‘å®¢æˆ·ç«¯å‘é€*/
 	     res.send(data);
 	
 	});

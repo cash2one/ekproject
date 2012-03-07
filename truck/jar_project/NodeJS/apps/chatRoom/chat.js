@@ -1,6 +1,7 @@
 /*
  *  ChatRoom Online Demo
- *  ÊµÊ±µÄÁÄÌìÊÒ Demo
+ *  å®æ—¶çš„èŠå¤©å®¤ Demo
+ *  Copyright 2012,ethanlam
  *
  */
 var sys = require("sys"),
@@ -8,24 +9,24 @@ var sys = require("sys"),
     qs = require("querystring");
 
 
-/*¶¨ÒåµÄ³£Á¿*/
-var MESSAGE_BACKLOG = 200,
+/*å®šä¹‰çš„å¸¸é‡*/
+var MESSAGE_BACKLOG = 5,
     SESSION_TIMEOUT = 60 * 1000;
 
 
 var sessions = {};
 
 
-/*´¦Àí¹ÜµÀÏûÏ¢*/
+/*å¤„ç†ç®¡é“æ¶ˆæ¯*/
 var channel = new function(){
       
-	  /*ÏûÏ¢ºĞ*/
+	  /*æ¶ˆæ¯ç›’*/
 	  var messages = [];
 
-	  /*µ±Ç°ÓÃ»§¹ÜµÀ - ÔÚÏßµÄ */
+	  /*å½“å‰ç”¨æˆ·ç®¡é“ - åœ¨çº¿çš„ */
 	  var callbacks = [];
       
-	  /*·¢²¼ÏûÏ¢ÏûÏ¢*/
+	  /*å‘å¸ƒæ¶ˆæ¯æ¶ˆæ¯*/
 	  this.appendMessage = function(nick,type,msg){
 
 	      console.log("User %s[%s]: %s ",nick,type,msg);
@@ -37,15 +38,15 @@ var channel = new function(){
                    };
 
 		 
-		  /*±£´æĞÅÏ¢*/
+		  /*ä¿å­˜ä¿¡æ¯*/
 		  messages.push( m );
 
-          /*ÏûÏ¢¶ÓÁĞÊÇ·ñ¹ı³¤*/ 
+          /*æ¶ˆæ¯é˜Ÿåˆ—æ˜¯å¦è¿‡é•¿*/ 
 		  while (messages.length > MESSAGE_BACKLOG)
             messages.shift();
            
 
-		  /*×èÈûÖĞµÄ¶ÓÁĞ*/
+		  /*é˜»å¡ä¸­çš„é˜Ÿåˆ—*/
           while (callbacks.length > 0) {
              callbacks.shift().callback([m]);
           }
@@ -53,7 +54,7 @@ var channel = new function(){
 	  };
 
 
-      /*²éÑ¯×îĞÂµÄÏûÏ¢*/
+      /*æŸ¥è¯¢æœ€æ–°çš„æ¶ˆæ¯*/
 	  this.query = function(since,callback){
 
 			var matching = [];
@@ -71,7 +72,7 @@ var channel = new function(){
 	  };
       
 
-	  /*¼ì²âÊÇ·ñ´æÔÚ×èÈûµÈ´ıµÄÏß³ÌÓ¦ÓÃ*/
+	  /*æ£€æµ‹æ˜¯å¦å­˜åœ¨é˜»å¡ç­‰å¾…çš„çº¿ç¨‹åº”ç”¨*/
 	  setInterval(function () {
 			var now = new Date();
 			while (callbacks.length > 0 && now - callbacks[0].timestamp > 30*1000) {
@@ -82,7 +83,7 @@ var channel = new function(){
 }
 
 
-/*ÓÃ»§½øÈëÁÄÌìÊÒ£¬×¢²á*/
+/*ç”¨æˆ·è¿›å…¥èŠå¤©å®¤ï¼Œæ³¨å†Œ*/
 exports.createSession = function(nick){
       
 	  if(!nick)
@@ -111,13 +112,13 @@ exports.createSession = function(nick){
 	  };
       
 	  sessions[session.id] = session;
-	  //¹ã²¥¼ÓÈëĞÅÏ¢
+	  //å¹¿æ’­åŠ å…¥ä¿¡æ¯
 	  channel.appendMessage(nick,'join','Hello');
 	  return session;
 }
 
 
-/*ÅĞ¶ÏÓÃ»§SessionÊÇ·ñ³¬Ê±ÁË£¬ÊÇµÄ»°Ö±½ÓÏú»Ù¸ÄSession*/
+/*åˆ¤æ–­ç”¨æˆ·Sessionæ˜¯å¦è¶…æ—¶äº†ï¼Œæ˜¯çš„è¯ç›´æ¥é”€æ¯æ”¹Session*/
 setInterval(function () {
   var now = new Date();
   for (var id in sessions) {
@@ -132,7 +133,7 @@ setInterval(function () {
 
 
 
-/*·¢±íÁôÑÔ*/
+/*å‘è¡¨ç•™è¨€*/
 exports.sendMessage = function(nick,msg){
    var session = null;
    for (var i in sessions) {
@@ -150,7 +151,7 @@ exports.sendMessage = function(nick,msg){
 
 
 
-/*»ñÈ¡µ±Ç°ÔÚÏßµÄÓÃ»§*/
+/*è·å–å½“å‰åœ¨çº¿çš„ç”¨æˆ·*/
 exports.onlineUsers = function(){
      var users = [];
 	 for(var i in sessions){
@@ -161,7 +162,7 @@ exports.onlineUsers = function(){
 
 
 
-/*²éÑ¯×îĞÂµÄÁôÑÔĞÅÏ¢*/
+/*æŸ¥è¯¢æœ€æ–°çš„ç•™è¨€ä¿¡æ¯*/
 exports.query = function(nick,since,callback){
 	 if(!nick)
 		return;

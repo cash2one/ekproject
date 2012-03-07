@@ -1,7 +1,6 @@
 /*!
  * ChatService Client JavaScript Library v1.7.1
  * Copyright 2012,ethanlam
- *
  * Date: Thir Mar 08 21:11:03 2012 -0001
  *
  */
@@ -17,16 +16,59 @@
 
 var transmission_errors = 0;
 
+util = {
+  urlRE: /https?:\/\/([-\w\.]+)+(:\d+)?(\/([^\s]*(\?\S+)?)?)?/g, 
+
+  //  html sanitizer 
+  toStaticHTML: function(inputHtml) {
+    inputHtml = inputHtml.toString();
+    return inputHtml.replace(/&/g, "&amp;")
+                    .replace(/</g, "&lt;")
+                    .replace(/>/g, "&gt;");
+  }, 
+
+  //pads n with zeros on the left,
+  //digits is minimum length of output
+  //zeroPad(3, 5); returns "005"
+  //zeroPad(2, 500); returns "500"
+  zeroPad: function (digits, n) {
+    n = n.toString();
+    while (n.length < digits) 
+      n = '0' + n;
+    return n;
+  },
+
+  //it is almost 8 o'clock PM here
+  //timeString(new Date); returns "19:49"
+  timeString: function (date) {
+    var minutes = date.getMinutes().toString();
+    var hours = date.getHours().toString();
+    return this.zeroPad(2, hours) + ":" + this.zeroPad(2, minutes);
+  },
+
+  //does the argument only contain whitespace?
+  isBlank: function(text) {
+    var blank = /^\s*$/;
+    return (text.match(blank) !== null);
+  }
+};
+
+
+
 function ChatClient(){};
 
 ChatClient.prototype = {
  
 
 
-     /*·¢ËÍÏûÏ¢*/
+     /*å‘é€æ¶ˆæ¯*/
     sendMsg:function(){
-	    var msg =  $("#msg").val();
+	    var msg =  $.trim($("#msg").val());
 		var nick = $("#nick").val();
+		if(!msg){
+		  alert('ä¸èƒ½å‘é€ç©ºçš„ä¿¡æ¯...');
+		  return;
+		}
 	    $.get('/send?nick='+nick+"&msg="+msg,function(data){
 		       if(data){
 			      data = eval(data);
@@ -38,7 +80,7 @@ ChatClient.prototype = {
 	},
 
 
-    /*ÂÖÑ¯·şÎñÆ÷µÄĞÅÏ¢*/
+    /*è½®è¯¢æœåŠ¡å™¨çš„ä¿¡æ¯*/
     longPoll:function(data){
 	
 	    if(data){
@@ -82,25 +124,22 @@ ChatClient.prototype = {
 	},
 
 
-    /*ÏÔÊ¾ĞÅÏ¢*/
+    /*æ˜¾ç¤ºä¿¡æ¯*/
     appendMessage:function(nick,type,timestamp,msg){
          var msgHtml ="";
-		 timestamp = new Date(timestamp);
+		 timestamp = util.timeString(new Date(timestamp));
               switch (type) {
 				  case "msg":
-					  msgHtml= "<tr><td>"+nick+" Ëµ£º</td>"+
-							   "<td>"+msg+"</td>"+
-							   "<td>"+timestamp+"</td></tr>";
+					  msgHtml= "<tr><td>"+nick+"è¯´("+timestamp+")ï¼š</td>"+
+							   "<td>"+msg+"</td></tr>";
 					break;
 				  case "join":
 					  msgHtml= "<tr><td>"+nick+"</td>"+
-							   "<td>¼ÓÈëÌÖÂÛ</td>"+
-							   "<td>"+timestamp+"</td></tr>";
+							   "<td>è¿›å…¥èŠå¤©å®¤(Atï¼š"+timestamp+")....</td></tr>";
 					break;
 				  case "part":
 					  msgHtml= "<tr><td>"+nick+"</td>"+
-							   "<td>Àë¿ª×´Ì¬</td>"+
-							   "<td>"+timestamp+"</td></tr>";
+							   "<td>ç¦»çº¿...(Atï¼š"+timestamp+")</td></tr>";
 					break;
 				}
 
