@@ -71,12 +71,23 @@ var channel = new function(){
 	  };
       
 
+	  /*检测是否存在阻塞等待的线程应用*/
+	  setInterval(function () {
+			var now = new Date();
+			while (callbacks.length > 0 && now - callbacks[0].timestamp > 30*1000) {
+			  callbacks.shift().callback([]);
+			}
+	  }, 3000);
+
 }
 
 
 /*用户进入聊天室，注册*/
 exports.createSession = function(nick){
-	  
+      
+	  if(!nick)
+        return;
+
 	  for (var i in sessions) {
 		var session = sessions[i];
 		console.log("Current User online list %s ",session.nick);
@@ -152,8 +163,19 @@ exports.onlineUsers = function(){
 
 /*查询最新的留言信息*/
 exports.query = function(nick,since,callback){
-        
-      
+	 if(!nick)
+		return;
+	 
+	 var session = null;
+     for (var i in sessions) {
+		  if (sessions[i] && sessions[i].nick === nick) 	
+			 session = sessions[i];
+     } 
 
+	 if(session){
+		 console.log("User %s checkMsgs ",session.nick); 
+		 since = parseInt(since, 10);
+		 channel.query(since,callback);
+	 }
 
 }
