@@ -1,24 +1,25 @@
-h1 Welcome To  #{title}  Join chat Room Test
+h1 Hello #{title},Welcome To Join chat Room Test
+
+div
+ h3 聊天记录
+ div#message_list.msglistDiv
 
 
-h3 当前在线的用户:
-ul#users
--for (var user in users)
-    li(class='user-'+ user) #{users[user]}
-
-br
-
-h3 聊天记录
-div#message_list
+div#cu.currentDiv
+ h3 当前在线的用户:
+ ul#users.currentUl
+ -for (var user in users)
+  li(class='user-'+ user) #{users[user]}
 
 
-h4 我要说:
-div#msgDiv.sendMsg
+
+div#msgDiv.sendMsgDiv
  textarea(id='msg',name='msg')
  br
  span#onlineUser
    input(type="hidden",name="nick",id="nick",value="#{title}")
-   button(name='sendBtn',id='sendBtn') 确定 
+   label 对：
    select(name="nick")
      each user in users
-       option(value='#{user}')#{user}
+       option(value='#{user}')#{user} 
+   button(name='sendBtn',id='sendBtn') 确定

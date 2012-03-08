@@ -130,16 +130,13 @@ ChatClient.prototype = {
 		 timestamp = util.timeString(new Date(timestamp));
               switch (type) {
 				  case "msg":
-					  msgHtml= "<tr><td>"+nick+"说("+timestamp+")：</td>"+
-							   "<td>"+msg+"</td></tr>";
+					  msgHtml= "<tr class='msg'><td clospan='2'>"+nick+"说("+timestamp+"):"+msg+"</td></tr>";
 					break;
 				  case "join":
-					  msgHtml= "<tr><td>"+nick+"</td>"+
-							   "<td>进入聊天室(At："+timestamp+")....</td></tr>";
+					  msgHtml= "<tr class='join'><td clospan='2'>"+nick+"进入聊天室(At："+timestamp+")</td></tr>";
 					break;
 				  case "part":
-					  msgHtml= "<tr><td>"+nick+"</td>"+
-							   "<td>离线...(At："+timestamp+")</td></tr>";
+					  msgHtml= "<tr class='part'><td clospan='2'>"+nick+"离线(At："+timestamp+")</td></tr>";
 					break;
 				}
 
