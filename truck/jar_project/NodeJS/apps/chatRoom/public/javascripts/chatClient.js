@@ -80,18 +80,49 @@ ChatClient.prototype = {
 	},
 
 
+    /*更新在线用户*/
+	updateCurrentUser:function(){
+	          
+	      $.ajax({ cache: false
+			 , type: "GET"
+			 , url: "/users"
+			 , dataType: "json"
+			 , data: { }
+			 , error: function () {
+				 chatClient.appendMessage("系统",'sys',new Date(),"更新在线用户发生错误！");
+				 setTimeout(chatClient.updateCurrentUser, 10*1000);
+			   }
+
+			 , success: function (data) {
+				if(data){
+				   var cuHtml = "";
+				   data = eval(data);
+				   $('#users').empty();
+				   //刷新聊天记录
+				   if(data)
+				   $.each(data,function(index){
+					    $('#users').append('<li>'+data[index]+'</li>');
+				   });
+				}
+				 setTimeout(chatClient.updateCurrentUser, 10*1000);
+			   }
+         });
+	
+	},
+
+
     /*轮询服务器的信息*/
     longPoll:function(data){
 	
 	    if(data){
 		   var msgHtml = "";
 		   data = eval(data);
+		   //刷新聊天记录
 		   if(data)
            $.each(data,function(index){
                if (data[index].timestamp > CONFIG.last_message_time)
                    CONFIG.last_message_time = data[index].timestamp;
 			   chatClient.appendMessage(data[index].nick,data[index].type,data[index].timestamp,data[index].msg);
-
 		   });       
 		}
         
@@ -103,7 +134,7 @@ ChatClient.prototype = {
 			 , dataType: "json"
 			 , data: { since: CONFIG.last_message_time,nick: CONFIG.nick }
 			 , error: function () {
-				 chatClient.appendMessage("", "long poll error. trying again...", new Date(), "error");
+				 chatClient.appendMessage("系统",'sys',new Date(),"连接服务失败，正在尝试重连服务...");
 				 transmission_errors += 1;
 				 //don't flood the servers on error, wait 10 seconds before retrying
 				 setTimeout(chatClient.longPoll, 10*1000);
@@ -130,13 +161,16 @@ ChatClient.prototype = {
 		 timestamp = util.timeString(new Date(timestamp));
               switch (type) {
 				  case "msg":
-					  msgHtml= "<tr class='msg'><td clospan='2'>"+nick+"说("+timestamp+"):"+msg+"</td></tr>";
+					  msgHtml= "<tr class='msg'><td clospan='2'>"+nick+",说("+timestamp+"):"+msg+"</td></tr>";
 					break;
 				  case "join":
-					  msgHtml= "<tr class='join'><td clospan='2'>"+nick+"进入聊天室(At："+timestamp+")</td></tr>";
+					  msgHtml= "<tr class='join'><td clospan='2'>"+nick+",进入聊天室.(At："+timestamp+")</td></tr>";
 					break;
 				  case "part":
-					  msgHtml= "<tr class='part'><td clospan='2'>"+nick+"离线(At："+timestamp+")</td></tr>";
+					  msgHtml= "<tr class='part'><td clospan='2'>"+nick+",离线.(At："+timestamp+")</td></tr>";
+					break;
+				  case "sys":
+					  msgHtml= "<tr class='part'><td clospan='2'>系统消息:"+msg+","+timestamp+" </td></tr>";
 					break;
 				}
 
@@ -153,4 +187,5 @@ $(document).ready(function(){
     $("#sendBtn").click(chatClient.sendMsg);
 	CONFIG.nick = $("#nick").val();
     chatClient.longPoll();
+	chatClient.updateCurrentUser();
 });

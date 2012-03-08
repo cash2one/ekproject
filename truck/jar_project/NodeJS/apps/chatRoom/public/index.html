@@ -1,8 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
-    <head>
-       <title>index</title>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<title>ChatRoom</title>
+	        <link rel="stylesheet" href="/stylesheets/style.css"/>
+			<script type="text/javascript" src="/javascripts/jquery-1.7.1.js"></script>
+			<script type="text/javascript">
+			   
+			   $(document).ready(function(){
+					$("#joinBtn").click(function(){
+                       var nick =$('#nick').val();
+					   if(nick&&nick!=''){
+					      window.location.href="/join?nick="+nick;
+					   }else{
+					     alert('好歹也给个昵称呢....');
+					   }
+					});
+			   });
+
+			</script>
 	</head>
     <body>
-	    Test
+	     昵称：<input type="text"  id="nick" name="nick" value="" />
+		 <input type="button" id="joinBtn" name="joinBtn" value="join" />
 	</body>
 </html>

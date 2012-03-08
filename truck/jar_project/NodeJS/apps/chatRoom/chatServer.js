@@ -10,7 +10,7 @@ var sys = require("sys"),
 
 
 /*定义的常量*/
-var MESSAGE_BACKLOG = 5,
+var MESSAGE_BACKLOG = 1000,
     SESSION_TIMEOUT = 60 * 1000;
 
 

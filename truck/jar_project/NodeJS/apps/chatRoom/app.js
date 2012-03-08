@@ -7,7 +7,7 @@ var express = require('express')
   , routes = require('./routes')
   , qs = require("querystring")
   , url = require("url")
-  , chatServer = require('./chat');
+  , chatServer = require('./chatServer');
 
 var app = module.exports = express.createServer();
 
@@ -51,10 +51,10 @@ app.get('/join', function(req, res){
 app.get('/send', function(req, res){
     var nick = qs.parse(url.parse(req.url).query).nick;
 	var msg = qs.parse(url.parse(req.url).query).msg;
+    chatServer.createSession(nick);
     console.log("server listening  %s send a msg is : %s  ",nick,msg);
     chatServer.sendMessage(nick,msg);
     res.send({ result: '发送成功' });
-
 });
 
 
@@ -62,7 +62,7 @@ app.get('/send', function(req, res){
 app.get('/users', function(req, res){
     var users = chatServer.onlineUsers( );
    // res.simpleJSON(200, {users:users});
-	res.render('index', { users:users});
+	 res.send(users);
 });
 
 
