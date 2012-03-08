@@ -98,10 +98,12 @@ ChatClient.prototype = {
 				   var cuHtml = "";
 				   data = eval(data);
 				   $('#users').empty();
+				   $('#nickSeletor').empty();
 				   //刷新聊天记录
 				   if(data)
 				   $.each(data,function(index){
 					    $('#users').append('<li>'+data[index]+'</li>');
+					    $('#nickSeletor').append("<option>"+data[index]+"</option>");
 				   });
 				}
 				 setTimeout(chatClient.updateCurrentUser, 10*1000);
@@ -181,7 +183,9 @@ ChatClient.prototype = {
 
 }
 
+/*实例化一个新的客户端*/
 var chatClient =  new ChatClient();
+
 
 $(document).ready(function(){
     $("#sendBtn").click(chatClient.sendMsg);

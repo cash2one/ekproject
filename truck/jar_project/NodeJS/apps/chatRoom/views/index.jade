@@ -19,7 +19,7 @@ div#msgDiv.sendMsgDiv
  span#onlineUser
    input(type="hidden",name="nick",id="nick",value="#{title}")
    label 对：
-   select(name="nick")
+   select(id="nickSeletor",name="nick")
      each user in users
        option(value='#{user}')#{user} 
    button(name='sendBtn',id='sendBtn') 确定

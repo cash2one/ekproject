@@ -10,7 +10,7 @@ a {
 
 h3{
     font-style:italic;
-   font-family:"ĞÂËÎÌå"
+   font-family:"æ–°å®‹ä½“"
 
 }
 
@@ -34,7 +34,7 @@ h3{
 
 
 
-/*ÁÄÌì¼ÇÂ¼µÄĞÅÏ¢*/
+/*èŠå¤©è®°å½•çš„ä¿¡æ¯*/
 .msglistDiv{
      width:400px;
 	 float:left;
@@ -45,7 +45,6 @@ h3{
 
 
 .msglistDiv table tr{
-    color:#FF51;
 	font-size:14px;
 	font-weight:bold;
 	text-align:center;
@@ -55,7 +54,7 @@ h3{
 .part{
    background-color:#FF0000;
    font-style:italic;
-   font-family:"ĞÂËÎÌå"
+   font-family:"æ–°å®‹ä½“"
    
 }
 
@@ -63,13 +62,13 @@ h3{
 .join{
    background-color:#00FFFF;
    font-style:italic;
-   font-family:"ĞÂËÎÌå"
+   font-family:"æ–°å®‹ä½“"
 }
 
 
 .msg{
    font-style:italic;
-   font-family:"ĞÂËÎÌå"
+   font-family:"æ–°å®‹ä½“"
 }
 
 
