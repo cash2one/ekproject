@@ -1,0 +1,36 @@
+<!DOCTYPE HTML><html>
+	<head>
+		<meta content="text/html; charset=UTF-8" />
+		<title>Game Engin Demo</title>
+		
+		<script type="text/javascript" src="./javascripts/jquery-1.7.1.js"></script>
+		<script type="text/javascript" src="./javascripts/GameEngine.js"></script>
+		<script type="text/javascript" src="./javascripts/GameObject.js"></script>
+		<script type="text/javascript" src="./javascripts/game.js"></script>
+		<script type="text/javascript">
+			 
+			 var g1 = new GameObject();
+			 var g2 = new GameObject();
+			 
+			 $(document).ready(function(){
+			 	  
+			 	  g1.image = "image_1"; 
+			 	  g1.deep = 100;
+                  g2.image = "image_2";
+                  g2.deep = 200;  
+                  
+                  g_GameObjectManager = new GameEngine();
+    			  g_GameObjectManager.startupGameEngine();
+                  g_GameObjectManager.addGameObject(g1);
+                  g_GameObjectManager.addGameObject(g2);
+                   
+			 });
+			
+			
+		</script>
+	</head>
+	<body>
+		
+		
+	</body>
+</html>
