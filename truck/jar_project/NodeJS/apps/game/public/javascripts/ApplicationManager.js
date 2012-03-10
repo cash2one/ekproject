@@ -12,7 +12,10 @@ function ApplicationManager() {
 	this.startupApplicationManager = function() {
 		Debug("startupApplicationManager....",'ApplicationManager');
 		//创建运行对象，游戏对象
-		this.bounce = new Bounce().startUpBounce(g_image);
+		bounce1 = new Bounce().startUpBounce(g_image,20,20);
+		//bounce2 = new Bounce().startUpBounce(g_image,150,150);
+	 //   bounce3 = new Bounce().startUpBounce(g_image,300,300);
+		
 		return this;	
 	}
 }

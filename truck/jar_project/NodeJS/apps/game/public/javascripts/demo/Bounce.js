@@ -18,8 +18,8 @@ function Bounce() {
 	this.speed = 10;
 
 	/*对象初始化*/
-	this.startUpBounce = function(image){
-		this.startUpVisualGameObject(image, 20, 20, 1);
+	this.startUpBounce = function(image,x,y){
+		this.startUpVisualGameObject(image,x,y,1);
 		return this;
 	};
 	/*
