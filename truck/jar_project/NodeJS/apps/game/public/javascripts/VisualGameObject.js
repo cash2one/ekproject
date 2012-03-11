@@ -21,7 +21,7 @@ function VisualGameObject() {
 	
 				
 	/*初始化当前对象*/
-	this.startUpVisualGameObject = function(image,x,y,deep){
+	this.startupVisualGameObject = function(image,x,y,deep){
 	     this.image = image;
 	     this.startupGameObject(x,y,deep);	
 	     return this;

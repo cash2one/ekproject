@@ -19,7 +19,7 @@ function Bounce() {
 
 	/*对象初始化*/
 	this.startUpBounce = function(image,x,y){
-		this.startUpVisualGameObject(image,x,y,1);
+		this.startupVisualGameObject(image,x,y,1);
 		return this;
 	};
 	/*
