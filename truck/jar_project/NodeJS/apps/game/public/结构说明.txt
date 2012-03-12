@@ -1,0 +1,16 @@
+//引擎的基本构成
+第一部分：
+  1、GameEngine  （核心类，主要是负责渲染的控制，控制跟 canvas 绘图打交道的）
+
+  2、GameObject   （游戏对象基类，对象都有 坐标 属性）
+
+  3、VisualGameObject （图像类型游戏对象基类（背景图）， 继承了 GameObject ）
+
+  4、ApplicationManager （应用的构成类，可以说是 游戏舞台的构成类，里面定义了 场景里的游戏对象种类，负责初始化 游戏对象的初始状态）
+
+  5、main  （游戏运行实例，定义引擎，游戏应用中的静态资源实例等）
+
+
+第二部分：
+   demo/Bounce.js  （游戏对象,继承了 VisualGameObject ）
+   demo/RepeatingGameObject.js (视差效果 - 就是当前使屏幕摄像机随时间增量偏移的滚动效果,需要继承 VisualGameObject )
