@@ -37,8 +37,8 @@ var DEBUG = true;
 function start(){
 	
     /*实例化引擎*/
-    g_GameObjectManager = new GameEngine();
-    g_GameObjectManager.startupGameEngine();
+    g_GameObjectManager = new GameObjectsManager();
+    g_GameObjectManager.startupGameObjectsManager();
     
           
 }

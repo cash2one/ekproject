@@ -4,7 +4,7 @@
  *
  */
 
-function GameEngine() {
+function GameObjectsManager() {
 
 	/*管理所有的 对象*/
 	var gameObjects = new Array();
@@ -33,7 +33,7 @@ function GameEngine() {
 	var applicationManager = null;
 
 	/*引擎初始化操作*/
-	this.startupGameEngine = function() {
+	this.startupGameObjectsManager = function() {
 		//g_GameObjectManager = this;
 
 		Debug("startupGameEngine....", 'GameEngine');
