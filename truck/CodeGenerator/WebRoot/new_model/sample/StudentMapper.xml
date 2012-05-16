@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="qtone.xxt.dao.mapper.edu.StudentMapper">
+   <cache />
+
+  <!-- 以下配置系统自动生成的 -->
+
+  <!-- 显示的记录对应的列-->
+  <sql id="studentColumns" >
+            stu.id,stu.name,stu.STU_SEQUENCE as stuSequence,
+		    clas.class_name as className,clas.id as classId,
+		    sch.school_name as schoolName,sch.id as schoolId 
+  </sql>
+  
+  
+  <!-- 列表对应的查询条件组合  -->
+  <sql id="queryOptions">
+       <where>
+            AND clas.class_type = 1
+            <if test="schoolId!=0"> AND sch.id = #{schoolId}</if>
+	        <if test="classId!=0"> AND clas.id = #{classId}</if>
+	        <if test="schoolName!=null"> AND sch.school_name = #{schoolName}</if>
+	        <if test="className!=null"> AND clas.class_name = #{className}</if>
+	        <if test="stuName!=null"> AND stu.name LIKE #{stuName}</if>
+	       	<if test="stuSequence!=null"> AND stu.stu_sequence LIKE #{stuSequence}</if>
+	      	<if test="icNo!=null"> AND stu.ic_no LIKE #{icNo}</if>
+        </where> 
+  </sql>
+
+
+  <!-- 列表查询对应的排序选项  -->
+  <sql id="orderControl">
+       <if test="orderList!=null">
+		  <trim prefix="ORDER BY" prefixOverrides=",">
+				<foreach collection="orderList" item="order" open=""  separator="," close="" >
+				   <choose>
+				       <when test="order.columnName=='schoolId'"> sch.id ${order.type} </when>
+				       <when test="order.columnName=='classId'"> clas.id ${order.type}  </when>
+				       <when test="order.columnName=='schoolName'"> sch.school_name ${order.type} </when>
+				       <when test="order.columnName=='className'"> clas.class_name ${order.type}  </when>
+				       <when test="order.columnName=='stuName'"> stu.name ${order.type}  </when>
+				       <when test="order.columnName=='stuSequence'"> stu.stu_sequence ${order.type} </when>
+				       <when test="order.columnName=='icNo'"> stu.ic_no ${order.type} </when>
+				  </choose>
+			 </foreach>
+		 </trim>
+	   </if>
+  </sql>
+
+ 
+  <!-- 列表查询对应的表关系SQL  -->
+  <sql id="querySqlMain">
+			  ${areaAbb}_XJ_STUDENT stu 
+			  LEFT JOIN ${areaAbb}_XJ_STU_CLASS sc  on stu.stu_sequence = sc.stu_sequence
+			  LEFT JOIN XJ_CLASS clas  on sc.class_id = clas.id
+			  LEFT JOIN XJ_SCHOOL sch  on sch.id = sc.school_id
+			  <include refid="queryOptions"/>
+  </sql>
+  
+ 
+   <!-- 根据ID查询记录 -->
+   <select id="findOne" resultType="qtone.xxt.dao.entity.edu.StudentEntry">
+	     SELECT  <include refid="studentColumns"/>              
+		    FROM <include refid="querySqlMain"/>
+			where clas.class_type = 1 AND stu.id = #{id}
+   </select>
+
+
+   <!-- 返回记录总数的语句 -->
+   <select id="qeuryStudentsRecordCount" resultType="int">
+        SELECT count(*) num  FROM  <include refid="querySqlMain"/> 
+   </select>
+   
+   
+    <!-- 分页查询对应的记录 -->
+   <select id="qeuryStudents" resultType="qtone.xxt.dao.entity.edu.StudentEntry">
+      SELECT * FROM (  
+	        SELECT A.*,ROWNUM RN FROM (
+	               SELECT <include refid="studentColumns"/>   
+		           FROM <include refid="querySqlMain"/>
+		           <include refid="orderControl"/>
+		    ) A WHERE ROWNUM &lt;=${startRow}+${pageSize} ) 
+		 WHERE RN &gt;=#{startRow}
+   </select>
+
+
+   <!-- 新增记录 -->
+   <insert id="insertStudent" useGeneratedKeys="false" keyProperty="id">
+       <selectKey resultType="long" order="AFTER" keyProperty="student.id">
+	       SELECT ${areaAbb}_xj_student_seq.currval FROM  DUAL
+	   </selectKey>
+           INSERT INTO ${areaAbb}_XJ_STUDENT (stu_sequence,name,ic_no)
+           VALUES(#{student.stuSequence},#{student.name},#{student.icNo}) 
+   </insert>
+   
+   
+   <!-- 更新记录 -->       
+   <update id="updateStudent">
+           UPDATE ${areaAbb}_XJ_STUDENT 
+           SET  name = #{student.name}, 
+		        stu_sequence = #{student.stuSequence}, 
+	            ic_no = #{student.icNo} 
+	       WHERE ID = #{student.id}
+   </update> 
+ 
+ 
+   <!-- 删除记录 -->
+   <delete id="deleteStudent">
+          DELETE FROM ${areaAbb}_XJ_STUDENT
+          WHERE ID in 
+          <foreach collection="ids" item="id" open="("  separator="," close=")" >
+                   #{id}
+          </foreach>
+   </delete>
+   
+   
+    <!-- 以下配置信息是手动追加的 -->
+   
+   
+   <!-- 获取新的学籍编号    规则为   年+地区代码+流水号  -->
+   <select id="getNextStuSequence" resultType="String">
+        SELECT to_char(sysdate,'yy')||${areaCode}||(${areaAbb}_xj_student_sequence.nextval)  FROM  DUAL 
+   </select>
+         
+         
+</mapper>
