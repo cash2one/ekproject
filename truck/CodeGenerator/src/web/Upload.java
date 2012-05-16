@@ -19,6 +19,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import qtone.generator.util.BaseCfg;
 
 /**
@@ -29,6 +31,8 @@ import qtone.generator.util.BaseCfg;
  */
 public class Upload extends HttpServlet {
 
+	private Logger logger = Logger.getLogger(Upload.class);
+	
 	/**
 	 * 
 	 */
@@ -38,6 +42,7 @@ public class Upload extends HttpServlet {
 			throws ServletException, IOException {
         
 		System.out.println("有新的文件被上传到服务器中："+new Date().toLocaleString());
+		logger.info("有新的文件被上传到服务器中.....");
 		
 		BufferedReader br = new BufferedReader(new InputStreamReader(
 				(ServletInputStream) request.getInputStream(),"utf-8"));

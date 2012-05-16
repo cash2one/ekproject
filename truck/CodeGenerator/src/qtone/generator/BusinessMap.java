@@ -27,6 +27,7 @@ public class BusinessMap {
     String primaryKey="id";
 	String name;
     
+	boolean isTransactionOff = true; // 事务开启 
     
     boolean isAreaDeal =false; //分表处理
     
@@ -37,7 +38,18 @@ public class BusinessMap {
     
     private Templater templator = null;
     
-    private void setName(String name) {
+    
+    
+    
+    public boolean isTransactionOff() {
+		return isTransactionOff;
+	}
+
+	public void setTransactionOff(boolean isTransactionOff) {
+		this.isTransactionOff = isTransactionOff;
+	}
+
+	private void setName(String name) {
 		this.name = name;
 	}
 
