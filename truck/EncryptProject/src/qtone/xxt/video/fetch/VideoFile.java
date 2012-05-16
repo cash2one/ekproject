@@ -11,7 +11,9 @@ import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -22,33 +24,64 @@ import java.util.Map;
 public class VideoFile {
 
 	
-//	private static  String filePath = "E:/elam/my_jar_project/CodeGenerator/WebRoot/flv/06_1/";
-	private static  String filePath = "D:/Workspaces/google/ekproject/truck/HTML5/WebContent/flv/06_1/";
+	private static  String filePath = "E:/elam/my_jar_project/CodeGenerator/WebRoot/flv/case1/";
+//	private static  String filePath = "D:/Workspaces/google/ekproject/truck/HTML5/WebContent/flv/06_1/";
 	
 	private static  String file = "1";
 	private static  String fileSuffix = ".flv";
 	private static  String keyFrameDir = "/keyFrames/";
 	
+	private static List<String> KeyframeList = new ArrayList<String>();
 	private static Map<String,Integer> keyFramePositions = new HashMap<String,Integer>();
-	private static Map<String,Float> keyFrameTimestamps = new HashMap<String,Float>();
+	private static Map<String,Integer> keyFrameTimestamps = new HashMap<String,Integer>();
 	
-	
+	 
 	private static boolean DEBUG = false;
+	private static boolean CREATE_FRAME = false;
 	
 	static MetadataTag _metadataTag = null;
 	
 	static double _duration = 0;
 	static double _filesize = 0;
 	
-   public static void main(String...args) throws Exception{
-//	   loadByBytes( );
-	   op = 0;
-//	   byte2hex(loadByByteBuffer());
-	   analysViedoTag(loadByByteBuffer());
+	
+   public static void resetParams(){
+	   keyFramePositions.clear();
+	   keyFrameTimestamps.clear();
+	   KeyframeList.clear();
    }
 	
+   public static void main(String...args) throws Exception{
+	 
+	   File _fileDir = new File(filePath);
+	   
+	   for(File file:_fileDir.listFiles()){
+		   op = 0;
+		   analysViedoTag(loadByByteBuffer(filePath,file.getName(),""));
+		   String content = createVideoKeyFrameDesFile(file.getName().substring(0, file.getName().indexOf(".")),false);
+		   System.out.println(content);
+		   resetParams();
+	   }  
+//	   analysViedoTag(loadByByteBuffer(filePath,"1.flv",""));
+	   System.out.println("分析程序完成了.....");
+   }
 	
    
+   
+   public static String createVideoKeyFrameDesFile(String fileName,boolean isHead){
+	   StringBuffer content = new StringBuffer();
+	   String template = "  <keyframe  offset=\"<offset>\" timestamp=\"<timestamp>\"  file=\""+fileName+"\" />";
+	   if(isHead)
+	       content.append("<keyframes>");
+	   for(String keyFrameName : KeyframeList){
+		   content.append(template.replace("<offset>", keyFramePositions.get(keyFrameName)+"").replace("<timestamp>", keyFrameTimestamps.get(keyFrameName)+"")+"");
+	   }
+	   if(isHead)
+	       content.append("</keyframes>");
+//	   System.out.println(content);
+	   return content.toString();
+   }
+
    
    /**
     * 普通的加载方式
@@ -144,12 +177,13 @@ public class VideoFile {
 			} else {
 				stmp= stmp.toUpperCase();
 			}
-//			System.out.println("Find Tag Type is ："+"  "+stmp +" At "+op);
+//			System.out.println("DEBUG -- Find Tag Type is ："+"  "+stmp +" At "+op);
 			if("09".equals(stmp)){
 				//是视频Tag
 				isKeyFrame(b,offLenght);
 			}else if("12".equals(stmp)){
-				System.out.println("FLV METADATE Time Stamp:"+timeMessage(b,offLenght));
+				if(DEBUG)
+				 System.out.println("FLV METADATE Time Stamp:"+timeMessage(b,offLenght));
 			}
 			
 			
@@ -165,6 +199,7 @@ public class VideoFile {
 				}
 				System.out.println("MetaData analys ......");
 				analysMetadataStruct();
+				if(DEBUG)
 				System.out.println("MetaData analys finished!");
 			}
 			
@@ -194,11 +229,16 @@ public class VideoFile {
 		if(frameType.startsWith("1")){
 			//是视频关键帧
 			String keyFrameOp = showPosition();
-			System.out.println("搜索到 视频 “关键帧” Tag:  "+(keyFrameOp+"  ").toUpperCase()+" ,Time: "+timeMessage(b,offLenght)+"   "+op);
+			if(DEBUG)
+			  System.out.println("搜索到 视频 “关键帧” Tag:  "+(keyFrameOp+"  ").toUpperCase()+" ,Time: "+timeMessage(b,offLenght)+"   "+op);
+			KeyframeList.add(keyFrameOp);
 			keyFramePositions.put(keyFrameOp, op);//记录视频出现的地方
 			keyFrameTimestamps.put(keyFrameOp,timeMessage(b,offLenght));
-			fetchNewKeyFrameFile(b,keyFrameOp,op);
-			fetchNewKeyFrameFile2(b,keyFrameOp,op);
+			if(CREATE_FRAME){
+//				fetchNewKeyFrameFile(b,keyFrameOp,op);
+				fetchNewKeyFrameFile_MF(b,keyFrameOp,op);
+//				fetchNewKeyFrameFile_KF(b,keyFrameOp,op);
+			}
 		} 
 	}
 	
@@ -211,12 +251,19 @@ public class VideoFile {
          //生成MetaData数据
 		 System.arraycopy(fileHeadData,13,metaData,0, fileHeadData.length-13);
 		 int spos = 24;
-		 
-		 System.out.println("MetaData Data Array: 视频信息有:"+byte2Number(metaData,26,3)+" 个参数。");
+		 int totalParams = byte2Number(metaData,26,3);
+	     if(DEBUG)
+		    System.out.println("MetaData Data Array: 视频信息有:"+totalParams+" 个参数。");
+		 int paramSeq = 1;
 		 for(int pos =spos+5;pos<fileHeadData.length-13;){
+			if(paramSeq>totalParams+1)
+				return;
+			
 			int strlength =  byte2Number(metaData,pos,2);
 			pos += 2;
 			String paramNameStr = byte2String(metaData,pos,strlength);
+//			System.out.println("MetaData array Data(len:"+strlength+"-Name: "+paramNameStr +") paramSeq "+(paramSeq++)+" len:"+strlength);
+			
 			pos += strlength;
 			int dataType = byte2Number(metaData,pos,1);
 			pos += 1;
@@ -239,11 +286,13 @@ public class VideoFile {
 			     case 11: dataLen = 4; break;//Date ;  SCRIPTDATADATE
 			     case 12: dataLen = 4; break;//Long string ;      SCRIPTDATALONGSTRING
 			} 
-		
-			System.out.println("MetaData array Data(len:"+strlength+") Name: "+paramNameStr +",Value:"+value+" [Type:"+dataType+"]");
+			if(DEBUG)
+			   System.out.println("MetaData array Data(len:"+strlength+",paramSeq:"+(paramSeq++)+" Name: "+paramNameStr +",Value:"+value+" [Type:"+dataType+"]");
 			_metaArrayData.addData(paramNameStr, value);
 			pos += dataLen;
 		 }
+		if(DEBUG)
+		  System.out.println("..................new MetadataTag..................");
 		 _metadataTag = new MetadataTag(_metaArrayData);
 		 _duration = (Double)_metadataTag.getParamValue("duration");
 		 _filesize = (Double)_metadataTag.getParamValue("filesize");
@@ -384,7 +433,7 @@ public class VideoFile {
 	 * @param startPosition
 	 * @throws Exception
 	 */
-	protected static void fetchNewKeyFrameFile2(byte[] videoData,String keyFrameName,int startPosition) throws Exception{
+	protected static void fetchNewKeyFrameFile_MF(byte[] videoData,String keyFrameName,int startPosition) throws Exception{
 		
 		File dir = new File(filePath+keyFrameDir);
 		dir.mkdirs();
@@ -410,6 +459,34 @@ public class VideoFile {
 		
 	}
 	
+	
+	/**
+	 * 直接截取关键帧后面的数据
+	 * @param videoData
+	 * @param keyFrameName
+	 * @param startPosition
+	 * @throws Exception
+	 */
+	protected static void fetchNewKeyFrameFile_KF(byte[] videoData,String keyFrameName,int startPosition) throws Exception{
+		
+		File dir = new File(filePath+keyFrameDir);
+		dir.mkdirs();
+//		static int MetaDataOp = 0; //计算metadata的数据包大小
+//		static byte[] fileHeadData = null; //获取头文件描述
+		
+		int nlength = videoData.length-startPosition ;
+		byte[] nVideoData = new byte[nlength];
+		System.out.println("生成新的关键帧文件..."+keyFrameName+" 文件大小为："+nlength);
+		//复制头数据
+//		System.arraycopy(fileHeadData,0,nVideoData,0,fileHeadData.length);
+		//复制Pre Tag Size + 视频数据
+		System.arraycopy(videoData, startPosition, nVideoData,0,nlength);
+	    ByteArrayOutputStream out = new ByteArrayOutputStream(nlength);
+	    out.write(nVideoData);
+		out.writeTo(new FileOutputStream(new File(filePath+keyFrameDir+keyFrameName+"_"+file+"_kf"+fileSuffix)));
+		out.close();
+		
+	}
 	
 	
 	/**
@@ -446,12 +523,12 @@ public class VideoFile {
 	 * @param offLenght
 	 * @return
 	 */
-	protected static float timeMessage(byte[] b,int offLenght){
+	protected static int timeMessage(byte[] b,int offLenght){
 		String tagDataLength = byte2hexString(b[offLenght+4]);
 		tagDataLength+=byte2hexString(b[offLenght+5]);
 		tagDataLength+=byte2hexString(b[offLenght+6]);
 //	    System.out.println("Tag data Size :"+tagDataLength);
-		return Integer.parseInt(tagDataLength, 16)/1000;
+		return Integer.parseInt(tagDataLength, 16);
 	}
 	
 	static String byte2hexString(byte b){
@@ -505,7 +582,7 @@ public class VideoFile {
 		
 	
 	
-	public static byte[] loadByByteBuffer() throws Exception{
+	public static byte[] loadByByteBuffer(String filePath,String file,String fileSuffix) throws Exception{
 		File _file = new File(filePath+file+fileSuffix);
 		ByteBuffer byteBuf = ByteBuffer.allocate((int) _file.length());
         FileInputStream fis = new FileInputStream(_file);
