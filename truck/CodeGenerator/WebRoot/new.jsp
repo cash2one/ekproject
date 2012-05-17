@@ -12,7 +12,7 @@
 	<head>
 		<base href="<%=basePath%>">
 
-		<title>配置文件 模版V1</title>
+		<title>模版V2</title>
 		<meta http-equiv="pragma" content="no-cache">
 		<meta http-equiv="cache-control" content="no-cache">
 		<meta http-equiv="expires" content="0">
@@ -51,11 +51,11 @@
 			      for(File fileName:cfgFiles){ if(fileName.getName().indexOf(".xml")<0) continue;%>
 			      <tr>
 			         <td><a href="<%=(!BaseCfg.APP_CONTEXT.equals("")?"/"+BaseCfg.APP_CONTEXT:"")+"/templates/"+fileName.getName()+"\""%>"><%=fileName.getName() %></a></td>
-			         <td><a href="<%=!BaseCfg.APP_CONTEXT.equals("")?"/"+BaseCfg.APP_CONTEXT:""%>/codeTemplators/entity.jsp?cfg=<%out.print(fileName.getName());%>">View Entity</a></td>
-			         <td><a href="<%=!BaseCfg.APP_CONTEXT.equals("")?"/"+BaseCfg.APP_CONTEXT:""%>/codeTemplators/mapper.jsp?cfg=<%out.print(fileName.getName());%>">View Mapper</a></td>
-			         <td><a href="<%=!BaseCfg.APP_CONTEXT.equals("")?"/"+BaseCfg.APP_CONTEXT:""%>/codeTemplators/mapperXml.jsp?cfg=<%out.print(fileName.getName());%>">View Mapper_XML</a></td>
-			         <td><a href="<%=!BaseCfg.APP_CONTEXT.equals("")?"/"+BaseCfg.APP_CONTEXT:""%>/codeTemplators/business.jsp?cfg=<%out.print(fileName.getName());%>">View Bussiness</a></td>
-			         <td><a href="<%=!BaseCfg.APP_CONTEXT.equals("")?"/"+BaseCfg.APP_CONTEXT:""%>/codeTemplators/listPage.jsp?cfg=<%out.print(fileName.getName());%>">View PageModel</a></td>
+			         <td><a href="<%=!BaseCfg.APP_CONTEXT.equals("")?"/"+BaseCfg.APP_CONTEXT:""%>/new_model/entity.jsp?cfg=<%out.print(fileName.getName());%>">View Entity</a></td>
+			         <td><a href="<%=!BaseCfg.APP_CONTEXT.equals("")?"/"+BaseCfg.APP_CONTEXT:""%>/new_model/mapper.jsp?cfg=<%out.print(fileName.getName());%>">View Mapper</a></td>
+			         <td><a href="<%=!BaseCfg.APP_CONTEXT.equals("")?"/"+BaseCfg.APP_CONTEXT:""%>/new_model/mapperXml.jsp?cfg=<%out.print(fileName.getName());%>">View Mapper_XML</a></td>
+			         <td><a href="<%=!BaseCfg.APP_CONTEXT.equals("")?"/"+BaseCfg.APP_CONTEXT:""%>/new_model/business.jsp?cfg=<%out.print(fileName.getName());%>">View Bussiness</a></td>
+			         <td><a href="<%=!BaseCfg.APP_CONTEXT.equals("")?"/"+BaseCfg.APP_CONTEXT:""%>/new_model/listPage.jsp?cfg=<%out.print(fileName.getName());%>">View PageModel</a></td>
 			      </tr>
 			      <%}%>
 		</table>
