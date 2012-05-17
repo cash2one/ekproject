@@ -33,6 +33,10 @@ public class Upload extends HttpServlet {
 
 	private Logger logger = Logger.getLogger(Upload.class);
 	
+//	private static String MODEL = "codeTemplators";
+	
+	private static String MODEL = "new_model";
+	
 	/**
 	 * 
 	 */
@@ -84,20 +88,20 @@ public class Upload extends HttpServlet {
 					""
 							+ (!BaseCfg.APP_CONTEXT.equals("") ? "/"
 									+ BaseCfg.APP_CONTEXT : "")
-							+ "/codeTemplators/entity.jsp?cfg=").append(fileCfg);
+							+ "/MODEL/entity.jsp?cfg=").append(fileCfg);
 			urls.append(";").append(ip).append(
 					(!BaseCfg.APP_CONTEXT.equals("") ? "/"
 							+ BaseCfg.APP_CONTEXT : "")
-							+ "/codeTemplators/mapper.jsp?cfg=").append(fileCfg);
+							+ "/MODEL/mapper.jsp?cfg=").append(fileCfg);
 			urls.append(";").append(ip).append(
 					(!BaseCfg.APP_CONTEXT.equals("") ? "/"
 							+ BaseCfg.APP_CONTEXT : "")
-							+ "/codeTemplators/mapperXml.jsp?cfg=")
+							+ "/MODEL/mapperXml.jsp?cfg=")
 					.append(fileCfg);
 			urls.append(";").append(ip).append(
 					(!BaseCfg.APP_CONTEXT.equals("") ? "/"
 							+ BaseCfg.APP_CONTEXT : "")
-							+ "/codeTemplators/business.jsp?cfg=").append(fileCfg);
+							+ "/MODEL/business.jsp?cfg=").append(fileCfg);
 		}
 		out.write(urls.toString());
 		out.close();
