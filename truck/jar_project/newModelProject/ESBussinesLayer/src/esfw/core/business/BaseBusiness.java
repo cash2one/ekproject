@@ -1,8 +1,7 @@
 package esfw.core.business;
 
 
-import esfw.base.util.OperatorType;
-import esfw.core.XxtFactory;
+import esfw.core.business.enumeration.ActionType;
 import esfw.core.exception.BusinessException;
 import esfw.core.purview.PurviewType;
 
@@ -20,7 +19,7 @@ public abstract class BaseBusiness implements java.io.Serializable{
 	public abstract String getBusinessName();//外层实现获取业务逻辑名称
 	public abstract String getFunctionFlag();//外层实现获取业务逻辑功能标识 对应数据表的功能标识
 	public abstract String getModel();//外层实现获取模块名称
-	public abstract void filterContent() throws BusinessException;//过滤关键字
+	protected abstract void checkAndFilter(ActionType type) throws BusinessException;//增删改验证器
 	
 	private String daoAbb;       //查询对应的地区分表
 	
@@ -40,7 +39,7 @@ public abstract class BaseBusiness implements java.io.Serializable{
 		if(!this.havePurview(PurviewType.add)){
 			return ;
 		}
-		this.filterContent();
+		this.checkAndFilter(ActionType.add);
 		onAdd();//回调
 	}
 	
@@ -49,7 +48,7 @@ public abstract class BaseBusiness implements java.io.Serializable{
 		if(!this.havePurview(PurviewType.mdf)){
 			return ;
 		}
-		this.filterContent();
+		this.checkAndFilter(ActionType.add);
 		onModify();//回调
 	}
 	
@@ -58,7 +57,7 @@ public abstract class BaseBusiness implements java.io.Serializable{
 		if(!this.havePurview(PurviewType.del)){
 			return ;
 		}
-		this.filterContent();
+		this.checkAndFilter(ActionType.del);
 		onDelete(ids);//回调
 	}
 

@@ -22,7 +22,7 @@ public class XxtFactory {
 	public static void init(String purviewclass,String lo4j) throws Exception{
 		System.out.println("log4j已经配置...");
 		DOMConfigurator.configure(lo4j);//初始化log4j
-		Class classinfo=Class.forName(purviewclass);
+//		Class classinfo=Class.forName(purviewclass);
 //		purview=(IPurviewInfo)classinfo.newInstance();//生成权限对象
 	
 	}

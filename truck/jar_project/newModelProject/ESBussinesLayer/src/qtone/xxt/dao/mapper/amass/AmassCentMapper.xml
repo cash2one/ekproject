@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="qtone.xxt.dao.mapper.amass.AmassCentMapper">
+
+  <!-- 以下配置是系统自动生成的 -->
+
+  <!-- 显示的记录对应的列-->
+  <sql id="AmassCentColumns" >
+		    amcent.id as id,amcent.area_id as areaId,amcent.user_id as userId,amcent.user_name as userName,amcent.si_id as siId,amcent.school_id as schoolId,amcent.school_name as schoolName,amcent.year as year,amcent.month as month,amcent.cent as cent,amcent.is_leader as isLeader,amcent.insertuserid as insertuserid,amcent.dt as dt,amcent.amh_id as amhId,amcent.is_confirm as isConfirm,area.name as areaName,qxadminsi.company as company
+  </sql>
+  
+  
+  <!-- 列表对应的查询条件组合  -->
+  <sql id="queryOptions">
+       <where>
+            	  <if test="cent>=0"> AND amcent.cent = #{cent}</if>
+            	  <if test="dt1!=null"> AND amcent.dt &gt; #{dt1}</if><if test="dt2!=null"> AND amcent.dt &lt; #{dt2}</if>
+            	  <if test="schoolName!=null"> AND amcent.school_name like #{schoolName}</if>
+            	  <if test="siId>=0"> AND amcent.si_id = #{siId}</if>
+            	  <if test="amhId>=0"> AND amcent.amh_id = #{amhId}</if>
+            	  <if test="isLeader>=0"> AND amcent.is_leader = #{isLeader}</if>
+            	  <if test="areaId>=0"> AND amcent.area_id = #{areaId}</if>
+            	  <if test="userId!=null"> AND amcent.user_id like #{userId}</if>
+            	  <if test="month>=0"> AND amcent.month = #{month}</if>
+            	  <if test="userName!=null"> AND amcent.user_name like #{userName}</if>
+            	  <if test="year>=0"> AND amcent.year = #{year}</if>
+            	  <if test="isConfirm>=0"> AND amcent.is_confirm = #{isConfirm}</if>
+            	  <if test="schoolId>=0"> AND amcent.school_id = #{schoolId}</if>
+            	  <if test="insertuserid!=null"> AND amcent.insertuserid like #{insertuserid}</if>         
+                  <if test="areaName!=null"> AND area.name like #{areaName}</if>         
+                  <if test="company!=null"> AND qxadminsi.company like #{company}</if> 
+        </where> 
+  </sql>
+
+
+
+  <!-- 列表查询对应的排序选项  -->
+  <sql id="orderControl">
+       <if test="orderList!=null">
+		  <trim prefix="ORDER BY" prefixOverrides=",">
+				<foreach collection="orderList" item="order" open=""  separator="," close="" >
+				   <choose> 
+				       <when test="order.columnName=='cent'"> amcent.cent ${order.type} </when> 
+				       <when test="order.columnName=='dt'"> amcent.dt ${order.type} </when> 
+				       <when test="order.columnName=='schoolName'"> amcent.school_name ${order.type} </when> 
+				       <when test="order.columnName=='siId'"> amcent.si_id ${order.type} </when> 
+				       <when test="order.columnName=='amhId'"> amcent.amh_id ${order.type} </when> 
+				       <when test="order.columnName=='isLeader'"> amcent.is_leader ${order.type} </when> 
+				       <when test="order.columnName=='areaId'"> amcent.area_id ${order.type} </when> 
+				       <when test="order.columnName=='userId'"> amcent.user_id ${order.type} </when> 
+				       <when test="order.columnName=='month'"> amcent.month ${order.type} </when> 
+				       <when test="order.columnName=='userName'"> amcent.user_name ${order.type} </when> 
+				       <when test="order.columnName=='year'"> amcent.year ${order.type} </when> 
+				       <when test="order.columnName=='isConfirm'"> amcent.is_confirm ${order.type} </when> 
+				       <when test="order.columnName=='schoolId'"> amcent.school_id ${order.type} </when> 
+				       <when test="order.columnName=='insertuserid'"> amcent.insertuserid ${order.type} </when>   
+				       <when test="order.columnName=='areaName'"> area.name ${order.type} </when>   
+				       <when test="order.columnName=='company'"> qxadminsi.company ${order.type} </when>
+                       
+				       <when test="order.columnName=='id'"> amcent.id  ${order.type}  </when> 
+				       
+				  </choose>
+			 </foreach>
+		 </trim>
+	   </if>
+  </sql>
+
+ 
+ 
+  <!-- 列表查询对应的表关系SQL  -->
+  <sql id="querySqlMain">
+			  AM_CENT  amcent LEFT JOIN AREA area ON amcent.AREA_ID = area.ID LEFT JOIN QX_ADMIN_SI qxadminsi ON amcent.SI_ID = qxadminsi.ID
+  </sql>
+
+  
+   
+   <!-- 根据ID查询记录 -->
+   <select id="findOne" resultType="qtone.xxt.dao.entity.amass.AmassCentEntry">
+	     SELECT  <include refid="AmassCentColumns"/>              
+		    FROM <include refid="querySqlMain"/>
+			where amcent.ID=#{id}
+   </select>
+   
+
+
+   <!-- 返回记录总数的语句 -->
+   <select id="qeuryAmassCentsRecordCount" resultType="int">
+        SELECT count(*) num  FROM  <include refid="querySqlMain"/>
+        <include refid="queryOptions"/> 
+   </select>
+   
+   
+    <!-- 分页查询对应的记录 -->
+   <select id="qeuryAmassCents" resultType="qtone.xxt.dao.entity.amass.AmassCentEntry">
+      SELECT * FROM (  
+	        SELECT A.*,ROWNUM RN FROM (
+	               SELECT <include refid="AmassCentColumns"/>   
+		           FROM <include refid="querySqlMain"/>
+		           <include refid="queryOptions"/>
+		           <include refid="orderControl"/>
+		    ) A WHERE ROWNUM &lt;=${startRow}+${pageSize}-1 ) 
+		 WHERE RN &gt;=#{startRow}
+   </select>
+
+
+   <!-- 新增记录 -->
+   <insert id="insertAmassCent" useGeneratedKeys="false" >
+       
+       <selectKey resultType="long" order="AFTER" keyProperty="amassCent.id">
+	       SELECT am_cent_ID_SEQ.currval FROM  DUAL
+	   </selectKey>
+             INSERT INTO AM_CENT (cent,dt,school_name,si_id,amh_id,is_leader,area_id,user_id,month,user_name,year,is_confirm,school_id,insertuserid)
+             VALUES(#{amassCent.cent},#{amassCent.dt},#{amassCent.schoolName},#{amassCent.siId},#{amassCent.amhId,jdbcType=NUMERIC},#{amassCent.isLeader,jdbcType=NUMERIC},#{amassCent.areaId},#{amassCent.userId},#{amassCent.month},#{amassCent.userName},#{amassCent.year},#{amassCent.isConfirm},#{amassCent.schoolId},#{amassCent.insertuserid,jdbcType=VARCHAR})
+            
+   </insert>
+   
+   
+   
+   <!-- 更新记录 -->       
+   <update id="updateAmassCent" >
+           UPDATE AM_CENT 
+           <set>
+                cent=#{amassCent.cent},
+                dt=#{amassCent.dt},
+                school_name=#{amassCent.schoolName},
+                si_id=#{amassCent.siId},
+                amh_id=#{amassCent.amhId,jdbcType=NUMERIC},
+                is_leader=#{amassCent.isLeader,jdbcType=NUMERIC},
+                area_id=#{amassCent.areaId},
+                user_id=#{amassCent.userId},
+                month=#{amassCent.month},
+                user_name=#{amassCent.userName},
+                year=#{amassCent.year},
+                is_confirm=#{amassCent.isConfirm},
+                school_id=#{amassCent.schoolId},
+                insertuserid=#{amassCent.insertuserid,jdbcType=VARCHAR},
+	   </set>
+	       WHERE ID = #{amassCent.id}
+   </update> 
+   
+
+
+   
+   <!-- 删除记录 -->
+   <delete id="deleteAmassCent">
+          DELETE FROM AM_CENT
+          WHERE ID in 
+          <foreach collection="ids" item="id" open="("  separator="," close=")" >
+                #{id}
+          </foreach>
+   </delete>
+  
+   
+   <!-- 以下是自定义的配置信息 -->
+   
+   
+   
+   
+
+</mapper>
+
+
+

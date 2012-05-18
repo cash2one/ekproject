@@ -18,7 +18,7 @@ public class BusinessContainer {
 	
 	private static BusinessContainer client = new BusinessContainer();
 	
-	final String APP_HOME = "F:/zj/04newxxt/XxtBusinessProject/";
+	final String APP_HOME = "E:/elam/my_jar_project/newModelProject/ESBussinesLayer/";
 	final String purviewclass = "qtone.xxt.business.purview.DefaultPurviewImp";
 	final String logCfgPath="config/log4j.xml";
 	
