@@ -27,13 +27,13 @@
 		<property name="jdbcUrl" value="jdbc:oracle:thin:@61.142.114.252:1522:orcl" />
 		<property name="user" value="zjxxt" />
 		<property name="password" value="zj23XXT" />
-		<property name="acquireIncrement" value="3" />
-		<property name="acquireRetryAttempts" value="30"/>
+		<property name="acquireIncrement" value="2" />
+		<property name="acquireRetryAttempts" value="2"/>
 		<property name="acquireRetryDelay" value="1000"/>
 		<property name="maxIdleTime" value="60" />
-		<property name="initialPoolSize" value="5"/>
-		<property name="minPoolSize" value="5"/>
-		<property name="maxPoolSize" value="10" />
+		<property name="initialPoolSize" value="2"/>
+		<property name="minPoolSize" value="2"/>
+		<property name="maxPoolSize" value="5" />
 		<property name="idleConnectionTestPeriod" value="60" />
 		<property name="checkoutTimeout" value="30000"/>
 	</bean>
@@ -62,7 +62,7 @@
     <!-- 自动加载对应的  数据访问层接口类 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="qtone.xxt.dao.mapper" />
-		<property name="markerInterface" value="esfw.core.dao.mapper.MyBatisMapper" />
+		<property name="markerInterface" value="esfw.core.framework.dao.mapper.MyBatisMapper" />
 		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
 	</bean>
 
