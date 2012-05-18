@@ -43,14 +43,16 @@ import org.springframework.context.annotation.Scope;
 
 
 import org.apache.log4j.Logger;
-import <%=basePackageName+map.getBusinessNamespace()%>.SpringUtil;
-import <%=basePackageName+map.getBusinessNamespace()%>.exceptions.BusinessException;
-import <%=basePackageName+map.getDaoNamespace()%>.exceptions.DaoException;
-import <%=basePackageName+map.getBusinessNamespace()%>.annotation.SeacherFun;
-import <%=basePackageName+map.getBusinessNamespace()%>.annotation.SearchParameter;
-import <%=basePackageName+map.getBusinessNamespace()%>.base.BaseBusiness;
+import esfw.core.framework.SpringUtil;
+import esfw.core.framework.annotation.SeacherFun;
+import esfw.core.framework.annotation.SearchParameter;
+import esfw.core.framework.business.BaseBusiness;
+import esfw.core.framework.business.enumeration.ActionType;
+import esfw.core.framework.dao.mapper.OrderItem;
+import esfw.core.framework.exception.BusinessException;
+import esfw.core.framework.exception.DaoAccessException;
+
 import <%=entryPackageName+"."+map.getClazz()%>Entry;
-import <%=basePackageName+map.getDaoNamespace()+"."+map.getMapperNamespace()%>.OrderItem;
 import <%=mapperPackageName+"."+map.getClazz()%>Mapper;
 
 
@@ -136,7 +138,7 @@ public class <%=map.getName()%> extends BaseBusiness {
 	@Override
 	public String getBusinessName(){
 	   // TODO Auto-generated method stub
-		 
+		 return "<%=map.getName()%>";
 	}
 
 
@@ -146,7 +148,7 @@ public class <%=map.getName()%> extends BaseBusiness {
 	@Override
 	public String getFunctionFlag() {
 		// TODO Auto-generated method stub
-		 
+		 return "<%=map.getName()%>";
 	}
 
 	/**
@@ -155,7 +157,7 @@ public class <%=map.getName()%> extends BaseBusiness {
 	@Override
 	public String getModel() {
 		// TODO Auto-generated method stub
-		 
+		 return "";
 	}
 
     /**
@@ -195,9 +197,9 @@ public class <%=map.getName()%> extends BaseBusiness {
 		<%=entryObjName%> entry = null;
 	    try{
 	         entry = <%=StringHelper.fistChartLowerCase(mapperObjName)%>.findOne(this.getDaoAbb(),<%=map.getPrimaryKeyItem().getName()%>);
-	    }catch(DaoException ex){
+	    }catch(DaoAccessException ex){
 	       logger.error(getBusinessName()+"执行记录findOne操作时出现异常",ex);
-	       throw new BusinessException(ex.getUserOperateExMsg(),ex.getMessage(),ex);
+	       throw new BusinessException("查询记录详细发生异常",ex.getMessage(),ex);
 	    }
 		 
 		 if (entry != null){<% //赋值
@@ -225,15 +227,13 @@ public class <%=map.getName()%> extends BaseBusiness {
 	@Override
 	protected void onAdd() throws BusinessException {
 		// TODO Auto-generated method stub
-		   //执行数据验证
-		   checkAndFilter(ActionType.add);
            try{
 		       <%=mapperImport%>
 		       <%=StringHelper.fistChartLowerCase(mapperObjName)%>.insert<%=map.getClazz()%>(<%=map.isAreaDeal()?"this.getDaoAbb(),":""%><%="this."+StringHelper.fistChartLowerCase(entryObjName)%>);
 		       <%=(true)?"":StringHelper.fistChartLowerCase(entryObjName)+"= null;"%> 
-	       }catch(DaoException ex){
+	       }catch(DaoAccessException ex){
 	          logger.error(getBusinessName()+"执行记录新增后，执行提交操作时出现数据库异常",ex);
-	          throw new BusinessException(ex.getUserOperateExMsg(),ex.getMessage(),ex);
+	          throw new BusinessException("新建记录发生异常",ex.getMessage(),ex);
 	       }
 	       
 	}
@@ -245,15 +245,13 @@ public class <%=map.getName()%> extends BaseBusiness {
 	@Override
 	protected void onModify() throws BusinessException {
 		// TODO Auto-generated method stub
-		//执行数据验证
-		checkAndFilter(ActionType.mdf);
         try{
 		    <%=mapperImport%>
 			<%=StringHelper.fistChartLowerCase(mapperObjName)%>.update<%=map.getClazz()%>(<%=map.isAreaDeal()?"this.getDaoAbb(),":""%><%="this."+StringHelper.fistChartLowerCase(entryObjName)%>);
 		    <%=(true)?"":StringHelper.fistChartLowerCase(entryObjName)+"= null;"%> 
-	    }catch(DaoException ex){
+	    }catch(DaoAccessException ex){
 	          logger.error(getBusinessName()+"执行记录修改操作后，执行提交操作时出现数据库异常",ex);
-	          throw new BusinessException(ex.getUserOperateExMsg(),ex.getMessage(),ex);
+	          throw new BusinessException("修改记录信息发生异常",ex.getMessage(),ex);
 	    }
 	}
 
@@ -267,9 +265,7 @@ public class <%=map.getName()%> extends BaseBusiness {
 	@Override
 	protected void onAdd() throws BusinessException {
 		// TODO Auto-generated method stub
-		   //执行数据验证
-		   checkAndFilter(ActionType.add);
-		   
+
 		   //打开事务控制
            DefaultTransactionDefinition def = new DefaultTransactionDefinition();
 		   def.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
@@ -280,10 +276,11 @@ public class <%=map.getName()%> extends BaseBusiness {
 		       <%=mapperImport%>
 		       <%=StringHelper.fistChartLowerCase(mapperObjName)%>.insert<%=map.getClazz()%>(<%=map.isAreaDeal()?"this.getDaoAbb(),":""%><%="this."+StringHelper.fistChartLowerCase(entryObjName)%>);
 		       <%=(true)?"":StringHelper.fistChartLowerCase(entryObjName)+"= null;"%> 
+		       
 		       //请实现业务新增的逻辑过程
 		       
 		       
-		       }catch(DaoException ex){
+		       }catch(DaoAccessException ex){
 		    	  logger.error(getBusinessName()+"执行记录新增后，进行业务提交时出现数据库异常",ex);
 		    	  txManager.rollback(status); //事务回滚
 		    	  throw new BusinessException(ex.getUserOperateExMsg(),ex.getMessage(),ex);
@@ -313,7 +310,7 @@ public class <%=map.getName()%> extends BaseBusiness {
 			<%=StringHelper.fistChartLowerCase(mapperObjName)%>.update<%=map.getClazz()%>(<%=map.isAreaDeal()?"this.getDaoAbb(),":""%><%="this."+StringHelper.fistChartLowerCase(entryObjName)%>);
 		    <%=(true)?"":StringHelper.fistChartLowerCase(entryObjName)+"= null;"%> 
 	        
-	        }catch(DaoException ex){
+	        }catch(DaoAccessException ex){
 		    	logger.error(getBusinessName()+"执行记录修改后，进行业务提交时出现数据库异常",ex);
 		    	txManager.rollback(status); //事务回滚
 		    	throw new BusinessException(ex.getUserOperateExMsg(),ex.getMessage(),ex);
@@ -333,9 +330,9 @@ public class <%=map.getName()%> extends BaseBusiness {
 		<%=mapperImport%>
 		try{
 		   <%=StringHelper.fistChartLowerCase(mapperObjName)%>.delete<%=map.getClazz()%>(<%=map.isAreaDeal()?"this.getDaoAbb(),":""%>ids);
-	    }catch(DaoException ex){
+	    }catch(DaoAccessException ex){
 	       logger.error(getBusinessName()+"执行记录删除操作后，进行提交时出现数据库异常",ex);
-	       throw new BusinessException(ex.getUserOperateExMsg(),ex.getMessage(),ex);
+	       throw new BusinessException("删除记录发送异常",ex.getMessage(),ex);
 	    }
 	}
 
@@ -392,6 +389,7 @@ public class <%=map.getName()%> extends BaseBusiness {
 		   List<<%=map.getName()%>> list = new ArrayList<<%=map.getName()%>>();
 		   //查询结果实体
 		   <%=mapperImport%>
+		  try{ 
 		   this.setQeuryRecordTotalNum(<%=StringHelper.fistChartLowerCase(mapperObjName)%>.qeury<%=map.getClazz()%>sRecordCount(this.getDaoAbb(),<%=tempStr%>));
 		   List<<%=entryObjName%>> entryList = <%=StringHelper.fistChartLowerCase(mapperObjName)%>.qeury<%=map.getClazz()%>s(startRow,pageSize,this.getDaoAbb(),<%=tempStr%>,orderList);
 	       if (entryList != null){
@@ -401,6 +399,10 @@ public class <%=map.getName()%> extends BaseBusiness {
 			  }
 			  entryList = null;
 		   }
+		  }catch(DaoAccessException ex){
+	          logger.error(getBusinessName()+"执行记录查询操作时出现数据库异常",ex);
+	          throw new BusinessException("查询记录发生异常",ex.getMessage(),ex);
+	      }
 		return list;
 	}
 				

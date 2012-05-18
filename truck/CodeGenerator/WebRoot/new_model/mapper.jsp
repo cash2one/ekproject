@@ -30,10 +30,12 @@ import java.util.*;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
+import esfw.core.framework.dao.mapper.MyBatisMapper;
+import esfw.core.framework.dao.mapper.OrderItem;
+import esfw.core.framework.exception.DaoAccessException;
+
 import <%=basePackageName+map.getDaoNamespace()+"."+map.getEntityNamespace()+"."+map.getNamespace()+"."+map.getClazz()%>Entry;
-import <%=basePackageName+map.getDaoNamespace()+"."+map.getMapperNamespace()%>.MyBatisMapper;
-import <%=basePackageName+map.getDaoNamespace()+"."+map.getMapperNamespace()%>.OrderItem;
-import <%=basePackageName+map.getDaoNamespace()%>.exceptions.DaoException;
+
 
 /**
  *
@@ -57,7 +59,7 @@ public interface <%=entityName%>Mapper extends MyBatisMapper {
 	 * @param <%=map.getPrimaryKeyItem().getName()%>  记录对应的主键
 	 * @return <%=entityName%>Entry
 	 */
-	public <%=entityName%>Entry findOne(<%=areaAbbParamStr%>,@Param("<%=map.getPrimaryKeyItem().getName()%>")long <%=map.getPrimaryKeyItem().getName()%>) throws DaoException;
+	public <%=entityName%>Entry findOne(<%=areaAbbParamStr%>,@Param("<%=map.getPrimaryKeyItem().getName()%>")long <%=map.getPrimaryKeyItem().getName()%>) throws DaoAccessException;
 	<% } %>
 	
 	 /**
@@ -89,7 +91,7 @@ public interface <%=entityName%>Mapper extends MyBatisMapper {
 	   * @return List<<%=entityName%>Entry>
 	   */
 	public List<<%=entityName%>Entry> qeury<%=entityName%>s(@Param("startRow")int startRow, @Param("pageSize")int pageSize,<%=areaAbbParamStr%>,
-				<%=conParamsStr%>,@Param("orderList")List<OrderItem>orderList) throws DaoException;
+				<%=conParamsStr%>,@Param("orderList")List<OrderItem>orderList) throws DaoAccessException;
 
 
 	/**
@@ -116,7 +118,7 @@ for(FieldItem field:mainFields){ if(field.getName().equals(map.getPrimaryKeyItem
     }conParamsStr = conParamsStr.substring(1);%>
 	 * @return 列表的记录数
 	 */
-	public int qeury<%=entityName%>sRecordCount(<%=areaAbbParamStr%>,<%=conParamsStr%>) throws DaoException ;
+	public int qeury<%=entityName%>sRecordCount(<%=areaAbbParamStr%>,<%=conParamsStr%>) throws DaoAccessException ;
 	
 	
 	/**
@@ -125,7 +127,7 @@ for(FieldItem field:mainFields){ if(field.getName().equals(map.getPrimaryKeyItem
 	 * @param <%=StringHelper.fistChartLowerCase(entityName)%>
 	 * @return
 	 */
-	public int insert<%=entityName%>(<%=isAppendAreaDeal%> @Param("<%=StringHelper.fistChartLowerCase(entityName)%>")<%=entityName%>Entry <%=StringHelper.fistChartLowerCase(entityName)%>) throws DaoException;
+	public int insert<%=entityName%>(<%=isAppendAreaDeal%> @Param("<%=StringHelper.fistChartLowerCase(entityName)%>")<%=entityName%>Entry <%=StringHelper.fistChartLowerCase(entityName)%>) throws DaoAccessException;
 	
 	
 	<% if(map.getPrimaryKeyItem()!=null){//有主键才可以有此方法 %>
@@ -135,7 +137,7 @@ for(FieldItem field:mainFields){ if(field.getName().equals(map.getPrimaryKeyItem
 	 * @param <%=StringHelper.fistChartLowerCase(entityName)%>
 	 * @return
 	 */
-	public int update<%=entityName%>(<%=isAppendAreaDeal%> @Param("<%=StringHelper.fistChartLowerCase(entityName)%>") <%=entityName%>Entry <%=StringHelper.fistChartLowerCase(entityName)%>) throws DaoException;
+	public int update<%=entityName%>(<%=isAppendAreaDeal%> @Param("<%=StringHelper.fistChartLowerCase(entityName)%>") <%=entityName%>Entry <%=StringHelper.fistChartLowerCase(entityName)%>) throws DaoAccessException;
     <%}%>
 	
 	<% if(map.getPrimaryKeyItem()!=null){//有主键才可以有此方法 %>
@@ -145,7 +147,7 @@ for(FieldItem field:mainFields){ if(field.getName().equals(map.getPrimaryKeyItem
 	 * @param <%=map.getPrimaryKeyItem().getName()%>s  记录对应的主键
 	 * @return
 	 */
-	public int delete<%=entityName%>(<%=isAppendAreaDeal%> @Param("<%=map.getPrimaryKeyItem().getName()%>s") long[] <%=map.getPrimaryKeyItem().getName()%>s) throws DaoException ;
+	public int delete<%=entityName%>(<%=isAppendAreaDeal%> @Param("<%=map.getPrimaryKeyItem().getName()%>s") long[] <%=map.getPrimaryKeyItem().getName()%>s) throws DaoAccessException ;
 	<%}%>
 	
 	
