@@ -3,9 +3,9 @@ package esfw.testcase;
 import java.util.List;
 
 import qtone.xxt.business.amass.AmassCentInfo;
-import esfw.core.SpringUtil;
-import esfw.core.business.BusinessContainer;
-import esfw.core.helper.MethodAdapter;
+import esfw.core.framework.MethodAdapter;
+import esfw.core.framework.SpringUtil;
+import esfw.core.framework.business.BusinessContainer;
 
 /**
  * 

@@ -1,4 +1,4 @@
-package esfw.core.purview;
+package esfw.core.framework.purview;
 
 public enum PurviewType {
 		add,

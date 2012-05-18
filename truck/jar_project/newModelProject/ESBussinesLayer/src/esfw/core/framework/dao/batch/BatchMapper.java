@@ -1,6 +1,6 @@
-package esfw.core.dao.batch;
+package esfw.core.framework.dao.batch;
 
-import esfw.core.dao.mapper.MyBatisMapper;
+import esfw.core.framework.dao.mapper.MyBatisMapper;
 
 /**
  * 

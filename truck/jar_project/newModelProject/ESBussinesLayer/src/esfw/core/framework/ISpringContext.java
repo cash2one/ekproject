@@ -1,4 +1,4 @@
-package esfw.core.inter;
+package esfw.core.framework;
 
 /**
  * 

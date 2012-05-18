@@ -1,4 +1,4 @@
-package esfw.core.exception;
+package esfw.core.framework.exception;
 
 /**
  * 业务逻辑层的  Exception 接口

@@ -1,8 +1,8 @@
-package esfw.core.business;
+package esfw.core.framework.business;
 
 import org.springframework.context.ApplicationContext;
 
-import esfw.core.inter.ISpringContext;
+import esfw.core.framework.ISpringContext;
 
 
 

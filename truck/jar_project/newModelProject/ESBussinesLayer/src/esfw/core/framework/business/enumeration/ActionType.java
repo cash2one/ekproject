@@ -1,4 +1,4 @@
-package esfw.core.business.enumeration;
+package esfw.core.framework.business.enumeration;
 
  
 public enum ActionType {

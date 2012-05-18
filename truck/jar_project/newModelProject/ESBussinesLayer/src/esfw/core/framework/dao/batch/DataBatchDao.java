@@ -1,4 +1,4 @@
-package esfw.core.dao.batch;
+package esfw.core.framework.dao.batch;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -8,7 +8,7 @@ import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
-import esfw.core.SpringUtil;
+import esfw.core.framework.SpringUtil;
 
 
 

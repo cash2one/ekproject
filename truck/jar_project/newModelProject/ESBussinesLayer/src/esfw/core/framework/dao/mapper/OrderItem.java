@@ -1,4 +1,4 @@
-package esfw.core.dao.mapper;
+package esfw.core.framework.dao.mapper;
 
 
 /**

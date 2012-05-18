@@ -1,10 +1,9 @@
-package esfw.core;
+package esfw.core.framework;
 
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
-import esfw.core.inter.ISpringContext;
 
 /**
  * Spring 容器

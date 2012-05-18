@@ -1,9 +1,9 @@
-package esfw.core.business;
+package esfw.core.framework.business;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 
-import esfw.core.BusinessBootCfg;
+import esfw.core.framework.BusinessBootCfg;
 
 
 /**

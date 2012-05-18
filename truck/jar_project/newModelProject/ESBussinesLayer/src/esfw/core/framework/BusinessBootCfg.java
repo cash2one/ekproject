@@ -1,6 +1,5 @@
-package esfw.core;
+package esfw.core.framework;
 
-import esfw.core.inter.ISpringContext;
 
 
 /**

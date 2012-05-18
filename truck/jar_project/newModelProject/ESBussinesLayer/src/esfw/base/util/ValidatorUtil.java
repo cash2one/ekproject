@@ -2,7 +2,7 @@ package esfw.base.util;
 
 import java.util.List;
 
-import esfw.core.helper.MethodAdapter;
+import esfw.core.framework.MethodAdapter;
 
 
 /**

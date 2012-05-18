@@ -1,9 +1,9 @@
-package esfw.core.business;
+package esfw.core.framework.business;
 
 
-import esfw.core.business.enumeration.ActionType;
-import esfw.core.exception.BusinessException;
-import esfw.core.purview.PurviewType;
+import esfw.core.framework.business.enumeration.ActionType;
+import esfw.core.framework.exception.BusinessException;
+import esfw.core.framework.purview.PurviewType;
 
 /**
  * 业务逻辑父类

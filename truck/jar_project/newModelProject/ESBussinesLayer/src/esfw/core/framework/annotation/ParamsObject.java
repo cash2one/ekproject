@@ -1,4 +1,4 @@
-package esfw.core.annotation;
+package esfw.core.framework.annotation;
 
 /**
  * 参数对象标识 （MethodAdapter 接口标识用）

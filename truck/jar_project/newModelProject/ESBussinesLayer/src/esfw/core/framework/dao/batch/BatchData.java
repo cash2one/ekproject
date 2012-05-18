@@ -1,4 +1,4 @@
-package esfw.core.dao.batch;
+package esfw.core.framework.dao.batch;
 
 /**
  * 

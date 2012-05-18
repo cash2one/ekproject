@@ -1,4 +1,4 @@
-package esfw.core.business.enumeration;
+package esfw.core.framework.business.enumeration;
 
 /**
  * 字符串查询条件匹配类型

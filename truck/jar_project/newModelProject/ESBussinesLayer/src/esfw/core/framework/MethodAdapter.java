@@ -1,4 +1,4 @@
-package esfw.core.helper;
+package esfw.core.framework;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
@@ -11,13 +11,13 @@ import java.util.Vector;
 import org.apache.log4j.Logger;
 
 import esfw.base.util.DateUtil;
-import esfw.core.annotation.ParamsObject;
-import esfw.core.annotation.SearchParameter;
-import esfw.core.business.enumeration.MatchingType;
+import esfw.core.framework.annotation.ParamsObject;
+import esfw.core.framework.annotation.SearchParameter;
+import esfw.core.framework.business.enumeration.MatchingType;
 
 
 /**
- * 
+ * 通用的查询接口
  * 方法适配调用
  * 被匹配调用调用的方法必须有如下的注解
  * 1、方法的参数必须加上 @SearchParameter

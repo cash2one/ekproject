@@ -1,4 +1,4 @@
-package esfw.core;
+package esfw.core.framework;
 
 import org.apache.log4j.xml.DOMConfigurator;
 

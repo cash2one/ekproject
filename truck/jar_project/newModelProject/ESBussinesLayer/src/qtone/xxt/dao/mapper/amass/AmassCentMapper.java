@@ -4,9 +4,9 @@ import java.util.*;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
-import esfw.core.dao.mapper.MyBatisMapper;
-import esfw.core.dao.mapper.OrderItem;
-import esfw.core.exception.DaoAccessException;
+import esfw.core.framework.dao.mapper.MyBatisMapper;
+import esfw.core.framework.dao.mapper.OrderItem;
+import esfw.core.framework.exception.DaoAccessException;
 
 import qtone.xxt.dao.entity.amass.AmassCentEntry;
 
