@@ -4,12 +4,13 @@ import java.io.Serializable;
 
 /**
  * 
- * 数据层的实体类
- * @author Ethan.Lam  2012-5-21
+ * 描述：数据层的实体类
+ * @author Ethan.Lam
+ * @dateTime 2012-5-22
  *
  */
 public interface GenericEntity extends Serializable {
 
-	
+ 
 	
 }
