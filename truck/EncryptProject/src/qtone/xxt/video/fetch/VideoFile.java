@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
@@ -16,6 +17,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import qtone.xxt.video.Main;
+
 /**
  * 
  * @author Ethan lam
@@ -24,7 +27,7 @@ import java.util.Map;
 public class VideoFile {
 
 	
-	private static  String filePath = "E:/elam/my_jar_project/CodeGenerator/WebRoot/flv/case1/";
+	private static  String filePath = "E:/elam/my_jar_project/CodeGenerator/WebRoot/flv/case1/src/";
 //	private static  String filePath = "D:/Workspaces/google/ekproject/truck/HTML5/WebContent/flv/06_1/";
 	
 	private static  String file = "1";
@@ -51,43 +54,126 @@ public class VideoFile {
 	   KeyframeList.clear();
    }
 	
-   public static void main(String...args) throws Exception{
-	 
-	   File _fileDir = new File(filePath);
-	   
-	   for(File file:_fileDir.listFiles()){
-		   op = 0;
-		   analysViedoTag(loadByByteBuffer(filePath,file.getName(),""));
-		   String content = createVideoKeyFrameDesFile(file.getName().substring(0, file.getName().indexOf(".")),false);
-		   System.out.println(content);
-		   resetParams();
-	   }  
-//	   analysViedoTag(loadByByteBuffer(filePath,"1.flv",""));
-	   System.out.println("分析程序完成了.....");
-   }
+   
+
 	
    
+   /**
+    * 入口函数 ,生成分割后的文件
+    * @author Ethan.Lam  2012-5-22
+    * @param subPath
+    * @param srcfileName
+    * @param fileSuffix
+    * @throws Exception
+    */
+   public static void createFileDescription(String subPath,String srcfileName,String fileSuffix,int videDuration,String outDescFileDir,String encodeDirName) throws Exception{
+	  
+	   System.out.println("视频文件分析进行中.....");
+	   boolean isEncode = encodeDirName!=null&&!"".equals(encodeDirName)?true:false;
+	   
+	   StringBuffer mainContent = new StringBuffer("<?xml version=\"1.0\" encoding=\"UTF-8\"?>").append(Main.CRLF);
+	   mainContent.append("<video>").append(Main.CRLF);
+	   if(!isEncode || "false".equals(Main.ENCRYPT)){
+	       mainContent.append("   <baseRequestUrl>"+Main.Main_VIDEO_DIR_WEB_ROOT+"/"+subPath+"/"+srcfileName+"/</baseRequestUrl>").append(Main.CRLF);
+	       mainContent.append("   <encrypt>false</encrypt>").append(Main.CRLF);
+	   }else{
+		   mainContent.append("   <baseRequestUrl>"+Main.Main_VIDEO_DIR_WEB_ROOT+"/"+subPath+"/"+srcfileName+encodeDirName+"/</baseRequestUrl>").append(Main.CRLF);
+		   mainContent.append("   <encrypt>true</encrypt>").append(Main.CRLF);
+	   }
+	   mainContent.append("   <baseFileName>"+srcfileName+"</baseFileName> ").append(Main.CRLF);
+	   mainContent.append("   <totalBufferFiles>#totalBufferFiles#</totalBufferFiles> ").append(Main.CRLF);
+	   mainContent.append("   <videDuration>#videDuration#</videDuration>").append(Main.CRLF);
+	   mainContent.append("   <pieceDurationSet>"+Main.PieceDurationSet+"</pieceDurationSet>").append(Main.CRLF);
+	  
+	   mainContent.append("   <type>"+Main.FILE_TYPE+"</type>").append(Main.CRLF);
+	   
+	   filePath = Main.Main_VIDEO_DIR_ROOT + subPath; 
+	   
+	   String srcDir = filePath+File.separator+srcfileName;
+	   File _fileDir = new File(srcDir);
+	   
+	   //列出目录下存在的文件（已分割的文件）
+	   int targetFiles = 0;
+	   mainContent.append("   <keyframes>").append(Main.CRLF);
+	   for(File file:_fileDir.listFiles()){
+		   if(file.getName().indexOf(Main.FILE_TYPE)<0)
+			   continue;
+		   op = 0;
+		   analysViedoTag(loadByByteBuffer(srcDir,file.getName(),""));
+		   targetFiles ++;
+		   String content = createVideoKeyFrameDesFile(srcfileName,file.getName().substring(0, file.getName().indexOf(".")),false,getFileSize(file));
+		   System.out.println(content);
+		   mainContent.append(content);
+		   resetParams();
+	   }  
+	   mainContent.append("   </keyframes>").append(Main.CRLF);
+	   mainContent.append("</video>").append(Main.CRLF);
+	   
+	   outDescFileDir = outDescFileDir==null||"".equals(outDescFileDir)?filePath:outDescFileDir;
+	   
+	   //输出描述文件
+	   File descFile = new File(outDescFileDir+File.separator+srcfileName+".desc");
+	   if(descFile.exists())
+		   descFile.delete();
+	   descFile.createNewFile();
+	   FileWriter fw = new FileWriter(descFile);
+	   String content = mainContent.toString().replace("#totalBufferFiles#",targetFiles+"").replace("#videDuration#", videDuration+"");
+	  
+	   fw.write(content);
+	   fw.flush();
+	   fw.close();
+	   
+	   System.out.println("视频文件分析完成了.....");
+   }
    
-   public static String createVideoKeyFrameDesFile(String fileName,boolean isHead){
+   
+   
+   
+   
+   /**
+    * 返回文件大小
+    * @author Ethan.Lam  2012-5-23
+    * @param file
+    * @return
+    */
+   private static int  getFileSize(File file){
+	   FileInputStream fin = null;
+	   if(file!=null && file.exists()){
+		   try {
+			   fin = new FileInputStream(file);
+			int size =  fin.available();
+			fin.close();
+			return size;
+		} catch (Exception e) {
+			return 0;
+		}
+	  }else
+		  return 0;
+   }
+   
+   
+
+   private static String createVideoKeyFrameDesFile(String mainName,String fileName,boolean isHead,long fileBytesLen){
 	   StringBuffer content = new StringBuffer();
-	   String template = "  <keyframe  offset=\"<offset>\" timestamp=\"<timestamp>\"  file=\""+fileName+"\" />";
+	   String template = "        <keyframe  offset=\"<offset>\" timestamp=\"<timestamp>\"  file=\""+fileName.replace(mainName+"_","")+"\" bytesLen=\""+fileBytesLen+"\" />";
 	   if(isHead)
 	       content.append("<keyframes>");
 	   for(String keyFrameName : KeyframeList){
-		   content.append(template.replace("<offset>", keyFramePositions.get(keyFrameName)+"").replace("<timestamp>", keyFrameTimestamps.get(keyFrameName)+"")+"");
+		   content.append(template.replace("<offset>", keyFramePositions.get(keyFrameName)+"").replace("<timestamp>", keyFrameTimestamps.get(keyFrameName)+"")+"").append(Main.CRLF);
 	   }
 	   if(isHead)
 	       content.append("</keyframes>");
 //	   System.out.println(content);
 	   return content.toString();
    }
+   
 
    
    /**
     * 普通的加载方式
     * @throws Exception
     */
-	public static void loadByBytes( ) throws Exception {
+   private static void loadByBytes( ) throws Exception {
       BufferedInputStream in = new BufferedInputStream(new FileInputStream(filePath+file+fileSuffix));
 	  System.out.println("Available bytes:" + in.available());
 	    byte[] temp = new byte[1024*20];
@@ -156,7 +242,7 @@ public class VideoFile {
 	 * @throws Exception 
 	 * 
 	 */
-	protected static void analysViedoTag(byte[] b) throws Exception {
+	private static void analysViedoTag(byte[] b) throws Exception {
 		String hs = "";
 		String stmp = "";
 		if(true)
@@ -220,7 +306,7 @@ public class VideoFile {
 	 * @return
 	 * @throws Exception 
 	 */
-	protected static void isKeyFrame(byte[] b,int offLenght) throws Exception{
+	private static void isKeyFrame(byte[] b,int offLenght) throws Exception{
 		if(!"9".equals((Integer.toHexString(b[offLenght] & 0XFF)))){
 			System.out.println("非视频Tag信息...");
 			return;
@@ -245,7 +331,7 @@ public class VideoFile {
 	/**
 	 * 分析视频文件的 MetaData 数据结构
 	 */
-	protected static void analysMetadataStruct(){
+	private static void analysMetadataStruct(){
 		 MetaArrayData _metaArrayData = new MetaArrayData();
 		 byte[] metaData = new byte[fileHeadData.length-13]; 
          //生成MetaData数据
@@ -300,7 +386,7 @@ public class VideoFile {
 
 	static int tempOp = 0;
 	
-    public static double readDouble(byte[] mpb, int start, int len){
+	private static double readDouble(byte[] mpb, int start, int len){
         ByteBuffer bbuf = ByteBuffer.allocate(len);
         byte[] buf = new byte[len];
         System.arraycopy(mpb,start,buf,0,len);
@@ -311,13 +397,13 @@ public class VideoFile {
     }//readDouble()
 	
     
-    public static Boolean getAMFBoolean(byte[] mbb, int pos){
+	private static Boolean getAMFBoolean(byte[] mbb, int pos){
         int val = readUint(mbb, pos, 1);
         pos += 1;
         return new Boolean((val == 1));
     }//getAMFBoolean()
     
-    public static String getAMFString(byte[] mbb, int pos){
+	private static String getAMFString(byte[] mbb, int pos){
     	tempOp = 0; //重置
         int bytes2read = readUint(mbb, pos, 2);
         pos += 2;
@@ -331,7 +417,7 @@ public class VideoFile {
     
     
     // read String from existing byte[]
-    public static String readString(byte[] mpb, int start, int len){
+	private static String readString(byte[] mpb, int start, int len){
 
     	byte [] buf = new byte[len];
         String str = null;
@@ -347,7 +433,7 @@ public class VideoFile {
 
     }//readString()
     
-    public static int readUint(byte[] mpb, int start, int len){
+	private static int readUint(byte[] mpb, int start, int len){
         int uint = 0;
         for(int i=0;i<len;i++){
             uint += (mpb[i+start] & 0xFF) << ((len -i -1)*8);
@@ -405,7 +491,7 @@ public class VideoFile {
 	 * @throws IOException 
 	 * @throws FileNotFoundException 
 	 */
-	protected static void fetchNewKeyFrameFile(byte[] videoData,String keyFrameName,int startPosition) throws Exception{
+	private static void fetchNewKeyFrameFile(byte[] videoData,String keyFrameName,int startPosition) throws Exception{
 		
 		File dir = new File(filePath+keyFrameDir);
 		dir.mkdirs();
@@ -433,7 +519,7 @@ public class VideoFile {
 	 * @param startPosition
 	 * @throws Exception
 	 */
-	protected static void fetchNewKeyFrameFile_MF(byte[] videoData,String keyFrameName,int startPosition) throws Exception{
+	private static void fetchNewKeyFrameFile_MF(byte[] videoData,String keyFrameName,int startPosition) throws Exception{
 		
 		File dir = new File(filePath+keyFrameDir);
 		dir.mkdirs();
@@ -467,7 +553,7 @@ public class VideoFile {
 	 * @param startPosition
 	 * @throws Exception
 	 */
-	protected static void fetchNewKeyFrameFile_KF(byte[] videoData,String keyFrameName,int startPosition) throws Exception{
+	private static void fetchNewKeyFrameFile_KF(byte[] videoData,String keyFrameName,int startPosition) throws Exception{
 		
 		File dir = new File(filePath+keyFrameDir);
 		dir.mkdirs();
@@ -583,7 +669,7 @@ public class VideoFile {
 	
 	
 	public static byte[] loadByByteBuffer(String filePath,String file,String fileSuffix) throws Exception{
-		File _file = new File(filePath+file+fileSuffix);
+		File _file = new File(filePath+File.separator+file+fileSuffix);
 		ByteBuffer byteBuf = ByteBuffer.allocate((int) _file.length());
         FileInputStream fis = new FileInputStream(_file);
 //      FileOutputStream fos = new FileOutputStream("d://outFile.txt");
@@ -600,7 +686,6 @@ public class VideoFile {
         fis.close();
 		return byteBuf.array();
 	}
-	
 	
 	
 }

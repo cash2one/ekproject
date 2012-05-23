@@ -8,32 +8,40 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 
+/**
+ * 
+ * 视频加密
+ * @author Ethan.Lam  2012-5-17
+ *
+ */
 public class VideoEncrypt {
 
-	public static void main(String... arg) throws Exception {
-//		byte[] x = new byte[] { 53 };
-//		int temp = ((int) x[0]) & 0xff;
-//		temp = temp ^ 2;
-//		byte bx = (byte) temp;
-//
-//		temp = (int) bx & 0xff;
-//		temp = temp ^ 2;
-//		byte bx2 = (byte) temp;
-//		System.out.println(bx2);
-//		System.out.println(x[0]);
-		encodeFile( );
-		deCodeFile( );
-	}
 	
 //	private static  String filePath = "D:/Workspaces/google/ekproject/truck/HTML5/WebContent/flv/06_1/";
-	private static  String filePath = "E:/elam/my_jar_project/CodeGenerator/WebRoot/flv/06_1/";
+	private static  String filePath = "E:/elam/my_jar_project/CodeGenerator/WebRoot/flv/case1/";
 	private static  String file = "3";
 	private static  String fileSuffix = ".flv";
 	private static  String enCodeName ="_e";
 	private static  String deCodeName = "_d";
 	
 	
-	public static void encodeFile( ) throws Exception {
+	public static void encodeFiles(String srcFilesPath,String enCodeFileName,String outPutFilesDir) throws Exception {
+		enCodeName = enCodeFileName;
+		filePath = srcFilesPath+File.separator;
+		File _fileDir = new File(srcFilesPath);
+		for(File _file:_fileDir.listFiles()){
+		   if(_file.getName().substring(_file.getName().indexOf(".")).equals(fileSuffix)){
+			   file = _file.getName().substring(0, _file.getName().indexOf("."));
+			   encodeFile(outPutFilesDir);
+		   }
+		}
+		System.out.println("视频文件夹中的文件已被加密.....");
+//		deCodeFile( );
+	}
+	
+	
+	
+	private static void encodeFile(String outputFileDir) throws Exception {
 //		String filePath = "D:/Workspaces/google/ekproject/truck/HTML5/WebContent/flv/06_1/";
         BufferedInputStream in = new BufferedInputStream(new FileInputStream(filePath+file+fileSuffix));
         ByteArrayOutputStream out = new ByteArrayOutputStream(1024);
@@ -46,14 +54,26 @@ public class VideoEncrypt {
 		}
 		in.close();
 		
+		outputFileDir = outputFileDir==null||"".equals(outputFileDir)?filePath:outputFileDir;
+		
 		byte[] content = out.toByteArray();
-		out.writeTo(new FileOutputStream(new File(filePath+file+enCodeName+fileSuffix)));
+		System.out.println(outputFileDir+File.separator+file+enCodeName+fileSuffix);
+		
+		File _file = new File(outputFileDir+File.separator+file+enCodeName+fileSuffix);
+		if(!_file.exists()){
+			new File(outputFileDir).mkdirs();
+		}
+		_file.createNewFile();
+		
+		out.writeTo(new FileOutputStream(_file));
 		out.close();
+		System.out.println("文件["+file+fileSuffix+"] path:"+(outputFileDir+File.separator+file+enCodeName+fileSuffix)+" 已完成加密操作。");
 		System.out.println("Readed bytes count:" + content.length);
+		
 	}
 	
 	
-	public static void deCodeFile( ) throws Exception {
+	private static void deCodeFile( ) throws Exception {
 //		String filePath = "D:/Workspaces/google/ekproject/truck/HTML5/WebContent/flv/06_1/";
         BufferedInputStream in = new BufferedInputStream(new FileInputStream(filePath+file+enCodeName+fileSuffix));
         ByteArrayOutputStream out = new ByteArrayOutputStream(1024);
