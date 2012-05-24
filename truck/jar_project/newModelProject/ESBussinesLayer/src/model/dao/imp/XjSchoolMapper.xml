@@ -1,0 +1,196 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="test.edu.dao.mapper.edu.XjSchoolMapper">
+
+  <!-- 以下配置是系统自动生成的 -->
+
+  <!-- 显示的记录对应的列-->
+  <sql id="XjSchoolColumns" >
+		    xjschool.id as id,xjschool.town_id as townId,xjschool.school_name as schoolName,xjschool.school_type as schoolType,xjschool.establish_date as establishDate,xjschool.school_mode as schoolMode,xjschool.address as address,xjschool.school_class as schoolClass,xjschool.school_bank as schoolBank,xjschool.school_addr as schoolAddr,xjschool.post_code as postCode,xjschool.phone as phone,xjschool.website as website,xjschool.email as email,xjschool.school_master as schoolMaster,xjschool.mobie as mobie,xjschool.learnyear as learnyear,xjschool.area_id as areaId,xjschool.section as section,xjschool.create_time as createTime,xjschool.adc_ec_code as adcEcCode,xjschool.sch_code as schCode,xjschool.short_name as shortName,xjschool.is_long as isLong,qxuserschool.user_id as siId,qxadminsi.company as siName,town1.name as townName,area.name as areaName,area.code as areaCode,area.abb as areaAbb
+  </sql>
+  
+  
+  <!-- 列表对应的查询条件组合  -->
+  <sql id="queryOptions">
+       <where>
+            	  <if test="createTime1!=null"> AND xjschool.create_time &gt; #{createTime1}</if><if test="createTime2!=null"> AND xjschool.create_time &lt; #{createTime2}</if>
+            	  <if test="schoolMode>=0"> AND xjschool.school_mode = #{schoolMode}</if>
+            	  <if test="phone!=null"> AND xjschool.phone like #{phone}</if>
+            	  <if test="schoolName!=null"> AND xjschool.school_name like #{schoolName}</if>
+            	  <if test="website!=null"> AND xjschool.website like #{website}</if>
+            	  <if test="postCode!=null"> AND xjschool.post_code like #{postCode}</if>
+            	  <if test="townId>=0"> AND xjschool.town_id = #{townId}</if>
+            	  <if test="adcEcCode!=null"> AND xjschool.adc_ec_code like #{adcEcCode}</if>
+            	  <if test="schoolType>=0"> AND xjschool.school_type = #{schoolType}</if>
+            	  <if test="schCode!=null"> AND xjschool.sch_code like #{schCode}</if>
+            	  <if test="section>=0"> AND xjschool.section = #{section}</if>
+            	  <if test="areaId>=0"> AND xjschool.area_id = #{areaId}</if>
+            	  <if test="isLong>=0"> AND xjschool.is_long = #{isLong}</if>
+            	  <if test="learnyear>=0"> AND xjschool.learnyear = #{learnyear}</if>
+            	  <if test="establishDate1!=null"> AND xjschool.establish_date &gt; #{establishDate1}</if><if test="establishDate2!=null"> AND xjschool.establish_date &lt; #{establishDate2}</if>
+            	  <if test="schoolClass>=0"> AND xjschool.school_class = #{schoolClass}</if>
+            	  <if test="address>=0"> AND xjschool.address = #{address}</if>
+            	  <if test="email!=null"> AND xjschool.email like #{email}</if>
+            	  <if test="schoolMaster!=null"> AND xjschool.school_master like #{schoolMaster}</if>
+            	  <if test="schoolBank>=0"> AND xjschool.school_bank = #{schoolBank}</if>
+            	  <if test="mobie!=null"> AND xjschool.mobie like #{mobie}</if>
+            	  <if test="schoolAddr!=null"> AND xjschool.school_addr like #{schoolAddr}</if>
+            	  <if test="shortName!=null"> AND xjschool.short_name like #{shortName}</if>         
+                  <if test="areaName!=null"> AND area.name like #{areaName}</if>         
+                  <if test="areaCode!=null"> AND area.code like #{areaCode}</if>         
+                  <if test="townName!=null"> AND town1.name like #{townName}</if>         
+                  <if test="siName!=null"> AND qxadminsi.company like #{siName}</if>         
+                  <if test="areaAbb!=null"> AND area.abb like #{areaAbb}</if>         
+                  <if test="siId>=0"> AND qxuserschool.user_id = #{siId}</if> 
+        </where> 
+  </sql>
+
+
+
+  <!-- 列表查询对应的排序选项  -->
+  <sql id="orderControl">
+       <if test="orderList!=null">
+		  <trim prefix="ORDER BY" prefixOverrides=",">
+				<foreach collection="orderList" item="order" open=""  separator="," close="" >
+				   <choose> 
+				       <when test="order.columnName=='createTime'"> xjschool.create_time ${order.type} </when> 
+				       <when test="order.columnName=='schoolMode'"> xjschool.school_mode ${order.type} </when> 
+				       <when test="order.columnName=='phone'"> xjschool.phone ${order.type} </when> 
+				       <when test="order.columnName=='schoolName'"> xjschool.school_name ${order.type} </when> 
+				       <when test="order.columnName=='website'"> xjschool.website ${order.type} </when> 
+				       <when test="order.columnName=='postCode'"> xjschool.post_code ${order.type} </when> 
+				       <when test="order.columnName=='townId'"> xjschool.town_id ${order.type} </when> 
+				       <when test="order.columnName=='adcEcCode'"> xjschool.adc_ec_code ${order.type} </when> 
+				       <when test="order.columnName=='schoolType'"> xjschool.school_type ${order.type} </when> 
+				       <when test="order.columnName=='schCode'"> xjschool.sch_code ${order.type} </when> 
+				       <when test="order.columnName=='section'"> xjschool.section ${order.type} </when> 
+				       <when test="order.columnName=='areaId'"> xjschool.area_id ${order.type} </when> 
+				       <when test="order.columnName=='isLong'"> xjschool.is_long ${order.type} </when> 
+				       <when test="order.columnName=='learnyear'"> xjschool.learnyear ${order.type} </when> 
+				       <when test="order.columnName=='establishDate'"> xjschool.establish_date ${order.type} </when> 
+				       <when test="order.columnName=='schoolClass'"> xjschool.school_class ${order.type} </when> 
+				       <when test="order.columnName=='address'"> xjschool.address ${order.type} </when> 
+				       <when test="order.columnName=='email'"> xjschool.email ${order.type} </when> 
+				       <when test="order.columnName=='schoolMaster'"> xjschool.school_master ${order.type} </when> 
+				       <when test="order.columnName=='schoolBank'"> xjschool.school_bank ${order.type} </when> 
+				       <when test="order.columnName=='mobie'"> xjschool.mobie ${order.type} </when> 
+				       <when test="order.columnName=='schoolAddr'"> xjschool.school_addr ${order.type} </when> 
+				       <when test="order.columnName=='shortName'"> xjschool.short_name ${order.type} </when>   
+				       <when test="order.columnName=='areaName'"> area.name ${order.type} </when>   
+				       <when test="order.columnName=='areaCode'"> area.code ${order.type} </when>   
+				       <when test="order.columnName=='townName'"> town1.name ${order.type} </when>   
+				       <when test="order.columnName=='siName'"> qxadminsi.company ${order.type} </when>   
+				       <when test="order.columnName=='areaAbb'"> area.abb ${order.type} </when>   
+				       <when test="order.columnName=='siId'"> qxuserschool.user_id ${order.type} </when>
+				  </choose>
+			 </foreach>
+		 </trim>
+	   </if>
+  </sql>
+
+ 
+ 
+  <!-- 列表查询对应的表关系SQL  -->
+  <sql id="querySqlMain">
+			  XJ_SCHOOL  xjschool LEFT JOIN QX_USER_SCHOOL qxuserschool ON xjschool.ID = qxuserschool.SCHOOL_ID LEFT JOIN QX_ADMIN_SI qxadminsi ON qxuserschool.USER_ID = qxadminsi.ID LEFT JOIN TOWN town1 ON xjschool.TOWN_ID = town1.ID LEFT JOIN AREA area ON xjschool.AREA_ID = area.ID
+  </sql>
+
+  
+   
+   <!-- 根据ID查询记录 -->
+   <select id="findOne" resultType="test.edu.dao.entity.edu.XjSchoolEntry">
+	     SELECT  <include refid="XjSchoolColumns"/>              
+		    FROM <include refid="querySqlMain"/>
+			where xjschool.id=#{id}
+   </select>
+   
+
+
+   <!-- 返回记录总数的语句 -->
+   <select id="qeuryXjSchoolsRecordCount" resultType="int">
+        SELECT count(*) num  FROM  <include refid="querySqlMain"/>
+        <include refid="queryOptions"/> 
+   </select>
+   
+   
+    <!-- 分页查询对应的记录 -->
+   <select id="qeuryXjSchools" resultType="test.edu.dao.entity.edu.XjSchoolEntry">
+      SELECT * FROM (  
+	        SELECT A.*,ROWNUM RN FROM (
+	               SELECT <include refid="XjSchoolColumns"/>   
+		           FROM <include refid="querySqlMain"/>
+		           <include refid="queryOptions"/>
+		           <include refid="orderControl"/>
+		    ) A WHERE ROWNUM &lt;=${startRow}+${pageSize}-1 ) 
+		 WHERE RN &gt;=#{startRow}
+   </select>
+
+
+   <!-- 新增记录 -->
+   <insert id="insertXjSchool" useGeneratedKeys="false" >
+       
+       <selectKey resultType="long" order="AFTER" keyProperty="xjSchool.id">
+	       SELECT xj_school_se.currval FROM  DUAL
+	   </selectKey>
+             INSERT INTO XJ_SCHOOL (create_time,school_mode,phone,school_name,website,post_code,town_id,adc_ec_code,school_type,sch_code,section,area_id,is_long,learnyear,establish_date,school_class,address,email,school_master,school_bank,mobie,school_addr,short_name)
+             VALUES(#{xjSchool.createTime},#{xjSchool.schoolMode,jdbcType=NUMERIC},#{xjSchool.phone,jdbcType=VARCHAR},#{xjSchool.schoolName},#{xjSchool.website,jdbcType=VARCHAR},#{xjSchool.postCode,jdbcType=VARCHAR},#{xjSchool.townId},#{xjSchool.adcEcCode},#{xjSchool.schoolType},#{xjSchool.schCode},#{xjSchool.section},#{xjSchool.areaId},#{xjSchool.isLong,jdbcType=NUMERIC},#{xjSchool.learnyear},#{xjSchool.establishDate},#{xjSchool.schoolClass},#{xjSchool.address,jdbcType=VARCHAR},#{xjSchool.email,jdbcType=VARCHAR},#{xjSchool.schoolMaster},#{xjSchool.schoolBank},#{xjSchool.mobie,jdbcType=VARCHAR},#{xjSchool.schoolAddr,jdbcType=VARCHAR},#{xjSchool.shortName,jdbcType=VARCHAR})
+            
+   </insert>
+   
+   
+   
+   <!-- 更新记录 -->       
+   <update id="updateXjSchool" >
+           UPDATE XJ_SCHOOL 
+           <set>
+                create_time=#{xjSchool.createTime,jdbcType=DATE},
+                school_mode=#{xjSchool.schoolMode,jdbcType=NUMERIC},
+                phone=#{xjSchool.phone,jdbcType=VARCHAR},
+                school_name=#{xjSchool.schoolName,jdbcType=VARCHAR},
+                website=#{xjSchool.website,jdbcType=VARCHAR},
+                post_code=#{xjSchool.postCode,jdbcType=VARCHAR},
+                town_id=#{xjSchool.townId,jdbcType=NUMERIC},
+                adc_ec_code=#{xjSchool.adcEcCode,jdbcType=VARCHAR},
+                school_type=#{xjSchool.schoolType,jdbcType=NUMERIC},
+                sch_code=#{xjSchool.schCode,jdbcType=VARCHAR},
+                section=#{xjSchool.section,jdbcType=NUMERIC},
+                area_id=#{xjSchool.areaId,jdbcType=NUMERIC},
+                is_long=#{xjSchool.isLong,jdbcType=NUMERIC},
+                learnyear=#{xjSchool.learnyear,jdbcType=NUMERIC},
+                establish_date=#{xjSchool.establishDate,jdbcType=DATE},
+                school_class=#{xjSchool.schoolClass,jdbcType=NUMERIC},
+                address=#{xjSchool.address,jdbcType=VARCHAR},
+                email=#{xjSchool.email,jdbcType=VARCHAR},
+                school_master=#{xjSchool.schoolMaster,jdbcType=VARCHAR},
+                school_bank=#{xjSchool.schoolBank,jdbcType=NUMERIC},
+                mobie=#{xjSchool.mobie,jdbcType=VARCHAR},
+                school_addr=#{xjSchool.schoolAddr,jdbcType=VARCHAR},
+                short_name=#{xjSchool.shortName,jdbcType=VARCHAR},
+	   </set>
+	       WHERE id = #{xjSchool.id}
+   </update> 
+   
+
+
+   
+   <!-- 删除记录 -->
+   <delete id="deleteXjSchool">
+          DELETE FROM XJ_SCHOOL
+          WHERE id in 
+          <foreach collection="ids" item="id" open="("  separator="," close=")" >
+                #{id}
+          </foreach>
+   </delete>
+  
+   
+   <!-- 以下是自定义的配置信息 -->
+   
+   
+   
+   
+
+</mapper>
+
+
+
