@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="test.edu.dao.mapper.edu.XjSchoolMapper">
+<mapper namespace="model.dao.imp.ModelMapper">
 
   <!-- 以下配置是系统自动生成的 -->
 
   <!-- 显示的记录对应的列-->
-  <sql id="XjSchoolColumns" >
+  <sql id="columns" >
 		    xjschool.id as id,xjschool.town_id as townId,xjschool.school_name as schoolName,xjschool.school_type as schoolType,xjschool.establish_date as establishDate,xjschool.school_mode as schoolMode,xjschool.address as address,xjschool.school_class as schoolClass,xjschool.school_bank as schoolBank,xjschool.school_addr as schoolAddr,xjschool.post_code as postCode,xjschool.phone as phone,xjschool.website as website,xjschool.email as email,xjschool.school_master as schoolMaster,xjschool.mobie as mobie,xjschool.learnyear as learnyear,xjschool.area_id as areaId,xjschool.section as section,xjschool.create_time as createTime,xjschool.adc_ec_code as adcEcCode,xjschool.sch_code as schCode,xjschool.short_name as shortName,xjschool.is_long as isLong,qxuserschool.user_id as siId,qxadminsi.company as siName,town1.name as townName,area.name as areaName,area.code as areaCode,area.abb as areaAbb
   </sql>
   
@@ -99,8 +99,8 @@
   
    
    <!-- 根据ID查询记录 -->
-   <select id="findOne" resultType="test.edu.dao.entity.edu.XjSchoolEntry">
-	     SELECT  <include refid="XjSchoolColumns"/>              
+   <select id="loadById" resultType="model.entity.ModelEntity">
+	     SELECT  <include refid="columns"/>              
 		    FROM <include refid="querySqlMain"/>
 			where xjschool.id=#{id}
    </select>
@@ -108,17 +108,17 @@
 
 
    <!-- 返回记录总数的语句 -->
-   <select id="qeuryXjSchoolsRecordCount" resultType="int">
+   <select id="count" resultType="int">
         SELECT count(*) num  FROM  <include refid="querySqlMain"/>
         <include refid="queryOptions"/> 
    </select>
    
    
     <!-- 分页查询对应的记录 -->
-   <select id="qeuryXjSchools" resultType="test.edu.dao.entity.edu.XjSchoolEntry">
+   <select id="qeury" resultType="model.entity.ModelEntity">
       SELECT * FROM (  
 	        SELECT A.*,ROWNUM RN FROM (
-	               SELECT <include refid="XjSchoolColumns"/>   
+	               SELECT <include refid="columns"/>   
 		           FROM <include refid="querySqlMain"/>
 		           <include refid="queryOptions"/>
 		           <include refid="orderControl"/>
@@ -128,7 +128,7 @@
 
 
    <!-- 新增记录 -->
-   <insert id="insertXjSchool" useGeneratedKeys="false" >
+   <insert id="insert" useGeneratedKeys="false" >
        
        <selectKey resultType="long" order="AFTER" keyProperty="xjSchool.id">
 	       SELECT xj_school_se.currval FROM  DUAL
@@ -141,7 +141,7 @@
    
    
    <!-- 更新记录 -->       
-   <update id="updateXjSchool" >
+   <update id="update" >
            UPDATE XJ_SCHOOL 
            <set>
                 create_time=#{xjSchool.createTime,jdbcType=DATE},
@@ -175,7 +175,7 @@
 
    
    <!-- 删除记录 -->
-   <delete id="deleteXjSchool">
+   <delete id="delete">
           DELETE FROM XJ_SCHOOL
           WHERE id in 
           <foreach collection="ids" item="id" open="("  separator="," close=")" >

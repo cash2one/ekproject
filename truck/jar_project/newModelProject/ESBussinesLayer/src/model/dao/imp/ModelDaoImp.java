@@ -16,6 +16,8 @@ import esfw.core.framework.dao.MyBaticGenericDao;
 @Component("modelDaoImp")
 public class ModelDaoImp  extends MyBaticGenericDao<Long,ModelEntity> implements ModelDao{
 
-	
+    protected String mapNameSpace(){
+    	return "model.dao.imp.ModelMapper";
+    };
 	
 }

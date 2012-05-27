@@ -25,7 +25,7 @@ public class MyBaticGenericDao<PK,E extends Serializable> implements GenericDao<
 	static String QUERY_SQL = "query";
 	static String UPDATE_SQL = "update";
 	static String DELETE_SQL = "delete";
-
+	static String COUNT_SQL = "count";
 	
 	@Autowired
 	private MyBatisDaoSupport myBatisDaoSupport;

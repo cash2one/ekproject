@@ -2,8 +2,8 @@ package esfw.testcase;
 
 import java.util.List;
 
+import model.business.ModelBusiness;
 import qtone.xxt.business.amass.AmassCentInfo;
-import test.edu.bussiness.XjSchoolInfo;
 import esfw.core.framework.MethodAdapter;
 import esfw.core.framework.SpringUtil;
 import esfw.core.framework.business.BusinessContainer;
@@ -43,13 +43,8 @@ public class Main {
 	
      
      public static void case2(String... arg) throws Exception{
-			XjSchoolInfo info  = SpringUtil.getSpringBean(XjSchoolInfo.class,"xjSchoolInfo");
-			info.findOne(1);
-//			AmassCentInfo info  = new  AmassCentInfo();
-			System.out.println("测试环境是否正常...");
-			info.setDaoAbb("cs");
-			 System.out.println("学校ID："+info.getSchoolName()+"  ");
-		    System.out.println("SpringUtil.getSpringBean 正常...");
+    	 ModelBusiness info  = SpringUtil.getSpringBean(ModelBusiness.class,"modelBusiness");
+    	 
 	 }
 	
 }
