@@ -15,7 +15,7 @@
 	
 	<!-- 注释配置 -->
 	<!-- 扫描用标注的包 -->
-	<context:component-scan base-package="qtone.xxt">
+	<context:component-scan base-package="qtone.xxt,model">
 	    <context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
 	</context:component-scan>
 	<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
@@ -65,5 +65,10 @@
 		<property name="markerInterface" value="esfw.core.framework.dao.mapper.MyBatisMapper" />
 		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
 	</bean>
+     
+    <bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+        <property name="configLocation" value="config/sqlmap-config.xml"/>
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
 
 </beans>
