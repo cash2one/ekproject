@@ -15,9 +15,10 @@
 	
 	<!-- 注释配置 -->
 	<!-- 扫描用标注的包 -->
-	<context:component-scan base-package="qtone.xxt,model">
+	<context:component-scan base-package="esfw,qtone.xxt,model">
 	    <context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
 	</context:component-scan>
+	
 	<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
  
 	
