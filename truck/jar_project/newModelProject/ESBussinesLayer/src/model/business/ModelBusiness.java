@@ -55,7 +55,7 @@ public class ModelBusiness extends BaseBusiness{
 	}
 
 	
-	protected void load(Long id) throws BusinessException {
+	public void load(Long id) throws BusinessException {
 		 try {
 			ModelEntity entity =  modelDao.load(id);
 			System.out.println(entity.getSchoolName());

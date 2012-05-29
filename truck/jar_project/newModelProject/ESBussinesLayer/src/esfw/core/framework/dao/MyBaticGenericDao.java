@@ -20,12 +20,12 @@ import esfw.core.framework.exception.DaoAccessException;
  */
 public class MyBaticGenericDao<PK,E extends Serializable> implements GenericDao<PK, E> {
    
-	static String LOAD_SQL = "loadById";
-	static String INSERT_SQL = "insert";
-	static String QUERY_SQL = "query";
-	static String UPDATE_SQL = "update";
-	static String DELETE_SQL = "delete";
-	static String COUNT_SQL = "count";
+	static String LOAD_SQL = ".loadById";
+	static String INSERT_SQL = ".insert";
+	static String QUERY_SQL = ".query";
+	static String UPDATE_SQL = ".update";
+	static String DELETE_SQL = ".delete";
+	static String COUNT_SQL = ".count";
 	
 	@Autowired
 	private MyBatisDaoSupport myBatisDaoSupport;

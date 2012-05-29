@@ -44,7 +44,7 @@ public class Main {
      
      public static void case2(String... arg) throws Exception{
     	 ModelBusiness info  = SpringUtil.getSpringBean(ModelBusiness.class,"modelBusiness");
-    	 
+    	 info.load((long) 1);
 	 }
 	
 }
