@@ -15,7 +15,7 @@ import com.ibatis.sqlmap.client.SqlMapClient;
  * 
  */
 @Component("myBatisDaoSupport")
-public class MyBatisDaoSupport extends SqlMapClientDaoSupport {
+public class IBatisDaoSupport extends SqlMapClientDaoSupport {
 
 	// 为了注入SqlMapClient所以多了一个baseDao
 	@Autowired(required=true)

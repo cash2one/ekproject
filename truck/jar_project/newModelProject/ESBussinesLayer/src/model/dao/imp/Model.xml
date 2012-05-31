@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Model">
+
+  <typeAlias alias="model" type="model.entity.ModelEntity"/>
+
+  <!--cacheModel id="productCache" type="LRU">
+    <flushInterval hours="24"/>
+    <property name="size" value="100"/>
+  </cacheModel-->
+
+  <select id="Model.loadById" resultClass="model" parameterClass="long">
+	     SELECT  xjschool.id as id,xjschool.town_id as townId,xjschool.school_name as schoolName,xjschool.school_type as schoolType,xjschool.establish_date as establishDate,xjschool.school_mode as schoolMode,xjschool.address as address,xjschool.school_class as schoolClass,xjschool.school_bank as schoolBank,xjschool.school_addr as schoolAddr,xjschool.post_code as postCode,xjschool.phone as phone,xjschool.website as website,xjschool.email as email,xjschool.school_master as schoolMaster,xjschool.mobie as mobie,xjschool.learnyear as learnyear,xjschool.area_id as areaId,xjschool.section as section,xjschool.create_time as createTime,xjschool.adc_ec_code as adcEcCode,xjschool.sch_code as schCode,xjschool.short_name as shortName,xjschool.is_long as isLong,qxuserschool.user_id as siId,qxadminsi.company as siName,town1.name as townName,area.name as areaName,area.code as areaCode,area.abb as areaAbb             
+		    FROM XJ_SCHOOL  xjschool LEFT JOIN QX_USER_SCHOOL qxuserschool ON xjschool.ID = qxuserschool.SCHOOL_ID LEFT JOIN QX_ADMIN_SI qxadminsi ON qxuserschool.USER_ID = qxadminsi.ID LEFT JOIN TOWN town1 ON xjschool.TOWN_ID = town1.ID LEFT JOIN AREA area ON xjschool.AREA_ID = area.ID
+			where xjschool.id=#id#
+  </select>
+
+  <!-- select id="getProductListByCategory" resultClass="product" parameterClass="string" cacheModel="productCache">
+    SELECT
+      PRODUCTID,
+      NAME,
+      DESCN as description,
+      CATEGORY as categoryId
+    FROM PRODUCT
+    WHERE CATEGORY = #value#
+  </select>
+
+  <select id="searchProductList" resultClass="product" >
+    select
+      PRODUCTID,
+      NAME,
+      DESCN as description,
+      CATEGORY as categoryId
+    from PRODUCT
+    <dynamic prepend="WHERE">
+      <iterate property="keywordList" open="" close="" conjunction="OR">
+        lower(name) like #keywordList[]# OR lower(category) like #keywordList[]# OR lower(descn) like #keywordList[]#
+      </iterate>
+    </dynamic>
+  </select -->
+
+</sqlMap>

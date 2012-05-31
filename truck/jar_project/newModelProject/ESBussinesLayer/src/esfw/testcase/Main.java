@@ -18,7 +18,7 @@ public class Main {
 
 	 public static void main(String...args) throws Exception{
 		 BusinessContainer.getInstance();
-		 case1(null);
+//		 case1(null);
 		 case2(null);
 	 }
 	 

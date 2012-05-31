@@ -12,13 +12,13 @@ import esfw.core.framework.exception.DaoAccessException;
  
 /**
  * 
- * 描述：MyBatic 数据访问层的数据实现
+ * 描述：IBatic 数据访问层的数据实现
  * @author Ethan lam
  * 2012-5-22
  * @param <PK>
  * @param <E>
  */
-public class MyBaticGenericDao<PK,E extends Serializable> implements GenericDao<PK, E> {
+public class IBaticGenericDao<PK,E extends Serializable> implements GenericDao<PK, E> {
    
 	static String LOAD_SQL = ".loadById";
 	static String INSERT_SQL = ".insert";

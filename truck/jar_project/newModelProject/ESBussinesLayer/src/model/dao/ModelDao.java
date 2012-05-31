@@ -2,7 +2,7 @@ package model.dao;
 
 import model.entity.ModelEntity;
 import esfw.core.framework.dao.GenericDao;
-import esfw.core.framework.dao.MyBaticGenericDao;
+import esfw.core.framework.dao.IBaticGenericDao;
 
 /**
  * 
