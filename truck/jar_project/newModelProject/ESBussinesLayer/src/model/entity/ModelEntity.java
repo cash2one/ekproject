@@ -14,14 +14,14 @@ import esfw.core.framework.dao.GenericEntity;
 public class ModelEntity implements GenericEntity {
 
     private long  id; //学校ID 
-    private long  townId; //所属镇区 
+    private long  townId = -1; //所属镇区 
     private String  schoolName; //学校的名称 
-    private long  schoolType; //学校类别(1国家重点、2省重点、3市重点、4县重点、5少数民族学校、6其他) 
+    private long  schoolType = -1; //学校类别(1国家重点、2省重点、3市重点、4县重点、5少数民族学校、6其他) 
     private Date  establishDate; //建校时间 
-    private long  schoolMode; //办学模式(1教育部门和集体办、2社会力量办、3其他部门办) 
-    private long  address; //所在地（1城市、2农村、3县镇、4其他） 
-    private long  schoolClass; //学校类型（1小学、2独立设置少数民族小学、3一贯制学校小学部、4小学教学点5其他学校附设小学班、6完全中学、7高级中学、8初级中学、9一贯制学校10其他学校附设初中班、11少数民族完全中学、12少数民族高级中学13少数民族初级中学、14少数民族一贯制学校、15职业初高中合设16职业高中、17职业初中、18普通中学附设职业班、19其它单位20学校职业班、21少数民职业初高中合设、22少数民族职业高中23少数民族职业初中、24幼儿园、25独立少数民族幼儿园、26独立设置学前班27盲人学校、28聋人学校、29弱智学校、30特殊教育其他学校、31小学附设特教班32初中附设特教班、33工读学校、34普通中等专业技术学校、35成人中等专业技术学校、36其他） 
-    private long  schoolBank; //学校等级（1国家级、2省级、3市级、4县级、5其他） 
+    private long  schoolMode = -1; //办学模式(1教育部门和集体办、2社会力量办、3其他部门办) 
+    private long  address = -1; //所在地（1城市、2农村、3县镇、4其他） 
+    private long  schoolClass = -1; //学校类型（1小学、2独立设置少数民族小学、3一贯制学校小学部、4小学教学点5其他学校附设小学班、6完全中学、7高级中学、8初级中学、9一贯制学校10其他学校附设初中班、11少数民族完全中学、12少数民族高级中学13少数民族初级中学、14少数民族一贯制学校、15职业初高中合设16职业高中、17职业初中、18普通中学附设职业班、19其它单位20学校职业班、21少数民职业初高中合设、22少数民族职业高中23少数民族职业初中、24幼儿园、25独立少数民族幼儿园、26独立设置学前班27盲人学校、28聋人学校、29弱智学校、30特殊教育其他学校、31小学附设特教班32初中附设特教班、33工读学校、34普通中等专业技术学校、35成人中等专业技术学校、36其他） 
+    private long  schoolBank = -1; //学校等级（1国家级、2省级、3市级、4县级、5其他） 
     private String  schoolAddr; //学校地址 
     private String  postCode; //邮编 
     private String  phone; //电话 
@@ -29,17 +29,17 @@ public class ModelEntity implements GenericEntity {
     private String  email; //E_MAIL 
     private String  schoolMaster; //校长 
     private String  mobie; //联系电话 
-    private long  learnyear; //学制(小学为6年，初高中为3年) 
-    private long  areaId; //地区id 
-    private long  section; //学段:0幼儿园，1小学，2初中，3高中，4综合 
+    private long  learnyear = -1; //学制(小学为6年，初高中为3年) 
+    private long  areaId = -1; //地区id 
+    private long  section = -1; //学段:0幼儿园，1小学，2初中，3高中，4综合 
     private Date  createTime; //创建这个学校的时间 
     private String  adcEcCode; //对应BOSS系统集团编号 
     private String  schCode; // 
     private String  shortName; // 
-    private long  isLong; //
+    private long  isLong = -1; //
 
 
-     private long  siId; //SIID 
+     private long  siId = -1; //SIID 
      private String  siName; //公司名称 
      private String  townName; //镇区名称 
      private String  areaName; //区域名称 

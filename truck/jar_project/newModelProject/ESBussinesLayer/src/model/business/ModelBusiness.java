@@ -1,5 +1,7 @@
 package model.business;
 
+import java.util.List;
+
 import model.dao.ModelDao;
 import model.entity.ModelEntity;
 
@@ -8,6 +10,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import esfw.core.framework.business.BaseBusiness;
+import esfw.core.framework.business.BaseQuery;
 import esfw.core.framework.business.enumeration.ActionType;
 import esfw.core.framework.exception.BusinessException;
 import esfw.core.framework.exception.DaoAccessException;
@@ -22,8 +25,13 @@ import esfw.core.framework.exception.DaoAccessException;
  */
 @Scope("prototype") 
 @Service("modelBusiness")
-public class ModelBusiness extends BaseBusiness{
+public class ModelBusiness extends BaseBusiness implements BaseQuery<ModelBusiness,Long,ModelEntity>{
 
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3705365983032530911L;
 	
 	@Autowired
 	ModelDao modelDao;
@@ -48,6 +56,7 @@ public class ModelBusiness extends BaseBusiness{
 		return null;
 	}
 
+	
 	@Override
 	public String getModel() {
 		// TODO Auto-generated method stub
@@ -55,14 +64,49 @@ public class ModelBusiness extends BaseBusiness{
 	}
 
 	
-	public void load(Long id) throws BusinessException {
+	/**
+	 * 
+	 * 功能描述：列表查询
+	 * @author Ethan.Lam
+	 * @date 2012-5-31
+	 * (non-Javadoc)
+	 * @see esfw.core.framework.business.BaseQuery#query(java.io.Serializable)
+	 */
+	public List<ModelBusiness> query(ModelEntity entity) throws BusinessException {
+           // TODO Auto-generated method stub
 		 try {
+			    int t = modelDao.count(new ModelEntity());
+			    System.out.println("查询结构的记录数有:"+ t ); 
+			    List<ModelEntity> entityList = modelDao.query(new ModelEntity());
+				for(ModelEntity e:entityList){
+					System.out.println("query:"+e.getSchoolName());
+				} 		
+			} catch (DaoAccessException e) {
+				e.printStackTrace();
+			}
+		
+		return null;
+	}
+
+
+	/**
+	 * 
+	 * 功能描述：FindOne 查询
+	 * @author Ethan.Lam
+	 * @date 2012-5-31
+	 * (non-Javadoc)
+	 * @see esfw.core.framework.business.BaseQuery#load(java.lang.Object)
+	 */
+	public void load(Long id) {
+	// TODO Auto-generated method stub
+	 try {
 			ModelEntity entity =  modelDao.load(id);
 			System.out.println(entity.getSchoolName());
 		} catch (DaoAccessException e) {
 			e.printStackTrace();
 		}
 	}
+	
 	
 	@Override
 	protected void onAdd() throws BusinessException {
@@ -82,7 +126,5 @@ public class ModelBusiness extends BaseBusiness{
 		
 	}
 
-	
-	
 	
 }

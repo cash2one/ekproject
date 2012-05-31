@@ -4,8 +4,9 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.orm.ibatis.SqlMapClientTemplate;
 
 import esfw.core.framework.exception.DaoAccessException;
 
@@ -28,7 +29,7 @@ public class MyBaticGenericDao<PK,E extends Serializable> implements GenericDao<
 	static String COUNT_SQL = ".count";
 	
 	@Autowired
-	private IBatisDaoSupport myBatisDaoSupport;
+	private MyBatisDaoSupport myBatisDaoSupport;
 	
 	
 	/**
@@ -40,8 +41,8 @@ public class MyBaticGenericDao<PK,E extends Serializable> implements GenericDao<
 	 * SqlSession
 	 *
 	 */
-	protected SqlMapClientTemplate getSqlMapClientTemplate(){
-	    return this.myBatisDaoSupport.getSqlMapClientTemplate();
+	protected SqlSession getSqlSession(){
+	    return this.myBatisDaoSupport.getSqlSession();
 	}
 	
 	
@@ -70,7 +71,7 @@ public class MyBaticGenericDao<PK,E extends Serializable> implements GenericDao<
      */
 	public E load(PK key) throws DaoAccessException {
 		// TODO Auto-generated method stub
-		return (E)getSqlMapClientTemplate().queryForObject(mapNameSpace()+LOAD_SQL,key);
+		return (E)getSqlSession().selectOne(mapNameSpace()+LOAD_SQL,key);
 	}
 
 	
@@ -85,7 +86,7 @@ public class MyBaticGenericDao<PK,E extends Serializable> implements GenericDao<
 	 */
 	public boolean insert(E entity) throws DaoAccessException {
 		// TODO Auto-generated method stub
-		getSqlMapClientTemplate().insert(mapNameSpace()+INSERT_SQL, entity);
+		getSqlSession().insert(mapNameSpace()+INSERT_SQL, entity);
 		return true;
 	}
 
@@ -100,7 +101,7 @@ public class MyBaticGenericDao<PK,E extends Serializable> implements GenericDao<
 	 */
 	public boolean update(E entity) throws DaoAccessException {
 		// TODO Auto-generated method stub
-		getSqlMapClientTemplate().update(this.mapNameSpace()+UPDATE_SQL, entity);
+		getSqlSession().update(this.mapNameSpace()+UPDATE_SQL, entity);
 		return true;
 	}
 	
@@ -116,7 +117,7 @@ public class MyBaticGenericDao<PK,E extends Serializable> implements GenericDao<
 	 */
 	public boolean delete(PK[] keys) throws DaoAccessException {
 		// TODO Auto-generated method stub
-		getSqlMapClientTemplate().delete(this.mapNameSpace()+DELETE_SQL,keys);
+		getSqlSession().delete(this.mapNameSpace()+DELETE_SQL,keys);
 		return true;
 	}
 	
@@ -134,7 +135,7 @@ public class MyBaticGenericDao<PK,E extends Serializable> implements GenericDao<
 	 */
 	public List<E> query(E entity) throws DaoAccessException {
 		// TODO Auto-generated method stub
-		List list = getSqlMapClientTemplate().queryForList(this.mapNameSpace()+QUERY_SQL,entity);
+		List list = getSqlSession().selectList(this.mapNameSpace()+QUERY_SQL,entity);
 		return list;
 	}
 
@@ -162,7 +163,8 @@ public class MyBaticGenericDao<PK,E extends Serializable> implements GenericDao<
         pageBean.setCurPage(page);
         pageBean.setPageSize(pageSize);
         pageBean.setTotalRecords(totalRows);
-        List list = getSqlMapClientTemplate().queryForList(this.mapNameSpace()+QUERY_SQL, entity, skipResults, maxResults);
+        RowBounds rb = new RowBounds();
+        List list = getSqlSession().selectList(this.mapNameSpace()+QUERY_SQL, entity, rb);
         pageBean.setRecords(list);
 		return pageBean;
     }
@@ -183,7 +185,7 @@ public class MyBaticGenericDao<PK,E extends Serializable> implements GenericDao<
 	 */
 	public int count(E entity) throws DaoAccessException {
 		// TODO Auto-generated method stub
-		 int rowResult = (Integer) getSqlMapClientTemplate().queryForObject(this.mapNameSpace()+QUERY_SQL, entity);
+		 int rowResult = (Integer) getSqlSession().selectOne(this.mapNameSpace()+COUNT_SQL, entity);
 		 return rowResult;
 	}
 	

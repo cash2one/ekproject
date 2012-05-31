@@ -16,9 +16,12 @@ public abstract class BaseBusiness implements java.io.Serializable{
 	protected abstract void onAdd() throws BusinessException;//外层实现的添加
 	protected abstract void onModify() throws BusinessException;//外层实现的修改
 	protected abstract void onDelete(long ids[]) throws BusinessException;//外层实现的删除
+
+	
 	public abstract String getBusinessName();//外层实现获取业务逻辑名称
 	public abstract String getFunctionFlag();//外层实现获取业务逻辑功能标识 对应数据表的功能标识
 	public abstract String getModel();//外层实现获取模块名称
+	
 	protected abstract void checkAndFilter(ActionType type) throws BusinessException;//增删改验证器
 	
 	private String daoAbb;       //查询对应的地区分表
@@ -61,6 +64,8 @@ public abstract class BaseBusiness implements java.io.Serializable{
 		onDelete(ids);//回调
 	}
 
+	
+	
 	//判断是否有权限
 	public  boolean havePurview(PurviewType pur){
 		return true;

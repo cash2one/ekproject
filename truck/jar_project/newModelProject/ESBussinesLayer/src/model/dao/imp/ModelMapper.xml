@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="model.dao.imp.ModelMapper">
+<mapper namespace="Model">
 
   <!-- 以下配置是系统自动生成的 -->
 
@@ -14,7 +14,7 @@
   <!-- 列表对应的查询条件组合  -->
   <sql id="queryOptions">
        <where>
-            	  <if test="createTime1!=null"> AND xjschool.create_time &gt; #{createTime1}</if><if test="createTime2!=null"> AND xjschool.create_time &lt; #{createTime2}</if>
+            	  <!-- if test="createTime1!=null"> AND xjschool.create_time &gt; #{createTime1}</if><if test="createTime2!=null"> AND xjschool.create_time &lt; #{createTime2}</if -->
             	  <if test="schoolMode>=0"> AND xjschool.school_mode = #{schoolMode}</if>
             	  <if test="phone!=null"> AND xjschool.phone like #{phone}</if>
             	  <if test="schoolName!=null"> AND xjschool.school_name like #{schoolName}</if>
@@ -28,7 +28,7 @@
             	  <if test="areaId>=0"> AND xjschool.area_id = #{areaId}</if>
             	  <if test="isLong>=0"> AND xjschool.is_long = #{isLong}</if>
             	  <if test="learnyear>=0"> AND xjschool.learnyear = #{learnyear}</if>
-            	  <if test="establishDate1!=null"> AND xjschool.establish_date &gt; #{establishDate1}</if><if test="establishDate2!=null"> AND xjschool.establish_date &lt; #{establishDate2}</if>
+            	  <!--if test="establishDate1!=null"> AND xjschool.establish_date &gt; #{establishDate1}</if><if test="establishDate2!=null"> AND xjschool.establish_date &lt; #{establishDate2}</if -->
             	  <if test="schoolClass>=0"> AND xjschool.school_class = #{schoolClass}</if>
             	  <if test="address>=0"> AND xjschool.address = #{address}</if>
             	  <if test="email!=null"> AND xjschool.email like #{email}</if>
@@ -109,19 +109,20 @@
 
    <!-- 返回记录总数的语句 -->
    <select id="count" resultType="int">
-        SELECT count(*) num  FROM  <include refid="querySqlMain"/>
+         <![CDATA[  SELECT count(*) num  FROM  ]]>  <include refid="querySqlMain"/>
         <include refid="queryOptions"/> 
    </select>
    
    
+   
     <!-- 分页查询对应的记录 -->
-   <select id="qeury" resultType="model.entity.ModelEntity">
+   <select id="query" resultType="model.entity.ModelEntity" >
       SELECT * FROM (  
 	        SELECT A.*,ROWNUM RN FROM (
 	               SELECT <include refid="columns"/>   
 		           FROM <include refid="querySqlMain"/>
 		           <include refid="queryOptions"/>
-		           <include refid="orderControl"/>
+		           <!--include refid="orderControl"/ -->
 		    ) A WHERE ROWNUM &lt;=${startRow}+${pageSize}-1 ) 
 		 WHERE RN &gt;=#{startRow}
    </select>

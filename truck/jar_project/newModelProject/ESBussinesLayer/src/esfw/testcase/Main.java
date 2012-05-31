@@ -18,8 +18,8 @@ public class Main {
 
 	 public static void main(String...args) throws Exception{
 		 BusinessContainer.getInstance();
-//		 case1(null);
-		 case2(null);
+		 case1(null); //原来模式的
+		 case2(null); //新的模式
 	 }
 	 
 	 /**
@@ -45,6 +45,10 @@ public class Main {
      public static void case2(String... arg) throws Exception{
     	 ModelBusiness info  = SpringUtil.getSpringBean(ModelBusiness.class,"modelBusiness");
     	 info.load((long) 1);
+    	 
+    	 info.query(null);
+    	 
+    	 
 	 }
 	
 }

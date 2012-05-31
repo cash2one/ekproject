@@ -28,7 +28,7 @@ public class IBaticGenericDao<PK,E extends Serializable> implements GenericDao<P
 	static String COUNT_SQL = ".count";
 	
 	@Autowired
-	private IBatisDaoSupport myBatisDaoSupport;
+	private IBatisDaoSupport iBatisDaoSupport;
 	
 	
 	/**
@@ -41,7 +41,7 @@ public class IBaticGenericDao<PK,E extends Serializable> implements GenericDao<P
 	 *
 	 */
 	protected SqlMapClientTemplate getSqlMapClientTemplate(){
-	    return this.myBatisDaoSupport.getSqlMapClientTemplate();
+	    return this.iBatisDaoSupport.getSqlMapClientTemplate();
 	}
 	
 	
