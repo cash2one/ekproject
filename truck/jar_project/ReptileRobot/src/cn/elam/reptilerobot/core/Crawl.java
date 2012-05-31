@@ -61,6 +61,7 @@ public class Crawl extends Thread{
 				            uRLConnection.setDoOutput(true);
 				            uRLConnection.setDoInput(true); 
 				            
+				            //“≥√Ê¥¶¿Ì
 				            parse.analyzeHTML(curUrl,uRLConnection);
 				            uRLConnection.disconnect();
 				            
