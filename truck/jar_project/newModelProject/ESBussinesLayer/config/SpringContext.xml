@@ -54,9 +54,10 @@
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
 	
-	<!--Session工厂类的配置-->
+	<!-- MyBatis 工厂类的配置-->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
       <property name="dataSource" ref="dataSource" />
+       <property name="mapperLocations" value="classpath*:model/dao/**/*.xml" />
     </bean>
  
     
@@ -66,10 +67,11 @@
 		<property name="markerInterface" value="esfw.core.framework.dao.mapper.MyBatisMapper" />
 		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
 	</bean>
-     
-    <bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+         
+    <!-- iBatis   -->
+    <!-- bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
         <property name="configLocation" value="config/sqlmap-config.xml"/>
         <property name="dataSource" ref="dataSource"/>
-    </bean>
+    </bean -->
 
 </beans>
