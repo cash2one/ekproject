@@ -156,7 +156,7 @@ public class MyBaticGenericDao<PK,E extends Serializable> implements GenericDao<
 	 */
 	public PageBean<E> query(int page, int pageSize, E entity) throws DaoAccessException {
         // TODO Auto-generated method stub
-        int skipResults = (page-1)*pageSize+1;
+        int startIndex = (page-1)*pageSize+1;
         int maxResults = page*pageSize;
         int totalRows =  count(entity); //总记录项
         PageBean pageBean = new PageBean();
@@ -164,7 +164,7 @@ public class MyBaticGenericDao<PK,E extends Serializable> implements GenericDao<
         pageBean.setPageSize(pageSize);
         pageBean.setTotalRecords(totalRows);
         RowBounds rb = new RowBounds();
-        List list = getSqlSession().selectList(this.mapNameSpace()+QUERY_SQL, entity, rb);
+        List list = getSqlSession().selectList(this.mapNameSpace()+QUERY_SQL, entity, new RowBounds(startIndex,pageSize));
         pageBean.setRecords(list);
 		return pageBean;
     }

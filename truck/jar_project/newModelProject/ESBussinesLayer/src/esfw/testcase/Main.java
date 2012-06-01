@@ -18,7 +18,7 @@ public class Main {
 
 	 public static void main(String...args) throws Exception{
 		 BusinessContainer.getInstance();
-		 case1(null); //原来模式的
+//		 case1(null); //原来模式的
 		 case2(null); //新的模式
 	 }
 	 
