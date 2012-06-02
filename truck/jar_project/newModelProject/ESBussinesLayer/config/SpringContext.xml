@@ -57,7 +57,8 @@
 	<!-- MyBatis 工厂类的配置-->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
       <property name="dataSource" ref="dataSource" />
-       <property name="mapperLocations" value="classpath*:model/dao/**/*.xml" />
+      <property name="configLocation" value="config/mybatis-config.xml" />  
+      <property name="mapperLocations" value="classpath*:model/dao/**/*.xml" />
     </bean>
  
     
@@ -68,10 +69,5 @@
 		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
 	</bean>
          
-    <!-- iBatis   -->
-    <!-- bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
-        <property name="configLocation" value="config/sqlmap-config.xml"/>
-        <property name="dataSource" ref="dataSource"/>
-    </bean -->
-
+    
 </beans>
