@@ -1,8 +1,8 @@
 package model.dao;
 
 import model.entity.ModelEntity;
+import model.vo.ModelVo;
 import esfw.core.framework.dao.GenericDao;
-import esfw.core.framework.dao.IBaticGenericDao;
 
 /**
  * 
@@ -11,8 +11,7 @@ import esfw.core.framework.dao.IBaticGenericDao;
  * @date 2012-5-24
  *
  */
-public interface ModelDao extends GenericDao<Long, ModelEntity> {
+public interface ModelDao extends GenericDao<ModelVo,Long, ModelEntity> {
 
-	
 	
 }

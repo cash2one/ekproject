@@ -7,7 +7,8 @@
 
   <!-- 显示的记录对应的列-->
   <sql id="columns" >
-		    xjschool.id as id,xjschool.town_id as townId,xjschool.school_name as schoolName,xjschool.school_type as schoolType,xjschool.establish_date as establishDate,xjschool.school_mode as schoolMode,xjschool.address as address,xjschool.school_class as schoolClass,xjschool.school_bank as schoolBank,xjschool.school_addr as schoolAddr,xjschool.post_code as postCode,xjschool.phone as phone,xjschool.website as website,xjschool.email as email,xjschool.school_master as schoolMaster,xjschool.mobie as mobie,xjschool.learnyear as learnyear,xjschool.area_id as areaId,xjschool.section as section,xjschool.create_time as createTime,xjschool.adc_ec_code as adcEcCode,xjschool.sch_code as schCode,xjschool.short_name as shortName,xjschool.is_long as isLong,qxuserschool.user_id as siId,qxadminsi.company as siName,town1.name as townName,area.name as areaName,area.code as areaCode,area.abb as areaAbb
+       <![CDATA[xjschool.id as id,xjschool.town_id as townId,xjschool.school_name as schoolName,xjschool.school_type as schoolType,xjschool.establish_date as establishDate,xjschool.school_mode as schoolMode,xjschool.address as address,xjschool.school_class as schoolClass,xjschool.school_bank as schoolBank,xjschool.school_addr as schoolAddr,xjschool.post_code as postCode,xjschool.phone as phone,xjschool.website as website,xjschool.email as email,xjschool.school_master as schoolMaster,xjschool.mobie as mobie,xjschool.learnyear as learnyear,xjschool.area_id as areaId,xjschool.section as section,xjschool.create_time as createTime,xjschool.adc_ec_code as adcEcCode,xjschool.sch_code as schCode,xjschool.short_name as shortName,xjschool.is_long as isLong,qxuserschool.user_id as siId,qxadminsi.company as siName,town1.name as townName,area.name as areaName,area.code as areaCode,area.abb as areaAbb
+       ]]>
   </sql>
   
   
@@ -93,7 +94,7 @@
  
   <!-- 列表查询对应的表关系SQL  -->
   <sql id="querySqlMain">
-			  XJ_SCHOOL  xjschool LEFT JOIN QX_USER_SCHOOL qxuserschool ON xjschool.ID = qxuserschool.SCHOOL_ID LEFT JOIN QX_ADMIN_SI qxadminsi ON qxuserschool.USER_ID = qxadminsi.ID LEFT JOIN TOWN town1 ON xjschool.TOWN_ID = town1.ID LEFT JOIN AREA area ON xjschool.AREA_ID = area.ID
+	    <![CDATA[ XJ_SCHOOL  xjschool LEFT JOIN QX_USER_SCHOOL qxuserschool ON xjschool.ID = qxuserschool.SCHOOL_ID LEFT JOIN QX_ADMIN_SI qxadminsi ON qxuserschool.USER_ID = qxadminsi.ID LEFT JOIN TOWN town1 ON xjschool.TOWN_ID = town1.ID LEFT JOIN AREA area ON xjschool.AREA_ID = area.ID  ]]>
   </sql>
 
   
@@ -117,26 +118,22 @@
    
     <!-- 分页查询对应的记录 -->
    <select id="query" resultType="model.entity.ModelEntity" >
-      SELECT * FROM (  
-	        SELECT A.*,ROWNUM RN FROM (
-	               SELECT <include refid="columns"/>   
-		           FROM <include refid="querySqlMain"/>
-		           <include refid="queryOptions"/>
-		           <!--include refid="orderControl"/ -->
-		    ) A WHERE ROWNUM &lt;=${startRow}+${pageSize}-1 ) 
-		 WHERE RN &gt;=#{startRow}
+	         SELECT <include refid="columns"/>   
+		         FROM <include refid="querySqlMain"/>
+		     <include refid="queryOptions"/>
+		     <!--include refid="orderControl"/ -->
    </select>
 
 
    <!-- 新增记录 -->
    <insert id="insert" useGeneratedKeys="false" >
-       
-       <selectKey resultType="long" order="AFTER" keyProperty="xjSchool.id">
+       <selectKey resultType="long" order="AFTER" keyProperty="id">
 	       SELECT xj_school_se.currval FROM  DUAL
 	   </selectKey>
+	     <![CDATA[
              INSERT INTO XJ_SCHOOL (create_time,school_mode,phone,school_name,website,post_code,town_id,adc_ec_code,school_type,sch_code,section,area_id,is_long,learnyear,establish_date,school_class,address,email,school_master,school_bank,mobie,school_addr,short_name)
-             VALUES(#{xjSchool.createTime},#{xjSchool.schoolMode,jdbcType=NUMERIC},#{xjSchool.phone,jdbcType=VARCHAR},#{xjSchool.schoolName},#{xjSchool.website,jdbcType=VARCHAR},#{xjSchool.postCode,jdbcType=VARCHAR},#{xjSchool.townId},#{xjSchool.adcEcCode},#{xjSchool.schoolType},#{xjSchool.schCode},#{xjSchool.section},#{xjSchool.areaId},#{xjSchool.isLong,jdbcType=NUMERIC},#{xjSchool.learnyear},#{xjSchool.establishDate},#{xjSchool.schoolClass},#{xjSchool.address,jdbcType=VARCHAR},#{xjSchool.email,jdbcType=VARCHAR},#{xjSchool.schoolMaster},#{xjSchool.schoolBank},#{xjSchool.mobie,jdbcType=VARCHAR},#{xjSchool.schoolAddr,jdbcType=VARCHAR},#{xjSchool.shortName,jdbcType=VARCHAR})
-            
+             VALUES(#{createTime},#{schoolMode,jdbcType=NUMERIC},#{phone,jdbcType=VARCHAR},#{schoolName},#{website,jdbcType=VARCHAR},#{postCode,jdbcType=VARCHAR},#{townId},#{adcEcCode},#{schoolType},#{schCode},#{section},#{areaId},#{isLong,jdbcType=NUMERIC},#{learnyear},#{establishDate},#{schoolClass},#{address,jdbcType=VARCHAR},#{email,jdbcType=VARCHAR},#{schoolMaster},#{schoolBank},#{mobie,jdbcType=VARCHAR},#{schoolAddr,jdbcType=VARCHAR},#{shortName,jdbcType=VARCHAR})
+          ]]>
    </insert>
    
    
@@ -145,31 +142,33 @@
    <update id="update" >
            UPDATE XJ_SCHOOL 
            <set>
-                create_time=#{xjSchool.createTime,jdbcType=DATE},
-                school_mode=#{xjSchool.schoolMode,jdbcType=NUMERIC},
-                phone=#{xjSchool.phone,jdbcType=VARCHAR},
-                school_name=#{xjSchool.schoolName,jdbcType=VARCHAR},
-                website=#{xjSchool.website,jdbcType=VARCHAR},
-                post_code=#{xjSchool.postCode,jdbcType=VARCHAR},
-                town_id=#{xjSchool.townId,jdbcType=NUMERIC},
-                adc_ec_code=#{xjSchool.adcEcCode,jdbcType=VARCHAR},
-                school_type=#{xjSchool.schoolType,jdbcType=NUMERIC},
-                sch_code=#{xjSchool.schCode,jdbcType=VARCHAR},
-                section=#{xjSchool.section,jdbcType=NUMERIC},
-                area_id=#{xjSchool.areaId,jdbcType=NUMERIC},
-                is_long=#{xjSchool.isLong,jdbcType=NUMERIC},
-                learnyear=#{xjSchool.learnyear,jdbcType=NUMERIC},
-                establish_date=#{xjSchool.establishDate,jdbcType=DATE},
-                school_class=#{xjSchool.schoolClass,jdbcType=NUMERIC},
-                address=#{xjSchool.address,jdbcType=VARCHAR},
-                email=#{xjSchool.email,jdbcType=VARCHAR},
-                school_master=#{xjSchool.schoolMaster,jdbcType=VARCHAR},
-                school_bank=#{xjSchool.schoolBank,jdbcType=NUMERIC},
-                mobie=#{xjSchool.mobie,jdbcType=VARCHAR},
-                school_addr=#{xjSchool.schoolAddr,jdbcType=VARCHAR},
-                short_name=#{xjSchool.shortName,jdbcType=VARCHAR},
+           	  <![CDATA[
+                create_time=#{createTime,jdbcType=DATE},
+                school_mode=#{schoolMode,jdbcType=NUMERIC},
+                phone=#{phone,jdbcType=VARCHAR},
+                school_name=#{schoolName,jdbcType=VARCHAR},
+                website=#{website,jdbcType=VARCHAR},
+                post_code=#{postCode,jdbcType=VARCHAR},
+                town_id=#{townId,jdbcType=NUMERIC},
+                adc_ec_code=#{adcEcCode,jdbcType=VARCHAR},
+                school_type=#{schoolType,jdbcType=NUMERIC},
+                sch_code=#{schCode,jdbcType=VARCHAR},
+                section=#{section,jdbcType=NUMERIC},
+                area_id=#{areaId,jdbcType=NUMERIC},
+                is_long=#{isLong,jdbcType=NUMERIC},
+                learnyear=#{learnyear,jdbcType=NUMERIC},
+                establish_date=#{establishDate,jdbcType=DATE},
+                school_class=#{schoolClass,jdbcType=NUMERIC},
+                address=#{address,jdbcType=VARCHAR},
+                email=#{email,jdbcType=VARCHAR},
+                school_master=#{schoolMaster,jdbcType=VARCHAR},
+                school_bank=#{schoolBank,jdbcType=NUMERIC},
+                mobie=#{mobie,jdbcType=VARCHAR},
+                school_addr=#{schoolAddr,jdbcType=VARCHAR},
+                short_name=#{shortName,jdbcType=VARCHAR},
+              ]]>
 	   </set>
-	       WHERE id = #{xjSchool.id}
+	       WHERE id = #{id}
    </update> 
    
 
@@ -177,9 +176,11 @@
    
    <!-- 删除记录 -->
    <delete id="delete">
+   	     <![CDATA[
           DELETE FROM XJ_SCHOOL
-          WHERE id in 
-          <foreach collection="ids" item="id" open="("  separator="," close=")" >
+          WHERE id in
+          ]]> 
+          <foreach  collection="array" item="id" open="("  separator="," close=")" >
                 #{id}
           </foreach>
    </delete>

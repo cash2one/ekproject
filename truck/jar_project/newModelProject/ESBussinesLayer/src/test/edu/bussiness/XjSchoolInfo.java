@@ -32,7 +32,7 @@ import esfw.core.framework.exception.BusinessException;
  */
 @Scope("prototype")
 @Service("xjSchoolInfo")
-public class XjSchoolInfo extends BaseBusiness {
+public class XjSchoolInfo extends BaseBusiness<Long> {
     
       //日志服务对象
       static Logger logger = Logger.getLogger(XjSchoolInfo.class);
@@ -647,7 +647,7 @@ public class XjSchoolInfo extends BaseBusiness {
 	 * 删除
 	 */
 	@Override
-	protected void onDelete(long ids[]) throws BusinessException {
+	protected void onDelete(Long ids[]) throws BusinessException {
 		// TODO Auto-generated method stub
 		XjSchoolMapper xjSchoolMapper= SpringUtil.getSpringBean(XjSchoolMapper.class,"xjSchoolMapper");
 		xjSchoolMapper.deleteXjSchool(ids);

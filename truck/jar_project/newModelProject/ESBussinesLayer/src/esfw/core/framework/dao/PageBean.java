@@ -26,10 +26,7 @@ public class PageBean<E> implements Serializable{
 	private int totalRecords;
 	
 	//记录
-	private List<E> records;
-
-	
-	
+	private List<E> beanList;
 	
 	
 	public int getCurPage() {
@@ -64,15 +61,13 @@ public class PageBean<E> implements Serializable{
 		this.totalRecords = totalRecords;
 	}
 
-	public List<E> getRecords() {
-		return records;
+	public List<E> getBeanList() {
+		return beanList;
 	}
 
-	public void setRecords(List<E> records) {
-		this.records = records;
+	public void setBeanList(List<E> beanList) {
+		this.beanList = beanList;
 	}
-	
-	
-	
+
 	
 }

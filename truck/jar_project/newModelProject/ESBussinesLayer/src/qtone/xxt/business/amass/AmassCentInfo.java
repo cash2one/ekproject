@@ -32,7 +32,7 @@ import qtone.xxt.dao.mapper.amass.AmassCentMapper;
  */
 @Scope("prototype") 
 @Service("amassCentInfo")
-public class AmassCentInfo extends BaseBusiness {
+public class AmassCentInfo extends BaseBusiness<Long> {
     
       //日志服务对象
       static Logger logger = Logger.getLogger(AmassCentInfo.class);
@@ -439,7 +439,7 @@ public class AmassCentInfo extends BaseBusiness {
 	 * 删除
 	 */
 	@Override
-	protected void onDelete(long ids[]) throws BusinessException {
+	protected void onDelete(Long ids[]) throws BusinessException {
 		// TODO Auto-generated method stub
 		AmassCentMapper amassCentMapper= SpringUtil.getSpringBean(AmassCentMapper.class,"amassCentMapper");
 		try{

@@ -4,10 +4,13 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import esfw.core.framework.controller.ViewObject;
 import esfw.core.framework.exception.DaoAccessException;
 
  
@@ -19,7 +22,7 @@ import esfw.core.framework.exception.DaoAccessException;
  * @param <PK>
  * @param <E>
  */
-public class MyBaticGenericDao<PK,E extends Serializable> implements GenericDao<PK, E> {
+public class MyBaticGenericDao<Vo extends ViewObject,PK,E extends Serializable> implements GenericDao<Vo,PK, E> {
    
 	static String LOAD_SQL = ".loadById";
 	static String INSERT_SQL = ".insert";
@@ -31,6 +34,7 @@ public class MyBaticGenericDao<PK,E extends Serializable> implements GenericDao<
 	@Autowired
 	private MyBatisDaoSupport myBatisDaoSupport;
 	
+	private SqlSessionTemplate template;
 	
 	/**
 	 * 
@@ -71,7 +75,11 @@ public class MyBaticGenericDao<PK,E extends Serializable> implements GenericDao<
      */
 	public E load(PK key) throws DaoAccessException {
 		// TODO Auto-generated method stub
-		return (E)getSqlSession().selectOne(mapNameSpace()+LOAD_SQL,key);
+		try{
+		   return (E)getSqlSession().selectOne(mapNameSpace()+LOAD_SQL,key);
+		}catch(Exception e){
+		   throw new DaoAccessException("记录查询发生异常",e);
+		}
 	}
 
 	
@@ -86,8 +94,12 @@ public class MyBaticGenericDao<PK,E extends Serializable> implements GenericDao<
 	 */
 	public boolean insert(E entity) throws DaoAccessException {
 		// TODO Auto-generated method stub
-		getSqlSession().insert(mapNameSpace()+INSERT_SQL, entity);
-		return true;
+		try{
+			getSqlSession().insert(mapNameSpace()+INSERT_SQL, entity);
+			return true;
+		}catch(Exception e){
+		   throw new DaoAccessException("--SQL--记录新增发生异常",e);
+		}
 	}
 
 	/**
@@ -101,8 +113,12 @@ public class MyBaticGenericDao<PK,E extends Serializable> implements GenericDao<
 	 */
 	public boolean update(E entity) throws DaoAccessException {
 		// TODO Auto-generated method stub
-		getSqlSession().update(this.mapNameSpace()+UPDATE_SQL, entity);
-		return true;
+		try{
+			getSqlSession().update(this.mapNameSpace()+UPDATE_SQL, entity);
+			return true;
+		}catch(Exception e){
+		   throw new DaoAccessException("--SQL--记录修改发生异常",e);
+		}		
 	}
 	
 	
@@ -117,8 +133,12 @@ public class MyBaticGenericDao<PK,E extends Serializable> implements GenericDao<
 	 */
 	public boolean delete(PK[] keys) throws DaoAccessException {
 		// TODO Auto-generated method stub
-		getSqlSession().delete(this.mapNameSpace()+DELETE_SQL,keys);
-		return true;
+		try{	
+			getSqlSession().delete(this.mapNameSpace()+DELETE_SQL, keys);
+			return true;
+		 }catch(Exception e){
+			throw new DaoAccessException("--SQL--记录删除发生异常",e);
+		 }		
 	}
 	
 	
@@ -133,10 +153,14 @@ public class MyBaticGenericDao<PK,E extends Serializable> implements GenericDao<
 	 * @throws DaoAccessException
 	 *
 	 */
-	public List<E> query(E entity) throws DaoAccessException {
+	public List<E> query(Vo vo) throws DaoAccessException {
 		// TODO Auto-generated method stub
-		List list = getSqlSession().selectList(this.mapNameSpace()+QUERY_SQL,entity);
+	 try{	
+		List list = getSqlSession().selectList(this.mapNameSpace()+QUERY_SQL,vo);
 		return list;
+	   }catch(Exception e){
+			throw new DaoAccessException("--SQL--记录查询发生异常",e);
+	   }			
 	}
 
 	
@@ -154,19 +178,22 @@ public class MyBaticGenericDao<PK,E extends Serializable> implements GenericDao<
 	 * @throws DaoAccessException
 	 *
 	 */
-	public PageBean<E> query(int page, int pageSize, E entity) throws DaoAccessException {
+	public PageBean<E> query(int page, int pageSize, Vo voBean) throws DaoAccessException {
         // TODO Auto-generated method stub
-        int startIndex = (page-1)*pageSize+1;
-        int maxResults = page*pageSize;
-        int totalRows =  count(entity); //总记录项
-        PageBean pageBean = new PageBean();
-        pageBean.setCurPage(page);
-        pageBean.setPageSize(pageSize);
-        pageBean.setTotalRecords(totalRows);
-        RowBounds rb = new RowBounds();
-        List list = getSqlSession().selectList(this.mapNameSpace()+QUERY_SQL, entity, new RowBounds(startIndex,pageSize));
-        pageBean.setRecords(list);
-		return pageBean;
+       try{ 
+			int startIndex = (page-1)*pageSize +1;
+	        int totalRows =  count(voBean); //总记录项
+	        PageBean<E> pageBean = new PageBean<E>();
+	        pageBean.setCurPage(page);
+	        pageBean.setPageSize(pageSize);
+	        pageBean.setTotalRecords(totalRows);
+	        RowBounds rb = new RowBounds();
+	        List<E> list =(List<E>)getSqlSession().selectList(this.mapNameSpace()+QUERY_SQL, voBean, new RowBounds(startIndex,pageSize));
+	        pageBean.setBeanList(list);
+			return pageBean;
+	   }catch(Exception e){
+			throw new DaoAccessException("--SQL--记录查询发生异常",e);
+	   }			
     }
 	
 	
@@ -183,10 +210,14 @@ public class MyBaticGenericDao<PK,E extends Serializable> implements GenericDao<
 	 * @throws DaoAccessException
 	 *
 	 */
-	public int count(E entity) throws DaoAccessException {
+	public int count(Vo voBean) throws DaoAccessException {
 		// TODO Auto-generated method stub
-		 int rowResult = (Integer) getSqlSession().selectOne(this.mapNameSpace()+COUNT_SQL, entity);
+	   try{	
+		 int rowResult = (Integer) getSqlSession().selectOne(this.mapNameSpace()+COUNT_SQL, voBean);
 		 return rowResult;
+	   }catch(Exception e){
+			throw new DaoAccessException("--SQL--记录查询发生异常",e);
+	   }		 
 	}
 	
 	
@@ -204,6 +235,7 @@ public class MyBaticGenericDao<PK,E extends Serializable> implements GenericDao<
 	 */
  	public boolean batchInsert(List<E> entityList) throws DaoAccessException {
 		// TODO Auto-generated method stub
+ 		
 		return false;
 	}
 

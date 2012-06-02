@@ -1,22 +1,25 @@
 package esfw.core.framework.business;
 
 
+import java.io.Serializable;
+
 import esfw.core.framework.business.enumeration.ActionType;
 import esfw.core.framework.exception.BusinessException;
 import esfw.core.framework.purview.PurviewType;
 
 /**
- * 业务逻辑父类
- * @author ygl
- * 2011-06-29
- * @param <T>
+ * 
+ * 描述：业务逻辑父类
+ * @author Ethan.Lam
+ * @dateTime 2012-6-2
+ * @param <PK>  主键类型 
+ *
  */
-public abstract class BaseBusiness implements java.io.Serializable{
+public abstract class BaseBusiness<PK extends Serializable> implements java.io.Serializable{
 	
 	protected abstract void onAdd() throws BusinessException;//外层实现的添加
 	protected abstract void onModify() throws BusinessException;//外层实现的修改
-	protected abstract void onDelete(long ids[]) throws BusinessException;//外层实现的删除
-
+	protected abstract void onDelete(PK ids[]) throws BusinessException;//外层实现的删除
 	
 	public abstract String getBusinessName();//外层实现获取业务逻辑名称
 	public abstract String getFunctionFlag();//外层实现获取业务逻辑功能标识 对应数据表的功能标识
@@ -56,7 +59,7 @@ public abstract class BaseBusiness implements java.io.Serializable{
 	}
 	
 	//删除
-	public void delete(long ids[]) throws BusinessException{
+	public void delete(PK ids[]) throws BusinessException{
 		if(!this.havePurview(PurviewType.del)){
 			return ;
 		}
@@ -86,4 +89,5 @@ public abstract class BaseBusiness implements java.io.Serializable{
 	public int getQeuryRecordTotalNum(){
 		return this.totalRecordNum;
 	}
+ 
 }

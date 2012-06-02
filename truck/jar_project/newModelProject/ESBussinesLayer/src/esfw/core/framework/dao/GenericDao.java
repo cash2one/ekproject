@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
+import esfw.core.framework.controller.ViewObject;
 import esfw.core.framework.exception.DaoAccessException;
 
 /**
@@ -15,7 +16,7 @@ import esfw.core.framework.exception.DaoAccessException;
  * @param <E>   实体类 
  *
  */
-public interface GenericDao<PK,E extends Serializable> {
+public interface GenericDao<Vo extends ViewObject,PK,E extends Serializable> {
 	
 	 /**
 	  * 功能描述：查找接口
@@ -69,7 +70,7 @@ public interface GenericDao<PK,E extends Serializable> {
 	   * List<E>
 	   *
 	   */
-	  public List<E> query(E entity)throws DaoAccessException;
+	  public List<E> query(Vo voBean)throws DaoAccessException;
 	  
 	 
 	  /**
@@ -85,7 +86,7 @@ public interface GenericDao<PK,E extends Serializable> {
 	   * List<E>
 	   *
 	   */
-	  public PageBean<E> query(int page,int PageSize,E entity)throws DaoAccessException;
+	  public PageBean<E> query(int page,int PageSize,Vo voBean)throws DaoAccessException;
 	  
 	  
 	  /**
@@ -99,7 +100,7 @@ public interface GenericDao<PK,E extends Serializable> {
 	   * int
 	   *
 	   */
-	  public int count(E entity) throws DaoAccessException;
+	  public int count(Vo voBean) throws DaoAccessException;
 	  
 	  
 	  

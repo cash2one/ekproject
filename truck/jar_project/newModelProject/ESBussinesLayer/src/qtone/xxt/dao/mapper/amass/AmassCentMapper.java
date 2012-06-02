@@ -118,7 +118,7 @@ public interface AmassCentMapper extends MyBatisMapper {
 	 * @param ids  记录对应的主键
 	 * @return
 	 */
-	public int deleteAmassCent( @Param("ids") long[] ids) throws DaoAccessException ;
+	public int deleteAmassCent( @Param("ids") Long[] ids) throws DaoAccessException ;
 	
 	
 	

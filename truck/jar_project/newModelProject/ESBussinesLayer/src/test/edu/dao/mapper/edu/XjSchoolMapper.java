@@ -147,7 +147,7 @@ public interface XjSchoolMapper extends MyBatisMapper {
 	 * @param ids  记录对应的主键
 	 * @return
 	 */
-	public int deleteXjSchool( @Param("ids") long[] ids);
+	public int deleteXjSchool( @Param("ids") Long[] ids);
 	
 	
 	

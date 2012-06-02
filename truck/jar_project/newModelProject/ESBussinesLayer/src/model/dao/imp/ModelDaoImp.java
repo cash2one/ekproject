@@ -2,6 +2,7 @@ package model.dao.imp;
 
 import model.dao.ModelDao;
 import model.entity.ModelEntity;
+import model.vo.ModelVo;
 
 import org.springframework.stereotype.Component;
 
@@ -14,11 +15,11 @@ import esfw.core.framework.dao.MyBaticGenericDao;
  * @date 2012-5-24
  *
  */
-@Component("modelDaoImp")
-public class ModelDaoImp  extends MyBaticGenericDao<Long,ModelEntity> implements ModelDao{
+@Component("modelDao")
+public class ModelDaoImp  extends MyBaticGenericDao<ModelVo,Long,ModelEntity> implements ModelDao{
 
     protected String mapNameSpace(){
     	return "Model";
-    };
+    }
 	
 }
