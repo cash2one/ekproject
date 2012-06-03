@@ -33,8 +33,6 @@ public class Upload extends HttpServlet {
 
 	private Logger logger = Logger.getLogger(Upload.class);
 	
-//	private static String MODEL = "codeTemplators";
-	
 	private static String MODEL = "new_model";
 	
 	/**
@@ -52,7 +50,7 @@ public class Upload extends HttpServlet {
 				(ServletInputStream) request.getInputStream(),"utf-8"));
 		String line = null;
 		
-		String fileName =request.getHeader("FileName");
+		String fileName =request.getHeader("FileName")+".xml";
 		String dirPath=BaseCfg.CFG_PATH+"/templates/";
 		File file = new File(dirPath+fileName);
 		if(file.exists()){
@@ -82,26 +80,32 @@ public class Upload extends HttpServlet {
 		System.out.println(request.getRemoteAddr());
 		String ip = request.getRemoteAddr().equals("127.0.0.1")||request.getRemoteAddr().indexOf("192.168.")>=0?BaseCfg.WWW_LOCALHOST:BaseCfg.WWW;
 		
-		
 		for (String fileCfg : recFiles) {
 			urls.append(ip).append(
-					""
-							+ (!BaseCfg.APP_CONTEXT.equals("") ? "/"
+					""+(!BaseCfg.APP_CONTEXT.equals("") ? "/"
 									+ BaseCfg.APP_CONTEXT : "")
-							+ "/MODEL/entity.jsp?cfg=").append(fileCfg);
+							+ "/"+MODEL+"/entity.jsp?cfg=").append(fileCfg);
 			urls.append(";").append(ip).append(
 					(!BaseCfg.APP_CONTEXT.equals("") ? "/"
 							+ BaseCfg.APP_CONTEXT : "")
-							+ "/MODEL/mapper.jsp?cfg=").append(fileCfg);
+							+ "/"+MODEL+"/baseDao.jsp?cfg=").append(fileCfg);
 			urls.append(";").append(ip).append(
 					(!BaseCfg.APP_CONTEXT.equals("") ? "/"
 							+ BaseCfg.APP_CONTEXT : "")
-							+ "/MODEL/mapperXml.jsp?cfg=")
+							+ "/"+MODEL+"/daoImp.jsp?cfg=").append(fileCfg);
+			urls.append(";").append(ip).append(
+					(!BaseCfg.APP_CONTEXT.equals("") ? "/"
+							+ BaseCfg.APP_CONTEXT : "")
+							+ "/"+MODEL+"/mapperXml.jsp?cfg=")
 					.append(fileCfg);
 			urls.append(";").append(ip).append(
 					(!BaseCfg.APP_CONTEXT.equals("") ? "/"
 							+ BaseCfg.APP_CONTEXT : "")
-							+ "/MODEL/business.jsp?cfg=").append(fileCfg);
+							+ "/"+MODEL+"/business.jsp?cfg=").append(fileCfg);
+			urls.append(";").append(ip).append(
+					(!BaseCfg.APP_CONTEXT.equals("") ? "/"
+							+ BaseCfg.APP_CONTEXT : "")
+							+ "/"+MODEL+"/viewOject.jsp?cfg=").append(fileCfg);
 		}
 		out.write(urls.toString());
 		out.close();
