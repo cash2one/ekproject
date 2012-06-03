@@ -177,7 +177,7 @@
    <delete id="delete">
           DELETE FROM <%=map.getTable()%>
           WHERE <%=primaryKey.getSourceField()%> in    
-          <foreach collection="array" item="<%=primaryKey.getName()%>" open="("  separator="," close=")" >
+          <foreach collection="ids" item="<%=primaryKey.getName()%>" open="("  separator="," close=")" >
                 <%="#{"+primaryKey.getName()+"}"%>
           </foreach>
    </delete>

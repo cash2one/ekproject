@@ -209,6 +209,7 @@ public class <%=map.getClazz()%>Business  extends BaseBusiness<%="<"%>Long<%=">"
 		    <%=StringHelper.fistChartLowerCase(map.getClazz())%>Dao.setDaoAbb(this.getDaoAbb());
 			<%=map.getClazz()%>Entity entity =  <%=StringHelper.fistChartLowerCase(map.getClazz())%>Dao.load(id);
 			if(entity!=null){
+			    entity.setDaoAbb(this.getDaoAbb()); //表分区信息
 				this.<%=StringHelper.fistChartLowerCase(entryObjName)%> = entity;
 				return true;
 			}else{
@@ -388,6 +389,7 @@ public class <%=map.getClazz()%>Business  extends BaseBusiness<%="<"%>Long<%=">"
 			    PageBean<<%=map.getClazz()%>Entity> pageBean = <%=StringHelper.fistChartLowerCase(mapperObjName)%>.query(vo.getPageVo().getPage(),vo.getPageVo().getPageSize(),vo);
 			    if(pageBean!=null && pageBean.getBeanList()!= null){
 					for(<%=map.getClazz()%>Entity et:pageBean.getBeanList()){
+					    et.setDaoAbb(this.getDaoAbb()); //表分区信息
 						results.add(new <%=map.getClazz()%>Business(et));
 					}
 			        this.setQeuryRecordTotalNum(pageBean.getTotalRecords());
