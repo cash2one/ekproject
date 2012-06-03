@@ -15,7 +15,7 @@
 	
 	<!-- 注释配置 -->
 	<!-- 扫描用标注的包 -->
-	<context:component-scan base-package="esfw,qtone.xxt,model">
+	<context:component-scan base-package="esfw,qtone.xxt,model,newm">
 	    <context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
 	</context:component-scan>
 	
@@ -58,7 +58,7 @@
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
       <property name="dataSource" ref="dataSource" />
       <property name="configLocation" value="config/mybatis-config.xml" />  
-      <property name="mapperLocations" value="classpath*:model/dao/**/*.xml" />
+      <property name="mapperLocations" value="classpath*:**/*.xml" />
     </bean>
  
     
