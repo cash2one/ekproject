@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="newm.dao.test.XjClassDao">
+
+  <!-- 以下配置是系统自动生成的 -->
+
+  <!-- 显示的记录对应的列-->
+  <sql id="columns" >
+	  <![CDATA[  
+	     xjclass.id as id,xjclass.grade_id as gradeId,xjclass.school_id as schoolId,xjclass.class_type as classType,xjclass.language as language,xjclass.user_id as userId,xjclass.is_graduate as isGraduate,xjclass.orderno as orderno,xjclass.classno as classno,xjclass.establish_date as establishDate,xjclass.in_school as inSchool,xjclass.studytype as studytype,xjclass.section as section,xjclass.class_name as className,xjclass.exchange_id as exchangeId,xjclass.preid as preid,xjclass.sep_code as sepCode,xjclass.father_sep_code as fatherSepCode,xjclass.create_time as createTime,xjclass.learning_year as learningYear,xjclass.last_update_timestamp as lastUpdateTimestamp,xjclass.nickname as nickname,xjclass.graduate_del as graduateDel  ]]>
+  </sql>
+  
+  
+  <!-- 列表对应的查询条件组合  -->
+  <sql id="queryOptions">
+       <where>
+            	  <if test="createTime1!=null"> AND xjclass.create_time &gt; #{createTime1}</if><if test="createTime2!=null"> AND xjclass.create_time &lt; #{createTime2}</if>
+            	  <if test="studytype!=null"> AND xjclass.studytype like #{studytype}</if>
+            	  <if test="gradeId>=0"> AND xjclass.grade_id = #{gradeId}</if>
+            	  <if test="nickname!=null"> AND xjclass.nickname like #{nickname}</if>
+            	  <if test="graduateDel>=0"> AND xjclass.graduate_del = #{graduateDel}</if>
+            	  <if test="orderno>=0"> AND xjclass.orderno = #{orderno}</if>
+            	  <if test="classType>=0"> AND xjclass.class_type = #{classType}</if>
+            	  <if test="classno!=null"> AND xjclass.classno like #{classno}</if>
+            	  <if test="learningYear!=null"> AND xjclass.learning_year like #{learningYear}</if>
+            	  <if test="section>=0"> AND xjclass.section = #{section}</if>
+            	  <if test="sepCode!=null"> AND xjclass.sep_code like #{sepCode}</if>
+            	  <if test="establishDate1!=null"> AND xjclass.establish_date &gt; #{establishDate1}</if><if test="establishDate2!=null"> AND xjclass.establish_date &lt; #{establishDate2}</if>
+            	  <if test="fatherSepCode!=null"> AND xjclass.father_sep_code like #{fatherSepCode}</if>
+            	  <if test="lastUpdateTimestamp1!=null"> AND xjclass.last_update_timestamp &gt; #{lastUpdateTimestamp1}</if><if test="lastUpdateTimestamp2!=null"> AND xjclass.last_update_timestamp &lt; #{lastUpdateTimestamp2}</if>
+            	  <if test="userId>=0"> AND xjclass.user_id = #{userId}</if>
+            	  <if test="preid>=0"> AND xjclass.preid = #{preid}</if>
+            	  <if test="className!=null"> AND xjclass.class_name like #{className}</if>
+            	  <if test="schoolId>=0"> AND xjclass.school_id = #{schoolId}</if>
+            	  <if test="language>=0"> AND xjclass.language = #{language}</if>
+            	  <if test="exchangeId!=null"> AND xjclass.exchange_id like #{exchangeId}</if>
+            	  <if test="isGraduate>=0"> AND xjclass.is_graduate = #{isGraduate}</if>
+            	  <if test="inSchool>=0"> AND xjclass.in_school = #{inSchool}</if> 
+        </where> 
+  </sql>
+
+
+
+  <!-- 列表查询对应的排序选项  -->
+  <sql id="orderControl">
+       <if test="orderList!=null">
+		  <trim prefix="ORDER BY" prefixOverrides=",">
+				<foreach collection="orderList" item="order" open=""  separator="," close="" >
+				   <choose> 
+				       <when test="order.columnName=='createTime'"> xjclass.create_time ${order.type} </when> 
+				       <when test="order.columnName=='studytype'"> xjclass.studytype ${order.type} </when> 
+				       <when test="order.columnName=='gradeId'"> xjclass.grade_id ${order.type} </when> 
+				       <when test="order.columnName=='nickname'"> xjclass.nickname ${order.type} </when> 
+				       <when test="order.columnName=='graduateDel'"> xjclass.graduate_del ${order.type} </when> 
+				       <when test="order.columnName=='orderno'"> xjclass.orderno ${order.type} </when> 
+				       <when test="order.columnName=='classType'"> xjclass.class_type ${order.type} </when> 
+				       <when test="order.columnName=='classno'"> xjclass.classno ${order.type} </when> 
+				       <when test="order.columnName=='learningYear'"> xjclass.learning_year ${order.type} </when> 
+				       <when test="order.columnName=='section'"> xjclass.section ${order.type} </when> 
+				       <when test="order.columnName=='sepCode'"> xjclass.sep_code ${order.type} </when> 
+				       <when test="order.columnName=='establishDate'"> xjclass.establish_date ${order.type} </when> 
+				       <when test="order.columnName=='fatherSepCode'"> xjclass.father_sep_code ${order.type} </when> 
+				       <when test="order.columnName=='lastUpdateTimestamp'"> xjclass.last_update_timestamp ${order.type} </when> 
+				       <when test="order.columnName=='userId'"> xjclass.user_id ${order.type} </when> 
+				       <when test="order.columnName=='preid'"> xjclass.preid ${order.type} </when> 
+				       <when test="order.columnName=='className'"> xjclass.class_name ${order.type} </when> 
+				       <when test="order.columnName=='schoolId'"> xjclass.school_id ${order.type} </when> 
+				       <when test="order.columnName=='language'"> xjclass.language ${order.type} </when> 
+				       <when test="order.columnName=='exchangeId'"> xjclass.exchange_id ${order.type} </when> 
+				       <when test="order.columnName=='isGraduate'"> xjclass.is_graduate ${order.type} </when> 
+				       <when test="order.columnName=='inSchool'"> xjclass.in_school ${order.type} </when>
+                       
+				       <when test="order.columnName=='id'"> xjclass.id  ${order.type}  </when> 
+				       
+				  </choose>
+			 </foreach>
+		 </trim>
+	   </if>
+  </sql>
+
+ 
+ 
+  <!-- 列表查询对应的表关系SQL  -->
+  <sql id="querySqlMain">
+	 <![CDATA[   
+	      XJ_CLASS  xjclass  ]]>
+  </sql>
+
+  
+   
+   <!-- 根据ID查询记录 -->
+   <select id="loadById" resultType="newm.dao.entity.test.XjClassEntity">
+	     SELECT  <include refid="columns"/>              
+		       FROM <include refid="querySqlMain"/>
+			   where xjclass.ID=#{id}
+   </select>
+   
+
+
+   <!-- 返回记录总数的语句 -->
+   <select id="count" resultType="int">
+         SELECT count(*) num   
+			  FROM  <include refid="querySqlMain"/>
+				    <include refid="queryOptions"/> 
+   </select>
+   
+   
+    <!-- 分页查询对应的记录 -->
+   <select id="query" resultType="newm.dao.entity.test.XjClassEntity">
+	      SELECT <include refid="columns"/>   
+		      FROM <include refid="querySqlMain"/>
+		      <include refid="queryOptions"/>
+		      <include refid="orderControl"/>
+   </select>
+
+
+   <!-- 新增记录 -->
+   <insert id="insert" useGeneratedKeys="false" >
+       
+       <selectKey resultType="long" order="AFTER" keyProperty="id">
+	       <![CDATA[    SELECT XJ_CLASS_SEQ.currval FROM  DUAL    ]]> 
+	   </selectKey> 
+             INSERT INTO XJ_CLASS (create_time,studytype,grade_id,nickname,graduate_del,orderno,class_type,classno,learning_year,section,sep_code,establish_date,father_sep_code,last_update_timestamp,user_id,preid,class_name,school_id,language,exchange_id,is_graduate,in_school)
+             VALUES(#{createTime,jdbcType=DATE},#{studytype,jdbcType=VARCHAR},#{gradeId,jdbcType=NUMERIC},#{nickname,jdbcType=VARCHAR},#{graduateDel,jdbcType=NUMERIC},#{orderno,jdbcType=NUMERIC},#{classType,jdbcType=NUMERIC},#{classno,jdbcType=VARCHAR},#{learningYear,jdbcType=VARCHAR},#{section,jdbcType=NUMERIC},#{sepCode,jdbcType=VARCHAR},#{establishDate,jdbcType=DATE},#{fatherSepCode,jdbcType=VARCHAR},#{lastUpdateTimestamp,jdbcType=DATE},#{userId,jdbcType=NUMERIC},#{preid,jdbcType=NUMERIC},#{className,jdbcType=VARCHAR},#{schoolId,jdbcType=NUMERIC},#{language,jdbcType=NUMERIC},#{exchangeId,jdbcType=VARCHAR},#{isGraduate,jdbcType=NUMERIC},#{inSchool,jdbcType=NUMERIC})  
+            
+   </insert>
+   
+   
+   
+   <!-- 更新记录 -->       
+   <update id="update" >
+           UPDATE XJ_CLASS 
+           <set>
+            <![CDATA[ 
+                create_time=#{createTime,jdbcType=DATE},
+                studytype=#{studytype,jdbcType=VARCHAR},
+                grade_id=#{gradeId,jdbcType=NUMERIC},
+                nickname=#{nickname,jdbcType=VARCHAR},
+                graduate_del=#{graduateDel,jdbcType=NUMERIC},
+                orderno=#{orderno,jdbcType=NUMERIC},
+                class_type=#{classType,jdbcType=NUMERIC},
+                classno=#{classno,jdbcType=VARCHAR},
+                learning_year=#{learningYear,jdbcType=VARCHAR},
+                section=#{section,jdbcType=NUMERIC},
+                sep_code=#{sepCode,jdbcType=VARCHAR},
+                establish_date=#{establishDate,jdbcType=DATE},
+                father_sep_code=#{fatherSepCode,jdbcType=VARCHAR},
+                last_update_timestamp=#{lastUpdateTimestamp,jdbcType=DATE},
+                user_id=#{userId,jdbcType=NUMERIC},
+                preid=#{preid,jdbcType=NUMERIC},
+                class_name=#{className,jdbcType=VARCHAR},
+                school_id=#{schoolId,jdbcType=NUMERIC},
+                language=#{language,jdbcType=NUMERIC},
+                exchange_id=#{exchangeId,jdbcType=VARCHAR},
+                is_graduate=#{isGraduate,jdbcType=NUMERIC},
+                in_school=#{inSchool,jdbcType=NUMERIC},   ]]>
+	   </set>
+	       WHERE ID = #{id}
+   </update> 
+   
+
+
+   
+   <!-- 删除记录 -->
+   <delete id="delete">
+          DELETE FROM XJ_CLASS
+          WHERE ID in    
+          <foreach collection="array" item="id" open="("  separator="," close=")" >
+                #{id}
+          </foreach>
+   </delete>
+  
+   
+   <!-- 以下是自定义的配置信息 -->
+   
+   
+   
+   
+
+</mapper>
+
+
+

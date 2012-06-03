@@ -5,7 +5,8 @@ import java.util.List;
 
 import model.business.ModelBusiness;
 import newm.business.edu.XjSchoolBusiness;
-import newm.vo.edu.XjSchoolVo;
+import newm.business.test.XjClassBusiness;
+import newm.vo.test.XjClassVo;
 import esfw.core.framework.SpringUtil;
 import esfw.core.framework.business.BusinessContainer;
 import esfw.core.framework.dao.mapper.OrderItem;
@@ -39,23 +40,26 @@ public class Main {
 	  */
      public static void case_query() {
     	 try {
-	    	 XjSchoolBusiness info  = SpringUtil.getSpringBean(XjSchoolBusiness.class,"xjSchoolBusiness");
-	    	 XjSchoolVo vo = new XjSchoolVo();
+    		 
+	    	 XjClassBusiness info  = SpringUtil.getSpringBean(XjClassBusiness.class,"xjClassBusiness");
+    	     XjClassVo vo = new XjClassVo();
 	    	 //分页设置
 	    	 vo.getPageVo().setPage(1);
 	    	 vo.getPageVo().setPageSize(50);
 	    	 
 	    	 //条件查询
-	    	 vo.setSchoolName("%测试%");
+//	    	 vo.setSchoolName("%测试%");
+	    	 vo.setSchoolId(1);
+	    	 vo.setGradeId(3);
 	    	 
 	    	 //排序控制
 	    	 List<OrderItem> orderSet = new ArrayList<OrderItem>();
-	    	 orderSet.add(new OrderItem("schoolName",OrderOption.DESC));
+	    	 orderSet.add(new OrderItem("className",OrderOption.DESC));
 	         vo.setOrderList(orderSet);
 	         //执行查询
-	    	 List<XjSchoolBusiness> results = info.query(vo);
-	    	 for(XjSchoolBusiness school:results){
-	    		 System.out.println("id:" +school.getId() +"  school: "+school.getSchoolName());
+	    	 List<XjClassBusiness> results = info.query(vo);
+	    	 for(XjClassBusiness school:results){
+	    		 System.out.println("id:" +school.getId() +"  class : "+school.getClassName());
 	    	 }
 	    	 
 		  } catch (BusinessException e) {

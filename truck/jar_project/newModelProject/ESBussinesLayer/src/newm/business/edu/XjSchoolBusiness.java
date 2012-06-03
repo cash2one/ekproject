@@ -4,7 +4,7 @@ package newm.business.edu;
 import java.util.*;
 
 import newm.dao.entity.edu.XjSchoolEntity;
-import newm.dao.edu.XjSchoolDao;
+import newm.dao.inter.edu.XjSchoolDao;
 import newm.vo.edu.XjSchoolVo;
 
 import org.apache.log4j.Logger;
