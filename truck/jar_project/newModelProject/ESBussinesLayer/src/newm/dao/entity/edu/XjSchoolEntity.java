@@ -10,7 +10,7 @@ import esfw.core.framework.dao.GenericEntity;
  * @author Qtone  
  * @CreateTime Sun Jun 03 02:15:50 GMT 2012
  */
-public class XjSchoolEntity implements GenericEntity {
+public class XjSchoolEntity extends GenericEntity {
    
      
          private long  id; //学校ID 

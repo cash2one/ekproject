@@ -11,7 +11,7 @@ import esfw.core.framework.dao.GenericEntity;
  * @date 2012-5-24
  *
  */
-public class ModelEntity implements GenericEntity {
+public class ModelEntity extends GenericEntity {
 
     private long  id; //学校ID 
     private long  townId = -1; //所属镇区 

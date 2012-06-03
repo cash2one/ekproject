@@ -3,8 +3,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
-<mapper namespace="new.mdao.imp.edu.XjSchoolDaoImp">
+<mapper namespace="newm.dao.edu.XjSchoolDao">
 
 	<!-- 以下配置是系统自动生成的 -->
 
@@ -129,7 +128,7 @@
 
 	<!-- 分页查询对应的记录 -->
 
-	<select id="qeury" resultType="newm.dao.entity.edu.XjSchoolEntity">
+	<select id="query" resultType="newm.dao.entity.edu.XjSchoolEntity">
 		SELECT <include refid="columns" />
 			FROM
 				<include refid="querySqlMain" />
@@ -154,7 +153,7 @@
 
 	<!-- 更新记录 -->
 
-	<update id="updateXjSchool">
+	<update id="update">
 		UPDATE XJ_SCHOOL
 		<set>
             <![CDATA[ 
@@ -190,7 +189,7 @@
 
 	<!-- 删除记录 -->
 
-	<delete id="deleteXjSchool">
+	<delete id="delete">
 		DELETE FROM XJ_SCHOOL
 		WHERE ID in
 		<foreach collection="array" item="id" open="(" separator=","

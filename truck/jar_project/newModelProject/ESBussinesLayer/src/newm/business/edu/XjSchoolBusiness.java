@@ -36,7 +36,7 @@ import esfw.core.framework.exception.DaoAccessException;
  *
  */
 @Scope("prototype") 
-@Service("xjSchoolInfo")
+@Service("xjSchoolBusiness")
 public class XjSchoolBusiness  extends BaseBusiness<Long> implements BaseQuery<XjSchoolBusiness,Long,XjSchoolVo>{
 
       //日志服务对象
