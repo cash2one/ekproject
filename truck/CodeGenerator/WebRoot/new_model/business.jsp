@@ -9,14 +9,15 @@
 	String entityName=map.getClazz();
 	
 	entityName=StringHelper.fistChartUpperCase(entityName);
-	String basePackageName = "qtone.xxt.";
+	String basePackageName = BaseCfg.basePackageName;
 	String businessPackageName = basePackageName+map.getBusinessNamespace()+"."+map.getNamespace();
 	String entryPackageName = basePackageName+map.getDaoNamespace()+"."+map.getEntityNamespace()+"."+map.getNamespace();
-	String mapperPackageName = basePackageName+map.getDaoNamespace()+"."+map.getMapperNamespace()+"."+map.getNamespace();
+	String mapperPackageName = basePackageName+map.getDaoNamespace()+"."+map.getNamespace();
+	String voPackageName = basePackageName+map.getVoNamespace()+"."+map.getNamespace();
 	
+	String mapperObjName = StringHelper.fistChartUpperCase(entityName)+"Dao";
+	String entryObjName =  StringHelper.fistChartUpperCase(entityName)+"Entity";
 	
-	String mapperObjName = StringHelper.fistChartUpperCase(entityName)+"Mapper";
-	String entryObjName =  StringHelper.fistChartUpperCase(entityName)+"Entry";
 	
 	//如果是该表是分表的就该在接口方法(新增、更新、删除方法，查询方法默认要保留)中加上对应的参数
 	String areaAbbParamStr = "@SearchParameter(name =\""+BaseCfg.AREA_ABB+"\")String "+BaseCfg.AREA_ABB;
@@ -32,28 +33,34 @@
     
     String tempStr="";
 %>
+
 package <%=businessPackageName%>;
  
+
 import java.util.*;
-import java.util.List;
 
-
-import org.springframework.stereotype.Service;
-import org.springframework.context.annotation.Scope;
-
+import <%=entryPackageName+"."+map.getClazz()%>Entity;
+import <%=mapperPackageName+"."+map.getClazz()%>Dao;
+import <%=voPackageName+"."+map.getClazz()%>Vo;
 
 import org.apache.log4j.Logger;
+import org.springframework.context.annotation.Scope;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.TransactionDefinition;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
+
 import esfw.core.framework.SpringUtil;
-import esfw.core.framework.annotation.SeacherFun;
-import esfw.core.framework.annotation.SearchParameter;
 import esfw.core.framework.business.BaseBusiness;
+import esfw.core.framework.business.BaseQuery;
 import esfw.core.framework.business.enumeration.ActionType;
-import esfw.core.framework.dao.mapper.OrderItem;
+import esfw.core.framework.dao.PageBean;
 import esfw.core.framework.exception.BusinessException;
 import esfw.core.framework.exception.DaoAccessException;
 
-import <%=entryPackageName+"."+map.getClazz()%>Entry;
-import <%=mapperPackageName+"."+map.getClazz()%>Mapper;
+
+
 
 
 /**
@@ -66,10 +73,10 @@ import <%=mapperPackageName+"."+map.getClazz()%>Mapper;
  */
 @Scope("prototype") 
 @Service("<%=StringHelper.fistChartLowerCase(map.getName())%>")
-public class <%=map.getName()%> extends BaseBusiness {
+public class <%=map.getClazz()%>Business  extends BaseBusiness<%="<"%>Long<%=">"%> implements BaseQuery<%="<"%><%=map.getClazz()%>Business,Long,<%=map.getClazz()%>Vo<%=">"%>{
     
       //日志服务对象
-      static Logger logger = Logger.getLogger(<%=map.getName()%>.class);
+      static Logger logger = Logger.getLogger(<%=map.getClazz()%>Business.class);
     
       //实体属性
 	  //*****************************************************************************************************************
@@ -82,15 +89,15 @@ public class <%=map.getName()%> extends BaseBusiness {
      /**
      * 默认构造函数
      */
-	 public <%=map.getName()%>() {
+	 public <%=map.getClazz()%>Business() {
 	     <%=StringHelper.fistChartLowerCase(entryObjName)%> = new <%=entryObjName%>();
 	 }
 	
      /**
      * 默认构造函数
      */
-	 public <%=map.getName()%>(<%=entryObjName%> entry) {
-	      this.<%=StringHelper.fistChartLowerCase(entryObjName)%> = entry;
+	 public <%=map.getClazz()%>Business(<%=entryObjName%> entity) {
+	      this.<%=StringHelper.fistChartLowerCase(entryObjName)%> = entity;
 	 }
 	
 	
@@ -138,7 +145,7 @@ public class <%=map.getName()%> extends BaseBusiness {
 	@Override
 	public String getBusinessName(){
 	   // TODO Auto-generated method stub
-		 return "<%=map.getName()%>";
+		 return "<%=map.getNamespace()+"."+map.getClazz()%>Business";
 	}
 
 
@@ -148,7 +155,7 @@ public class <%=map.getName()%> extends BaseBusiness {
 	@Override
 	public String getFunctionFlag() {
 		// TODO Auto-generated method stub
-		 return "<%=map.getName()%>";
+		 return "<%=map.getClazz()%>Business";
 	}
 
 	/**
@@ -157,7 +164,7 @@ public class <%=map.getName()%> extends BaseBusiness {
 	@Override
 	public String getModel() {
 		// TODO Auto-generated method stub
-		 return "";
+		 return "<%=map.getNamespace()%>";
 	}
 
     /**
@@ -188,35 +195,33 @@ public class <%=map.getName()%> extends BaseBusiness {
 	
    <% if(map.getPrimaryKeyItem()!=null){//有主键才可以有此方法 %>
     /**
-     * 根据主键（<%=map.getPrimaryKeyItem().getName()%>）查询某条记录
-     * @param <%=map.getPrimaryKeyItem().getName()%>
-     * @return Boolean true:代表查询到结果,false：找不到记录
-     */
-	public Boolean findOne(<%="long  "+map.getPrimaryKeyItem().getName()%>)  throws BusinessException {
-	    <%=mapperImport%>
-		<%=entryObjName%> entry = null;
-	    try{
-	         entry = <%=StringHelper.fistChartLowerCase(mapperObjName)%>.findOne(this.getDaoAbb(),<%=map.getPrimaryKeyItem().getName()%>);
-	    }catch(DaoAccessException ex){
-	       logger.error(getBusinessName()+"执行记录findOne操作时出现异常",ex);
-	       throw new BusinessException("查询记录详细发生异常",ex.getMessage(),ex);
-	    }
-		 
-		 if (entry != null){<% //赋值
-	     for(FieldItem field:mainFields){%>
-	           this.set<%out.print(StringHelper.fistChartUpperCase(field.getName())+"(entry.get"+StringHelper.fistChartUpperCase(field.getName())+"());");
-	     }
-         for(FieldItem field:subFields){%>
-                   this.set<%out.print(StringHelper.fistChartUpperCase(field.getName())+"(entry.get"+StringHelper.fistChartUpperCase(field.getName())+"());");}%>
-		  
-		   entry = null;
-		   return true;
-		  }else{ 
-		        this.<%=StringHelper.fistChartLowerCase(entryObjName)%> = new <%=entryObjName%>();
-		        return false;  
-          }
-           
+	 * 
+	 * 功能描述：Load 根据主键 查询对应的记录
+	 * @author Ethan.Lam
+	 * (non-Javadoc)
+	 * @see esfw.core.framework.business.BaseQuery#load(java.lang.Object)
+	 * 
+	 */
+	public Boolean load(Long id) throws BusinessException {
+	// TODO Auto-generated method stub
+	 try {
+		        <%=mapperImport%>
+			<%=map.getClazz()%>Entity entity =  <%=StringHelper.fistChartLowerCase(map.getClazz())%>Dao.load(id);
+			if(entity!=null){
+				this.<%=StringHelper.fistChartLowerCase(entryObjName)%> = entity;
+				return true;
+			}else{
+				this.<%=StringHelper.fistChartLowerCase(entryObjName)%> = new <%=map.getClazz()%>Entity();
+				// 没有对应的记录是，返回空集对象
+				return false;
+			}
+		} catch (DaoAccessException ex) {
+		    logger.error(getBusinessName()+" 执行记录  load 操作时出现异常",ex);
+		    throw new BusinessException("查询记录详细发生异常",ex.getMessage(),ex);
+		}
 	}
+
+
 	 <%}//END IF%>
 	
 	
@@ -227,16 +232,15 @@ public class <%=map.getName()%> extends BaseBusiness {
 	@Override
 	protected void onAdd() throws BusinessException {
 		// TODO Auto-generated method stub
-           try{
+		   try{
 		       <%=mapperImport%>
-		       <%=StringHelper.fistChartLowerCase(mapperObjName)%>.insert<%=map.getClazz()%>(<%=map.isAreaDeal()?"this.getDaoAbb(),":""%><%="this."+StringHelper.fistChartLowerCase(entryObjName)%>);
-		       <%=(true)?"":StringHelper.fistChartLowerCase(entryObjName)+"= null;"%> 
-	       }catch(DaoAccessException ex){
-	          logger.error(getBusinessName()+"执行记录新增后，执行提交操作时出现数据库异常",ex);
-	          throw new BusinessException("新建记录发生异常",ex.getMessage(),ex);
-	       }
-	       
+		       <%=StringHelper.fistChartLowerCase(map.getClazz())%>Dao.insert(this.<%=StringHelper.fistChartLowerCase(map.getClazz())%>Entity);
+		       }catch(DaoAccessException ex){
+		    	  logger.error(getBusinessName()+"执行记录新增后，进行提交时出现数据库异常",ex);
+		    	  throw new BusinessException("记录新增发生异常",ex.getMessage(),ex);
+		    } 
 	}
+	
 	
 	
 	/**
@@ -246,12 +250,27 @@ public class <%=map.getName()%> extends BaseBusiness {
 	protected void onModify() throws BusinessException {
 		// TODO Auto-generated method stub
         try{
-		    <%=mapperImport%>
-			<%=StringHelper.fistChartLowerCase(mapperObjName)%>.update<%=map.getClazz()%>(<%=map.isAreaDeal()?"this.getDaoAbb(),":""%><%="this."+StringHelper.fistChartLowerCase(entryObjName)%>);
-		    <%=(true)?"":StringHelper.fistChartLowerCase(entryObjName)+"= null;"%> 
+		        <%=mapperImport%>
+		     <%=StringHelper.fistChartLowerCase(map.getClazz())%>Dao.update(this.<%=StringHelper.fistChartLowerCase(map.getClazz())%>Entity);
 	    }catch(DaoAccessException ex){
 	          logger.error(getBusinessName()+"执行记录修改操作后，执行提交操作时出现数据库异常",ex);
 	          throw new BusinessException("修改记录信息发生异常",ex.getMessage(),ex);
+	    }
+	}
+	
+	
+	/**
+	 * 删除
+	 */
+	@Override
+	protected void onDelete(long ids[]) throws BusinessException {
+		// TODO Auto-generated method stub
+		try{
+	           <%=mapperImport%>
+		   <%=StringHelper.fistChartLowerCase(mapperObjName)%>.delete(ids);
+	    }catch(DaoAccessException ex){
+	       logger.error(getBusinessName()+"执行记录删除操作后，进行提交时出现数据库异常",ex);
+	       throw new BusinessException("删除记录发生异常",ex.getMessage(),ex);
 	    }
 	}
 
@@ -260,7 +279,7 @@ public class <%=map.getName()%> extends BaseBusiness {
    	
    	<% if(!map.isTransactionOff()){//事务控制类型的方法 %>
 	/**
-	 * 新增
+	 * 新增记录（事务控制类型）
 	 */
 	@Override
 	protected void onAdd() throws BusinessException {
@@ -274,16 +293,16 @@ public class <%=map.getName()%> extends BaseBusiness {
 		   try{
 		      
 		       <%=mapperImport%>
-		       <%=StringHelper.fistChartLowerCase(mapperObjName)%>.insert<%=map.getClazz()%>(<%=map.isAreaDeal()?"this.getDaoAbb(),":""%><%="this."+StringHelper.fistChartLowerCase(entryObjName)%>);
+		       <%=StringHelper.fistChartLowerCase(mapperObjName)%>.insert(<%="this."+StringHelper.fistChartLowerCase(entryObjName)%>);
 		       <%=(true)?"":StringHelper.fistChartLowerCase(entryObjName)+"= null;"%> 
 		       
 		       //请实现业务新增的逻辑过程
 		       
-		       
+			   txManager.commit(status);		       
 		       }catch(DaoAccessException ex){
 		    	  logger.error(getBusinessName()+"执行记录新增后，进行业务提交时出现数据库异常",ex);
 		    	  txManager.rollback(status); //事务回滚
-		    	  throw new BusinessException(ex.getUserOperateExMsg(),ex.getMessage(),ex);
+		    	  throw new BusinessException("新增记录发生异常",ex.getMessage(),ex);
 		    } 
 		    txManager = null;
 		    def = null;
@@ -291,7 +310,7 @@ public class <%=map.getName()%> extends BaseBusiness {
 	
 	
 	/**
-	 * 修改
+	 * 修改 （事务控制类型）
 	 */
 	@Override
 	protected void onModify() throws BusinessException {
@@ -307,13 +326,41 @@ public class <%=map.getName()%> extends BaseBusiness {
 		TransactionStatus status = txManager.getTransaction(def);
 		try{
 		    <%=mapperImport%>
-			<%=StringHelper.fistChartLowerCase(mapperObjName)%>.update<%=map.getClazz()%>(<%=map.isAreaDeal()?"this.getDaoAbb(),":""%><%="this."+StringHelper.fistChartLowerCase(entryObjName)%>);
+			<%=StringHelper.fistChartLowerCase(mapperObjName)%>.update(<%="this."+StringHelper.fistChartLowerCase(entryObjName)%>);
 		    <%=(true)?"":StringHelper.fistChartLowerCase(entryObjName)+"= null;"%> 
-	        
+				  
+		    txManager.commit(status);	        
 	        }catch(DaoAccessException ex){
 		    	logger.error(getBusinessName()+"执行记录修改后，进行业务提交时出现数据库异常",ex);
 		    	txManager.rollback(status); //事务回滚
-		    	throw new BusinessException(ex.getUserOperateExMsg(),ex.getMessage(),ex);
+		    	throw new BusinessException("修改记录详细信息发生异常",ex.getMessage(),ex);
+		    } 
+		    txManager = null;
+		    def = null;
+	}
+	
+	
+    /**
+     * 删除记录（事务控制类型）
+     */
+	@Override
+      protected void onDelete(Long[] ids) throws BusinessException {
+		// TODO Auto-generated method stub
+		        
+        //打开事务控制
+        DefaultTransactionDefinition def = new DefaultTransactionDefinition();
+		def.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
+		DataSourceTransactionManager txManager =  SpringUtil.getSpringBean(DataSourceTransactionManager.class,"transactionManager");
+		TransactionStatus status = txManager.getTransaction(def);
+		try{
+	       <%=mapperImport%>
+		   <%=StringHelper.fistChartLowerCase(mapperObjName)%>.delete(ids);
+	        
+		    txManager.commit(status);	        
+	        }catch(DaoAccessException ex){
+		    	logger.error(getBusinessName()+"执行记录删除后，进行业务提交时出现数据库异常",ex);
+		    	txManager.rollback(status); //事务回滚
+		    	throw new BusinessException("删除记录时发生异常",ex.getMessage(),ex);
 		    } 
 		    txManager = null;
 		    def = null;
@@ -321,96 +368,35 @@ public class <%=map.getName()%> extends BaseBusiness {
    	<%}//END IF%>
 
 	
+
+
 	/**
-	 * 删除
+	 * 
+	 * 功能描述：列表查询(分页)
+	 * @author Ethan.Lam
+	 * (non-Javadoc)
+	 * @see esfw.core.framework.business.BaseQuery#query(java.io.Serializable)
 	 */
-	@Override
-	protected void onDelete(long ids[]) throws BusinessException {
-		// TODO Auto-generated method stub
-		<%=mapperImport%>
-		try{
-		   <%=StringHelper.fistChartLowerCase(mapperObjName)%>.delete<%=map.getClazz()%>(<%=map.isAreaDeal()?"this.getDaoAbb(),":""%>ids);
-	    }catch(DaoAccessException ex){
-	       logger.error(getBusinessName()+"执行记录删除操作后，进行提交时出现数据库异常",ex);
-	       throw new BusinessException("删除记录发送异常",ex.getMessage(),ex);
-	    }
+	public List<<%=map.getClazz()%>Business> query(<%=map.getClazz()%>Vo vo) throws BusinessException {
+           // TODO Auto-generated method stub
+         List<<%=map.getClazz()%>Business> results = new ArrayList<<%=map.getClazz()%>Business>();
+		 try {
+	            <%=mapperImport%>
+			    PageBean<<%=map.getClazz()%>Entity> pageBean = <%=StringHelper.fistChartLowerCase(mapperObjName)%>.query(vo.getPageVo().getPage(),vo.getPageVo().getPageSize(),vo);
+			    if(pageBean!=null && pageBean.getBeanList()!= null){
+					for(<%=map.getClazz()%>Entity et:pageBean.getBeanList()){
+						results.add(new <%=map.getClazz()%>Business(et));
+					}
+			        this.setQeuryRecordTotalNum(pageBean.getTotalRecords());
+			    }
+			} catch (DaoAccessException ex) {
+			    logger.error(getBusinessName()+"执行记录查询操作时出现数据库异常",ex);
+			    throw new BusinessException("查询记录发生异常",ex.getMessage(),ex);
+			}
+		return results;
 	}
+						
 
-
-
-	
-	  /**
-	   * 查询结果集合
-	   * @param startRow   开始记录的行数
-	   * @param pageSize   设置每页显示的记录数
-     <%String conParamsStr="";tempStr="";String funcParamsStr="";
-   for(FieldItem field:mainFields){ funcParamsStr+=",entry.get"+StringHelper.fistChartUpperCase(field.getName())+"()";if(field.getName().equals(map.getPrimaryKeyItem()!=null?map.getPrimaryKeyItem().getName():null)) continue; %>
-	   <%
-	       if(field.getType().toLowerCase().indexOf("date")>=0||field.getType().toLowerCase().indexOf("time")>=0){
-	    	  out.println("* @param   "+field.getName()+"1   "+field.getDescript()+" （大于或等于开始时间）");
-	    	  out.print("           * @param   "+field.getName()+"2   "+field.getDescript()+" （小于或等于结束时间）");
-		      tempStr+=","+field.getName()+"1,"+field.getName()+"2";
-		      conParamsStr+=",@SearchParameter(name =\""+field.getName()+"1\")"+field.getType()+" "+field.getName()+"1,@SearchParameter(name =\""+field.getName()+"2\")"+field.getType()+" "+field.getName()+"2";
-	       }else{
-	          out.print("* @param   "+field.getName()+"   "+field.getDescript());
-	          tempStr+=","+field.getName();
-	          if("long".equals(field.getType().toLowerCase())||"int".equals(field.getType().toLowerCase()))
-	        	conParamsStr+=",@SearchParameter(name =\""+field.getName()+"\", defaultValue=\"-1\" )"+field.getType()+" "+field.getName();
-	        	  else
-	            conParamsStr+=",@SearchParameter(name =\""+field.getName()+"\")"+field.getType()+" "+field.getName();}
-	 
-   }//end for
-   for(FieldItem field:subFields){ funcParamsStr+=",entry.get"+StringHelper.fistChartUpperCase(field.getName())+"()";%>
-	   <%
-	      if(field.getType().toLowerCase().indexOf("date")>=0||field.getType().toLowerCase().indexOf("time")>=0){
-	    	  out.println("* @param   "+field.getName()+"1   "+field.getDescript()+" （大于或等于开始时间）");
-	    	  out.print("            * @param   "+field.getName()+"2   "+field.getDescript()+" （小于或等于结束时间）");
-		      tempStr+=","+field.getName()+"1,"+field.getName()+"2";
-		      conParamsStr+=",@SearchParameter(name =\""+field.getName()+"1\")"+field.getType()+" "+field.getName()+"1,@SearchParameter(name =\""+field.getName()+"2\")"+field.getType()+" "+field.getName()+"2";
-	      }else{ 
-	          out.print("* @param   "+field.getName()+"   "+field.getDescript());
-	          if("long".equals(field.getType().toLowerCase())||"int".equals(field.getType().toLowerCase()))
-		          conParamsStr+=",@SearchParameter(name =\""+field.getName()+"\", defaultValue=\"-1\" )"+field.getType()+" "+field.getName();
-		      else
-	              conParamsStr+=",@SearchParameter(name =\""+field.getName()+"\")"+field.getType()+" "+field.getName();
-	          tempStr+=","+field.getName();}
-	     }//end for
-         funcParamsStr=funcParamsStr.substring(1);
-         tempStr=tempStr.substring(1);;
-	     conParamsStr = conParamsStr.substring(1);%>
-	   * @param orderList  //控制排序
-	   * @return List<<%=map.getName()%>>
-	   */
-	@SeacherFun(nameAlias="<%=map.getName()%>Seacher")
-	public List<<%=map.getName()%>> query<%=entityName%>s(@SearchParameter(defaultValue = "1",name = "startRow")int startRow, @SearchParameter(defaultValue = "20",name = "pageSize")int pageSize,
-				<%=conParamsStr%>,
-				@SearchParameter(name="orderList")List<OrderItem>orderList) throws BusinessException{
-		   //实例化List对象		
-		   List<<%=map.getName()%>> list = new ArrayList<<%=map.getName()%>>();
-		   //查询结果实体
-		   <%=mapperImport%>
-		  try{ 
-		   this.setQeuryRecordTotalNum(<%=StringHelper.fistChartLowerCase(mapperObjName)%>.qeury<%=map.getClazz()%>sRecordCount(this.getDaoAbb(),<%=tempStr%>));
-		   List<<%=entryObjName%>> entryList = <%=StringHelper.fistChartLowerCase(mapperObjName)%>.qeury<%=map.getClazz()%>s(startRow,pageSize,this.getDaoAbb(),<%=tempStr%>,orderList);
-	       if (entryList != null){
-			  for (<%=entryObjName%> entry : entryList) {
-				   list.add(new <%=map.getName()%>(entry));
-				   entry = null;
-			  }
-			  entryList = null;
-		   }
-		  }catch(DaoAccessException ex){
-	          logger.error(getBusinessName()+"执行记录查询操作时出现数据库异常",ex);
-	          throw new BusinessException("查询记录发生异常",ex.getMessage(),ex);
-	      }
-		return list;
-	}
-				
-			
-
-	
-	
-	
 	//自定义方法
 	//*****************************************************************************************************************
 	

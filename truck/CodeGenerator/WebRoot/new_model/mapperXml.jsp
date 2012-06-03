@@ -5,14 +5,14 @@
     String path = request.getContextPath();
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 	String cfgPath = BaseCfg.CFG_PATH+"/templates/"+request.getParameter("cfg");
+	
 	BusinessMap map = new BusinessMap(cfgPath);
 	String entityName=map.getClazz();
 	
-	
-	String basePackageName = "qtone.xxt.";
+	String basePackageName = BaseCfg.basePackageName;
 	String packageName = basePackageName+map.getDaoNamespace()+"."+map.getEntityNamespace()+"."+map.getNamespace()+".";
-	String mapperName=basePackageName+map.getDaoNamespace()+"."+map.getMapperNamespace()+"."+map.getNamespace()+"."+StringHelper.fistChartUpperCase(entityName+"Mapper");
-	String entryName = packageName+StringHelper.fistChartUpperCase(entityName+"Entry");
+	String mapperName=basePackageName+map.getDaoNamespace()+"."+map.getNamespace()+"."+StringHelper.fistChartUpperCase(entityName+"Dao");
+	String entryName = packageName+StringHelper.fistChartUpperCase(entityName+"Entity");
 	String isDefineEntityName = !map.isAreaDeal()?("resultType=\""+entryName)+"\"":"";
 	
 	String moduleName=StringHelper.fistChartUpperCase(entityName);
@@ -64,8 +64,9 @@
   <!-- 以下配置是系统自动生成的 -->
 
   <!-- 显示的记录对应的列-->
-  <sql id="<%=moduleName%>Columns" >
-		    <%=allFieldStr%>
+  <sql id="columns" >
+	  <![CDATA[  
+	     <%=allFieldStr%>  ]]>
   </sql>
   
   
@@ -77,7 +78,7 @@
             	  <%out.print(SqlXmlCreator.appendWhereOptions(key,items[0],items[1],items[3]));  
             	    insertFieldStr+=","+items[1];
  	        	     // valuesStr+=",#{"+entityName+"."+items[2]+"}";
-            	    valuesStr+=",#{"+SqlXmlCreator.columnTran(entityName+"."+items[2],items[3],items[5])+"}";
+            	    valuesStr+=",#{"+SqlXmlCreator.columnTran(items[2],items[3],items[5])+"}";
                }
                for(String key:subFieldSet.keySet()){
              	  items = subFieldSet.get(key);%>         
@@ -111,51 +112,49 @@
  
   <!-- 列表查询对应的表关系SQL  -->
   <sql id="querySqlMain">
-			  <% out.print(SqlXmlCreator.wrapperMainQuerySql(map.getTable(),map.getTableAlias(),map.getTopJoinTable())); %>
+	 <![CDATA[   
+	      <% out.print(SqlXmlCreator.wrapperMainQuerySql(map.getTable(),map.getTableAlias(),map.getTopJoinTable())); %>  ]]>
   </sql>
 
   
    <% if(map.getPrimaryKeyItem()!=null){//有主键才可以有此方法 %>
    <!-- 根据ID查询记录 -->
-   <select id="findOne" resultType="<%=entryName%>">
-	     SELECT  <include refid="<%=moduleName%>Columns"/>              
-		    FROM <include refid="querySqlMain"/>
-			where <%=primaryKey.getTableAlias()%>.<%=primaryKey.getSourceField()%>=<%="#{"+primaryKey.getName()+"}"%>
+   <select id="loadById" resultType="<%=entryName%>">
+	     SELECT  <include refid="columns"/>              
+		       FROM <include refid="querySqlMain"/>
+			   where <%=primaryKey.getTableAlias()%>.<%=primaryKey.getSourceField()%>=<%="#{"+primaryKey.getName()+"}"%>
    </select>
    <%}//END IF%>
 
 
    <!-- 返回记录总数的语句 -->
-   <select id="qeury<%=moduleName%>sRecordCount" resultType="int">
-        SELECT count(*) num  FROM  <include refid="querySqlMain"/>
-        <include refid="queryOptions"/> 
+   <select id="count" resultType="int">
+         SELECT count(*) num   
+			  FROM  <include refid="querySqlMain"/>
+				    <include refid="queryOptions"/> 
    </select>
    
    
     <!-- 分页查询对应的记录 -->
-   <select id="qeury<%=moduleName%>s" resultType="<%=entryName%>">
-      SELECT * FROM (  
-	        SELECT A.*,ROWNUM RN FROM (
-	               SELECT <include refid="<%=moduleName%>Columns"/>   
-		           FROM <include refid="querySqlMain"/>
-		           <include refid="queryOptions"/>
-		           <include refid="orderControl"/>
-		    ) A WHERE ROWNUM &lt;=<%="${startRow}+${pageSize}-1"%> ) 
-		 WHERE RN &gt;=<%="#{startRow}"%>
+   <select id="qeury" resultType="<%=entryName%>">
+	      SELECT <include refid="columns"/>   
+		      FROM <include refid="querySqlMain"/>
+		      <include refid="queryOptions"/>
+		      <include refid="orderControl"/>
    </select>
 
 
    <!-- 新增记录 -->
-   <insert id="insert<%=moduleName%>" useGeneratedKeys="false" >
+   <insert id="insert" useGeneratedKeys="false" >
        <% if(map.getPrimaryKeyItem()!=null&&map.getSequence()!=null&&!"".equals(map.getSequence())){//已设置序列到主键上 %>
-       <selectKey resultType="long" order="AFTER" keyProperty="<%=entityName%>.<%=primaryKey.getName()%>">
-	       SELECT <%=map.getSequence()%>.currval FROM  DUAL
-	   </selectKey>
+       <selectKey resultType="long" order="AFTER" keyProperty="<%=primaryKey.getName()%>">
+	       <![CDATA[    SELECT <%=map.getSequence()%>.currval FROM  DUAL    ]]> 
+	   </selectKey> 
              INSERT INTO <%=map.getTable()%> (<%=insertFieldStr.substring(1)%>)
-             VALUES(<%=valuesStr.substring(1)%>)
+             VALUES(<%=valuesStr.substring(1)%>)  
        <%}else{//没设置序列%>   
              INSERT INTO <%=map.getTable()%> (<%=map.getPrimaryKeyItem()!=null?(map.getPrimaryKeyItem().getName()+","+insertFieldStr.substring(1)):insertFieldStr.substring(1)%>)
-             VALUES(<%=map.getPrimaryKeyItem()!=null?(keyCloumnValue+","+valuesStr.substring(1)):valuesStr.substring(1)%>)
+             VALUES(<%=map.getPrimaryKeyItem()!=null?(keyCloumnValue+","+valuesStr.substring(1)):valuesStr.substring(1)%>) 
        <%}//END ELSE%>     
    </insert>
    
@@ -164,10 +163,11 @@
    <!-- 更新记录 -->       
    <update id="update<%=moduleName%>" >
            UPDATE <%=map.getTable()%> 
-           <set><% for(String[] infos:mainFieldSet.values()){%>
-                <%  if("false".equals(infos[4])){ out.print(infos[1]+"=#{"+ SqlXmlCreator.columnTran(entityName+"."+infos[2],infos[3],infos[5])+"},");  }}%>
+           <set>
+            <![CDATA[ <% for(String[] infos:mainFieldSet.values()){%>
+                <%  if("false".equals(infos[4])){ out.print(infos[1]+"=#{"+ SqlXmlCreator.columnTran(infos[2],infos[3],infos[5])+"},");  }}%>   ]]>
 	   </set>
-	       WHERE <%=primaryKey.getSourceField()%> = <%="#{"+entityName%>.<%=primaryKey.getName()+"}"%>
+	       WHERE <%=primaryKey.getSourceField()%> = <%="#{"%><%=primaryKey.getName()+"}"%>
    </update> 
    <%}//END IF%>
 
@@ -176,8 +176,8 @@
    <!-- 删除记录 -->
    <delete id="delete<%=moduleName%>">
           DELETE FROM <%=map.getTable()%>
-          WHERE <%=primaryKey.getSourceField()%> in 
-          <foreach collection="<%=primaryKey.getName()+"s"%>" item="<%=primaryKey.getName()%>" open="("  separator="," close=")" >
+          WHERE <%=primaryKey.getSourceField()%> in    
+          <foreach collection="array" item="<%=primaryKey.getName()%>" open="("  separator="," close=")" >
                 <%="#{"+primaryKey.getName()+"}"%>
           </foreach>
    </delete>

@@ -8,12 +8,13 @@
 	BusinessMap map = new BusinessMap(cfgPath);
 	String entityName=map.getClazz();
 	entityName=StringHelper.fistChartUpperCase(entityName);
-	String packageName = "qtone.xxt."+map.getDaoNamespace()+"."+map.getEntityNamespace()+"."+map.getNamespace();
+	String packageName = BaseCfg.basePackageName+map.getDaoNamespace()+"."+map.getEntityNamespace()+"."+map.getNamespace();
 %>
 package <%=packageName%>;
 
-import java.io.Serializable;
 import java.util.*;
+
+import esfw.core.framework.dao.GenericEntity;
 
 /**
  * @description <%=map.getDescription()%> 对应的实体
@@ -21,7 +22,7 @@ import java.util.*;
  * @author <%=map.getAuthor()%>  
  * @CreateTime <%=new Date().toString()%>
  */
-public class <%=entityName%>Entry implements Serializable {
+public class <%=entityName%>Entity implements GenericEntity {
    
     <% //输出主要的字段属性
        List<FieldItem> mainFields = map.getMainFields();
@@ -34,7 +35,7 @@ public class <%=entityName%>Entry implements Serializable {
           private <%out.print(field.getType()+"  "+field.getName()+"; //"+field.getDescript());}%>
      
         //默认空构造函数
-	  public <%=entityName%>Entry(){
+	  public <%=entityName%>Entity(){
 	
 	  }
 	
