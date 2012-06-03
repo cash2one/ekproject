@@ -1,4 +1,4 @@
-package newm.dao.edu;
+package newm.dao.inter.edu;
 
 import java.util.*;
 

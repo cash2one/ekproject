@@ -6,9 +6,9 @@ import org.springframework.stereotype.Component;
 
 import esfw.core.framework.dao.MyBaticGenericDao;
 
-import newm.dao.edu.XjSchoolDao;
 
 import newm.dao.entity.edu.XjSchoolEntity;
+import newm.dao.inter.edu.XjSchoolDao;
 
 import newm.vo.edu.XjSchoolVo;
 
