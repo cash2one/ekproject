@@ -34,7 +34,7 @@
     String tempStr="";
 %>
 
-package <%=businessPackageName%>;
+  package <%=businessPackageName%>;
  
 
 import java.util.*;
@@ -206,6 +206,7 @@ public class <%=map.getClazz()%>Business  extends BaseBusiness<%="<"%>Long<%=">"
 	// TODO Auto-generated method stub
 	 try {
 		        <%=mapperImport%>
+		    <%=StringHelper.fistChartLowerCase(map.getClazz())%>Dao.setDaoAbb(this.getDaoAbb());
 			<%=map.getClazz()%>Entity entity =  <%=StringHelper.fistChartLowerCase(map.getClazz())%>Dao.load(id);
 			if(entity!=null){
 				this.<%=StringHelper.fistChartLowerCase(entryObjName)%> = entity;
@@ -234,6 +235,7 @@ public class <%=map.getClazz()%>Business  extends BaseBusiness<%="<"%>Long<%=">"
 		// TODO Auto-generated method stub
 		   try{
 		       <%=mapperImport%>
+		       <%=StringHelper.fistChartLowerCase(map.getClazz())%>Dao.setDaoAbb(this.getDaoAbb());
 		       <%=StringHelper.fistChartLowerCase(map.getClazz())%>Dao.insert(this.<%=StringHelper.fistChartLowerCase(map.getClazz())%>Entity);
 		       }catch(DaoAccessException ex){
 		    	  logger.error(getBusinessName()+"执行记录新增后，进行提交时出现数据库异常",ex);
@@ -251,6 +253,7 @@ public class <%=map.getClazz()%>Business  extends BaseBusiness<%="<"%>Long<%=">"
 		// TODO Auto-generated method stub
         try{
 		        <%=mapperImport%>
+		     <%=StringHelper.fistChartLowerCase(map.getClazz())%>Dao.setDaoAbb(this.getDaoAbb());   
 		     <%=StringHelper.fistChartLowerCase(map.getClazz())%>Dao.update(this.<%=StringHelper.fistChartLowerCase(map.getClazz())%>Entity);
 	    }catch(DaoAccessException ex){
 	          logger.error(getBusinessName()+"执行记录修改操作后，执行提交操作时出现数据库异常",ex);
@@ -266,7 +269,8 @@ public class <%=map.getClazz()%>Business  extends BaseBusiness<%="<"%>Long<%=">"
 	protected void onDelete(long ids[]) throws BusinessException {
 		// TODO Auto-generated method stub
 		try{
-	           <%=mapperImport%>
+	       <%=mapperImport%>
+	       <%=StringHelper.fistChartLowerCase(map.getClazz())%>Dao.setDaoAbb(this.getDaoAbb());    
 		   <%=StringHelper.fistChartLowerCase(mapperObjName)%>.delete(ids);
 	    }catch(DaoAccessException ex){
 	       logger.error(getBusinessName()+"执行记录删除操作后，进行提交时出现数据库异常",ex);
@@ -292,6 +296,7 @@ public class <%=map.getClazz()%>Business  extends BaseBusiness<%="<"%>Long<%=">"
 		   try{
 		      
 		       <%=mapperImport%>
+		       <%=StringHelper.fistChartLowerCase(map.getClazz())%>Dao.setDaoAbb(this.getDaoAbb()); 
 		       <%=StringHelper.fistChartLowerCase(mapperObjName)%>.insert(<%="this."+StringHelper.fistChartLowerCase(entryObjName)%>);
 		       <%=(true)?"":StringHelper.fistChartLowerCase(entryObjName)+"= null;"%> 
 		       
@@ -321,6 +326,7 @@ public class <%=map.getClazz()%>Business  extends BaseBusiness<%="<"%>Long<%=">"
 		TransactionStatus status = txManager.getTransaction(def);
 		try{
 		    <%=mapperImport%>
+		    <%=StringHelper.fistChartLowerCase(map.getClazz())%>Dao.setDaoAbb(this.getDaoAbb()); 
 			<%=StringHelper.fistChartLowerCase(mapperObjName)%>.update(<%="this."+StringHelper.fistChartLowerCase(entryObjName)%>);
 		    <%=(true)?"":StringHelper.fistChartLowerCase(entryObjName)+"= null;"%> 
 				  
@@ -349,6 +355,7 @@ public class <%=map.getClazz()%>Business  extends BaseBusiness<%="<"%>Long<%=">"
 		TransactionStatus status = txManager.getTransaction(def);
 		try{
 	       <%=mapperImport%>
+	       <%=StringHelper.fistChartLowerCase(map.getClazz())%>Dao.setDaoAbb(this.getDaoAbb()); 
 		   <%=StringHelper.fistChartLowerCase(mapperObjName)%>.delete(ids);
 	        
 		    txManager.commit(status);	        
@@ -377,6 +384,7 @@ public class <%=map.getClazz()%>Business  extends BaseBusiness<%="<"%>Long<%=">"
          List<<%=map.getClazz()%>Business> results = new ArrayList<<%=map.getClazz()%>Business>();
 		 try {
 	            <%=mapperImport%>
+	            <%=StringHelper.fistChartLowerCase(map.getClazz())%>Dao.setDaoAbb(this.getDaoAbb()); 
 			    PageBean<<%=map.getClazz()%>Entity> pageBean = <%=StringHelper.fistChartLowerCase(mapperObjName)%>.query(vo.getPageVo().getPage(),vo.getPageVo().getPageSize(),vo);
 			    if(pageBean!=null && pageBean.getBeanList()!= null){
 					for(<%=map.getClazz()%>Entity et:pageBean.getBeanList()){
