@@ -1,8 +1,11 @@
 package model.vo;
 
+import java.util.List;
+
 import model.entity.ModelEntity;
 import esfw.core.framework.controller.PageVo;
 import esfw.core.framework.controller.ViewObject;
+import esfw.core.framework.dao.mapper.OrderItem;
 
 /**
  * 
@@ -17,6 +20,15 @@ public class ModelVo extends ModelEntity implements ViewObject {
 	    return pageVo;
 	}
     
+    private List<OrderItem> orderList; //排序控制
+
+	public List<OrderItem> getOrderList() {
+		return orderList;
+	}
+
+	public void setOrderList(List<OrderItem> orderList) {
+		this.orderList = orderList;
+	}
 	
-	
+    
 }

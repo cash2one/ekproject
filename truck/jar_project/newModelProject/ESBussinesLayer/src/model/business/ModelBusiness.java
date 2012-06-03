@@ -1,5 +1,6 @@
 package model.business;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import model.dao.ModelDao;
@@ -123,15 +124,21 @@ public class ModelBusiness extends BaseBusiness<Long> implements BaseQuery<Model
 	 */
 	public List<ModelBusiness> query(ModelVo vo) throws BusinessException {
            // TODO Auto-generated method stub
+		 List<ModelBusiness> results = new ArrayList<ModelBusiness>();
 		 try {
 			    ModelDao modelDao= SpringUtil.getSpringBean(ModelDao.class,"modelDao");
 			    PageBean<ModelEntity> pageBean = modelDao.query(vo.getPageVo().getPage(),vo.getPageVo().getPageSize(),vo);
-				for(ModelEntity e:pageBean.getBeanList()){
-					System.out.println("分页查询结果: id: "+e.getId()+"  , "+e.getSchoolName());
-				} 		
-			} catch (DaoAccessException e) {
+			    if(pageBean!=null && pageBean.getBeanList()!= null){
+					for(ModelEntity e:pageBean.getBeanList()){
+						results.add(new ModelBusiness(e));
+					}
+			        this.setQeuryRecordTotalNum(pageBean.getTotalRecords());
+			    }
+			} catch (DaoAccessException ex) {
+			    logger.error(getBusinessName()+"执行记录查询操作时出现数据库异常",ex);
+			    throw new BusinessException("查询记录发生异常",ex.getMessage(),ex);
 			}
-		return null;
+		return results;
 	}
 
 
@@ -211,8 +218,8 @@ public class ModelBusiness extends BaseBusiness<Long> implements BaseQuery<Model
 			  ModelDao modelDao= SpringUtil.getSpringBean(ModelDao.class,"modelDao");
 			  modelDao.update(this.entity);	
 			} catch (DaoAccessException ex) {
-		          logger.error(getBusinessName()+"执行记录修改操作后，执行提交操作时出现数据库异常",ex);
-		          throw new BusinessException("修改记录信息发生异常",ex.getMessage(),ex);
+		       logger.error(getBusinessName()+"执行记录修改操作后，执行提交操作时出现数据库异常",ex);
+		       throw new BusinessException("修改记录信息发生异常",ex.getMessage(),ex);
 			}
 	}
 

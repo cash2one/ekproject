@@ -121,7 +121,7 @@
 	         SELECT <include refid="columns"/>   
 		         FROM <include refid="querySqlMain"/>
 		     <include refid="queryOptions"/>
-		     <!--include refid="orderControl"/ -->
+		     <include refid="orderControl"/>
    </select>
 
 

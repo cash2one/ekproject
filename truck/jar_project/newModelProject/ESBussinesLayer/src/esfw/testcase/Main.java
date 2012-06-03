@@ -1,5 +1,6 @@
 package esfw.testcase;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import model.business.ModelBusiness;
@@ -8,6 +9,8 @@ import qtone.xxt.business.amass.AmassCentInfo;
 import esfw.core.framework.MethodAdapter;
 import esfw.core.framework.SpringUtil;
 import esfw.core.framework.business.BusinessContainer;
+import esfw.core.framework.dao.mapper.OrderItem;
+import esfw.core.framework.dao.mapper.OrderItem.OrderOption;
 import esfw.core.framework.exception.BusinessException;
 
 /**
@@ -22,7 +25,7 @@ public class Main {
 		 BusinessContainer.getInstance();
 //		 case1(null); //原来模式的
 //		 case_mdf();
-		 case_del();
+//		 case_del();
 		 case_query(); //新的模式
 //		 case_mdf();
 //		 case_insert();
@@ -54,11 +57,21 @@ public class Main {
     	 try {
 	    	 ModelBusiness info  = SpringUtil.getSpringBean(ModelBusiness.class,"modelBusiness");
 	    	 ModelVo vo = new ModelVo();
+	    	 //分页设置
 	    	 vo.getPageVo().setPage(1);
 	    	 vo.getPageVo().setPageSize(50);
-	    	 vo.setSchoolName("测试%");
+	    	 
+	    	 //条件查询
+	    	 vo.setSchoolName("%测试%");
+	    	 
+	    	 //排序控制
+	    	 List<OrderItem> orderSet = new ArrayList<OrderItem>();
+	    	 orderSet.add(new OrderItem("schoolName",OrderOption.DESC));
+	         vo.setOrderList(orderSet);
+	         //执行查询
 	    	 info.query(vo);
 		  } catch (BusinessException e) {
+		 
 		  }
 	 }
      
