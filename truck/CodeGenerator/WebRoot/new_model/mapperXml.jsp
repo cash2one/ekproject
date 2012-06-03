@@ -161,7 +161,7 @@
    
    <% if(map.getPrimaryKeyItem()!=null){//有主键才可以有此方法 %>
    <!-- 更新记录 -->       
-   <update id="update<%=moduleName%>" >
+   <update id="update" >
            UPDATE <%=map.getTable()%> 
            <set>
             <![CDATA[ <% for(String[] infos:mainFieldSet.values()){%>
@@ -174,7 +174,7 @@
 
    <% if(map.getPrimaryKeyItem()!=null){//有主键才可以有此方法 %>
    <!-- 删除记录 -->
-   <delete id="delete<%=moduleName%>">
+   <delete id="delete">
           DELETE FROM <%=map.getTable()%>
           WHERE <%=primaryKey.getSourceField()%> in    
           <foreach collection="array" item="<%=primaryKey.getName()%>" open="("  separator="," close=")" >
