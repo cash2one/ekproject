@@ -11,7 +11,7 @@
 	entityName=StringHelper.fistChartUpperCase(entityName);
 	String basePackageName = BaseCfg.basePackageName;
 	String packageName = basePackageName+map.getDaoNamespace()+"."+map.getMapperNamespace()+"."+map.getNamespace();
-	String interPackageName = basePackageName+map.getDaoNamespace()+"."+map.getNamespace();
+	String interPackageName = basePackageName+map.getDaoNamespace()+".inter."+map.getNamespace();
 	
 	//如果是该表是分表的就该在接口方法(新增、更新、删除方法，查询方法默认要保留)中加上对应的参数
 	String areaAbbParamStr = "@Param(\""+BaseCfg.AREA_ABB+"\")String "+BaseCfg.AREA_ABB;

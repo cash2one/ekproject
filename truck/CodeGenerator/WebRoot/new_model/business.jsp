@@ -12,7 +12,7 @@
 	String basePackageName = BaseCfg.basePackageName;
 	String businessPackageName = basePackageName+map.getBusinessNamespace()+"."+map.getNamespace();
 	String entryPackageName = basePackageName+map.getDaoNamespace()+"."+map.getEntityNamespace()+"."+map.getNamespace();
-	String mapperPackageName = basePackageName+map.getDaoNamespace()+"."+map.getNamespace();
+	String mapperPackageName = basePackageName+map.getDaoNamespace()+".inter."+map.getNamespace();
 	String voPackageName = basePackageName+map.getVoNamespace()+"."+map.getNamespace();
 	
 	String mapperObjName = StringHelper.fistChartUpperCase(entityName)+"Dao";
@@ -284,7 +284,6 @@ public class <%=map.getClazz()%>Business  extends BaseBusiness<%="<"%>Long<%=">"
 	@Override
 	protected void onAdd() throws BusinessException {
 		// TODO Auto-generated method stub
-
 		   //打开事务控制
            DefaultTransactionDefinition def = new DefaultTransactionDefinition();
 		   def.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
@@ -315,10 +314,6 @@ public class <%=map.getClazz()%>Business  extends BaseBusiness<%="<"%>Long<%=">"
 	@Override
 	protected void onModify() throws BusinessException {
 		// TODO Auto-generated method stub
-		
-		//执行数据验证
-		checkAndFilter(ActionType.mdf);
-        
         //打开事务控制
         DefaultTransactionDefinition def = new DefaultTransactionDefinition();
 		def.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
