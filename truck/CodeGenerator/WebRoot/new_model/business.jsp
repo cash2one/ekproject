@@ -72,7 +72,7 @@ import esfw.core.framework.exception.DaoAccessException;
  *
  */
 @Scope("prototype") 
-@Service("<%=StringHelper.fistChartLowerCase(map.getName())%>")
+@Service("<%=StringHelper.fistChartLowerCase(map.getClazz())%>Business")
 public class <%=map.getClazz()%>Business  extends BaseBusiness<%="<"%>Long<%=">"%> implements BaseQuery<%="<"%><%=map.getClazz()%>Business,Long,<%=map.getClazz()%>Vo<%=">"%>{
     
       //日志服务对象
