@@ -52,7 +52,9 @@
 			      <tr>
 			         <td><a href="<%=(!BaseCfg.APP_CONTEXT.equals("")?"/"+BaseCfg.APP_CONTEXT:"")+"/templates/"+fileName.getName()+"\""%>"><%=fileName.getName() %></a></td>
 			         <td><a href="<%=!BaseCfg.APP_CONTEXT.equals("")?"/"+BaseCfg.APP_CONTEXT:""%>/new_model/entity.jsp?cfg=<%out.print(fileName.getName());%>">View Entity</a></td>
-			         <td><a href="<%=!BaseCfg.APP_CONTEXT.equals("")?"/"+BaseCfg.APP_CONTEXT:""%>/new_model/mapper.jsp?cfg=<%out.print(fileName.getName());%>">View Mapper</a></td>
+			         <td>
+			         <a href="<%=!BaseCfg.APP_CONTEXT.equals("")?"/"+BaseCfg.APP_CONTEXT:""%>/new_model/baseDao.jsp?cfg=<%out.print(fileName.getName());%>">View Base</a> |
+			         <a href="<%=!BaseCfg.APP_CONTEXT.equals("")?"/"+BaseCfg.APP_CONTEXT:""%>/new_model/daoImp.jsp?cfg=<%out.print(fileName.getName());%>">View DaoImp</a></td>
 			         <td><a href="<%=!BaseCfg.APP_CONTEXT.equals("")?"/"+BaseCfg.APP_CONTEXT:""%>/new_model/mapperXml.jsp?cfg=<%out.print(fileName.getName());%>">View Mapper_XML</a></td>
 			         <td><a href="<%=!BaseCfg.APP_CONTEXT.equals("")?"/"+BaseCfg.APP_CONTEXT:""%>/new_model/business.jsp?cfg=<%out.print(fileName.getName());%>">View Bussiness</a></td>
 			         <td><a href="<%=!BaseCfg.APP_CONTEXT.equals("")?"/"+BaseCfg.APP_CONTEXT:""%>/new_model/listPage.jsp?cfg=<%out.print(fileName.getName());%>">View PageModel</a></td>
