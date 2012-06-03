@@ -557,7 +557,7 @@ public class XjSchoolBusiness  extends BaseBusiness<Long> implements BaseQuery<X
 	public Boolean load(Long id) throws BusinessException {
 	// TODO Auto-generated method stub
 	 try {
-		        XjSchoolDao xjSchoolDao= SpringUtil.getSpringBean(XjSchoolDao.class,"xjSchoolDao");
+		    XjSchoolDao xjSchoolDao= SpringUtil.getSpringBean(XjSchoolDao.class,"xjSchoolDao");
 			XjSchoolEntity entity =  xjSchoolDao.load(id);
 			if(entity!=null){
 				this.xjSchoolEntity = entity;
@@ -619,9 +619,6 @@ public class XjSchoolBusiness  extends BaseBusiness<Long> implements BaseQuery<X
 	protected void onModify() throws BusinessException {
 		// TODO Auto-generated method stub
 		
-		//执行数据验证
-		checkAndFilter(ActionType.mdf);
-        
         //打开事务控制
         DefaultTransactionDefinition def = new DefaultTransactionDefinition();
 		def.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);

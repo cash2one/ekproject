@@ -13,7 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import esfw.core.framework.exception.BusinessException;
 
 @RunWith(SpringJUnit4ClassRunner.class)  
-@ContextConfiguration(locations={"config/applicationContext.xml"})  
+@ContextConfiguration(locations={"/config/SpringContext.xml"})  
 public class ModeTest {
 
 	

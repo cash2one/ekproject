@@ -558,9 +558,11 @@ public class XjStudentBusiness  extends BaseBusiness<Long> implements BaseQuery<
 	public Boolean load(Long id) throws BusinessException {
 	// TODO Auto-generated method stub
 	 try {
-		        XjStudentDao xjStudentDao= SpringUtil.getSpringBean(XjStudentDao.class,"xjStudentDao");
-			XjStudentEntity entity =  xjStudentDao.load(id);
+		    XjStudentDao xjStudentDao= SpringUtil.getSpringBean(XjStudentDao.class,"xjStudentDao");
+		    xjStudentDao.setDaoAbb(this.getDaoAbb());
+		    XjStudentEntity entity =  xjStudentDao.load(id);
 			if(entity!=null){
+			    entity.setDaoAbb(this.getDaoAbb());
 				this.xjStudentEntity = entity;
 				return true;
 			}else{
@@ -596,6 +598,7 @@ public class XjStudentBusiness  extends BaseBusiness<Long> implements BaseQuery<
 		   try{
 		      
 		       XjStudentDao xjStudentDao= SpringUtil.getSpringBean(XjStudentDao.class,"xjStudentDao");
+			   xjStudentDao.setDaoAbb(this.getDaoAbb());
 		       xjStudentDao.insert(this.xjStudentEntity);
 		        
 		       
@@ -625,6 +628,7 @@ public class XjStudentBusiness  extends BaseBusiness<Long> implements BaseQuery<
 		TransactionStatus status = txManager.getTransaction(def);
 		try{
 		    XjStudentDao xjStudentDao= SpringUtil.getSpringBean(XjStudentDao.class,"xjStudentDao");
+		    xjStudentDao.setDaoAbb(this.getDaoAbb());
 			xjStudentDao.update(this.xjStudentEntity);
 		     
 				  
@@ -653,6 +657,7 @@ public class XjStudentBusiness  extends BaseBusiness<Long> implements BaseQuery<
 		TransactionStatus status = txManager.getTransaction(def);
 		try{
 	       XjStudentDao xjStudentDao= SpringUtil.getSpringBean(XjStudentDao.class,"xjStudentDao");
+		   xjStudentDao.setDaoAbb(this.getDaoAbb());
 		   xjStudentDao.delete(ids);
 	        
 		    txManager.commit(status);	        
@@ -681,9 +686,11 @@ public class XjStudentBusiness  extends BaseBusiness<Long> implements BaseQuery<
          List<XjStudentBusiness> results = new ArrayList<XjStudentBusiness>();
 		 try {
 	            XjStudentDao xjStudentDao= SpringUtil.getSpringBean(XjStudentDao.class,"xjStudentDao");
+			    xjStudentDao.setDaoAbb(this.getDaoAbb());
 			    PageBean<XjStudentEntity> pageBean = xjStudentDao.query(vo.getPageVo().getPage(),vo.getPageVo().getPageSize(),vo);
 			    if(pageBean!=null && pageBean.getBeanList()!= null){
 					for(XjStudentEntity et:pageBean.getBeanList()){
+						et.setDaoAbb(this.getDaoAbb());
 						results.add(new XjStudentBusiness(et));
 					}
 			        this.setQeuryRecordTotalNum(pageBean.getTotalRecords());

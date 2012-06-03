@@ -123,4 +123,17 @@ public interface GenericDao<Vo extends ViewObject,PK,E extends Serializable> {
 	   */
 	  public boolean batchUpdate(PK[] pKeys,Map<String,Object> values)throws DaoAccessException;
 	  
+	  
+	  
+	  /**
+	   * 
+	   * 功能描述：表的物理分区   如,"cs_tableName"  设置  "cs"
+	   * @author Ethan.Lam
+	   * @dateTime 2012-6-3
+	   * @param daoAbb  cs
+	   * void
+	   *
+	   */
+	  public void setDaoAbb(String daoAbb);
+	  
 }
