@@ -22,7 +22,7 @@ import esfw.core.framework.dao.GenericEntity;
  * @author <%=map.getAuthor()%>  
  * @CreateTime <%=new Date().toString()%>
  */
-public class <%=entityName%>Entity implements GenericEntity {
+public class <%=entityName%>Entity extends GenericEntity {
    
     <% //输出主要的字段属性
        List<FieldItem> mainFields = map.getMainFields();

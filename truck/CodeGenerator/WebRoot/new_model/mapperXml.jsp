@@ -136,7 +136,7 @@
    
    
     <!-- 分页查询对应的记录 -->
-   <select id="qeury" resultType="<%=entryName%>">
+   <select id="query" resultType="<%=entryName%>">
 	      SELECT <include refid="columns"/>   
 		      FROM <include refid="querySqlMain"/>
 		      <include refid="queryOptions"/>
