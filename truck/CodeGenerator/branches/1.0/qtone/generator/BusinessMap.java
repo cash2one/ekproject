@@ -23,9 +23,11 @@ public class BusinessMap {
     
 	String daoNamespace="dao";
 	
+	String voNamespace="vo";
+	
     String entityNamespace="entity";
 	
-	String mapperNamespace="mapper";
+	String mapperNamespace="imp";
 	
     String table="${areaAbb}_XJ_STUDENT";
     String tableAlias = "";
@@ -53,6 +55,15 @@ public class BusinessMap {
 
 	public void setTransactionOff(boolean isTransactionOff) {
 		this.isTransactionOff = isTransactionOff;
+	}
+
+	
+	public String getVoNamespace() {
+		return voNamespace;
+	}
+
+	public void setVoNamespace(String voNamespace) {
+		this.voNamespace = voNamespace;
 	}
 
 	private void setName(String name) {
@@ -139,7 +150,7 @@ public class BusinessMap {
 
 
 	public String getMapperNamespace() {
-		return mapperNamespace;
+		return "imp";
 	}
 
 
