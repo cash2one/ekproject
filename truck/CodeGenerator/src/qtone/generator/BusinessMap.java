@@ -16,18 +16,24 @@ import cn.elam.util.file.xml.XmlHandler;
 public class BusinessMap {
 	
 	String namespace="edu";  
+	
 	String clazz="Student";
+	
 	String businessNamespace="business";
-    String daoNamespace="dao";
-	String entityNamespace="entity";
+    
+	String daoNamespace="dao";
+	
+    String entityNamespace="entity";
+	
 	String mapperNamespace="mapper";
+	
     String table="${areaAbb}_XJ_STUDENT";
     String tableAlias = "";
     String sequence="";
     String primaryKey="id";
 	String name;
     
-	boolean isTransactionOff = true; // 事务开启 
+	boolean isTransactionOff = false; // 事务开启 
     
     boolean isAreaDeal =false; //分表处理
     

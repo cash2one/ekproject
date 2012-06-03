@@ -32,6 +32,8 @@ public class BaseCfg {
 	public static String WWW_LOCALHOST="http://localhost/";
  
 
+	public static String basePackageName = "qtone.xxt.";
+	
 	static {
 		DOMConfigurator.configure("D:/Workspaces/google/ekproject/truck/CodeGenerator/src/log4j.xml");
 		
