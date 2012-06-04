@@ -267,7 +267,7 @@ public class <%=map.getClazz()%>Business  extends BaseBusiness<%="<"%>Long<%=">"
 	 * 删除
 	 */
 	@Override
-	protected void onDelete(long ids[]) throws BusinessException {
+	protected void onDelete(Long[] ids) throws BusinessException {
 		// TODO Auto-generated method stub
 		try{
 	       <%=mapperImport%>
