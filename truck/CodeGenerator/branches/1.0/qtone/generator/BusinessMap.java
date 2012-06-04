@@ -233,6 +233,7 @@ public class BusinessMap {
 		this.setPrimaryKey(_root.attributeValue("primaryKey"));
 		this.setSequence(_root.attributeValue("sequence"));
 		this.setAreaDeal(_root.attributeValue("isAreaDeal")!=null&&"true".equals(_root.attributeValue("isAreaDeal").toLowerCase())?true:false);
+		this.setTransactionOff(_root.attributeValue("isTranOn")!=null&&"true".equals(_root.attributeValue("isTranOn").toLowerCase())?false:true);
 		this.setTableAlias(_root.attributeValue("tableAlias"));
 		this.setName(this.getClazz()+"Info");
 		this.setVersion(XmlHandler.getElement(_doc,"descript/version").getText());

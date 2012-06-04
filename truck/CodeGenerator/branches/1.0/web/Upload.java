@@ -105,7 +105,7 @@ public class Upload extends HttpServlet {
 			urls.append(";").append(ip).append(
 					(!BaseCfg.APP_CONTEXT.equals("") ? "/"
 							+ BaseCfg.APP_CONTEXT : "")
-							+ "/"+MODEL+"/viewOject.jsp?cfg=").append(fileCfg);
+							+ "/"+MODEL+"/viewObject.jsp?cfg=").append(fileCfg);
 		}
 		out.write(urls.toString());
 		out.close();
