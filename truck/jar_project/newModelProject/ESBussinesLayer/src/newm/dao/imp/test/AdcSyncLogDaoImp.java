@@ -5,21 +5,21 @@ import java.util.*;
 import org.springframework.stereotype.Component;
 import esfw.core.framework.dao.MyBaticGenericDao;
 
-import newm.dao.inter.test.XjStudentDao;
-import newm.dao.entity.test.XjStudentEntity;
-import newm.vo.test.XjStudentVo;
+import newm.dao.inter.test.AdcSyncLogDao;
+import newm.dao.entity.test.AdcSyncLogEntity;
+import newm.vo.test.AdcSyncLogVo;
 
 
 /**
  *
- * @description 测试 类 对应的 Dao 实现层
+ * @description fsdf 类 对应的 Dao 实现层
  * @version v1.0.0
  * @author Ethanlam  
- * @CreateTime Mon Jun 04 13:26:23 GMT 2012
+ * @CreateTime Mon Jun 04 13:00:20 GMT 2012
  *
  */
-@Component("xjStudentDao")
-public class XjStudentDaoImp extends MyBaticGenericDao <XjStudentVo,Long,XjStudentEntity> implements XjStudentDao{
+@Component("adcSyncLogDao")
+public class AdcSyncLogDaoImp extends MyBaticGenericDao <AdcSyncLogVo,Long,AdcSyncLogEntity> implements AdcSyncLogDao{
     
      //自动生成的方法
 	 //************************************************************************************************************************
@@ -34,7 +34,7 @@ public class XjStudentDaoImp extends MyBaticGenericDao <XjStudentVo,Long,XjStude
 	 *
 	 */
     protected String mapNameSpace(){
-    	return "newm.dao.test.XjStudentDao";
+    	return "newm.dao.test.AdcSyncLogDao";
     }
     
     

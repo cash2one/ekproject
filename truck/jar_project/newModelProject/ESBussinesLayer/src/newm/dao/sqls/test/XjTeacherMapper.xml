@@ -1,0 +1,232 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="newm.dao.test.XjTeacherDao">
+
+  <!-- 以下配置是系统自动生成的 -->
+
+  <!-- 显示的记录对应的列-->
+  <sql id="columns" >
+	  <![CDATA[  
+	     xjteacher.id as id,xjteacher.school_id as schoolId,xjteacher.userid as userid,xjteacher.psw as psw,xjteacher.username as username,xjteacher.code as code,xjteacher.role_id as roleId,xjteacher.mphone as mphone,xjteacher.email as email,xjteacher.breceive as breceive,xjteacher.flag as flag,xjteacher.cdata as cdata,xjteacher.baseinfo as baseinfo,xjteacher.message_code as messageCode,xjteacher.credit_code as creditCode,xjteacher.birthday as birthday,xjteacher.preid as preid,xjteacher.exchange_id as exchangeId,xjteacher.seat_number as seatNumber,xjteacher.ic_no as icNo,xjteacher.crate_time as crateTime,xjteacher.psend as psend,xjteacher.synlesson_psw as synlessonPsw,xjteacher.lastupdatepswdate as lastupdatepswdate,xjteacher.opt_userid as optUserid,xjteacher.last_update_timestamp as lastUpdateTimestamp,xjteacher.last_login_time as lastLoginTime,xjteacher.is_locked as isLocked,xjteacher.login_sms as loginSms,xjteacher.sms_check_139 as smsCheck139,xjteacher.login_name as loginName,xjteacher.gjflag as gjflag,xjteacher.sx_userid as sxUserid,xjteacher.sx_psw as sxPsw,xjteacher.amass_phone as amassPhone,xjteacher.lastupdatepswtime as lastupdatepswtime,xjteacher.mms_data as mmsData,xjteacher.treceive as treceive,xjteacher.isbindphone as isbindphone  ]]>
+  </sql>
+  
+  
+  <!-- 列表对应的查询条件组合  -->
+  <sql id="queryOptions">
+       <where>
+            	  <if test="cdata>=0"> AND xjteacher.cdata = #{cdata}</if>
+            	  <if test="birthday1!=null"> AND xjteacher.birthday &gt; #{birthday1}</if><if test="birthday2!=null"> AND xjteacher.birthday &lt; #{birthday2}</if>
+            	  <if test="mmsData>=0"> AND xjteacher.mms_data = #{mmsData}</if>
+            	  <if test="psw!=null"> AND xjteacher.psw like #{psw}</if>
+            	  <if test="userid!=null"> AND xjteacher.userid like #{userid}</if>
+            	  <if test="synlessonPsw!=null"> AND xjteacher.synlesson_psw like #{synlessonPsw}</if>
+            	  <if test="amassPhone!=null"> AND xjteacher.amass_phone like #{amassPhone}</if>
+            	  <if test="sxUserid!=null"> AND xjteacher.sx_userid like #{sxUserid}</if>
+            	  <if test="messageCode!=null"> AND xjteacher.message_code like #{messageCode}</if>
+            	  <if test="username!=null"> AND xjteacher.username like #{username}</if>
+            	  <if test="sxPsw!=null"> AND xjteacher.sx_psw like #{sxPsw}</if>
+            	  <if test="optUserid!=null"> AND xjteacher.opt_userid like #{optUserid}</if>
+            	  <if test="treceive>=0"> AND xjteacher.treceive = #{treceive}</if>
+            	  <if test="preid>=0"> AND xjteacher.preid = #{preid}</if>
+            	  <if test="lastLoginTime1!=null"> AND xjteacher.last_login_time &gt; #{lastLoginTime1}</if><if test="lastLoginTime2!=null"> AND xjteacher.last_login_time &lt; #{lastLoginTime2}</if>
+            	  <if test="exchangeId!=null"> AND xjteacher.exchange_id like #{exchangeId}</if>
+            	  <if test="loginName!=null"> AND xjteacher.login_name like #{loginName}</if>
+            	  <if test="roleId>=0"> AND xjteacher.role_id = #{roleId}</if>
+            	  <if test="baseinfo!=null"> AND xjteacher.baseinfo like #{baseinfo}</if>
+            	  <if test="smsCheck139>=0"> AND xjteacher.sms_check_139 = #{smsCheck139}</if>
+            	  <if test="psend>=0"> AND xjteacher.psend = #{psend}</if>
+            	  <if test="gjflag!=null"> AND xjteacher.gjflag like #{gjflag}</if>
+            	  <if test="crateTime1!=null"> AND xjteacher.crate_time &gt; #{crateTime1}</if><if test="crateTime2!=null"> AND xjteacher.crate_time &lt; #{crateTime2}</if>
+            	  <if test="isbindphone>=0"> AND xjteacher.isbindphone = #{isbindphone}</if>
+            	  <if test="lastupdatepswtime1!=null"> AND xjteacher.lastupdatepswtime &gt; #{lastupdatepswtime1}</if><if test="lastupdatepswtime2!=null"> AND xjteacher.lastupdatepswtime &lt; #{lastupdatepswtime2}</if>
+            	  <if test="code!=null"> AND xjteacher.code like #{code}</if>
+            	  <if test="icNo!=null"> AND xjteacher.ic_no like #{icNo}</if>
+            	  <if test="isLocked>=0"> AND xjteacher.is_locked = #{isLocked}</if>
+            	  <if test="lastupdatepswdate1!=null"> AND xjteacher.lastupdatepswdate &gt; #{lastupdatepswdate1}</if><if test="lastupdatepswdate2!=null"> AND xjteacher.lastupdatepswdate &lt; #{lastupdatepswdate2}</if>
+            	  <if test="flag>=0"> AND xjteacher.flag = #{flag}</if>
+            	  <if test="breceive>=0"> AND xjteacher.breceive = #{breceive}</if>
+            	  <if test="email!=null"> AND xjteacher.email like #{email}</if>
+            	  <if test="loginSms>=0"> AND xjteacher.login_sms = #{loginSms}</if>
+            	  <if test="lastUpdateTimestamp1!=null"> AND xjteacher.last_update_timestamp &gt; #{lastUpdateTimestamp1}</if><if test="lastUpdateTimestamp2!=null"> AND xjteacher.last_update_timestamp &lt; #{lastUpdateTimestamp2}</if>
+            	  <if test="seatNumber>=0"> AND xjteacher.seat_number = #{seatNumber}</if>
+            	  <if test="creditCode!=null"> AND xjteacher.credit_code like #{creditCode}</if>
+            	  <if test="mphone!=null"> AND xjteacher.mphone like #{mphone}</if>
+            	  <if test="schoolId>=0"> AND xjteacher.school_id = #{schoolId}</if> 
+        </where> 
+  </sql>
+
+
+
+  <!-- 列表查询对应的排序选项  -->
+  <sql id="orderControl">
+       <if test="orderList!=null">
+		  <trim prefix="ORDER BY" prefixOverrides=",">
+				<foreach collection="orderList" item="order" open=""  separator="," close="" >
+				   <choose> 
+				       <when test="order.columnName=='cdata'"> xjteacher.cdata ${order.type} </when> 
+				       <when test="order.columnName=='birthday'"> xjteacher.birthday ${order.type} </when> 
+				       <when test="order.columnName=='mmsData'"> xjteacher.mms_data ${order.type} </when> 
+				       <when test="order.columnName=='psw'"> xjteacher.psw ${order.type} </when> 
+				       <when test="order.columnName=='userid'"> xjteacher.userid ${order.type} </when> 
+				       <when test="order.columnName=='synlessonPsw'"> xjteacher.synlesson_psw ${order.type} </when> 
+				       <when test="order.columnName=='amassPhone'"> xjteacher.amass_phone ${order.type} </when> 
+				       <when test="order.columnName=='sxUserid'"> xjteacher.sx_userid ${order.type} </when> 
+				       <when test="order.columnName=='messageCode'"> xjteacher.message_code ${order.type} </when> 
+				       <when test="order.columnName=='username'"> xjteacher.username ${order.type} </when> 
+				       <when test="order.columnName=='sxPsw'"> xjteacher.sx_psw ${order.type} </when> 
+				       <when test="order.columnName=='optUserid'"> xjteacher.opt_userid ${order.type} </when> 
+				       <when test="order.columnName=='treceive'"> xjteacher.treceive ${order.type} </when> 
+				       <when test="order.columnName=='preid'"> xjteacher.preid ${order.type} </when> 
+				       <when test="order.columnName=='lastLoginTime'"> xjteacher.last_login_time ${order.type} </when> 
+				       <when test="order.columnName=='exchangeId'"> xjteacher.exchange_id ${order.type} </when> 
+				       <when test="order.columnName=='loginName'"> xjteacher.login_name ${order.type} </when> 
+				       <when test="order.columnName=='roleId'"> xjteacher.role_id ${order.type} </when> 
+				       <when test="order.columnName=='baseinfo'"> xjteacher.baseinfo ${order.type} </when> 
+				       <when test="order.columnName=='smsCheck139'"> xjteacher.sms_check_139 ${order.type} </when> 
+				       <when test="order.columnName=='psend'"> xjteacher.psend ${order.type} </when> 
+				       <when test="order.columnName=='gjflag'"> xjteacher.gjflag ${order.type} </when> 
+				       <when test="order.columnName=='crateTime'"> xjteacher.crate_time ${order.type} </when> 
+				       <when test="order.columnName=='isbindphone'"> xjteacher.isbindphone ${order.type} </when> 
+				       <when test="order.columnName=='lastupdatepswtime'"> xjteacher.lastupdatepswtime ${order.type} </when> 
+				       <when test="order.columnName=='code'"> xjteacher.code ${order.type} </when> 
+				       <when test="order.columnName=='icNo'"> xjteacher.ic_no ${order.type} </when> 
+				       <when test="order.columnName=='isLocked'"> xjteacher.is_locked ${order.type} </when> 
+				       <when test="order.columnName=='lastupdatepswdate'"> xjteacher.lastupdatepswdate ${order.type} </when> 
+				       <when test="order.columnName=='flag'"> xjteacher.flag ${order.type} </when> 
+				       <when test="order.columnName=='breceive'"> xjteacher.breceive ${order.type} </when> 
+				       <when test="order.columnName=='email'"> xjteacher.email ${order.type} </when> 
+				       <when test="order.columnName=='loginSms'"> xjteacher.login_sms ${order.type} </when> 
+				       <when test="order.columnName=='lastUpdateTimestamp'"> xjteacher.last_update_timestamp ${order.type} </when> 
+				       <when test="order.columnName=='seatNumber'"> xjteacher.seat_number ${order.type} </when> 
+				       <when test="order.columnName=='creditCode'"> xjteacher.credit_code ${order.type} </when> 
+				       <when test="order.columnName=='mphone'"> xjteacher.mphone ${order.type} </when> 
+				       <when test="order.columnName=='schoolId'"> xjteacher.school_id ${order.type} </when>
+                       
+				       <when test="order.columnName=='id'"> xjteacher.id  ${order.type}  </when> 
+				       
+				  </choose>
+			 </foreach>
+		 </trim>
+	   </if>
+  </sql>
+
+ 
+ 
+  <!-- 列表查询对应的表关系SQL  -->
+  <sql id="querySqlMain">
+	 <![CDATA[   
+	      XJ_TEACHER  xjteacher  ]]>
+  </sql>
+
+  
+   
+   <!-- 根据ID查询记录 -->
+   <select id="loadById" resultType="newm.dao.entity.test.XjTeacherEntity">
+	     SELECT  <include refid="columns"/>              
+		       FROM <include refid="querySqlMain"/>
+			   where xjteacher.ID=#{id}
+   </select>
+   
+
+
+   <!-- 返回记录总数的语句 -->
+   <select id="count" resultType="int">
+         SELECT count(*) num   
+			  FROM  <include refid="querySqlMain"/>
+				    <include refid="queryOptions"/> 
+   </select>
+   
+   
+    <!-- 分页查询对应的记录 -->
+   <select id="query" resultType="newm.dao.entity.test.XjTeacherEntity">
+	      SELECT <include refid="columns"/>   
+		      FROM <include refid="querySqlMain"/>
+		      <include refid="queryOptions"/>
+		      <include refid="orderControl"/>
+   </select>
+
+
+   <!-- 新增记录 -->
+   <insert id="insert" useGeneratedKeys="false" >
+       
+       <selectKey resultType="long" order="AFTER" keyProperty="id">
+	       <![CDATA[    SELECT XJ_TEACHER_SEQ.currval FROM  DUAL    ]]> 
+	   </selectKey> 
+             INSERT INTO XJ_TEACHER (cdata,birthday,mms_data,psw,userid,synlesson_psw,amass_phone,sx_userid,message_code,username,sx_psw,opt_userid,treceive,preid,last_login_time,exchange_id,login_name,role_id,baseinfo,sms_check_139,psend,gjflag,crate_time,isbindphone,lastupdatepswtime,code,ic_no,is_locked,lastupdatepswdate,flag,breceive,email,login_sms,last_update_timestamp,seat_number,credit_code,mphone,school_id)
+             VALUES(#{cdata,jdbcType=NUMERIC},#{birthday,jdbcType=DATE},#{mmsData,jdbcType=NUMERIC},#{psw,jdbcType=VARCHAR},#{userid,jdbcType=VARCHAR},#{synlessonPsw,jdbcType=VARCHAR},#{amassPhone,jdbcType=VARCHAR},#{sxUserid,jdbcType=VARCHAR},#{messageCode,jdbcType=VARCHAR},#{username,jdbcType=VARCHAR},#{sxPsw,jdbcType=VARCHAR},#{optUserid,jdbcType=VARCHAR},#{treceive,jdbcType=NUMERIC},#{preid,jdbcType=NUMERIC},#{lastLoginTime,jdbcType=DATE},#{exchangeId,jdbcType=VARCHAR},#{loginName,jdbcType=VARCHAR},#{roleId,jdbcType=NUMERIC},#{baseinfo,jdbcType=VARCHAR},#{smsCheck139,jdbcType=NUMERIC},#{psend,jdbcType=NUMERIC},#{gjflag,jdbcType=VARCHAR},#{crateTime,jdbcType=DATE},#{isbindphone,jdbcType=NUMERIC},#{lastupdatepswtime,jdbcType=DATE},#{code,jdbcType=VARCHAR},#{icNo,jdbcType=VARCHAR},#{isLocked,jdbcType=NUMERIC},#{lastupdatepswdate,jdbcType=DATE},#{flag,jdbcType=NUMERIC},#{breceive,jdbcType=NUMERIC},#{email,jdbcType=VARCHAR},#{loginSms,jdbcType=NUMERIC},#{lastUpdateTimestamp,jdbcType=DATE},#{seatNumber,jdbcType=NUMERIC},#{creditCode,jdbcType=VARCHAR},#{mphone,jdbcType=VARCHAR},#{schoolId,jdbcType=NUMERIC})  
+            
+   </insert>
+   
+   
+   
+   <!-- 更新记录 -->       
+   <update id="update" >
+           UPDATE XJ_TEACHER 
+           <set>
+            <![CDATA[ 
+                cdata=#{cdata,jdbcType=NUMERIC},
+                birthday=#{birthday,jdbcType=DATE},
+                mms_data=#{mmsData,jdbcType=NUMERIC},
+                psw=#{psw,jdbcType=VARCHAR},
+                userid=#{userid,jdbcType=VARCHAR},
+                synlesson_psw=#{synlessonPsw,jdbcType=VARCHAR},
+                amass_phone=#{amassPhone,jdbcType=VARCHAR},
+                sx_userid=#{sxUserid,jdbcType=VARCHAR},
+                message_code=#{messageCode,jdbcType=VARCHAR},
+                username=#{username,jdbcType=VARCHAR},
+                sx_psw=#{sxPsw,jdbcType=VARCHAR},
+                opt_userid=#{optUserid,jdbcType=VARCHAR},
+                treceive=#{treceive,jdbcType=NUMERIC},
+                preid=#{preid,jdbcType=NUMERIC},
+                last_login_time=#{lastLoginTime,jdbcType=DATE},
+                exchange_id=#{exchangeId,jdbcType=VARCHAR},
+                login_name=#{loginName,jdbcType=VARCHAR},
+                role_id=#{roleId,jdbcType=NUMERIC},
+                baseinfo=#{baseinfo,jdbcType=VARCHAR},
+                sms_check_139=#{smsCheck139,jdbcType=NUMERIC},
+                psend=#{psend,jdbcType=NUMERIC},
+                gjflag=#{gjflag,jdbcType=VARCHAR},
+                crate_time=#{crateTime,jdbcType=DATE},
+                isbindphone=#{isbindphone,jdbcType=NUMERIC},
+                lastupdatepswtime=#{lastupdatepswtime,jdbcType=DATE},
+                code=#{code,jdbcType=VARCHAR},
+                ic_no=#{icNo,jdbcType=VARCHAR},
+                is_locked=#{isLocked,jdbcType=NUMERIC},
+                lastupdatepswdate=#{lastupdatepswdate,jdbcType=DATE},
+                flag=#{flag,jdbcType=NUMERIC},
+                breceive=#{breceive,jdbcType=NUMERIC},
+                email=#{email,jdbcType=VARCHAR},
+                login_sms=#{loginSms,jdbcType=NUMERIC},
+                last_update_timestamp=#{lastUpdateTimestamp,jdbcType=DATE},
+                seat_number=#{seatNumber,jdbcType=NUMERIC},
+                credit_code=#{creditCode,jdbcType=VARCHAR},
+                mphone=#{mphone,jdbcType=VARCHAR},
+                school_id=#{schoolId,jdbcType=NUMERIC},   ]]>
+	   </set>
+	       WHERE ID = #{id}
+   </update> 
+   
+
+
+   
+   <!-- 删除记录 -->
+   <delete id="delete">
+          DELETE FROM XJ_TEACHER
+          WHERE ID in    
+          <foreach collection="ids" item="id" open="("  separator="," close=")" >
+                #{id}
+          </foreach>
+   </delete>
+  
+   
+   <!-- 以下是自定义的配置信息 -->
+   
+   
+   
+   
+
+</mapper>
+
+
+

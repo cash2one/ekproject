@@ -32,7 +32,7 @@ import esfw.core.framework.exception.DaoAccessException;
  * @description 测试 对应的（业务逻辑类）
  * @version v1.0.0
  * @author Ethanlam  
- * @CreateTime Sun Jun 03 10:54:30 GMT 2012
+ * @CreateTime Mon Jun 04 13:26:23 GMT 2012
  *
  */
 @Scope("prototype") 
@@ -486,7 +486,63 @@ public class XjStudentBusiness  extends BaseBusiness<Long> implements BaseQuery<
          }
     
     
-     
+               
+        /**
+         * @param schoolId 所属的学校
+         */
+         private void setSchoolId(long schoolId){
+	        this.xjStudentEntity.setSchoolId(schoolId);
+         }
+         
+        /**
+          * @return schoolId 所属的学校
+         */
+         public long getSchoolId( ){ 
+	        return this.xjStudentEntity.getSchoolId( );     
+         }
+              
+        /**
+         * @param classId 班级编号
+         */
+         private void setClassId(long classId){
+	        this.xjStudentEntity.setClassId(classId);
+         }
+         
+        /**
+          * @return classId 班级编号
+         */
+         public long getClassId( ){ 
+	        return this.xjStudentEntity.getClassId( );     
+         }
+              
+        /**
+         * @param schoolName 学校的名称
+         */
+         private void setSchoolName(String schoolName){
+	        this.xjStudentEntity.setSchoolName(schoolName);
+         }
+         
+        /**
+          * @return schoolName 学校的名称
+         */
+         public String getSchoolName( ){ 
+	        return this.xjStudentEntity.getSchoolName( );     
+         }
+              
+        /**
+         * @param className 班级名(页面上系统自动生成：年级名称+(班级序号)+班,可以由用户修改)
+         */
+         private void setClassName(String className){
+	        this.xjStudentEntity.setClassName(className);
+         }
+         
+        /**
+          * @return className 班级名(页面上系统自动生成：年级名称+(班级序号)+班,可以由用户修改)
+         */
+         public String getClassName( ){ 
+	        return this.xjStudentEntity.getClassName( );     
+         }
+    
     
     
     //子类必须要实现父类的抽象方法（模块）。
@@ -558,11 +614,11 @@ public class XjStudentBusiness  extends BaseBusiness<Long> implements BaseQuery<
 	public Boolean load(Long id) throws BusinessException {
 	// TODO Auto-generated method stub
 	 try {
-		    XjStudentDao xjStudentDao= SpringUtil.getSpringBean(XjStudentDao.class,"xjStudentDao");
+		        XjStudentDao xjStudentDao= SpringUtil.getSpringBean(XjStudentDao.class,"xjStudentDao");
 		    xjStudentDao.setDaoAbb(this.getDaoAbb());
-		    XjStudentEntity entity =  xjStudentDao.load(id);
+			XjStudentEntity entity =  xjStudentDao.load(id);
 			if(entity!=null){
-			    entity.setDaoAbb(this.getDaoAbb());
+			    entity.setDaoAbb(this.getDaoAbb()); //表分区信息
 				this.xjStudentEntity = entity;
 				return true;
 			}else{
@@ -598,7 +654,7 @@ public class XjStudentBusiness  extends BaseBusiness<Long> implements BaseQuery<
 		   try{
 		      
 		       XjStudentDao xjStudentDao= SpringUtil.getSpringBean(XjStudentDao.class,"xjStudentDao");
-			   xjStudentDao.setDaoAbb(this.getDaoAbb());
+		       xjStudentDao.setDaoAbb(this.getDaoAbb()); 
 		       xjStudentDao.insert(this.xjStudentEntity);
 		        
 		       
@@ -628,7 +684,7 @@ public class XjStudentBusiness  extends BaseBusiness<Long> implements BaseQuery<
 		TransactionStatus status = txManager.getTransaction(def);
 		try{
 		    XjStudentDao xjStudentDao= SpringUtil.getSpringBean(XjStudentDao.class,"xjStudentDao");
-		    xjStudentDao.setDaoAbb(this.getDaoAbb());
+		    xjStudentDao.setDaoAbb(this.getDaoAbb()); 
 			xjStudentDao.update(this.xjStudentEntity);
 		     
 				  
@@ -657,7 +713,7 @@ public class XjStudentBusiness  extends BaseBusiness<Long> implements BaseQuery<
 		TransactionStatus status = txManager.getTransaction(def);
 		try{
 	       XjStudentDao xjStudentDao= SpringUtil.getSpringBean(XjStudentDao.class,"xjStudentDao");
-		   xjStudentDao.setDaoAbb(this.getDaoAbb());
+	       xjStudentDao.setDaoAbb(this.getDaoAbb()); 
 		   xjStudentDao.delete(ids);
 	        
 		    txManager.commit(status);	        
@@ -686,11 +742,11 @@ public class XjStudentBusiness  extends BaseBusiness<Long> implements BaseQuery<
          List<XjStudentBusiness> results = new ArrayList<XjStudentBusiness>();
 		 try {
 	            XjStudentDao xjStudentDao= SpringUtil.getSpringBean(XjStudentDao.class,"xjStudentDao");
-			    xjStudentDao.setDaoAbb(this.getDaoAbb());
+	            xjStudentDao.setDaoAbb(this.getDaoAbb()); 
 			    PageBean<XjStudentEntity> pageBean = xjStudentDao.query(vo.getPageVo().getPage(),vo.getPageVo().getPageSize(),vo);
 			    if(pageBean!=null && pageBean.getBeanList()!= null){
 					for(XjStudentEntity et:pageBean.getBeanList()){
-						et.setDaoAbb(this.getDaoAbb());
+					    et.setDaoAbb(this.getDaoAbb()); //表分区信息
 						results.add(new XjStudentBusiness(et));
 					}
 			        this.setQeuryRecordTotalNum(pageBean.getTotalRecords());

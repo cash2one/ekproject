@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="newm.dao.test.AdcSiLogDao">
+
+  <!-- 以下配置是系统自动生成的 -->
+
+  <!-- 显示的记录对应的列-->
+  <sql id="columns" >
+	  <![CDATA[  
+	     adcsilog.id as id,adcsilog.phone as phone,adcsilog.studentid as studentid,adcsilog.servicecode as servicecode,adcsilog.ip as ip,adcsilog.dt as dt  ]]>
+  </sql>
+  
+  
+  <!-- 列表对应的查询条件组合  -->
+  <sql id="queryOptions">
+       <where>
+            	  <if test="dt1!=null"> AND adcsilog.dt &gt; #{dt1}</if><if test="dt2!=null"> AND adcsilog.dt &lt; #{dt2}</if>
+            	  <if test="phone!=null"> AND adcsilog.phone like #{phone}</if>
+            	  <if test="servicecode!=null"> AND adcsilog.servicecode like #{servicecode}</if>
+            	  <if test="ip!=null"> AND adcsilog.ip like #{ip}</if>
+            	  <if test="studentid!=null"> AND adcsilog.studentid like #{studentid}</if> 
+        </where> 
+  </sql>
+
+
+
+  <!-- 列表查询对应的排序选项  -->
+  <sql id="orderControl">
+       <if test="orderList!=null">
+		  <trim prefix="ORDER BY" prefixOverrides=",">
+				<foreach collection="orderList" item="order" open=""  separator="," close="" >
+				   <choose> 
+				       <when test="order.columnName=='dt'"> adcsilog.dt ${order.type} </when> 
+				       <when test="order.columnName=='phone'"> adcsilog.phone ${order.type} </when> 
+				       <when test="order.columnName=='servicecode'"> adcsilog.servicecode ${order.type} </when> 
+				       <when test="order.columnName=='ip'"> adcsilog.ip ${order.type} </when> 
+				       <when test="order.columnName=='studentid'"> adcsilog.studentid ${order.type} </when>
+                       
+				       <when test="order.columnName=='id'"> adcsilog.id  ${order.type}  </when> 
+				       
+				  </choose>
+			 </foreach>
+		 </trim>
+	   </if>
+  </sql>
+
+ 
+ 
+  <!-- 列表查询对应的表关系SQL  -->
+  <sql id="querySqlMain">
+	 <![CDATA[   
+	      ADC_SI_LOG  adcsilog  ]]>
+  </sql>
+
+  
+   
+   <!-- 根据ID查询记录 -->
+   <select id="loadById" resultType="newm.dao.entity.test.AdcSiLogEntity">
+	     SELECT  <include refid="columns"/>              
+		       FROM <include refid="querySqlMain"/>
+			   where adcsilog.ID=#{id}
+   </select>
+   
+
+
+   <!-- 返回记录总数的语句 -->
+   <select id="count" resultType="int">
+         SELECT count(*) num   
+			  FROM  <include refid="querySqlMain"/>
+				    <include refid="queryOptions"/> 
+   </select>
+   
+   
+    <!-- 分页查询对应的记录 -->
+   <select id="query" resultType="newm.dao.entity.test.AdcSiLogEntity">
+	      SELECT <include refid="columns"/>   
+		      FROM <include refid="querySqlMain"/>
+		      <include refid="queryOptions"/>
+		      <include refid="orderControl"/>
+   </select>
+
+
+   <!-- 新增记录 -->
+   <insert id="insert" useGeneratedKeys="false" >
+       
+       <selectKey resultType="long" order="AFTER" keyProperty="id">
+	       <![CDATA[    SELECT ADC_SI_LOG_SEQ.currval FROM  DUAL    ]]> 
+	   </selectKey> 
+             INSERT INTO ADC_SI_LOG (dt,phone,servicecode,ip,studentid)
+             VALUES(#{dt,jdbcType=DATE},#{phone,jdbcType=VARCHAR},#{servicecode,jdbcType=VARCHAR},#{ip,jdbcType=VARCHAR},#{studentid,jdbcType=VARCHAR})  
+            
+   </insert>
+   
+   
+   
+   <!-- 更新记录 -->       
+   <update id="update" >
+           UPDATE ADC_SI_LOG 
+           <set>
+            <![CDATA[ 
+                dt=#{dt,jdbcType=DATE},
+                phone=#{phone,jdbcType=VARCHAR},
+                servicecode=#{servicecode,jdbcType=VARCHAR},
+                ip=#{ip,jdbcType=VARCHAR},
+                studentid=#{studentid,jdbcType=VARCHAR},   ]]>
+	   </set>
+	       WHERE ID = #{id}
+   </update> 
+   
+
+
+   
+   <!-- 删除记录 -->
+   <delete id="delete">
+          DELETE FROM ADC_SI_LOG
+          WHERE ID in    
+          <foreach collection="ids" item="id" open="("  separator="," close=")" >
+                #{id}
+          </foreach>
+   </delete>
+  
+   
+   <!-- 以下是自定义的配置信息 -->
+   
+   
+   
+   
+
+</mapper>
+
+
+

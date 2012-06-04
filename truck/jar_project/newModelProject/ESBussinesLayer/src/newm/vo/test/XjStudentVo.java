@@ -12,7 +12,7 @@ import esfw.core.framework.dao.mapper.OrderItem;
  * @description 测试 对应的 ViewOject 实体 vo
  * @version v1.0.0
  * @author Ethanlam  
- * @CreateTime Sun Jun 03 10:54:30 GMT 2012
+ * @CreateTime Mon Jun 04 13:26:23 GMT 2012
  */
 public class   XjStudentVo  extends XjStudentEntity implements ViewObject{
    
@@ -57,7 +57,11 @@ public class   XjStudentVo  extends XjStudentEntity implements ViewObject{
 
   
     
-    
+     
+             this.setSchoolId(-1);
+ 
+             this.setClassId(-1);
+
 	
 	  }
 		

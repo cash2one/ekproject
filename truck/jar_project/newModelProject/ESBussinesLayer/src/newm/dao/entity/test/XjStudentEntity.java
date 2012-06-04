@@ -8,7 +8,7 @@ import esfw.core.framework.dao.GenericEntity;
  * @description 测试 对应的实体
  * @version v1.0.0
  * @author Ethanlam  
- * @CreateTime Sun Jun 03 10:54:30 GMT 2012
+ * @CreateTime Mon Jun 04 13:26:23 GMT 2012
  */
 public class XjStudentEntity extends GenericEntity {
    
@@ -46,7 +46,11 @@ public class XjStudentEntity extends GenericEntity {
          private String  sxPsw; //思讯密码 
          private String  comments; //备注信息
     
-    
+     
+          private long  schoolId; //所属的学校 
+          private long  classId; //班级编号 
+          private String  schoolName; //学校的名称 
+          private String  className; //班级名(页面上系统自动生成：年级名称+(班级序号)+班,可以由用户修改)
      
         //默认空构造函数
 	  public XjStudentEntity(){
@@ -474,6 +478,58 @@ public class XjStudentEntity extends GenericEntity {
          }
     
     
+      
+         /**
+         * @param schoolId 所属的学校
+         */
+         public void setSchoolId(long schoolId){
+	       this.schoolId=schoolId;    
+         }
+         /**
+         * @return schoolId 所属的学校
+         */
+         public long getSchoolId(  ){ 
+	        return this.schoolId;    
+         }
      
+         /**
+         * @param classId 班级编号
+         */
+         public void setClassId(long classId){
+	       this.classId=classId;    
+         }
+         /**
+         * @return classId 班级编号
+         */
+         public long getClassId(  ){ 
+	        return this.classId;    
+         }
+     
+         /**
+         * @param schoolName 学校的名称
+         */
+         public void setSchoolName(String schoolName){
+	       this.schoolName=schoolName;    
+         }
+         /**
+         * @return schoolName 学校的名称
+         */
+         public String getSchoolName(  ){ 
+	        return this.schoolName;    
+         }
+     
+         /**
+         * @param className 班级名(页面上系统自动生成：年级名称+(班级序号)+班,可以由用户修改)
+         */
+         public void setClassName(String className){
+	       this.className=className;    
+         }
+         /**
+         * @return className 班级名(页面上系统自动生成：年级名称+(班级序号)+班,可以由用户修改)
+         */
+         public String getClassName(  ){ 
+	        return this.className;    
+         }
+    
 
 }

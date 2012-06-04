@@ -3,11 +3,12 @@ package newm;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.business.ModelBusiness;
 import newm.business.test.XjClassBusiness;
 import newm.business.test.XjStudentBusiness;
+import newm.business.test.XjTeacherBusiness;
 import newm.vo.test.XjClassVo;
 import newm.vo.test.XjStudentVo;
+import newm.vo.test.XjTeacherVo;
 import esfw.core.framework.SpringUtil;
 import esfw.core.framework.business.BusinessContainer;
 import esfw.core.framework.dao.mapper.OrderItem;
@@ -28,8 +29,8 @@ public class Main {
 //		 case_mdf();
 //		 case_del();
 //		 case_query2(); //新的模式
-//		 case_insert();
-		 case_del();
+		 case_query_stu("测试%");
+//		 case_del();
 //		 case_insert();
 //		 case_query(); //新的模式
 		 
@@ -91,9 +92,24 @@ public class Main {
 	         //执行查询
 	    	 List<XjStudentBusiness> results = info.query(vo);
 	    	 for(XjStudentBusiness stu:results){
-	    		 System.out.println("id:" +stu.getId() +"  sqe : "+stu.getStuSequence()+"  name : "+stu.getName());
+	    		 System.out.println("id:" +stu.getId() +"  sqe : "+stu.getStuSequence()+"  name : "+stu.getName()+"  "+stu.getClassName());
 	    	 }
 	    	 
+	    	 System.out.println(".........................查询学生数据.........................");
+	    	 XjTeacherBusiness xjTeacherBusiness = SpringUtil.getSpringBean(XjTeacherBusiness.class,"xjTeacherBusiness");
+	    	 XjTeacherVo vot = new XjTeacherVo();
+	    	 vot.setSchoolId(1);
+	    	 List<XjTeacherBusiness> res = xjTeacherBusiness.query(vot);
+	    	 for(XjTeacherBusiness t:res){
+	    		 System.out.println("id:" +t.getId() +"  name : "+t.getUsername()+"  schoolId :"+t.getSchoolId());
+	    	 }
+	    	 System.out.println(".........................查询教师.........................");
+	    	 
+	    	 xjTeacherBusiness.load((long)1296594);
+	    	 System.out.println(".........................查询教师.........................id:"+xjTeacherBusiness.getId() +" name:"+xjTeacherBusiness.getUsername());
+	    	 xjTeacherBusiness.delete(new Long[]{(long)1296594});
+	    	 xjTeacherBusiness.load((long)1296594);
+	    	 System.out.println(".........................删除后查询教师.........................id:"+xjTeacherBusiness.getId() +" name:"+xjTeacherBusiness.getUsername());
 		  } catch (BusinessException e) {
 		 
 		  }

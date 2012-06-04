@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="newm.dao.test.AdcSyncLogDao">
+
+  <!-- 以下配置是系统自动生成的 -->
+
+  <!-- 显示的记录对应的列-->
+  <sql id="columns" >
+	  <![CDATA[  
+	     adcsynclog.id as id,adcsynclog.xml as xml,adcsynclog.eccode as eccode,adcsynclog.type as type,adcsynclog.dt as dt,adcsynclog.school_name as schoolName  ]]>
+  </sql>
+  
+  
+  <!-- 列表对应的查询条件组合  -->
+  <sql id="queryOptions">
+       <where>
+            	  <if test="dt1!=null"> AND adcsynclog.dt &gt; #{dt1}</if><if test="dt2!=null"> AND adcsynclog.dt &lt; #{dt2}</if>
+            	  <if test="schoolName!=null"> AND adcsynclog.school_name like #{schoolName}</if>
+            	  <if test="xml!=null"> AND adcsynclog.xml like #{xml}</if>
+            	  <if test="eccode!=null"> AND adcsynclog.eccode like #{eccode}</if>
+            	  <if test="type>=0"> AND adcsynclog.type = #{type}</if> 
+        </where> 
+  </sql>
+
+
+
+  <!-- 列表查询对应的排序选项  -->
+  <sql id="orderControl">
+       <if test="orderList!=null">
+		  <trim prefix="ORDER BY" prefixOverrides=",">
+				<foreach collection="orderList" item="order" open=""  separator="," close="" >
+				   <choose> 
+				       <when test="order.columnName=='dt'"> adcsynclog.dt ${order.type} </when> 
+				       <when test="order.columnName=='schoolName'"> adcsynclog.school_name ${order.type} </when> 
+				       <when test="order.columnName=='xml'"> adcsynclog.xml ${order.type} </when> 
+				       <when test="order.columnName=='eccode'"> adcsynclog.eccode ${order.type} </when> 
+				       <when test="order.columnName=='type'"> adcsynclog.type ${order.type} </when>
+                       
+				       <when test="order.columnName=='id'"> adcsynclog.id  ${order.type}  </when> 
+				       
+				  </choose>
+			 </foreach>
+		 </trim>
+	   </if>
+  </sql>
+
+ 
+ 
+  <!-- 列表查询对应的表关系SQL  -->
+  <sql id="querySqlMain">
+	 <![CDATA[   
+	      ADC_SYNC_LOG  adcsynclog  ]]>
+  </sql>
+
+  
+   
+   <!-- 根据ID查询记录 -->
+   <select id="loadById" resultType="newm.dao.entity.test.AdcSyncLogEntity">
+	     SELECT  <include refid="columns"/>              
+		       FROM <include refid="querySqlMain"/>
+			   where adcsynclog.ID=#{id}
+   </select>
+   
+
+
+   <!-- 返回记录总数的语句 -->
+   <select id="count" resultType="int">
+         SELECT count(*) num   
+			  FROM  <include refid="querySqlMain"/>
+				    <include refid="queryOptions"/> 
+   </select>
+   
+   
+    <!-- 分页查询对应的记录 -->
+   <select id="query" resultType="newm.dao.entity.test.AdcSyncLogEntity">
+	      SELECT <include refid="columns"/>   
+		      FROM <include refid="querySqlMain"/>
+		      <include refid="queryOptions"/>
+		      <include refid="orderControl"/>
+   </select>
+
+
+   <!-- 新增记录 -->
+   <insert id="insert" useGeneratedKeys="false" >
+       
+       <selectKey resultType="long" order="AFTER" keyProperty="id">
+	       <![CDATA[    SELECT ADC_SYNC_LOG_SEQ.currval FROM  DUAL    ]]> 
+	   </selectKey> 
+             INSERT INTO ADC_SYNC_LOG (dt,school_name,xml,eccode,type)
+             VALUES(#{dt,jdbcType=DATE},#{schoolName,jdbcType=VARCHAR},#{xml,jdbcType=VARCHAR},#{eccode,jdbcType=VARCHAR},#{type,jdbcType=NUMERIC})  
+            
+   </insert>
+   
+   
+   
+   <!-- 更新记录 -->       
+   <update id="update" >
+           UPDATE ADC_SYNC_LOG 
+           <set>
+            <![CDATA[ 
+                dt=#{dt,jdbcType=DATE},
+                school_name=#{schoolName,jdbcType=VARCHAR},
+                xml=#{xml,jdbcType=VARCHAR},
+                eccode=#{eccode,jdbcType=VARCHAR},
+                type=#{type,jdbcType=NUMERIC},   ]]>
+	   </set>
+	       WHERE ID = #{id}
+   </update> 
+   
+
+
+   
+   <!-- 删除记录 -->
+   <delete id="delete">
+          DELETE FROM ADC_SYNC_LOG
+          WHERE ID in    
+          <foreach collection="ids" item="id" open="("  separator="," close=")" >
+                #{id}
+          </foreach>
+   </delete>
+  
+   
+   <!-- 以下是自定义的配置信息 -->
+   
+   
+   
+   
+
+</mapper>
+
+
+
