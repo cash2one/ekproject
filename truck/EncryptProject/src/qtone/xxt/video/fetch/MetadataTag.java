@@ -46,7 +46,7 @@ public class MetadataTag {
 		byte[] _metaArrayDataBytes = _metaArrayData.getDatas();
 	   	//开始写tag head
 		bbuf.put((byte)18);//tag type
-	   	int dataSize = _metaArrayDataBytes.length+18;
+	   	int dataSize = _metaArrayDataBytes.length+18+9;
 	   	writeNumberToByte(bbuf,dataSize,3); //dataSzie
 	   	bbuf.putInt(0);//timestamp  默认为“0”
 		writeNumberToByte(bbuf,0,3); // stream id   默认为“0”
@@ -55,6 +55,11 @@ public class MetadataTag {
 		bbuf.put((byte)2);
 		bbuf.putShort((short)10);
 		bbuf.put("onMetaData".getBytes());
+		
+//		bbuf.put((byte)2);
+//		bbuf.putShort((short)6);
+//		bbuf.put("onTest".getBytes());
+		
 		//AMF2
 		bbuf.put((byte)8);
 		bbuf.putInt(_metaArrayData.getCurrenParamsLength());

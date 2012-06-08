@@ -40,7 +40,7 @@ public class VideoFile {
 	
 	 
 	private static boolean DEBUG = false;
-	private static boolean CREATE_FRAME = false;
+	private static boolean CREATE_FRAME = true;
 	
 	static MetadataTag _metadataTag = null;
 	
@@ -52,6 +52,8 @@ public class VideoFile {
 	   keyFramePositions.clear();
 	   keyFrameTimestamps.clear();
 	   KeyframeList.clear();
+	   _metadataTag = null;
+	   MetaDataOp = 0;
    }
 	
    
@@ -66,7 +68,7 @@ public class VideoFile {
     * @param fileSuffix
     * @throws Exception
     */
-   public static void createFileDescription(String subPath,String srcfileName,String fileSuffix,int videDuration,String outDescFileDir,String encodeDirName) throws Exception{
+   public static void createFileDescription(String subPath,String srcfileName,String fileSuffix,String outDescFileDir,String encodeDirName) throws Exception{
 	  
 	   System.out.println("视频文件分析进行中.....");
 	   boolean isEncode = encodeDirName!=null&&!"".equals(encodeDirName)?true:false;
@@ -74,10 +76,10 @@ public class VideoFile {
 	   StringBuffer mainContent = new StringBuffer("<?xml version=\"1.0\" encoding=\"UTF-8\"?>").append(Main.CRLF);
 	   mainContent.append("<video>").append(Main.CRLF);
 	   if(!isEncode || "false".equals(Main.ENCRYPT)){
-	       mainContent.append("   <baseRequestUrl>"+Main.Main_VIDEO_DIR_WEB_ROOT+"/"+subPath+"/"+srcfileName+"/</baseRequestUrl>").append(Main.CRLF);
+	       mainContent.append("   <baseRequestUrl>"+Main.Main_VIDEO_DIR_WEB_CONTEXT+"/"+Main.Main_VIDEO_DIR_WEB_ROOT+"/"+srcfileName+"/</baseRequestUrl>").append(Main.CRLF);
 	       mainContent.append("   <encrypt>false</encrypt>").append(Main.CRLF);
 	   }else{
-		   mainContent.append("   <baseRequestUrl>"+Main.Main_VIDEO_DIR_WEB_ROOT+"/"+subPath+"/"+srcfileName+encodeDirName+"/</baseRequestUrl>").append(Main.CRLF);
+		   mainContent.append("   <baseRequestUrl>"+Main.Main_VIDEO_DIR_WEB_CONTEXT+"/"+Main.Main_VIDEO_DIR_WEB_ROOT+"/"+srcfileName+encodeDirName+"/</baseRequestUrl>").append(Main.CRLF);
 		   mainContent.append("   <encrypt>true</encrypt>").append(Main.CRLF);
 	   }
 	   mainContent.append("   <baseFileName>"+srcfileName+"</baseFileName> ").append(Main.CRLF);
@@ -94,36 +96,43 @@ public class VideoFile {
 	   
 	   //列出目录下存在的文件（已分割的文件）
 	   int targetFiles = 0;
+	   float videDuration = 0;
 	   mainContent.append("   <keyframes>").append(Main.CRLF);
 	   for(File file:_fileDir.listFiles()){
 		   if(file.getName().indexOf(Main.FILE_TYPE)<0)
 			   continue;
 		   op = 0;
+		   
 		   analysViedoTag(loadByByteBuffer(srcDir,file.getName(),""));
+		   System.out.println(file.getName()+" duration: "+_metadataTag.getParamValue("duration"));
+		   videDuration += (Double)_metadataTag.getParamValue("duration");
+
 		   targetFiles ++;
 		   String content = createVideoKeyFrameDesFile(srcfileName,file.getName().substring(0, file.getName().indexOf(".")),false,getFileSize(file));
-		   System.out.println(content);
+//		   System.out.println(content);
 		   mainContent.append(content);
 		   resetParams();
+		   
 	   }  
 	   mainContent.append("   </keyframes>").append(Main.CRLF);
 	   mainContent.append("</video>").append(Main.CRLF);
 	   
 	   outDescFileDir = outDescFileDir==null||"".equals(outDescFileDir)?filePath:outDescFileDir;
-	   
+	   	   
 	   //输出描述文件
 	   File descFile = new File(outDescFileDir+File.separator+srcfileName+".desc");
 	   if(descFile.exists())
 		   descFile.delete();
 	   descFile.createNewFile();
 	   FileWriter fw = new FileWriter(descFile);
-	   String content = mainContent.toString().replace("#totalBufferFiles#",targetFiles+"").replace("#videDuration#", videDuration+"");
+	   
+	   String content = mainContent.toString().replace("#totalBufferFiles#",targetFiles+"").replace("#videDuration#", (int)videDuration+"");
 	  
 	   fw.write(content);
 	   fw.flush();
 	   fw.close();
 	   
-	   System.out.println("视频文件分析完成了.....");
+	   System.out.println("视频文件分析完成了。");
    }
    
    
@@ -175,7 +184,7 @@ public class VideoFile {
     */
    private static void loadByBytes( ) throws Exception {
       BufferedInputStream in = new BufferedInputStream(new FileInputStream(filePath+file+fileSuffix));
-	  System.out.println("Available bytes:" + in.available());
+//	  System.out.println("Available bytes:" + in.available());
 	    byte[] temp = new byte[1024*20];
 		int size = 0;
 		int times = 0;
@@ -183,7 +192,7 @@ public class VideoFile {
 			byte2hex(temp);
 			times++;
 		}
-		System.out.println("times:"+(times++));
+//		System.out.println("times:"+(times++));
 		in.close();
 	}
 	
@@ -279,11 +288,11 @@ public class VideoFile {
 			if(MetaDataOp==0){
 				MetaDataOp = startOp+next ; //metaDate结束的位置 + Pre tag Size 
 				fileHeadData = new byte[MetaDataOp];
-				System.out.println("MetaDataOp:"+MetaDataOp);
+//				System.out.println("MetaDataOp:"+MetaDataOp);
 				for(int i=0;i<MetaDataOp;i++){
 					fileHeadData[i] = b[i];
 				}
-				System.out.println("MetaData analys ......");
+//				System.out.println("MetaData analys ......");
 				analysMetadataStruct();
 				if(DEBUG)
 				System.out.println("MetaData analys finished!");
@@ -322,7 +331,7 @@ public class VideoFile {
 			keyFrameTimestamps.put(keyFrameOp,timeMessage(b,offLenght));
 			if(CREATE_FRAME){
 //				fetchNewKeyFrameFile(b,keyFrameOp,op);
-				fetchNewKeyFrameFile_MF(b,keyFrameOp,op);
+//				fetchNewKeyFrameFile_MF(b,keyFrameOp,op);
 //				fetchNewKeyFrameFile_KF(b,keyFrameOp,op);
 			}
 		} 

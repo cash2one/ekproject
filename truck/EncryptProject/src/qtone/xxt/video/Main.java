@@ -12,11 +12,11 @@ import qtone.xxt.video.fetch.VideoFile;
  */
 public class Main {
 
-	
-	public static String Main_VIDEO_DIR_WEB_ROOT ="/v2t/video";
+	public static String Main_VIDEO_DIR_WEB_CONTEXT ="/";
+	public static String Main_VIDEO_DIR_WEB_ROOT ="flv/test";
 	public static String Main_VIDEO_DIR_ROOT ="E:/elam/my_jar_project/CodeGenerator/WebRoot/";
 	public static int PieceDurationSet = 60;
-	public static String ENCRYPT ="false";
+	public static String ENCRYPT ="true";
 	public static String FILE_TYPE = ".flv";
 	public static String CRLF="\n";
 	/**
@@ -33,13 +33,18 @@ public class Main {
     	 String encodeDirName = "_encode";  // -c
     	 int videDuration = 600;            // -t
     	 
+        //  -rp E:/elam/my_jar_project/CodeGenerator/WebRoot/  -sp  flv/test -w http://192.168.4.39/code -f  case.flv  -pt 60
+    	 // -rp 
     	 
     	 if(args==null||args.length==0){
     		 System.out.println("程序需要指定以下的输入参数：");
     		 System.out.println(" -rp : 设置web访问的绝对路径 ，如   /data/adobe/fms4/webroot/vod/");
     		 System.out.println(" -sp : 设置web访问的相对路径 ，如    course/cp2/cs20059/video");
     		 System.out.println(" -f ：设置视频源文件名，如  20059_1.flv ");
-    		 System.out.println(" -c : 可选项目 ");
+//    		 System.out.println(" -at ：视频源文件的总播放时长（秒），如 120 ");
+    		 System.out.println(" -pt ：视频源文件的分段播放时长（秒），如 10 ");
+    		 System.out.println(" -c : (可选项目)  加密后的目录后缀名");
+    		 System.out.println(" -w : (可选项目)  设置web访问的绝对路径 ，如   /v2t");
     		 return;
     	 }else{
     		 //进行复制操作
@@ -54,6 +59,7 @@ public class Main {
     			 if("-sp".equals(args[i].trim())){
     				 if(paramCheck(args[i+1])){
     				     subPath = args[i+1];
+    				     Main_VIDEO_DIR_WEB_ROOT = subPath;
     					 paramsCount+=10;
     				 }
     			 }
@@ -64,13 +70,16 @@ public class Main {
     				 }
     			 }
     			 
-    			 if("-t".equals(args[i].trim())){
+    
+    			 if("-pt".equals(args[i].trim())){
     				 if(paramCheck(args[i+1])){
-    					 videDuration = Integer.parseInt(args[i+1]);
+    					 PieceDurationSet = Integer.parseInt(args[i+1]);
     					 paramsCount+=10;
     				 }
     			 }
     			 
+    			
+    			 ///非必须参数
     			 if("-c".equals(args[i].trim())){
     				 if(paramCheck(args[i+1])){
     					 encodeDirName = args[i+1];
@@ -78,6 +87,12 @@ public class Main {
     				 }
     			 }
 
+    			 if("-w".equals(args[i].trim())){
+    				 if(paramCheck(args[i+1])){
+    					 Main_VIDEO_DIR_WEB_CONTEXT = args[i+1];
+    					 paramsCount++;
+    				 }
+    			 }
     		 }
     		 if(paramsCount<40){
     			 System.out.println("程序输入的参数有误，请检查！");
@@ -93,7 +108,7 @@ public class Main {
     	 String outDescFileDir = "";
        	 
        	 //解析文件
-       	 VideoFile.createFileDescription(subPath,targetName,fileSuffix,videDuration,outDescFileDir,encodeDirName);
+       	 VideoFile.createFileDescription(subPath,targetName,fileSuffix,outDescFileDir,encodeDirName);
     	 
          String srcFilesPath = Main_VIDEO_DIR_ROOT+subPath+File.separator+targetName;
          outDescFileDir = Main_VIDEO_DIR_ROOT+subPath+File.separator+targetName+encodeDirName;
@@ -104,7 +119,7 @@ public class Main {
      }
 	
 	 public  static boolean paramCheck(String inputStr){
-		 if("-rp,-sp,-f,-c,-t".indexOf(inputStr+",")>=0)
+		 if("-rp,-sp,-f,-c,-pt,-at,-w,".indexOf(inputStr+",")>=0)
 			 return false;
 		 else
 			 return true;
