@@ -22,10 +22,7 @@ public class BootStartUp implements ServletContextListener {
 
 	public void contextInitialized(ServletContextEvent arg0) {
 		
-		// TODO Auto-generated method stub
 		System.out.println("Æô¶¯·þÎñ¼àÌý...");
-		
-//		SecurityXMLServer _server = new SecurityXMLServer();
 		
 		SocketAcceptor acceptor = new NioSocketAcceptor();
 		DefaultIoFilterChainBuilder chain = acceptor.getFilterChain();
