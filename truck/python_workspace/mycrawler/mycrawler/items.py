@@ -9,3 +9,12 @@ class MycrawlerItem(Item):
     # define the fields for your item here like:
     # name = Field()
     pass
+
+
+class JingdianItem(Item):
+    title = Field()
+    link = Field()
+    desc = Field()
+
+
+    
