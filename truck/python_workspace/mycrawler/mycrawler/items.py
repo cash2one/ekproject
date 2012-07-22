@@ -15,6 +15,7 @@ class JingdianItem(Item):
     title = Field()
     link = Field()
     desc = Field()
-
+    layer = Field()
+    parent = Field()
 
     
