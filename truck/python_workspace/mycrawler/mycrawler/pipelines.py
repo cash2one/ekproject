@@ -5,4 +5,5 @@
 
 class MycrawlerPipeline(object):
     def process_item(self, item, spider):
+        print '........................MycrawlerPipeline....................'
         return item

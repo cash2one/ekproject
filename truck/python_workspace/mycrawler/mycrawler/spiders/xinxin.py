@@ -5,7 +5,10 @@ from scrapy.spider import BaseSpider
 from scrapy.selector import HtmlXPathSelector
 from mycrawler.items import JingdianItem 
 
+
 import os
+import re
+import pymongo
 
 
 area_dict = {}
@@ -16,6 +19,8 @@ class XinXinSpider(BaseSpider):
     name = "XinXin"
     allowed_domains = ["cncn.com"]
     start_urls = ["http://www.cncn.com/jingdian/"]
+
+
 
 
     # 处理首页的数据
@@ -40,9 +45,11 @@ class XinXinSpider(BaseSpider):
            items.append(item)
            ##if args[1][0].find('guangdong')>= 0:
            nextUrls.append(args[1][0])
+           self.saveToMongoDB(item)
            ##nextUrls.append(args[1][0])
        ##crawl the next url page
-       items.extend([self.make_requests_from_url(url).replace(callback=self.parse_areaIndexPage) for url in nextUrls])    
+       items.extend([self.make_requests_from_url(url).replace(callback=self.parse_areaIndexPage) for url in nextUrls])
+       ##items.extend([Request(url, meta={'item': item}, callback=self.parse_areaIndexPage) for url in nextUrls ])
        return items
 
 
@@ -60,6 +67,8 @@ class XinXinSpider(BaseSpider):
        parentId = area_dict[areaName]
        nextUrls = []  # new url
        for index, link in enumerate(links):
+           if len(re.findall(r'hongkong|macao|taiwan',areaName)):
+               continue
            args = (index, link.select('@href').extract(),link.select('text()').extract())
            ##print args
            item = JingdianItem()
@@ -73,9 +82,12 @@ class XinXinSpider(BaseSpider):
                area_dict[item['title']] = areaName
                nextUrls.append(item['link'])
            item['layer'] = "2:"+str(parentId)+"-"+str(args[0])
+           self.saveToMongoDB(item)
            items.append(item)
-       items.extend([self.make_requests_from_url(url).replace(callback=self.parse_cityIndexPage) for url in nextUrls])   
+       items.extend([self.make_requests_from_url(url).replace(callback=self.parse_cityIndexPage) for url in nextUrls])
+       ##yield Request(url, meta={'item': item}, callback=self.parse_item)
        return items
+
 
 
     def parse_cityIndexPage(self,response):
@@ -83,7 +95,6 @@ class XinXinSpider(BaseSpider):
        cityName = response.url.split("/")[2].replace('.cncn.com','')
        areaName = area_dict[cityName]
        self.downloadPage(response,areaName)
-       print ''
 
 
 
@@ -106,4 +117,12 @@ class XinXinSpider(BaseSpider):
             os.makedirs(_savePath)
             print 'create dirs %s suc... ' %(_savePath)
         open(filename, 'wb').write(response.body)
+
+    def saveToMongoDB(self,item):
+        connection=pymongo.Connection('localhost',27017)
+        db = connection.test_database
+        post = {'layer':item['layer'],'title':item['title'],'parent':item['parent'],'link':item['link'],'desc':item['desc']}
+        posts = db.post
+        posts.insert(post)
+        pass
         

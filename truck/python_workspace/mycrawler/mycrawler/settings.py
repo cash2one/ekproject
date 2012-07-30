@@ -12,4 +12,5 @@ BOT_VERSION = '1.0'
 SPIDER_MODULES = ['mycrawler.spiders']
 NEWSPIDER_MODULE = 'mycrawler.spiders'
 USER_AGENT = '%s/%s' % (BOT_NAME, BOT_VERSION)
-
+#debug
+##LOG_LEVEL = 'WARNING'
