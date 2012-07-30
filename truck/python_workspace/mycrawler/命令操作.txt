@@ -5,3 +5,4 @@ scrapy crawl XinXin --set FEED_URI=items.cvs --set FEED_FORMAT=cvs
 scrapy crawl XinXin -o items.json -t json
 
 scrapy crawl XinXin -o xinxin.csv -t csv
+
