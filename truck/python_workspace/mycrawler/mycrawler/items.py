@@ -17,5 +17,6 @@ class JingdianItem(Item):
     desc = Field()
     layer = Field()
     parent = Field()
+    type = Field()
 
     

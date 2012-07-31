@@ -12,18 +12,33 @@ print db.collection_names()
 def listAllLinks():
     links = db.links
     print 'desc , link ,title,parent,layer '
-    for link in links.find():
+    for link in links.find().sort('title'):
         print '%s , %s , %s , %s , %s' % (link['desc'],link['link'],link['title'],link['parent'],link['layer'])
     print '所有找到的链接情况有：%d' % links.count()
 
 def findlinkByDesc(str):
     links = db.links
-    link = links.find_one({"desc": str})
-    print '%s , %s , %s , %s , %s' % (link['desc'],link['link'],link['title'],link['parent'],link['layer'])
+    for link in links.find({"desc": str}).sort('title'):
+        if link:
+             print '%s , %s , %s , %s , %s' % (link['desc'],link['link'],link['title'],link['parent'],link['layer'])
+
+
+def removeData():
+    links = db.links
+    links.remove({});
+    print '对数据进行删除操作'
+#    db.linlin.remove({})                   delete * from linlin
+#    db.linlin.remove({'age':20})           delete linlin where age=20
+#    db.linlin.remove({'age':{$lt:20}})     delete linlin where age<20
+#    db.linlin.remove({'age':{$lte:20}})    delete linlin where age<=20
+#    db.linlin.remove({'age':{$gt:20}})     delete linlin where age>20
+#    db.linlin.remove({'age':{$gte:20}})    delete linlin where age>=20
+#    db.linlin.remove({'age':{$ne:20}})     delete linlin where age!=20
 
 listAllLinks()
 findlinkByDesc('广州')
-
+#removeData()
+##listAllLinks()
 
 cityName = 'http://guangzhou.cncn.com/jingdian/'
 print cityName.find('guangou')
