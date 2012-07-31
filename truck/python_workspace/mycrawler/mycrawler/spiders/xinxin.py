@@ -10,7 +10,8 @@ import os
 import re
 import pymongo
 
-area_dict = {}
+area_dict = {}   #信息字典
+urlshistory = {} #记录已经访问过的地址
 
 connection=pymongo.Connection('localhost',27017)
 db = connection.xinxin_database
@@ -37,8 +38,9 @@ class XinXinSpider(BaseSpider):
            item['title'] = args[2][0]
            item['link'] = args[1][0] 
            item['desc'] = args[3][0]
-           item['layer'] = "1:"+str(args[0])
+           item['id'] = "A-"+str(args[0])
            item['parent'] = -1
+           item['type'] = 1
            area_dict[item['title']+'_id'] = args[00]  ##建立爬虫主键
            area_dict[item['title']+'_name'] = args[3][0]
            ##str_to = args[2].decode('gbk', 'ignore').encode('utf-8')
@@ -80,11 +82,13 @@ class XinXinSpider(BaseSpider):
            if item["link"].find('.cncn.com')>=0:
                item['title'] = item['link'].split("/")[2].replace('.cncn.com','')
                area_dict[item['title']+"_pname"] = areaName
-               area_dict[item['title']+"_id"] = args[0]
                area_dict[item['title']+"_pid"] = parentId
-               area_dict[item['title']+"_name"] = item['desc']
+               if area_dict.get(item['title']+"_id") == None:
+                    area_dict[item['title']+"_id"] = args[0]
+                    area_dict[item['title']+"_name"] = item['desc']
                nextUrls.append(item['link'])
-           item['layer'] = "2:"+str(parentId)+"-"+str(args[0])
+           item['id'] = "C-"+str(parentId)+"-"+str(args[0])
+           item['type'] = 2
            self.saveToMongoDB(item)
            items.append(item)
        ##items.extend([self.make_requests_from_url(url).replace(callback=self.parse_cityIndexPage) for url in nextUrls])
@@ -119,31 +123,70 @@ class XinXinSpider(BaseSpider):
 
     ##通过分页提取景点列表入口地址
     def parse_JingDianEntryLinkPage(self,response):
-        ##print 'parse_JingDianPage:%s' % response.url
+        global urlshistory
         global area_dict
         cityName = response.url.split("/")[2].replace('.cncn.com','')
-        baseUrl = response.url.split("/")[2]
+        #取得分页编码,用来编辑对应的景点ID
+        pageSeqNum = response.url.split("/")[4].replace('index','').replace('.htm','')
+
+        if self.hasAccessUrl(cityName+"_"+pageSeqNum):
+            #假如已经访问过了，就不做重复处理
+            pass
+        else:
+            baseUrl = response.url.split("/")[2]
+            hxs = HtmlXPathSelector(response)
+            parentId = area_dict[cityName+"_id"]
+            #得出景点的链接入口地址
+            items = []
+            links  = hxs.select('//div[@class="txt mt10"]/dl[@class="gPopN"]/dd/a')
+            for index, link in enumerate(links):
+                args = (index+1, link.select('@href').extract(),link.select('text()').extract())
+                #print "%s jingdian: %s %s " % (cityName,args[2][0],"http://"+baseUrl+args[1][0])
+                item = JingdianItem()
+                if args[1][0]:
+                    jingdianName = args[1][0].split("/")[2]
+                    item['title'] = jingdianName
+                    area_dict[jingdianName+"_id"] = args[0]
+                item['desc'] = args[2][0]
+                item['link'] = "http://"+baseUrl+args[1][0]
+                item['parent'] = parentId
+                item['type'] = 3
+                item['id'] = "J-"+str(parentId)+"-"+pageSeqNum+"-"+str(args[0])
+                items.append(item)
+                items.extend([self.make_requests_from_url(item['link']+'/profile').replace(callback=self.parse_JingDianProfilePage)])
+            return items
+
+
+
+
+
+    #景点的简介信息
+    def parse_JingDianProfilePage(self,response):
+        global area_dict
+        cityName = response.url.split("/")[2].replace('.cncn.com','')
+        jingdianName = response.url.split("/")[4]
         hxs = HtmlXPathSelector(response)
-        #得出景点的链接入口地址
-        items = []
-        links  = hxs.select('//div[@class="txt mt10"]/dl[@class="gPopN"]/dd/a')
-        for index, link in enumerate(links):
-            args = (index+1, link.select('@href').extract(),link.select('text()').extract())
-            print "%s jingdian: %s %s " % (cityName,args[2][0],"http://"+baseUrl+args[1][0])
-            if args[1][0]:
-                jingdianName = args[1][0].split("/")[1]
-                item['title'] = jingdianName
-            item['desc'] = args[2][0]
-            item['link'] = args[1][0]
-            item['parent'] = area_dict[cityName+"_id"]
-            item['type'] = 2
-        return items
+        contents  = hxs.select('//div[@class="content"]').select('text()').extract()
+        contentTxt =""
+        for content in contents:
+            contentTxt +=content
+        item = JingdianItem()
+        item['desc'] = contentTxt
+        item['link'] = response.url
+        item['parent'] = area_dict[cityName+"_id"]
+        item['type'] = 4
+        item['id'] = "P-"+str(area_dict[jingdianName+"_id"])
+        return [item]
 
 
-    #景点的首页信息
-    def parse_JingDianIndexPage(self):
-        pass
-
+    #判断该地址是否已经被处理过
+    def hasAccessUrl(self,url):
+        global urlshistory
+        if urlshistory.get(url):
+            return True
+        else:
+            urlshistory[url] = 1
+            return False
 
 
     #下载对应的页面
@@ -169,7 +212,7 @@ class XinXinSpider(BaseSpider):
     #保存到数据库中
     def saveToMongoDB(self,item):
         global db
-        link = {'layer':item['layer'],'title':item['title'],'parent':item['parent'],'link':item['link'],'desc':item['desc']}
+        link = {'id':item['id'],'title':item['title'],'parent':item['parent'],'link':item['link'],'desc':item['desc']}
         links = db.links
         links.insert(link)
 

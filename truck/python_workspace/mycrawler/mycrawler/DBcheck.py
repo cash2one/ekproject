@@ -13,14 +13,14 @@ def listAllLinks():
     links = db.links
     print 'desc , link ,title,parent,layer '
     for link in links.find().sort('title'):
-        print '%s , %s , %s , %s , %s' % (link['desc'],link['link'],link['title'],link['parent'],link['layer'])
+        print '%s , %s , %s , %s , %s' % (link['desc'],link['link'],link['title'],link['parent'],link['id'])
     print '所有找到的链接情况有：%d' % links.count()
 
 def findlinkByDesc(str):
     links = db.links
     for link in links.find({"desc": str}).sort('title'):
         if link:
-             print '%s , %s , %s , %s , %s' % (link['desc'],link['link'],link['title'],link['parent'],link['layer'])
+             print '%s , %s , %s , %s , %s' % (link['desc'],link['link'],link['title'],link['parent'],link['id'])
 
 
 def removeData():
@@ -40,5 +40,5 @@ findlinkByDesc('广州')
 #removeData()
 ##listAllLinks()
 
-cityName = 'http://guangzhou.cncn.com/jingdian/'
-print cityName.find('guangou')
+
+
