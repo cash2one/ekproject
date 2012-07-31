@@ -6,3 +6,10 @@ scrapy crawl XinXin -o items.json -t json
 
 scrapy crawl XinXin -o xinxin.csv -t csv
 
+
+scrapy shell http://guangzhou.cncn.com//jingdian/index1.htm
+
+hxs.select('//div[@class="txt"]/dl[@class="gPopN"]')
+
+
+hxs.select('//div[@class="txt"]/dl/dd/a/@href').extract()
