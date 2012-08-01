@@ -179,6 +179,7 @@ class XinXinSpider(BaseSpider):
         return [item]
 
 
+
     #判断该地址是否已经被处理过
     def hasAccessUrl(self,url):
         global urlshistory
@@ -212,8 +213,20 @@ class XinXinSpider(BaseSpider):
     #保存到数据库中
     def saveToMongoDB(self,item):
         global db
-        link = {'id':item['id'],'title':item['title'],'parent':item['parent'],'link':item['link'],'desc':item['desc']}
-        links = db.links
-        links.insert(link)
-
+        if item["type"] == 1:
+            area = {'id':item['id'],'title':item['title'],'parent':item['parent'],'link':item['link'],'desc':item['desc']}
+            areas = db.areas
+            areas.insert(area)
+        if item["type"] == 2:
+            city = {'id':item['id'],'title':item['title'],'parent':item['parent'],'link':item['link'],'desc':item['desc']}
+            citys = db.citys
+            citys.insert(city)
+        if item["type"] == 3:
+            jingdian = {'id':item['id'],'title':item['title'],'parent':item['parent'],'link':item['link'],'desc':item['desc']}
+            jingdians = db.jingdians
+            jingdians.insert(jingdian)
+        if item["type"] == 4:
+            jdetail = {'id':item['id'],'title':item['title'],'parent':item['parent'],'link':item['link'],'desc':item['desc']}
+            jdetails = db.jdetails
+            jdetails.insert(jdetail)
         

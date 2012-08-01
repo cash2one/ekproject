@@ -9,15 +9,15 @@ print db.collection_names()
 
 
 ##打印所有的链接情况
-def listAllLinks():
-    links = db.links
+def listAllLinks(type):
+    links = db[type]
     print 'desc , link ,title,parent,layer '
     for link in links.find().sort('title'):
         print '%s , %s , %s , %s , %s' % (link['desc'],link['link'],link['title'],link['parent'],link['id'])
     print '所有找到的链接情况有：%d' % links.count()
 
-def findlinkByDesc(str):
-    links = db.links
+def findlinkByDesc(str,type):
+    links = db[type]
     for link in links.find({"desc": str}).sort('title'):
         if link:
              print '%s , %s , %s , %s , %s' % (link['desc'],link['link'],link['title'],link['parent'],link['id'])
@@ -35,8 +35,11 @@ def removeData():
 #    db.linlin.remove({'age':{$gte:20}})    delete linlin where age>=20
 #    db.linlin.remove({'age':{$ne:20}})     delete linlin where age!=20
 
-listAllLinks()
-findlinkByDesc('广州')
+listAllLinks('areas')
+listAllLinks('citys')
+
+findlinkByDesc('广东','areas')
+findlinkByDesc('广州','citys')
 #removeData()
 ##listAllLinks()
 
