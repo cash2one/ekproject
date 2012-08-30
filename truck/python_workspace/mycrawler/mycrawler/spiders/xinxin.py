@@ -9,12 +9,20 @@ from mycrawler.items import JingdianItem
 import os
 import re
 import pymongo
+import MySQLdb
+
+
+conn=MySQLdb.connect(host="localhost",user="root",passwd="aa123456",db="test",charset="utf8")
+conn.autocommit(True)
+cursor = conn.cursor()
 
 area_dict = {}   #信息字典
 urlshistory = {} #记录已经访问过的地址
 
-connection=pymongo.Connection('localhost',27017)
-db = connection.xinxin_database
+#connection=pymongo.Connection('localhost',27017)
+#mgdb = connection.xinxin_database
+
+
 
 ##爬虫实例(XinXin)
 class XinXinSpider(BaseSpider):
@@ -47,7 +55,7 @@ class XinXinSpider(BaseSpider):
            items.append(item)
            if args[1][0].find('guangdong')>= 0:
               nextUrls.append(args[1][0])
-           self.saveToMongoDB(item)
+           self.saveToDB(item)
            ##nextUrls.append(args[1][0])
        ##crawl the next url page
        items.extend([self.make_requests_from_url(url).replace(callback=self.parse_areaIndexPage) for url in nextUrls])
@@ -89,7 +97,7 @@ class XinXinSpider(BaseSpider):
                nextUrls.append(item['link'])
            item['id'] = "C-"+str(parentId)+"-"+str(args[0])
            item['type'] = 2
-           self.saveToMongoDB(item)
+           self.saveToDB(item)
            items.append(item)
        ##items.extend([self.make_requests_from_url(url).replace(callback=self.parse_cityIndexPage) for url in nextUrls])
        items.extend([self.make_requests_from_url('http://'+it['title']+'.cncn.com/jingdian/index1.htm').replace(callback=self.parse_cityJingDianListPages) for it in items])
@@ -211,22 +219,39 @@ class XinXinSpider(BaseSpider):
 
 
     #保存到数据库中
-    def saveToMongoDB(self,item):
-        global db
+#    def saveToDB(self,item):
+#        global db
+#        if item["type"] == 1:
+#            area = {'id':item['id'],'title':item['title'],'parent':item['parent'],'link':item['link'],'desc':item['desc']}
+#            areas = mgdb.areas
+#            areas.insert(area)
+#        if item["type"] == 2:
+#            city = {'id':item['id'],'title':item['title'],'parent':item['parent'],'link':item['link'],'desc':item['desc']}
+#            citys = mgdb.citys
+#            citys.insert(city)
+#        if item["type"] == 3:
+#            jingdian = {'id':item['id'],'title':item['title'],'parent':item['parent'],'link':item['link'],'desc':item['desc']}
+#            jingdians = mgdb.jingdians
+#            jingdians.insert(jingdian)
+#        if item["type"] == 4:
+#            jdetail = {'id':item['id'],'title':item['title'],'parent':item['parent'],'link':item['link'],'desc':item['desc']}
+#            jdetails = mgdb.jdetails
+#            jdetails.insert(jdetail)
+
+    def saveToDB(self,item):
         if item["type"] == 1:
-            area = {'id':item['id'],'title':item['title'],'parent':item['parent'],'link':item['link'],'desc':item['desc']}
-            areas = db.areas
-            areas.insert(area)
+            sql = "insert into area(id,name,description) values(%s,%s,%s)"
+            param = (item['id'],item['title'],item['desc'])
+            n = cursor.execute(sql,param)
         if item["type"] == 2:
-            city = {'id':item['id'],'title':item['title'],'parent':item['parent'],'link':item['link'],'desc':item['desc']}
-            citys = db.citys
-            citys.insert(city)
-        if item["type"] == 3:
-            jingdian = {'id':item['id'],'title':item['title'],'parent':item['parent'],'link':item['link'],'desc':item['desc']}
-            jingdians = db.jingdians
-            jingdians.insert(jingdian)
-        if item["type"] == 4:
-            jdetail = {'id':item['id'],'title':item['title'],'parent':item['parent'],'link':item['link'],'desc':item['desc']}
-            jdetails = db.jdetails
-            jdetails.insert(jdetail)
-        
+            sql = "insert into city(id,name,description,area_id) values(%s,%s,%s,%s)"
+            param = (item['id'],item['title'],item['desc'],item['parent'])
+            n = cursor.execute(sql,param)
+#        if item["type"] == 3:
+#            jingdian = {'id':item['id'],'title':item['title'],'parent':item['parent'],'link':item['link'],'desc':item['desc']}
+#            jingdians = mgdb.jingdians
+#            jingdians.insert(jingdian)
+#        if item["type"] == 4:
+#            jdetail = {'id':item['id'],'title':item['title'],'parent':item['parent'],'link':item['link'],'desc':item['desc']}
+#            jdetails = mgdb.jdetails
+#            jdetails.insert(jdetail)
