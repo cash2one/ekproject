@@ -35,11 +35,12 @@ def removeData():
 #    db.linlin.remove({'age':{$gte:20}})    delete linlin where age>=20
 #    db.linlin.remove({'age':{$ne:20}})     delete linlin where age!=20
 
-listAllLinks('areas')
-listAllLinks('citys')
+#listAllLinks('areas')
+#listAllLinks('citys')
+listAllLinks('jdetails')
 
-findlinkByDesc('广东','areas')
-findlinkByDesc('广州','citys')
+#findlinkByDesc('广东','areas')
+#findlinkByDesc('广州','citys')
 #removeData()
 ##listAllLinks()
 
