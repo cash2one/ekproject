@@ -12,7 +12,7 @@ import pymongo
 import MySQLdb
 
 
-conn=MySQLdb.connect(host="localhost",user="root",passwd="aa123456",db="test",charset="utf8")
+conn=MySQLdb.connect(host="localhost",user="root",passwd="123456",db="test",charset="utf8")
 conn.autocommit(True)
 cursor = conn.cursor()
 
@@ -46,17 +46,18 @@ class XinXinSpider(BaseSpider):
            item['title'] = args[2][0]
            item['link'] = args[1][0] 
            item['desc'] = args[3][0]
-           item['id'] = "A-"+str(args[0])
+           item['id'] = args[0]
            item['parent'] = -1
            item['type'] = 1
-           area_dict[item['title']+'_id'] = args[00]  ##建立爬虫主键
+           area_dict[item['title']+'_id'] = args[0]  ##建立爬虫主键
            area_dict[item['title']+'_name'] = args[3][0]
            ##str_to = args[2].decode('gbk', 'ignore').encode('utf-8')
            items.append(item)
-           if args[1][0].find('guangdong')>= 0:
-              nextUrls.append(args[1][0])
+           #保存省份列表
            self.saveToDB(item)
-           ##nextUrls.append(args[1][0])
+#           if args[1][0].find('guangdong')>= 0:
+#               nextUrls.append(args[1][0])
+           nextUrls.append(args[1][0])
        ##crawl the next url page
        items.extend([self.make_requests_from_url(url).replace(callback=self.parse_areaIndexPage) for url in nextUrls])
        ##items.extend([Request(url, meta={'item': item}, callback=self.parse_areaIndexPage) for url in nextUrls ])
@@ -92,11 +93,12 @@ class XinXinSpider(BaseSpider):
                area_dict[item['title']+"_pname"] = areaName
                area_dict[item['title']+"_pid"] = parentId
                if area_dict.get(item['title']+"_id") == None:
-                    area_dict[item['title']+"_id"] = args[0]
+                    area_dict[item['title']+"_id"] = args[0] + (30*parentId)
                     area_dict[item['title']+"_name"] = item['desc']
                nextUrls.append(item['link'])
-           item['id'] = "C-"+str(parentId)+"-"+str(args[0])
+           item['id'] = args[0] + (30*parentId)
            item['type'] = 2
+           #保存地市列表
            self.saveToDB(item)
            items.append(item)
        ##items.extend([self.make_requests_from_url(url).replace(callback=self.parse_cityIndexPage) for url in nextUrls])
@@ -113,7 +115,7 @@ class XinXinSpider(BaseSpider):
        cityName = response.url.split("/")[2].replace('.cncn.com','')
        areaName = area_dict[cityName+"_pname"]
        items = []
-       if cityName.find('guangzhou')< 0:
+       if cityName.find('-1')> 0:
             pass
        else:
            self.downloadPage(response,areaName)
@@ -149,18 +151,21 @@ class XinXinSpider(BaseSpider):
             links  = hxs.select('//div[@class="txt mt10"]/dl[@class="gPopN"]/dd/a')
             for index, link in enumerate(links):
                 args = (index+1, link.select('@href').extract(),link.select('text()').extract())
-                #print "%s jingdian: %s %s " % (cityName,args[2][0],"http://"+baseUrl+args[1][0])
+                print "%s jingdian: %s %s " % (cityName,args[2][0],"http://"+baseUrl+args[1][0])
                 item = JingdianItem()
+                item['id'] = "J-"+str(parentId)+"-"+pageSeqNum+"-"+str(args[0])
                 if args[1][0]:
                     jingdianName = args[1][0].split("/")[2]
                     item['title'] = jingdianName
-                    area_dict[jingdianName+"_id"] = args[0]
+                    area_dict[jingdianName+"_id"] = item['id']
+                else:
+                    item['title'] = '--'
                 item['desc'] = args[2][0]
                 item['link'] = "http://"+baseUrl+args[1][0]
                 item['parent'] = parentId
                 item['type'] = 3
-                item['id'] = "J-"+str(parentId)+"-"+pageSeqNum+"-"+str(args[0])
                 items.append(item)
+                self.saveToDB(item)
                 items.extend([self.make_requests_from_url(item['link']+'/profile').replace(callback=self.parse_JingDianProfilePage)])
             return items
 
@@ -184,6 +189,11 @@ class XinXinSpider(BaseSpider):
         item['parent'] = area_dict[cityName+"_id"]
         item['type'] = 4
         item['id'] = "P-"+str(area_dict[jingdianName+"_id"])
+        if  not contentTxt:
+            self.saveToDB(item)
+            print  'test:'+contentTxt
+        else:
+            print 'jingdian is null....'
         return [item]
 
 
@@ -238,7 +248,14 @@ class XinXinSpider(BaseSpider):
 #            jdetails = mgdb.jdetails
 #            jdetails.insert(jdetail)
 
+
     def saveToDB(self,item):
+        if item.get('title') is  None:
+            item["title"] = "---"
+
+        if item.get('desc') is  None:
+            item["desc"] = "---"
+
         if item["type"] == 1:
             sql = "insert into area(id,name,description) values(%s,%s,%s)"
             param = (item['id'],item['title'],item['desc'])
@@ -247,11 +264,12 @@ class XinXinSpider(BaseSpider):
             sql = "insert into city(id,name,description,area_id) values(%s,%s,%s,%s)"
             param = (item['id'],item['title'],item['desc'],item['parent'])
             n = cursor.execute(sql,param)
-#        if item["type"] == 3:
-#            jingdian = {'id':item['id'],'title':item['title'],'parent':item['parent'],'link':item['link'],'desc':item['desc']}
-#            jingdians = mgdb.jingdians
-#            jingdians.insert(jingdian)
-#        if item["type"] == 4:
-#            jdetail = {'id':item['id'],'title':item['title'],'parent':item['parent'],'link':item['link'],'desc':item['desc']}
-#            jdetails = mgdb.jdetails
-#            jdetails.insert(jdetail)
+        if item["type"] == 3:
+            sql = "insert into jindian(id,name,description,city_id,link_url) values(%s,%s,%s,%s,%s)"
+            param = (item['id'],item['title'],item['desc'],item['parent'],item['link'])
+            n = cursor.execute(sql,param)
+        if item["type"] == 4:
+            sql = "update jindian set profile= %s where id=%s "
+            param = (item['desc'],item['id'])
+            n = cursor.execute(sql,param)
+            print "update sql:"+sql % param
