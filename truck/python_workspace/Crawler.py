@@ -1,11 +1,15 @@
 #ethan lam  crawler
 import urllib2
 import time
+import redis
+
+r = redis.StrictRedis(host='61.142.114.242', port=6379, db=0)
+main_key = "crawl:url:"
 
 class Crawler(object):
     def __init__(self,urls):
         self.urls = urls
-        self.dirRoot = "d:/crawl/crawl_web/"
+        self.dirRoot = "d:/temp/crawl_web/"
 
     def save(self,url,content):
         _fileName = url.replace('http://','')
@@ -15,6 +19,7 @@ class Crawler(object):
         _file = open(self.dirRoot+_fileName,'w')
         _file.write(content)
         _file.close()
+        r.set(main_key+url,time.time())
         print 'start to  save:'+url+" At:%d" %(time.time()) 
 
 
