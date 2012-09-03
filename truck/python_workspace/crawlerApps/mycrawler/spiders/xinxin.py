@@ -12,7 +12,7 @@ import pymongo
 import MySQLdb
 
 
-conn=MySQLdb.connect(host="localhost",user="root",passwd="aa123456",db="test",charset="utf8")
+conn=MySQLdb.connect(host="localhost",user="root",passwd="123456",db="test",charset="utf8")
 conn.autocommit(True)
 cursor = conn.cursor()
 
@@ -33,6 +33,7 @@ class XinXinSpider(BaseSpider):
 
     # 处理首页的数据
     def parse(self, response):
+        self.cleanOldDatas();
         global area_dict
         self.downloadPage(response,'')
         hxs = HtmlXPathSelector(response)
@@ -176,15 +177,26 @@ class XinXinSpider(BaseSpider):
         cityName = response.url.split("/")[2].replace('.cncn.com','')
         jingdianName = response.url.split("/")[4]
         hxs = HtmlXPathSelector(response)
-        contents  = hxs.select('//div[@class="content"]').select('text()').extract()
         contentTxt =""
+        type = 1
+
+        #正文内容是样式1的
+        contents  = hxs.select('//div[@id="article"]').select('text()').extract()
         for content in contents:
             contentTxt +=content
+        #正文内容是样式2 的
+        if contentTxt =='':
+            contents  = hxs.select('//div[@class="type"]').select('text()').extract()
+            contentTxt =""
+            type = 2
+            for content in contents:
+                contentTxt +=content
+
         item = JingdianItem()
         item['profile'] = contentTxt
         item['link_url'] = response.url
         item['city_id'] = area_dict[cityName+"_id"]
-        item['type'] = 4
+        item['type'] = type
         item['id'] = area_dict[jingdianName+"_id"]
         self.saveToDB(item)
         return [item]
@@ -242,6 +254,15 @@ class XinXinSpider(BaseSpider):
     #            jdetails.insert(jdetail)
 
 
+    def cleanOldDatas(self):
+        sql = "delete from area;"
+        cursor.execute(sql)
+        sql = "delete from city;"
+        cursor.execute(sql)
+        sql = "delete from jingdian;"
+        cursor.execute(sql)
+        print 'clean old data....'
+
     #入库处理
     def saveToDB(self,item):
         if isinstance(item,AreaItem):
@@ -262,7 +283,7 @@ class XinXinSpider(BaseSpider):
                 cursor.execute(sql,param)
             elif  item.get('profile') is not None:
                 #更新记录
-                sql = "update jingdian set profile = %s where id = %s "
-                param = (item['profile'],item['id'])
+                sql = "update jingdian set profile = %s,type= %s where id = %s "
+                param = (item['profile'],item['type'],item['id'])
                 cursor.execute(sql,param)
 
