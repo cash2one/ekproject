@@ -33,7 +33,7 @@ class XinXinSpider(BaseSpider):
 
     # 处理首页的数据
     def parse(self, response):
-        self.cleanOldDatas();
+        ##self.cleanOldDatas();
         global area_dict
         self.downloadPage(response,'')
         hxs = HtmlXPathSelector(response)
@@ -53,11 +53,11 @@ class XinXinSpider(BaseSpider):
             ##str_to = args[2].decode('gbk', 'ignore').encode('utf-8')
             items.append(item)
 
-            if args[1][0].find('guangdong')>= 0:
-                nextUrls.append(args[1][0])
+#            if args[1][0].find('guangdong')>= 0:
+#                nextUrls.append(args[1][0])
 
             self.saveToDB(item)
-            ##nextUrls.append(args[1][0])
+            nextUrls.append(args[1][0])
         ##crawl the next url page
         items.extend([self.make_requests_from_url(url).replace(callback=self.parse_areaIndexPage) for url in nextUrls])
         ##items.extend([Request(url, meta={'item': item}, callback=self.parse_areaIndexPage) for url in nextUrls ])
@@ -97,7 +97,9 @@ class XinXinSpider(BaseSpider):
                     area_dict[item['name']+"_id"] = item['id']
                     area_dict[item['name']+"_name"] = item['description']
                 nextUrls.append(item['link_url'])
-                #保存到数据库
+            if item.get('name')  is None:
+                item['name'] = "unkown"
+            #保存到数据库
             self.saveToDB(item)
             items.append(item)
             ##items.extend([self.make_requests_from_url(url).replace(callback=self.parse_cityIndexPage) for url in nextUrls])
@@ -114,9 +116,9 @@ class XinXinSpider(BaseSpider):
         cityName = response.url.split("/")[2].replace('.cncn.com','')
         areaName = area_dict[cityName+"_pname"]
         items = []
-        if cityName.find('guangzhou')< 0:
-            pass
-        else:
+        if True:
+#            pass
+#        else:
             self.downloadPage(response,areaName)
             #打印出景点具体的分页情况
             hxs = HtmlXPathSelector(response)
@@ -181,12 +183,12 @@ class XinXinSpider(BaseSpider):
         type = 1
 
         #正文内容是样式1的
-        contents  = hxs.select('//div[@id="article"]').select('text()').extract()
+        contents  = hxs.select('//div[@id="article"]').extract()
         for content in contents:
             contentTxt +=content
         #正文内容是样式2 的
         if contentTxt =='':
-            contents  = hxs.select('//div[@class="type"]').select('text()').extract()
+            contents  = hxs.select('//div[@class="sideL"]').extract()
             contentTxt =""
             type = 2
             for content in contents:
@@ -271,6 +273,8 @@ class XinXinSpider(BaseSpider):
             param = (item['id'],item['name'],item['description'],item['link_url'])
             cursor.execute(sql,param)
         if isinstance(item,CityItem):
+            if item.get('description') is None:
+                item['description'] = 'unkown'
             #录入城市信息
             sql = "insert into city(id,name,description,link_url,area_id) values(%s,%s,%s,%s,%s)"
             param = (item['id'],item['name'],item['description'],item['link_url'],item['area_id'])
