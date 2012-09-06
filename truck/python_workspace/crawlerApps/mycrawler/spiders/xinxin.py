@@ -8,13 +8,16 @@ from mycrawler.items import JingdianItem,AreaItem,CityItem
 
 import os
 import re
-import pymongo
 import MySQLdb
 
+#连接数据库
+from mycrawler.elam.common.loggerUtil import initlog
 
-conn=MySQLdb.connect(host="localhost",user="root",passwd="123456",db="test",charset="utf8")
+conn=MySQLdb.connect(host="localhost",user="root",passwd="aa123456",db="test",charset="utf8")
 conn.autocommit(True)
 cursor = conn.cursor()
+
+logging=initlog("crawl")
 
 area_dict = {}   #信息字典
 urlshistory = {} #记录已经访问过的地址
@@ -111,25 +114,27 @@ class XinXinSpider(BaseSpider):
 
     #转到城市的对应的景点的分页数据情况
     def parse_cityJingDianListPages(self,response):
-        global area_dict
-        baseUrlStr = "http://"+response.url.split("/")[2]+"/jingdian/"
-        cityName = response.url.split("/")[2].replace('.cncn.com','')
-        areaName = area_dict[cityName+"_pname"]
-        items = []
-        if True:
-#            pass
-#        else:
-            self.downloadPage(response,areaName)
-            #打印出景点具体的分页情况
-            hxs = HtmlXPathSelector(response)
-            links  = hxs.select('//div[@class="recommend1 mt10"]/div[@class="cutpage"][1]/div[@class="cp2"]/li/a')
-            #print '%s JingDianListPages: ' % cityName
-            for index, link in enumerate(links):
-                args = (index+1, link.select('@href').extract(),link.select('text()').extract())
-                items.extend([self.make_requests_from_url(baseUrlStr+link.select('@href').extract()[0]).replace(callback=self.parse_JingDianEntryLinkPage)])
-                #print baseUrlStr+link.select('@href').extract()[0]
-        return items
-
+        try:
+            global area_dict
+            baseUrlStr = "http://"+response.url.split("/")[2]+"/jingdian/"
+            cityName = response.url.split("/")[2].replace('.cncn.com','')
+            areaName = area_dict[cityName+"_pname"]
+            items = []
+            if True:
+    #            pass
+    #        else:
+                self.downloadPage(response,areaName)
+                #打印出景点具体的分页情况
+                hxs = HtmlXPathSelector(response)
+                links  = hxs.select('//div[@class="recommend1 mt10"]/div[@class="cutpage"][1]/div[@class="cp2"]/li/a')
+                #print '%s JingDianListPages: ' % cityName
+                for index, link in enumerate(links):
+                    args = (index+1, link.select('@href').extract(),link.select('text()').extract())
+                    items.extend([self.make_requests_from_url(baseUrlStr+link.select('@href').extract()[0]).replace(callback=self.parse_JingDianEntryLinkPage)])
+                    #print baseUrlStr+link.select('@href').extract()[0]
+            return items
+        except :
+            logging.error(response.url+" crawl fail...");
 
 
     ##通过分页提取景点列表入口地址
@@ -176,32 +181,35 @@ class XinXinSpider(BaseSpider):
     #景点的简介信息
     def parse_JingDianProfilePage(self,response):
         global area_dict
-        cityName = response.url.split("/")[2].replace('.cncn.com','')
-        jingdianName = response.url.split("/")[4]
-        hxs = HtmlXPathSelector(response)
-        contentTxt =""
-        type = 1
-
-        #正文内容是样式1的
-        contents  = hxs.select('//div[@id="article"]').extract()
-        for content in contents:
-            contentTxt +=content
-        #正文内容是样式2 的
-        if contentTxt =='':
-            contents  = hxs.select('//div[@class="sideL"]').extract()
+        try:
+            cityName = response.url.split("/")[2].replace('.cncn.com','')
+            jingdianName = response.url.split("/")[4]
+            hxs = HtmlXPathSelector(response)
             contentTxt =""
-            type = 2
+            type = 1
+
+            #正文内容是样式1的
+            contents  = hxs.select('//div[@id="article"]').extract()
             for content in contents:
                 contentTxt +=content
+            #正文内容是样式2 的
+            if contentTxt =='':
+                contents  = hxs.select('//div[@class="sideL"]').extract()
+                contentTxt =""
+                type = 2
+                for content in contents:
+                    contentTxt +=content
 
-        item = JingdianItem()
-        item['profile'] = contentTxt
-        item['link_url'] = response.url
-        item['city_id'] = area_dict[cityName+"_id"]
-        item['type'] = type
-        item['id'] = area_dict[jingdianName+"_id"]
-        self.saveToDB(item)
-        return [item]
+            item = JingdianItem()
+            item['profile'] = contentTxt
+            item['link_url'] = response.url
+            item['city_id'] = area_dict[cityName+"_id"]
+            item['type'] = type
+            item['id'] = area_dict[jingdianName+"_id"]
+            self.saveToDB(item)
+            return [item]
+        except :
+            logging.error(response.url+" crawl fail...");
 
 
 
@@ -290,4 +298,5 @@ class XinXinSpider(BaseSpider):
                 sql = "update jingdian set profile = %s,type= %s where id = %s "
                 param = (item['profile'],item['type'],item['id'])
                 cursor.execute(sql,param)
+
 
