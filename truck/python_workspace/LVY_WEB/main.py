@@ -13,7 +13,8 @@ import tornado.options
 import tornado.web
 
 from tornado.options import define, options
-from uiModules import AreaEntryModule
+from uiModules import AreaEntryModule,ViewspotEntryModule
+
 
 #基础配置
 define("port", default=80, help="run on the given port", type=int)
@@ -27,12 +28,13 @@ class Application(tornado.web.Application):
     def __init__(self):
         handlers = [
             (r"/", HomeHandler),
+            (r"/view/([^/]+)",ViewSpotHandler),
         ]
         settings = dict(
             view_title=u"旅游信息",
             template_path=os.path.join(os.path.dirname(__file__), "templates"),
             static_path=os.path.join(os.path.dirname(__file__), "static"),
-            ui_modules={"AreaEntry": AreaEntryModule},
+            ui_modules={"AreaEntry": AreaEntryModule,"ViewspotEntry":ViewspotEntryModule},
             xsrf_cookies=True,
             cookie_secret="11oETzKXQAGaYdkL5gEmGeJJFuYh7EQnp2XdTP1o/Vo=",
             login_url="/auth/login",
@@ -66,6 +68,16 @@ class HomeHandler(BaseHandler):
             return
         self.render("home.html", entries=entries)
 
+
+#应用首页
+class ViewSpotHandler(BaseHandler):
+    def get(self,city):
+        entries = self.db.query("SELECT * FROM jingdian where city_id=%s ORDER BY id "
+                                "DESC LIMIT 100 ",city)
+        if not entries:
+            self.redirect("/")
+            return
+        self.render("viewspot.html", entries=entries)
 
 def main():
     tornado.options.parse_command_line()
