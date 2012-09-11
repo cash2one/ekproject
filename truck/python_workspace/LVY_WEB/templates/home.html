@@ -1,10 +1,11 @@
 {% extends "base.html" %}
 
 {% block body %}
-  <ul>
-  {% for entry in entries %}
-    {{ modules.AreaEntry(entry) }}
-  </ul>
-  {% end %}
-  <div><a href="/archive">.....</a></div>
+<div>
+  	 <ul class="area">
+	  {% for entry in entries %}
+	    {{ modules.AreaEntry(entry) }}
+      {% end %}
+     </ul>  	
+ </div>
 {% end %}

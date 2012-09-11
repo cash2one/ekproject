@@ -13,15 +13,17 @@ import tornado.options
 import tornado.web
 
 from tornado.options import define, options
-from uiModules import AreaEntryModule,ViewspotEntryModule
+from uiModules import AreaEntryModule,ViewspotEntryModule,CityEntryModule
+from viewSpot import BaseHandler,HomeHandler,ViewSpotHandler,CityHandler
 
 
-#基础配置
+#应用的基础配置
 define("port", default=80, help="run on the given port", type=int)
 define("mysql_host", default="127.0.0.1:3306", help="blog database host")
 define("mysql_database", default="test", help="blog database name")
 define("mysql_user", default="root", help="blog database user")
-define("mysql_password", default="aa123456", help="blog database password")
+define("mysql_password", default="123456", help="blog database password")
+
 
 #应用设置
 class Application(tornado.web.Application):
@@ -29,56 +31,28 @@ class Application(tornado.web.Application):
         handlers = [
             (r"/", HomeHandler),
             (r"/view/([^/]+)",ViewSpotHandler),
+            (r"/area/([^/]+)",CityHandler),
         ]
         settings = dict(
             view_title=u"旅游信息",
             template_path=os.path.join(os.path.dirname(__file__), "templates"),
             static_path=os.path.join(os.path.dirname(__file__), "static"),
-            ui_modules={"AreaEntry": AreaEntryModule,"ViewspotEntry":ViewspotEntryModule},
+            ui_modules={"AreaEntry": AreaEntryModule,"ViewspotEntry":ViewspotEntryModule,"CityEntry":CityEntryModule},
             xsrf_cookies=True,
             cookie_secret="11oETzKXQAGaYdkL5gEmGeJJFuYh7EQnp2XdTP1o/Vo=",
             login_url="/auth/login",
             autoescape=None,
+            debug=True
         )
         tornado.web.Application.__init__(self, handlers, **settings)
 
-        # Have one global connection to the blog DB across all handlers
+        # Have one global connection to the DB across all handlers
         self.db = tornado.database.Connection(
             host=options.mysql_host, database=options.mysql_database,
             user=options.mysql_user, password=options.mysql_password)
 
-#控制器基类
-class BaseHandler(tornado.web.RequestHandler):
-    @property
-    def db(self):
-        return self.application.db
 
-    def get_current_user(self):
-        user_id = self.get_secure_cookie("user")
-        if not user_id: return None
-        return self.db.get("SELECT * FROM authors WHERE id = %s", int(user_id))
-
-#应用首页
-class HomeHandler(BaseHandler):
-    def get(self):
-        entries = self.db.query("SELECT * FROM area ORDER BY id "
-                                "DESC LIMIT 34")
-        if not entries:
-            self.redirect("/")
-            return
-        self.render("home.html", entries=entries)
-
-
-#应用首页
-class ViewSpotHandler(BaseHandler):
-    def get(self,city):
-        entries = self.db.query("SELECT * FROM jingdian where city_id=%s ORDER BY id "
-                                "DESC LIMIT 100 ",city)
-        if not entries:
-            self.redirect("/")
-            return
-        self.render("viewspot.html", entries=entries)
-
+#运行程序
 def main():
     tornado.options.parse_command_line()
     http_server = tornado.httpserver.HTTPServer(Application())
