@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <ImageView
+        android:id="@+id/listItemImg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_margin="5dp"
+        android:layout_marginLeft="10px"
+        android:layout_marginTop="10px"
+        android:src="@drawable/default_avatar_shadow" />
+
+    <TextView
+        android:id="@+id/listItemName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/listItemImg"
+        android:layout_marginTop="10px"
+        android:text="  新的消息"
+        android:textColor="@android:color/black"
+        android:textSize="20sp" />
+
+
+
+    <TextView
+        android:id="@+id/listItemTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/listItemName"
+        android:layout_below="@+id/listItemName"
+        android:text="这可能是近年来最令人期待的一场发布会了，旧金山Yerba Buena中心将再一次响起人们的欢呼声和惊叹声，这也是乔布斯逝世库克接棒后第一次独立发布iPhone产品"
+        android:textColor="@android:color/black"
+        android:textSize="20sp" 
+        style="@style/listContentStyle"/>
+
+     <ImageView
+         android:id="@+id/listItemContentImg"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignLeft="@+id/listItemTitle"
+         android:layout_below="@+id/listItemTitle"
+         android:layout_margin="5dp"
+         android:src="@drawable/back" />
+    
+</RelativeLayout>

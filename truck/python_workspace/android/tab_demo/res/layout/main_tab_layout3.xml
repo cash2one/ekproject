@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>  
+<RelativeLayout 
+    android:layout_height="fill_parent"  
+    android:layout_width="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"> 
+    
+    
+        <LinearLayout 
+        android:id="@+id/Container"  
+        android:layout_above="@+id/bottom_tab" 
+        android:layout_width="fill_parent"  
+        android:layout_height="fill_parent">  
+        </LinearLayout>  
+        
+        
+        <GridView
+        android:id="@+id/bottom_tab" 
+        android:layout_width="fill_parent"  
+        android:layout_height="wrap_content"     
+        android:layout_alignParentBottom="true"  
+        android:padding="2dp" 
+        android:background="@drawable/tab_widget_background"
+        android:listSelector="@drawable/selector_tab_background"
+       	android:numColumns="5">  
+        </GridView>  
+
+		
+		
+</RelativeLayout>  
+ 

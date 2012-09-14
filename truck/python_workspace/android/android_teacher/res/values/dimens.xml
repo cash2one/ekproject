@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 主页大边框 -->
+    <dimen name="main_big_margin">16dp</dimen>
+    <!-- 主页中边框 -->
+    <dimen name="main_mid_margin">8dp</dimen>
+    <!-- 主页细边框 -->
+    <dimen name="main_small_margin">8dp</dimen>
+    <!-- 主页按钮的bottom pad -->
+    <dimen name="main_btn_bpad">5dp</dimen>
+    <!-- 主页按钮的right pad -->
+    <dimen name="main_btn_rpad">30dp</dimen>
+    <!-- 主页按钮的字体大小 -->
+    <dimen name="title_txt_size">20dp</dimen>
+
+</resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<color name="deep">#499E8D</color><!--深绿_背景色 -->
+<color name="mid">#85CC9F</color><!--深绿_背景色 -->
+<color name="light">#A4DEAB</color><!--深绿_背景色 -->
+<color name="normal">#C8E8C7</color><!--深绿_背景色 -->
+<color name="whrite">#FFF6C9</color><!--深绿_背景色 -->
+<color name="main_btn">#000000</color><!-- 主界面按钮文字 -->
+</resources>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layer-list
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/user_faceback_drawable" 
+        android:drawable="@drawable/addressbook_faceback" />
+    <item android:id="@+id/user_face_drawable" 
+        android:drawable="@drawable/addressbook_personhead" 
+        android:left="3dip"
+        android:right="3dip"
+        android:top="3dip"
+        android:bottom="3dip" />
+</layer-list>

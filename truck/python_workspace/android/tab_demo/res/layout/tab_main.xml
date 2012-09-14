@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TabHost xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@android:id/tabhost"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+
+        <TabWidget
+            android:id="@android:id/tabs"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="1dip"
+            android:paddingRight="1dip"
+            android:paddingTop="4dip"
+            android:visibility="gone" />
+
+        <FrameLayout
+            android:id="@android:id/tabcontent"
+            android:layout_width="fill_parent"
+            android:layout_height="0dip"
+            android:layout_weight="1" />
+            
+        <RadioGroup
+            android:id="@+id/rg"
+            android:layout_width="fill_parent"
+            android:layout_height="50px"
+            android:background="#f00"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/rb01"
+                style="@style/menu_item"
+                android:checked="true"
+                android:drawableTop="@drawable/menu_home"
+                android:text="主页" />
+
+            <RadioButton
+                android:id="@+id/rb02"
+                style="@style/menu_item"
+                android:drawableTop="@drawable/menu_clear"
+                android:text="清除" />
+
+            <RadioButton
+                android:id="@+id/rb03"
+                style="@style/menu_item"
+                android:drawableTop="@drawable/menu_refresh"
+                android:text="刷新" />
+
+            <RadioButton
+                android:id="@+id/rb04"
+                style="@style/menu_item"
+                android:drawableTop="@drawable/menu_save"
+                android:text="保存" />
+
+            <RadioButton
+                android:id="@+id/rb05"
+                style="@style/menu_item"
+                android:drawableTop="@drawable/menu_more"
+                android:text="更多" />
+        </RadioGroup>
+
+    </LinearLayout>
+
+</TabHost>

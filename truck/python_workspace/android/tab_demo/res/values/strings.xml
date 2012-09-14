@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello World, MainActivity!</string>
+    <string name="app_name">Tab_demo</string>
+
+    <color name="btn_normal_begin">#fff</color>
+    <color name="btn_normal_end">#ccc</color>
+    <color name="btn_press_begin">#fefeee</color>
+    <color name="btn_press_end">#f9e795</color>
+
+        
+    <dimen name="btn_radius">20dp</dimen>
+</resources>

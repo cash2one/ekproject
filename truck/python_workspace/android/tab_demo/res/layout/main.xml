@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:gravity ="center_horizontal"
+	android:background="@drawable/main_background"
+	>
+    
+	<Button android:text="RadioGroup实例(底)" android:id="@+id/button1" style="@style/btn_style" />
+	<Button android:text="RadioGroup+ViewFlipper实例(顶)" android:id="@+id/button2"  style="@style/btn_style" />
+	<Button android:text="滑动菜单" android:id="@+id/button3"  style="@style/btn_style" />
+
+	<Button android:text="CusTab" android:id="@+id/button4" style="@style/btn_style" />
+	<Button android:text="RadioGroup" android:id="@+id/button5"  style="@style/btn_style" />
+	<Button android:text="ActivityGroup" android:id="@+id/button6"  style="@style/btn_style" />
+
+	<Button android:text="上下tab综合" android:id="@+id/button7"  style="@style/btn_style" />
+</LinearLayout>
