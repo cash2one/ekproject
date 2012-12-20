@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div class="area_ul">
+  	 <ul class="area">
+	  {% for entry in entries %}
+	    {{ modules.AreaEntry(entry) }}
+      {% end %}
+     </ul>  	
+ </div>
+ <div class="hot_viewspot">
+ 	
+ 	
+ </div>
+ <div class="hot_comment">
+ 	
+ 	
+ </div>
+{% end %}

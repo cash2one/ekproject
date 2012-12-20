@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block body %}
+  <ul>
+  {% for entry in entries %}
+    {{ modules.ViewspotEntry(entry) }}
+  {% end %}
+  </ul>
+  <div><a href="/archive">.....</a></div>
+{% end %}
