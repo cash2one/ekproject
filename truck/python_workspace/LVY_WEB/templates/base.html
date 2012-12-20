@@ -14,12 +14,11 @@
             <div>用户还没登陆</div>
           {% end %}
         </div>
-        <h1><a href="/">{{ escape(handler.settings["view_title"]) }}</a></h1>
       </div>
       <div id="content">
       	 {% block body %}{% end %}	 
       </div>
     </div>
-    {% block bottom %}{% end %}
+         {% block bottom %}{% end %}
   </body>
 </html>
