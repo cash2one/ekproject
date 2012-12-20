@@ -19,7 +19,7 @@ def showCurrentMaster(hostIp,nport):
     print 'REDIS_NODES_CFG %s ' % r.get('REDIS_NODES_CFG')
 
 #
-#showRangeDatas(hostIP,6379);
+showRangeDatas(hostIP,6579);
 
 showCurrentMaster(hostIP,6379);
 

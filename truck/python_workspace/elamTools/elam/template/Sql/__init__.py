@@ -6,94 +6,30 @@ import os
 
 SQLTemplate  = Template("""
 
--- 老师对学生的评价得分情况 记录表
-create table  zjxxt.${abb}_estimate_score(
-    id  number(12),
-    stu_sequence varchar(30),
-    school_id   number(12),
-    execute_id  number(12),
-    item_cfg_id  number(12),
-    rank_score   number(12),
-    update_time  date  default sysdate
-);
+insert into zjxxt.hz_KQ_ATTREC
+select 1,12,t.school_id,t.class_id,t.ic_no,t.STU_SEQUENCE,sysdate+${num}-8/24,sysdate+${num}-8/24,1,1,stu_no,1,t.stu_type
+from (select stu.STU_SEQUENCE,sc.school_id,STU.STU_NO,stu.stu_type,stu.ic_no,sc.class_id from zjxxt.hz_xj_student stu,zjxxt.hz_xj_stu_class sc
+where stu.STU_SEQUENCE = sc.STU_SEQUENCE and stu.ic_no is not null
+and sc.class_id = 141901)t;
 
+insert into zjxxt.hz_KQ_ATTREC
+select 1,12,t.school_id,t.class_id,t.ic_no,t.STU_SEQUENCE,sysdate+${num}-4/24,sysdate+${num}-4/24,2,1,stu_no,1,t.stu_type
+from (select stu.STU_SEQUENCE,sc.school_id,STU.STU_NO,stu.stu_type,stu.ic_no,sc.class_id from zjxxt.hz_xj_student stu,zjxxt.hz_xj_stu_class sc
+where stu.STU_SEQUENCE = sc.STU_SEQUENCE and stu.ic_no is not null
+and sc.class_id = 141901)t;
 
-comment on table zjxxt.${abb}_estimate_score is '老师对学生的评价得分情况 记录表';
+insert into zjxxt.hz_KQ_ATTREC
+select 1,12,t.school_id,t.class_id,t.ic_no,t.STU_SEQUENCE,sysdate+${num}-2/24,sysdate+${num}-2/24,3,1,stu_no,1,t.stu_type
+from (select stu.STU_SEQUENCE,sc.school_id,STU.STU_NO,stu.stu_type,stu.ic_no,sc.class_id from zjxxt.hz_xj_student stu,zjxxt.hz_xj_stu_class sc
+where stu.STU_SEQUENCE = sc.STU_SEQUENCE and stu.ic_no is not null
+and sc.class_id = 141901)t;
 
-comment on column  zjxxt.${abb}_estimate_score.stu_sequence is '学生编号';
+insert into zjxxt.hz_KQ_ATTREC
+select 1,12,t.school_id,t.class_id,t.ic_no,t.STU_SEQUENCE,sysdate+${num}+1/24,sysdate+${num}+1/24,4,1,stu_no,1,t.stu_type
+from (select stu.STU_SEQUENCE,sc.school_id,STU.STU_NO,stu.stu_type,stu.ic_no,sc.class_id from zjxxt.hz_xj_student stu,zjxxt.hz_xj_stu_class sc
+where stu.STU_SEQUENCE = sc.STU_SEQUENCE and stu.ic_no is not null
+and sc.class_id = 141901)t;
 
-comment on column  zjxxt.${abb}_estimate_score.school_id is '学校ID';
-
-comment on column  zjxxt.${abb}_estimate_score.execute_id is 'estimate_execute.id 评分调查活动的主键';
-
-comment on column  zjxxt.${abb}_estimate_score.item_cfg_id is '评价条目 estimate_item_cfg ';
-
-comment on column  zjxxt.${abb}_estimate_score.rank_score is ' 对应的得分情况 estimate_rank_cfg_id';
-
-comment on column  zjxxt.${abb}_estimate_score.update_time is '评价更新时间';
-
-
-CREATE SEQUENCE ZJXXT.${abb}_estimate_score_SEQ
-  START WITH 1
-  MAXVALUE 9999999999999999
-  MINVALUE 1
-  NOCYCLE
-  CACHE 20
-  NOORDER;
-
-CREATE OR REPLACE TRIGGER "ZJXXT"."${abb}_estimate_score_TRI"
-BEFORE INSERT
-ON ZJXXT.${abb}_estimate_score
-REFERENCING NEW AS New OLD AS Old
-FOR EACH ROW
-BEGIN
-     SELECT ZJXXT.${abb}_estimate_score_SEQ.NEXTVAL INTO :NEW.id FROM DUAL;
-END;
-
--- 老师及其家长 对 学生的评语 记录表
-create table  zjxxt.${abb}_estimate_comment(
-    id  number(12),
-    stu_sequence  varchar(30),
-    school_id     number(12),
-    execute_id   number(12),
-    teacher_comment  varchar(300) ,
-    parent_comment   varchar(300),
-    update_time  date default sysdate
-);
-
-
-comment on table zjxxt.${abb}_estimate_comment is '老师对学生的评价得分情况 记录表';
-
-comment on column  zjxxt.${abb}_estimate_comment.stu_sequence is '学生编号';
-
-comment on column  zjxxt.${abb}_estimate_comment.school_id is '学校ID';
-
-comment on column  zjxxt.${abb}_estimate_comment.execute_id is 'estimate_execute.id 评分调查活动的主键';
-
-comment on column  zjxxt.${abb}_estimate_comment.teacher_comment is '教师对学生的评语';
-
-comment on column  zjxxt.${abb}_estimate_comment.parent_comment is '教师对学生的评语';
-
-comment on column  zjxxt.${abb}_estimate_comment.update_time is '评价更新时间';
-
-
-
-CREATE SEQUENCE ZJXXT.${abb}_estimate_comment_SEQ
-  START WITH 1
-  MAXVALUE 9999999999999999
-  MINVALUE 1
-  NOCYCLE
-  CACHE 20
-  NOORDER;
-
-CREATE OR REPLACE TRIGGER "ZJXXT"."${abb}_estimate_comment_TRI"
-BEFORE INSERT
-ON ZJXXT.${abb}_estimate_comment
-REFERENCING NEW AS New OLD AS Old
-FOR EACH ROW
-BEGIN
-     SELECT ZJXXT.${abb}_estimate_comment_SEQ.NEXTVAL INTO :NEW.id FROM DUAL;
-END;
 
 """)
 
@@ -101,7 +37,7 @@ END;
 def makeCode(areaAbb):
     fieldSetContent = ''
     for abb in areaAbb:
-        fieldSetContent+=SQLTemplate.safe_substitute({"abb":abb})
+        fieldSetContent+=SQLTemplate.safe_substitute({"num":abb})
     return fieldSetContent
 
 
@@ -117,5 +53,5 @@ def saveFile(filePath, buf):
     f.close()
 
 
-areaAbb = ['qz','hz','jx','nb','sx','tz','wz','ls','jh','zs','huz']
-saveFile("C:/Users/Solosus/Desktop/SqlScripts/estimate.sql",makeCode(areaAbb))
+areaAbb = [0,1,2,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21]
+saveFile("d:/kq_data.sql",makeCode(areaAbb))
