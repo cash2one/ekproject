@@ -30,6 +30,7 @@
             	  <if test="insertuserid!=null"> AND amcent.insertuserid like #{insertuserid}</if>         
                   <if test="areaName!=null"> AND area.name like #{areaName}</if>         
                   <if test="company!=null"> AND qxadminsi.company like #{company}</if> 
+                  <if test="TEST!=null">TEST SQL </if>
         </where> 
   </sql>
 

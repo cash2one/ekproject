@@ -26,8 +26,8 @@ public class Main {
 //		 case1(null); //原来模式的
 //		 case_mdf();
 //		 case_del();
-//		 case_query(); //新的模式
-		 case_mdf();
+		 case_query_1(); //新的模式
+//		 case_mdf();
 //		 case_insert();
 //		 case_query(); //新的模式
 		 
@@ -38,21 +38,7 @@ public class Main {
 	  * @param arg
 	  * @throws Exception
 	  */
-     public static void case1(String... arg) throws Exception{
-			BusinessContainer.getInstance();
-			AmassCentInfo info  = SpringUtil.getSpringBean(AmassCentInfo.class,"amassCentInfo");
-//			AmassCentInfo info  = new  AmassCentInfo();
-			 System.out.println("测试环境是否正常...");
-			info.setDaoAbb("cs");
-			List<AmassCentInfo> cents = (List<AmassCentInfo>)MethodAdapter.invoker(info, "queryAmassCents",true,new Object[][]{{"schoolId",1}});
-			if(cents!=null)
-			for(AmassCentInfo cent : cents){
-			     System.out.println("学校ID："+cent.getSchoolId()+",用户名："+cent.getUserId()+"，积分情况： "+cent.getCent()+"  ");
-		    }
-		    System.out.println("SpringUtil.getSpringBean 正常...");
-	 }
-	
-     
+ 
      public static void case_query() {
     	 try {
 	    	 ModelBusiness info  = SpringUtil.getSpringBean(ModelBusiness.class,"modelBusiness");
@@ -104,4 +90,18 @@ public class Main {
 		 } catch (Exception e) {
 		 }
 	 }
+     
+     public static void case_query_1() {
+    	 try {
+    		 AmassCentInfo info  = SpringUtil.getSpringBean(AmassCentInfo.class,"amassCentInfo");
+    		 List<AmassCentInfo> lst = (List<AmassCentInfo>)MethodAdapter.invoker(info, "queryAmassCents", false, new Object[][]{{"schoolId",1}});
+    		 for(AmassCentInfo c:lst){
+    			 System.out.println(c.getSchoolId()+"  "+c.getSchoolName());
+    		 }
+    		 
+		  } catch (Exception e) {
+		 
+		  }
+	 }
+     
 }

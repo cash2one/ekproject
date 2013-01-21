@@ -28,11 +28,11 @@ public class Main {
 //		 case1(null); //原来模式的
 //		 case_mdf();
 //		 case_del();
-//		 case_query2(); //新的模式
+		 case_query_stu("测试%"); //新的模式
 		 case_query_stu("测试%");
 //		 case_del();
 //		 case_insert();
-//		 case_query(); //新的模式
+
 		 
 	 }
 	 

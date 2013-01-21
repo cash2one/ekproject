@@ -1,23 +1,22 @@
 package esfw.core.framework.dao.extend.interceptor;
 
 
-import java.sql.Connection;    
-import java.util.Map;    
-import java.util.Properties;    
-    
-import model.business.ModelBusiness;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.util.HashMap;
+import java.util.Properties;
 
-import org.apache.ibatis.executor.parameter.DefaultParameterHandler;    
-import org.apache.ibatis.executor.statement.StatementHandler;    
-import org.apache.ibatis.mapping.BoundSql;    
-import org.apache.ibatis.plugin.Interceptor;    
-import org.apache.ibatis.plugin.Intercepts;    
-import org.apache.ibatis.plugin.Invocation;    
-import org.apache.ibatis.plugin.Plugin;    
-import org.apache.ibatis.plugin.Signature;    
-import org.apache.ibatis.reflection.MetaObject;    
-import org.apache.ibatis.session.Configuration;    
-import org.apache.ibatis.session.RowBounds;    
+import org.apache.ibatis.executor.parameter.DefaultParameterHandler;
+import org.apache.ibatis.executor.statement.StatementHandler;
+import org.apache.ibatis.mapping.BoundSql;
+import org.apache.ibatis.plugin.Interceptor;
+import org.apache.ibatis.plugin.Intercepts;
+import org.apache.ibatis.plugin.Invocation;
+import org.apache.ibatis.plugin.Plugin;
+import org.apache.ibatis.plugin.Signature;
+import org.apache.ibatis.reflection.MetaObject;
+import org.apache.ibatis.session.Configuration;
+import org.apache.ibatis.session.RowBounds;
 import org.apache.log4j.Logger;
 
 import esfw.core.framework.dao.extend.dialect.Dialect;
@@ -39,8 +38,28 @@ public class PaginationInterceptor implements Interceptor {
     
     public Object intercept(Invocation invocation) throws Throwable {  
     	  	
+    	    System.out.println("...................PaginationInterceptor...............");
+    	
 		    StatementHandler statementHandler = (StatementHandler)invocation.getTarget();    
 		    MetaObject metaStatementHandler = MetaObject.forObject(statementHandler);    
+		    
+		    
+//		    statementHandler.
+//		    ((HashMap)statementHandler.getParameterHandler().getParameterObject()).put("schoolId",1000);
+//		    ((HashMap)statementHandler.getParameterHandler().getParameterObject()).put("schoolName","fdsfdsfds");
+//		    ((HashMap)statementHandler.getParameterHandler().getParameterObject()).put("siId",1000);
+		    
+		    
+		    Object t = statementHandler.getParameterHandler().getParameterObject();
+		    
+		    PreparedStatement st = null;
+		    
+//		    statementHandler.getParameterHandler().setParameters(st);
+		    
+//		    metaStatementHandler.setValue("schoolName","fdf");
+		   
+		    
+//		    statementHandler.getParameterHandler().setParameters(arg0)
 		    
 		    RowBounds rowBounds = (RowBounds)metaStatementHandler.getValue("delegate.rowBounds");    
 		    if(rowBounds == null || rowBounds == RowBounds.DEFAULT){    
@@ -51,7 +70,9 @@ public class PaginationInterceptor implements Interceptor {
 //		    Map parameterMap = (Map)defaultParameterHandler.getParameterObject();    
 //		    Object sidx = parameterMap.get("_sidx");    
 //		    Object sord = parameterMap.get("_sord");    
-//		        
+//		    
+		  
+		    
 		    String originalSql = (String)metaStatementHandler.getValue("delegate.boundSql.sql");    
 		        
 //		    if(sidx != null && sord != null){    
