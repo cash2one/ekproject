@@ -33,9 +33,7 @@ public class Upload extends HttpServlet {
 
 	private Logger logger = Logger.getLogger(Upload.class);
 	
-//	private static String MODEL = "codeTemplators";
-	
-	private static String MODEL = "new_model";
+	private static String MODEL = BaseCfg.CFG_MODEL_TYPE;
 	
 	/**
 	 * 
@@ -53,6 +51,9 @@ public class Upload extends HttpServlet {
 		String line = null;
 		
 		String fileName =request.getHeader("FileName");
+		if(fileName.indexOf(".xml")<0){
+			fileName=fileName+".xml";
+		}
 		String dirPath=BaseCfg.CFG_PATH+"/templates/";
 		File file = new File(dirPath+fileName);
 		if(file.exists()){
@@ -88,20 +89,20 @@ public class Upload extends HttpServlet {
 					""
 							+ (!BaseCfg.APP_CONTEXT.equals("") ? "/"
 									+ BaseCfg.APP_CONTEXT : "")
-							+ "/MODEL/entity.jsp?cfg=").append(fileCfg);
+							+ "/"+MODEL+"/entity.jsp?cfg=").append(fileCfg);
 			urls.append(";").append(ip).append(
 					(!BaseCfg.APP_CONTEXT.equals("") ? "/"
 							+ BaseCfg.APP_CONTEXT : "")
-							+ "/MODEL/mapper.jsp?cfg=").append(fileCfg);
+							+ "/"+MODEL+"/mapper.jsp?cfg=").append(fileCfg);
 			urls.append(";").append(ip).append(
 					(!BaseCfg.APP_CONTEXT.equals("") ? "/"
 							+ BaseCfg.APP_CONTEXT : "")
-							+ "/MODEL/mapperXml.jsp?cfg=")
+							+ "/"+MODEL+"/mapperXml.jsp?cfg=")
 					.append(fileCfg);
 			urls.append(";").append(ip).append(
 					(!BaseCfg.APP_CONTEXT.equals("") ? "/"
 							+ BaseCfg.APP_CONTEXT : "")
-							+ "/MODEL/business.jsp?cfg=").append(fileCfg);
+							+ "/"+MODEL+"/business.jsp?cfg=").append(fileCfg);
 		}
 		out.write(urls.toString());
 		out.close();

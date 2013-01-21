@@ -21,22 +21,26 @@ public class BaseCfg {
 
 //	public static String CFG_PATH="E:/elam/my_jar_project/CodeGenerator/WebRoot/";
 	
-	public static String CFG_PATH="D:/Workspaces/google/ekproject/truck/CodeGenerator/WebRoot/";
+//	public static String CFG_PATH="D:/Workspaces/google/ekproject/truck/CodeGenerator/WebRoot/";
+	
+	public static String CFG_PATH="/home/zjxxt/codeGenService/webRoot/";
+	
+	public static String CFG_MODEL_TYPE = "codeTemplators"; 
 	
 	public static String AREA_ABB="daoAbb";
 	
 //	public static String WWW="http://zsqtsm.vicp.net:43980/";
 	
-	public static String WWW="http://localhost/";
+	public static String WWW="http://61.142.114.242:8888/";
 	
-	public static String WWW_LOCALHOST="http://localhost/";
+	public static String WWW_LOCALHOST="http://61.142.114.242:8888/";
  
 
 	public static String basePackageName = "qtone.xxt.";
 	
 	static {
-		DOMConfigurator.configure("D:/Workspaces/google/ekproject/truck/CodeGenerator/src/log4j.xml");
-		
+//		DOMConfigurator.configure("D:/Workspaces/google/ekproject/truck/CodeGenerator/src/log4j.xml");
+		DOMConfigurator.configure("/home/zjxxt/codeGenService/webRoot/classes/log4j.xml");
 	}
      
 }

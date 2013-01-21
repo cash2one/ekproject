@@ -13,7 +13,7 @@ import org.apache.mina.transport.socket.nio.NioSocketAcceptor;
 
 public class BootStartUp implements ServletContextListener {
 
-    private static final int PORT = 888;  
+    private static final int PORT = 1550;  
     
 	public void contextDestroyed(ServletContextEvent arg0) {
 		// TODO Auto-generated method stub
