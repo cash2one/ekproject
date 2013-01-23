@@ -31,9 +31,13 @@ public class BaseCfg {
 	
 //	public static String WWW="http://zsqtsm.vicp.net:43980/";
 	
-	public static String WWW="http://61.142.114.242:8888/";
+//	public static String WWW="http://61.142.114.242:8888/";
 	
-	public static String WWW_LOCALHOST="http://61.142.114.242:8888/";
+//	public static String WWW_LOCALHOST="http://61.142.114.242:8888/";
+	
+	public static String WWW="http://localhost:8888/";
+	
+	public static String WWW_LOCALHOST="http://localhost.242:8888/";
  
 
 	public static String basePackageName = "qtone.xxt.";
