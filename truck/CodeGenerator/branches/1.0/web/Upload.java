@@ -51,7 +51,9 @@ public class Upload extends HttpServlet {
 		String line = null;
 		
 		String fileName =request.getHeader("FileName")+".xml";
-		String dirPath=BaseCfg.CFG_PATH+"/templates/";
+//		String dirPath=BaseCfg.CFG_PATH+"/templates/";
+		String dirPath=request.getRealPath("/")+"/templates/";
+		
 		File file = new File(dirPath+fileName);
 		if(file.exists()){
 		   String dateStr = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
